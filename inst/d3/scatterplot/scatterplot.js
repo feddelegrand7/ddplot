@@ -35,6 +35,7 @@ let y = d3.scaleLinear()
           .nice()
 
 
+
 xS = d3.axisBottom(x).ticks(options.xticks)
 yS = d3.axisLeft(y).ticks(options.yticks)
 
@@ -89,7 +90,13 @@ svg.selectAll('circle')
    .attr('r', function(d) {
 
   if (typeof options.size == 'string') {
-    return d[options.size]
+
+    let z = d3.scaleLinear()
+          .domain(d3.extent(data, d => d[options.size]))
+          .range([2, 20])
+          .nice()
+
+    return z(d[options.size])
   } else {
     return options.size
   }
