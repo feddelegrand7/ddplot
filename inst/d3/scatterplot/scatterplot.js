@@ -5,6 +5,8 @@ margin = {
   bottom: 40
 }
 
+
+
 let xmin = d3.min(data, d => d[options.x])
 let xmax = d3.max(data, d => d[options.x])
 
@@ -84,7 +86,15 @@ svg.selectAll('circle')
    .append('circle')
    .attr('cx', d => x(d[options.x]))
    .attr('cy', d => y(d[options.y]))
-   .attr('r', options.size)
+   .attr('r', function(d) {
+
+  if (typeof options.size == 'string') {
+    return d[options.size]
+  } else {
+    return options.size
+  }
+
+   })
    .attr('fill', options.col)
    .attr('stroke', options.stroke)
    .attr('stroke-width', options.strokeWidth)
