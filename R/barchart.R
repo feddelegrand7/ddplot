@@ -3,7 +3,7 @@ barChart <- function(
                         x,
                         y,
                         fill = "crimson",
-                        sort = "ascending",
+                        sort = "none",
                         id = NULL,
                         paddingWidth = 0.1,
                         xticks = NULL,

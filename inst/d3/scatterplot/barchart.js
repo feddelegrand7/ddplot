@@ -13,7 +13,9 @@ let yScale = d3.scaleLinear()
 .range([height - margin.bottom, margin.top])
 
 
-xS = d3.axisBottom(xScale).ticks(options.xticks)
+xS = d3.axisBottom(xScale)
+       .ticks(options.xticks)
+       .tickFormat(i => data[i][options.x ])
 yS = d3.axisLeft(yScale).ticks(options.yticks)
 
 
