@@ -9,9 +9,12 @@ barChart <- function(
                         xticks = NULL,
                         xFontSize = 10,
                         yticks = NULL,
-                        xlab = NULL,
-                        ylab = NULL,
+                        xtitle = NULL,
+                        xtitleFontSize = 16,
+                        ytitle = NULL,
+                        ytitleFontSize = 16,
                         title = NULL,
+                        titleFontSize = 22,
                         stroke = "crimson",
                         strokeWidth = NULL,
                         font = "Verdana, Geneva, Tahoma, sans-serif",
@@ -35,8 +38,8 @@ barChart <- function(
       paddingWidth = paddingWidth,
       xticks = xticks,
       yticks = yticks,
-      xlab = xlab,
-      ylab = ylab,
+      xtitle = xtitle,
+      ytitle = ytitle,
       title = title,
       font = font,
       stroke = stroke,
@@ -44,7 +47,11 @@ barChart <- function(
       width = width,
       height = height,
       id = id,
-      xFontSize = xFontSize
+      xFontSize = xFontSize,
+      xtitleFontSize = xtitleFontSize,
+      ytitleFontSize = ytitleFontSize,
+      titleFontSize = titleFontSize
+
     )
   )
 }

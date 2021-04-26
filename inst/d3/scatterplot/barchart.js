@@ -39,6 +39,41 @@ gy = svg
 // Removing the y ticks
 gy.call((g) => g.select(".domain").remove());
 
+
+// Rendering the x-axis title
+svg
+  .append("text")
+  .attr("transform", "translate(" + width / 2 + " ," + (height - 5) + ")")
+  .attr("dx", "0em")
+  .style("text-anchor", "middle")
+  .style("font-family", options.font)
+  .style("font-size", options.xtitleFontSize)
+  .text(options.xtitle);
+
+// Rendering the y-axis title
+svg
+  .append("text")
+  .attr("transform", "translate(" + 0 + " ," + height / 2 + ") rotate(-90)")
+  .attr("dy", "0.8em")
+  .style("text-anchor", "middle")
+  .style("font-size", options.ytitleFontSize)
+  .style("font-family", options.font)
+  .text(options.ytitle);
+
+// Rendering the chart title
+svg
+  .append("text")
+  .attr("x", width / 2)
+  .attr("y", margin.top / 2)
+  .attr("text-anchor", "middle")
+  .attr("dx", "0em")
+  .style("font-size", options.titleFontSize)
+  .style("font-family", options.font)
+  .text(options.title);
+
+
+
+
 // Rendering the bar chart
 svg
   .attr("id", options.id)
