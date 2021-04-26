@@ -45,6 +45,7 @@ svg
   .append("text")
   .attr("transform", "translate(" + width / 2 + " ," + (height - 5) + ")")
   .attr("dx", "0em")
+  .attr("dy", "-0.4em")
   .style("text-anchor", "middle")
   .style("font-family", options.font)
   .style("font-size", options.xtitleFontSize)
@@ -54,7 +55,7 @@ svg
 svg
   .append("text")
   .attr("transform", "translate(" + 0 + " ," + height / 2 + ") rotate(-90)")
-  .attr("dy", "0.8em")
+  .attr("dy", "1em")
   .style("text-anchor", "middle")
   .style("font-size", options.ytitleFontSize)
   .style("font-family", options.font)
@@ -77,6 +78,7 @@ svg
 // Rendering the bar chart
 svg
   .attr("id", options.id)
+  .style("background-color", options.bgcol)
   .attr("viewBox", [0, 0, width, height])
   .selectAll("rect")
   .data(data)

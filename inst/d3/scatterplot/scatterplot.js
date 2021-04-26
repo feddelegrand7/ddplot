@@ -83,6 +83,7 @@ svg
 // Rendering the scatter plot
 svg
   .attr("id", options.id)
+  .style("background-color", options.bgcol)
   .selectAll("circle")
   .data(data)
   .enter()

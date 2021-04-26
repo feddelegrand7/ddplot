@@ -17,6 +17,7 @@ scatterPlot <- function(
                         stroke = NULL,
                         strokeWidth = NULL,
                         font = "Verdana, Geneva, Tahoma, sans-serif",
+                        bgcol = "#CAD0D3",
                         width = NULL,
                         height = NULL
                         ) {
@@ -50,7 +51,11 @@ scatterPlot <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
-      id = id
+      id = id,
+      xtitleFontSize = xtitleFontSize,
+      ytitleFontSize = ytitleFontSize,
+      titleFontSize = titleFontSize,
+      bgcol = bgcol
     )
   )
 }

@@ -18,6 +18,7 @@ barChart <- function(
                         stroke = "crimson",
                         strokeWidth = NULL,
                         font = "Verdana, Geneva, Tahoma, sans-serif",
+                        bgcol = "#CAD0D3",
                         width = NULL,
                         height = NULL) {
   if (grepl(";", font)) {
@@ -50,7 +51,9 @@ barChart <- function(
       xFontSize = xFontSize,
       xtitleFontSize = xtitleFontSize,
       ytitleFontSize = ytitleFontSize,
-      titleFontSize = titleFontSize
+      titleFontSize = titleFontSize,
+      bgcol = bgcol
+
 
     )
   )
