@@ -7,6 +7,7 @@ barChart <- function(
                         id = NULL,
                         paddingWidth = 0.1,
                         xticks = NULL,
+                        xFontSize = 10,
                         yticks = NULL,
                         xlab = NULL,
                         ylab = NULL,
@@ -42,7 +43,8 @@ barChart <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
-      id = id
+      id = id,
+      xFontSize = xFontSize
     )
   )
 }

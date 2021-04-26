@@ -13,20 +13,23 @@ let yScale = d3.scaleLinear()
 .range([height - margin.bottom, margin.top])
 
 
-xS = d3.axisBottom(xScale)
+xAx = d3.axisBottom(xScale)
        .ticks(options.xticks)
-       .tickFormat(i => data[i][options.x ])
-yS = d3.axisLeft(yScale).ticks(options.yticks)
+       .tickFormat(i => data[i][options.x])
+yAx = d3.axisLeft(yScale).ticks(options.yticks)
 
 
 svg.append('g')
    .attr('transform', 'translate(0,' + (height-margin.bottom) + ')')
-   .call(xS)
+   .call(xAx)
+   .attr('font-size', options.xFontSize)
 
 
-svg.append('g')
+gy = svg.append('g')
    .attr('transform', 'translate(' + margin.left + ', 0)')
-   .call(yS)
+   .call(yAx)
+
+gy.call(g => g.select(".domain").remove())
 
 
 
