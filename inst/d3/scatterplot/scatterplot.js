@@ -104,5 +104,6 @@ svg
     }
   })
   .attr("fill", options.col)
+  .attr("opacity", options.opacity)
   .attr("stroke", options.stroke)
   .attr("stroke-width", options.strokeWidth);

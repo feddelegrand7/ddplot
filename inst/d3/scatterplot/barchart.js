@@ -98,5 +98,6 @@ svg
   .attr("width", xScale.bandwidth())
   .attr("height", (d) => yScale(0) - yScale(d[options.y]))
   .attr("fill", options.fill)
+  .attr("opacity", options.opacity)
   .attr("stroke", options.stroke)
   .attr("stroke-width", options.strokeWidth);
