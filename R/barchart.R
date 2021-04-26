@@ -1,9 +1,10 @@
 barChart <- function(
                         data,
-                        xvar,
-                        yvar,
+                        x,
+                        y,
                         fill = "crimson",
                         sort = "ascending",
+                        id = NULL,
                         paddingWidth = 0.1,
                         xticks = NULL,
                         yticks = NULL,
@@ -26,8 +27,8 @@ barChart <- function(
       package = "ddplot"
     ),
     options = list(
-      xvar = xvar,
-      yvar = yvar,
+      x = x,
+      y = y,
       fill = fill,
       sort = sort,
       paddingWidth = paddingWidth,
@@ -40,7 +41,8 @@ barChart <- function(
       stroke = stroke,
       strokeWidth = strokeWidth,
       width = width,
-      height = height
+      height = height,
+      id = id
     )
   )
 }

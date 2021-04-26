@@ -81,7 +81,8 @@ svg.append("text")
   .text(options.title);
 
 
-svg.selectAll('circle')
+svg.attr('id', options.id)
+   .selectAll('circle')
    .data(data)
    .enter()
    .append('circle')

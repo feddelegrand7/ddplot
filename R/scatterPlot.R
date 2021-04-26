@@ -5,6 +5,7 @@ scatterPlot <- function(
                         y,
                         col = "crimson",
                         size = 2,
+                        id = NULL,
                         xticks = NULL,
                         yticks = NULL,
                         xlab = NULL,
@@ -45,7 +46,8 @@ scatterPlot <- function(
       stroke = stroke,
       strokeWidth = strokeWidth,
       width = width,
-      height = height
+      height = height,
+      id = id
     )
   )
 }
