@@ -23,6 +23,8 @@ svg
     .attr('d', arc)
     .attr('fill', d => colorSeq(d.data[options.label]))
     .attr('stroke', options.stroke)
-    .style('stroke-width', options.strokeWidth);
+    .attr('stroke-width', options.strokeWidth)
+    .attr('opacity', options.opacity)
+
 
 
