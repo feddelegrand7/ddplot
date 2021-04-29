@@ -3,6 +3,10 @@ pieChart <- function(
   data,
   value,
   label,
+  colorCategory = "Set1",
+  stroke = NULL,
+  strokeWidth = NULL,
+  innerRadius = 0,
   id = NULL,
   title = NULL,
   titleFontSize = 22,
@@ -37,7 +41,11 @@ pieChart <- function(
       id = id,
       titleFontSize = titleFontSize,
       bgcol = bgcol,
-      opacity = opacity
+      opacity = opacity,
+      colorCategory = colorCategory,
+      innerRadius = innerRadius,
+      stroke = stroke,
+      strokeWidth = strokeWidth
     )
   )
 }

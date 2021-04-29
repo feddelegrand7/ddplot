@@ -1,19 +1,17 @@
 let pie = d3.pie()
-    .sort(null)
-    .value(d => d[options.value])
+    .value(d => d[options.value]);
 
 let radius = Math.min(width, height) / 2 -1;
 
-let pieData = pie(data)
+let pieData = pie(data);
 
-let colorSeq = d3.scaleOrdinal(d3.schemeCategory10);
+let colorCategory = "scheme" + options.colorCategory;
 
-
+let colorSeq = d3.scaleOrdinal(d3[colorCategory]);
 
 let arc = d3.arc()
-    .innerRadius(0)
+    .innerRadius(options.innerRadius)
     .outerRadius(radius)
-
 
 svg
 .append('g')
@@ -24,7 +22,7 @@ svg
     .append('path')
     .attr('d', arc)
     .attr('fill', d => colorSeq(d.data[options.label]))
-    .attr('stroke', 'grey')
-    .style('stroke-width', '1px');
+    .attr('stroke', options.stroke)
+    .style('stroke-width', options.strokeWidth);
 
 
