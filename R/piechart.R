@@ -7,12 +7,17 @@ pieChart <- function(
   stroke = NULL,
   strokeWidth = NULL,
   innerRadius = 0,
+  outerRadius = "auto",
+  padRadius = 0,
+  padAngle = NULL,
+  cornerRadius = 0,
   id = NULL,
   title = NULL,
   titleFontSize = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#CAD0D3",
   opacity = 1,
+  labelHeight = 18,
   width = NULL,
   height = NULL
 ) {
@@ -45,7 +50,12 @@ pieChart <- function(
       colorCategory = colorCategory,
       innerRadius = innerRadius,
       stroke = stroke,
-      strokeWidth = strokeWidth
+      strokeWidth = strokeWidth,
+      outerRadius = outerRadius,
+      labelHeight = labelHeight,
+      padRadius = padRadius,
+      padAngle = padAngle,
+      cornerRadius = cornerRadius
     )
   )
 }
