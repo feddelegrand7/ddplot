@@ -3,7 +3,7 @@ pieChart <- function(
   data,
   value,
   label,
-  colorCategory = "Set1",
+  colorCategory = "Paired",
   stroke = NULL,
   strokeWidth = NULL,
   innerRadius = 0,
@@ -11,6 +11,7 @@ pieChart <- function(
   padRadius = 0,
   padAngle = NULL,
   cornerRadius = 0,
+  labelFont = 'sans-serif',
   id = NULL,
   title = NULL,
   titleFontSize = 22,
@@ -55,7 +56,8 @@ pieChart <- function(
       labelHeight = labelHeight,
       padRadius = padRadius,
       padAngle = padAngle,
-      cornerRadius = cornerRadius
+      cornerRadius = cornerRadius,
+      labelFont = labelFont
     )
   )
 }

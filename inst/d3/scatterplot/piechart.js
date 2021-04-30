@@ -25,6 +25,7 @@ let arc = d3.arc()
 let labelHeight = options.labelHeight;
 
 svg
+.attr('id', options.id)
 .append('g')
 .attr('transform', `translate(${radius},${radius})`)
 .selectAll(null)
@@ -62,5 +63,5 @@ legend
     .text(d => d.data[options.label])
     .attr('x', labelHeight * 1.2)
     .attr('y', d => labelHeight * d.index * 1.8 + labelHeight)
-    .style('font-family', 'sans-serif')
+    .style('font-family', options.labelFont)
     .style('font-size', `${labelHeight}px`);
