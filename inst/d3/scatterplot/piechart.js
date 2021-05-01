@@ -1,7 +1,9 @@
+let margin = 20;
+
 let pie = d3.pie()
     .value(d => d[options.value]);
 
-let radius = Math.min(width, height) / 2 -1;
+let radius = Math.min(width, height) / 2 - margin;
 
 if (options.outerRadius != "auto") {
     radius = options.outerRadius
@@ -52,7 +54,7 @@ legend
     .data(pieData)
     .enter()
     .append('rect')
-    .attr('y', d => labelHeight * d.index * 1.8)
+    .attr('y', d => 5 + labelHeight * d.index * 1.8)
     .attr('width', labelHeight)
     .attr('height', labelHeight)
     .attr('fill', d => colorSeq(d.data[options.label]))
@@ -67,3 +69,16 @@ legend
     .attr('y', d => labelHeight * d.index * 1.8 + labelHeight)
     .style('font-family', options.labelFont)
     .style('font-size', `${labelHeight}px`);
+
+
+// Rendering the chart title
+svg
+  .append("text")
+  .attr("x", radius)
+  .attr("y", radius * 2 + 30)
+  .attr("text-anchor", "middle")
+  .attr("dx", "0em")
+  .style("font-size", options.titleFontSize)
+  .style("font-family", options.font)
+  .text(options.title);
+
