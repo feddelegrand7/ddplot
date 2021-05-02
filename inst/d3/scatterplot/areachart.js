@@ -76,6 +76,16 @@ svg
   .text(options.title);
 
 
+// Creating a clip path
+
+svg.append("clipPath")
+.attr("id", "chart-area")
+.append("rect")
+.attr("x", margin.left + 1)
+.attr("y", margin.top)
+.attr("width", width - margin.left)
+.attr("height", height - margin.bottom);
+
 
 // Rendering the scatter plot
 
@@ -88,6 +98,8 @@ let area = d3.area()
 svg
   .attr("id", options.id)
   .style("background-color", options.bgcol)
+  .append('g')
+  .attr("clip-path", "url(#chart-area)")
   .append("path")
   .datum(data)
   .attr("fill", options.fill)
