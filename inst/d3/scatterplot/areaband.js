@@ -8,8 +8,7 @@ margin = {
 
 
 // Setting the min and max of the y variable
-let ymin = d3.min(data, (d) => d[options.y]);
-let ymax = d3.max(data, (d) => d[options.y]);
+let ymax = d3.max(data, (d) => d[options.yUpper]);
 
 // Setting the scale of the x variable
 
@@ -75,13 +74,14 @@ svg
   .style("font-family", options.font)
   .text(options.title);
 
+
+
 // Rendering the scatter plot
 
-let area = d3.area()
+let areaBand = d3.area()
              .x(d => x(new Date(d[options.x])))
-             .y0(function() { return y.range()[0]; })
-             .y1(d => y(d[options.y]))
-
+             .y0(d => y(d[options.yLower]))
+             .y1(d => y(d[options.yUpper]))
 
 svg
   .attr("id", options.id)
@@ -93,6 +93,6 @@ svg
   .attr("stroke-width", options.strokeWidth)
   .attr("stroke-linejoin", "round")
   .attr("stroke-linecap", "round")
-  .attr('d', area)
+  .attr('d', areaBand)
 
 

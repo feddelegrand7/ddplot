@@ -17,14 +17,14 @@ let ymax = d3.max(data, (d) => d[options.y]);
 // Setting the scale of the x variable
 let x = d3
   .scaleLinear()
-  .domain([0, xmax])
+  .domain(d3.extent(data, d => d[options.x]))
   .range([margin.left, width - margin.right])
   .nice();
 
 // Setting the scale of the y variable
 let y = d3
   .scaleLinear()
-  .domain([0, ymax])
+  .domain(d3.extent(data, d => d[options.y]))
   .range([height - margin.top, margin.bottom])
   .nice();
 
