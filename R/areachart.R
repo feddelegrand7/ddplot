@@ -1,4 +1,45 @@
 
+#' Create an area chart
+#'
+#' @param data The data frame containing the variables to consider.
+#' @param x The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.
+#' @param y The y-variable to consider.
+#' @param fill The color of the area chart. Defaults to 'crimson'.
+#' @param stroke Optional. The color of the stroke of the area.
+#' @param strokeWidth Optional. The width of the area stroke.
+#' @param id Optional. The id of the SVG output.
+#' @param xticks Optional. the number of x-axis ticks to consider.
+#' @param yticks Optional. The number of y-axis ticks to consider.
+#' @param xtitle Optional. The title of the x-axis.
+#' @param xtitleFontSize The font size of the x-axis title. Defaults to 16.
+#' @param ytitle Optional. The title of the y-axis.
+#' @param ytitleFontSize The font size of the y-axis title. Defaults to 16.
+#' @param title Optional. The title of the plot.
+#' @param titleFontSize The font size of the plot title. Defaults to 22.
+#' @param font The font family to consider for the titles. Defaults to
+#' "Verdana, Geneva, Tahoma, sans-serif".
+#' @param bgcol The background color of the SVG. Defaults to "#CAD0D3" HEX color.
+#' @param opacity The color opacity of the area chart (from 0 to 1). Defaults to 1.
+#' @param width Optional. The width of the SVG output.
+#' @param height Optional. The height of the SVG output.
+#'
+#' @return a SVG area chart
+#' @export
+#'
+#' @examples
+#'
+#' airpassengers <- data.frame(
+#'   passengers = as.matrix(AirPassengers),
+#'   date= zoo::as.Date(time(AirPassengers))
+#' )
+#'
+#' areaChart(
+#'   data = airpassengers,
+#'   x = "date",
+#'   y = "passengers"
+#' )
+
+
 areaChart <- function(
   data,
   x,
@@ -22,13 +63,13 @@ areaChart <- function(
   height = NULL
 ) {
 
-
+  if (is.null(data[[x]]) || is.null(data[[y]])) {
+    stop("Please check that x and y belongs to the specified data frame")
+  }
 
   if (grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
   }
-
-
 
   r2d3::r2d3(
     data = data,

@@ -9,8 +9,6 @@ pieChart(
   value,
   label,
   colorCategory = "Paired",
-  stroke = NULL,
-  strokeWidth = NULL,
   innerRadius = 0,
   outerRadius = "auto",
   padRadius = 0,
@@ -37,10 +35,6 @@ pieChart(
 
 \item{colorCategory}{A D3 color scheme, you can find more
 here https://observablehq.com/@d3/color-schemes. Defaults to 'Paired'}
-
-\item{stroke}{Optional. The color of the pie stroke.}
-
-\item{strokeWidth}{Optional. The width of the color stroke.}
 
 \item{innerRadius}{The size of the inner radius of the pie.
 Defaults to 0. Set the inner radius to a higher value to plot
@@ -84,4 +78,19 @@ Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
 }
 \description{
 Create a pie chart
+}
+\examples{
+library(dplyr)
+
+mini_starwars <- sample_n(tbl = starwars,
+                          size = 5)
+
+pieChart(
+  data = mini_starwars,
+  value = "height",
+  label = "name",
+  padRadius = 300,
+  padAngle = 0.1,
+  cornerRadius = 50
+)
 }

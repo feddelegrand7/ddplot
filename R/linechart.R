@@ -68,8 +68,6 @@ lineChart <- function(
     stop("please remove the ';' character from your font argument")
   }
 
-
-
   r2d3::r2d3(
     data = data,
     script = system.file(

@@ -38,10 +38,6 @@ svg
     .attr('fill', d => colorSeq(d.data[options.label]))
     .attr('opacity', options.opacity)
 
-
-
-
-
 const legend = svg
     .append('g')
     .attr('transform', `translate(${radius * 2 + 20},0)`);
