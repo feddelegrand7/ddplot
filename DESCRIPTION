@@ -11,3 +11,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/feddelegrand7/ddplot
 BugReports: https://github.com/feddelegrand7/ddplot/issues
+RoxygenNote: 7.1.1
