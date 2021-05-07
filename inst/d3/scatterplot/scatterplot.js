@@ -90,19 +90,7 @@ svg
   .append("circle")
   .attr("cx", (d) => x(d[options.x]))
   .attr("cy", (d) => y(d[options.y]))
-  .attr("r", function (d) {
-    if (typeof options.size == "string") {
-      let z = d3
-        .scaleLinear()
-        .domain(d3.extent(data, (d) => d[options.size]))
-        .range([2, 20])
-        .nice();
-
-      return z(d[options.size]);
-    } else {
-      return options.size;
-    }
-  })
+  .attr("r", options.size)
   .attr("fill", options.col)
   .attr("opacity", options.opacity)
   .attr("stroke", options.stroke)
