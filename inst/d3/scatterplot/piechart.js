@@ -36,8 +36,6 @@ svg
     .append('path')
     .attr('d', arc)
     .attr('fill', d => colorSeq(d.data[options.label]))
-    .attr('stroke', options.stroke)
-    .attr('stroke-width', options.strokeWidth)
     .attr('opacity', options.opacity)
 
 

@@ -69,6 +69,10 @@ barChart <- function(
                      height = NULL
                      ) {
 
+  if (is.null(data[[x]]) || is.null(data[[y]])) {
+    stop("Please check that x and y belongs to the specified data frame")
+  }
+
 
   if (!(any(c('none',
               'ascending',
