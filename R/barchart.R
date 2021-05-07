@@ -70,7 +70,7 @@ barChart <- function(
                      ) {
 
   if (is.null(data[[x]]) || is.null(data[[y]])) {
-    stop("Please check that x and y belongs to the specified data frame")
+    stop("Please check that x and y belong to the specified data frame")
   }
 
 
