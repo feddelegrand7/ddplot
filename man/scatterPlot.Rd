@@ -2,7 +2,7 @@
 % Please edit documentation in R/scatterPlot.R
 \name{scatterPlot}
 \alias{scatterPlot}
-\title{Create a scatter plot}
+\title{Create a scatter plot.}
 \usage{
 scatterPlot(
   data,
@@ -29,63 +29,63 @@ scatterPlot(
 )
 }
 \arguments{
-\item{data}{the data frame containing the quantitative variables}
+\item{data}{The data frame containing the quantitative variables.}
 
-\item{x}{the x-variable to plot.}
+\item{x}{The x-variable to consider.}
 
-\item{y}{the y-variable to plot}
+\item{y}{The y-variable to consider.}
 
-\item{col}{the color of the dots. Defaults to 'crimson'}
+\item{col}{The color of the dots. Defaults to 'crimson'.}
 
-\item{size}{the size of the dots. Defaults to 2}
+\item{size}{The size of the dots. Defaults to 2.}
 
-\item{id}{optional. the id of the SVG output.}
+\item{id}{Optional. The id of the SVG output.}
 
-\item{xticks}{optional. the number of x-axis ticks to consider}
+\item{xticks}{Optional. The number of x-axis ticks to consider.}
 
-\item{yticks}{optional. the number of y-axis ticks to consider}
+\item{yticks}{Optional. The number of y-axis ticks to consider.}
 
-\item{xtitle}{optional. the title of the x-axis}
+\item{xtitle}{Optional. the title of the x-axis.}
 
-\item{xtitleFontSize}{the font size of the x-axis title. Defaults to 16}
+\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
 
-\item{ytitle}{optional. the title of the y-axis}
+\item{ytitle}{Optional. The title of the y-axis.}
 
-\item{ytitleFontSize}{the font size of the y-axis title. Defaults to 16}
+\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
 
-\item{title}{optional. the title of the plot}
+\item{title}{Optional. the title of the plot.}
 
-\item{titleFontSize}{the font size of the plot title. Defaults to 22}
+\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
 
-\item{stroke}{optional. the stroke color of the dots}
+\item{stroke}{Optional. the stroke color of the dots.}
 
-\item{strokeWidth}{optional. the stroke width of the dots}
+\item{strokeWidth}{Optional. the stroke width of the dots.}
 
-\item{font}{the font family to consider for the titles. Defaults to
-"Verdana, Geneva, Tahoma, sans-serif"}
+\item{font}{The font family to consider for the titles. Defaults to
+"Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{the background color of the SVG. Defaults to "#CAD0D3" HEX color}
+\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
 
-\item{opacity}{the color opacity of the dots (from 0 to 1). Defaults to 1}
+\item{opacity}{The color opacity of the dots (from 0 to 1). Defaults to 1.}
 
-\item{width}{optional. the width of the SVG output}
+\item{width}{Optional. the width of the SVG output.}
 
-\item{height}{optional. the height of the SVG output}
+\item{height}{Optional. the height of the SVG output.}
 }
 \value{
-a SVG scatter plot
+A SVG scatter plot.
 }
 \description{
-Create a scatter plot
+Create a scatter plot.
 }
 \examples{
+
+library(ggplot2) # needed to get the mpg data frame
 
 scatterPlot(
   data = mpg,
   x = "cty",
   y = "hwy"
   )
-
-
 
 }
