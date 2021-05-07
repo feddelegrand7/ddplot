@@ -15,8 +15,8 @@
 #' @param xtitle Optional. The title of the x-axis.
 #' @param xtitleFontSize The font size of the x-axis title. Defaults to 16.
 #' @param ytitle Optional. The title of the y-axis.
-#' @param ytitleFontSize the font size of the y-axis title. Defaults to 16
-#' @param title Optional. the title of the plot
+#' @param ytitleFontSize The font size of the y-axis title. Defaults to 16.
+#' @param title Optional. The title of the plot.
 #' @param titleFontSize The font size of the plot title. Defaults to 22.
 #' @param stroke The stroke color of the bars. Defaults to 'crimson'.
 #' @param strokeWidth Optional. the stroke width of the bars.
@@ -45,28 +45,29 @@
 
 barChart <- function(
                      data,
-                        x,
-                        y,
-                        fill = "crimson",
-                        sort = "none",
-                        id = NULL,
-                        paddingWidth = 0.1,
-                        xticks = NULL,
-                        xFontSize = 10,
-                        yticks = NULL,
-                        xtitle = NULL,
-                        xtitleFontSize = 16,
-                        ytitle = NULL,
-                        ytitleFontSize = 16,
-                        title = NULL,
-                        titleFontSize = 22,
-                        stroke = "crimson",
-                        strokeWidth = NULL,
-                        font = "Verdana, Geneva, Tahoma, sans-serif",
-                        bgcol = "#CAD0D3",
-                        opacity = 1,
-                        width = NULL,
-                        height = NULL) {
+                     x,
+                     y,
+                     fill = "crimson",
+                     sort = "none",
+                     id = NULL,
+                     paddingWidth = 0.1,
+                     xticks = NULL,
+                     xFontSize = 10,
+                     yticks = NULL,
+                     xtitle = NULL,
+                     xtitleFontSize = 16,
+                     ytitle = NULL,
+                     ytitleFontSize = 16,
+                     title = NULL,
+                     titleFontSize = 22,
+                     stroke = "crimson",
+                     strokeWidth = NULL,
+                     font = "Verdana, Geneva, Tahoma, sans-serif",
+                     bgcol = "#CAD0D3",
+                     opacity = 1,
+                     width = NULL,
+                     height = NULL
+                     ) {
 
 
   if (!(any(c('none',
