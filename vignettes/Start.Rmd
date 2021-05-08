@@ -1,6 +1,6 @@
 ---
 title: "Start"
-output: rmarkdown::html_vignette
+output: html_document
 vignette: >
   %\VignetteIndexEntry{Start}
   %\VignetteEngine{knitr::rmarkdown}
@@ -24,7 +24,7 @@ library(ddplot)
 
 Let's work with the `mpg` data frame from the `ggplot2` package. 
 
-```{r}
+```{r fig.align='center', message=FALSE, warning=FALSE}
 library(ggplot2) # needed for the mpg data frame
 
 scatterPlot(
@@ -43,7 +43,8 @@ In comparison to `ggplot2`, graphics' customization in `ddplot` is limited nonet
 
 If you're good in `CSS`, you can add some features to the created `SVG`. There is an `id` parameter that can be used to retrieve the graphic. 
 
-```{r}
+
+```{r, fig.align='center'}
 scatterPlot(
   data = mpg, 
   x = "displ", 
@@ -57,8 +58,7 @@ scatterPlot(
   ytitle = "cty variable", 
   xticks = 3, 
   yticks = 3, 
-  id = "displ-cty", 
-)
+  id = "displ-cty")
 
 ```
 
@@ -66,7 +66,7 @@ scatterPlot(
 
 The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.   
 
-```{r}
+```{r fig.align='center', message=FALSE, warning=FALSE}
 library(dplyr)
 
 mpg %>% group_by(manufacturer) %>% 
@@ -85,19 +85,142 @@ mpg %>% group_by(manufacturer) %>%
 The bars can be easily sorted in `ascending` or `descending` order using the `sort` parameter: 
 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 mpg %>% group_by(manufacturer) %>% 
   summarise(mean_cty = mean(cty)) %>% 
   barChart(
     x = "manufacturer", 
     y = "mean_cty", 
-    sort = "descending",
+    sort = "ascending",
     xFontSize = 10, 
     fill = "orange", 
     strokeWidth = 2, 
     ytitle = "average cty value", 
-    title = "Average City Miles per Gallon by manufacturer"
+    title = "Average City Miles per Gallon by manufacturer", 
+    titleFontSize = 16
   )
+
+```
+
+# `pieChart()` 
+
+Pie charts and donut charts are pretty straightforward to set up. We'll use a sample from the `starwars` data frame to plot a simple pie chart. 
+
+
+```{r}
+# starwars is part of the dplyr data frame
+
+mini_starwars <- starwars %>% tidyr::drop_na(mass) %>% 
+  sample_n(size = 5) # getting 5 random values
+
+pieChart(
+  data = mini_starwars, 
+  value = "mass",
+  label = "name"
+)
+
+```
+
+Using the `padRadius`, `padAngle` and `cornerRadius` parameters, one can get fanciers pie charts: 
+
+```{r}
+pieChart(
+  data = mini_starwars, 
+  value = "mass",
+  label = "name", 
+  padRadius = 200, 
+  padAngle = 0.1, 
+  cornerRadius = 50, 
+  innerRadius = 10
+)
+```
+If you need a donut chart, you just need to play with the `innerRadius` parameter: 
+
+```{r}
+
+pieChart(
+  data = mini_starwars, 
+  value = "mass",
+  label = "name", 
+  innerRadius = 120, 
+  cornerRadius = 20, 
+  title = "5 Starwars characters ranked by their mass",
+  titleFontSize = 16, 
+  bgcol = "yellow"
+)
+
+```
+
+# `lineChart()` 
+
+The `lineChart()` function is used to plot time series data. The use must provide a `date` variable that has the `yyyy-mm-dd` format. In the following example, we'll use the `Air Passenger` built-in `ts` data and convert it to a classical data frame: 
+
+
+```{r}
+
+# 1. converting AirPassengers to a tidy data frame
+
+airpassengers <- data.frame(
+  passengers = as.matrix(AirPassengers),
+  date= zoo::as.Date(time(AirPassengers))
+)
+
+# 2. plotting the line chart
+lineChart(
+  data = airpassengers, 
+  x = "date", 
+  y = "passengers"
+)
+
+```
+
+# `areaChart()` 
+
+`areaChart()` works similarly except that instead of a line you get an area. 
+
+
+```{r}
+
+# 1. converting AirPassengers to a tidy data frame
+
+airpassengers <- data.frame(
+  passengers = as.matrix(AirPassengers),
+  date= zoo::as.Date(time(AirPassengers))
+)
+
+# 2. plotting the area chart
+areaChart(
+  data = airpassengers, 
+  x = "date", 
+  y = "passengers", 
+  fill = "purple", 
+  bgcol = "white"
+)
+
+```
+
+# `areaBand()` 
+
+`areaBand()` lets you plot a filled area between two y-values. For the sake of the example, let's create an additional column `passengers_upper` that has an additional 40 passengers for each observation: 
+
+```{r}
+
+airpassengers <- data.frame(
+  passengers_lower = as.matrix(AirPassengers),
+  passengers_upper = as.matrix(AirPassengers) + 40,
+  date= zoo::as.Date(time(AirPassengers))
+)
+
+areaBand(
+  data = airpassengers,
+  x = "date",
+  yLower = "passengers_lower", 
+  yUpper = "passengers_upper", 
+  fill = "yellow", 
+  stroke = "black"
+)
+
+
 
 ```
 

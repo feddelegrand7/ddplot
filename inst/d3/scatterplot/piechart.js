@@ -28,6 +28,7 @@ let labelHeight = options.labelHeight;
 
 svg
 .attr('id', options.id)
+.style('background-color', options.bgcol)
 .append('g')
 .attr('transform', `translate(${radius},${radius})`)
 .selectAll(null)
