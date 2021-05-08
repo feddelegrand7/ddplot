@@ -1,6 +1,6 @@
 Package: ddplot
 Type: Package
-Title: 
+Title: Create D3 Based SVG Graphics
 Version: 0.0.1
 Authors@R: c(
     person("Mohamed El Fodil", "Ihaddaden", email = "ihaddaden.fodeil@gmail.com", role = c("aut", "cre")),

@@ -19,7 +19,7 @@ pieChart(
   title = NULL,
   titleFontSize = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
+  bgcol = "white",
   opacity = 1,
   labelHeight = 18,
   width = NULL,
@@ -63,7 +63,7 @@ using circles of the given radius. Defaults to 0.}
 \item{font}{The font family to consider for the titles.
 Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
 \item{opacity}{The color opacity of the pie (from 0 to 1). Defaults to 1.}
 
