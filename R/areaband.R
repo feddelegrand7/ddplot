@@ -27,19 +27,7 @@
 #' @return A SVG band chart
 #' @export
 #'
-#' @examples
-#' airpassengers <- data.frame(
-#'   passengers_lower = as.matrix(AirPassengers),
-#'   passengers_upper = as.matrix(AirPassengers) + 40,
-#'   date= zoo::as.Date(time(AirPassengers))
-#' )
-#'
-#' areaBand(
-#'   data = airpassengers,
-#'   x = "date",
-#'   yLower = "passengers_lower",
-#'   yUpper = "passengers_upper"
-#' )
+
 
 areaBand <- function(
   data,

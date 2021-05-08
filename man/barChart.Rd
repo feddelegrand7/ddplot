@@ -86,15 +86,3 @@ A SVG bar chart.
 \description{
 Create a bar chart.
 }
-\examples{
-library(dplyr)
-library(ggplot2) # needed to get the mpg data frame
-
-mpg \%>\% group_by(manufacturer) \%>\%
-  summarise(mean_cty = mean(cty)) \%>\%
-  barChart(
-    x = "manufacturer",
-    y = "mean_cty",
-    sort = "descending"
-  )
-}

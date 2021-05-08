@@ -32,20 +32,7 @@
 #' @return A SVG pie chart
 #' @export
 #'
-#' @examples
-#' library(dplyr)
-#'
-#' mini_starwars <- sample_n(tbl = starwars,
-#'                           size = 5)
-#'
-#' pieChart(
-#'   data = mini_starwars,
-#'   value = "height",
-#'   label = "name",
-#'   padRadius = 300,
-#'   padAngle = 0.1,
-#'   cornerRadius = 50
-#' )
+
 
 
 pieChart <- function(

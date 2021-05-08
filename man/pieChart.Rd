@@ -79,18 +79,3 @@ A SVG pie chart
 \description{
 Create a pie chart
 }
-\examples{
-library(dplyr)
-
-mini_starwars <- sample_n(tbl = starwars,
-                          size = 5)
-
-pieChart(
-  data = mini_starwars,
-  value = "height",
-  label = "name",
-  padRadius = 300,
-  padAngle = 0.1,
-  cornerRadius = 50
-)
-}

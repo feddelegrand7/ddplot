@@ -29,12 +29,10 @@
 #'
 #' @examples
 #'
-#'library(ggplot2) # needed to get the mpg data frame
-#'
 #'scatterPlot(
-#'   data = mpg,
-#'   x = "cty",
-#'   y = "hwy"
+#'   data = mtcars,
+#'   x = "mpg",
+#'   y = "wt"
 #'   )
 #'
 

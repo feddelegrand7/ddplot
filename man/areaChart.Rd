@@ -75,16 +75,3 @@ a SVG area chart
 \description{
 Create an area chart
 }
-\examples{
-
-airpassengers <- data.frame(
-  passengers = as.matrix(AirPassengers),
-  date= zoo::as.Date(time(AirPassengers))
-)
-
-areaChart(
-  data = airpassengers,
-  x = "date",
-  y = "passengers"
-)
-}

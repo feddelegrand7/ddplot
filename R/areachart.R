@@ -26,18 +26,7 @@
 #' @return a SVG area chart
 #' @export
 #'
-#' @examples
-#'
-#' airpassengers <- data.frame(
-#'   passengers = as.matrix(AirPassengers),
-#'   date= zoo::as.Date(time(AirPassengers))
-#' )
-#'
-#' areaChart(
-#'   data = airpassengers,
-#'   x = "date",
-#'   y = "passengers"
-#' )
+
 
 
 areaChart <- function(
