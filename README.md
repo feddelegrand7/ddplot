@@ -14,7 +14,9 @@ You can install the development version of `ddplot` from Github with:
 remotes::install_github("feddelegrand7/ddplot")
 ```
 
-You can get started in the `Start` vignette.
+## Usage 
+
+You can get started [here](https://feddelegrand7.github.io/ddplot/articles/Start.html)
 
 ## Code of Conduct
 
