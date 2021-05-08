@@ -1,7 +1,7 @@
 Package: ddplot
 Type: Package
 Title: 
-Version: 0.1.0
+Version: 0.0.1
 Authors@R: c(
     person("Mohamed El Fodil", "Ihaddaden", email = "ihaddaden.fodeil@gmail.com", role = c("aut", "cre")),
     person("Mike", "Bostock", role = c("ctb", "cph"), comment = "D3.js developer"),
