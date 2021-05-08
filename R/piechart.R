@@ -29,7 +29,7 @@
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
-#' @return
+#' @return A SVG pie chart
 #' @export
 #'
 #' @examples

@@ -74,7 +74,7 @@ Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
 \item{height}{Optional. The height of the SVG output.}
 }
 \value{
-
+A SVG pie chart
 }
 \description{
 Create a pie chart
