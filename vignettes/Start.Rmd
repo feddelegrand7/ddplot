@@ -1,0 +1,103 @@
+---
+title: "Start"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Start}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ddplot)
+```
+
+`D3.js` is a famous JavaScript library that allows one to create extremely flexible SVG graphics however `D3` has (at least according to me) a pretty steep learning curve. Further, in order to understand some core concepts, one need to have some basics in `HTML`, `CSS` and `JavaScript`. `ddplot` aims to simply the process using a set of functions that render several graphics using a simple `R` API. Finally, `ddplot` is built upon the amazing `r2d3` package which makes it a breeze to interface `D3.js` with `R`, so a big thanks to the developers.  
+
+# `scatterPlot()`
+
+Let's work with the `mpg` data frame from the `ggplot2` package. 
+
+```{r}
+library(ggplot2) # needed for the mpg data frame
+
+scatterPlot(
+  data = mpg, 
+  x = "hwy", 
+  y = "cty", 
+  xtitle = "hwy variable", 
+  ytitle = "cty variable", 
+  title = "cty and hwy relationship", 
+  titleFontSize = 20
+)
+
+```
+
+In comparison to `ggplot2`, graphics' customization in `ddplot` is limited nonetheless you get a fully vectorized SVG which is cool. 
+
+If you're good in `CSS`, you can add some features to the created `SVG`. There is an `id` parameter that can be used to retrieve the graphic. 
+
+```{r}
+scatterPlot(
+  data = mpg, 
+  x = "displ", 
+  y = "cty", 
+  col = "tomato", 
+  bgcol = "#5096AB", 
+  size = 3, 
+  stroke = "yellow", 
+  strokeWidth = 1,
+  xtitle = "displ variable", 
+  ytitle = "cty variable", 
+  xticks = 3, 
+  yticks = 3, 
+  id = "displ-cty", 
+)
+
+```
+
+# `barChart()`
+
+The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.   
+
+```{r}
+library(dplyr)
+
+mpg %>% group_by(manufacturer) %>% 
+  summarise(mean_cty = mean(cty)) %>% 
+  barChart(
+    x = "manufacturer", 
+    y = "mean_cty", 
+    xFontSize = 10, 
+    fill = "orange", 
+    strokeWidth = 2, 
+    ytitle = "average cty value", 
+    title = "Average City Miles per Gallon by manufacturer"
+  )
+```
+
+The bars can be easily sorted in `ascending` or `descending` order using the `sort` parameter: 
+
+
+```{r}
+mpg %>% group_by(manufacturer) %>% 
+  summarise(mean_cty = mean(cty)) %>% 
+  barChart(
+    x = "manufacturer", 
+    y = "mean_cty", 
+    sort = "descending",
+    xFontSize = 10, 
+    fill = "orange", 
+    strokeWidth = 2, 
+    ytitle = "average cty value", 
+    title = "Average City Miles per Gallon by manufacturer"
+  )
+
+```
+

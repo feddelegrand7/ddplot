@@ -1,6 +1,19 @@
 // Setting the margin object
 let margin = { top: 50, right: 50, bottom: 50, left: 50 };
 
+// Sorting the data
+
+data.sort(function (a, b) {
+    if (options.sort === "none") {
+      return null;
+    } else if (options.sort === "ascending") {
+      return d3.ascending(a[options.y], b[options.y]);
+    } else {
+      return d3.descending(a[options.y], b[options.y]);
+    }
+  })
+
+
 // Setting the scaling of the x variable
 let xScale = d3
   .scaleBand()
@@ -73,8 +86,6 @@ svg
   .text(options.title);
 
 
-
-
 // Rendering the bar chart
 svg
   .attr("id", options.id)
@@ -84,15 +95,6 @@ svg
   .data(data)
   .enter()
   .append("rect")
-  .sort(function (a, b) {
-    if (options.sort === "none") {
-      return null;
-    } else if (options.sort === "ascending") {
-      return d3.ascending(a[options.y], b[options.y]);
-    } else {
-      return d3.descending(a[options.y], b[options.y]);
-    }
-  })
   .attr("x", (d, i) => xScale(i))
   .attr("y", (d) => yScale(d[options.y]))
   .attr("width", xScale.bandwidth())
@@ -101,3 +103,6 @@ svg
   .attr("opacity", options.opacity)
   .attr("stroke", options.stroke)
   .attr("stroke-width", options.strokeWidth);
+
+
+

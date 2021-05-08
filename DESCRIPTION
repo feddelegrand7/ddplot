@@ -1,14 +1,22 @@
 Package: ddplot
 Type: Package
-Title: What the Package Does (Title Case)
+Title: 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: c(
+    person("Mohamed El Fodil", "Ihaddaden", email = "ihaddaden.fodeil@gmail.com", role = c("aut", "cre")),
+    person("Mike", "Bostock", role = c("ctb", "cph"), comment = "D3.js developer"),
+    person("RStudio", role = c("ctb", "cph"), comment = "developers of the r2d3 package")) 
+Maintainer: Mohamed El Fodil Ihaddaden <ihaddaden.fodeil@gmail.com>
+Description: Create D3 based SVG graphics using a simple R API. 
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/feddelegrand7/ddplot
 BugReports: https://github.com/feddelegrand7/ddplot/issues
 RoxygenNote: 7.1.1
+Imports: 
+    r2d3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
