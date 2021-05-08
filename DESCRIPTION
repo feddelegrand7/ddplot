@@ -18,5 +18,9 @@ Imports:
     r2d3
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown, 
+    ggplot2, 
+    dplyr, 
+    tidyr,
+    zoo
 VignetteBuilder: knitr
