@@ -3,8 +3,22 @@ horzBarChart <- function(data,
                          value,
                          label,
                          fill = "crimson",
+                         stroke = NULL,
+                         strokeWidth = 1,
                          id = NULL,
-                         paddingWidth = 0.1) {
+                         paddingWidth = 0.1,
+                         valueTicks = NULL,
+                         valueFontSize = 10,
+                         labelFontSize = 10,
+                         valueTitle = NULL,
+                         valueTitleFontSize = 14,
+                         font = "Verdana, Geneva, Tahoma, sans-serif",
+                         title = NULL,
+                         titleFontSize = 20,
+                         opacity = 1,
+                         width = NULL,
+                         height = NULL
+                         ) {
 
 
   if (is.null(data[[value]]) || is.null(data[[label]])) {
@@ -23,7 +37,20 @@ horzBarChart <- function(data,
       label = label,
       fill = fill,
       id = id,
-      paddingWidth = paddingWidth
+      paddingWidth = paddingWidth,
+      valueTicks = valueTicks,
+      valueFontSize = valueFontSize,
+      labelFontSize = labelFontSize,
+      valueTitle = valueTitle,
+      valueTitleFontSize = valueTitleFontSize,
+      font = font,
+      title = title,
+      titleFontSize = titleFontSize,
+      stroke = stroke,
+      strokeWidth = strokeWidth,
+      opacity = opacity,
+      width = width,
+      height = height
     )
   )
 

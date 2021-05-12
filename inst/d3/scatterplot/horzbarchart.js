@@ -1,53 +1,85 @@
 let margin = {
-    top: 50, 
-    right: 0, 
-    bottom: 50, 
-    left: 100
-}
+  top: 50,
+  right: 10,
+  bottom: 50,
+  left: 100,
+};
 
-let barHeight = 25; 
+let barHeight = 25;
 
-let x = d3.scaleLinear()
-          .domain([0, d3.max(data, d => d[options.value])])
-          .range([margin.left, width - margin.right])
+let x = d3
+  .scaleLinear()
+  .domain([0, d3.max(data, (d) => d[options.value])])
+  .range([margin.left, width - margin.right]);
 
-let y = d3.scaleBand()
-          .domain(d3.range(data.length))
-          .rangeRound([margin.top, height - margin.bottom])
-          .padding(options.paddingWidth)
+let y = d3
+  .scaleBand()
+  .domain(d3.range(data.length))
+  .rangeRound([margin.top, height - margin.bottom])
+  .padding(options.paddingWidth);
+
+let xAxis = (g) =>
+  g
+    .attr("transform", `translate(0, ${height - margin.bottom})`)
+    .call(d3.axisBottom(x).ticks(options.valueTicks))
+    .call((g) => g.select(".domain").remove());
+
+let yAxis = (g) =>
+  g
+    .attr("transform", `translate(${margin.left}, 0)`)
+    .call(d3.axisLeft(y).tickFormat((i) => data[i][options.label]));
+
+svg.attr("viewBox", [0, 0, width, height])
+   .attr("id", options.id)
+   .style('background-color', '#CAD0D3')
+
+svg
+  .append("g")
+  .attr("fill", options.fill)
+  .selectAll("rect")
+  .data(data)
+  .enter()
+  .append("rect")
+  .attr("x", x(0))
+  .attr("y", (d, i) => y(i))
+  .attr("width", (d) => x(d[options.value]) - x(0))
+  .attr("height", y.bandwidth())
+  .attr("opacity", options.opacity)
+  .attr("stroke", options.stroke)
+  .attr("stroke-width", options.strokeWidth);
 
 
-          
 
-        
-let format = x.tickFormat(20, data.format); 
+svg
+  .append("g")
+  .call(xAxis)
+  .attr("font-size", options.valueFontSize)
 
-let xAxis = g => g
-        .attr('transform', 
-        `translate(0, ${margin.top})`)
-        .call(d3.axisTop(x).ticks(width/80, data.format))
-        .call(g => g.select('.domain').remove())
+svg
+  .append("g")
+  .call(yAxis)
+  .attr("font-size", options.labelFontSize)
+  .style("font-family", options.font);
 
-let yAxis = g => g
-        .attr('transform', `translate(${margin.left}, 0)`)
-        .call(d3.axisLeft(y).tickFormat(i => data[i][options.label]))
+// rendering the x-axis title
 
-svg.attr('viewBox', [0, 0, width, height])
-   .attr('id', options.id)
+svg
+  .append("text")
+  .attr("transform", "translate(" + width / 2 + " ," + (height - 3) + ")")
+  .attr("dx", "0em")
+  .attr("dy", "-0.4em")
+  .style("text-anchor", "middle")
+  .style("font-family", options.font)
+  .style("font-size", options.valueTitleFontSize)
+  .text(options.valueTitle);
 
-svg.append('g')
-   .attr('fill', options.fill)
-   .selectAll('rect')
-   .data(data)
-   .enter()
-   .append('rect')
-   .attr('x', x(0))
-   .attr('y', (d, i) => y(i))
-   .attr('width', d => x(d[options.value]) - x(0))
-   .attr('height', y.bandwidth())
-
-svg.append('g')
-    .call(xAxis)
-
-svg.append('g')
-   .call(yAxis)
+// Rendering the chart title
+svg
+  .append("text")
+  .attr("x", width / 2)
+  .attr("y", margin.top / 2)
+  .attr("text-anchor", "middle")
+  .attr("dx", "0em")
+  .style("font-size", options.titleFontSize)
+  .style("font-family", options.font)
+  .text(options.title);

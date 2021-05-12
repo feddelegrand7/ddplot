@@ -49,7 +49,7 @@ gy = svg
   .attr("transform", "translate(" + margin.left + ", 0)")
   .call(yAx);
 
-// Removing the y ticks
+// Removing the y axis line
 gy.call((g) => g.select(".domain").remove());
 
 
