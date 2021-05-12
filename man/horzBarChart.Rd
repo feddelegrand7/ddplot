@@ -2,7 +2,7 @@
 % Please edit documentation in R/horzBarChart.R
 \name{horzBarChart}
 \alias{horzBarChart}
-\title{Create a horizental bar chart}
+\title{Create a horizontal bar chart}
 \usage{
 horzBarChart(
   data,
@@ -10,10 +10,11 @@ horzBarChart(
   value,
   fill = "crimson",
   sort = "none",
-  stroke = NULL,
-  strokeWidth = 1,
   id = NULL,
   paddingWidth = 0.1,
+  stroke = NULL,
+  strokeWidth = 1,
+  bgcol = "#CAD0D3",
   valueTicks = NULL,
   valueFontSize = 10,
   labelFontSize = 10,
@@ -36,14 +37,14 @@ horzBarChart(
 
 \item{fill}{The color of the bars. Defaults to 'crimson'.}
 
-\item{stroke}{Optional. The color of the stroke of the bars.}
-
-\item{strokeWidth}{The width of the stroke of the bars. Defaults to 1 when the 'stroke' parameter is used.}
-
 \item{id}{Optional. The id of the SVG output.}
 
 \item{paddingWidth}{The distance between each bar.
 The value goes from 0 to 0.99 included. Defaults to 0.1.}
+
+\item{stroke}{Optional. The color of the stroke of the bars.}
+
+\item{strokeWidth}{The width of the stroke of the bars. Defaults to 1 when the 'stroke' parameter is used.}
 
 \item{valueTicks}{Optional. the number of x-axis ticks to consider.}
 
@@ -71,7 +72,7 @@ The value goes from 0 to 0.99 included. Defaults to 0.1.}
 A SVG horizontal bar chart.
 }
 \description{
-Create a horizental bar chart
+Create a horizontal bar chart
 }
 \examples{
 

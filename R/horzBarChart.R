@@ -1,5 +1,5 @@
 
-#' Create a horizental bar chart
+#' Create a horizontal bar chart
 #'
 #' @param data The data frame containing the variables to consider.
 #' @param value The numeric variable to consider. Will be plotted on the x-axis.
