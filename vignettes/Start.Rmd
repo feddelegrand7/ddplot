@@ -164,7 +164,8 @@ mpg %>% group_by(drv) %>%
     sort = "ascending", 
     xtitle = "drv variable", 
     ytitle = "median cty", 
-    title = "Median cty per drv"
+    title = "Median cty per drv", 
+    xFontSize = 20
   )
 
 ```
@@ -180,6 +181,7 @@ lollipopChart(
     x = "manufacturer", 
     y = "hwy", 
     circleFill = 'red', 
+    circleStroke = 'orange',
     circleRadius = 5, 
     sort = "none", 
     xFontSize = 10
@@ -188,6 +190,39 @@ lollipopChart(
 ```
 
 From above, it's quite easy to notice that although Toyota has two cars with high highway miles per galon (hwy), it also produces many other vehicles with poor hwy. 
+
+
+# `horzLollipop()` 
+
+Same with bar charts, if you have a variable that has many categorical values, you can work with the reversed version of `lollipopChart()` which is `horzLollipop()`: 
+
+
+```{r}
+mpg %>% group_by(manufacturer) %>% 
+  summarise(median_cty = median(cty)) %>% 
+  horzLollipop(
+    label = "manufacturer", 
+    value = "median_cty", 
+    sort = "descending")
+
+```
+You can also do: 
+
+
+
+```{r}
+
+mpg %>% filter(year == 2008) %>%   
+horzLollipop(
+    label = "manufacturer", 
+    value = "hwy", 
+    circleFill = 'red', 
+    circleStroke = 'orange',
+    circleRadius = 5, 
+    sort = "none"
+  )
+
+```
 
 
 # `pieChart()` 

@@ -1,7 +1,7 @@
 // Setting the margin object
 let margin = {
   top: 50,
-  right: 10,
+  right: 20,
   bottom: 50,
   left: 100,
 };

@@ -7,7 +7,7 @@
 #' @param y The numeric variable to consider. Will be plotted on the y-axis.
 #' @param sort Whether to sort or not the vertical lines. Takes three values
 #' 'none' which is the default, 'ascending' or 'descending'.
-#' @param bgcol The background-color of the SVG output. Defaults to 'white'.
+#' @param bgcol The background-color of the SVG output. Defaults to 'salmon'.
 #' @param valueTicks Optional. the number of x-axis ticks to consider.
 #' @param labelTicks Optional. The number of y-axis ticks to consider.
 #' @param valueFontSize the font size of the x-axis labels. Defaults to 10.
@@ -37,7 +37,7 @@ horzLollipop <- function(data,
                           label,
                           value,
                           sort = 'none',
-                          bgcol = "white",
+                          bgcol = "salmon",
                           valueTicks = NULL,
                           labelTicks = NULL,
                           valueFontSize = 12,
