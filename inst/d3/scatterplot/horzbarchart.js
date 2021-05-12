@@ -5,6 +5,17 @@ let margin = {
   left: 100,
 };
 
+data.sort(function (a, b) {
+    if (options.sort === "none") {
+      return null;
+    } else if (options.sort === "ascending") {
+      return d3.ascending(a[options.value], b[options.value]);
+    } else {
+      return d3.descending(a[options.value], b[options.value]);
+    }
+  })
+
+
 let barHeight = 25;
 
 let x = d3
