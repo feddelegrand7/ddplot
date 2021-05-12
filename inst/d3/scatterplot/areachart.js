@@ -84,7 +84,6 @@ let area = d3.area()
 
 
 svg
-  .attr("id", options.id)
   .style("background-color", options.bgcol)
   .append("path")
   .datum(data)

@@ -7,7 +7,6 @@
 #' @param fill The color of the area chart. Defaults to 'crimson'.
 #' @param stroke Optional. The color of the stroke of the area.
 #' @param strokeWidth Optional. The width of the area stroke.
-#' @param id Optional. The id of the SVG output.
 #' @param xticks Optional. the number of x-axis ticks to consider.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xtitle Optional. The title of the x-axis.
@@ -36,7 +35,6 @@ areaChart <- function(
   fill = "crimson",
   stroke = NULL,
   strokeWidth = NULL,
-  id = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
@@ -80,7 +78,6 @@ areaChart <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
-      id = id,
       xtitleFontSize = xtitleFontSize,
       ytitleFontSize = ytitleFontSize,
       titleFontSize = titleFontSize,

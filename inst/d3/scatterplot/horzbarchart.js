@@ -38,7 +38,6 @@ let yAxis = (g) =>
     .call(d3.axisLeft(y).tickFormat((i) => data[i][options.label]));
 
 svg.attr("viewBox", [0, 0, width, height])
-   .attr("id", options.id)
    .style('background-color', options.bgcol)
 
 svg

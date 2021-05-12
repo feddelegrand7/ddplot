@@ -7,6 +7,7 @@
 #' @param y The numeric variable to consider. Will be plotted on the y-axis.
 #' @param sort Whether to sort or not the vertical lines. Takes three values
 #' 'none' which is the default, 'ascending' or 'descending'.
+#' @param bgcol The background-color of the SVG output. Defaults to 'white'.
 #' @param xticks Optional. the number of x-axis ticks to consider.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xFontSize the font size of the x-axis labels. Defaults to 10.
@@ -48,6 +49,7 @@ lollipopChart <- function(data,
                          x,
                          y,
                          sort = 'none',
+                         bgcol = "white",
                          xticks = NULL,
                          yticks = NULL,
                          xFontSize = 12,
@@ -97,6 +99,7 @@ lollipopChart <- function(data,
       x = x,
       y = y,
       sort = sort,
+      bgcol = bgcol,
       xticks = xticks,
       yticks = yticks,
       xFontSize = xFontSize,

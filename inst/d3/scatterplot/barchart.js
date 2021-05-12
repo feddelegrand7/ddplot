@@ -90,7 +90,6 @@ svg
 
 // Rendering the bar chart
 svg
-  .attr("id", options.id)
   .style("background-color", options.bgcol)
   .attr("viewBox", [0, 0, width, height])
   .selectAll("rect")

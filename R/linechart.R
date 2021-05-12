@@ -6,7 +6,6 @@
 #' @param y The y-variable to consider.
 #' @param stroke The color of the line. Defaults to 'crimson'.
 #' @param strokeWidth The width of the line. Defaults to 1.5.
-#' @param id Optional. The id of the SVG output.
 #' @param xticks Optional. the number of x-axis ticks to consider.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xtitle Optional. The title of the x-axis.
@@ -33,7 +32,6 @@ lineChart <- function(
                       y,
                       stroke = "crimson",
                       strokeWidth = 1.5,
-                      id = NULL,
                       xticks = NULL,
                       yticks = NULL,
                       xtitle = NULL,

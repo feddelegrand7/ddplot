@@ -6,7 +6,6 @@
 #' @param y The y-variable to consider.
 #' @param col The color of the dots. Defaults to 'crimson'.
 #' @param size The size of the dots. Defaults to 2.
-#' @param id Optional. The id of the SVG output.
 #' @param xticks Optional. The number of x-axis ticks to consider.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xtitle Optional. the title of the x-axis.
@@ -42,7 +41,6 @@ scatterPlot <- function(
                         y,
                         col = "crimson",
                         size = 2,
-                        id = NULL,
                         xticks = NULL,
                         yticks = NULL,
                         xtitle = NULL,
@@ -89,7 +87,6 @@ scatterPlot <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
-      id = id,
       xtitleFontSize = xtitleFontSize,
       ytitleFontSize = ytitleFontSize,
       titleFontSize = titleFontSize,

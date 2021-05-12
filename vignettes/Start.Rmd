@@ -41,7 +41,6 @@ scatterPlot(
 
 In comparison to `ggplot2`, graphics' customization in `ddplot` is limited nonetheless you get a fully vectorized SVG which is cool. 
 
-If you're good in `CSS`, you can add some features to the created `SVG`. There is an `id` parameter that can be used to retrieve the graphic. 
 
 
 ```{r, fig.align='center'}
@@ -57,8 +56,7 @@ scatterPlot(
   xtitle = "displ variable", 
   ytitle = "cty variable", 
   xticks = 3, 
-  yticks = 3, 
-  id = "displ-cty")
+  yticks = 3)
 
 ```
 

@@ -84,7 +84,6 @@ let line = d3.line()
              .y(d => y(d[options.y]))
 
 svg
-  .attr("id", options.id)
   .style("background-color", options.bgcol)
   .append("path")
   .datum(data)

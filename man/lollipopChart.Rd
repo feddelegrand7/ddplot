@@ -9,10 +9,11 @@ lollipopChart(
   x,
   y,
   sort = "none",
+  bgcol = "white",
   xticks = NULL,
   yticks = NULL,
-  xFontSize = 14,
-  yFontSize = 14,
+  xFontSize = 12,
+  yFontSize = 12,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   xtitle = NULL,
   xtitleFontSize = 14,
@@ -37,6 +38,8 @@ lollipopChart(
 
 \item{sort}{Whether to sort or not the vertical lines. Takes three values
 'none' which is the default, 'ascending' or 'descending'.}
+
+\item{bgcol}{The background-color of the SVG output. Defaults to 'white'.}
 
 \item{xticks}{Optional. the number of x-axis ticks to consider.}
 
@@ -80,6 +83,9 @@ A SVG lollipop chart.
 Create a lollipop chart
 }
 \examples{
+library(ggplot2) # needed for the mpg data frame
+library(dplyr) # needed for data wrangling
+
 mpg \%>\% group_by(drv) \%>\%
   summarise(median_cty = median(cty)) \%>\%
   lollipopChart(

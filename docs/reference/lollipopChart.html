@@ -134,10 +134,11 @@
   <span class='va'>x</span>,
   <span class='va'>y</span>,
   sort <span class='op'>=</span> <span class='st'>"none"</span>,
+  bgcol <span class='op'>=</span> <span class='st'>"white"</span>,
   xticks <span class='op'>=</span> <span class='cn'>NULL</span>,
   yticks <span class='op'>=</span> <span class='cn'>NULL</span>,
-  xFontSize <span class='op'>=</span> <span class='fl'>14</span>,
-  yFontSize <span class='op'>=</span> <span class='fl'>14</span>,
+  xFontSize <span class='op'>=</span> <span class='fl'>12</span>,
+  yFontSize <span class='op'>=</span> <span class='fl'>12</span>,
   font <span class='op'>=</span> <span class='st'>"Verdana, Geneva, Tahoma, sans-serif"</span>,
   xtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
   xtitleFontSize <span class='op'>=</span> <span class='fl'>14</span>,
@@ -172,6 +173,10 @@
       <th>sort</th>
       <td><p>Whether to sort or not the vertical lines. Takes three values
 'none' which is the default, 'ascending' or 'descending'.</p></td>
+    </tr>
+    <tr>
+      <th>bgcol</th>
+      <td><p>The background-color of the SVG output. Defaults to 'white'.</p></td>
     </tr>
     <tr>
       <th>xticks</th>
@@ -249,8 +254,11 @@
     <p>A SVG lollipop chart.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mpg</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>drv</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/summarise.html'>summarise</a></span><span class='op'>(</span>median_cty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/median.html'>median</a></span><span class='op'>(</span><span class='va'>cty</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span> <span class='co'># needed for the mpg data frame</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span> <span class='co'># needed for data wrangling</span>
+
+<span class='va'>mpg</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>drv</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>median_cty <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/median.html'>median</a></span><span class='op'>(</span><span class='va'>cty</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
   <span class='fu'>lollipopChart</span><span class='op'>(</span>
     x <span class='op'>=</span> <span class='st'>"drv"</span>,
     y <span class='op'>=</span> <span class='st'>"median_cty"</span>,

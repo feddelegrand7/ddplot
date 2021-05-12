@@ -10,7 +10,6 @@ lineChart(
   y,
   stroke = "crimson",
   strokeWidth = 1.5,
-  id = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
@@ -36,8 +35,6 @@ lineChart(
 \item{stroke}{The color of the line. Defaults to 'crimson'.}
 
 \item{strokeWidth}{The width of the line. Defaults to 1.5.}
-
-\item{id}{Optional. The id of the SVG output.}
 
 \item{xticks}{Optional. the number of x-axis ticks to consider.}
 

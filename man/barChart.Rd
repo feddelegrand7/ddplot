@@ -10,7 +10,6 @@ barChart(
   y,
   fill = "crimson",
   sort = "none",
-  id = NULL,
   paddingWidth = 0.1,
   xticks = NULL,
   xFontSize = 10,
@@ -42,8 +41,6 @@ barChart(
 
 \item{sort}{Whether to sort or not the bars. Takes three values
 'none' which is the default, 'ascending' or 'descending'.}
-
-\item{id}{Optional. The id of the SVG output.}
 
 \item{paddingWidth}{The distance between each bar.
 The value goes from 0 to 0.99 included. Defaults to 0.1.}

@@ -18,7 +18,6 @@
 #' If the corner radius is greater than zero, the corners of the arc are rounded
 #' using circles of the given radius. Defaults to 0.
 #' @param labelFont The font family of the legend. Defaults to 'sans-serif'.
-#' @param id Optional. The id of the SVG output.
 #' @param title Optional. The title of the plot.
 #' @param titleFontSize The font size of the plot title. Defaults to 22.
 #' @param font The font family to consider for the titles.
@@ -46,7 +45,6 @@ pieChart <- function(
   padAngle = NULL,
   cornerRadius = 0,
   labelFont = 'sans-serif',
-  id = NULL,
   title = NULL,
   titleFontSize = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
@@ -81,7 +79,6 @@ pieChart <- function(
       font = font,
       width = width,
       height = height,
-      id = id,
       titleFontSize = titleFontSize,
       bgcol = bgcol,
       opacity = opacity,

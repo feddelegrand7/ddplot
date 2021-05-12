@@ -84,7 +84,6 @@ let areaBand = d3.area()
              .y1(d => y(d[options.yUpper]))
 
 svg
-  .attr("id", options.id)
   .style("background-color", options.bgcol)
   .append("path")
   .datum(data)

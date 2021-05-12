@@ -10,7 +10,6 @@ horzBarChart(
   value,
   fill = "crimson",
   sort = "none",
-  id = NULL,
   paddingWidth = 0.1,
   stroke = NULL,
   strokeWidth = 1,
@@ -36,8 +35,6 @@ horzBarChart(
 \item{value}{The numeric variable to consider. Will be plotted on the x-axis.}
 
 \item{fill}{The color of the bars. Defaults to 'crimson'.}
-
-\item{id}{Optional. The id of the SVG output.}
 
 \item{paddingWidth}{The distance between each bar.
 The value goes from 0 to 0.99 included. Defaults to 0.1.}

@@ -15,7 +15,6 @@ pieChart(
   padAngle = NULL,
   cornerRadius = 0,
   labelFont = "sans-serif",
-  id = NULL,
   title = NULL,
   titleFontSize = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
@@ -53,8 +52,6 @@ If the corner radius is greater than zero, the corners of the arc are rounded
 using circles of the given radius. Defaults to 0.}
 
 \item{labelFont}{The font family of the legend. Defaults to 'sans-serif'.}
-
-\item{id}{Optional. The id of the SVG output.}
 
 \item{title}{Optional. The title of the plot.}
 

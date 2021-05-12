@@ -12,7 +12,6 @@ areaBand(
   fill = "crimson",
   stroke = NULL,
   strokeWidth = NULL,
-  id = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
@@ -42,8 +41,6 @@ areaBand(
 \item{stroke}{Optional. The color of the stroke of the band.}
 
 \item{strokeWidth}{Optional. The width of the band stroke.}
-
-\item{id}{Optional. The id of the SVG output.}
 
 \item{xticks}{Optional. the number of x-axis ticks to consider.}
 

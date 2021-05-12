@@ -6,7 +6,6 @@
 #' @param fill The color of the bars. Defaults to 'crimson'.
 #' @param sort Whether to sort or not the bars. Takes three values
 #' 'none' which is the default, 'ascending' or 'descending'.
-#' @param id Optional. The id of the SVG output.
 #' @param paddingWidth The distance between each bar.
 #' The value goes from 0 to 0.99 included. Defaults to 0.1.
 #' @param xticks Optional. the number of x-axis ticks to consider.
@@ -40,7 +39,6 @@ barChart <- function(
                      y,
                      fill = "crimson",
                      sort = "none",
-                     id = NULL,
                      paddingWidth = 0.1,
                      xticks = NULL,
                      xFontSize = 10,
@@ -101,7 +99,6 @@ barChart <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
-      id = id,
       xFontSize = xFontSize,
       yFontSize = yFontSize,
       xtitleFontSize = xtitleFontSize,

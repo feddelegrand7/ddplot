@@ -10,7 +10,6 @@ scatterPlot(
   y,
   col = "crimson",
   size = 2,
-  id = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
@@ -38,8 +37,6 @@ scatterPlot(
 \item{col}{The color of the dots. Defaults to 'crimson'.}
 
 \item{size}{The size of the dots. Defaults to 2.}
-
-\item{id}{Optional. The id of the SVG output.}
 
 \item{xticks}{Optional. The number of x-axis ticks to consider.}
 

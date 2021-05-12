@@ -8,7 +8,6 @@
 #' @param fill The color of the band. Defaults to 'crimson'.
 #' @param stroke Optional. The color of the stroke of the band.
 #' @param strokeWidth Optional. The width of the band stroke.
-#' @param id Optional. The id of the SVG output.
 #' @param xticks Optional. the number of x-axis ticks to consider.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xtitle Optional. The title of the x-axis.
@@ -37,7 +36,6 @@ areaBand <- function(
   fill = "crimson",
   stroke = NULL,
   strokeWidth = NULL,
-  id = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
@@ -84,7 +82,6 @@ areaBand <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
-      id = id,
       xtitleFontSize = xtitleFontSize,
       ytitleFontSize = ytitleFontSize,
       titleFontSize = titleFontSize,

@@ -135,7 +135,6 @@
   <span class='va'>value</span>,
   fill <span class='op'>=</span> <span class='st'>"crimson"</span>,
   sort <span class='op'>=</span> <span class='st'>"none"</span>,
-  id <span class='op'>=</span> <span class='cn'>NULL</span>,
   paddingWidth <span class='op'>=</span> <span class='fl'>0.1</span>,
   stroke <span class='op'>=</span> <span class='cn'>NULL</span>,
   strokeWidth <span class='op'>=</span> <span class='fl'>1</span>,
@@ -171,10 +170,6 @@
     <tr>
       <th>fill</th>
       <td><p>The color of the bars. Defaults to 'crimson'.</p></td>
-    </tr>
-    <tr>
-      <th>id</th>
-      <td><p>Optional. The id of the SVG output.</p></td>
     </tr>
     <tr>
       <th>paddingWidth</th>
@@ -249,8 +244,8 @@ The value goes from 0 to 0.99 included. Defaults to 0.1.</p></td>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:base':</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'>
-<span class='va'>mpg</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>manufacturer</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
- <span class='fu'><a href='https://rdrr.io/pkg/dplyr/man/summarise.html'>summarise</a></span><span class='op'>(</span>median_hwy <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/median.html'>median</a></span><span class='op'>(</span><span class='va'>hwy</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+<span class='va'>mpg</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>manufacturer</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+ <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>median_hwy <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/median.html'>median</a></span><span class='op'>(</span><span class='va'>hwy</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
  <span class='fu'>horzBarChart</span><span class='op'>(</span>
    label <span class='op'>=</span> <span class='st'>"manufacturer"</span>,
    value <span class='op'>=</span> <span class='st'>"median_hwy"</span>,

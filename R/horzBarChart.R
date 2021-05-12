@@ -7,7 +7,6 @@
 #' @param fill The color of the bars. Defaults to 'crimson'.
 #' @param stroke Optional. The color of the stroke of the bars.
 #' @param strokeWidth The width of the stroke of the bars. Defaults to 1 when the 'stroke' parameter is used.
-#' @param id Optional. The id of the SVG output.
 #' @param paddingWidth The distance between each bar.
 #' The value goes from 0 to 0.99 included. Defaults to 0.1.
 #' @param valueTicks Optional. the number of x-axis ticks to consider.
@@ -45,7 +44,6 @@ horzBarChart <- function(data,
                          value,
                          fill = "crimson",
                          sort = "none",
-                         id = NULL,
                          paddingWidth = 0.1,
                          stroke = NULL,
                          strokeWidth = 1,
@@ -92,7 +90,6 @@ horzBarChart <- function(data,
       value = value,
       label = label,
       fill = fill,
-      id = id,
       paddingWidth = paddingWidth,
       valueTicks = valueTicks,
       valueFontSize = valueFontSize,
