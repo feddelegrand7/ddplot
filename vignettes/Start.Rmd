@@ -151,6 +151,46 @@ mpg %>% group_by(manufacturer) %>%
 ```
 
 
+# `lollipopChart()` 
+
+lollipop chart follows the same behavior as bar charts but instead of bars you get lollipops, hence the name. Below an example of a lollipop chart with `ddplot`:  
+
+
+```{r}
+
+mpg %>% group_by(drv) %>% 
+  summarise(median_cty = median(cty)) %>% 
+  lollipopChart(
+    x = "drv", 
+    y = "median_cty", 
+    sort = "ascending", 
+    xtitle = "drv variable", 
+    ytitle = "median cty", 
+    title = "Median cty per drv"
+  )
+
+```
+
+
+It's possible to grasp the distribution of some variable according to a specific categorical variable using the same function: 
+
+
+```{r}
+
+mpg %>% filter(year == 2008) %>%   
+lollipopChart(
+    x = "manufacturer", 
+    y = "hwy", 
+    circleFill = 'red', 
+    circleRadius = 5, 
+    sort = "none", 
+    xFontSize = 10
+  )
+
+```
+
+From above, it's quite easy to notice that although Toyota has two cars with high highway miles per galon (hwy), it also produces many other vehicles with poor hwy. 
+
 
 # `pieChart()` 
 
