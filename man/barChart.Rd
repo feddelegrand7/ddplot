@@ -14,6 +14,7 @@ barChart(
   paddingWidth = 0.1,
   xticks = NULL,
   xFontSize = 10,
+  yFontSize = 10,
   yticks = NULL,
   xtitle = NULL,
   xtitleFontSize = 16,
@@ -50,6 +51,8 @@ The value goes from 0 to 0.99 included. Defaults to 0.1.}
 \item{xticks}{Optional. the number of x-axis ticks to consider.}
 
 \item{xFontSize}{the font size of the x-axis labels. Defaults to 10.}
+
+\item{yFontSize}{the font size of the y-axis labels. Defaults to 10.}
 
 \item{yticks}{Optional. The number of y-axis ticks to consider.}
 

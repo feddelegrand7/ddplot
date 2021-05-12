@@ -50,9 +50,9 @@ scatterPlot(
   x = "displ", 
   y = "cty", 
   col = "tomato", 
-  bgcol = "#5096AB", 
+  bgcol = "pink", 
   size = 3, 
-  stroke = "yellow", 
+  stroke = "royalblue", 
   strokeWidth = 1,
   xtitle = "displ variable", 
   ytitle = "cty variable", 
@@ -74,7 +74,8 @@ mpg %>% group_by(manufacturer) %>%
   barChart(
     x = "manufacturer", 
     y = "mean_cty", 
-    xFontSize = 10, 
+    xFontSize = 10,
+    yFontSize = 10,
     fill = "orange", 
     strokeWidth = 2, 
     ytitle = "average cty value", 
@@ -93,14 +94,63 @@ mpg %>% group_by(manufacturer) %>%
     y = "mean_cty", 
     sort = "ascending",
     xFontSize = 10, 
+    yFontSize = 10,
     fill = "orange", 
-    strokeWidth = 2, 
+    strokeWidth = 1, 
     ytitle = "average cty value", 
     title = "Average City Miles per Gallon by manufacturer", 
     titleFontSize = 16
   )
-
 ```
+
+
+# `horzBarChart()` 
+
+If you've many categories, it might be a good idea to go for a horizontal bar chart. It has the same parameters as the `barChart()` function except that the x-axis parameter is named `value` and the y-axis parameter named `label`, this naming convention aims to mitigate some confusion that can arise. Also, I've made the choice to not include a title in the label axis as I think it's cumbersome and the labels can tell the story. 
+
+If we want to replicate the above graphic in a horizontal way, we can do: 
+
+```{r}
+mpg %>% group_by(manufacturer) %>% 
+  summarise(mean_cty = mean(cty)) %>% 
+  horzBarChart(
+    label = "manufacturer", 
+    value = "mean_cty", 
+    sort = "ascending",
+    labelFontSize  = 10, 
+    valueFontSize = 10,
+    fill = "orange", 
+    stroke = "crimson",
+    strokeWidth = 1, 
+    valueTitle  = "average cty value", 
+    title = "Average City Miles per Gallon by manufacturer", 
+    titleFontSize = 16
+  )
+```
+
+As in `barChart()`, we can aslo sort in descending order: 
+
+
+```{r}
+mpg %>% group_by(manufacturer) %>% 
+  summarise(mean_cty = mean(cty)) %>% 
+  horzBarChart(
+    label = "manufacturer", 
+    value = "mean_cty", 
+    sort = "descending",
+    labelFontSize  = 10, 
+    valueFontSize = 10,
+    bgcol = "white",
+    fill = "royalblue", 
+    stroke = "white",
+    strokeWidth = 1, 
+    valueTitle  = "average cty value", 
+    title = "Average City Miles per Gallon by manufacturer", 
+    titleFontSize = 16
+  )
+```
+
+
 
 # `pieChart()` 
 

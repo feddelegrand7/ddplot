@@ -39,7 +39,7 @@ let yAxis = (g) =>
 
 svg.attr("viewBox", [0, 0, width, height])
    .attr("id", options.id)
-   .style('background-color', '#CAD0D3')
+   .style('background-color', options.bgcol)
 
 svg
   .append("g")

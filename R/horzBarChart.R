@@ -48,6 +48,7 @@ horzBarChart <- function(data,
                          stroke = NULL,
                          strokeWidth = 1,
                          id = NULL,
+                         bgcol = "#CAD0D3",
                          paddingWidth = 0.1,
                          valueTicks = NULL,
                          valueFontSize = 10,
@@ -106,7 +107,8 @@ horzBarChart <- function(data,
       opacity = opacity,
       width = width,
       height = height,
-      sort = sort
+      sort = sort,
+      bgcol = bgcol
     )
   )
 

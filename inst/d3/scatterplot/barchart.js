@@ -47,7 +47,9 @@ svg
 gy = svg
   .append("g")
   .attr("transform", "translate(" + margin.left + ", 0)")
-  .call(yAx);
+  .call(yAx)
+  .attr("font-size", options.yFontSize);
+
 
 // Removing the y axis line
 gy.call((g) => g.select(".domain").remove());

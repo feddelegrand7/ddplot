@@ -11,6 +11,7 @@
 #' The value goes from 0 to 0.99 included. Defaults to 0.1.
 #' @param xticks Optional. the number of x-axis ticks to consider.
 #' @param xFontSize the font size of the x-axis labels. Defaults to 10.
+#' @param yFontSize the font size of the y-axis labels. Defaults to 10.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xtitle Optional. The title of the x-axis.
 #' @param xtitleFontSize The font size of the x-axis title. Defaults to 16.
@@ -43,6 +44,7 @@ barChart <- function(
                      paddingWidth = 0.1,
                      xticks = NULL,
                      xFontSize = 10,
+                     yFontSize = 10,
                      yticks = NULL,
                      xtitle = NULL,
                      xtitleFontSize = 16,
@@ -101,6 +103,7 @@ barChart <- function(
       height = height,
       id = id,
       xFontSize = xFontSize,
+      yFontSize = yFontSize,
       xtitleFontSize = xtitleFontSize,
       ytitleFontSize = ytitleFontSize,
       titleFontSize = titleFontSize,
