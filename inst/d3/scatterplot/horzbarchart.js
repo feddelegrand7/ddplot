@@ -15,9 +15,6 @@ data.sort(function (a, b) {
     }
   })
 
-
-let barHeight = 25;
-
 let x = d3
   .scaleLinear()
   .domain([0, d3.max(data, (d) => d[options.value])])
@@ -58,8 +55,6 @@ svg
   .attr("opacity", options.opacity)
   .attr("stroke", options.stroke)
   .attr("stroke-width", options.strokeWidth);
-
-
 
 svg
   .append("g")

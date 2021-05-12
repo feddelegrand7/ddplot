@@ -67,6 +67,19 @@ horzBarChart <- function(data,
     stop("Please check that x and y belong to the specified data frame")
   }
 
+  if (!(any(c('none',
+              'ascending',
+              'descending') %in% sort))) {
+    stop("
+    the sort parameter can only take the following values:
+    'none', 'ascending' or 'descending'
+       ")
+  }
+
+  if (grepl(";", font)) {
+    stop("please remove the ';' character from your font argument")
+  }
+
 
   r2d3::r2d3(
     data = data,
@@ -96,13 +109,6 @@ horzBarChart <- function(data,
       sort = sort
     )
   )
-
-
-
-
-
-
-
 
 
 }
