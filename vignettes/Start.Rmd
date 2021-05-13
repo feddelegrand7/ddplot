@@ -297,6 +297,20 @@ lineChart(
 
 ```
 
+# `animLineChart()`
+
+Heavily inspired from [Jure Stabuc's example](https://observablehq.com/@jurestabuc/animated-line-chart), the `animLineChart()` function create an empty SVG but when each time you click on it a line chart animation starts. Note that the line lasts after the end of the animation. Go ahead, click on the empty graphic below: 
+
+```{r}
+animLineChart(
+  data = airpassengers, 
+  x = "date", 
+  y = "passengers", 
+  duration = 2000 # 2 milliseconds
+)
+```
+
+
 # `areaChart()` 
 
 `areaChart()` works similarly except that instead of a line you get an area. 
