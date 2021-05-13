@@ -9,7 +9,7 @@ horzLollipop(
   label,
   value,
   sort = "none",
-  bgcol = "white",
+  bgcol = "salmon",
   valueTicks = NULL,
   labelTicks = NULL,
   valueFontSize = 12,
@@ -35,7 +35,7 @@ horzLollipop(
 \item{sort}{Whether to sort or not the vertical lines. Takes three values
 'none' which is the default, 'ascending' or 'descending'.}
 
-\item{bgcol}{The background-color of the SVG output. Defaults to 'white'.}
+\item{bgcol}{The background-color of the SVG output. Defaults to 'salmon'.}
 
 \item{valueTicks}{Optional. the number of x-axis ticks to consider.}
 

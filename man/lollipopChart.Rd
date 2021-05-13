@@ -9,7 +9,7 @@ lollipopChart(
   x,
   y,
   sort = "none",
-  bgcol = "white",
+  bgcol = "salmon",
   xticks = NULL,
   yticks = NULL,
   xFontSize = 12,
