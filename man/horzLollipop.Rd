@@ -26,7 +26,10 @@ horzLollipop(
   circleFill = "lime",
   circleStroke = "lime",
   circleStrokeWidth = 1,
-  circleRadius = 5
+  circleRadius = 5,
+  axisCol = "black",
+  width = NULL,
+  height = NULL
 )
 }
 \arguments{
@@ -71,6 +74,13 @@ horzLollipop(
 \item{circleStrokeWidth}{The width of the circles' stroke. Defaults to 1.}
 
 \item{circleRadius}{The radius of the circles. Defaults to 10.}
+
+\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
+Defaults to 'black'.}
+
+\item{width}{Optional. The width of the SVG output.}
+
+\item{height}{Optional. The height of the SVG output.}
 
 \item{x}{The categorical variable to consider. Will be plotted on the x-axis.}
 

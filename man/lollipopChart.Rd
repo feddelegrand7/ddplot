@@ -9,7 +9,7 @@ lollipopChart(
   x,
   y,
   sort = "none",
-  bgcol = "salmon",
+  bgcol = "white",
   xticks = NULL,
   yticks = NULL,
   xFontSize = 12,
@@ -26,7 +26,10 @@ lollipopChart(
   circleFill = "lime",
   circleStroke = "lime",
   circleStrokeWidth = 1,
-  circleRadius = 10
+  circleRadius = 10,
+  axisCol = "black",
+  width = NULL,
+  height = NULL
 )
 }
 \arguments{
@@ -75,6 +78,13 @@ lollipopChart(
 \item{circleStrokeWidth}{The width of the circles' stroke. Defaults to 1.}
 
 \item{circleRadius}{The radius of the circles. Defaults to 10.}
+
+\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
+Defaults to 'black'.}
+
+\item{width}{Optional. The width of the SVG output.}
+
+\item{height}{Optional. The height of the SVG output.}
 }
 \value{
 A SVG lollipop chart.

@@ -26,7 +26,11 @@
 #' @param circleStroke The color of the stroke surrounding the circle. Defaults to 'lime'.
 #' @param circleStrokeWidth The width of the circles' stroke. Defaults to 1.
 #' @param circleRadius The radius of the circles. Defaults to 10.
-#'
+#' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
+#' Defaults to 'black'.
+#' @param width Optional. The width of the SVG output.
+#' @param height Optional. The height of the SVG output.
+
 #' @return A SVG horizontal lollipop chart.
 #' @export
 #'
@@ -37,7 +41,7 @@ horzLollipop <- function(data,
                           label,
                           value,
                           sort = 'none',
-                          bgcol = "salmon",
+                          bgcol = "white",
                           valueTicks = NULL,
                           labelTicks = NULL,
                           valueFontSize = 12,
@@ -54,7 +58,10 @@ horzLollipop <- function(data,
                           circleFill = "lime",
                           circleStroke = "lime",
                           circleStrokeWidth = 1,
-                          circleRadius = 5
+                          circleRadius = 5,
+                          axisCol = "black",
+                          width = NULL,
+                          height = NULL
 
 ) {
 
@@ -104,7 +111,10 @@ horzLollipop <- function(data,
       circleStroke = circleStroke,
       circleStrokeWidth = circleStrokeWidth,
       circleFill = circleFill,
-      circleRadius = circleRadius
+      circleRadius = circleRadius,
+      axisCol = axisCol,
+      width = width,
+      height = height
 
     )
   )
