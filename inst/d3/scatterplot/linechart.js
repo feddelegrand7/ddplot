@@ -18,9 +18,18 @@ let x = d3
   .range([margin.left, width - margin.right]);
 
 // Setting the scale of the y variable
+
+function isItNegative() {
+  if(ymin < 0) {
+    return ymin - (ymin * 10/100)
+  } else {
+    return 0
+  }
+}
+
 let y = d3
   .scaleLinear()
-  .domain([0, ymax])
+  .domain([isItNegative(), ymax])
   .range([height - margin.top, margin.bottom])
   .nice();
 
