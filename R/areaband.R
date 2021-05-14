@@ -20,9 +20,9 @@
 #' "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "#CAD0D3" HEX color.
 #' @param opacity The color opacity of the area chart (from 0 to 1). Defaults to 1.
-#' @param width Optional. The width of the SVG output.
 #' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
 #' Defaults to 'black'.
+#' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
 #' @return A SVG band chart

@@ -63,7 +63,8 @@ svg
   .style("text-anchor", "middle")
   .style("font-family", options.font)
   .style("font-size", options.xtitleFontSize)
-  .text(options.xtitle);
+  .text(options.xtitle)
+  .style('fill', options.axisCol)
 
 // Rendering the y-axis title
 svg
@@ -73,7 +74,8 @@ svg
   .style("text-anchor", "middle")
   .style("font-size", options.ytitleFontSize)
   .style("font-family", options.font)
-  .text(options.ytitle);
+  .text(options.ytitle)
+  .style('fill', options.axisCol)
 
 // Rendering the chart title
 svg
@@ -84,7 +86,14 @@ svg
   .attr("dx", "0em")
   .style("font-size", options.titleFontSize)
   .style("font-family", options.font)
-  .text(options.title);
+  .text(options.title)
+  .style('fill', options.axisCol)
+
+// Modifying the color of the ticks and labels
+svg.selectAll(".tick line").attr("stroke", options.axisCol)
+svg.selectAll(".tick text").style("fill", options.axisCol)
+svg.selectAll("path.domain").attr("stroke", options.axisCol)
+  
 
 // Rendering the lines
 
