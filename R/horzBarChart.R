@@ -18,6 +18,8 @@
 #' @param title Optional. The title of the overall graphic.
 #' @param titleFontSize The font size of the overall graphic's title when specified.
 #' @param opacity The color opacity of the bars. Goes from 0 to 1. Defaults to 1.
+#' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
+#' Defaults to 'black'.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
@@ -57,6 +59,7 @@ horzBarChart <- function(data,
                          title = NULL,
                          titleFontSize = 20,
                          opacity = 1,
+                         axisCol = "black",
                          width = NULL,
                          height = NULL
                          ) {
@@ -105,7 +108,8 @@ horzBarChart <- function(data,
       width = width,
       height = height,
       sort = sort,
-      bgcol = bgcol
+      bgcol = bgcol,
+      axisCol = axisCol
     )
   )
 
