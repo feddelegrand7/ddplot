@@ -26,6 +26,17 @@
 #' @return An animated SVG line chart.
 #' @export
 #'
+#' @examples
+#'airpassengers <- data.frame(
+#'  passengers = as.matrix(AirPassengers),
+#'  date= zoo::as.Date(time(AirPassengers))
+#')
+#'animLineChart(
+#'  data = airpassengers,
+#'  x = "date",
+#'  y = "passengers",
+#'  duration = 10000 # in milliseconds (10 seconds)
+#')
 
 
 animLineChart <- function(

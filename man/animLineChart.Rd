@@ -72,3 +72,15 @@ An animated SVG line chart.
 \description{
 Create an animated line chart
 }
+\examples{
+airpassengers <- data.frame(
+ passengers = as.matrix(AirPassengers),
+ date= zoo::as.Date(time(AirPassengers))
+)
+animLineChart(
+ data = airpassengers,
+ x = "date",
+ y = "passengers",
+ duration = 10000 # in milliseconds (10 seconds)
+)
+}
