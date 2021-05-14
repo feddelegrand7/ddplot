@@ -23,6 +23,7 @@ horzBarChart(
   title = NULL,
   titleFontSize = 20,
   opacity = 1,
+  axisCol = "black",
   width = NULL,
   height = NULL
 )
@@ -60,6 +61,9 @@ The value goes from 0 to 0.99 included. Defaults to 0.1.}
 \item{titleFontSize}{The font size of the overall graphic's title when specified.}
 
 \item{opacity}{The color opacity of the bars. Goes from 0 to 1. Defaults to 1.}
+
+\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
+Defaults to 'black'.}
 
 \item{width}{Optional. The width of the SVG output.}
 
