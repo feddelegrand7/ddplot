@@ -4,14 +4,14 @@ let margin = { top: 50, right: 50, bottom: 50, left: 50 };
 // Sorting the data
 
 data.sort(function (a, b) {
-    if (options.sort === "none") {
-      return null;
-    } else if (options.sort === "ascending") {
-      return d3.ascending(a[options.y], b[options.y]);
-    } else {
-      return d3.descending(a[options.y], b[options.y]);
-    }
-  })
+  if (options.sort === "none") {
+    return null;
+  } else if (options.sort === "ascending") {
+    return d3.ascending(a[options.y], b[options.y]);
+  } else {
+    return d3.descending(a[options.y], b[options.y]);
+  }
+});
 
 // Setting the scaling of the x variable
 let xScale = d3
@@ -64,7 +64,7 @@ svg
   .style("font-family", options.font)
   .style("font-size", options.xtitleFontSize)
   .text(options.xtitle)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Rendering the y-axis title
 svg
@@ -75,7 +75,7 @@ svg
   .style("font-size", options.ytitleFontSize)
   .style("font-family", options.font)
   .text(options.ytitle)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Rendering the chart title
 svg
@@ -87,13 +87,12 @@ svg
   .style("font-size", options.titleFontSize)
   .style("font-family", options.font)
   .text(options.title)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Modifying the color of the ticks and labels
-svg.selectAll(".tick line").attr("stroke", options.axisCol)
-svg.selectAll(".tick text").style("fill", options.axisCol)
-svg.selectAll("path.domain").attr("stroke", options.axisCol)
-  
+svg.selectAll(".tick line").attr("stroke", options.axisCol);
+svg.selectAll(".tick text").style("fill", options.axisCol);
+svg.selectAll("path.domain").attr("stroke", options.axisCol);
 
 // Rendering the lines
 

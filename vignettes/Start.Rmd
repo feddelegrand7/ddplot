@@ -104,7 +104,7 @@ mpg %>% group_by(manufacturer) %>%
 
 # `horzBarChart()` 
 
-If you've many categories, it might be a good idea to go for a horizontal bar chart. It has the same parameters as the `barChart()` function except that the x-axis parameter is named `value` and the y-axis parameter named `label`, this naming convention aims to mitigate some confusion that can arise. Also, I've made the choice to not include a title in the label axis as I think it's cumbersome and the labels can tell the story. 
+If you've many categories, it might be a good idea to go for a horizontal bar chart. It has the same parameters as the `barChart()` function except that the x-axis parameter is named `value` and the y-axis parameter named `label`, this naming convention aims to mitigate some confusion that can arise.
 
 If we want to replicate the above graphic in a horizontal way, we can do: 
 

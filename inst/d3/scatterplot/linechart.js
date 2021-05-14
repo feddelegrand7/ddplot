@@ -6,16 +6,16 @@ margin = {
   bottom: 40,
 };
 
-
 // Setting the min and max of the y variable
 let ymin = d3.min(data, (d) => d[options.y]);
 let ymax = d3.max(data, (d) => d[options.y]);
 
 // Setting the scale of the x variable
 
-let x = d3.scaleUtc()
-    .domain(d3.extent(data, d => new Date(d[options.x])))
-    .range([margin.left, width - margin.right])
+let x = d3
+  .scaleUtc()
+  .domain(d3.extent(data, (d) => new Date(d[options.x])))
+  .range([margin.left, width - margin.right]);
 
 // Setting the scale of the y variable
 let y = d3
@@ -42,7 +42,6 @@ svg
   .attr("transform", "translate(" + margin.left + ", 0)")
   .call(yS);
 
-
 // Rendering the x-axis title
 svg
   .append("text")
@@ -52,8 +51,7 @@ svg
   .style("font-family", options.font)
   .style("font-size", options.xtitleFontSize)
   .text(options.xtitle)
-  .style('fill', options.axisCol)
-
+  .style("fill", options.axisCol);
 
 // Rendering the y-axis title
 svg
@@ -64,7 +62,7 @@ svg
   .style("font-size", options.ytitleFontSize)
   .style("font-family", options.font)
   .text(options.ytitle)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Rendering the chart title
 
@@ -77,20 +75,19 @@ svg
   .style("font-size", options.titleFontSize)
   .style("font-family", options.font)
   .text(options.title)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Modifying the color of the ticks and labels
-svg.selectAll(".tick line").attr("stroke", options.axisCol)
-svg.selectAll(".tick text").style("fill", options.axisCol)
-svg.selectAll("path.domain").attr("stroke", options.axisCol)
-  
-
+svg.selectAll(".tick line").attr("stroke", options.axisCol);
+svg.selectAll(".tick text").style("fill", options.axisCol);
+svg.selectAll("path.domain").attr("stroke", options.axisCol);
 
 // Rendering the scatter plot
 
-let line = d3.line()
-             .x(d => x(new Date(d[options.x])))
-             .y(d => y(d[options.y]))
+let line = d3
+  .line()
+  .x((d) => x(new Date(d[options.x])))
+  .y((d) => y(d[options.y]));
 
 svg
   .style("background-color", options.bgcol)
@@ -101,6 +98,4 @@ svg
   .attr("stroke-width", options.strokeWidth)
   .attr("stroke-linejoin", "round")
   .attr("stroke-linecap", "round")
-  .attr('d', line)
-
-
+  .attr("d", line);

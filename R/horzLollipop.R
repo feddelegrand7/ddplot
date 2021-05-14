@@ -15,9 +15,9 @@
 #' @param font The font family to consider for the titles. Defaults to
 #' "Verdana, Geneva, Tahoma, sans-serif".
 #' @param valueTitle Optional. The title of the x-axis.
-#' @param valueTitleFontSize The font size of the x-axis title. Defaults to 16.
+#' @param valueTitleFontSize The font size of the x-axis title. Defaults to 14.
 #' @param labelTitle Optional. The title of the y-axis.
-#' @param labelTitleFontSize The font size of the y-axis title. Defaults to 16.
+#' @param labelTitleFontSize The font size of the y-axis title. Defaults to 14.
 #' @param title Optional. The title of the plot.
 #' @param titleFontSize The font size of the plot title. Defaults to 22.
 #' @param lineStroke The stroke color of the vertical lines. Defaults to 'maroon'.

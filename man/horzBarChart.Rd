@@ -19,6 +19,8 @@ horzBarChart(
   labelFontSize = 10,
   valueTitle = NULL,
   valueTitleFontSize = 14,
+  labelTitle = NULL,
+  labelTitleFontSize = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   title = NULL,
   titleFontSize = 20,
@@ -53,6 +55,10 @@ The value goes from 0 to 0.99 included. Defaults to 0.1.}
 \item{valueTitle}{Optional. The title of the x-axis.}
 
 \item{valueTitleFontSize}{The font size of the x-axis title if specified. Defaults to 14.}
+
+\item{labelTitle}{Optional. The title of the y-axis.}
+
+\item{labelTitleFontSize}{The font size of the y-axis title. Defaults to 14.}
 
 \item{font}{The font family of the text. Defaults to "Verdana, Geneva, Tahoma, sans-serif"}
 

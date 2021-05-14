@@ -17,14 +17,14 @@ let ymax = d3.max(data, (d) => d[options.y]);
 // Setting the scale of the x variable
 let x = d3
   .scaleLinear()
-  .domain(d3.extent(data, d => d[options.x]))
+  .domain(d3.extent(data, (d) => d[options.x]))
   .range([margin.left, width - margin.right])
   .nice();
 
 // Setting the scale of the y variable
 let y = d3
   .scaleLinear()
-  .domain(d3.extent(data, d => d[options.y]))
+  .domain(d3.extent(data, (d) => d[options.y]))
   .range([height - margin.top, margin.bottom])
   .nice();
 
@@ -34,20 +34,17 @@ xS = d3.axisBottom(x).ticks(options.xticks);
 // Setting the y-axis
 yS = d3.axisLeft(y).ticks(options.yticks);
 
-
-
 // Rendering the x-axis
 svg
   .append("g")
   .attr("transform", "translate(0," + (height - margin.bottom) + ")")
-  .call(xS)
+  .call(xS);
 
 // Rendering the y-axis
 svg
   .append("g")
   .attr("transform", "translate(" + margin.left + ", 0)")
-  .call(yS)
-
+  .call(yS);
 
 // Rendering the x-axis title
 svg
@@ -58,7 +55,7 @@ svg
   .style("font-family", options.font)
   .style("font-size", options.xtitleFontSize)
   .text(options.xtitle)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Rendering the y-axis title
 svg
@@ -69,7 +66,7 @@ svg
   .style("font-size", options.ytitleFontSize)
   .style("font-family", options.font)
   .text(options.ytitle)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Rendering the chart title
 svg
@@ -81,13 +78,12 @@ svg
   .style("font-size", options.titleFontSize)
   .style("font-family", options.font)
   .text(options.title)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Modifying the color of the ticks and labels
-svg.selectAll(".tick line").attr("stroke", options.axisCol)
-svg.selectAll(".tick text").style("fill", options.axisCol)
-svg.selectAll("path.domain").attr("stroke", options.axisCol)
-
+svg.selectAll(".tick line").attr("stroke", options.axisCol);
+svg.selectAll(".tick text").style("fill", options.axisCol);
+svg.selectAll("path.domain").attr("stroke", options.axisCol);
 
 // Rendering the scatter plot
 svg

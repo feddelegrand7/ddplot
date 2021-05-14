@@ -14,6 +14,8 @@
 #' @param labelFontSize The font size of the y-axis labels. Defaults to 10.
 #' @param valueTitle Optional. The title of the x-axis.
 #' @param valueTitleFontSize The font size of the x-axis title if specified. Defaults to 14.
+#' @param labelTitle Optional. The title of the y-axis.
+#' @param labelTitleFontSize The font size of the y-axis title. Defaults to 14.
 #' @param font The font family of the text. Defaults to "Verdana, Geneva, Tahoma, sans-serif"
 #' @param title Optional. The title of the overall graphic.
 #' @param titleFontSize The font size of the overall graphic's title when specified.
@@ -55,6 +57,8 @@ horzBarChart <- function(data,
                          labelFontSize = 10,
                          valueTitle = NULL,
                          valueTitleFontSize = 14,
+                         labelTitle = NULL,
+                         labelTitleFontSize = 14,
                          font = "Verdana, Geneva, Tahoma, sans-serif",
                          title = NULL,
                          titleFontSize = 20,
@@ -99,6 +103,8 @@ horzBarChart <- function(data,
       labelFontSize = labelFontSize,
       valueTitle = valueTitle,
       valueTitleFontSize = valueTitleFontSize,
+      labelTitle = labelTitle,
+      labelTitleFontSize = labelTitleFontSize,
       font = font,
       title = title,
       titleFontSize = titleFontSize,

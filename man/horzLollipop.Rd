@@ -9,7 +9,7 @@ horzLollipop(
   label,
   value,
   sort = "none",
-  bgcol = "salmon",
+  bgcol = "white",
   valueTicks = NULL,
   labelTicks = NULL,
   valueFontSize = 12,
@@ -53,11 +53,11 @@ horzLollipop(
 
 \item{valueTitle}{Optional. The title of the x-axis.}
 
-\item{valueTitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{valueTitleFontSize}{The font size of the x-axis title. Defaults to 14.}
 
 \item{labelTitle}{Optional. The title of the y-axis.}
 
-\item{labelTitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{labelTitleFontSize}{The font size of the y-axis title. Defaults to 14.}
 
 \item{title}{Optional. The title of the plot.}
 

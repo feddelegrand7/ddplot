@@ -6,14 +6,14 @@ let margin = {
 };
 
 data.sort(function (a, b) {
-    if (options.sort === "none") {
-      return null;
-    } else if (options.sort === "ascending") {
-      return d3.ascending(a[options.value], b[options.value]);
-    } else {
-      return d3.descending(a[options.value], b[options.value]);
-    }
-  })
+  if (options.sort === "none") {
+    return null;
+  } else if (options.sort === "ascending") {
+    return d3.ascending(a[options.value], b[options.value]);
+  } else {
+    return d3.descending(a[options.value], b[options.value]);
+  }
+});
 
 let x = d3
   .scaleLinear()
@@ -37,8 +37,9 @@ let yAxis = (g) =>
     .attr("transform", `translate(${margin.left}, 0)`)
     .call(d3.axisLeft(y).tickFormat((i) => data[i][options.label]));
 
-svg.attr("viewBox", [0, 0, width, height])
-   .style('background-color', options.bgcol)
+svg
+  .attr("viewBox", [0, 0, width, height])
+  .style("background-color", options.bgcol);
 
 svg
   .append("g")
@@ -55,10 +56,7 @@ svg
   .attr("stroke", options.stroke)
   .attr("stroke-width", options.strokeWidth);
 
-svg
-  .append("g")
-  .call(xAxis)
-  .attr("font-size", options.valueFontSize)
+svg.append("g").call(xAxis).attr("font-size", options.valueFontSize);
 
 svg
   .append("g")
@@ -77,8 +75,18 @@ svg
   .style("font-family", options.font)
   .style("font-size", options.valueTitleFontSize)
   .text(options.valueTitle)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
+// Rendering the y-axis title
+svg
+  .append("text")
+  .attr("transform", "translate(" + 2 + " ," + height / 2 + ") rotate(-90)")
+  .attr("dy", "1em")
+  .style("text-anchor", "middle")
+  .style("font-size", options.labelTitleFontSize)
+  .style("font-family", options.font)
+  .text(options.labelTitle)
+  .style("fill", options.axisCol);
 
 // Rendering the chart title
 svg
@@ -90,10 +98,9 @@ svg
   .style("font-size", options.titleFontSize)
   .style("font-family", options.font)
   .text(options.title)
-  .style('fill', options.axisCol)
+  .style("fill", options.axisCol);
 
 // Modifying the color of the ticks and labels
-svg.selectAll(".tick line").attr("stroke", options.axisCol)
-svg.selectAll(".tick text").style("fill", options.axisCol)
-svg.selectAll("path.domain").attr("stroke", options.axisCol)
-  
+svg.selectAll(".tick line").attr("stroke", options.axisCol);
+svg.selectAll(".tick text").style("fill", options.axisCol);
+svg.selectAll("path.domain").attr("stroke", options.axisCol);
