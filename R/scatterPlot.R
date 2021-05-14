@@ -20,6 +20,8 @@
 #' "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "#CAD0D3" HEX color.
 #' @param opacity The color opacity of the dots (from 0 to 1). Defaults to 1.
+#' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
+#' Defaults to 'black'.
 #' @param width Optional. the width of the SVG output.
 #' @param height Optional. the height of the SVG output.
 #'
@@ -54,6 +56,7 @@ scatterPlot <- function(
                         font = "Verdana, Geneva, Tahoma, sans-serif",
                         bgcol = "#CAD0D3",
                         opacity = 1,
+                        axisCol = "black",
                         width = NULL,
                         height = NULL
                         ) {
@@ -91,7 +94,8 @@ scatterPlot <- function(
       ytitleFontSize = ytitleFontSize,
       titleFontSize = titleFontSize,
       bgcol = bgcol,
-      opacity = opacity
+      opacity = opacity,
+      axisCol = axisCol
     )
   )
 }
