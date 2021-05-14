@@ -83,7 +83,7 @@ svg
   .text(options.title)
   .style('fill', options.axisCol)
 
-
+// Modifying the color of the ticks and labels
 svg.selectAll(".tick line").attr("stroke", options.axisCol)
 svg.selectAll(".tick text").style("fill", options.axisCol)
 svg.selectAll("path.domain").attr("stroke", options.axisCol)

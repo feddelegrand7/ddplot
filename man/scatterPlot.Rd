@@ -23,6 +23,7 @@ scatterPlot(
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#CAD0D3",
   opacity = 1,
+  axisCol = "black",
   width = NULL,
   height = NULL
 )
@@ -64,6 +65,9 @@ scatterPlot(
 \item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
 
 \item{opacity}{The color opacity of the dots (from 0 to 1). Defaults to 1.}
+
+\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
+Defaults to 'black'.}
 
 \item{width}{Optional. the width of the SVG output.}
 
