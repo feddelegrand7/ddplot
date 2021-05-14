@@ -138,11 +138,13 @@ mpg %>% group_by(manufacturer) %>%
     sort = "descending",
     labelFontSize  = 10, 
     valueFontSize = 10,
-    bgcol = "white",
-    fill = "royalblue", 
+    bgcol = "black",
+    axisCol = "white",
+    fill = "white", 
     stroke = "white",
     strokeWidth = 1, 
     valueTitle  = "average cty value", 
+    labelTitle = "Manufacturers",
     title = "Average City Miles per Gallon by manufacturer", 
     titleFontSize = 16
   )
