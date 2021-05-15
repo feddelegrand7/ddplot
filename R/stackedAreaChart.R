@@ -26,8 +26,6 @@
 #'
 #' @return a SVG stacked area chart
 #' @export
-#'
-
 
 
 stackedAreaChart <- function(
