@@ -34,7 +34,7 @@ lineChart(
 
 \item{y}{The y-variable to consider.}
 
-\item{curve}{Optional. The line's curve type to render.
+\item{curve}{The line's curve type to render.
 A complete list can be found here <https://github.com/d3/d3-shape#curves>.
 Defaults to 'curveLinear'.}
 

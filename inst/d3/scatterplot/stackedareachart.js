@@ -2,7 +2,7 @@
 margin = {
   top: 40,
   left: 50,
-  right: 100,
+  right: 120,
   bottom: 40,
 };
 
@@ -108,7 +108,10 @@ svg.append("clipPath")
 let area = d3.area()
             .x((d) => x(new Date(d.data[options.x])))
             .y0((d) => y(d[0]))
-            .y1((d) => y(d[1]));
+            .y1((d) => y(d[1]))
+            .curve(d3[options.curve])
+
+
 
 svg
   .attr("viewBox", [0, 0, width, height])
@@ -126,4 +129,30 @@ svg
      .style('stroke-width', options.strokeWidth)
   .append('title')
      .text(({key}) => key)
+
+// Adding legends 
+
+let size = options.legendBoxSize;
+svg.selectAll('myrectangles')
+   .data(dataColumns.reverse())
+   .enter()
+   .append('rect')
+   .attr('x', width - margin.right + 5)
+   .attr('y', (d, i) => margin.top + i * (size + 5))
+   .attr('width', size)
+   .attr('height', size)
+   .style('fill', d => color(d))
+
+svg.selectAll('mylabels')
+   .data(dataColumns)
+   .enter()
+   .append('text')
+   .attr('x', width - margin.right + size * 1.5)
+   .attr('y', (d, i) => margin.top + i * (size + 5) + (size/2) + 1)
+   .style("fill", d => color(d))
+   .text(d => d)
+   .attr("text-anchor", "left")
+   .style("alignment-baseline", "middle")
+   .style('fill', options.axisCol)
+   .style('font-size', `${options.legendTextSize}px`)
 

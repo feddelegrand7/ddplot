@@ -3,8 +3,11 @@
 #'
 #' @param data The data frame containing the variables to consider.
 #' @param x The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.
-#' @param colorCategory A D3 color scheme, you can find more
-#' here https://observablehq.com/@d3/color-schemes. Defaults to 'Paired'.
+#' @param colorCategory A D3 categorical color scheme, you can find more
+#' here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Category10'.
+#' @param curve The line's curve type to render.
+#' A complete list can be found here <https://github.com/d3/d3-shape#curves>.
+#' Defaults to 'curveLinear'.
 #' @param stroke Optional. The color of the stroke of the area.
 #' @param strokeWidth The width of the line. Defaults to 1.5.
 #' @param xticks Optional. the number of x-axis ticks to consider.
@@ -21,6 +24,8 @@
 #' @param opacity The color opacity of the area chart (from 0 to 1). Defaults to 1.
 #' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
 #' Defaults to 'black'.
+#' @param legendBoxSize The size of the legend rectangles. Defaults to 18.
+#' @param legendTextSize The font size of the legend text Defaults to 18.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
@@ -31,7 +36,8 @@
 stackedAreaChart <- function(
   data,
   x,
-  colorCategory = "Paired",
+  colorCategory = "Category10",
+  curve = "curveLinear",
   stroke = NULL,
   strokeWidth = 1.5,
   xticks = NULL,
@@ -46,6 +52,8 @@ stackedAreaChart <- function(
   bgcol = "#CAD0D3",
   opacity = 1,
   axisCol = "black",
+  legendBoxSize = 18,
+  legendTextSize = 18,
   width = NULL,
   height = NULL
 ) {
@@ -71,6 +79,7 @@ stackedAreaChart <- function(
     options = list(
       x = x,
       colorCategory = colorCategory,
+      curve = curve,
       stroke = stroke,
       strokeWidth = strokeWidth,
       xticks = xticks,
@@ -87,7 +96,9 @@ stackedAreaChart <- function(
       bgcol = bgcol,
       opacity = opacity,
       axisCol = axisCol,
-      columnNames = columnNames
+      columnNames = columnNames,
+      legendBoxSize = legendBoxSize,
+      legendTextSize = legendTextSize
     )
   )
 }

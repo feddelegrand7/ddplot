@@ -4,8 +4,8 @@
 #' @param data The data frame to consider.
 #' @param value The numeric variable to consider.
 #' @param label The labeling variable to consider.
-#' @param colorCategory A D3 color scheme, you can find more
-#' here https://observablehq.com/@d3/color-schemes. Defaults to 'Paired'
+#' @param colorCategory A D3 categorical color scheme, you can find more
+#' here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Paired'
 #' @param innerRadius The size of the inner radius of the pie.
 #' Defaults to 0. Set the inner radius to a higher value to plot
 #' a donut chart.

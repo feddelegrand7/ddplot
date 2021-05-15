@@ -4,7 +4,7 @@
 #' @param data The data frame containing the variables to consider.
 #' @param x The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.
 #' @param y The y-variable to consider.
-#' @param curve Optional. The line's curve type to render.
+#' @param curve The line's curve type to render.
 #' A complete list can be found here <https://github.com/d3/d3-shape#curves>.
 #' Defaults to 'curveLinear'.
 #' @param stroke The color of the line. Defaults to 'crimson'.

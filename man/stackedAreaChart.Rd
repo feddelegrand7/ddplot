@@ -7,6 +7,10 @@
 stackedAreaChart(
   data,
   x,
+  colorCategory = "Category10",
+  curve = "curveLinear",
+  stroke = NULL,
+  strokeWidth = 1.5,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
@@ -19,6 +23,8 @@ stackedAreaChart(
   bgcol = "#CAD0D3",
   opacity = 1,
   axisCol = "black",
+  legendBoxSize = 18,
+  legendTextSize = 18,
   width = NULL,
   height = NULL
 )
@@ -27,6 +33,17 @@ stackedAreaChart(
 \item{data}{The data frame containing the variables to consider.}
 
 \item{x}{The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.}
+
+\item{colorCategory}{A D3 categorical color scheme, you can find more
+here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Category10'.}
+
+\item{curve}{The line's curve type to render.
+A complete list can be found here <https://github.com/d3/d3-shape#curves>.
+Defaults to 'curveLinear'.}
+
+\item{stroke}{Optional. The color of the stroke of the area.}
+
+\item{strokeWidth}{The width of the line. Defaults to 1.5.}
 
 \item{xticks}{Optional. the number of x-axis ticks to consider.}
 
@@ -54,12 +71,13 @@ stackedAreaChart(
 \item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
 Defaults to 'black'.}
 
+\item{legendBoxSize}{The size of the legend rectangles. Defaults to 18.}
+
+\item{legendTextSize}{The font size of the legend text Defaults to 18.}
+
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
-
-\item{colorCategory}{A D3 color scheme, you can find more
-here https://observablehq.com/@d3/color-schemes. Defaults to 'Paired'}
 }
 \value{
 a SVG stacked area chart

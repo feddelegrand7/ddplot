@@ -343,8 +343,6 @@ airpassengers <- data.frame(
   date= zoo::as.Date(time(AirPassengers))
 )
 
-airpassengers[2, 1] <- -200 
-
 # 2. plotting the area chart
 areaChart(
   data = airpassengers, 
@@ -375,6 +373,87 @@ areaBand(
   stroke = "black"
 )
 ```
+
+
+# `stackedAreaChart()` 
+
+This function allows you to create a stacked area chart. You need two components: 
+
+- A data frame in wide format (see an example below). If it's in wide format, you can still use `pivot_wider()` from the `tidyr` package to make wider. 
+- A date variable in `yyyy-mm-dd` format that will plotted in the x-axis. 
+
+Let's work with the following data frame (shortened) provided by [Mike Bostock in his stacked area chart example](https://observablehq.com/@d3/stacked-area-chart): 
+
+```{r}
+data <- data.frame(
+  date = c(
+    "2000-01-01", "2000-02-01", "2000-03-01", "2000-04-01",
+    "2000-05-01", "2000-06-01", "2000-07-01",
+    "2000-08-01", "2000-09-01", "2000-10-01"
+  ),
+  Trade = c(
+    2000,1023, 983, 2793, 1821, 1837, 1792, 1853, 791, 739
+  ),
+  Manufacturing = c(
+    734, 694, 739, 736, 685, 621, 708, 685, 667, 693
+  ),
+  Leisure = c(
+    1782, 1779, 1789, 658, 675, 833, 786, 675, 636, 691
+  ),
+  Agriculture = c(
+    655, 587,623, 517, 561, 2545, 636, 584, 559, 2504
+  )
+)
+
+data
+```
+
+
+Note that when running `stackedAreaChart()` all the variables availables within the considered data frame will be plotted. If you want to restrict the plotting to only specific variables, just drop the unneeded columns:
+
+
+```{r}
+
+stackedAreaChart(
+  data = data, 
+  x = "date", 
+  legendTextSize = 14, 
+  curve = "curveCardinal" 
+  )
+
+```
+
+You can modify the color scheme using the `colorCategory` parameter: 
+
+
+```{r}
+stackedAreaChart(
+  data = data, 
+  x = "date", 
+  legendTextSize = 14, 
+  curve = "curveCardinal", 
+  colorCategory = "Accent", 
+  bgcol = "white", 
+  stroke = "black", 
+  strokeWidth = 1
+  )
+```
+
+
+```{r}
+stackedAreaChart(
+  data = data, 
+  x = "date", 
+  legendTextSize = 14, 
+  curve = "curveCardinal", 
+  colorCategory = "Set3", 
+  bgcol = "black", 
+  axisCol = "white"
+  )
+```
+
+You can find list of D3 categorical color schemes [here](https://github.com/d3/d3-scale-chromatic#categorical)
+
 
 # More to Come ... 
 
