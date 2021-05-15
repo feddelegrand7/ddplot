@@ -96,7 +96,8 @@ svg.selectAll("path.domain").attr("stroke", options.axisCol);
 let line = d3
   .line()
   .x((d) => x(new Date(d[options.x])))
-  .y((d) => y(d[options.y]));
+  .y((d) => y(d[options.y]))
+  .curve(d3[options.curve])
 
 svg
   .style("background-color", options.bgcol)
@@ -108,3 +109,5 @@ svg
   .attr("stroke-linejoin", "round")
   .attr("stroke-linecap", "round")
   .attr("d", line);
+
+

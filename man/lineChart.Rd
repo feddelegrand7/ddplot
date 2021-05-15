@@ -8,6 +8,7 @@ lineChart(
   data,
   x,
   y,
+  curve = "curveLinear",
   stroke = "crimson",
   strokeWidth = 1.5,
   xticks = NULL,
@@ -32,6 +33,10 @@ lineChart(
 \item{x}{The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.}
 
 \item{y}{The y-variable to consider.}
+
+\item{curve}{Optional. The line's curve type to render.
+A complete list can be found here <https://github.com/d3/d3-shape#curves>.
+Defaults to 'curveLinear'.}
 
 \item{stroke}{The color of the line. Defaults to 'crimson'.}
 

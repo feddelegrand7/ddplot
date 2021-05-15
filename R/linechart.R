@@ -4,6 +4,9 @@
 #' @param data The data frame containing the variables to consider.
 #' @param x The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.
 #' @param y The y-variable to consider.
+#' @param curve Optional. The line's curve type to render.
+#' A complete list can be found here <https://github.com/d3/d3-shape#curves>.
+#' Defaults to 'curveLinear'.
 #' @param stroke The color of the line. Defaults to 'crimson'.
 #' @param strokeWidth The width of the line. Defaults to 1.5.
 #' @param xticks Optional. the number of x-axis ticks to consider.
@@ -32,6 +35,7 @@ lineChart <- function(
                       data,
                       x,
                       y,
+                      curve = "curveLinear",
                       stroke = "crimson",
                       strokeWidth = 1.5,
                       xticks = NULL,
@@ -68,6 +72,7 @@ lineChart <- function(
     options = list(
       x = x,
       y = y,
+      curve = curve,
       xticks = xticks,
       yticks = yticks,
       xtitle = xtitle,
