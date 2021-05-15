@@ -5,6 +5,9 @@
 #' @param data The data frame containing the variables to consider.
 #' @param x The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.
 #' @param y The y-variable to consider.
+#' @param curve Optional. The line's curve type to render.
+#' A complete list can be found here <https://github.com/d3/d3-shape#curves>.
+#' Defaults to 'curveLinear'.
 #' @param duration The duration in Milliseconds of the animation. Defaults to 5000.
 #' @param stroke The color of the line. Defaults to 'crimson'.
 #' @param strokeWidth The width of the line. Defaults to 1.5.
@@ -45,6 +48,7 @@ animLineChart <- function(
   data,
   x,
   y,
+  curve = "curveLinear",
   duration = 5000,
   stroke = "crimson",
   strokeWidth = 1.5,
@@ -82,6 +86,7 @@ animLineChart <- function(
     options = list(
       x = x,
       y = y,
+      curve = curve,
       duration = duration,
       xticks = xticks,
       yticks = yticks,

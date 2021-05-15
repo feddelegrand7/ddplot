@@ -299,6 +299,39 @@ lineChart(
 
 ```
 
+You can modify the line interpolation using the `curve` parameter: 
+
+```{r}
+lineChart(
+  data = airpassengers, 
+  x = "date", 
+  y = "passengers", 
+  curve = "curveStep"
+)
+
+```
+
+
+```{r}
+lineChart(
+  data = airpassengers, 
+  x = "date", 
+  y = "passengers", 
+  curve = "curveCardinal"
+)
+
+```
+
+```{r}
+lineChart(
+  data = airpassengers, 
+  x = "date", 
+  y = "passengers", 
+  curve = "curveBasis"
+)
+
+```
+
 # `animLineChart()`
 
 Heavily inspired from [Jure Stabuc's example](https://observablehq.com/@jurestabuc/animated-line-chart), the `animLineChart()` function create an empty SVG but when each time you click on it a line chart animation starts. Note that the line lasts after the end of the animation. Go ahead, click on the empty graphic below: 
@@ -308,8 +341,9 @@ animLineChart(
   data = airpassengers, 
   x = "date", 
   y = "passengers", 
-  duration = 10000 # in milliseconds (10 seconds)
-)
+  duration = 10000, # in milliseconds (10 seconds)
+  curve = "curveCardinal"
+  )
 ```
 
 
