@@ -417,8 +417,7 @@ Note that when running `stackedAreaChart()` all the variables availables within 
 stackedAreaChart(
   data = data, 
   x = "date", 
-  legendTextSize = 14, 
-  curve = "curveCardinal" 
+  legendTextSize = 14
   )
 
 ```
@@ -445,10 +444,12 @@ stackedAreaChart(
   data = data, 
   x = "date", 
   legendTextSize = 14, 
-  curve = "curveCardinal", 
+  curve = "curveBasis", 
   colorCategory = "Set3", 
   bgcol = "black", 
-  axisCol = "white"
+  axisCol = "white", 
+  xticks = 4, 
+  stroke = "black"
   )
 ```
 
