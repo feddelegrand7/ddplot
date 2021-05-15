@@ -133,6 +133,7 @@
   <span class='va'>data</span>,
   <span class='va'>x</span>,
   <span class='va'>y</span>,
+  curve <span class='op'>=</span> <span class='st'>"curveLinear"</span>,
   stroke <span class='op'>=</span> <span class='st'>"crimson"</span>,
   strokeWidth <span class='op'>=</span> <span class='fl'>1.5</span>,
   xticks <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -165,6 +166,12 @@
     <tr>
       <th>y</th>
       <td><p>The y-variable to consider.</p></td>
+    </tr>
+    <tr>
+      <th>curve</th>
+      <td><p>Optional. The line's curve type to render.
+A complete list can be found here &lt;https://github.com/d3/d3-shape#curves&gt;.
+Defaults to 'curveLinear'.</p></td>
     </tr>
     <tr>
       <th>stroke</th>
