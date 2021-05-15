@@ -34,7 +34,9 @@ svg
   .append("path")
   .attr("d", arc)
   .attr("fill", (d) => colorSeq(d.data[options.label]))
-  .attr("opacity", options.opacity);
+  .attr("opacity", options.opacity)
+  .append('title')
+  .text(d => d.data[options.value])
 
 const legend = svg
   .append("g")
