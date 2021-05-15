@@ -455,6 +455,8 @@ stackedAreaChart(
 
 You can find list of D3 categorical color schemes [here](https://github.com/d3/d3-scale-chromatic#categorical)
 
+Finally, if you hover over the chart you'll notice a tooltip that identified the different area categories. 
+
 
 # More to Come ... 
 
