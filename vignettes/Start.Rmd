@@ -157,7 +157,6 @@ lollipop chart follows the same behavior as bar charts but instead of bars you g
 
 
 ```{r}
-
 mpg %>% group_by(drv) %>% 
   summarise(median_cty = median(cty)) %>% 
   lollipopChart(
@@ -169,7 +168,6 @@ mpg %>% group_by(drv) %>%
     title = "Median cty per drv", 
     xFontSize = 20
   )
-
 ```
 
 
@@ -188,7 +186,6 @@ lollipopChart(
     sort = "none", 
     xFontSize = 10
   )
-
 ```
 
 From above, it's quite easy to notice that although Toyota has two cars with high highway miles per galon (hwy), it also produces many other vehicles with poor hwy. 
@@ -206,14 +203,12 @@ mpg %>% group_by(manufacturer) %>%
     label = "manufacturer", 
     value = "median_cty", 
     sort = "descending")
-
 ```
 You can also do: 
 
 
 
 ```{r}
-
 mpg %>% filter(year == 2008) %>%   
 horzLollipop(
     label = "manufacturer", 
@@ -223,7 +218,6 @@ horzLollipop(
     circleRadius = 5, 
     sort = "none"
   )
-
 ```
 
 
@@ -234,7 +228,6 @@ Pie charts and donut charts are pretty straightforward to set up. We'll use a sa
 
 ```{r}
 # starwars is part of the dplyr data frame
-
 mini_starwars <- starwars %>% tidyr::drop_na(mass) %>% 
   sample_n(size = 5) # getting 5 random values
 
@@ -243,7 +236,6 @@ pieChart(
   value = "mass",
   label = "name"
 )
-
 ```
 
 Using the `padRadius`, `padAngle` and `cornerRadius` parameters, one can get fanciers pie charts: 
@@ -262,7 +254,6 @@ pieChart(
 If you need a donut chart, you just need to play with the `innerRadius` parameter: 
 
 ```{r}
-
 pieChart(
   data = mini_starwars, 
   value = "mass",
@@ -273,7 +264,6 @@ pieChart(
   titleFontSize = 16, 
   bgcol = "yellow"
 )
-
 ```
 
 # `lineChart()` 
@@ -282,9 +272,7 @@ The `lineChart()` function is used to plot time series data. The use must provid
 
 
 ```{r}
-
 # 1. converting AirPassengers to a tidy data frame
-
 airpassengers <- data.frame(
   passengers = as.matrix(AirPassengers),
   date= zoo::as.Date(time(AirPassengers))
@@ -296,7 +284,6 @@ lineChart(
   x = "date", 
   y = "passengers"
 )
-
 ```
 
 You can modify the line interpolation using the `curve` parameter: 
@@ -308,7 +295,6 @@ lineChart(
   y = "passengers", 
   curve = "curveStep"
 )
-
 ```
 
 
@@ -319,7 +305,6 @@ lineChart(
   y = "passengers", 
   curve = "curveCardinal"
 )
-
 ```
 
 ```{r}
@@ -329,7 +314,6 @@ lineChart(
   y = "passengers", 
   curve = "curveBasis"
 )
-
 ```
 
 # `animLineChart()`
@@ -353,13 +337,13 @@ animLineChart(
 
 
 ```{r}
-
 # 1. converting AirPassengers to a tidy data frame
-
 airpassengers <- data.frame(
   passengers = as.matrix(AirPassengers),
   date= zoo::as.Date(time(AirPassengers))
 )
+
+airpassengers[2, 1] <- -200 
 
 # 2. plotting the area chart
 areaChart(
@@ -369,7 +353,6 @@ areaChart(
   fill = "purple", 
   bgcol = "white"
 )
-
 ```
 
 # `areaBand()` 
@@ -377,7 +360,6 @@ areaChart(
 `areaBand()` lets you plot a filled area between two y-values. For the sake of the example, let's create an additional column `passengers_upper` that has an additional 40 passengers for each observation: 
 
 ```{r}
-
 airpassengers <- data.frame(
   passengers_lower = as.matrix(AirPassengers),
   passengers_upper = as.matrix(AirPassengers) + 40,
@@ -392,9 +374,6 @@ areaBand(
   fill = "yellow", 
   stroke = "black"
 )
-
-
-
 ```
 
 # More to Come ... 
