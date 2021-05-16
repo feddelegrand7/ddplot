@@ -70,8 +70,10 @@ histogram(
   bins = 20, 
   fill = "crimson", 
   stroke = "white", 
-  strokeWidth = 3, 
-  title = "Distribution of the hwy variable"
+  strokeWidth = 1, 
+  title = "Distribution of the hwy variable", 
+  width = "20", 
+  height = "10"
 )
 ```
 
