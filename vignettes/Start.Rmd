@@ -425,7 +425,7 @@ data
 ```
 
 
-Note that when running `stackedAreaChart()` all the variables availables within the considered data frame will be plotted. If you want to restrict the plotting to only specific variables, just drop the unneeded columns:
+Note that when running `stackedAreaChart()` all the variables available within the considered data frame will be plotted. If you want to restrict the plotting to only specific variables, just drop the unneeded columns:
 
 
 ```{r}
