@@ -406,6 +406,11 @@ data <- data.frame(
 )
 
 data
+
+multiLineChart(
+  data, 
+  x = "date"
+)
 ```
 
 
