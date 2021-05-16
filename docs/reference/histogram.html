@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • ddplot</title>
+<title>Create a histogram. — histogram • ddplot</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create a histogram. — histogram" />
+<meta property="og:description" content="Create a histogram." />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -117,108 +118,137 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create a histogram.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/feddelegrand7/ddplot/blob/master/R/histogram.R'><code>R/histogram.R</code></a></small>
+    <div class="hidden name"><code>histogram.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Create a histogram.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>histogram</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  bins <span class='op'>=</span> <span class='fl'>30</span>,
+  fill <span class='op'>=</span> <span class='st'>"crimson"</span>,
+  xFontSize <span class='op'>=</span> <span class='fl'>10</span>,
+  yFontSize <span class='op'>=</span> <span class='fl'>10</span>,
+  xticks <span class='op'>=</span> <span class='cn'>NULL</span>,
+  yticks <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xtitleFontSize <span class='op'>=</span> <span class='fl'>16</span>,
+  ytitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ytitleFontSize <span class='op'>=</span> <span class='fl'>16</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  titleFontSize <span class='op'>=</span> <span class='fl'>22</span>,
+  stroke <span class='op'>=</span> <span class='st'>"crimson"</span>,
+  strokeWidth <span class='op'>=</span> <span class='cn'>NULL</span>,
+  font <span class='op'>=</span> <span class='st'>"Verdana, Geneva, Tahoma, sans-serif"</span>,
+  bgcol <span class='op'>=</span> <span class='st'>"#CAD0D3"</span>,
+  opacity <span class='op'>=</span> <span class='fl'>1</span>,
+  axisCol <span class='op'>=</span> <span class='st'>"black"</span>,
+  width <span class='op'>=</span> <span class='cn'>NULL</span>,
+  height <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="animLineChart.html">animLineChart()</a></code> </p>
-        </td>
-        <td><p>Create an animated line chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="areaBand.html">areaBand()</a></code> </p>
-        </td>
-        <td><p>Create a band chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="areaChart.html">areaChart()</a></code> </p>
-        </td>
-        <td><p>Create an area chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="barChart.html">barChart()</a></code> </p>
-        </td>
-        <td><p>Create a bar chart.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="histogram.html">histogram()</a></code> </p>
-        </td>
-        <td><p>Create a histogram.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="horzBarChart.html">horzBarChart()</a></code> </p>
-        </td>
-        <td><p>Create a horizontal bar chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="horzLollipop.html">horzLollipop()</a></code> </p>
-        </td>
-        <td><p>Create a horizontal lollipop chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lineChart.html">lineChart()</a></code> </p>
-        </td>
-        <td><p>Create a line chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="lollipopChart.html">lollipopChart()</a></code> </p>
-        </td>
-        <td><p>Create a lollipop chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pieChart.html">pieChart()</a></code> </p>
-        </td>
-        <td><p>Create a pie chart</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="scatterPlot.html">scatterPlot()</a></code> </p>
-        </td>
-        <td><p>Create a scatter plot.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="stackedAreaChart.html">stackedAreaChart()</a></code> </p>
-        </td>
-        <td><p>Create a stacked area chart</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A vector of data.</p></td>
+    </tr>
+    <tr>
+      <th>bins</th>
+      <td><p>The number of bins to consider. Defaults to 30.</p></td>
+    </tr>
+    <tr>
+      <th>fill</th>
+      <td><p>The color of the bars. Defaults to 'crimson'.</p></td>
+    </tr>
+    <tr>
+      <th>xFontSize</th>
+      <td><p>the font size of the x-axis labels. Defaults to 10.</p></td>
+    </tr>
+    <tr>
+      <th>yFontSize</th>
+      <td><p>the font size of the y-axis labels. Defaults to 10.</p></td>
+    </tr>
+    <tr>
+      <th>xticks</th>
+      <td><p>Optional. the number of x-axis ticks to consider.</p></td>
+    </tr>
+    <tr>
+      <th>yticks</th>
+      <td><p>Optional. The number of y-axis ticks to consider.</p></td>
+    </tr>
+    <tr>
+      <th>xtitle</th>
+      <td><p>Optional. The title of the x-axis.</p></td>
+    </tr>
+    <tr>
+      <th>xtitleFontSize</th>
+      <td><p>The font size of the x-axis title. Defaults to 16.</p></td>
+    </tr>
+    <tr>
+      <th>ytitle</th>
+      <td><p>Optional. The title of the y-axis.</p></td>
+    </tr>
+    <tr>
+      <th>ytitleFontSize</th>
+      <td><p>The font size of the y-axis title. Defaults to 16.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Optional. The title of the plot.</p></td>
+    </tr>
+    <tr>
+      <th>titleFontSize</th>
+      <td><p>The font size of the plot title. Defaults to 22.</p></td>
+    </tr>
+    <tr>
+      <th>stroke</th>
+      <td><p>The stroke color of the bars. Defaults to 'crimson'.</p></td>
+    </tr>
+    <tr>
+      <th>strokeWidth</th>
+      <td><p>Optional. the stroke width of the bars.</p></td>
+    </tr>
+    <tr>
+      <th>font</th>
+      <td><p>The font family to consider for the titles. Defaults to
+"Verdana, Geneva, Tahoma, sans-serif".</p></td>
+    </tr>
+    <tr>
+      <th>bgcol</th>
+      <td><p>The background color of the SVG. Defaults to "#CAD0D3" HEX color.</p></td>
+    </tr>
+    <tr>
+      <th>opacity</th>
+      <td><p>The color opacity of the bars (from 0 to 1). Defaults to 1.</p></td>
+    </tr>
+    <tr>
+      <th>axisCol</th>
+      <td><p>the color of the x and y axis. It includes the ticks, the labels and titles.
+Defaults to 'black'.</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>Optional. The width of the SVG output.</p></td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td><p>Optional. The height of the SVG output.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A SVG histogram.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

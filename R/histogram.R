@@ -1,6 +1,6 @@
 #' Create a histogram.
 #'
-#' @param x The x-variable to consider.
+#' @param x A vector of data.
 #' @param bins The number of bins to consider. Defaults to 30.
 #' @param fill The color of the bars. Defaults to 'crimson'.
 #' @param xFontSize the font size of the x-axis labels. Defaults to 10.

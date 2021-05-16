@@ -60,6 +60,22 @@ scatterPlot(
 
 ```
 
+# `histogram()` 
+
+The `histogram()` function allows you to visualize the distribution of a vector of data: 
+
+```{r}
+histogram(
+  x = mpg$hwy, 
+  bins = 20, 
+  fill = "crimson", 
+  stroke = "white", 
+  strokeWidth = 3, 
+  title = "Distribution of the hwy variable"
+)
+```
+
+
 # `barChart()`
 
 The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.   
@@ -406,11 +422,6 @@ data <- data.frame(
 )
 
 data
-
-multiLineChart(
-  data, 
-  x = "date"
-)
 ```
 
 
