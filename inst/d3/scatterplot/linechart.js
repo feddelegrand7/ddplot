@@ -99,8 +99,22 @@ let line = d3
   .y((d) => y(d[options.y]))
   .curve(d3[options.curve])
 
+  let clipPathId = "chart-area" + Math.floor(Math.random() * 100);
+
+  svg
+    .append("clipPath")
+    .attr("id", clipPathId)
+    .append("rect")
+    .attr("x", margin.left + 1)
+    .attr("y", margin.top)
+    .attr("width", width - margin.left)
+    .attr("height", height - margin.bottom);
+
 svg
+  .attr("viewBox", [0, 0, width, height])
   .style("background-color", options.bgcol)
+  .append("g")
+  .attr("clip-path", "url(#" + clipPathId + ")")
   .append("path")
   .datum(data)
   .attr("fill", "none")

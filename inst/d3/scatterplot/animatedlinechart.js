@@ -29,9 +29,6 @@ function transition(path) {
 let ymin = d3.min(data, (d) => d[options.y]);
 let ymax = d3.max(data, (d) => d[options.y]);
 
-
-
-
 // Setting the scale of the x variable
 
 let x = d3
@@ -42,10 +39,10 @@ let x = d3
 // Setting the scale of the y variable
 
 function isItNegative() {
-  if(ymin < 0) {
-    return ymin - (ymin * 10/100)
+  if (ymin < 0) {
+    return ymin - (ymin * 10) / 100;
   } else {
-    return 0
+    return 0;
   }
 }
 
@@ -84,7 +81,6 @@ svg
   .text(options.xtitle)
   .style("fill", options.axisCol);
 
-
 // Rendering the y-axis title
 svg
   .append("text")
@@ -95,8 +91,6 @@ svg
   .style("font-family", options.font)
   .text(options.ytitle)
   .style("fill", options.axisCol);
-
-
 
 // Rendering the chart title
 
@@ -116,19 +110,30 @@ svg.selectAll(".tick line").attr("stroke", options.axisCol);
 svg.selectAll(".tick text").style("fill", options.axisCol);
 svg.selectAll("path.domain").attr("stroke", options.axisCol);
 
-
-
 // Rendering the scatter plot
 
 let line = d3
   .line()
   .x((d) => x(new Date(d[options.x])))
   .y((d) => y(d[options.y]))
-  .curve(d3[options.curve])
+  .curve(d3[options.curve]);
 
+let clipPathId = "chart-area" + Math.floor(Math.random() * 100);
 
 svg
+  .append("clipPath")
+  .attr("id", clipPathId)
+  .append("rect")
+  .attr("x", margin.left + 1)
+  .attr("y", margin.top)
+  .attr("width", width - margin.left)
+  .attr("height", height - margin.bottom);
+
+svg
+  .attr("viewBox", [0, 0, width, height])
   .style("background-color", options.bgcol)
+  .append("g")
+  .attr("clip-path", "url(#" + clipPathId + ")")
   .append("path")
   .attr("class", "line-chart")
   .datum(data)

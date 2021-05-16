@@ -89,8 +89,22 @@ let areaBand = d3
   .y0((d) => y(d[options.yLower]))
   .y1((d) => y(d[options.yUpper]));
 
+let clipPathId = "chart-area" + Math.floor(Math.random() * 100);
+
+  svg
+    .append("clipPath")
+    .attr("id", clipPathId)
+    .append("rect")
+    .attr("x", margin.left + 1)
+    .attr("y", margin.top)
+    .attr("width", width - margin.left)
+    .attr("height", height - margin.bottom);
+  
 svg
+  .attr("viewBox", [0, 0, width, height])
   .style("background-color", options.bgcol)
+  .append("g")
+  .attr("clip-path", "url(#" + clipPathId + ")")
   .append("path")
   .datum(data)
   .attr("fill", options.fill)

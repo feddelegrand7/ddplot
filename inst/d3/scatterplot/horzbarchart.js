@@ -37,11 +37,25 @@ let yAxis = (g) =>
     .attr("transform", `translate(${margin.left}, 0)`)
     .call(d3.axisLeft(y).tickFormat((i) => data[i][options.label]));
 
+let clipPathId = "chart-area" + Math.floor(Math.random() * 100);
+
+svg
+  .append("clipPath")
+  .attr("id", clipPathId)
+  .append("rect")
+  .attr("x", margin.left + 1)
+  .attr("y", margin.top)
+  .attr("width", width - margin.left)
+  .attr("height", height - margin.bottom);
+
 svg
   .attr("viewBox", [0, 0, width, height])
   .style("background-color", options.bgcol);
 
+
 svg
+  .append("g")
+  .attr("clip-path", "url(#" + clipPathId + ")")
   .append("g")
   .attr("fill", options.fill)
   .selectAll("rect")
