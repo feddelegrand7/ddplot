@@ -98,7 +98,6 @@ animLineChart <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
-      id = id,
       xtitleFontSize = xtitleFontSize,
       ytitleFontSize = ytitleFontSize,
       titleFontSize = titleFontSize,
