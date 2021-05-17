@@ -90,3 +90,22 @@ A SVG bar chart.
 \description{
 Create a bar chart.
 }
+\examples{
+library(ggplot2) #needed for the mpg data frame
+library(dplyr) #needed for data wrangling
+
+mpg \%>\% group_by(manufacturer) \%>\%
+ summarise(mean_cty = mean(cty)) \%>\%
+ barChart(
+   x = "manufacturer",
+   y = "mean_cty",
+   sort = "ascending",
+   xFontSize = 10,
+   yFontSize = 10,
+   fill = "orange",
+   strokeWidth = 1,
+   ytitle = "average cty value",
+   title = "Average City Miles per Gallon by manufacturer",
+   titleFontSize = 16
+ )
+}

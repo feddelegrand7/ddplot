@@ -78,6 +78,23 @@ histogram(
 ```
 
 
+# `animatedHistogram()` 
+
+This function allows you to create a one-click histogram animation. Useful for presentation purposes. Click on the following empty plot and see what happens: 
+
+```{r}
+animatedHistogram(
+  x = mpg$hwy, 
+  duration = 2000, 
+  delay = 100,
+  fill = "lime", 
+  stroke = "white",
+  bgcol = "white"
+  )
+```
+
+Note that you can customize the animation using the two parameters `duration` and `delay`.
+
 # `barChart()`
 
 The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.   
@@ -431,13 +448,11 @@ Note that when running `stackedAreaChart()` all the variables available within t
 
 
 ```{r}
-
 stackedAreaChart(
   data = data, 
   x = "date", 
   legendTextSize = 14
   )
-
 ```
 
 You can modify the color scheme using the `colorCategory` parameter: 

@@ -1,12 +1,13 @@
-
-#' Create an area chart
+#' Create an animated histogram.
 #'
-#' @param data The data frame containing the variables to consider.
-#' @param x The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.
-#' @param y The y-variable to consider.
-#' @param fill The color of the area chart. Defaults to 'crimson'.
-#' @param stroke Optional. The color of the stroke of the area.
-#' @param strokeWidth Optional. The width of the area stroke.
+#' @param x A vector of data.
+#' @param bins The number of bins to consider. Defaults to 30.
+#' @param duration The duration of the bars' transition in milliseconds. Defaults to 2000.
+#' @param delay The amount of time (in milliseconds) that
+#' precedes before triggering the appearance of each bar. Defaults to 100.
+#' @param fill The color of the bars. Defaults to 'crimson'.
+#' @param xFontSize the font size of the x-axis labels. Defaults to 10.
+#' @param yFontSize the font size of the y-axis labels. Defaults to 10.
 #' @param xticks Optional. the number of x-axis ticks to consider.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xtitle Optional. The title of the x-axis.
@@ -15,43 +16,38 @@
 #' @param ytitleFontSize The font size of the y-axis title. Defaults to 16.
 #' @param title Optional. The title of the plot.
 #' @param titleFontSize The font size of the plot title. Defaults to 22.
+#' @param stroke The stroke color of the bars. Defaults to 'crimson'.
+#' @param strokeWidth Optional. the stroke width of the bars.
 #' @param font The font family to consider for the titles. Defaults to
 #' "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "#CAD0D3" HEX color.
-#' @param opacity The color opacity of the area chart (from 0 to 1). Defaults to 1.
+#' @param opacity The color opacity of the bars (from 0 to 1). Defaults to 1.
 #' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
 #' Defaults to 'black'.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
-#' @return a SVG area chart
+#' @return An animated SVG histogram.
 #' @export
 #'
 #' @examples
-#' # 1. converting AirPassengers to a tidy data frame
-#' airpassengers <- data.frame(
-#'   passengers = as.matrix(AirPassengers),
-#'   date= zoo::as.Date(time(AirPassengers))
-#' )
-#'
-#' # 2. plotting the area chart
-#' areaChart(
-#'   data = airpassengers,
-#'   x = "date",
-#'   y = "passengers",
-#'   fill = "purple",
-#'   bgcol = "white"
-#' )
+#'animatedHistogram(
+#'  x = mpg$hwy,
+#'  duration = 2000,
+#'  delay = 100
+#')
 
 
 
-areaChart <- function(
-  data,
+
+animatedHistogram <- function(
   x,
-  y,
+  bins = 30,
+  duration = 2000,
+  delay = 100,
   fill = "crimson",
-  stroke = NULL,
-  strokeWidth = NULL,
+  xFontSize = 10,
+  yFontSize = 10,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
@@ -60,6 +56,8 @@ areaChart <- function(
   ytitleFontSize = 16,
   title = NULL,
   titleFontSize = 22,
+  stroke = "crimson",
+  strokeWidth = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#CAD0D3",
   opacity = 1,
@@ -68,9 +66,6 @@ areaChart <- function(
   height = NULL
 ) {
 
-  if (is.null(data[[x]]) || is.null(data[[y]])) {
-    stop("Please check that x and y belong to the specified data frame")
-  }
 
   if (grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
@@ -79,12 +74,12 @@ areaChart <- function(
   r2d3::r2d3(
     data = data,
     script = system.file(
-      "d3/scatterplot/areachart.js",
+      "d3/scatterplot/animatedhistogram.js",
       package = "ddplot"
     ),
     options = list(
       x = x,
-      y = y,
+      bins = bins,
       fill = fill,
       xticks = xticks,
       yticks = yticks,
@@ -96,12 +91,16 @@ areaChart <- function(
       strokeWidth = strokeWidth,
       width = width,
       height = height,
+      xFontSize = xFontSize,
+      yFontSize = yFontSize,
       xtitleFontSize = xtitleFontSize,
       ytitleFontSize = ytitleFontSize,
       titleFontSize = titleFontSize,
       bgcol = bgcol,
       opacity = opacity,
-      axisCol = axisCol
+      axisCol = axisCol,
+      duration = duration,
+      delay = delay
     )
   )
 }

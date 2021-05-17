@@ -29,7 +29,19 @@
 #' @return A SVG line chart.
 #' @export
 #'
-
+#' @examples
+#' # 1. converting AirPassengers to a tidy data frame
+#' airpassengers <- data.frame(
+#'   passengers = as.matrix(AirPassengers),
+#'   date= zoo::as.Date(time(AirPassengers))
+#' )
+#'
+#' # 2. plotting the line chart
+#' lineChart(
+#'   data = airpassengers,
+#'   x = "date",
+#'   y = "passengers"
+#' )
 
 lineChart <- function(
                       data,

@@ -85,3 +85,36 @@ a SVG stacked area chart
 \description{
 Create a stacked area chart
 }
+\examples{
+data <- data.frame(
+  date = c(
+    "2000-01-01", "2000-02-01", "2000-03-01", "2000-04-01",
+    "2000-05-01", "2000-06-01", "2000-07-01",
+    "2000-08-01", "2000-09-01", "2000-10-01"
+  ),
+  Trade = c(
+    2000,1023, 983, 2793, 1821, 1837, 1792, 1853, 791, 739
+  ),
+  Manufacturing = c(
+    734, 694, 739, 736, 685, 621, 708, 685, 667, 693
+  ),
+  Leisure = c(
+    1782, 1779, 1789, 658, 675, 833, 786, 675, 636, 691
+  ),
+  Agriculture = c(
+    655, 587,623, 517, 561, 2545, 636, 584, 559, 2504
+  )
+)
+
+stackedAreaChart(
+  data = data,
+  x = "date",
+  legendTextSize = 14,
+  curve = "curveCardinal",
+  colorCategory = "Accent",
+  bgcol = "white",
+  stroke = "black",
+  strokeWidth = 1
+)
+
+}

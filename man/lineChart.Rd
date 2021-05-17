@@ -78,3 +78,17 @@ A SVG line chart.
 \description{
 Create a line chart
 }
+\examples{
+# 1. converting AirPassengers to a tidy data frame
+airpassengers <- data.frame(
+  passengers = as.matrix(AirPassengers),
+  date= zoo::as.Date(time(AirPassengers))
+)
+
+# 2. plotting the line chart
+lineChart(
+  data = airpassengers,
+  x = "date",
+  y = "passengers"
+)
+}

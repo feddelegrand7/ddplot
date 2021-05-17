@@ -26,7 +26,18 @@
 #'
 #' @return A SVG histogram.
 #' @export
+#' @examples
 #'
+#' histogram(
+#'   x = mtcars$mpg,
+#'   bins = 20,
+#'   fill = "crimson",
+#'   stroke = "white",
+#'   strokeWidth = 1,
+#'   title = "Distribution of the hwy variable",
+#'   width = "20",
+#'   height = "10"
+#' )
 
 
 

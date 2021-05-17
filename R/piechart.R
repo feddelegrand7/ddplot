@@ -31,6 +31,18 @@
 #' @return A SVG pie chart
 #' @export
 #'
+#' @examples
+#' library(dplyr) # needed for the starwars data frame
+#'
+#' # starwars is part of the dplyr data frame
+#' mini_starwars <- starwars %>% tidyr::drop_na(mass) %>%
+#'   sample_n(size = 5) # getting 5 random values
+#'
+#' pieChart(
+#'   data = mini_starwars,
+#'   value = "mass",
+#'   label = "name"
+#' )
 
 
 

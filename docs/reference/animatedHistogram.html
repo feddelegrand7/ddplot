@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a stacked area chart — stackedAreaChart • ddplot</title>
+<title>Create an animated histogram. — animatedHistogram • ddplot</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Create a stacked area chart — stackedAreaChart" />
-<meta property="og:description" content="Create a stacked area chart" />
+<meta property="og:title" content="Create an animated histogram. — animatedHistogram" />
+<meta property="og:description" content="Create an animated histogram." />
 
 
 
@@ -120,22 +120,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a stacked area chart</h1>
-    <small class="dont-index">Source: <a href='https://github.com/feddelegrand7/ddplot/blob/master/R/stackedAreaChart.R'><code>R/stackedAreaChart.R</code></a></small>
-    <div class="hidden name"><code>stackedAreaChart.Rd</code></div>
+    <h1>Create an animated histogram.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/feddelegrand7/ddplot/blob/master/R/animatedHistogram.R'><code>R/animatedHistogram.R</code></a></small>
+    <div class="hidden name"><code>animatedHistogram.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create a stacked area chart</p>
+    <p>Create an animated histogram.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stackedAreaChart</span><span class='op'>(</span>
-  <span class='va'>data</span>,
+    <pre class="usage"><span class='fu'>animatedHistogram</span><span class='op'>(</span>
   <span class='va'>x</span>,
-  colorCategory <span class='op'>=</span> <span class='st'>"Category10"</span>,
-  curve <span class='op'>=</span> <span class='st'>"curveLinear"</span>,
-  stroke <span class='op'>=</span> <span class='cn'>NULL</span>,
-  strokeWidth <span class='op'>=</span> <span class='fl'>1.5</span>,
+  bins <span class='op'>=</span> <span class='fl'>30</span>,
+  duration <span class='op'>=</span> <span class='fl'>2000</span>,
+  delay <span class='op'>=</span> <span class='fl'>100</span>,
+  fill <span class='op'>=</span> <span class='st'>"crimson"</span>,
+  xFontSize <span class='op'>=</span> <span class='fl'>10</span>,
+  yFontSize <span class='op'>=</span> <span class='fl'>10</span>,
   xticks <span class='op'>=</span> <span class='cn'>NULL</span>,
   yticks <span class='op'>=</span> <span class='cn'>NULL</span>,
   xtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -144,12 +145,12 @@
   ytitleFontSize <span class='op'>=</span> <span class='fl'>16</span>,
   title <span class='op'>=</span> <span class='cn'>NULL</span>,
   titleFontSize <span class='op'>=</span> <span class='fl'>22</span>,
+  stroke <span class='op'>=</span> <span class='st'>"crimson"</span>,
+  strokeWidth <span class='op'>=</span> <span class='cn'>NULL</span>,
   font <span class='op'>=</span> <span class='st'>"Verdana, Geneva, Tahoma, sans-serif"</span>,
   bgcol <span class='op'>=</span> <span class='st'>"#CAD0D3"</span>,
   opacity <span class='op'>=</span> <span class='fl'>1</span>,
   axisCol <span class='op'>=</span> <span class='st'>"black"</span>,
-  legendBoxSize <span class='op'>=</span> <span class='fl'>18</span>,
-  legendTextSize <span class='op'>=</span> <span class='fl'>18</span>,
   width <span class='op'>=</span> <span class='cn'>NULL</span>,
   height <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
@@ -158,31 +159,33 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>The data frame containing the variables to consider.</p></td>
-    </tr>
-    <tr>
       <th>x</th>
-      <td><p>The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.</p></td>
+      <td><p>A vector of data.</p></td>
     </tr>
     <tr>
-      <th>colorCategory</th>
-      <td><p>A D3 categorical color scheme, you can find more
-here &lt;https://github.com/d3/d3-scale-chromatic#categorical&gt;. Defaults to 'Category10'.</p></td>
+      <th>bins</th>
+      <td><p>The number of bins to consider. Defaults to 30.</p></td>
     </tr>
     <tr>
-      <th>curve</th>
-      <td><p>The line's curve type to render.
-A complete list can be found here &lt;https://github.com/d3/d3-shape#curves&gt;.
-Defaults to 'curveLinear'.</p></td>
+      <th>duration</th>
+      <td><p>The duration of the bars' transition in milliseconds. Defaults to 2000.</p></td>
     </tr>
     <tr>
-      <th>stroke</th>
-      <td><p>Optional. The color of the stroke of the area.</p></td>
+      <th>delay</th>
+      <td><p>The amount of time (in milliseconds) that
+precedes before triggering the appearance of each bar. Defaults to 100.</p></td>
     </tr>
     <tr>
-      <th>strokeWidth</th>
-      <td><p>The width of the line. Defaults to 1.5.</p></td>
+      <th>fill</th>
+      <td><p>The color of the bars. Defaults to 'crimson'.</p></td>
+    </tr>
+    <tr>
+      <th>xFontSize</th>
+      <td><p>the font size of the x-axis labels. Defaults to 10.</p></td>
+    </tr>
+    <tr>
+      <th>yFontSize</th>
+      <td><p>the font size of the y-axis labels. Defaults to 10.</p></td>
     </tr>
     <tr>
       <th>xticks</th>
@@ -217,6 +220,14 @@ Defaults to 'curveLinear'.</p></td>
       <td><p>The font size of the plot title. Defaults to 22.</p></td>
     </tr>
     <tr>
+      <th>stroke</th>
+      <td><p>The stroke color of the bars. Defaults to 'crimson'.</p></td>
+    </tr>
+    <tr>
+      <th>strokeWidth</th>
+      <td><p>Optional. the stroke width of the bars.</p></td>
+    </tr>
+    <tr>
       <th>font</th>
       <td><p>The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".</p></td>
@@ -227,20 +238,12 @@ Defaults to 'curveLinear'.</p></td>
     </tr>
     <tr>
       <th>opacity</th>
-      <td><p>The color opacity of the area chart (from 0 to 1). Defaults to 1.</p></td>
+      <td><p>The color opacity of the bars (from 0 to 1). Defaults to 1.</p></td>
     </tr>
     <tr>
       <th>axisCol</th>
       <td><p>the color of the x and y axis. It includes the ticks, the labels and titles.
 Defaults to 'black'.</p></td>
-    </tr>
-    <tr>
-      <th>legendBoxSize</th>
-      <td><p>The size of the legend rectangles. Defaults to 18.</p></td>
-    </tr>
-    <tr>
-      <th>legendTextSize</th>
-      <td><p>The font size of the legend text Defaults to 18.</p></td>
     </tr>
     <tr>
       <th>width</th>
@@ -254,41 +257,15 @@ Defaults to 'black'.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a SVG stacked area chart</p>
+    <p>An animated SVG histogram.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
-  date <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='st'>"2000-01-01"</span>, <span class='st'>"2000-02-01"</span>, <span class='st'>"2000-03-01"</span>, <span class='st'>"2000-04-01"</span>,
-    <span class='st'>"2000-05-01"</span>, <span class='st'>"2000-06-01"</span>, <span class='st'>"2000-07-01"</span>,
-    <span class='st'>"2000-08-01"</span>, <span class='st'>"2000-09-01"</span>, <span class='st'>"2000-10-01"</span>
-  <span class='op'>)</span>,
-  Trade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='fl'>2000</span>,<span class='fl'>1023</span>, <span class='fl'>983</span>, <span class='fl'>2793</span>, <span class='fl'>1821</span>, <span class='fl'>1837</span>, <span class='fl'>1792</span>, <span class='fl'>1853</span>, <span class='fl'>791</span>, <span class='fl'>739</span>
-  <span class='op'>)</span>,
-  Manufacturing <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='fl'>734</span>, <span class='fl'>694</span>, <span class='fl'>739</span>, <span class='fl'>736</span>, <span class='fl'>685</span>, <span class='fl'>621</span>, <span class='fl'>708</span>, <span class='fl'>685</span>, <span class='fl'>667</span>, <span class='fl'>693</span>
-  <span class='op'>)</span>,
-  Leisure <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='fl'>1782</span>, <span class='fl'>1779</span>, <span class='fl'>1789</span>, <span class='fl'>658</span>, <span class='fl'>675</span>, <span class='fl'>833</span>, <span class='fl'>786</span>, <span class='fl'>675</span>, <span class='fl'>636</span>, <span class='fl'>691</span>
-  <span class='op'>)</span>,
-  Agriculture <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>
-    <span class='fl'>655</span>, <span class='fl'>587</span>,<span class='fl'>623</span>, <span class='fl'>517</span>, <span class='fl'>561</span>, <span class='fl'>2545</span>, <span class='fl'>636</span>, <span class='fl'>584</span>, <span class='fl'>559</span>, <span class='fl'>2504</span>
-  <span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>animatedHistogram</span><span class='op'>(</span>
+ x <span class='op'>=</span> <span class='va'>mpg</span><span class='op'>$</span><span class='va'>hwy</span>,
+ duration <span class='op'>=</span> <span class='fl'>2000</span>,
+ delay <span class='op'>=</span> <span class='fl'>100</span>
 <span class='op'>)</span>
-
-<span class='fu'>stackedAreaChart</span><span class='op'>(</span>
-  data <span class='op'>=</span> <span class='va'>data</span>,
-  x <span class='op'>=</span> <span class='st'>"date"</span>,
-  legendTextSize <span class='op'>=</span> <span class='fl'>14</span>,
-  curve <span class='op'>=</span> <span class='st'>"curveCardinal"</span>,
-  colorCategory <span class='op'>=</span> <span class='st'>"Accent"</span>,
-  bgcol <span class='op'>=</span> <span class='st'>"white"</span>,
-  stroke <span class='op'>=</span> <span class='st'>"black"</span>,
-  strokeWidth <span class='op'>=</span> <span class='fl'>1</span>
-<span class='op'>)</span>
-
-</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in r2d3::r2d3(data = data, script = system.file("d3/scatterplot/animatedhistogram.js",     package = "ddplot"), options = list(x = x, bins = bins, fill = fill,     xticks = xticks, yticks = yticks, xtitle = xtitle, ytitle = ytitle,     title = title, font = font, stroke = stroke, strokeWidth = strokeWidth,     width = width, height = height, xFontSize = xFontSize, yFontSize = yFontSize,     xtitleFontSize = xtitleFontSize, ytitleFontSize = ytitleFontSize,     titleFontSize = titleFontSize, bgcol = bgcol, opacity = opacity,     axisCol = axisCol, duration = duration, delay = delay)): object 'mpg' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
