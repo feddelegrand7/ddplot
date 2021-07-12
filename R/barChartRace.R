@@ -35,7 +35,7 @@
 #' @param timeLabel Whether to show a label for the value of the time variable. Defaults to TRUE.
 #' @param timeLabelOpts Options for labeling the value of the time variable.
 #' Takes a list specifying the `size`, `prefix`, `suffix`, `xOffset`, and `yOffset`.
-#' Offsets are scaled relative to the dimensions of the label.
+#' Offsets are scaled relative to the dimensions of the label, from the bottom-right corner of the panel.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
