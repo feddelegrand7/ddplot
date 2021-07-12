@@ -4,7 +4,8 @@
 #' @param x The x-variable to consider.
 #' @param y The y-variable to consider.
 #' @param time The time variable to consider.
-#' @param frameDur The time spent transitioning between frames in milliseconds.
+#' @param frameDur The time spent paused on each frame (time point) in milliseconds.
+#' @param transitionDur The time spent transitioning between frames in milliseconds.
 #' @param colorCategory A D3 categorical color scheme, you can find more
 #' here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Accent'.
 #' @param sort Whether to sort or not the bars. Takes three values
@@ -88,7 +89,8 @@ barChartRace <- function(
   x,
   y,
   time,
-  frameDur = 1000,
+  frameDur = 500,
+  transitionDur = 500,
   colorCategory = "Accent",
   sort = "descending",
   paddingWidth = 0.1,
@@ -163,6 +165,7 @@ barChartRace <- function(
       y = y,
       time = time,
       frameDur = frameDur,
+      transitionDur = transitionDur,
       colorCategory = colorCategory,
       sort = sort,
       paddingWidth = paddingWidth,

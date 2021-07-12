@@ -23,7 +23,7 @@ const svg = div
 
 // panel
 
-//// adjust left plot margin to fit y-axis text
+//// adjust left plot margin to fit y-axis text (TODO this doesnt work)
 const longestLabel = data.map(d => d[options.y]).sort((a, b) => b.length - a.length)
 const longestText = svg
   .append("text")
@@ -116,7 +116,7 @@ const colorScale = d3.scaleOrdinal()
 // animating function
 function update(frame, init = false) {
 
-  const t = svg.transition().duration(options.frameDur)
+  const t = svg.transition().duration(options.transitionDur)
 
   // setup data
   const frameData = data.filter(d => d[options.time] == frame)
@@ -223,4 +223,4 @@ var counter = 1
 setInterval(() => {
   update(timeSet[counter % timeSet.length])
   counter++
-}, options.frameDur);
+}, options.frameDur + options.transitionDur);
