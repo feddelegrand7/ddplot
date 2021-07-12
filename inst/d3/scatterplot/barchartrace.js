@@ -116,7 +116,10 @@ const colorScale = d3.scaleOrdinal()
 // animating function
 function update(frame, init = false) {
 
-  const t = svg.transition().duration(options.transitionDur)
+  const t = svg
+    .transition()
+    .ease(d3["ease" + options.ease])
+    .duration(options.transitionDur)
 
   // setup data
   const frameData = data.filter(d => d[options.time] == frame)

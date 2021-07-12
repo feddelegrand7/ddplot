@@ -4,6 +4,8 @@
 #' @param x The x-variable to consider.
 #' @param y The y-variable to consider.
 #' @param time The time variable to consider.
+#' @param ease The easing method, you can find more
+#' here <https://github.com/d3/d3-ease>. Defaults to 'Linear'.
 #' @param frameDur The time spent paused on each frame (time point) in milliseconds.
 #' @param transitionDur The time spent transitioning between frames in milliseconds.
 #' @param colorCategory A D3 categorical color scheme, you can find more
@@ -89,6 +91,7 @@ barChartRace <- function(
   x,
   y,
   time,
+  ease = "Linear",
   frameDur = 500,
   transitionDur = 500,
   colorCategory = "Accent",
@@ -164,6 +167,7 @@ barChartRace <- function(
       x = x,
       y = y,
       time = time,
+      ease = ease,
       frameDur = frameDur,
       transitionDur = transitionDur,
       colorCategory = colorCategory,
