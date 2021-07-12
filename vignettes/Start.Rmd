@@ -490,19 +490,38 @@ You can find list of D3 categorical color schemes [here](https://github.com/d3/d
 
 Finally, if you hover over the chart you'll notice a tooltip that identified the different area categories.
 
-# `barChartRace`
+# `barChartRace()`
 
-This function allows you to create an animated bar chart race. It's similar to `barChart` but takes an additional variable mapped to the `time` dimension, with options for styling transitions.
+This function allows you to create an animated bar chart race. `barChartRace()` is similar to `barChart()` but takes a third variable mapped to the time dimension, with options for styling transitions.
 
-Let's make a bar chart race of population growth among various countries with a subset of the `gapminder` dataset from the [`{gapminder}` package](https://github.com/jennybc/gapminder):
+Let's make a bar chart race of population growth among various countries using a subset of the `gapminder` dataset from the [{gapminder} package](https://github.com/jennybc/gapminder):
 
 ```{r, eval = FALSE}
+<<<<<<< HEAD
+gapminder_subset <- gapminder::gapminder %>%
+  select(country, year, pop) %>% 
+  filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Philippines", "Vietnam")) %>%
+  mutate(pop = pop/1e6)
+=======
 gapminder_subset <- gapminder::gapminder %>% select(country, year, pop) %>%
     filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Mexico", "Philippines", "Vietnam")) %>%
     mutate(pop = pop/1e6)
+>>>>>>> 6bab1415a132b17bda7192e7e2e63758614d5161
 
 gapminder_subset %>%
   slice_sample(n = 10)
+
+#>    year       pop     country
+#> 1  2007  91.07729 Philippines
+#> 2  1997  76.04900     Vietnam
+#> 3  1972 107.18827       Japan
+#> 4  1967  39.46391     Vietnam
+#> 5  1952  30.14432      Mexico
+#> 6  1987 142.93808      Brazil
+#> 7  1997 168.54672      Brazil
+#> 8  1962  41.12148      Mexico
+#> 9  1952  69.14595     Germany
+#> 10 1957  91.56301       Japan
 ```
 
 
@@ -554,12 +573,9 @@ gapminder_subset <- data.frame(
     "Vietnam","Vietnam","Vietnam"
   ))
 )
-
-gapminder_subset %>%
-  slice_sample(n = 10)
 ```
 
-In this simplest example, we simply pass call `barChartRace()` like `barChart()` but with an additional variable mapped to the time dimension specified with `time = year`:
+In this example, we simply pass call `barChartRace()` like `barChart()`, but with an additional variable mapped to the time dimension specified with `time = year`:
 
 ```{r}
 gapminder_subset %>%
