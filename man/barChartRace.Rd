@@ -9,7 +9,9 @@ barChartRace(
   x,
   y,
   time,
-  frameDur = 1000,
+  ease = "Linear",
+  frameDur = 500,
+  transitionDur = 500,
   colorCategory = "Accent",
   sort = "descending",
   paddingWidth = 0.1,
@@ -44,7 +46,12 @@ barChartRace(
 
 \item{time}{The time variable to consider.}
 
-\item{frameDur}{The time spent transitioning between frames in milliseconds.}
+\item{ease}{The easing method, you can find more
+here <https://github.com/d3/d3-ease>. Defaults to 'Linear'.}
+
+\item{frameDur}{The time spent paused on each frame (time point) in milliseconds.}
+
+\item{transitionDur}{The time spent transitioning between frames in milliseconds.}
 
 \item{colorCategory}{A D3 categorical color scheme, you can find more
 here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Accent'.}
@@ -92,7 +99,7 @@ The value goes from 0 to 0.99 included. Defaults to 0.1.}
 
 \item{timeLabelOpts}{Options for labeling the value of the time variable.
 Takes a list specifying the `size`, `prefix`, `suffix`, `xOffset`, and `yOffset`.
-Offsets are scaled relative to the dimensions of the label.}
+Offsets are scaled relative to the dimensions of the label, from the bottom-right corner of the panel.}
 
 \item{width}{Optional. The width of the SVG output.}
 

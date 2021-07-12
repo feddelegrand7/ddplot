@@ -490,6 +490,125 @@ You can find list of D3 categorical color schemes [here](https://github.com/d3/d
 
 Finally, if you hover over the chart you'll notice a tooltip that identified the different area categories. 
 
+# `barChartRace`
+
+This function allows you to create an animated bar chart race. It's similar to `barChart` but takes an additional variable mapped to the `time` dimension, with options for styling transitions.
+
+Let's make a bar chart race of population growth among various countries with a subset of the `gapminder` dataset from the [`{gapminder}` package](https://github.com/jennybc/gapminder):
+
+```{r, eval = FALSE}
+gapminder_subset <- gapminder::gapminder %>% select(country, year, pop) %>% 
+    filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Mexico", "Philippines", "Vietnam")) %>%
+    mutate(pop = pop/1e6)
+
+gapminder_subset %>%
+  slice_sample(n = 10)
+```
+
+
+```{r, echo = FALSE}
+gapminder_subset <- data.frame(
+  year = c(
+    1952L,1957L,1962L,1967L,1972L,1977L,
+    1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
+    1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
+    1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
+    1997L,2002L,2007L,1952L,1957L,1962L,1967L,1972L,1977L,
+    1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
+    1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
+    1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
+    1997L,2002L,2007L
+  ),
+  pop = c(
+    56.60256,65.551171,76.03939,88.049823,
+    100.840058,114.313951,128.962939,142.938076,155.975974,
+    168.546719,179.914212,190.010647,69.145952,71.019069,73.739117,
+    76.368453,78.717088,78.160773,78.335266,77.718298,
+    80.597764,82.011073,82.350671,82.400996,86.459025,91.563009,
+    95.831757,100.825279,107.188273,113.872473,118.454974,
+    122.091325,124.329269,125.956499,127.065841,127.467972,30.144317,
+    35.015548,41.121485,47.995559,55.984294,63.759976,
+    71.640904,80.122492,88.11103,95.895146,102.479927,108.700891,
+    22.438691,26.072194,30.325264,35.3566,40.850141,46.850962,
+    53.456774,60.017788,67.185766,75.012988,82.995088,91.077287,
+    26.246839,28.998543,33.79614,39.46391,44.655014,50.533506,
+    56.142181,62.826491,69.940728,76.048996,80.908147,
+    85.262356
+  ),
+  country = as.factor(c(
+    "Brazil","Brazil",
+    "Brazil","Brazil","Brazil","Brazil","Brazil",
+    "Brazil","Brazil","Brazil","Brazil","Brazil","Germany",
+    "Germany","Germany","Germany","Germany",
+    "Germany","Germany","Germany","Germany","Germany",
+    "Germany","Germany","Japan","Japan","Japan","Japan",
+    "Japan","Japan","Japan","Japan","Japan","Japan",
+    "Japan","Japan","Mexico","Mexico","Mexico",
+    "Mexico","Mexico","Mexico","Mexico","Mexico",
+    "Mexico","Mexico","Mexico","Mexico","Philippines",
+    "Philippines","Philippines","Philippines","Philippines",
+    "Philippines","Philippines","Philippines",
+    "Philippines","Philippines","Philippines","Philippines",
+    "Vietnam","Vietnam","Vietnam","Vietnam",
+    "Vietnam","Vietnam","Vietnam","Vietnam","Vietnam",
+    "Vietnam","Vietnam","Vietnam"
+  ))
+)
+
+gapminder_subset %>%
+  slice_sample(n = 10)
+```
+
+In this simplest example, we simply pass call `barChartRace()` like `barChart()` but with an additional variable mapped to the time dimension specified with `time = year`:
+
+```{r}
+gapminder_subset %>% 
+  barChartRace(
+    x = "pop",
+    y = "country",
+    time = "year",
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations"
+  )
+```
+
+You can also stylize transitions with the `frameDur`, `transitionDur`,  and `ease` arguments. For example, setting the time spent pausing on each frame to zero with `frameDur = 0` will create a smooth animation:
+
+```{r}
+gapminder_subset %>% 
+  barChartRace(
+    x = "pop",
+    y = "country",
+    time = "year",
+    transitionDur = 1000,
+    frameDur = 0,
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations"
+  )
+```
+
+As you might have noticed, the value of the column passed to the `time` argument is automatically labelled at the bottom-right corner of the plot panel. We can stylize this with a list of options passed to the `timeLabelOpts` argument (or turn it off with `timeLabel = FALSE`). We also give the bars a little bounce here with `ease = "BackInOut"` for fun.
+
+```{r}
+gapminder_subset %>% 
+  barChartRace(
+    x = "pop",
+    y = "country",
+    time = "year",
+    ease = "BackInOut",
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations",
+    timeLabelOpts = list(
+      size = 40,
+      prefix = "Year: ",
+      xOffset = 0.2
+    )
+  )
+```
+
 
 # More to Come ... 
 
