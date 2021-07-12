@@ -4,7 +4,10 @@
 #' @param x The x-variable to consider.
 #' @param y The y-variable to consider.
 #' @param time The time variable to consider.
-#' @param frameDur The time spent transitioning between frames in milliseconds.
+#' @param ease The easing method, you can find more
+#' here <https://github.com/d3/d3-ease>. Defaults to 'Linear'.
+#' @param frameDur The time spent paused on each frame (time point) in milliseconds.
+#' @param transitionDur The time spent transitioning between frames in milliseconds.
 #' @param colorCategory A D3 categorical color scheme, you can find more
 #' here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Accent'.
 #' @param sort Whether to sort or not the bars. Takes three values
@@ -32,7 +35,7 @@
 #' @param timeLabel Whether to show a label for the value of the time variable. Defaults to TRUE.
 #' @param timeLabelOpts Options for labeling the value of the time variable.
 #' Takes a list specifying the `size`, `prefix`, `suffix`, `xOffset`, and `yOffset`.
-#' Offsets are scaled relative to the dimensions of the label.
+#' Offsets are scaled relative to the dimensions of the label, from the bottom-right corner of the panel.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
@@ -88,7 +91,9 @@ barChartRace <- function(
   x,
   y,
   time,
-  frameDur = 1000,
+  ease = "Linear",
+  frameDur = 500,
+  transitionDur = 500,
   colorCategory = "Accent",
   sort = "descending",
   paddingWidth = 0.1,
@@ -162,7 +167,9 @@ barChartRace <- function(
       x = x,
       y = y,
       time = time,
+      ease = ease,
       frameDur = frameDur,
+      transitionDur = transitionDur,
       colorCategory = colorCategory,
       sort = sort,
       paddingWidth = paddingWidth,
@@ -187,4 +194,3 @@ barChartRace <- function(
     )
   )
 }
-
