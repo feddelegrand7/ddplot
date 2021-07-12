@@ -50,7 +50,7 @@ const panel = svg.append("g")
         .attr("fill", options.panelcol)
     }
   )
-  
+
 
 // init static elements
 
@@ -61,14 +61,14 @@ const title = svg.append("text")
   .style("font-size", options.titleFontSize)
   .style("font-family", options.font)
   .text(options.title)
-  
+
 const xGridLines = panel.append("g")
   .attr("class", "x-gridlines")
   .attr("transform", `translate(0, ${dims.panel.height})`)
-      
+
 const layerBar = panel.append("g")
   .attr("class", "layer-bar")
-        
+
 let xAxis = panel.append("g")
   .attr("class", "x-axis")
   .attr("transform", `translate(0, ${dims.panel.height})`)
@@ -79,7 +79,7 @@ let yAxis = panel.append("g")
   .attr("class", "y-axis")
   .style("font-size", options.yFontSize)
   .style("font-family", options.font)
-        
+
 const xAxisTitle = xAxis.append("text")
   .attr("x", dims.panel.width * 0.5)
   .attr("y", dims.margin.b * 0.8)
@@ -111,22 +111,22 @@ const xScale = d3.scaleLinear()
 
 const yScale = d3.scaleBand()
   .range([dims.panel.height, 0])
-  
+
 const colorScale = d3.scaleOrdinal()
 
 
 // animating function
 function update(frame, init = false) {
-  
+
   const t = svg.transition().duration(options.frameDur)
-  
+
   // setup data
   const frameData = data.filter(d => d.year == frame)
-  
+
   frameData.sort(function(a, b){
    return d3[options.sort](a[options.x], b[options.x]);
   })
-  
+
   // update scales
   xScale
     .domain([0, d3.max(data, d => d[options.x]) * 1.05])
@@ -141,9 +141,9 @@ function update(frame, init = false) {
 	 colorScale
 	  .domain(yLabels)
 	  .range(d3["scheme" + options.colorCategory].slice(0, yLabels.length))
-  
+
   // draw bars
-  
+
   layerBar
     .selectAll("rect")
     .data(frameData, d => d[options.y])
@@ -160,14 +160,14 @@ function update(frame, init = false) {
       },
       update => {
         update.call(
-          update => 
+          update =>
             update.transition(t)
               .attr("width", d => xScale(d[options.x]))
               .attr("y", d => yScale(d[options.y]))
         )
       }
     )
-    
+
   // draw axes
   xGridLines
     .call(
@@ -191,31 +191,32 @@ function update(frame, init = false) {
     d3.axisBottom(xScale)
       .ticks(options.xticks)
   )
-  
+
   if (init) {
     yAxis.call(d3.axisLeft(yScale))
   } else {
     yAxis.call(g => g.transition(t).call(d3.axisLeft(yScale)))
   }
-  
+
   // label the frame
   if (options.timeLabel) {
-    
+
     timeLabelText
       .text(options.timeLabelOpts.prefix + frame + options.timeLabelOpts.suffix)
-      
+
     const timeLabelDims = timeLabelText.node().getBBox()
-    
+
     timeLabel
       .attr("transform", `translate(
         ${dims.panel.width - (timeLabelDims.width * options.timeLabelOpts.xOffset)},
         ${dims.panel.height - (timeLabelDims.height * options.timeLabelOpts.yOffset)}
       )`)
-      
+
   }
-  
+
 }
 
+// TODO format time and sort + expose method as parameter
 const timeSet = [... new Set(data.map(d => d[options.time]))]
 
 update(timeSet[0], init = true)
