@@ -194,4 +194,3 @@ barChartRace <- function(
     )
   )
 }
-
