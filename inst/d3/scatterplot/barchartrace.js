@@ -119,7 +119,7 @@ function update(frame, init = false) {
   const t = svg.transition().duration(options.frameDur)
 
   // setup data
-  const frameData = data.filter(d => d.year == frame)
+  const frameData = data.filter(d => d[options.time] == frame)
 
   frameData.sort(function(a, b){
    return d3[options.sort](a[options.x], b[options.x]);
@@ -143,11 +143,12 @@ function update(frame, init = false) {
   // draw bars
 
   layerBar
-    .selectAll("rect")
+    .selectAll(".bar")
     .data(frameData, d => d[options.y])
     .join(
       enter => {
         enter.append("rect")
+          .attr("class", "bar")
           .attr("width", d => xScale(d[options.x]))
           .attr("height", yScale.bandwidth())
           .attr("y", d => yScale(d[options.y]))
