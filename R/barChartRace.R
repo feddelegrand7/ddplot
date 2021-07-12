@@ -138,6 +138,17 @@ barChartRace <- function(
     stop("please remove the ';' character from your font argument")
   }
 
+  timeLabelOpts <- modifyList(
+    list(
+      size = 32,
+      prefix = "",
+      suffix = "",
+      xOffset = 0.5,
+      yOffset = 1
+    ),
+    timeLabelOpts
+  )
+
   r2d3::r2d3(
     data = data,
     container = "div",
