@@ -24,9 +24,7 @@ const svg = div
 // panel
 
 //// adjust left plot margin to fit y-axis text
-let longestLabel = data
-  .map(d => d[options.y])
-  .sort((a, b) => b.length - a.length)[0]
+let longestLabel = data.map(d => d[options.y]).sort((a, b) => b.length - a.length)[0]
 const longestText = svg
   .append("text")
   .text(longestLabel)
