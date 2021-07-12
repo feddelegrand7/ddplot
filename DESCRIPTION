@@ -4,6 +4,7 @@ Title: Create D3 Based SVG Graphics
 Version: 0.0.1
 Authors@R: c(
     person("Mohamed El Fodil", "Ihaddaden", email = "ihaddaden.fodeil@gmail.com", role = c("aut", "cre")),
+    person("June", "Choe", email = "jchoe001@gmail.com", role = c("ctb", "cph")),
     person("Mike", "Bostock", role = c("ctb", "cph"), comment = "D3.js developer"),
     person("RStudio", role = c("ctb", "cph"), comment = "developers of the r2d3 package")) 
 Maintainer: Mohamed El Fodil Ihaddaden <ihaddaden.fodeil@gmail.com>
