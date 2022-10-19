@@ -34,7 +34,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' library(ggplot2) # needed for the mpg data frame
 #' library(dplyr) # needed for the data wrangling process
 #'
@@ -45,10 +44,6 @@
 #'    value = "median_hwy",
 #'    sort = "ascending"
 #'  )
-#' }
-
-
-
 
 horzBarChart <- function(data,
                          label,

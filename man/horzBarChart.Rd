@@ -88,7 +88,6 @@ A SVG horizontal bar chart.
 Create a horizontal bar chart
 }
 \examples{
-\dontrun{
 library(ggplot2) # needed for the mpg data frame
 library(dplyr) # needed for the data wrangling process
 
@@ -99,5 +98,4 @@ mpg \%>\% group_by(manufacturer) \%>\%
    value = "median_hwy",
    sort = "ascending"
  )
-}
 }

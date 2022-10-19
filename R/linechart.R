@@ -30,7 +30,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # 1. converting AirPassengers to a tidy data frame
 #' airpassengers <- data.frame(
 #'   passengers = as.matrix(AirPassengers),
@@ -43,7 +42,6 @@
 #'   x = "date",
 #'   y = "passengers"
 #' )
-#' }
 
 lineChart <- function(
                       data,

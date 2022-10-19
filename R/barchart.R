@@ -33,7 +33,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #'library(ggplot2) #needed for the mpg data frame
 #'library(dplyr) #needed for data wrangling
 #'
@@ -51,8 +50,6 @@
 #'    title = "Average City Miles per Gallon by manufacturer",
 #'    titleFontSize = 16
 #'  )
-#' }
-
 
 barChart <- function(
                      data,

@@ -8,7 +8,11 @@ Authors@R: c(
     person("Mike", "Bostock", role = c("ctb", "cph"), comment = "D3.js developer"),
     person("RStudio", role = c("ctb", "cph"), comment = "developers of the r2d3 package")) 
 Maintainer: Mohamed El Fodil Ihaddaden <ihaddaden.fodeil@gmail.com>
-Description: Create D3 based SVG graphics using a simple R API. 
+Description: Create 'D3' based 'SVG' ('Scalable Vector Graphics') graphics using a simple 'R' API. 
+    The package aims to simplify
+    the creation of many 'SVG' plot types using a straighforward 'R' API.  
+    The package relies on the 'r2d3' 'R' package and the 'D3' 'JavaScript' library. 
+    See <https://rstudio.github.io/r2d3/> and <https://d3js.org/> respectively.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -19,9 +23,10 @@ Imports:
     r2d3
 Suggests: 
     knitr,
-    rmarkdown, 
-    ggplot2, 
-    dplyr, 
+    rmarkdown,
+    ggplot2,
+    dplyr,
     tidyr,
-    zoo
+    zoo,
+    gapminder
 VignetteBuilder: knitr

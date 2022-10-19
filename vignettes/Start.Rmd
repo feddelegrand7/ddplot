@@ -18,76 +18,76 @@ knitr::opts_chunk$set(
 library(ddplot)
 ```
 
-`D3.js` is a famous JavaScript library that allows one to create extremely flexible SVG graphics however `D3` has (at least according to me) a pretty steep learning curve. Further, in order to understand some core concepts, one need to have some basics in `HTML`, `CSS` and `JavaScript`. `ddplot` aims to simply the process using a set of functions that render several graphics using a simple `R` API. Finally, `ddplot` is built upon the amazing `r2d3` package which makes it a breeze to interface `D3.js` with `R`, so a big thanks to the developers.  
+`D3.js` is a famous JavaScript library that allows one to create extremely flexible SVG graphics however `D3` has (at least according to me) a pretty steep learning curve. Further, in order to understand some core concepts, one need to have some basics in `HTML`, `CSS` and `JavaScript`. `ddplot` aims to simply the process using a set of functions that render several graphics using a simple `R` API. Finally, `ddplot` is built upon the amazing `r2d3` package which makes it a breeze to interface `D3.js` with `R`, so a big thanks to the developers.
 
 # `scatterPlot()`
 
-Let's work with the `mpg` data frame from the `ggplot2` package. 
+Let's work with the `mpg` data frame from the `ggplot2` package.
 
 ```{r fig.align='center', message=FALSE, warning=FALSE}
 library(ggplot2) # needed for the mpg data frame
 
 scatterPlot(
-  data = mpg, 
-  x = "hwy", 
-  y = "cty", 
-  xtitle = "hwy variable", 
-  ytitle = "cty variable", 
-  title = "cty and hwy relationship", 
+  data = mpg,
+  x = "hwy",
+  y = "cty",
+  xtitle = "hwy variable",
+  ytitle = "cty variable",
+  title = "cty and hwy relationship",
   titleFontSize = 20
 )
 
 ```
 
-In comparison to `ggplot2`, graphics' customization in `ddplot` is limited nonetheless you get a fully vectorized SVG which is cool. 
+In comparison to `ggplot2`, graphics' customization in `ddplot` is limited nonetheless you get a fully vectorized SVG which is cool.
 
 
 
 ```{r, fig.align='center'}
 scatterPlot(
-  data = mpg, 
-  x = "displ", 
-  y = "cty", 
-  col = "tomato", 
-  bgcol = "pink", 
-  size = 3, 
-  stroke = "royalblue", 
+  data = mpg,
+  x = "displ",
+  y = "cty",
+  col = "tomato",
+  bgcol = "pink",
+  size = 3,
+  stroke = "royalblue",
   strokeWidth = 1,
-  xtitle = "displ variable", 
-  ytitle = "cty variable", 
-  xticks = 3, 
+  xtitle = "displ variable",
+  ytitle = "cty variable",
+  xticks = 3,
   yticks = 3)
 
 ```
 
-# `histogram()` 
+# `histogram()`
 
-The `histogram()` function allows you to visualize the distribution of a vector of data: 
+The `histogram()` function allows you to visualize the distribution of a vector of data:
 
 ```{r}
 histogram(
-  x = mpg$hwy, 
-  bins = 20, 
-  fill = "crimson", 
-  stroke = "white", 
-  strokeWidth = 1, 
-  title = "Distribution of the hwy variable", 
-  width = "20", 
+  x = mpg$hwy,
+  bins = 20,
+  fill = "crimson",
+  stroke = "white",
+  strokeWidth = 1,
+  title = "Distribution of the hwy variable",
+  width = "20",
   height = "10"
 )
 ```
 
 
-# `animatedHistogram()` 
+# `animatedHistogram()`
 
-This function allows you to create a one-click histogram animation. Useful for presentation purposes. Click on the following empty plot and see what happens: 
+This function allows you to create a one-click histogram animation. Useful for presentation purposes. Click on the following empty plot and see what happens:
 
 ```{r}
 animatedHistogram(
-  x = mpg$hwy, 
-  duration = 2000, 
+  x = mpg$hwy,
+  duration = 2000,
   delay = 100,
-  fill = "lime", 
+  fill = "lime",
   stroke = "white",
   bgcol = "white"
   )
@@ -97,213 +97,213 @@ Note that you can customize the animation using the two parameters `duration` an
 
 # `barChart()`
 
-The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.   
+The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.
 
 ```{r fig.align='center', message=FALSE, warning=FALSE}
 library(dplyr)
 
-mpg %>% group_by(manufacturer) %>% 
-  summarise(mean_cty = mean(cty)) %>% 
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
   barChart(
-    x = "manufacturer", 
-    y = "mean_cty", 
+    x = "manufacturer",
+    y = "mean_cty",
     xFontSize = 10,
     yFontSize = 10,
-    fill = "orange", 
-    strokeWidth = 2, 
-    ytitle = "average cty value", 
+    fill = "orange",
+    strokeWidth = 2,
+    ytitle = "average cty value",
     title = "Average City Miles per Gallon by manufacturer"
   )
 ```
 
-The bars can be easily sorted in `ascending` or `descending` order using the `sort` parameter: 
+The bars can be easily sorted in `ascending` or `descending` order using the `sort` parameter:
 
 
 ```{r message=FALSE, warning=FALSE}
-mpg %>% group_by(manufacturer) %>% 
-  summarise(mean_cty = mean(cty)) %>% 
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
   barChart(
-    x = "manufacturer", 
-    y = "mean_cty", 
+    x = "manufacturer",
+    y = "mean_cty",
     sort = "ascending",
-    xFontSize = 10, 
+    xFontSize = 10,
     yFontSize = 10,
-    fill = "orange", 
-    strokeWidth = 1, 
-    ytitle = "average cty value", 
-    title = "Average City Miles per Gallon by manufacturer", 
+    fill = "orange",
+    strokeWidth = 1,
+    ytitle = "average cty value",
+    title = "Average City Miles per Gallon by manufacturer",
     titleFontSize = 16
   )
 ```
 
 
-# `horzBarChart()` 
+# `horzBarChart()`
 
 If you've many categories, it might be a good idea to go for a horizontal bar chart. It has the same parameters as the `barChart()` function except that the x-axis parameter is named `value` and the y-axis parameter named `label`, this naming convention aims to mitigate some confusion that can arise.
 
-If we want to replicate the above graphic in a horizontal way, we can do: 
+If we want to replicate the above graphic in a horizontal way, we can do:
 
 ```{r}
-mpg %>% group_by(manufacturer) %>% 
-  summarise(mean_cty = mean(cty)) %>% 
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
   horzBarChart(
-    label = "manufacturer", 
-    value = "mean_cty", 
+    label = "manufacturer",
+    value = "mean_cty",
     sort = "ascending",
-    labelFontSize  = 10, 
+    labelFontSize  = 10,
     valueFontSize = 10,
-    fill = "orange", 
+    fill = "orange",
     stroke = "crimson",
-    strokeWidth = 1, 
-    valueTitle  = "average cty value", 
-    title = "Average City Miles per Gallon by manufacturer", 
+    strokeWidth = 1,
+    valueTitle  = "average cty value",
+    title = "Average City Miles per Gallon by manufacturer",
     titleFontSize = 16
   )
 ```
 
-As in `barChart()`, we can aslo sort in descending order: 
+As in `barChart()`, we can aslo sort in descending order:
 
 
 ```{r}
-mpg %>% group_by(manufacturer) %>% 
-  summarise(mean_cty = mean(cty)) %>% 
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
   horzBarChart(
-    label = "manufacturer", 
-    value = "mean_cty", 
+    label = "manufacturer",
+    value = "mean_cty",
     sort = "descending",
-    labelFontSize  = 10, 
+    labelFontSize  = 10,
     valueFontSize = 10,
     bgcol = "black",
     axisCol = "white",
-    fill = "white", 
+    fill = "white",
     stroke = "white",
-    strokeWidth = 1, 
-    valueTitle  = "average cty value", 
+    strokeWidth = 1,
+    valueTitle  = "average cty value",
     labelTitle = "Manufacturers",
-    title = "Average City Miles per Gallon by manufacturer", 
+    title = "Average City Miles per Gallon by manufacturer",
     titleFontSize = 16
   )
 ```
 
 
-# `lollipopChart()` 
+# `lollipopChart()`
 
-lollipop chart follows the same behavior as bar charts but instead of bars you get lollipops, hence the name. Below an example of a lollipop chart with `ddplot`:  
+lollipop chart follows the same behavior as bar charts but instead of bars you get lollipops, hence the name. Below an example of a lollipop chart with `ddplot`:
 
 
 ```{r}
-mpg %>% group_by(drv) %>% 
-  summarise(median_cty = median(cty)) %>% 
+mpg %>% group_by(drv) %>%
+  summarise(median_cty = median(cty)) %>%
   lollipopChart(
-    x = "drv", 
-    y = "median_cty", 
-    sort = "ascending", 
-    xtitle = "drv variable", 
-    ytitle = "median cty", 
-    title = "Median cty per drv", 
+    x = "drv",
+    y = "median_cty",
+    sort = "ascending",
+    xtitle = "drv variable",
+    ytitle = "median cty",
+    title = "Median cty per drv",
     xFontSize = 20
   )
 ```
 
 
-It's possible to grasp the distribution of some variable according to a specific categorical variable using the same function: 
+It's possible to grasp the distribution of some variable according to a specific categorical variable using the same function:
 
 
 ```{r}
 
-mpg %>% filter(year == 2008) %>%   
+mpg %>% filter(year == 2008) %>%
 lollipopChart(
-    x = "manufacturer", 
-    y = "hwy", 
-    circleFill = 'red', 
+    x = "manufacturer",
+    y = "hwy",
+    circleFill = 'red',
     circleStroke = 'orange',
-    circleRadius = 5, 
-    sort = "none", 
+    circleRadius = 5,
+    sort = "none",
     xFontSize = 10
   )
 ```
 
-From above, it's quite easy to notice that although Toyota has two cars with high highway miles per galon (hwy), it also produces many other vehicles with poor hwy. 
+From above, it's quite easy to notice that although Toyota has two cars with high highway miles per galon (hwy), it also produces many other vehicles with poor hwy.
 
 
-# `horzLollipop()` 
+# `horzLollipop()`
 
-Same with bar charts, if you have a variable that has many categorical values, you can work with the reversed version of `lollipopChart()` which is `horzLollipop()`: 
+Same with bar charts, if you have a variable that has many categorical values, you can work with the reversed version of `lollipopChart()` which is `horzLollipop()`:
 
 
 ```{r}
-mpg %>% group_by(manufacturer) %>% 
-  summarise(median_cty = median(cty)) %>% 
+mpg %>% group_by(manufacturer) %>%
+  summarise(median_cty = median(cty)) %>%
   horzLollipop(
-    label = "manufacturer", 
-    value = "median_cty", 
+    label = "manufacturer",
+    value = "median_cty",
     sort = "descending")
 ```
-You can also do: 
+You can also do:
 
 
 
 ```{r}
-mpg %>% filter(year == 2008) %>%   
+mpg %>% filter(year == 2008) %>%
 horzLollipop(
-    label = "manufacturer", 
-    value = "hwy", 
-    circleFill = 'red', 
+    label = "manufacturer",
+    value = "hwy",
+    circleFill = 'red',
     circleStroke = 'orange',
-    circleRadius = 5, 
+    circleRadius = 5,
     sort = "none"
   )
 ```
 
 
-# `pieChart()` 
+# `pieChart()`
 
-Pie charts and donut charts are pretty straightforward to set up. We'll use a sample from the `starwars` data frame to plot a simple pie chart. 
+Pie charts and donut charts are pretty straightforward to set up. We'll use a sample from the `starwars` data frame to plot a simple pie chart.
 
 
 ```{r}
 # starwars is part of the dplyr data frame
-mini_starwars <- starwars %>% tidyr::drop_na(mass) %>% 
+mini_starwars <- starwars %>% tidyr::drop_na(mass) %>%
   sample_n(size = 5) # getting 5 random values
 
 pieChart(
-  data = mini_starwars, 
+  data = mini_starwars,
   value = "mass",
   label = "name"
 )
 ```
 
-Using the `padRadius`, `padAngle` and `cornerRadius` parameters, one can get fanciers pie charts: 
+Using the `padRadius`, `padAngle` and `cornerRadius` parameters, one can get fanciers pie charts:
 
 ```{r}
 pieChart(
-  data = mini_starwars, 
+  data = mini_starwars,
   value = "mass",
-  label = "name", 
-  padRadius = 200, 
-  padAngle = 0.1, 
-  cornerRadius = 50, 
+  label = "name",
+  padRadius = 200,
+  padAngle = 0.1,
+  cornerRadius = 50,
   innerRadius = 10
 )
 ```
-If you need a donut chart, you just need to play with the `innerRadius` parameter: 
+If you need a donut chart, you just need to play with the `innerRadius` parameter:
 
 ```{r}
 pieChart(
-  data = mini_starwars, 
+  data = mini_starwars,
   value = "mass",
-  label = "name", 
-  innerRadius = 120, 
-  cornerRadius = 20, 
+  label = "name",
+  innerRadius = 120,
+  cornerRadius = 20,
   title = "5 Starwars characters ranked by their mass",
-  titleFontSize = 16, 
+  titleFontSize = 16,
   bgcol = "yellow"
 )
 ```
 
-# `lineChart()` 
+# `lineChart()`
 
-The `lineChart()` function is used to plot time series data. The use must provide a `date` variable that has the `yyyy-mm-dd` format. In the following example, we'll use the `Air Passenger` built-in `ts` data and convert it to a classical data frame: 
+The `lineChart()` function is used to plot time series data. The use must provide a `date` variable that has the `yyyy-mm-dd` format. In the following example, we'll use the `Air Passenger` built-in `ts` data and convert it to a classical data frame:
 
 
 ```{r}
@@ -315,19 +315,19 @@ airpassengers <- data.frame(
 
 # 2. plotting the line chart
 lineChart(
-  data = airpassengers, 
-  x = "date", 
+  data = airpassengers,
+  x = "date",
   y = "passengers"
 )
 ```
 
-You can modify the line interpolation using the `curve` parameter: 
+You can modify the line interpolation using the `curve` parameter:
 
 ```{r}
 lineChart(
-  data = airpassengers, 
-  x = "date", 
-  y = "passengers", 
+  data = airpassengers,
+  x = "date",
+  y = "passengers",
   curve = "curveStep"
 )
 ```
@@ -335,40 +335,40 @@ lineChart(
 
 ```{r}
 lineChart(
-  data = airpassengers, 
-  x = "date", 
-  y = "passengers", 
+  data = airpassengers,
+  x = "date",
+  y = "passengers",
   curve = "curveCardinal"
 )
 ```
 
 ```{r}
 lineChart(
-  data = airpassengers, 
-  x = "date", 
-  y = "passengers", 
+  data = airpassengers,
+  x = "date",
+  y = "passengers",
   curve = "curveBasis"
 )
 ```
 
 # `animLineChart()`
 
-Heavily inspired from [Jure Stabuc's example](https://observablehq.com/@jurestabuc/animated-line-chart), the `animLineChart()` function create an empty SVG but when each time you click on it a line chart animation starts. Note that the line lasts after the end of the animation. Go ahead, click on the empty graphic below: 
+Heavily inspired from [Jure Stabuc's example](https://observablehq.com/@jurestabuc/animated-line-chart), the `animLineChart()` function create an empty SVG but when each time you click on it a line chart animation starts. Note that the line lasts after the end of the animation. Go ahead, click on the empty graphic below:
 
 ```{r}
 animLineChart(
-  data = airpassengers, 
-  x = "date", 
-  y = "passengers", 
+  data = airpassengers,
+  x = "date",
+  y = "passengers",
   duration = 10000, # in milliseconds (10 seconds)
   curve = "curveCardinal"
   )
 ```
 
 
-# `areaChart()` 
+# `areaChart()`
 
-`areaChart()` works similarly except that instead of a line you get an area. 
+`areaChart()` works similarly except that instead of a line you get an area.
 
 
 ```{r}
@@ -380,17 +380,17 @@ airpassengers <- data.frame(
 
 # 2. plotting the area chart
 areaChart(
-  data = airpassengers, 
-  x = "date", 
-  y = "passengers", 
-  fill = "purple", 
+  data = airpassengers,
+  x = "date",
+  y = "passengers",
+  fill = "purple",
   bgcol = "white"
 )
 ```
 
-# `areaBand()` 
+# `areaBand()`
 
-`areaBand()` lets you plot a filled area between two y-values. For the sake of the example, let's create an additional column `passengers_upper` that has an additional 40 passengers for each observation: 
+`areaBand()` lets you plot a filled area between two y-values. For the sake of the example, let's create an additional column `passengers_upper` that has an additional 40 passengers for each observation:
 
 ```{r}
 airpassengers <- data.frame(
@@ -402,22 +402,22 @@ airpassengers <- data.frame(
 areaBand(
   data = airpassengers,
   x = "date",
-  yLower = "passengers_lower", 
-  yUpper = "passengers_upper", 
-  fill = "yellow", 
+  yLower = "passengers_lower",
+  yUpper = "passengers_upper",
+  fill = "yellow",
   stroke = "black"
 )
 ```
 
 
-# `stackedAreaChart()` 
+# `stackedAreaChart()`
 
-This function allows you to create a stacked area chart. You need two components: 
+This function allows you to create a stacked area chart. You need two components:
 
-- A data frame in wide format (see an example below). If it's in wide format, you can still use `pivot_wider()` from the `tidyr` package to make wider. 
-- A date variable in `yyyy-mm-dd` format that will plotted in the x-axis. 
+- A data frame in wide format (see an example below). If it's in wide format, you can still use `pivot_wider()` from the `tidyr` package to make wider.
+- A date variable in `yyyy-mm-dd` format that will plotted in the x-axis.
 
-Let's work with the following data frame (shortened) provided by [Mike Bostock in his stacked area chart example](https://observablehq.com/@d3/stacked-area-chart): 
+Let's work with the following data frame (shortened) provided by [Mike Bostock in his stacked area chart example](https://observablehq.com/@d3/stacked-area-chart):
 
 ```{r}
 data <- data.frame(
@@ -449,24 +449,24 @@ Note that when running `stackedAreaChart()` all the variables available within t
 
 ```{r}
 stackedAreaChart(
-  data = data, 
-  x = "date", 
+  data = data,
+  x = "date",
   legendTextSize = 14
   )
 ```
 
-You can modify the color scheme using the `colorCategory` parameter: 
+You can modify the color scheme using the `colorCategory` parameter:
 
 
 ```{r}
 stackedAreaChart(
-  data = data, 
-  x = "date", 
-  legendTextSize = 14, 
-  curve = "curveCardinal", 
-  colorCategory = "Accent", 
-  bgcol = "white", 
-  stroke = "black", 
+  data = data,
+  x = "date",
+  legendTextSize = 14,
+  curve = "curveCardinal",
+  colorCategory = "Accent",
+  bgcol = "white",
+  stroke = "black",
   strokeWidth = 1
   )
 ```
@@ -474,22 +474,156 @@ stackedAreaChart(
 
 ```{r}
 stackedAreaChart(
-  data = data, 
-  x = "date", 
-  legendTextSize = 14, 
-  curve = "curveBasis", 
-  colorCategory = "Set3", 
-  bgcol = "black", 
-  axisCol = "white", 
-  xticks = 4, 
+  data = data,
+  x = "date",
+  legendTextSize = 14,
+  curve = "curveBasis",
+  colorCategory = "Set3",
+  bgcol = "black",
+  axisCol = "white",
+  xticks = 4,
   stroke = "black"
   )
 ```
 
 You can find list of D3 categorical color schemes [here](https://github.com/d3/d3-scale-chromatic#categorical)
 
-Finally, if you hover over the chart you'll notice a tooltip that identified the different area categories. 
+Finally, if you hover over the chart you'll notice a tooltip that identified the different area categories.
+
+# `barChartRace()`
+
+This function allows you to create an animated bar chart race. `barChartRace()` is similar to `barChart()` but takes a third variable mapped to the time dimension, with options for styling transitions.
+
+Let's make a bar chart race of population growth among various countries using a subset of the `gapminder` dataset from the [{gapminder} package](https://github.com/jennybc/gapminder):
+
+```{r, eval = FALSE}
+<<<<<<< HEAD
+gapminder_subset <- gapminder::gapminder %>%
+  select(country, year, pop) %>% 
+  filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Philippines", "Vietnam")) %>%
+  mutate(pop = pop/1e6)
+=======
+gapminder_subset <- gapminder::gapminder %>% select(country, year, pop) %>%
+    filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Mexico", "Philippines", "Vietnam")) %>%
+    mutate(pop = pop/1e6)
+>>>>>>> 6bab1415a132b17bda7192e7e2e63758614d5161
+
+gapminder_subset %>%
+  slice_sample(n = 10)
+
+#>    year       pop     country
+#> 1  2007  91.07729 Philippines
+#> 2  1997  76.04900     Vietnam
+#> 3  1972 107.18827       Japan
+#> 4  1967  39.46391     Vietnam
+#> 5  1952  30.14432      Mexico
+#> 6  1987 142.93808      Brazil
+#> 7  1997 168.54672      Brazil
+#> 8  1962  41.12148      Mexico
+#> 9  1952  69.14595     Germany
+#> 10 1957  91.56301       Japan
+```
 
 
-# More to Come ... 
+```{r, echo = FALSE}
+gapminder_subset <- data.frame(
+  year = c(
+    1952L,1957L,1962L,1967L,1972L,1977L,
+    1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
+    1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
+    1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
+    1997L,2002L,2007L,1952L,1957L,1962L,1967L,1972L,1977L,
+    1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
+    1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
+    1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
+    1997L,2002L,2007L
+  ),
+  pop = c(
+    56.60256,65.551171,76.03939,88.049823,
+    100.840058,114.313951,128.962939,142.938076,155.975974,
+    168.546719,179.914212,190.010647,69.145952,71.019069,73.739117,
+    76.368453,78.717088,78.160773,78.335266,77.718298,
+    80.597764,82.011073,82.350671,82.400996,86.459025,91.563009,
+    95.831757,100.825279,107.188273,113.872473,118.454974,
+    122.091325,124.329269,125.956499,127.065841,127.467972,30.144317,
+    35.015548,41.121485,47.995559,55.984294,63.759976,
+    71.640904,80.122492,88.11103,95.895146,102.479927,108.700891,
+    22.438691,26.072194,30.325264,35.3566,40.850141,46.850962,
+    53.456774,60.017788,67.185766,75.012988,82.995088,91.077287,
+    26.246839,28.998543,33.79614,39.46391,44.655014,50.533506,
+    56.142181,62.826491,69.940728,76.048996,80.908147,
+    85.262356
+  ),
+  country = as.factor(c(
+    "Brazil","Brazil",
+    "Brazil","Brazil","Brazil","Brazil","Brazil",
+    "Brazil","Brazil","Brazil","Brazil","Brazil","Germany",
+    "Germany","Germany","Germany","Germany",
+    "Germany","Germany","Germany","Germany","Germany",
+    "Germany","Germany","Japan","Japan","Japan","Japan",
+    "Japan","Japan","Japan","Japan","Japan","Japan",
+    "Japan","Japan","Mexico","Mexico","Mexico",
+    "Mexico","Mexico","Mexico","Mexico","Mexico",
+    "Mexico","Mexico","Mexico","Mexico","Philippines",
+    "Philippines","Philippines","Philippines","Philippines",
+    "Philippines","Philippines","Philippines",
+    "Philippines","Philippines","Philippines","Philippines",
+    "Vietnam","Vietnam","Vietnam","Vietnam",
+    "Vietnam","Vietnam","Vietnam","Vietnam","Vietnam",
+    "Vietnam","Vietnam","Vietnam"
+  ))
+)
+```
 
+In this example, we simply pass call `barChartRace()` like `barChart()`, but with an additional variable mapped to the time dimension specified with `time = year`:
+
+```{r}
+gapminder_subset %>%
+  barChartRace(
+    x = "pop",
+    y = "country",
+    time = "year",
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations"
+  )
+```
+
+You can also stylize transitions with the `frameDur`, `transitionDur`,  and `ease` arguments. For example, setting the time spent pausing on each frame to zero with `frameDur = 0` will create a smooth animation:
+
+```{r}
+gapminder_subset %>%
+  barChartRace(
+    x = "pop",
+    y = "country",
+    time = "year",
+    transitionDur = 1000,
+    frameDur = 0,
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations"
+  )
+```
+
+As you might have noticed, the value of the column passed to the `time` argument is automatically labelled at the bottom-right corner of the plot panel. We can stylize this with a list of options passed to the `timeLabelOpts` argument (or turn it off with `timeLabel = FALSE`). We also give the bars a little bounce here with `ease = "BackInOut"` for fun.
+
+```{r}
+gapminder_subset %>%
+  barChartRace(
+    x = "pop",
+    y = "country",
+    time = "year",
+    ease = "BackInOut",
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations",
+    timeLabelOpts = list(
+      size = 40,
+      prefix = "Year: ",
+      xOffset = 0.2
+    )
+  )
+```
+
+
+# More to Come ...

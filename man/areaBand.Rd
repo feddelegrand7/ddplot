@@ -80,7 +80,6 @@ A SVG band chart
 Create a band chart
 }
 \examples{
-\dontrun{
 airpassengers <- data.frame(
  passengers_lower = as.matrix(AirPassengers),
  passengers_upper = as.matrix(AirPassengers) + 40,
@@ -95,5 +94,4 @@ areaBand(
  fill = "yellow",
  stroke = "black"
 )
-}
 }

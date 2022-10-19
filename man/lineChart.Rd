@@ -79,7 +79,6 @@ A SVG line chart.
 Create a line chart
 }
 \examples{
-\dontrun{
 # 1. converting AirPassengers to a tidy data frame
 airpassengers <- data.frame(
   passengers = as.matrix(AirPassengers),
@@ -92,5 +91,4 @@ lineChart(
   x = "date",
   y = "passengers"
 )
-}
 }

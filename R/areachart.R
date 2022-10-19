@@ -28,7 +28,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' # 1. converting AirPassengers to a tidy data frame
 #' airpassengers <- data.frame(
 #'   passengers = as.matrix(AirPassengers),
@@ -43,9 +42,6 @@
 #'   fill = "purple",
 #'   bgcol = "white"
 #' )
-#' }
-
-
 
 areaChart <- function(
   data,

@@ -32,7 +32,6 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #'airpassengers <- data.frame(
 #'  passengers = as.matrix(AirPassengers),
 #'  date= zoo::as.Date(time(AirPassengers))
@@ -43,7 +42,6 @@
 #'  y = "passengers",
 #'  duration = 10000 # in milliseconds (10 seconds)
 #')
-#' }
 
 
 animLineChart <- function(
