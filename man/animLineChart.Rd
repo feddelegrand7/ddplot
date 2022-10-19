@@ -82,6 +82,7 @@ An animated SVG line chart.
 Create an animated line chart
 }
 \examples{
+\dontrun{
 airpassengers <- data.frame(
  passengers = as.matrix(AirPassengers),
  date= zoo::as.Date(time(AirPassengers))
@@ -92,4 +93,5 @@ animLineChart(
  y = "passengers",
  duration = 10000 # in milliseconds (10 seconds)
 )
+}
 }

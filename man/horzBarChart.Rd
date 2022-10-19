@@ -39,12 +39,18 @@ horzBarChart(
 
 \item{fill}{The color of the bars. Defaults to 'crimson'.}
 
+\item{sort}{Optional. Takes the following arguments:
+'none', 'ascending' or 'descending', default to 'none'}
+
 \item{paddingWidth}{The distance between each bar.
 The value goes from 0 to 0.99 included. Defaults to 0.1.}
 
 \item{stroke}{Optional. The color of the stroke of the bars.}
 
 \item{strokeWidth}{The width of the stroke of the bars. Defaults to 1 when the 'stroke' parameter is used.}
+
+\item{bgcol}{Optional. The color of the background, default to:
+'#CAD0D3'}
 
 \item{valueTicks}{Optional. the number of x-axis ticks to consider.}
 
@@ -82,7 +88,7 @@ A SVG horizontal bar chart.
 Create a horizontal bar chart
 }
 \examples{
-
+\dontrun{
 library(ggplot2) # needed for the mpg data frame
 library(dplyr) # needed for the data wrangling process
 
@@ -93,4 +99,5 @@ mpg \%>\% group_by(manufacturer) \%>\%
    value = "median_hwy",
    sort = "ascending"
  )
+}
 }

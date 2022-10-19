@@ -105,48 +105,24 @@ An animated SVG bar chart race, wrapped in a div.
 Create a bar chart race.
 }
 \examples{
-data <- data.frame(
-  pop = c(57,66,76,88,101,114,129,143,156,
-          169,180,190,69,71,74,76,79,78,78,78,81,82,82,82,86,
-          92,96,101,107,114,118,122,124,126,127,127,30,35,
-          41,48,56,64,72,80,88,96,102,109,22,26,30,35,41,
-          47,53,60,67,75,83,91,26,29,34,39,45,51,56,63,70,
-          76,81,85),
-  year = c(1952L,1957L,1962L,1967L,1972L,1977L,
-           1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
-           1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
-           1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
-           1997L,2002L,2007L,1952L,1957L,1962L,1967L,1972L,1977L,
-           1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
-           1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
-           1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
-           1997L,2002L,2007L),
-  country = as.factor(c("Brazil","Brazil",
-                        "Brazil","Brazil","Brazil","Brazil","Brazil",
-                        "Brazil","Brazil","Brazil","Brazil","Brazil","Germany",
-                        "Germany","Germany","Germany","Germany",
-                        "Germany","Germany","Germany","Germany","Germany",
-                        "Germany","Germany","Japan","Japan","Japan","Japan",
-                        "Japan","Japan","Japan","Japan","Japan","Japan",
-                        "Japan","Japan","Mexico","Mexico","Mexico",
-                        "Mexico","Mexico","Mexico","Mexico","Mexico",
-                        "Mexico","Mexico","Mexico","Mexico","Philippines",
-                        "Philippines","Philippines","Philippines","Philippines",
-                        "Philippines","Philippines","Philippines",
-                        "Philippines","Philippines","Philippines","Philippines",
-                        "Vietnam","Vietnam","Vietnam","Vietnam",
-                        "Vietnam","Vietnam","Vietnam","Vietnam","Vietnam",
-                        "Vietnam","Vietnam","Vietnam"))
+\dontrun{
+library(gapminder)
+library(dplyr)
+# let's select a set of countries only
+gapminder <- gapminder \%>\%
+filter(
+country \%in\% c("Algeria", "Mexico", "Iceland", "Greece", "Finland")
 )
 
 barChartRace(
-  data = data,
-  x = "pop",
-  y = "country",
-  time = "year",
-  ytitle = "Country",
-  xtitle = "Population (in millions)",
-  title = "Bar chart race of country populations"
+data = gapminder,
+x = "lifeExp",
+y = "country",
+time = "year",
+ytitle = "Country",
+xtitle = "Life expectancy",
+title = "Bar chart race of countries life expectancy"
 )
+}
 
 }

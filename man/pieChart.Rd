@@ -77,6 +77,7 @@ A SVG pie chart
 Create a pie chart
 }
 \examples{
+\dontrun{
 library(dplyr) # needed for the starwars data frame
 
 # starwars is part of the dplyr data frame
@@ -88,4 +89,5 @@ pieChart(
   value = "mass",
   label = "name"
 )
+}
 }

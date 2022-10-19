@@ -32,6 +32,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' library(dplyr) # needed for the starwars data frame
 #'
 #' # starwars is part of the dplyr data frame
@@ -43,6 +44,7 @@
 #'   value = "mass",
 #'   label = "name"
 #' )
+#' }
 
 
 

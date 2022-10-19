@@ -24,12 +24,17 @@
 #' Defaults to 'black'.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
+#' @param sort Optional. Takes the following arguments:
+#' 'none', 'ascending' or 'descending', default to 'none'
+#'
+#' @param bgcol Optional. The color of the background, default to:
+#' '#CAD0D3'
 #'
 #' @return A SVG horizontal bar chart.
 #' @export
 #'
 #' @examples
-#'
+#' \dontrun{
 #' library(ggplot2) # needed for the mpg data frame
 #' library(dplyr) # needed for the data wrangling process
 #'
@@ -40,6 +45,8 @@
 #'    value = "median_hwy",
 #'    sort = "ascending"
 #'  )
+#' }
+
 
 
 

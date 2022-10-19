@@ -32,7 +32,7 @@
 #'
 #' @examples
 #'animatedHistogram(
-#'  x = mpg$hwy,
+#'  x = mtcars$mpg,
 #'  duration = 2000,
 #'  delay = 100
 #')

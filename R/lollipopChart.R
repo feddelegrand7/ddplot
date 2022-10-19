@@ -35,6 +35,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' library(ggplot2) # needed for the mpg data frame
 #' library(dplyr) # needed for data wrangling
 #'
@@ -48,6 +49,7 @@
 #'     ytitle = "median cty",
 #'     title = "Median cty per drv"
 #'   )
+#' }
 
 lollipopChart <- function(data,
                          x,

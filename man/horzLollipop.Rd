@@ -35,6 +35,10 @@ horzLollipop(
 \arguments{
 \item{data}{The data frame containing the variables to consider.}
 
+\item{label}{The categorical variable to consider. Will be plotted on the x-axis.}
+
+\item{value}{The numeric variable to consider. Will be plotted on the y-axis.}
+
 \item{sort}{Whether to sort or not the vertical lines. Takes three values
 'none' which is the default, 'ascending' or 'descending'.}
 
@@ -81,10 +85,6 @@ Defaults to 'black'.}
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
-
-\item{x}{The categorical variable to consider. Will be plotted on the x-axis.}
-
-\item{y}{The numeric variable to consider. Will be plotted on the y-axis.}
 }
 \value{
 A SVG horizontal lollipop chart.

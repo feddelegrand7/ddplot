@@ -3,8 +3,8 @@
 #' Create a horizontal lollipop chart
 #'
 #' @param data The data frame containing the variables to consider.
-#' @param x The categorical variable to consider. Will be plotted on the x-axis.
-#' @param y The numeric variable to consider. Will be plotted on the y-axis.
+#' @param label The categorical variable to consider. Will be plotted on the x-axis.
+#' @param value The numeric variable to consider. Will be plotted on the y-axis.
 #' @param sort Whether to sort or not the vertical lines. Takes three values
 #' 'none' which is the default, 'ascending' or 'descending'.
 #' @param bgcol The background-color of the SVG output. Defaults to 'salmon'.
@@ -34,7 +34,6 @@
 #' @return A SVG horizontal lollipop chart.
 #' @export
 #'
-#' @examples
 
 
 horzLollipop <- function(data,

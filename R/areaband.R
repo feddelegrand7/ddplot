@@ -29,6 +29,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #'airpassengers <- data.frame(
 #'  passengers_lower = as.matrix(AirPassengers),
 #'  passengers_upper = as.matrix(AirPassengers) + 40,
@@ -43,6 +44,7 @@
 #'  fill = "yellow",
 #'  stroke = "black"
 #')
+#' }
 
 
 areaBand <- function(

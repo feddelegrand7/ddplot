@@ -93,6 +93,7 @@ A SVG lollipop chart.
 Create a lollipop chart
 }
 \examples{
+\dontrun{
 library(ggplot2) # needed for the mpg data frame
 library(dplyr) # needed for data wrangling
 
@@ -106,4 +107,5 @@ mpg \%>\% group_by(drv) \%>\%
     ytitle = "median cty",
     title = "Median cty per drv"
   )
+}
 }
