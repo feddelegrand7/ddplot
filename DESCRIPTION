@@ -10,7 +10,7 @@ Authors@R: c(
 Maintainer: Mohamed El Fodil Ihaddaden <ihaddaden.fodeil@gmail.com>
 Description: Create 'D3' based 'SVG' ('Scalable Vector Graphics') graphics using a simple 'R' API. 
     The package aims to simplify
-    the creation of many 'SVG' plot types using a straighforward 'R' API.  
+    the creation of many 'SVG' plot types using a straightforward 'R' API.  
     The package relies on the 'r2d3' 'R' package and the 'D3' 'JavaScript' library. 
     See <https://rstudio.github.io/r2d3/> and <https://d3js.org/> respectively.
 License: GPL (>= 3)
