@@ -1,4 +1,280 @@
+# Changes in D3 6.0
+
+[Released August 26, 2020.](https://github.com/d3/d3/releases/tag/v6.0.0)
+
+*This document covers only major changes. For minor and patch changes, please see the [release notes](https://github.com/d3/d3/releases).*
+
+D3 now **uses native collections** (Map and Set) and **accepts iterables**. [d3.group and d3.rollup](https://observablehq.com/@d3/d3-group) are powerful new aggregation functions that replace d3.nest and work great [with d3-hierarchy](https://observablehq.com/d/9a453665f405eebf) and d3-selection. There are lots of new helpers in d3-array, too, such as [d3.greatest](https://observablehq.com/@d3/d3-least), [d3.quickselect](https://observablehq.com/@d3/d3-quickselect), and [d3.fsum](https://observablehq.com/@d3/d3-fsum).
+
+D3 now **passes events directly to listeners**, replacing the d3.event global and bringing D3 inline with vanilla JavaScript and most other frameworks.
+
+**d3-delaunay** (based on Vladimir Agafonkin’s excellent [Delaunator](https://github.com/mapbox/delaunator)) replaces d3-voronoi, offering dramatic improvements to performance, robustness, and [search](https://observablehq.com/@d3/delaunay-find). And there’s a new [d3-geo-voronoi](https://github.com/Fil/d3-geo-voronoi) for spherical (geographical) data! **d3-random** is [greatly expanded](https://github.com/d3/d3-random/blob/master/README.md) and includes a fast [linear congruential generator](https://observablehq.com/@d3/d3-randomlcg) for seeded randomness. **d3-chord** has new layouts for [directed](https://observablehq.com/@d3/directed-chord-diagram) and transposed chord diagrams. **d3-scale** adds a new [radial scale](https://observablehq.com/@d3/radial-stacked-bar-chart-ii) type.
+
+… and a variety of other small enhancements. [More than 450 examples](https://observablehq.com/@d3/gallery) have been updated to D3 6.0!
+
+### d3-array
+
+* Accept iterables.
+* Add [d3.group](https://github.com/d3/d3-array/blob/master/README.md#group).
+* Add [d3.groups](https://github.com/d3/d3-array/blob/master/README.md#groups).
+* Add [d3.index](https://github.com/d3/d3-array/blob/master/README.md#index).
+* Add [d3.indexes](https://github.com/d3/d3-array/blob/master/README.md#indexes).
+* Add [d3.rollup](https://github.com/d3/d3-array/blob/master/README.md#rollup).
+* Add [d3.rollups](https://github.com/d3/d3-array/blob/master/README.md#rollups).
+* Add [d3.maxIndex](https://github.com/d3/d3-array/blob/master/README.md#maxIndex).
+* Add [d3.minIndex](https://github.com/d3/d3-array/blob/master/README.md#minIndex).
+* Add [d3.greatest](https://github.com/d3/d3-array/blob/master/README.md#greatest).
+* Add [d3.greatestIndex](https://github.com/d3/d3-array/blob/master/README.md#greatestIndex).
+* Add [d3.least](https://github.com/d3/d3-array/blob/master/README.md#least).
+* Add [d3.leastIndex](https://github.com/d3/d3-array/blob/master/README.md#leastIndex).
+* Add [d3.bin](https://github.com/d3/d3-array/blob/master/README.md#bin).
+* Add [d3.count](https://github.com/d3/d3-array/blob/master/README.md#count).
+* Add [d3.cumsum](https://github.com/d3/d3-array/blob/master/README.md#cumsum).
+* Add [d3.fsum](https://github.com/d3/d3-array/blob/master/README.md#fsum).
+* Add [d3.Adder](https://github.com/d3/d3-array/blob/master/README.md#Adder).
+* Add [d3.quantileSorted](https://github.com/d3/d3-array/blob/master/README.md#quantileSorted).
+* Add [d3.quickselect](https://github.com/d3/d3-array/blob/master/README.md#quickselect).
+* Add [*bisector*.center](https://github.com/d3/d3-array/blob/master/README.md#bisector_center).
+* Allow more than two iterables for [d3.cross](https://github.com/d3/d3-array/blob/master/README.md#cross).
+* Accept non-sorted input with [d3.quantile](https://github.com/d3/d3-array/blob/master/README.md#quantile).
+* Fix a *array*.sort bug in Safari.
+* Fix bin thresholds to ignore NaN input.
+* Fix [d3.ticks](https://github.com/d3/d3-array/blob/master/README.md#ticks) to not return ticks outside the domain.
+* Improve the performance of [d3.median](https://github.com/d3/d3-array/blob/master/README.md#median).
+
+See https://observablehq.com/@d3/d3-array-2-0 for details.
+
+### d3-brush
+
+* Add [*event*.mode](https://github.com/d3/d3-brush/blob/master/README.md#brush-events).
+* Change [*brush*.on](https://github.com/d3/d3-brush/blob/master/README.md#brush_on) to pass the *event* directly to listeners.
+* Improve multitouch (two-touch) interaction.
+
+### d3-chord
+
+* Add [d3.chordDirected](https://github.com/d3/d3-chord/blob/master/README.md#chordDirected).
+* Add [d3.chordTranspose](https://github.com/d3/d3-chord/blob/master/README.md#chordTranspose).
+* Add [d3.ribbonArrow](https://github.com/d3/d3-chord/blob/master/README.md#ribbonArrow).
+* Add [*ribbon*.padAngle](https://github.com/d3/d3-chord/blob/master/README.md#ribbon_padAngle).
+* Add [*ribbon*.sourceRadius](https://github.com/d3/d3-chord/blob/master/README.md#ribbon_sourceRadius).
+* Add [*ribbon*.targetRadius](https://github.com/d3/d3-chord/blob/master/README.md#ribbon_targetRadius).
+
+### d3-delaunay
+
+* Add [d3.Delaunay](https://github.com/d3/d3-delaunay/blob/master/README.md).
+
+### d3-drag
+
+* Change [*drag*.on](https://github.com/d3/d3-drag/blob/master/README.md#drag_on) to pass the *event* directly to listeners.
+
+### d3-force
+
+* Add *iterations* argument to [*simulation*.tick](https://github.com/d3/d3-force/blob/master/README.md#simulation_tick).
+* Add [*forceCenter*.strength](https://github.com/d3/d3-force/blob/master/README.md#center_strength).
+* Add [*forceSimulation*.randomSource](https://github.com/d3/d3-force/blob/master/README.md#simulation_randomSource).
+* All built-in forces are now fully deterministic (including “jiggling” coincident nodes).
+* Improve the default phyllotaxis layout slightly by offsetting by one half-radius.
+* Improve the error message when a link references an unknown node.
+* [*force*.initialize](https://github.com/d3/d3-force/blob/master/README.md#force_initialize) is now passed a random source.
+* Fix bug when initializing nodes with fixed positions.
+
+### d3-format
+
+* Change the default minus sign to the minus sign (−) instead of hyphen-minus (-).
+* Fix decimal `d` formatting of numbers greater than or equal to 1e21.
+
+### d3-geo
+
+* Fix clipping of some degenerate polygons.
+
+### d3-hierarchy
+
+* Accept iterables.
+* Add [*node*[Symbol.iterator]](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_iterator); hierarchies are now iterable.
+* Add [*node*.find](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_find).
+* Change [*node*.each](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_each) to pass the traversal index.
+* Change [*node*.eachAfter](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_eachAfter) to pass the traversal index.
+* Change [*node*.eachBefore](https://github.com/d3/d3-hierarchy/blob/master/README.md#node_eachBefore) to pass the traversal index.
+* Fix [d3.packSiblings](https://github.com/d3/d3-hierarchy/blob/master/README.md#packSiblings) for huge circles.
+* Fix divide-by-zero bug in [d3.treemapBinary](https://github.com/d3/d3-hierarchy/blob/master/README.md#treemapBinary).
+* Fix divide-by-zero bug in [d3.treemapResquarify](https://github.com/d3/d3-hierarchy/blob/master/README.md#treemapResquarify).
+
+### d3-interpolate
+
+* Add [*interpolateZoom*.rho](https://github.com/d3/d3-interpolate/blob/master/README.md#interpolateZoom_rho). (#25)
+* Allow [d3.piecewise](https://github.com/d3/d3-interpolate/blob/master/README.md#piecewise) to default to using d3.interpolate. #90
+* Change [d3.interpolateTransformCss](https://github.com/d3/d3-interpolate/blob/master/README.md#interpolateTransformCss) to use DOMMatrix and require absolute units. #83
+
+### d3-quadtree
+
+* Fix an infinite loop when coordinates diverge to huge values.
+
+### d3-random
+
+* Add [d3.randomLcg](https://github.com/d3/d3-random/blob/master/README.md#randomLcg).
+* Add [d3.randomGamma](https://github.com/d3/d3-random/blob/master/README.md#randomGamma).
+* Add [d3.randomBeta](https://github.com/d3/d3-random/blob/master/README.md#randomBeta).
+* Add [d3.randomWeibull](https://github.com/d3/d3-random/blob/master/README.md#randomWeibull).
+* Add [d3.randomCauchy](https://github.com/d3/d3-random/blob/master/README.md#randomCauchy).
+* Add [d3.randomLogistic](https://github.com/d3/d3-random/blob/master/README.md#randomLogistic).
+* Add [d3.randomPoisson](https://github.com/d3/d3-random/blob/master/README.md#randomPoisson).
+* Add [d3.randomInt](https://github.com/d3/d3-random/blob/master/README.md#randomInt).
+* Add [d3.randomBinomial](https://github.com/d3/d3-random/blob/master/README.md#randomBinomial).
+* Add [d3.randomGeometric](https://github.com/d3/d3-random/blob/master/README.md#randomGeometric).
+* Add [d3.randomPareto](https://github.com/d3/d3-random/blob/master/README.md#randomPareto).
+* Add [d3.randomBernoulli](https://github.com/d3/d3-random/blob/master/README.md#randomBernoulli).
+* Allow [d3.randomBates](https://github.com/d3/d3-random/blob/master/README.md#randomBates) to take fractional *n*.
+* Allow [d3.randomIrwinHall](https://github.com/d3/d3-random/blob/master/README.md#randomIrwinHall) to take fractional *n*.
+* Don’t wrap Math.random in the default source.
+
+Thanks to @Lange, @p-v-d-Veeken, @svanschooten, @Parcly-Taxel and @jrus for your contributions!
+
+### d3-scale
+
+* Accept iterables.
+* Add [*diverging*.rangeRound](https://github.com/d3/d3-scale/blob/master/README.md#diverging_rangeRound).
+* Add [*sequential*.range](https://github.com/d3/d3-scale/blob/master/README.md#sequential_range) (for compatibility with d3-axis).
+* Add [*sequential*.rangeRound](https://github.com/d3/d3-scale/blob/master/README.md#sequential_rangeRound).
+* Add [*sequentialQuantile*.quantiles](https://github.com/d3/d3-scale/blob/master/README.md#sequentialQuantile_quantiles).
+* Add [d3.scaleRadial](https://github.com/d3/d3-scale/blob/master/README.md#radial-scales).
+* [*diverging*.range](https://github.com/d3/d3-scale/blob/master/README.md#diverging_range) can now be used to set the interpolator.
+* [*sequential*.range](https://github.com/d3/d3-scale/blob/master/README.md#sequential_range) can now be used to set the interpolator.
+* [d3.scaleDiverging](https://github.com/d3/d3-scale/blob/master/README.md#diverging-scales) can now accept a range array in place of an interpolator.
+* [d3.scaleSequential](https://github.com/d3/d3-scale/blob/master/README.md#sequential-scales) can now accept a range array in place of an interpolator.
+* Fix [*continuous*.nice](https://github.com/d3/d3-scale/blob/master/README.md#continuous_nice) to ensure that niced domains always span ticks.
+* Fix [*log*.ticks](https://github.com/d3/d3-scale/blob/master/README.md#log_ticks) for small domains.
+* Fix [*log*.ticks](https://github.com/d3/d3-scale/blob/master/README.md#log_ticks) for small domains. #44
+* Fix [*scale*.clamp](https://github.com/d3/d3-scale/blob/master/README.md#continuous_clamp) for [sequential quantile scales](https://github.com/d3/d3-scale/blob/master/README.md#scaleSequentialQuantile). Thanks, @Fil!
+* Fix [*scale*.clamp](https://github.com/d3/d3-scale/blob/master/README.md#continuous_clamp) for continuous scales with more domain values than range values.
+* Fix [diverging scales](https://github.com/d3/d3-scale/blob/master/README.md#diverging-scales) with descending domains.
+* Remove deprecated *step* argument from [*time*.ticks](https://github.com/d3/d3-scale/blob/master/README.md#time_ticks) and [*time*.nice](https://github.com/d3/d3-scale/blob/master/README.md#time_nice).
+
+### d3-selection
+
+* Add [*selection*.selectChild](https://github.com/d3/d3-selection/blob/master/README.md#selection_selectChild).
+* Add [*selection*.selectChildren](https://github.com/d3/d3-selection/blob/master/README.md#selection_selectChildren).
+* Add [d3.pointer](https://github.com/d3/d3-selection/blob/master/README.md#pointer).
+* Add [d3.pointers](https://github.com/d3/d3-selection/blob/master/README.md#pointers).
+* Add *selection*[Symbol.iterator]; selections are now iterable!
+* Accept iterables with [*selection*.data](https://github.com/d3/d3-selection/blob/master/README.md#selection_data).
+* Accept iterables with [d3.selectAll](https://github.com/d3/d3-selection/blob/master/README.md#selectAll).
+* Change [*selection*.on](https://github.com/d3/d3-selection/blob/master/README.md#selection_on) to pass the *event* directly to listeners.
+* Remove index and group from *selection*.on listeners!
+* Remove d3.event!
+* Remove d3.mouse.
+* Remove d3.touch.
+* Remove d3.touches.
+* Remove d3.customEvent.
+* Remove d3.clientPoint.
+* Remove d3.sourceEvent.
+* Fix *selection*.merge(*transition*) to error.
+
+For an overview of changes, see https://observablehq.com/@d3/d3-selection-2-0.
+
+### d3-shape
+
+* Accept iterables.
+* Add [d3.line](https://github.com/d3/d3-shape/blob/master/README.md#line)(*x*, *y*) shorthand.
+* Add [d3.area](https://github.com/d3/d3-shape/blob/master/README.md#area)(*x*, *y0*, *y1*) shorthand.
+* Add [d3.symbol](https://github.com/d3/d3-shape/blob/master/README.md#symbol)(*type*, *size*) shorthand.
+
+### d3-time-format
+
+* Add ISO 8601 “week year” (`%G` and `%g`).
+
+### d3-timer
+
+* Fix [*interval*.restart](https://github.com/d3/d3-timer/blob/master/README.md#timer_restart) to restart as an interval.
+
+### d3-transition
+
+* Add [*transition*.easeVarying](https://github.com/d3/d3-transition/blob/master/README.md#transition_easeVarying).
+* Add *transition*[Symbol.iterator]; transitions are now iterable.
+* Fix [*selection*.transition](https://github.com/d3/d3-transition/blob/master/README.md#selection_transition) to error if the named transition to inherit is not found.k
+* Fix [*transition*.end](https://github.com/d3/d3-transition/blob/master/README.md#transition_end) to resolve immediately if the selection is empty.
+
+### d3-zoom
+
+* Add [*zoom*.tapDistance](https://github.com/d3/d3-zoom/blob/master/README.md#zoom_tapDistance).
+* Change [*zoom*.on](https://github.com/d3/d3-zoom/blob/master/README.md#zoom_on) to pass the *event* directly to listeners.
+* Change the default [*zoom*.filter](https://github.com/d3/d3-zoom/blob/master/README.md#zoom_filter) to observe *wheel* events if the control key is pressed.
+* Change the default [*zoom*.wheelDelta](ttps://github.com/d3/d3-zoom/blob/master/README.md#zoom_wheelDelta) to go faster if the control key is pressed.
+* Don‘t set touch-action: none.
+* Upgrade to [d3-selection 2](https://observablehq.com/@d3/d3-selection-2-0).
+
+### Breaking Changes
+
+D3 6.0 introduces several non-backwards-compatible changes.
+
+* Remove [d3.event](https://observablehq.com/d/f91cccf0cad5e9cb#events).
+* Change [*selection*.on](https://observablehq.com/d/f91cccf0cad5e9cb#events) to pass the *event* directly to listeners.
+* Change [*transition*.on](https://observablehq.com/d/f91cccf0cad5e9cb#events) to pass the *event* directly to listeners.
+* Change [*brush*.on](https://observablehq.com/d/f91cccf0cad5e9cb#event_brush) to pass the *event* directly to listeners.
+* Change [*drag*.on](https://observablehq.com/d/f91cccf0cad5e9cb#event_drag) to pass the *event* directly to listeners.
+* Change [*zoom*.on](https://observablehq.com/d/f91cccf0cad5e9cb#event_zoom) to pass the *event* directly to listeners.
+* Remove d3.mouse; use [d3.pointer](https://observablehq.com/d/f91cccf0cad5e9cb#pointer).
+* Remove d3.touch; use [d3.pointer](https://observablehq.com/d/f91cccf0cad5e9cb#pointer).
+* Remove d3.touches; use [d3.pointers](https://observablehq.com/d/f91cccf0cad5e9cb#pointer).
+* Remove d3.clientPoint; use [d3.pointer](https://observablehq.com/d/f91cccf0cad5e9cb#pointer).
+* Remove d3.voronoi; use [d3.Delaunay](https://observablehq.com/d/f91cccf0cad5e9cb#delaunay).
+* Remove d3.nest; use [d3.group](https://observablehq.com/d/f91cccf0cad5e9cb#group) and [d3.rollup](https://observablehq.com/d/f91cccf0cad5e9cb#group).
+* Remove d3.map; use [Map](https://observablehq.com/d/f91cccf0cad5e9cb#collection).
+* Remove d3.set; use [Set](https://observablehq.com/d/f91cccf0cad5e9cb#collection).
+* Remove d3.keys; use [Object.keys](https://observablehq.com/d/f91cccf0cad5e9cb#collection).
+* Remove d3.values; use [Object.values](https://observablehq.com/d/f91cccf0cad5e9cb#collection).
+* Remove d3.entries; use [Object.entries](https://observablehq.com/d/f91cccf0cad5e9cb#collection).
+* Rename d3.histogram to [d3.bin](https://observablehq.com/d/f91cccf0cad5e9cb#bin).
+* Rename d3.scan to [d3.leastIndex](https://observablehq.com/d/f91cccf0cad5e9cb#leastIndex).
+* Change [d3.interpolateTransformCss](https://observablehq.com/d/f91cccf0cad5e9cb#interpolateTransformCss) to require absolute units.
+* Change [d3.format](https://observablehq.com/d/f91cccf0cad5e9cb#minus) to default to the minus sign instead of hyphen-minus for negative values.
+
+D3 now requires a browser that supports [ES2015](http://www.ecma-international.org/ecma-262/6.0/). For older browsers, you must bring your own transpiler.
+
+Lastly, support for [Bower](https://bower.io) has been dropped; D3 is now exclusively published to npm and GitHub.
+
+See our [migration guide](https://observablehq.com/d/f91cccf0cad5e9cb) for help upgrading.
+
+# Changes in D3 5.0
+
+[Released March 22, 2018.](https://github.com/d3/d3/releases/tag/v5.0.0)
+
+D3 5.0 introduces only a few non-backwards-compatible changes.
+
+D3 now uses [Promises](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Using_promises) instead of asynchronous callbacks to load data. Promises simplify the structure of asynchronous code, especially in modern browsers that support [async and await](https://javascript.info/async-await). (See this [introduction to promises](https://observablehq.com/@observablehq/introduction-to-promises) on [Observable](https://observablehq.com).) For example, to load a CSV file in v4, you might say:
+
+```js
+d3.csv("file.csv", function(error, data) {
+  if (error) throw error;
+  console.log(data);
+});
+```
+
+In v5, using promises:
+
+```js
+d3.csv("file.csv").then(function(data) {
+  console.log(data);
+});
+```
+
+Note that you don’t need to rethrow the error—the promise will reject automatically, and you can *promise*.catch if desired. Using await, the code is even simpler:
+
+```js
+const data = await d3.csv("file.csv");
+console.log(data);
+```
+
+With the adoption of promises, D3 now uses the [Fetch API](https://fetch.spec.whatwg.org/) instead of [XMLHttpRequest](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest): the [d3-request](https://github.com/d3/d3-request) module has been replaced by [d3-fetch](https://github.com/d3/d3-fetch). Fetch supports many powerful new features, such as [streaming responses](https://observablehq.com/@mbostock/streaming-shapefiles). D3 5.0 also deprecates and removes the [d3-queue](https://github.com/d3/d3-queue) module. Use [Promise.all](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) to run a batch of asynchronous tasks in parallel, or a helper library such as [p-queue](https://github.com/sindresorhus/p-queue) to [control concurrency](https://observablehq.com/@mbostock/hello-p-queue).
+
+D3 no longer provides the d3.schemeCategory20* categorical color schemes. These twenty-color schemes were flawed because their grouped design could falsely imply relationships in the data: a shared hue can imply that the encoded data are part of a group (a super-category), while relative lightness can imply order. Instead, D3 now includes [d3-scale-chromatic](https://github.com/d3/d3-scale-chromatic), which implements excellent schemes from ColorBrewer, including [categorical](https://github.com/d3/d3-scale-chromatic/blob/master/README.md#categorical), [diverging](https://github.com/d3/d3-scale-chromatic/blob/master/README.md#diverging), [sequential single-hue](https://github.com/d3/d3-scale-chromatic/blob/master/README.md#sequential-single-hue) and [sequential multi-hue](https://github.com/d3/d3-scale-chromatic/blob/master/README.md#sequential-multi-hue) schemes. These schemes are available in both discrete and continuous variants.
+
+D3 now provides implementations of [marching squares](https://observablehq.com/@d3/contours) and [density estimation](https://observablehq.com/@d3/density-contours) via [d3-contour](https://github.com/d3/d3-contour)! There are two new [d3-selection](https://github.com/d3/d3-selection) methods: [*selection*.clone](https://github.com/d3/d3-selection/blob/master/README.md#selection_clone) for inserting clones of the selected nodes, and [d3.create](https://github.com/d3/d3-selection/blob/master/README.md#create) for creating detached elements. [Geographic projections](https://github.com/d3/d3-geo) now support [*projection*.angle](https://github.com/d3/d3-geo/blob/master/README.md#projection_angle), which has enabled several fantastic new [polyhedral projections](https://github.com/d3/d3-geo-polygon) by Philippe Rivière.
+
+Lastly, D3’s [package.json](https://github.com/d3/d3/blob/master/package.json) no longer pins exact versions of the dependent D3 modules. This fixes an issue with [duplicate installs](https://github.com/d3/d3/issues/3256) of D3 modules.
+
 # Changes in D3 4.0
+
+[Released June 28, 2016.](https://github.com/d3/d3/releases/tag/v4.0.0)
 
 D3 4.0 is modular. Instead of one library, D3 is now [many small libraries](#table-of-contents) that are designed to work together. You can pick and choose which parts to use as you see fit. Each library is maintained in its own repository, allowing decentralized ownership and independent release cycles. The default bundle combines about thirty of these microlibraries.
 
@@ -91,7 +367,7 @@ The [d3.range](https://github.com/d3/d3-array/blob/master/README.md#range) metho
 
 The method signature for optional accessors has been changed to be more consistent with array methods such as [*array*.forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach): the accessor is passed the current element (*d*), the index (*i*), and the array (*data*), with *this* as undefined. This affects [d3.min](https://github.com/d3/d3-array/blob/master/README.md#min), [d3.max](https://github.com/d3/d3-array/blob/master/README.md#max), [d3.extent](https://github.com/d3/d3-array/blob/master/README.md#extent), [d3.sum](https://github.com/d3/d3-array/blob/master/README.md#sum), [d3.mean](https://github.com/d3/d3-array/blob/master/README.md#mean), [d3.median](https://github.com/d3/d3-array/blob/master/README.md#median), [d3.quantile](https://github.com/d3/d3-array/blob/master/README.md#quantile), [d3.variance](https://github.com/d3/d3-array/blob/master/README.md#variance) and [d3.deviation](https://github.com/d3/d3-array/blob/master/README.md#deviation). The [d3.quantile](https://github.com/d3/d3-array/blob/master/README.md#quantile) method previously did not take an accessor. Some methods with optional arguments now treat those arguments as missing if they are null or undefined, rather than strictly checking arguments.length.
 
-The new [d3.histogram](https://github.com/d3/d3-array/blob/master/README.md#histograms) API replaces d3.layout.histogram. Rather than exposing *bin*.x and *bin*.dx on each returned bin, the histogram exposes *bin*.x0 and *bin*.x1, guaranteeing that *bin*.x0 is exactly equal to *bin*.x1 on the preceeding bin. The “frequency” and “probability” modes are no longer supported; each bin is simply an array of elements from the input data, so *bin*.length is equal to D3 3.x’s *bin*.y in frequency mode. To compute a probability distribution, divide the number of elements in each bin by the total number of elements.
+The new [d3.histogram](https://github.com/d3/d3-array/blob/master/README.md#histograms) API replaces d3.layout.histogram. Rather than exposing *bin*.x and *bin*.dx on each returned bin, the histogram exposes *bin*.x0 and *bin*.x1, guaranteeing that *bin*.x0 is exactly equal to *bin*.x1 on the preceding bin. The “frequency” and “probability” modes are no longer supported; each bin is simply an array of elements from the input data, so *bin*.length is equal to D3 3.x’s *bin*.y in frequency mode. To compute a probability distribution, divide the number of elements in each bin by the total number of elements.
 
 The *histogram*.range method has been renamed [*histogram*.domain](https://github.com/d3/d3-array/blob/master/README.md#histogram_domain) for consistency with scales. The *histogram*.bins method has been renamed [*histogram*.thresholds](https://github.com/d3/d3-array/blob/master/README.md#histogram_thresholds), and no longer accepts an upper value: *n* thresholds will produce *n* + 1 bins. If you specify a desired number of bins rather than thresholds, d3.histogram now uses [d3.ticks](https://github.com/d3/d3-array/blob/master/README.md#ticks) to compute nice bin thresholds. In addition to the default Sturges’ formula, D3 now implements the [Freedman-Diaconis rule](https://github.com/d3/d3-array/blob/master/README.md#thresholdFreedmanDiaconis) and [Scott’s normal reference rule](https://github.com/d3/d3-array/blob/master/README.md#thresholdScott).
 
@@ -817,17 +1093,17 @@ var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 [Sequential scales](https://github.com/d3/d3-scale/blob/master/README.md#scaleSequential), are a new class of scales with a fixed output [interpolator](https://github.com/d3/d3-scale/blob/master/README.md#sequential_interpolator) instead of a [range](https://github.com/d3/d3-scale/blob/master/README.md#continuous_range). Typically these scales are used to implement continuous sequential or diverging color schemes. Inspired by Matplotlib’s new [perceptually-motived colormaps](https://bids.github.io/colormap/), 4.0 now features [viridis](https://github.com/d3/d3-scale/blob/master/README.md#interpolateViridis), [inferno](https://github.com/d3/d3-scale/blob/master/README.md#interpolateInferno), [magma](https://github.com/d3/d3-scale/blob/master/README.md#interpolateMagma), [plasma](https://github.com/d3/d3-scale/blob/master/README.md#interpolatePlasma) interpolators for use with sequential scales. Using [d3.quantize](https://github.com/d3/d3-interpolate/blob/master/README.md#quantize), these interpolators can also be applied to [quantile](https://github.com/d3/d3-scale/blob/master/README.md#quantile-scales), [quantize](https://github.com/d3/d3-scale/blob/master/README.md#quantize-scales) and [threshold](https://github.com/d3/d3-scale/blob/master/README.md#threshold-scales) scales.
 
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/viridis.png" width="100%" height="40" alt="viridis">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateViridis)
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/inferno.png" width="100%" height="40" alt="inferno">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateInferno)
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/magma.png" width="100%" height="40" alt="magma">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateMagma)
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/plasma.png" width="100%" height="40" alt="plasma">](https://github.com/d3/d3-scale/blob/master/README.md#interpolatePlasma)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/viridis.png" width="100%" height="40" alt="viridis">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateViridis)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/inferno.png" width="100%" height="40" alt="inferno">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateInferno)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/magma.png" width="100%" height="40" alt="magma">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateMagma)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/plasma.png" width="100%" height="40" alt="plasma">](https://github.com/d3/d3-scale/blob/master/README.md#interpolatePlasma)
 
 4.0 also ships new Cubehelix schemes, including [Dave Green’s default](https://github.com/d3/d3-scale/blob/master/README.md#interpolateCubehelixDefault) and a [cyclical rainbow](https://github.com/d3/d3-scale/blob/master/README.md#interpolateRainbow) inspired by [Matteo Niccoli](https://mycarta.wordpress.com/2013/02/21/perceptual-rainbow-palette-the-method/):
 
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/cubehelix.png" width="100%" height="40" alt="cubehelix">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateCubehelixDefault)
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/rainbow.png" width="100%" height="40" alt="rainbow">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateRainbow)
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/warm.png" width="100%" height="40" alt="warm">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateWarm)
-[<img src="https://raw.githubusercontent.com/d3/d3-scale/master/img/cool.png" width="100%" height="40" alt="cool">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateCool)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/cubehelix.png" width="100%" height="40" alt="cubehelix">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateCubehelixDefault)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/rainbow.png" width="100%" height="40" alt="rainbow">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateRainbow)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/warm.png" width="100%" height="40" alt="warm">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateWarm)
+[<img src="https://raw.githubusercontent.com/d3/d3-scale/v1.0.0/img/cool.png" width="100%" height="40" alt="cool">](https://github.com/d3/d3-scale/blob/master/README.md#interpolateCool)
 
 For even more sequential and categorical color schemes, see [d3-scale-chromatic](https://github.com/d3/d3-scale-chromatic).
 

@@ -497,16 +497,11 @@ This function allows you to create an animated bar chart race. `barChartRace()` 
 Let's make a bar chart race of population growth among various countries using a subset of the `gapminder` dataset from the [{gapminder} package](https://github.com/jennybc/gapminder):
 
 ```{r, eval = FALSE}
-<<<<<<< HEAD
 gapminder_subset <- gapminder::gapminder %>%
   select(country, year, pop) %>% 
   filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Philippines", "Vietnam")) %>%
   mutate(pop = pop/1e6)
-=======
-gapminder_subset <- gapminder::gapminder %>% select(country, year, pop) %>%
-    filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Mexico", "Philippines", "Vietnam")) %>%
-    mutate(pop = pop/1e6)
->>>>>>> 6bab1415a132b17bda7192e7e2e63758614d5161
+
 
 gapminder_subset %>%
   slice_sample(n = 10)
