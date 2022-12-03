@@ -8,6 +8,12 @@
 
 ## Installation
 
+You can install `ddplot` from CRAN with: 
+
+``` r
+install.packages("ddplot")
+```
+
 You can install the development version of `ddplot` from Github with:
 
 ``` r
