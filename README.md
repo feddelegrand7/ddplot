@@ -2,6 +2,10 @@
 # ddplot
 
 <!-- badges: start -->
+[![metacran
+downloads](https://cranlogs.r-pkg.org/badges/ddplot)](https://cran.r-project.org/package=ddplot)
+[![metacran
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/ddplot)](https://cran.r-project.org/package=ddplot)
 <!-- badges: end -->
 
 `ddplot` is a package that allows you to create D3 based SVG graphics using a simple R API. 
