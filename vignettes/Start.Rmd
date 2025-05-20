@@ -95,6 +95,23 @@ animatedHistogram(
 
 Note that you can customize the animation using the two parameters `duration` and `delay`.
 
+# `emoji_histogram()`
+
+You can use __emojis__ to render your histogram (try to hover over the emojis):
+
+```{r}
+emoji_histogram(
+  x = mpg$hwy,
+  bins = 20,
+  emoji = "🌸",
+  emojiSize = 30,
+  stroke = "white",
+  bgcol = "white", 
+  title = NULL
+)
+```
+
+
 # `barChart()`
 
 The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.
