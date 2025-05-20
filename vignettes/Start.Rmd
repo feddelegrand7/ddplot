@@ -621,4 +621,65 @@ gapminder_subset %>%
 ```
 
 
-# More to Come ...
+# Using `ddplot` in `Shiny` 
+
+If you want to add reactivity to your `ddplot` plots, use the `uiOutput` and `renderUI` in order to render a frame, note that you'll need to have a `www` folder, below an example: 
+
+
+```{r, eval=FALSE}
+library(shiny)
+library(ddplot)
+library(r2d3)
+
+ui <- fluidPage(
+
+  shiny::h2("Example ddplot application"),
+
+  shiny::selectInput(
+    inputId = "colors",
+    label = NULL,
+    choices = colors(),
+    selected = "springgreen3"
+  ),
+
+  shiny::br(),
+
+  shiny::sliderInput(
+    inputId = "slider",
+    label = NULL,
+    min = 1,
+    max = 10,
+    value = 3
+  ),
+  shiny::br(),
+  mainPanel(
+    uiOutput("ddplot_ui")
+  )
+)
+
+server <- function(input, output) {
+  output$ddplot_ui <- renderUI({
+    widget <- ddplot::scatterPlot(
+      data = iris,
+      x = "Sepal.Length",
+      y = "Sepal.Width",
+      size = input$slider,
+      col = input$colors
+    )
+    htmlwidgets::saveWidget(widget, "www/temp_ddplot.html", selfcontained = TRUE)
+    tags$iframe(src = "temp_ddplot.html", width = "100%", height = "400px", frameborder = 0)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+
+
+
+
+
+
+
+
+
