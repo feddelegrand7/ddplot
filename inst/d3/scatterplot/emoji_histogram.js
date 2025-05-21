@@ -83,31 +83,38 @@ let emojiGroup = svg.append("g")
 
 bins.forEach((bin) => {
   bin.forEach((_, i) => {
-  emojiGroup.append("text")
-  .text(emoji)
-  .attr("x", xScale((bin.x0 + bin.x1) / 2))
-  .attr("y", yScale(i + 1))
-  .attr("opacity", options.opacity || 1)
-  .attr("stroke", options.stroke || "none")
-  .attr("stroke-width", options.strokeWidth || 0)
-  .style("transition", "transform 0.4s ease")
-  .style("cursor", "pointer")
-  .on("mouseover", function () {
-    d3.select(this)
+    emojiGroup.append("text")
+      .text(emoji)
+      .attr("x", xScale((bin.x0 + bin.x1) / 2))
+      .attr("y", yScale(i + 1) - 50)
+      .attr("opacity", 0)
+      .attr("stroke", options.stroke || "none")
+      .attr("stroke-width", options.strokeWidth || 0)
+      .attr("text-anchor", "middle")
+      .style("cursor", "pointer")
       .transition()
-      .duration(300)
-      .attr("transform", function () {
-        let x = d3.select(this).attr("x");
-        let y = d3.select(this).attr("y");
-        return `rotate(-15,${x},${y})`;
+      .delay(Math.random() * 300)
+      .duration(600)
+      .attr("y", yScale(i + 1))
+      .attr("opacity", options.opacity || 1)
+      .on("end", function () {
+        d3.select(this)
+          .on("mouseover", function () {
+            d3.select(this)
+              .transition()
+              .duration(300)
+              .attr("transform", function () {
+                let x = d3.select(this).attr("x");
+                let y = d3.select(this).attr("y");
+                return `rotate(-15,${x},${y})`;
+              });
+          })
+          .on("mouseout", function () {
+            d3.select(this)
+              .transition()
+              .duration(300)
+              .attr("transform", null);
+          });
       });
-  })
-  .on("mouseout", function () {
-    d3.select(this)
-      .transition()
-      .duration(300)
-      .attr("transform", null);
-  });
-
   });
 });

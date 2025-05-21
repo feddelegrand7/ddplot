@@ -30,7 +30,7 @@
 #' @export
 #' @examples
 #'
-#' histogram(
+#' emoji_histogram(
 #'   x = mtcars$mpg,
 #'   emoji = "🌸",
 #'   bins = 20,
