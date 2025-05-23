@@ -112,11 +112,37 @@ emoji_histogram(
 ```
 
 
+
+# `flower()` 
+
+The `flower()` function allows you to plot a simple flowers with a defined number of petals. You can also define the width/length of the petals and rotate them if needed: 
+
+
+```{r}
+flower(
+  petalCount = 7,
+  petalColor = "plum",
+  centerText = "🌼",
+  rotationSpeed = 0
+)
+```
+
+
+```{r}
+flower(
+  petalCount = 15,
+  petalWidth = 20,
+  petalColor = "plum",
+  rotationSpeed = 1.5
+)
+```
+
+
 # `barChart()`
 
 The `barChat()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.
 
-```{r fig.align='center', message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE}
 library(dplyr)
 
 mpg %>% group_by(manufacturer) %>%
