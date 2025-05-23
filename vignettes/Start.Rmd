@@ -137,6 +137,28 @@ flower(
 )
 ```
 
+`parliament_chart()`
+
+You can easily create a `Parliamant chart` using the `parliamant_chart()` function, consider the following example: 
+
+```{r}
+# The data is a toy example and does not reflect the reality
+vote_results_germany <- data.frame(
+    political_party = c("SDP", "CDU", "Linke"),
+    number_of_seats = c(200, 40, 30)
+)
+parliament_chart(
+  data = vote_results_germany,
+  categorical_column = "political_party",
+  numerical_column = "number_of_seats",
+  title = "German Bundestag",
+  seatSize = 10,
+  bgcol = "#fefefe"
+)
+```
+
+
+
 
 # `barChart()`
 

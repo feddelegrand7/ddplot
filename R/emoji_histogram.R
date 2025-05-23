@@ -104,8 +104,49 @@ emoji_histogram <- function(
   )
 
 }
+library(r2d3)
+
+data <- data.frame(
+  political_party = c("SDP", "AFD", "Linke", "güne", "fefe"),
+  number_of_seats = sort(c(200, 40, 30, 20, 101))
+)
+
+r2d3(
+  data = data,
+  script = system.file(
+    "d3/scatterplot/parliamant_chart.js",
+    package = "ddplot"
+  ),
+  options = list(
+    seatSize = 6,
+    padding = 2,
+    backgroundColor = "#f9f9f9",
+    font = "Helvetica",
+    title = "Bundestag Composition",
+    legendX = 30,  # Position top-left
+    legendY = 40
+  )
+)
 
 
+library(r2d3)
 
+df <- data.frame(
+  political_party = c("SDP", "AFD", "Linke"),
+  number_of_seats = c(2000, 400, 300)
+)
 
+r2d3(
+  data = df,
+  script = "parliament.js",
+  options = list(
+    seatSize = 6,
+    padding = 2,
+    backgroundColor = "#f9f9f9",
+    font = "Helvetica",
+    title = "Bundestag Composition",
+    legendX = 30,  # Position top-left
+    legendY = 40
+  )
+)
 
