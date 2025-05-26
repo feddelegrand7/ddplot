@@ -144,7 +144,7 @@ You can create cool `flames` using the `flame` function, useful if you want to d
 
 ```{r}
 flame(
-  intensity = 60, 
+  intensity = 20, 
   flameGradientColors = c("yellow", "orange", "darkred"),
   flameOutline = "darkred",
   bgcol = "#fefefe"

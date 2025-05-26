@@ -1,5 +1,5 @@
 const centerX = width / 2;
-const centerY = height * 0.75;
+const centerY = height * 0.95;
 
 const flameColor0 = options.flameColor0 || "white";
 const flameColor1 = options.flameColor1 || "orange";
@@ -17,8 +17,7 @@ function mapIntensityToScale(intensity) {
   if (intensity <= maxInput) {
     return minScale + (intensity - minInput) * (maxScale - minScale) / (maxInput - minInput);
   } else {
-    // For intensity > 100, continue scaling linearly beyond maxScale
-    const extraScalePerUnit = 0.02; // adjust to control growth speed above 100
+    const extraScalePerUnit = 0.02;
     return maxScale + (intensity - maxInput) * extraScalePerUnit;
   }
 }
