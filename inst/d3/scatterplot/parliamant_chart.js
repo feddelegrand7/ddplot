@@ -115,7 +115,7 @@ data.forEach((d, i) => {
 if (title) {
   svg.append("text")
     .attr("x", centerX)
-    .attr("y", height - 10)
+    .attr("y", height - 100)
     .attr("text-anchor", "middle")
     .style("font-family", fontFamily)
     .style("font-size", `${titleFontSize}px`)

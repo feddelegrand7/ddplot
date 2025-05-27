@@ -137,6 +137,24 @@ flower(
 )
 ```
 
+
+# `heart_fill`
+
+The `heart_fill` function allows you to display a heart indicator which will be filled according to a numerical value from 0 to 1: 
+
+```{r}
+heart_fill(fill_level = 0.8, titleText = NULL, renderFillLabel = FALSE)
+```
+
+# `glass_fill` 
+
+The `glass_fill` function works the same way as the `heart_fill` above: 
+
+```{r}
+glass_fill(fill_level = 0.8, titleText = "Glass of water", renderFillLabel = TRUE)
+```
+
+
 # `flame` 
 
 You can create cool `flames` using the `flame` function, useful if you want to display the state of a critical information that yields a numerical values (for example, the number of errors encountered in a specific process):
