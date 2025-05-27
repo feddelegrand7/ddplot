@@ -1,15 +1,3 @@
-d3.select("head").append("style").html(`
-  .plant_growth_flower:hover {
-    animation: wiggle 0.4s ease-in-out infinite alternate;
-    transform-origin: center;
-  }
-
-  @keyframes wiggle {
-    0%   { transform: rotate(0deg); }
-    50%  { transform: rotate(3deg); }
-    100% { transform: rotate(-3deg); }
-  }
-`);
 
 const potWidth = options.potWidth || 100;
 const potHeight = options.potHeight || 40;
@@ -76,23 +64,20 @@ if (data > 0.5) {
     .attr("cx", centerX)
     .attr("cy", stemY - 8)
     .attr("r", flowerSize)
-    .attr("fill", flowerColor)
-    .attr("class", "plant_growth_flower");
+    .attr("fill", flowerColor);
 
   // Leaf flowers
   plantGroup.append("circle")
     .attr("cx", centerX - 15)
     .attr("cy", stemY + 8)
     .attr("r", flowerSize * 0.6)
-    .attr("fill", flowerColor)
-    .attr("class", "plant_growth_flower");
+    .attr("fill", flowerColor);
 
   plantGroup.append("circle")
     .attr("cx", centerX + 15)
     .attr("cy", stemY + 12)
     .attr("r", flowerSize * 0.6)
-    .attr("fill", flowerColor)
-    .attr("class", "plant_growth_flower");
+    .attr("fill", flowerColor);
 }
 
 // Growth label
