@@ -38,6 +38,11 @@ glass_fill <- function(
     titleFontSize = "14px",
     font = "Verdana, Geneva, Tahoma, sans-serif"
 ) {
+
+  if (fill_level > 1) {
+    fill_level <- 1
+  }
+
   r2d3::r2d3(
     data = fill_level,
     script = system.file("d3/scatterplot/glass_fill.js", package = "ddplot"),

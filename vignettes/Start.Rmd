@@ -154,6 +154,17 @@ The `glass_fill` function works the same way as the `heart_fill` above:
 glass_fill(fill_level = 0.8, titleText = "Glass of water", renderFillLabel = TRUE)
 ```
 
+# `plant_growth`
+
+The `plant_growth` function can also be used as a visual clue: 
+
+```{r}
+plant_growth(0.4)
+```
+```{r}
+plant_growth(1)
+```
+
 
 # `flame` 
 
