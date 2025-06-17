@@ -1,10 +1,11 @@
 #' Visualize a Glass Filling with Water using D3
 #'
+#' @description
 #' This function generates an SVG visualization of a glass filled with water to a specified level,
-#' rendered via D3 using the `r2d3` package. The fill level, appearance of the glass, and label settings
+#' rendered via D3 using the r2d3 package. The fill level, appearance of the glass, and label settings
 #' can be customized.
 #'
-#' @param fill_level Numeric value between 0 and 1 indicating how full the glass should appear (e.g., 0.65 = 65% full).
+#' @param fill_level Numeric value between 0 and 1 indicating how full the glass should appear.
 #' @param glassWidth Width of the glass in pixels.
 #' @param glassHeight Height of the glass in pixels.
 #' @param strokeColor Color of the glass outline (stroke).
@@ -16,6 +17,8 @@
 #' @param titleColor Color of the title text displayed below the glass.
 #' @param titleFontSize Font size of the title text, defaults to "14px"
 #' @param titleText Text to display as the title beneath the glass.
+#' @param font The font name that will be used for the plot text. Defaults to
+#' "Verdana, Geneva, Tahoma, sans-serif"
 #'
 #' @return An interactive D3 visualization rendered in the RStudio Viewer or web browser.
 #' @examples

@@ -21,7 +21,7 @@ glass_fill(
 )
 }
 \arguments{
-\item{fill_level}{Numeric value between 0 and 1 indicating how full the glass should appear (e.g., 0.65 = 65% full).}
+\item{fill_level}{Numeric value between 0 and 1 indicating how full the glass should appear.}
 
 \item{glassWidth}{Width of the glass in pixels.}
 
@@ -44,13 +44,16 @@ glass_fill(
 \item{titleColor}{Color of the title text displayed below the glass.}
 
 \item{titleFontSize}{Font size of the title text, defaults to "14px"}
+
+\item{font}{The font name that will be used for the plot text. Defaults to
+"Verdana, Geneva, Tahoma, sans-serif"}
 }
 \value{
 An interactive D3 visualization rendered in the RStudio Viewer or web browser.
 }
 \description{
 This function generates an SVG visualization of a glass filled with water to a specified level,
-rendered via D3 using the `r2d3` package. The fill level, appearance of the glass, and label settings
+rendered via D3 using the r2d3 package. The fill level, appearance of the glass, and label settings
 can be customized.
 }
 \examples{

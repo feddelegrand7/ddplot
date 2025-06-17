@@ -20,33 +20,45 @@ heart_fill(
 )
 }
 \arguments{
-\item{fill_level}{Numeric value between 0 and 1 indicating how full the heart should appear (e.g., 0.8 = 80% full).}
+\item{fill_level}{Value between 0 and 1 indicating how full the heart should appear (e.g., 0.65).}
 
-\item{heartSize}{Numeric width/height scale for the heart shape in pixels.}
+\item{heartSize}{Width/height scale of the heart in pixels.}
 
 \item{strokeColor}{Color of the heart outline.}
 
-\item{strokeWidth}{Width of the outline stroke.}
+\item{strokeWidth}{Width of the heart outline stroke.}
 
-\item{fillColor}{Fill color of the heart (used to indicate level).}
+\item{fillColor}{Color used to fill the heart based on the fill level.}
 
-\item{renderFillLabel}{Logical; if `TRUE`, a percentage label is shown above the heart.}
+\item{renderFillLabel}{Whether to display a percentage label above the heart.}
 
 \item{labelColor}{Color of the percentage label text.}
 
-\item{labelFontSize}{Font size of the percentage label text (e.g., `"16px"`).}
+\item{labelFontSize}{Font size of the percentage label text (e.g., "16px").}
 
-\item{font}{Font family for text.}
+\item{titleText}{Optional title displayed below the heart.}
+
+\item{titleColor}{Color of the title text.}
+
+\item{titleFontSize}{Font size of the title text (e.g., "14px").}
+
+\item{font}{Font family used for text labels and title.}
 }
 \value{
-An interactive D3 heart fill visualization.
+An interactive D3 heart fill visualization rendered in the RStudio Viewer or web browser.
 }
 \description{
 This function renders a heart-shaped SVG graphic that fills from the bottom up based on the provided level.
-The appearance of the heart and accompanying label can be fully customized.
+The appearance of the heart and the optional label can be fully customized. It uses the `r2d3` package to
+render the visualization with D3.js.
 }
 \examples{
 heart_fill(fill_level = 0.9)
-heart_fill(fill_level = 0.4, fillColor = "pink", labelColor = "#C00", strokeColor = "#900")
+heart_fill(
+  fill_level = 0.4,
+  fillColor = "pink",
+  labelColor = "#C00",
+  strokeColor = "#900"
+)
 
 }

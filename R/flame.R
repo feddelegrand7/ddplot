@@ -19,7 +19,10 @@
 #'
 #' @examples
 #' flame(intensity = 5)
-#' flame(intensity = 50, flameGradientColors = c("lightblue", "blue", "darkblue"), flameOutline = "navy")
+#' flame(
+#'   intensity = 50,
+#'   flameGradientColors = c("lightblue", "blue", "darkblue")
+#' )
 flame <- function(
     intensity = 50,
     flameGradientColors = c("white", "yellow", "darkred"),

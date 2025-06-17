@@ -1,22 +1,32 @@
 #' Visualize a Heart Filling with Color using D3
 #'
 #' This function renders a heart-shaped SVG graphic that fills from the bottom up based on the provided level.
-#' The appearance of the heart and accompanying label can be fully customized.
+#' The appearance of the heart and the optional label can be fully customized. It uses the `r2d3` package to
+#' render the visualization with D3.js.
 #'
-#' @param fill_level Numeric value between 0 and 1 indicating how full the heart should appear (e.g., 0.8 = 80% full).
-#' @param heartSize Numeric width/height scale for the heart shape in pixels.
+#' @param fill_level Value between 0 and 1 indicating how full the heart should appear (e.g., 0.65).
+#' @param heartSize Width/height scale of the heart in pixels.
 #' @param strokeColor Color of the heart outline.
-#' @param strokeWidth Width of the outline stroke.
-#' @param fillColor Fill color of the heart (used to indicate level).
-#' @param renderFillLabel Logical; if `TRUE`, a percentage label is shown above the heart.
+#' @param strokeWidth Width of the heart outline stroke.
+#' @param fillColor Color used to fill the heart based on the fill level.
+#' @param renderFillLabel Whether to display a percentage label above the heart.
 #' @param labelColor Color of the percentage label text.
-#' @param labelFontSize Font size of the percentage label text (e.g., `"16px"`).
-#' @param font Font family for text.
+#' @param labelFontSize Font size of the percentage label text (e.g., "16px").
+#' @param titleText Optional title displayed below the heart.
+#' @param titleColor Color of the title text.
+#' @param titleFontSize Font size of the title text (e.g., "14px").
+#' @param font Font family used for text labels and title.
 #'
-#' @return An interactive D3 heart fill visualization.
+#' @return An interactive D3 heart fill visualization rendered in the RStudio Viewer or web browser.
+#'
 #' @examples
 #' heart_fill(fill_level = 0.9)
-#' heart_fill(fill_level = 0.4, fillColor = "pink", labelColor = "#C00", strokeColor = "#900")
+#' heart_fill(
+#'   fill_level = 0.4,
+#'   fillColor = "pink",
+#'   labelColor = "#C00",
+#'   strokeColor = "#900"
+#' )
 #'
 #' @export
 heart_fill <- function(

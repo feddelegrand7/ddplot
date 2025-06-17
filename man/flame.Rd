@@ -39,5 +39,8 @@ with smooth pulsing and wobbling animation.
 }
 \examples{
 flame(intensity = 5)
-flame(intensity = 50, flameGradientColors = c("lightblue", "blue", "darkblue"), flameOutline = "navy")
+flame(
+  intensity = 50,
+  flameGradientColors = c("lightblue", "blue", "darkblue")
+)
 }
