@@ -105,7 +105,6 @@ The `flower()` function allows you to plot a simple flowers with a defined numbe
 flower(
   petalCount = 7,
   petalColor = "plum",
-  centerText = "🌼",
   rotationSpeed = 0
 )
 ```
