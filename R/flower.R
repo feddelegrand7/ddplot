@@ -24,7 +24,6 @@
 #' flower(
 #'   petalCount = 5,
 #'   petalColor = "plum",
-#'   centerText = "🌼",
 #'   rotationSpeed = 1.5
 #' )
 flower <- function(
