@@ -40,7 +40,7 @@
 #'
 #' mpg %>% group_by(drv) %>%
 #'   summarise(median_cty = median(cty)) %>%
-#'   lollipopChart(
+#'   lollipop_chart(
 #'     x = "drv",
 #'     y = "median_cty",
 #'     sort = "ascending",
@@ -49,7 +49,7 @@
 #'     title = "Median cty per drv"
 #'   )
 
-lollipopChart <- function(data,
+lollipop_chart <- function(data,
                          x,
                          y,
                          sort = 'none',

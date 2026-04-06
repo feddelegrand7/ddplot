@@ -35,7 +35,7 @@
 #'  date= zoo::as.Date(time(AirPassengers))
 #')
 #'
-#'areaBand(
+#'area_band(
 #'  data = airpassengers,
 #'  x = "date",
 #'  yLower = "passengers_lower",
@@ -44,7 +44,7 @@
 #'  stroke = "black"
 #')
 
-areaBand <- function(
+area_band <- function(
   data,
   x,
   yLower,

@@ -38,7 +38,7 @@
 #'
 #'mpg %>% group_by(manufacturer) %>%
 #'  summarise(mean_cty = mean(cty)) %>%
-#'  barChart(
+#'  bar_chart(
 #'    x = "manufacturer",
 #'    y = "mean_cty",
 #'    sort = "ascending",
@@ -51,7 +51,7 @@
 #'    titleFontSize = 16
 #'  )
 
-barChart <- function(
+bar_chart <- function(
                      data,
                      x,
                      y,

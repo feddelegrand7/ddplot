@@ -30,14 +30,14 @@
 #'
 #' @examples
 #'
-#'scatterPlot(
+#'scatter_plot(
 #'   data = mtcars,
 #'   x = "mpg",
 #'   y = "wt"
 #'   )
 #'
 
-scatterPlot <- function(
+scatter_plot <- function(
                         data,
                         x,
                         y,

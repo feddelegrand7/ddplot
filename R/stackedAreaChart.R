@@ -52,7 +52,7 @@
 #'   )
 #' )
 #'
-#' stackedAreaChart(
+#' stacked_area_chart(
 #'   data = data,
 #'   x = "date",
 #'   legendTextSize = 14,
@@ -65,7 +65,7 @@
 #'
 
 
-stackedAreaChart <- function(
+stacked_area_chart <- function(
   data,
   x,
   colorCategory = "Category10",

@@ -39,13 +39,13 @@
 #'
 #' mpg %>% group_by(manufacturer) %>%
 #'  summarise(median_hwy = median(hwy)) %>%
-#'  horzBarChart(
+#'  horz_bar_chart(
 #'    label = "manufacturer",
 #'    value = "median_hwy",
 #'    sort = "ascending"
 #'  )
 
-horzBarChart <- function(data,
+horz_bar_chart <- function(data,
                          label,
                          value,
                          fill = "crimson",

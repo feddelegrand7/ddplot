@@ -35,7 +35,7 @@
 #' )
 #'
 #' # 2. plotting the area chart
-#' areaChart(
+#' area_chart(
 #'   data = airpassengers,
 #'   x = "date",
 #'   y = "passengers",
@@ -43,7 +43,7 @@
 #'   bgcol = "white"
 #' )
 
-areaChart <- function(
+area_chart <- function(
   data,
   x,
   y,

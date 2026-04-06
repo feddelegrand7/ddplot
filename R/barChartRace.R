@@ -50,7 +50,7 @@
 #' country %in% c("Algeria", "Mexico", "Iceland", "Greece", "Finland")
 #' )
 #'
-#' barChartRace(
+#' bar_chart_race(
 #' data = gapminder,
 #' x = "lifeExp",
 #' y = "country",
@@ -60,7 +60,7 @@
 #' title = "Bar chart race of countries life expectancy"
 #' )
 
-barChartRace <- function(
+bar_chart_race <- function(
   data,
   x,
   y,

@@ -38,13 +38,13 @@
 #' mini_starwars <- starwars %>% tidyr::drop_na(mass) %>%
 #'   sample_n(size = 5) # getting 5 random values
 #'
-#' pieChart(
+#' pie_chart(
 #'   data = mini_starwars,
 #'   value = "mass",
 #'   label = "name"
 #' )
 
-pieChart <- function(
+pie_chart <- function(
   data,
   value,
   label,

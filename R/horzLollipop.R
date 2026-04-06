@@ -36,7 +36,7 @@
 #'
 
 
-horzLollipop <- function(data,
+horz_lollipop <- function(data,
                           label,
                           value,
                           sort = 'none',

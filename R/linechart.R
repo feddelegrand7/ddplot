@@ -37,13 +37,13 @@
 #' )
 #'
 #' # 2. plotting the line chart
-#' lineChart(
+#' line_chart(
 #'   data = airpassengers,
 #'   x = "date",
 #'   y = "passengers"
 #' )
 
-lineChart <- function(
+line_chart <- function(
                       data,
                       x,
                       y,

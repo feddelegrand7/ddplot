@@ -31,7 +31,7 @@
 #' @export
 #'
 #' @examples
-#'animatedHistogram(
+#'animated_histogram(
 #'  x = mtcars$mpg,
 #'  duration = 2000,
 #'  delay = 100
@@ -40,7 +40,7 @@
 
 
 
-animatedHistogram <- function(
+animated_histogram <- function(
   x,
   bins = 30,
   duration = 2000,

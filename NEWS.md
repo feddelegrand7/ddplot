@@ -1,7 +1,15 @@
+# ddplot 0.1.0
+
+### Breaking changes: 
+- Now all function are `snake_case` named
+
+### Adding new functions:
+- `pulse_grid`
+
 # ddplot 0.0.2
 
 ### Adding new functions: 
-- `flame()`
+- `flame`
 - `glass_fill`
 - `heart_fill`
 - `flower`

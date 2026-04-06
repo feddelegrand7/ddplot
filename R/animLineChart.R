@@ -36,7 +36,7 @@
 #'  passengers = as.matrix(AirPassengers),
 #'  date= zoo::as.Date(time(AirPassengers))
 #')
-#'animLineChart(
+#'anim_line_chart(
 #'  data = airpassengers,
 #'  x = "date",
 #'  y = "passengers",
@@ -44,7 +44,7 @@
 #')
 
 
-animLineChart <- function(
+anim_line_chart <- function(
     data,
     x,
     y,
