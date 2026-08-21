@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>/404.html</loc></url>
+<url><loc>/CLAUDE.html</loc></url>
 <url><loc>/CODE_OF_CONDUCT.html</loc></url>
 <url><loc>/LICENSE.html</loc></url>
 <url><loc>/articles/Start.html</loc></url>
@@ -24,6 +25,7 @@
 <url><loc>/reference/emoji_histogram.html</loc></url>
 <url><loc>/reference/flame.html</loc></url>
 <url><loc>/reference/flower.html</loc></url>
+<url><loc>/reference/gauge_chart.html</loc></url>
 <url><loc>/reference/glass_fill.html</loc></url>
 <url><loc>/reference/heart_fill.html</loc></url>
 <url><loc>/reference/histogram.html</loc></url>

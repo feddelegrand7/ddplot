@@ -806,7 +806,263 @@ gapminder_subset %>%
 ```
 
 
-# Using `ddplot` in `Shiny` 
+# `liquid_chart()`
+
+`liquid_chart()` renders a single value as a circle filled with an animated liquid. The water rises from empty to the target level on load, two staggered wave layers give the surface a natural depth, and the label text switches color at the water line — appearing in `textColor` above the surface and in `waveTextColor` inside the water.
+
+```{r}
+liquid_chart(value = 0.55, title = "Memory")
+```
+
+Colors, wave behaviour, and the label are all configurable:
+
+```{r}
+liquid_chart(
+  value         = 0.28,
+  label         = "28%",
+  fillColor     = "tomato",
+  circleColor   = "tomato",
+  textColor     = "tomato",
+  waveTextColor = "white",
+  title         = "Errors"
+)
+```
+
+```{r}
+liquid_chart(
+  value         = 0.72,
+  label         = "72%",
+  fillColor     = "#27ae60",
+  waveAmplitude = 0.05,
+  waveCount     = 3,
+  waveSpeed     = 1.5,
+  title         = "Battery"
+)
+```
+
+# `waterfall_chart()`
+
+A waterfall chart shows how an initial value is built up or eroded by a sequence of positive and negative contributions. Each bar starts exactly where the previous one ended. It is the standard chart for P&L decomposition, budget variance analysis, and any "what changed and why" narrative.
+
+The optional `measure` column lets you mark certain bars as `"total"`, they span from zero to the running cumulative sum, making subtotals and final totals visually distinct. **Hovering over any bar shows a tooltip** with the label, the delta, and the running total.
+
+```{r}
+pnl <- data.frame(
+  label   = c("Revenue", "COGS", "Gross Profit",
+              "R&D", "S&M", "G&A", "Operating Income"),
+  value   = c(1200, -450, 750, -120, -90, -60, 480),
+  measure = c("relative", "relative", "total",
+              "relative", "relative", "relative", "total")
+)
+
+waterfall_chart(
+  data   = pnl,
+  x      = "label",
+  y      = "value",
+  measure = "measure",
+  title  = "P&L bridge",
+  ytitle = "USD thousands"
+)
+```
+
+Without a `measure` column every bar is a simple delta — useful for tracking a running balance over time:
+
+```{r}
+cashflow <- data.frame(
+  month = c("Jan", "Feb", "Mar", "Apr", "May", "Jun"),
+  delta = c(120, -30, 80, -60, 95, -20)
+)
+
+waterfall_chart(
+  data          = cashflow,
+  x             = "month",
+  y             = "delta",
+  title         = "Monthly cash flow",
+  ytitle        = "USD thousands",
+  positiveColor = "steelblue",
+  negativeColor = "tomato"
+)
+```
+
+# `dumbbell_chart()`
+
+A dumbbell chart (also called a connected dot plot) shows two values per category as dots joined by a horizontal line. It is the clearest way to communicate the gap or change between two groups, time points, or conditions across many categories , a grouped bar chart would require much more visual scanning to reach the same conclusion. The New York Times and The Economist use this format regularly.
+
+```{r}
+life_exp <- data.frame(
+  country   = c("Brazil", "China", "Egypt", "India",
+                "Japan", "Mexico", "Nigeria", "Turkey"),
+  year_1952 = c(50.9, 44.0, 41.9, 37.4, 63.0, 50.8, 36.3, 43.6),
+  year_2007 = c(72.4, 72.9, 71.3, 64.7, 82.6, 76.2, 46.9, 71.8)
+)
+
+dumbbell_chart(
+  data     = life_exp,
+  x1       = "year_1952",
+  x2       = "year_2007",
+  y        = "country",
+  x1Label  = "1952",
+  x2Label  = "2007",
+  title    = "Life expectancy: 1952 vs 2007",
+  xtitle   = "Life expectancy (years)",
+  sort     = "ascending"
+)
+```
+
+The chart works equally well for comparing two conditions within the same time period. Here we compare average city and highway fuel economy across vehicle classes using the `mpg` dataset:
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+
+mpg_summary <- mpg |>
+  group_by(class) |>
+  summarise(city = mean(cty), highway = mean(hwy))
+
+dumbbell_chart(
+  data    = mpg_summary,
+  x1      = "city",
+  x2      = "highway",
+  y       = "class",
+  x1Label = "City",
+  x2Label = "Highway",
+  col1    = "steelblue",
+  col2    = "darkorange",
+  title   = "City vs highway fuel economy by class",
+  xtitle  = "Miles per gallon",
+  sort    = "ascending"
+)
+```
+
+# `beeswarm_plot()`
+
+A beeswarm plot shows every individual data point along a numeric axis, spreading them sideways so they never overlap. It is far more transparent than a box plot because nothing is hidden behind a summary statistic — you see the full shape, outliers, and clusters of the raw data. The New York Times graphics desk uses this style regularly to remind readers that numbers represent real people.
+
+The layout is computed with a D3 force simulation: each point is pulled toward its true value on the x-axis while a collision force prevents any two circles from touching.
+
+```{r fig.align='center', message=FALSE, warning=FALSE}
+library(ggplot2) # for the mpg dataset
+
+# Single swarm — full distribution of highway fuel economy
+beeswarm_plot(
+  data   = mpg,
+  x      = "hwy",
+  col    = "steelblue",
+  xtitle = "Highway miles per gallon",
+  title  = "Distribution of hwy"
+)
+```
+
+When a `group` column is provided, one swarm is drawn per group and colored automatically:
+
+```{r fig.align='center', message=FALSE, warning=FALSE}
+beeswarm_plot(
+  data   = mpg,
+  x      = "hwy",
+  group  = "class",
+  xtitle = "Highway miles per gallon",
+  title  = "Highway fuel economy by vehicle class"
+)
+```
+
+You can swap the dataset and adjust the look freely. Here using the built-in `iris` dataset with a different color palette and larger points:
+
+```{r fig.align='center'}
+beeswarm_plot(
+  data         = iris,
+  x            = "Sepal.Length",
+  group        = "Species",
+  colorPalette = "Set2",
+  radius       = 5,
+  opacity      = 0.8,
+  xtitle       = "Sepal length (cm)",
+  title        = "Sepal length by species"
+)
+```
+
+# `bullet_chart()`
+
+The `bullet_chart()` function renders a bullet chart — a compact alternative to gauge charts designed by Stephen Few. It displays one actual value (the dark bar) against shaded qualitative bands (e.g. poor / satisfactory / good) and an optional target marker (the short vertical line).
+
+The `ranges` argument defines the upper bound of each band; the first band starts at `min` (default 0). Colors default to a sequence of grays from darker (lower range) to lighter (higher range).
+
+```{r}
+bullet_chart(
+  value    = 270,
+  target   = 300,
+  ranges   = c(150, 225, 350),
+  title    = "Revenue",
+  subtitle = "USD thousands"
+)
+```
+
+You can stack several bullet charts side by side to compare multiple KPIs at a glance:
+
+```{r}
+bullet_chart(
+  value      = 7.4,
+  target     = 8.0,
+  ranges     = c(4, 7, 10),
+  title      = "Satisfaction",
+  subtitle   = "out of 10",
+  valueColor = "steelblue"
+)
+```
+
+When a lower value is better (e.g. response time), simply order your `rangeColors` from lightest (best, lowest range) to darkest (worst, highest range):
+
+```{r}
+bullet_chart(
+  value       = 320,
+  target      = 250,
+  ranges      = c(200, 500, 1000),
+  rangeColors = c("#f0f0f0", "#d9d9d9", "#bdbdbd"),
+  title       = "Response",
+  subtitle    = "ms"
+)
+```
+
+# `gauge_chart()` 
+
+The `gauge_chart()` function renders a speedometer-style gauge. It takes a single numeric `value` and displays it on a circular dial spanning from `min` to `max`. The arc is divided into three zones: normal (plain), warning, and danger, each with its own color.
+
+```{r}
+gauge_chart(
+  value = 8,
+  title = "Memory"
+)
+```
+
+You can adjust the thresholds and colors to match your context. Here the warning zone starts at 60% and the danger zone at 80%:
+
+```{r}
+gauge_chart(
+  value = 72,
+  min = 0,
+  max = 100,
+  title = "CPU Load",
+  warningZone  = 60,
+  warningColor = "orange",
+  dangerZone   = 80,
+  dangerColor  = "red"
+)
+```
+
+The gauge is not limited to percentages, any numeric range works. Below is an example monitoring server response time in milliseconds, where anything above 400 ms is a warning and above 700 ms is critical:
+
+```{r}
+gauge_chart(
+  value = 530,
+  min = 0,
+  max = 1000,
+  title = "Response (ms)",
+  warningZone  = 400,
+  warningColor = "orange",
+  dangerZone   = 700,
+  dangerColor  = "red"
+)
+```
+
+# Using `ddplot` in `Shiny`
 
 If you want to add reactivity to your `ddplot` plots, use the `uiOutput` and `renderUI` in order to render a frame, note that you'll need to have a `www` folder, below an example: 
 

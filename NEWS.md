@@ -5,6 +5,12 @@
 
 ### Adding new functions:
 - `pulse_grid`
+- `gauge_chart`
+- `bullet_chart`
+- `beeswarm_plot`
+- `dumbbell_chart`
+- `waterfall_chart`
+- `liquid_chart`
 
 # ddplot 0.0.2
 
