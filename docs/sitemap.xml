@@ -20,8 +20,11 @@
 <url><loc>/reference/barChartRace.html</loc></url>
 <url><loc>/reference/bar_chart.html</loc></url>
 <url><loc>/reference/bar_chart_race.html</loc></url>
+<url><loc>/reference/beeswarm_plot.html</loc></url>
+<url><loc>/reference/bullet_chart.html</loc></url>
 <url><loc>/reference/constellationPlot.html</loc></url>
 <url><loc>/reference/constellation_plot.html</loc></url>
+<url><loc>/reference/dumbbell_chart.html</loc></url>
 <url><loc>/reference/emoji_histogram.html</loc></url>
 <url><loc>/reference/flame.html</loc></url>
 <url><loc>/reference/flower.html</loc></url>
@@ -36,6 +39,7 @@
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/lineChart.html</loc></url>
 <url><loc>/reference/line_chart.html</loc></url>
+<url><loc>/reference/liquid_chart.html</loc></url>
 <url><loc>/reference/lollipopChart.html</loc></url>
 <url><loc>/reference/lollipop_chart.html</loc></url>
 <url><loc>/reference/parliament_chart.html</loc></url>
@@ -48,5 +52,6 @@
 <url><loc>/reference/scatter_plot.html</loc></url>
 <url><loc>/reference/stackedAreaChart.html</loc></url>
 <url><loc>/reference/stacked_area_chart.html</loc></url>
+<url><loc>/reference/waterfall_chart.html</loc></url>
 </urlset>
 

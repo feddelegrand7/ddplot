@@ -70,9 +70,8 @@
 #' library(ggplot2)
 #' library(dplyr)
 #'
-#' mpg_summary <- mpg |>
-#'   group_by(class) |>
-#'   summarise(city = mean(cty), highway = mean(hwy))
+#' mpg_summary <- summarise(group_by(mpg, class),
+#'   city = mean(cty), highway = mean(hwy))
 #'
 #' dumbbell_chart(
 #'   data    = mpg_summary,
