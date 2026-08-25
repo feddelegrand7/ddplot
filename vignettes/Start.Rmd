@@ -960,9 +960,12 @@ beeswarm_plot(
   x      = "hwy",
   group  = "class",
   xtitle = "Highway miles per gallon",
-  title  = "Highway fuel economy by vehicle class"
+  title  = "Highway fuel economy by vehicle class", 
+  tooltip = "manufacturer"
 )
 ```
+
+
 
 You can swap the dataset and adjust the look freely. Here using the built-in `iris` dataset with a different color palette and larger points:
 

@@ -8,6 +8,11 @@ beeswarm_plot(
   data,
   x,
   group = NULL,
+  tooltip = NULL,
+  hover = TRUE,
+  animate = TRUE,
+  stat = c("none", "mean", "median"),
+  statColor = "#d62728",
   col = "steelblue",
   colorPalette = "Tableau10",
   radius = 4,
@@ -34,6 +39,24 @@ beeswarm_plot(
 
 \item{group}{Optional. The name of a categorical column used to split
 the data into separate swarms. Defaults to \code{NULL} (single swarm).}
+
+\item{tooltip}{Optional. A column name, or a vector of column names, whose
+values are shown in a tooltip when a point is hovered. Each column appears
+on its own line as \code{"column: value"}. When \code{NULL} (default) no
+tooltip is shown.}
+
+\item{hover}{Logical. When \code{TRUE} (default), hovering a point
+enlarges it and dims the rest of the swarm to make it stand out.}
+
+\item{animate}{Logical. When \code{TRUE} (default), points grow into
+place with a short staggered entry animation on first render.}
+
+\item{stat}{Character. Draws a reference line per swarm at the
+\code{"mean"} or \code{"median"} of the values. Defaults to
+\code{"none"} (no line).}
+
+\item{statColor}{Color of the mean/median reference line and its label.
+Defaults to \code{"#d62728"}.}
 
 \item{col}{Fill color of the points when no \code{group} is supplied.
 Defaults to \code{"steelblue"}.}
@@ -87,6 +110,14 @@ is drawn per group along the opposite axis.
 The layout is computed with a D3 force simulation that pulls each point
 toward its true value on the x-axis while resolving collisions so no
 two circles overlap.
+
+The plot is interactive: hovering a point highlights it while dimming the
+rest of the swarm, and (when \code{tooltip} columns are supplied) shows a
+tooltip with those columns' values. When a \code{group} is supplied,
+hovering a group label focuses that swarm and clicking a label toggles it
+on or off. An optional mean/median reference line can be drawn per swarm.
+The interactive behaviors are controlled by \code{tooltip}, \code{hover},
+\code{animate}, and \code{stat}.
 }
 \examples{
 library(ggplot2) # for the mpg dataset
@@ -118,5 +149,16 @@ beeswarm_plot(
   radius       = 5,
   xtitle       = "Sepal length (cm)",
   title        = "Sepal length by species"
+)
+
+# Interactive extras: median line per swarm and a tooltip label column
+beeswarm_plot(
+  data    = mpg,
+  x       = "hwy",
+  group   = "class",
+  tooltip = "model",
+  stat    = "median",
+  xtitle  = "Highway miles per gallon",
+  title   = "Highway fuel economy by vehicle class"
 )
 }

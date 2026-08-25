@@ -11,10 +11,31 @@
 #' toward its true value on the x-axis while resolving collisions so no
 #' two circles overlap.
 #'
+#' The plot is interactive: hovering a point highlights it while dimming the
+#' rest of the swarm, and (when \code{tooltip} columns are supplied) shows a
+#' tooltip with those columns' values. When a \code{group} is supplied,
+#' hovering a group label focuses that swarm and clicking a label toggles it
+#' on or off. An optional mean/median reference line can be drawn per swarm.
+#' The interactive behaviors are controlled by \code{tooltip}, \code{hover},
+#' \code{animate}, and \code{stat}.
+#'
 #' @param data The data frame containing the variables to consider.
 #' @param x The name of the numeric column whose distribution is displayed.
 #' @param group Optional. The name of a categorical column used to split
 #' the data into separate swarms. Defaults to \code{NULL} (single swarm).
+#' @param tooltip Optional. A column name, or a vector of column names, whose
+#' values are shown in a tooltip when a point is hovered. Each column appears
+#' on its own line as \code{"column: value"}. When \code{NULL} (default) no
+#' tooltip is shown.
+#' @param hover Logical. When \code{TRUE} (default), hovering a point
+#' enlarges it and dims the rest of the swarm to make it stand out.
+#' @param animate Logical. When \code{TRUE} (default), points grow into
+#' place with a short staggered entry animation on first render.
+#' @param stat Character. Draws a reference line per swarm at the
+#' \code{"mean"} or \code{"median"} of the values. Defaults to
+#' \code{"none"} (no line).
+#' @param statColor Color of the mean/median reference line and its label.
+#' Defaults to \code{"#d62728"}.
 #' @param col Fill color of the points when no \code{group} is supplied.
 #' Defaults to \code{"steelblue"}.
 #' @param colorPalette D3 categorical color scheme used when \code{group}
@@ -72,10 +93,26 @@
 #'   xtitle       = "Sepal length (cm)",
 #'   title        = "Sepal length by species"
 #' )
+#'
+#' # Interactive extras: median line per swarm and a tooltip label column
+#' beeswarm_plot(
+#'   data    = mpg,
+#'   x       = "hwy",
+#'   group   = "class",
+#'   tooltip = "model",
+#'   stat    = "median",
+#'   xtitle  = "Highway miles per gallon",
+#'   title   = "Highway fuel economy by vehicle class"
+#' )
 beeswarm_plot <- function(
     data,
     x,
     group        = NULL,
+    tooltip      = NULL,
+    hover        = TRUE,
+    animate      = TRUE,
+    stat         = c("none", "mean", "median"),
+    statColor    = "#d62728",
     col          = "steelblue",
     colorPalette = "Tableau10",
     radius       = 4,
@@ -107,6 +144,16 @@ beeswarm_plot <- function(
     stop("Column '", group, "' not found in data.")
   }
 
+  if (!is.null(tooltip)) {
+    missing_cols <- setdiff(tooltip, names(data))
+    if (length(missing_cols) > 0) {
+      stop("Column(s) not found in data: ",
+           paste(missing_cols, collapse = ", "))
+    }
+  }
+
+  stat <- match.arg(stat)
+
   if (grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
   }
@@ -117,6 +164,11 @@ beeswarm_plot <- function(
     options = list(
       x            = x,
       group        = group,
+      tooltip      = tooltip,
+      hover        = hover,
+      animate      = animate,
+      stat         = stat,
+      statColor    = statColor,
       col          = col,
       colorPalette = colorPalette,
       radius       = radius,
