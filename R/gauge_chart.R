@@ -3,6 +3,8 @@
 #' @description
 #' A gauge (speedometer) chart displays a single quantitative measure
 #' against colored zones (warning and danger) with a needle indicator.
+#' By default the needle animates on load, sweeping up from the minimum to
+#' the value and settling with a small wobble, like a car dashboard.
 #'
 #' @param value Numeric. The current value to display on the gauge.
 #' @param min Numeric. The minimum value of the gauge. Defaults to 0.
@@ -22,6 +24,11 @@
 #' @param font The font family used for all text. Defaults to
 #' "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param animate Logical. When \code{TRUE} (default), the needle sweeps from
+#' the minimum up to the value on load and settles with a small wobble. Set to
+#' \code{FALSE} to draw the needle at the value immediately with no animation.
+#' @param animationDuration Numeric. Duration of the needle sweep in
+#' milliseconds. Defaults to 1500.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
@@ -69,6 +76,8 @@ gauge_chart <- function(
     valueFontSize = 14,
     font = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol = "white",
+    animate = TRUE,
+    animationDuration = 1500,
     width = NULL,
     height = NULL
 ) {
@@ -110,7 +119,9 @@ gauge_chart <- function(
       titleFontSize = titleFontSize,
       valueFontSize = valueFontSize,
       font = font,
-      bgcol = bgcol
+      bgcol = bgcol,
+      animate = animate,
+      animationDuration = animationDuration
     ),
     width = width,
     height = height

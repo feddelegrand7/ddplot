@@ -20,6 +20,8 @@ gauge_chart(
   valueFontSize = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
+  animate = TRUE,
+  animationDuration = 1500,
   width = NULL,
   height = NULL
 )
@@ -58,6 +60,13 @@ Defaults to 90\% of max.}
 
 \item{bgcol}{The background color of the SVG. Defaults to "white".}
 
+\item{animate}{Logical. When \code{TRUE} (default), the needle sweeps from
+the minimum up to the value on load and settles with a small wobble. Set to
+\code{FALSE} to draw the needle at the value immediately with no animation.}
+
+\item{animationDuration}{Numeric. Duration of the needle sweep in
+milliseconds. Defaults to 1500.}
+
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
@@ -68,6 +77,8 @@ An SVG gauge chart.
 \description{
 A gauge (speedometer) chart displays a single quantitative measure
 against colored zones (warning and danger) with a needle indicator.
+By default the needle animates on load, sweeping up from the minimum to
+the value and settling with a small wobble, like a car dashboard.
 }
 \examples{
 # Basic usage

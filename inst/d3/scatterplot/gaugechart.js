@@ -13,6 +13,10 @@ const titleFontSize = options.titleFontSize || 16;
 const valueFontSize = options.valueFontSize || 14;
 const fontFamily = options.font || "Verdana, Geneva, Tahoma, sans-serif";
 const bgcol = options.bgcol || "white";
+// Needle animation (default on): the needle sweeps from the minimum up to the
+// value on load and settles with a small wobble, like a car dashboard.
+const animate = options.animate === undefined ? true : options.animate;
+const animationDuration = options.animationDuration || 1500;
 
 const cx = width / 2;
 const cy = height / 2;
@@ -167,32 +171,52 @@ svg.append("text")
   .attr("font-family", fontFamily)
   .text(maxVal);
 
-// Needle
+// Needle — drawn pointing straight up (north) inside a group centred on the
+// pivot, then rotated to the target angle. Rotating a group (rather than
+// recomputing the polygon) lets us animate the sweep smoothly.
 const valueFraction = (val - minVal) / (maxVal - minVal);
-const needleAngle = startAngle + valueFraction * totalSpan;
+const needleAngle = startAngle + valueFraction * totalSpan;   // radians
+const needleAngleDeg = needleAngle * 180 / Math.PI;
+const startAngleDeg  = startAngle  * 180 / Math.PI;
+const endAngleDeg    = endAngle    * 180 / Math.PI;
+
 const needleLength = radius - arcWidth - 12;
 const needleTailLength = radius * 0.12;
 const needleHalfBase = Math.max(4, radius * 0.04);
 
-const sinN = Math.sin(needleAngle);
-const cosN = Math.cos(needleAngle);
-const sinP = Math.sin(needleAngle + Math.PI / 2);
-const cosP = Math.cos(needleAngle + Math.PI / 2);
+// Polygon pointing up: tip → right base → tail → left base
+const needlePoints = [
+  `0,${-needleLength}`,
+  `${needleHalfBase},0`,
+  `0,${needleTailLength}`,
+  `${-needleHalfBase},0`
+].join(" ");
 
-const tipX  = cx + needleLength * sinN;
-const tipY  = cy - needleLength * cosN;
-const tailX = cx - needleTailLength * sinN;
-const tailY = cy + needleTailLength * cosN;
+const needleGroup = svg.append("g")
+  .attr("transform",
+    `translate(${cx},${cy}) rotate(${animate ? startAngleDeg : needleAngleDeg})`);
 
-// Needle polygon: tip → left base → tail → right base
-const b1x = cx + needleHalfBase * sinP;
-const b1y = cy - needleHalfBase * cosP;
-const b2x = cx - needleHalfBase * sinP;
-const b2y = cy + needleHalfBase * cosP;
-
-svg.append("polygon")
-  .attr("points", `${tipX},${tipY} ${b1x},${b1y} ${tailX},${tailY} ${b2x},${b2y}`)
+needleGroup.append("polygon")
+  .attr("points", needlePoints)
   .attr("fill", needleColor);
+
+// Sweep from the minimum up to the value, overshooting slightly and settling
+// back — the way an analog car needle jumps and wobbles into place. The angle
+// is clamped so the wobble never swings visibly past the ends of the gauge.
+if (animate) {
+  const clampLo = startAngleDeg - 6;
+  const clampHi = endAngleDeg + 6;
+  needleGroup.transition()
+    .duration(animationDuration)
+    .ease(d3.easeElasticOut.amplitude(1).period(0.6))
+    .attrTween("transform", () => {
+      const interp = d3.interpolate(startAngleDeg, needleAngleDeg);
+      return t => {
+        const a = Math.max(clampLo, Math.min(clampHi, interp(t)));
+        return `translate(${cx},${cy}) rotate(${a})`;
+      };
+    });
+}
 
 // Center pivot circle
 svg.append("circle")
