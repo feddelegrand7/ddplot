@@ -111,7 +111,7 @@ function makePath(fillY, phase) {
 const riseDuration = 1400; // ms for water to rise to target level
 let startTime = null;
 
-d3.timer(elapsed => {
+ddplotTrack(d3.timer(elapsed => {
   if (startTime === null) startTime = elapsed;
   const dt = elapsed - startTime;
 
@@ -133,7 +133,7 @@ d3.timer(elapsed => {
 
   // Keep wave clip in sync with wave1 so text2 is revealed correctly
   waveClipPath.attr("d", p1);
-});
+}));
 
 // --- Title below the circle ---
 if (title) {

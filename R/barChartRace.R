@@ -131,10 +131,7 @@ bar_chart_race <- function(
   r2d3::r2d3(
     data = data,
     container = "div",
-    script = system.file(
-      "d3/scatterplot/barchartrace.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("barchartrace.js"),
     width = width,
     height = height,
     options = list(

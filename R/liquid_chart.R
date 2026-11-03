@@ -98,7 +98,7 @@ liquid_chart <- function(
 
   r2d3::r2d3(
     data   = value,
-    script = system.file("d3/scatterplot/liquidchart.js", package = "ddplot"),
+    script = ddplot_script("liquidchart.js"),
     options = list(
       label           = label,
       fillColor       = fillColor,

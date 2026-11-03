@@ -134,7 +134,7 @@ dumbbell_chart <- function(
 
   r2d3::r2d3(
     data   = data,
-    script = system.file("d3/scatterplot/dumbbellchart.js", package = "ddplot"),
+    script = ddplot_script("dumbbellchart.js"),
     options = list(
       x1            = x1,
       x2            = x2,

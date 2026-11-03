@@ -192,7 +192,7 @@ bump_chart <- function(
 
   r2d3::r2d3(
     data   = df,
-    script = system.file("d3/scatterplot/bumpchart.js", package = "ddplot"),
+    script = ddplot_script("bumpchart.js"),
     options = list(
       periods       = as.list(periods),
       ranked        = ranked,

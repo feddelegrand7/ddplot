@@ -78,10 +78,7 @@ pie_chart <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/piechart.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("piechart.js"),
     options = list(
       value = value,
       label = label,

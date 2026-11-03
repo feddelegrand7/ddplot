@@ -98,10 +98,7 @@ lollipop_chart <- function(data,
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/lollipopchart.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("lollipopchart.js"),
     options = list(
       x = x,
       y = y,

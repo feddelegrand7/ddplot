@@ -71,10 +71,7 @@ scatter_plot <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/scatterplot.js",
-       package = "ddplot"
-    ),
+    script = ddplot_script("scatterplot.js"),
     options = list(
       x = x,
       y = y,

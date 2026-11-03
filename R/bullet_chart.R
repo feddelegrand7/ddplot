@@ -115,7 +115,7 @@ bullet_chart <- function(
 
   r2d3::r2d3(
     data   = value,
-    script = system.file("d3/scatterplot/bulletchart.js", package = "ddplot"),
+    script = ddplot_script("bulletchart.js"),
     options = list(
       ranges      = ranges,
       target      = target,

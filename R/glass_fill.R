@@ -48,7 +48,7 @@ glass_fill <- function(
 
   r2d3::r2d3(
     data = fill_level,
-    script = system.file("d3/scatterplot/glass_fill.js", package = "ddplot"),
+    script = ddplot_script("glass_fill.js"),
     options = list(
       glassWidth = glassWidth,
       glassHeight = glassHeight,

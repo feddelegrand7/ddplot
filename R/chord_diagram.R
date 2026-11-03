@@ -386,7 +386,7 @@ chord_diagram <- function(
 
   r2d3::r2d3(
     data   = edges,
-    script = system.file("d3/scatterplot/chorddiagram.js", package = "ddplot"),
+    script = ddplot_script("chorddiagram.js"),
     options = list(
       names            = as.list(entities),
       directed         = directed,

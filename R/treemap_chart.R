@@ -166,7 +166,7 @@ treemap_chart <- function(
 
   r2d3::r2d3(
     data   = data,
-    script = system.file("d3/scatterplot/treemapchart.js", package = "ddplot"),
+    script = ddplot_script("treemapchart.js"),
     options = list(
       value          = value,
       label          = label,

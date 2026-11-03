@@ -59,15 +59,12 @@ svg.append("text")
   .text(centerText);
 
 const rotationSpeed = options.rotationSpeed || 0
-// Function to continuously rotate the petals around the center
-function rotatePetals(angle = 0) {
+// Continuously rotate the petals around the center (50 frames per second).
+// A single tracked d3.interval, so ddplotreset.js can stop it on re-render.
+let petalAngle = 0;
+petalGroup.attr("transform", `translate(${centerX}, ${centerY}) rotate(0)`);
+ddplotTrack(d3.interval(() => {
+  petalAngle = (petalAngle + rotationSpeed) % 360;
   petalGroup
-    .attr("transform", `translate(${centerX}, ${centerY}) rotate(${angle})`);
-
-  d3.timeout(() => {
-    rotatePetals((angle + rotationSpeed) % 360); // Adjust speed here
-  }, 20); // 50 frames per second
-}
-
-// Start rotating
-rotatePetals();
+    .attr("transform", `translate(${centerX}, ${centerY}) rotate(${petalAngle})`);
+}, 20));

@@ -98,10 +98,7 @@ bar_chart <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/barchart.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("barchart.js"),
     options = list(
       x = x,
       y = y,

@@ -77,10 +77,7 @@ line_chart <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/linechart.js",
-       package = "ddplot"
-    ),
+    script = ddplot_script("linechart.js"),
     options = list(
       x = x,
       y = y,

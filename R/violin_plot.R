@@ -302,7 +302,7 @@ violin_plot <- function(
 
   r2d3::r2d3(
     data   = plot_data,
-    script = system.file("d3/scatterplot/violinplot.js", package = "ddplot"),
+    script = ddplot_script("violinplot.js"),
     options = list(
       y              = y,
       group          = group,

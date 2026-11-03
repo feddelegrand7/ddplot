@@ -76,10 +76,7 @@ area_chart <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/areachart.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("areachart.js"),
     options = list(
       x = x,
       y = y,

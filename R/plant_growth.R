@@ -41,7 +41,7 @@ plant_growth <- function(
 
   r2d3::r2d3(
     data = fill_level,
-    script = system.file("d3/scatterplot/plant_growth.js", package = "ddplot"),
+    script = ddplot_script("plant_growth.js"),
     options = list(
       potWidth = potWidth,
       potHeight = potHeight,

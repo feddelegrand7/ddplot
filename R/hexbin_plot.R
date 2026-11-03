@@ -210,7 +210,7 @@ hexbin_plot <- function(
 
   r2d3::r2d3(
     data   = plot_data,
-    script = system.file("d3/scatterplot/hexbinplot.js", package = "ddplot"),
+    script = ddplot_script("hexbinplot.js"),
     options = list(
       xName          = x,
       yName          = y,

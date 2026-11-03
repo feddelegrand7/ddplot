@@ -259,7 +259,7 @@ calendar_heatmap <- function(
 
   r2d3::r2d3(
     data   = daily,
-    script = system.file("d3/scatterplot/calendarheatmap.js", package = "ddplot"),
+    script = ddplot_script("calendarheatmap.js"),
     options = list(
       weekStart         = weekStart,
       colors            = as.list(colors),

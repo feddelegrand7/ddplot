@@ -240,7 +240,7 @@ radial_bar_chart <- function(
       value = data[[value]],
       stringsAsFactors = FALSE
     ),
-    script = system.file("d3/scatterplot/radialbarchart.js", package = "ddplot"),
+    script = ddplot_script("radialbarchart.js"),
     options = list(
       max            = max,
       startAngle     = startAngle,

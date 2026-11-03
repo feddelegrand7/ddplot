@@ -214,7 +214,7 @@ sunburst_chart <- function(
 
   r2d3::r2d3(
     data   = plot_data,
-    script = system.file("d3/scatterplot/sunburstchart.js", package = "ddplot"),
+    script = ddplot_script("sunburstchart.js"),
     options = list(
       levels         = as.list(levels),
       value          = value,

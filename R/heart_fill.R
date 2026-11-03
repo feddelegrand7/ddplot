@@ -50,7 +50,7 @@ heart_fill <- function(
 
   r2d3::r2d3(
     data = fill_level,
-    script = system.file("d3/scatterplot/heart_fill.js", package = "ddplot"),
+    script = ddplot_script("heart_fill.js"),
     options = list(
       heartSize = heartSize,
       strokeColor = strokeColor,

@@ -105,10 +105,7 @@ pulse_grid <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/pulsegrid.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("pulsegrid.js"),
     options = list(
       x = x,
       y = y,

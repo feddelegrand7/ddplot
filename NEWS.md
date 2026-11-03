@@ -1,5 +1,8 @@
 # ddplot (development version)
 
+### Bug fixes:
+- Charts now redraw correctly in `Shiny` with `r2d3::d3Output()` / `r2d3::renderD3()`. Previously r2d3 re-ran the chart script on the same SVG, so updates were drawn on top of the previous chart (or not visibly at all) and animation timers kept running. A shared preamble (`ddplotreset.js`) now clears the previous render and stops its timers before each redraw; this also fixes stacked timers after a widget resize.
+
 ### Adding new functions:
 - `slope_chart`: Tufte / New York Times style slopegraph comparing two values per category, with direction colouring, `highlight`, label collision avoidance and hover-to-focus.
 - `bump_chart`: ranking-over-time chart (Financial Times, The Economist, FiveThirtyEight) with ranks computed per period (or supplied via `ranked = TRUE`), rank circles, end labels and `highlight`.

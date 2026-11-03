@@ -104,10 +104,7 @@ stacked_area_chart <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/stackedareachart.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("stackedareachart.js"),
     options = list(
       x = x,
       colorCategory = colorCategory,

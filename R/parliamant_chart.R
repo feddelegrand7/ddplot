@@ -67,7 +67,7 @@ parliament_chart <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file("d3/scatterplot/parliamant_chart.js", package = "ddplot"),
+    script = ddplot_script("parliamant_chart.js"),
     options = list(
       seatSize = seatSize,
       padding = padding,

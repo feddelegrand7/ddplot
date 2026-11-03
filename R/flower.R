@@ -50,7 +50,7 @@ flower <- function(
 
   r2d3::r2d3(
     data = NULL,
-    script = system.file("d3/scatterplot/flower.js", package = "ddplot"),
+    script = ddplot_script("flower.js"),
     options = list(
       petalCount = petalCount,
       petalLength = petalLength,

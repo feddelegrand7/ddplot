@@ -242,7 +242,7 @@ mosaic_chart <- function(
 
   r2d3::r2d3(
     data   = agg,
-    script = system.file("d3/scatterplot/mosaicchart.js", package = "ddplot"),
+    script = ddplot_script("mosaicchart.js"),
     options = list(
       xLevels           = as.list(x_levels),
       fillLevels        = as.list(fill_levels),

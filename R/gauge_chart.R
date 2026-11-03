@@ -104,7 +104,7 @@ gauge_chart <- function(
 
   r2d3::r2d3(
     data = value,
-    script = system.file("d3/scatterplot/gaugechart.js", package = "ddplot"),
+    script = ddplot_script("gaugechart.js"),
     options = list(
       min = min,
       max = max,

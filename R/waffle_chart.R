@@ -168,7 +168,7 @@ waffle_chart <- function(
 
   r2d3::r2d3(
     data   = plot_data,
-    script = system.file("d3/scatterplot/wafflechart.js", package = "ddplot"),
+    script = ddplot_script("wafflechart.js"),
     options = list(
       rows              = rows,
       cols              = cols,

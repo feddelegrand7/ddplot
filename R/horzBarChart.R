@@ -91,10 +91,7 @@ horz_bar_chart <- function(data,
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/horzbarchart.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("horzbarchart.js"),
     options = list(
       value = value,
       label = label,

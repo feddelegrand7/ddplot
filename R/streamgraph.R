@@ -289,7 +289,7 @@ streamgraph <- function(
 
   r2d3::r2d3(
     data   = long,
-    script = system.file("d3/scatterplot/streamgraph.js", package = "ddplot"),
+    script = ddplot_script("streamgraph.js"),
     options = list(
       groups         = as.list(groups),
       xType          = if (is_date) "date" else "number",

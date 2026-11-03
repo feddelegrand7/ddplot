@@ -155,11 +155,13 @@ hexbin_plot(
   title    = "Old Faithful eruptions"
 )
 
-# 54,000 diamonds: carat vs price, with a log color scale
+# 10,000 diamonds: carat vs price, with a log color scale
 library(ggplot2) # for the diamonds dataset
+set.seed(1)
+dsample <- diamonds[sample(nrow(diamonds), 10000), ]
 
 hexbin_plot(
-  data         = diamonds,
+  data         = dsample,
   x            = "carat",
   y            = "price",
   binWidth     = 8,

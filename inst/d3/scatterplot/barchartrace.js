@@ -217,7 +217,7 @@ const timeSet = [...new Set(data.map((d) => d[options.time]))];
 
 update(timeSet[0], (init = true));
 var counter = 1;
-setInterval(() => {
+ddplotTrack(setInterval(() => {
   update(timeSet[counter % timeSet.length]);
   counter++;
-}, options.frameDur + options.transitionDur);
+}, options.frameDur + options.transitionDur));

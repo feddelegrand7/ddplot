@@ -256,7 +256,7 @@ radar_chart <- function(
 
   r2d3::r2d3(
     data   = plot_data,
-    script = system.file("d3/scatterplot/radarchart.js", package = "ddplot"),
+    script = ddplot_script("radarchart.js"),
     options = list(
       group          = group,
       axes           = as.list(axes),

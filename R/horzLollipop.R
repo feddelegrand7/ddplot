@@ -85,10 +85,7 @@ horz_lollipop <- function(data,
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/horzlollipop.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("horzlollipop.js"),
     options = list(
       label = label,
       value = value,

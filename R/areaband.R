@@ -80,10 +80,7 @@ area_band <- function(
 
   r2d3::r2d3(
     data = data,
-    script = system.file(
-      "d3/scatterplot/areaband.js",
-      package = "ddplot"
-    ),
+    script = ddplot_script("areaband.js"),
     options = list(
       x = x,
       yLower = yLower,

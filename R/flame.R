@@ -39,7 +39,7 @@ flame <- function(
 
   r2d3::r2d3(
     data = list(intensity = intensity),
-    script = system.file("d3/scatterplot/flame.js", package = "ddplot"),
+    script = ddplot_script("flame.js"),
     options = list(
       flameColor0 = flameGradientColors[[1]],
       flameColor1 = flameGradientColors[[2]],

@@ -218,7 +218,7 @@ ridgeline_plot <- function(
 
   r2d3::r2d3(
     data   = data,
-    script = system.file("d3/scatterplot/ridgelineplot.js", package = "ddplot"),
+    script = ddplot_script("ridgelineplot.js"),
     options = list(
       x            = x,
       group        = group,
