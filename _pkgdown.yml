@@ -1,0 +1,146 @@
+url: https://feddelegrand7.github.io/ddplot/
+
+template:
+  bootstrap: 5
+  light-switch: true
+  bslib:
+    primary: "#4269d0"
+    link-color: "#3156b8"
+    body-color: "#1f2433"
+    border-radius: 0.6rem
+    border-radius-lg: 0.9rem
+    base_font: {google: "Inter"}
+    heading_font: {google: "Plus Jakarta Sans"}
+    code_font: {google: "JetBrains Mono"}
+    font-size-base: 1rem
+    headings-font-weight: 700
+    navbar-padding-y: 0.75rem
+
+home:
+  title: "ddplot: interactive D3 charts from R"
+  description: >
+    More than 40 interactive SVG charts built on D3.js, each one a single R
+    function: time series, bars, distributions, hierarchies, KPIs and more.
+    Works in the RStudio viewer, R Markdown, Quarto and Shiny.
+
+navbar:
+  structure:
+    left: [start, gallery, guides, reference, news]
+    right: [search, github, lightswitch]
+  components:
+    start:
+      text: Get started
+      href: articles/Start.html
+    gallery:
+      text: Gallery
+      href: articles/gallery.html
+    guides:
+      text: Chart guides
+      menu:
+      - text: Time series and trends
+        href: articles/time-series.html
+      - text: Comparing categories
+        href: articles/comparisons.html
+      - text: Distributions
+        href: articles/distributions.html
+      - text: Relationships and flows
+        href: articles/relationships.html
+      - text: Part-to-whole and hierarchies
+        href: articles/composition.html
+      - text: KPIs and monitoring
+        href: articles/kpis.html
+      - text: Playful indicators
+        href: articles/playful.html
+      - text: "---"
+      - text: Using ddplot in Shiny
+        href: articles/Start.html#using-ddplot-in-shiny
+
+articles:
+- title: Start here
+  navbar: ~
+  contents:
+  - Start
+  - articles/gallery
+- title: Chart guides
+  desc: >
+    One guide per family of charts, with live examples. The families are
+    ordered from the charts you are most likely to need to the more
+    specialised ones.
+  contents:
+  - articles/time-series
+  - articles/comparisons
+  - articles/distributions
+  - articles/relationships
+  - articles/composition
+  - articles/kpis
+  - articles/playful
+
+reference:
+- title: Time series and trends
+  desc: Data indexed by time, from one series to many.
+  contents:
+  - line_chart
+  - area_chart
+  - stacked_area_chart
+  - area_band
+  - streamgraph
+  - calendar_heatmap
+  - anim_line_chart
+- title: Comparing categories
+  desc: Values across categories, gaps, rankings and bridges.
+  contents:
+  - bar_chart
+  - horz_bar_chart
+  - lollipop_chart
+  - horz_lollipop
+  - dumbbell_chart
+  - slope_chart
+  - bump_chart
+  - waterfall_chart
+  - radar_chart
+  - radial_bar_chart
+  - bar_chart_race
+- title: Distributions
+  desc: How a numeric variable is spread, alone or across groups.
+  contents:
+  - histogram
+  - violin_plot
+  - beeswarm_plot
+  - ridgeline_plot
+  - animated_histogram
+- title: Relationships and flows
+  desc: Two numeric variables, or flows between categories.
+  contents:
+  - scatter_plot
+  - hexbin_plot
+  - chord_diagram
+- title: Part-to-whole and hierarchies
+  desc: A whole split into its parts, flat or nested.
+  contents:
+  - pie_chart
+  - treemap_chart
+  - waffle_chart
+  - sunburst_chart
+  - mosaic_chart
+  - rose_chart
+  - parliament_chart
+- title: KPIs and monitoring
+  desc: One value against a target or thresholds, and hot-spot grids.
+  contents:
+  - gauge_chart
+  - bullet_chart
+  - liquid_chart
+  - pulse_grid
+- title: Playful indicators
+  desc: Illustrative SVG indicators for a single level.
+  contents:
+  - heart_fill
+  - glass_fill
+  - plant_growth
+  - flame
+  - flower
+
+footer:
+  structure:
+    left: [developed_by]
+    right: [built_with]

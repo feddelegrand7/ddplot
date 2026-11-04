@@ -4,110 +4,260 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create D3 Based SVG Graphics • ddplot</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Create D3 Based SVG Graphics">
-<meta property="og:description" content="Create D3 based SVG (Scalable Vector Graphics) graphics using a simple R API. The package aims to simplify the creation of many SVG plot types using a straightforward R API. The package relies on the r2d3 R package and the D3 JavaScript library. See &lt;https://rstudio.github.io/r2d3/&gt; and &lt;https://d3js.org/&gt; respectively.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>ddplot: interactive D3 charts from R • ddplot</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
+<script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Inter-0.4.9/font.css" rel="stylesheet">
+<link href="deps/JetBrains_Mono-0.4.9/font.css" rel="stylesheet">
+<link href="deps/Plus_Jakarta_Sans-0.4.9/font.css" rel="stylesheet">
+<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<script src="extra.js"></script><meta property="og:title" content="ddplot: interactive D3 charts from R">
+<meta name="description" content="More than 40 interactive SVG charts built on D3.js, each one a single R function: time series, bars, distributions, hierarchies, KPIs and more. Works in the RStudio viewer, R Markdown, Quarto and Shiny.
+">
+<meta property="og:description" content="More than 40 interactive SVG charts built on D3.js, each one a single R function: time series, bars, distributions, hierarchies, KPIs and more. Works in the RStudio viewer, R Markdown, Quarto and Shiny.
+">
+<meta property="og:image" content="https://feddelegrand7.github.io/ddplot/logo.svg">
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">ddplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
-      </span>
-    </div>
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
+    <a class="navbar-brand me-2" href="index.html">ddplot</a>
 
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/Start.html">Getting Started</a>
-    </li>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/Start.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="articles/gallery.html">Gallery</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-chart-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Chart guides</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-chart-guides">
+<li><a class="dropdown-item" href="articles/time-series.html">Time series and trends</a></li>
+    <li><a class="dropdown-item" href="articles/comparisons.html">Comparing categories</a></li>
+    <li><a class="dropdown-item" href="articles/distributions.html">Distributions</a></li>
+    <li><a class="dropdown-item" href="articles/relationships.html">Relationships and flows</a></li>
+    <li><a class="dropdown-item" href="articles/composition.html">Part-to-whole and hierarchies</a></li>
+    <li><a class="dropdown-item" href="articles/kpis.html">KPIs and monitoring</a></li>
+    <li><a class="dropdown-item" href="articles/playful.html">Playful indicators</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="articles/Start.html#using-ddplot-in-shiny">Using ddplot in Shiny</a></li>
   </ul>
 </li>
-<li>
-  <a href="news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/feddelegrand7/ddplot/" class="external-link">
-    <span class="fab fa-github fa-lg"></span>
-
-  </a>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/feddelegrand7/ddplot/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+
   </div>
-<!--/.container -->
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="dd-hero">
+<div class="dd-hero-text">
+<p class="dd-eyebrow">R package · D3.js · SVG</p>
+<div class="page-header">
+<img src="logo.svg" class="logo" alt=""><h1 class="dd-hero-title">Interactive D3 charts, one R function at a time</h1>
 </div>
-<!--/.navbar -->
-
-
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="ddplot">ddplot<a class="anchor" aria-label="anchor" href="#ddplot"></a>
-</h1></div>
-<!-- badges: start -->
-
-<p><code>ddplot</code> is a package that allows you to create D3 based SVG graphics using a simple R API.</p>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<p class="dd-lead"><strong>ddplot</strong> turns a data frame into an interactive SVG chart. More than 40 chart types, from everyday line and bar charts to chord diagrams and sunbursts, that work in the RStudio viewer, R Markdown, Quarto and Shiny. No JavaScript required.</p>
+<div class="dd-cta">
+<a class="btn btn-primary btn-lg" href="articles/Start.html">Get started</a>
+<a class="btn btn-outline-primary btn-lg" href="articles/gallery.html">Browse the gallery</a>
+</div>
+<div class="dd-install">
+<span class="dd-prompt">&gt;</span><code>install.packages("ddplot")</code><button type="button" class="dd-copy" data-copy='install.packages("ddplot")' aria-label="Copy install command">Copy</button>
+</div>
+</div>
+<div class="dd-hero-art" aria-hidden="true">
+<svg viewbox="0 0 420 300" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="420" height="300" rx="18" class="dd-art-bg"></rect><g class="dd-art-grid"><line x1="40" x2="390" y1="70" y2="70"></line><line x1="40" x2="390" y1="125" y2="125"></line><line x1="40" x2="390" y1="180" y2="180"></line><line x1="40" x2="390" y1="235" y2="235"></line></g><path class="dd-art-area" d="M40,200 C80,190 100,150 140,160 S200,200 240,150 S310,80 350,100 S380,90 390,75 L390,250 L40,250 Z"></path><path class="dd-art-line dd-l1" d="M40,200 C80,190 100,150 140,160 S200,200 240,150 S310,80 350,100 S380,90 390,75"></path><path class="dd-art-line dd-l2" d="M40,170 C80,175 110,200 150,190 S210,130 250,140 S320,170 350,150 S380,130 390,128"></path><path class="dd-art-line dd-l3" d="M40,230 C90,225 120,215 160,220 S230,205 270,200 S330,190 360,180 S385,182 390,178"></path><line class="dd-art-cross" x1="250" x2="250" y1="55" y2="250"></line><circle class="dd-art-dot dd-d1" cx="250" cy="139" r="6"></circle><circle class="dd-art-dot dd-d2" cx="250" cy="140" r="6"></circle><g class="dd-art-tip"><rect x="262" y="28" width="118" height="62" rx="9"></rect><text x="274" y="50" class="dd-art-tip-title">Q3 2026</text><circle cx="279" cy="66" r="4" class="dd-d1"></circle><text x="290" y="70">Revenue  148</text><circle cx="279" cy="81" r="4" class="dd-d2"></circle><text x="290" y="85">Costs  139</text></g></svg>
+</div>
+</div>
+<div class="dd-features">
+<div class="dd-feature">
+<div class="dd-feature-icon">1</div>
+<h3>One function per chart</h3>
+<p>Pass a data frame and column names. Every chart shares the same vocabulary: <code>title</code>, <code>xtitle</code>, <code>fill</code>, <code>bgcol</code>, <code>font</code>…</p>
+</div>
+<div class="dd-feature">
+<div class="dd-feature-icon">2</div>
+<h3>Interactive by default</h3>
+<p>Tooltips, hover highlights, sorting and animations. <code><a href="reference/line_chart.html">line_chart()</a></code> adds zoom, range buttons, a navigator and annotations.</p>
+</div>
+<div class="dd-feature">
+<div class="dd-feature-icon">3</div>
+<h3>Works where R works</h3>
+<p>RStudio viewer, R Markdown, Quarto, and Shiny through <code>d3Output()</code> and <code>renderD3()</code>. Save any chart as a standalone HTML file.</p>
+</div>
+</div>
+<div class="section level2 dd-section-title">
+<h2 class="dd-section-title" id="start-with-the-essentials">Start with the essentials<a class="anchor" aria-label="anchor" href="#start-with-the-essentials"></a>
 </h2>
-<p>You can install <code>ddplot</code> from CRAN with:</p>
+<p class="dd-section-lead">The charts most projects need. Each card opens the chart's guide with live examples.</p>
+<div class="dd-gallery dd-gallery-featured">
+<div class="dd-card">
+<div class="dd-thumb"><img src="gallery/line_chart.png" alt="Line chart" loading="lazy"></div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Time series</span><span class="dd-badge dd-badge-interactive">interactive</span>
+</div>
+<h3><a class="stretched-link" href="articles/time-series.html#line_chart">Line chart</a></h3>
+<p>One or many series, with zoom, a navigator, annotations and forecast ribbons.</p>
+<a class="dd-card-ref" href="reference/line_chart.html"><code>line_chart()</code></a>
+</div>
+</div>
+<div class="dd-card">
+<div class="dd-thumb"><img src="gallery/bar_chart.png" alt="Bar chart" loading="lazy"></div>
+<div class="dd-card-body">
+<div class="dd-card-meta"><span class="dd-card-cat">Comparisons</span></div>
+<h3><a class="stretched-link" href="articles/comparisons.html#bar_chart">Bar chart</a></h3>
+<p>Compare a value across categories, sorted or not.</p>
+<a class="dd-card-ref" href="reference/bar_chart.html"><code>bar_chart()</code></a>
+</div>
+</div>
+<div class="dd-card">
+<div class="dd-thumb"><img src="gallery/scatter_plot.png" alt="Scatter plot" loading="lazy"></div>
+<div class="dd-card-body">
+<div class="dd-card-meta"><span class="dd-card-cat">Relationships</span></div>
+<h3><a class="stretched-link" href="articles/relationships.html#scatter_plot">Scatter plot</a></h3>
+<p>The relationship between two numeric variables.</p>
+<a class="dd-card-ref" href="reference/scatter_plot.html"><code>scatter_plot()</code></a>
+</div>
+</div>
+<div class="dd-card">
+<div class="dd-thumb"><img src="gallery/histogram.png" alt="Histogram" loading="lazy"></div>
+<div class="dd-card-body">
+<div class="dd-card-meta"><span class="dd-card-cat">Distributions</span></div>
+<h3><a class="stretched-link" href="articles/distributions.html#histogram">Histogram</a></h3>
+<p>The distribution of a single numeric variable.</p>
+<a class="dd-card-ref" href="reference/histogram.html"><code>histogram()</code></a>
+</div>
+</div>
+<div class="dd-card">
+<div class="dd-thumb"><img src="gallery/stacked_area_chart.png" alt="Stacked area chart" loading="lazy"></div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Time series</span><span class="dd-badge dd-badge-interactive">interactive</span>
+</div>
+<h3><a class="stretched-link" href="articles/time-series.html#stacked_area_chart">Stacked area chart</a></h3>
+<p>A total and how each component contributes over time.</p>
+<a class="dd-card-ref" href="reference/stacked_area_chart.html"><code>stacked_area_chart()</code></a>
+</div>
+</div>
+<div class="dd-card">
+<div class="dd-thumb"><img src="gallery/horz_bar_chart.png" alt="Horizontal bar chart" loading="lazy"></div>
+<div class="dd-card-body">
+<div class="dd-card-meta"><span class="dd-card-cat">Comparisons</span></div>
+<h3><a class="stretched-link" href="articles/comparisons.html#horz_bar_chart">Horizontal bar chart</a></h3>
+<p>Many categories or long labels.</p>
+<a class="dd-card-ref" href="reference/horz_bar_chart.html"><code>horz_bar_chart()</code></a>
+</div>
+</div>
+</div>
+<p class="dd-more"><a href="articles/gallery.html">See all 42 charts in the gallery →</a></p>
+</div>
+<div class="section level2 dd-section-title">
+<h2 class="dd-section-title" id="browse-by-family">Browse by family<a class="anchor" aria-label="anchor" href="#browse-by-family"></a>
+</h2>
+<p class="dd-section-lead">Families are ordered from the charts you are most likely to need to the more specialised ones.</p>
+<div class="dd-families">
+<a class="dd-family" href="articles/time-series.html"><img src="gallery/streamgraph.png" alt="" loading="lazy"><div>
+<h3>Time series and trends <span>7</span>
+</h3>
+<p>line, area, stacked area, band, streamgraph, calendar</p>
+</div></a>
+<a class="dd-family" href="articles/comparisons.html"><img src="gallery/dumbbell_chart.png" alt="" loading="lazy"><div>
+<h3>Comparing categories <span>11</span>
+</h3>
+<p>bars, lollipops, dumbbell, slope, bump, waterfall, radar</p>
+</div></a>
+<a class="dd-family" href="articles/distributions.html"><img src="gallery/violin_plot.png" alt="" loading="lazy"><div>
+<h3>Distributions <span>5</span>
+</h3>
+<p>histogram, violin, beeswarm, ridgeline</p>
+</div></a>
+<a class="dd-family" href="articles/relationships.html"><img src="gallery/hexbin_plot.png" alt="" loading="lazy"><div>
+<h3>Relationships and flows <span>3</span>
+</h3>
+<p>scatter, hexbin, chord diagram</p>
+</div></a>
+<a class="dd-family" href="articles/composition.html"><img src="gallery/treemap_chart.png" alt="" loading="lazy"><div>
+<h3>Part-to-whole and hierarchies <span>7</span>
+</h3>
+<p>pie, treemap, waffle, sunburst, mosaic, rose, parliament</p>
+</div></a>
+<a class="dd-family" href="articles/kpis.html"><img src="gallery/gauge_chart.png" alt="" loading="lazy"><div>
+<h3>KPIs and monitoring <span>4</span>
+</h3>
+<p>gauge, bullet, liquid fill, pulse grid</p>
+</div></a>
+<a class="dd-family" href="articles/playful.html"><img src="gallery/flower.png" alt="" loading="lazy"><div>
+<h3>Playful indicators <span>5</span>
+</h3>
+<p>heart, glass, plant, flame, flower</p>
+</div></a>
+</div>
+</div>
+<div class="section level2 dd-section-title">
+<h2 class="dd-section-title" id="a-first-chart">A first chart<a class="anchor" aria-label="anchor" href="#a-first-chart"></a>
+</h2>
+<p>A <code>ts</code> object, or a data frame with a date column and one or several value columns, is all <code><a href="reference/line_chart.html">line_chart()</a></code> needs:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ddplot"</span><span class="op">)</span></span></code></pre></div>
-<p>You can install the development version of <code>ddplot</code> from Github with:</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://feddelegrand7.github.io/ddplot/">ddplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/line_chart.html">line_chart</a></span><span class="op">(</span></span>
+<span>  <span class="va">EuStockMarkets</span>,</span>
+<span>  transform <span class="op">=</span> <span class="st">"index"</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"European stock indices"</span>,</span>
+<span>  subtitle <span class="op">=</span> <span class="st">"Rebased to 100 at the first visible date"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Hover to read every series at a date, drag on the chart to zoom, click the legend to hide a series. The <a href="articles/Start.html">Get started</a> guide goes further, and covers Shiny.</p>
+</div>
+<div class="section level2 dd-section-title">
+<h2 class="dd-section-title" id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>Install the released version from CRAN:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ddplot"</span><span class="op">)</span></span></code></pre></div>
+<p>Or the development version from GitHub:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"feddelegrand7/ddplot"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
-</h2>
-<p>You can get started <a href="https://feddelegrand7.github.io/ddplot/articles/Start.html" class="external-link">here</a></p>
-</div>
-<div class="section level2">
-<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+<div class="section level2 dd-section-title">
+<h2 class="dd-section-title" id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
 <p>Please note that the ddplot project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
-</div>
-  </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
+  </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=ddplot" class="external-link">View on CRAN</a></li>
@@ -146,31 +296,22 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=ddplot" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/ddplot" alt="metacran downloads"></a></li>
-<li><a href="https://cran.r-project.org/package=ddplot" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/ddplot" alt="metacran downloads"></a></li>
-</ul>
-</div>
 
-  </div>
+
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p></p>
-<p>Developed by Mohamed El Fodil Ihaddaden.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p>Developed by Mohamed El Fodil Ihaddaden.</p>
 </div>
 
-<div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<div class="pkgdown-footer-right">
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
-
 
 
 

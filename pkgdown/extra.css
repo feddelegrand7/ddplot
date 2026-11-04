@@ -1,0 +1,738 @@
+/* ddplot site theme ------------------------------------------------------ */
+
+:root {
+  --dd-blue: #4269d0;
+  --dd-yellow: #efb118;
+  --dd-coral: #ff725c;
+  --dd-teal: #6cc5b0;
+  --dd-ink: #1f2433;
+  --dd-muted: #5d6475;
+  --dd-surface: #ffffff;
+  --dd-surface-2: #f6f8fc;
+  --dd-line: #e4e8f1;
+  --dd-shadow: 0 1px 2px rgba(20, 30, 60, .06), 0 8px 24px -12px rgba(20, 30, 60, .18);
+  --dd-shadow-hover: 0 2px 4px rgba(20, 30, 60, .08), 0 18px 40px -16px rgba(20, 30, 60, .30);
+  --dd-radius: 14px;
+}
+
+[data-bs-theme="dark"] {
+  --dd-ink: #e8ebf3;
+  --dd-muted: #a3aabb;
+  --dd-surface: #171c2b;
+  --dd-surface-2: #1d2335;
+  --dd-line: #2b3247;
+  --dd-shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -12px rgba(0, 0, 0, .6);
+  --dd-shadow-hover: 0 2px 4px rgba(0, 0, 0, .5), 0 18px 40px -16px rgba(0, 0, 0, .8);
+  --bs-body-bg: #10131d;
+  --bs-link-color: #8aa6ff;
+  --bs-link-color-rgb: 138, 166, 255;
+  --bs-link-hover-color: #b3c5ff;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Navbar ------------------------------------------------------------------- */
+
+.navbar {
+  background: color-mix(in srgb, var(--bs-body-bg) 82%, transparent) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--dd-line);
+  box-shadow: none;
+}
+
+.navbar-brand {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  font-size: 1.35rem;
+  background: linear-gradient(90deg, var(--dd-blue), #7b5cd6 60%, var(--dd-coral));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.navbar .nav-link {
+  font-weight: 500;
+  border-radius: 8px;
+  padding-left: .7rem !important;
+  padding-right: .7rem !important;
+}
+
+.navbar .nav-item.active > .nav-link,
+.navbar .nav-link:hover {
+  background: color-mix(in srgb, var(--dd-blue) 10%, transparent);
+}
+
+.navbar .dropdown-menu {
+  border: 1px solid var(--dd-line);
+  box-shadow: var(--dd-shadow-hover);
+  border-radius: 12px;
+  padding: .4rem;
+}
+
+.navbar .dropdown-item {
+  border-radius: 8px;
+  padding: .45rem .8rem;
+}
+
+#search-input {
+  border-radius: 999px;
+  background: var(--dd-surface-2);
+  border-color: var(--dd-line);
+}
+
+/* Typography --------------------------------------------------------------- */
+
+h1, h2, h3, h4 { letter-spacing: -.015em; }
+
+main h2 {
+  margin-top: 2.6rem;
+  padding-top: .4rem;
+}
+
+main h2 > code,
+main h3 > code {
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-size: .92em;
+}
+
+.page-header h1 { font-weight: 800; }
+
+.page-header .lead,
+.template-article .page-header ~ p:first-of-type {
+  color: var(--dd-muted);
+}
+
+/* Code --------------------------------------------------------------------- */
+
+pre {
+  border-radius: 12px;
+  border: 1px solid var(--dd-line);
+  background: var(--dd-surface-2) !important;
+  padding: 1rem 1.1rem;
+}
+
+:not(pre) > code {
+  border-radius: 6px;
+  padding: .1em .35em;
+  background: color-mix(in srgb, var(--dd-blue) 8%, transparent);
+}
+
+a > code { color: inherit; }
+
+/* Charts in articles and reference pages: present each widget as a card.
+   No border/padding (which would change the widget size); a ring shadow and
+   a white background keep charts readable in dark mode too. */
+
+main .html-widget {
+  background: #ffffff;
+  border-radius: var(--dd-radius);
+  box-shadow: 0 0 0 1px var(--dd-line), var(--dd-shadow);
+  overflow: hidden;
+  margin: 1.2rem auto 1.8rem;
+}
+
+/* Reference pages: example output */
+.template-reference-topic .html-widget { margin-top: .6rem; }
+
+/* "Use it when" table at the top of each guide */
+.dd-chooser table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid var(--dd-line);
+  border-radius: var(--dd-radius);
+  overflow: hidden;
+  margin: 1.4rem 0 2rem;
+  background: var(--dd-surface);
+  box-shadow: var(--dd-shadow);
+}
+
+.dd-chooser th {
+  background: var(--dd-surface-2);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--dd-muted);
+  padding: .65rem 1rem;
+  border-bottom: 1px solid var(--dd-line);
+}
+
+.dd-chooser td {
+  padding: .6rem 1rem;
+  border-top: 1px solid var(--dd-line);
+  vertical-align: top;
+}
+
+.dd-chooser tr:first-child td { border-top: 0; }
+.dd-chooser table { table-layout: auto; }
+.dd-chooser col { width: auto !important; }
+.dd-chooser td:first-child { white-space: nowrap; width: 1%; }
+.dd-chooser td, .dd-chooser th { border-bottom: 0 !important; }
+.dd-chooser tbody tr { transition: background .15s; }
+.dd-chooser tbody tr:hover { background: color-mix(in srgb, var(--dd-blue) 6%, transparent); }
+
+/* Reference pill added next to each chart heading by extra.js */
+.dd-ref-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  margin-left: .7rem;
+  padding: .15rem .6rem;
+  font: 600 .72rem/1.4 Inter, sans-serif;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: var(--dd-blue);
+  border: 1px solid color-mix(in srgb, var(--dd-blue) 35%, transparent);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+}
+
+.dd-ref-pill:hover {
+  background: var(--dd-blue);
+  color: #fff;
+}
+
+/* Generic tables in articles */
+main table.table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Gallery -------------------------------------------------------------------- */
+
+.dd-gallery-tools {
+  position: sticky;
+  top: 4.4rem;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: center;
+  margin: 1.2rem 0 1.5rem;
+  padding: .8rem;
+  background: color-mix(in srgb, var(--bs-body-bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--dd-line);
+  border-radius: var(--dd-radius);
+}
+
+.dd-search {
+  flex: 1 1 220px;
+  max-width: 320px;
+  border-radius: 999px;
+  background: var(--dd-surface-2);
+}
+
+.dd-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
+.dd-chip {
+  border: 1px solid var(--dd-line);
+  background: var(--dd-surface);
+  color: var(--dd-ink);
+  border-radius: 999px;
+  padding: .3rem .8rem;
+  font-size: .85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.dd-chip span {
+  margin-left: .25rem;
+  color: var(--dd-muted);
+  font-size: .75rem;
+}
+
+.dd-chip:hover { border-color: var(--dd-blue); }
+
+.dd-chip.active {
+  background: var(--dd-blue);
+  border-color: var(--dd-blue);
+  color: #fff;
+}
+
+.dd-chip.active span { color: rgba(255, 255, 255, .8); }
+
+.dd-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 1.1rem;
+  margin: 1rem 0 2rem;
+}
+
+.dd-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--dd-surface);
+  border: 1px solid var(--dd-line);
+  border-radius: var(--dd-radius);
+  overflow: hidden;
+  box-shadow: var(--dd-shadow);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s;
+}
+
+.dd-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--dd-shadow-hover);
+  border-color: color-mix(in srgb, var(--dd-blue) 45%, var(--dd-line));
+}
+
+.dd-card[hidden] { display: none; }
+
+.dd-thumb {
+  aspect-ratio: 16 / 10;
+  background: #fff;
+  border-bottom: 1px solid var(--dd-line);
+  overflow: hidden;
+}
+
+.dd-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .35s ease;
+}
+
+.dd-card:hover .dd-thumb img { transform: scale(1.04); }
+
+.dd-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  padding: .8rem .95rem .9rem;
+  flex: 1;
+}
+
+.dd-card-meta {
+  display: flex;
+  gap: .35rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dd-card-cat {
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--dd-muted);
+  margin-right: auto;
+}
+
+.dd-card h3 {
+  font-size: 1.02rem;
+  margin: 0;
+}
+
+.dd-card h3 a {
+  color: var(--dd-ink);
+  text-decoration: none;
+}
+
+.dd-card p {
+  margin: 0;
+  font-size: .86rem;
+  color: var(--dd-muted);
+  line-height: 1.45;
+  flex: 1;
+}
+
+.dd-card-ref {
+  position: relative;
+  z-index: 2;
+  align-self: flex-start;
+  font-size: .8rem;
+  text-decoration: none;
+}
+
+.dd-card-ref code {
+  background: color-mix(in srgb, var(--dd-blue) 10%, transparent);
+  color: var(--dd-blue);
+}
+
+.dd-card-ref:hover code {
+  background: var(--dd-blue);
+  color: #fff;
+}
+
+.dd-badge {
+  font-size: .64rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: .1rem .45rem;
+  border-radius: 999px;
+}
+
+.dd-badge-interactive { background: color-mix(in srgb, var(--dd-blue) 14%, transparent); color: var(--dd-blue); }
+.dd-badge-animated { background: color-mix(in srgb, var(--dd-coral) 18%, transparent); color: #c4442f; }
+.dd-badge-shiny { background: color-mix(in srgb, var(--dd-teal) 22%, transparent); color: #2b8a75; }
+
+[data-bs-theme="dark"] .dd-badge-interactive,
+[data-bs-theme="dark"] .dd-card-ref code { color: #8aa6ff; }
+[data-bs-theme="dark"] .dd-badge-animated { color: #ff9a88; }
+[data-bs-theme="dark"] .dd-badge-shiny { color: #8fe0cc; }
+
+.dd-empty {
+  text-align: center;
+  color: var(--dd-muted);
+  padding: 2rem 0;
+}
+
+.dd-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.dd-reveal.dd-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* The gallery page uses the full width: no sidebar. */
+.row:has(.dd-gallery-tools) > aside { display: none; }
+.row:has(.dd-gallery-tools) > main { flex: 0 0 100%; max-width: 100%; }
+
+/* Home page ------------------------------------------------------------------ */
+
+.dd-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  margin: 1.6rem 0 2.5rem;
+  padding: 2.2rem;
+  border-radius: 22px;
+  border: 1px solid var(--dd-line);
+  background:
+    radial-gradient(900px 300px at -10% -20%, color-mix(in srgb, var(--dd-blue) 16%, transparent), transparent 60%),
+    radial-gradient(600px 300px at 110% 120%, color-mix(in srgb, var(--dd-coral) 14%, transparent), transparent 60%),
+    var(--dd-surface);
+  box-shadow: var(--dd-shadow);
+}
+
+.dd-eyebrow {
+  font-size: .78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--dd-blue);
+  margin-bottom: .6rem;
+}
+
+.dd-hero-title {
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  margin: 0 0 1rem;
+}
+
+.dd-lead {
+  font-size: 1.08rem;
+  color: var(--dd-muted);
+  line-height: 1.6;
+}
+
+.dd-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 1.4rem 0 1.1rem;
+}
+
+.dd-cta .btn {
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: .6rem 1.3rem;
+}
+
+.dd-install {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem .5rem .45rem .9rem;
+  border-radius: 12px;
+  background: #151a2b;
+  color: #e6e9f2;
+  font-family: "JetBrains Mono", monospace;
+  font-size: .9rem;
+  max-width: 100%;
+}
+
+.dd-install code {
+  background: none !important;
+  color: inherit;
+  padding: 0;
+}
+
+.dd-prompt { color: var(--dd-yellow); }
+
+.dd-copy {
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font: 600 .75rem Inter, sans-serif;
+  padding: .3rem .6rem;
+  cursor: pointer;
+}
+
+.dd-copy:hover { background: rgba(255, 255, 255, .2); }
+
+.dd-hero-art svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 18px 30px rgba(30, 45, 90, .18));
+}
+
+.dd-art-bg { fill: #ffffff; stroke: var(--dd-line); }
+.dd-art-grid line { stroke: #edf0f6; stroke-width: 1; }
+.dd-art-area { fill: color-mix(in srgb, var(--dd-blue) 10%, transparent); opacity: 0; animation: dd-fade .8s ease 1.4s forwards; }
+.dd-art-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 600; stroke-dashoffset: 600; animation: dd-draw 1.8s cubic-bezier(.6, .1, .2, 1) forwards; }
+.dd-l1 { stroke: var(--dd-blue); }
+.dd-l2 { stroke: var(--dd-yellow); animation-delay: .25s; }
+.dd-l3 { stroke: var(--dd-coral); animation-delay: .5s; }
+.dd-art-cross { stroke: #9aa3b5; stroke-dasharray: 4 4; opacity: 0; animation: dd-fade .4s ease 2s forwards; }
+.dd-art-dot { stroke: #fff; stroke-width: 2.5; opacity: 0; animation: dd-fade .4s ease 2.1s forwards; }
+circle.dd-d1 { fill: var(--dd-blue); }
+circle.dd-d2 { fill: var(--dd-yellow); }
+.dd-art-tip { opacity: 0; animation: dd-pop .45s cubic-bezier(.3, 1.4, .5, 1) 2.3s forwards; transform-origin: 320px 60px; }
+.dd-art-tip rect { fill: #ffffff; stroke: var(--dd-line); filter: drop-shadow(0 6px 10px rgba(20, 30, 60, .15)); }
+.dd-art-tip text { font: 500 11px Inter, sans-serif; fill: #1f2433; }
+.dd-art-tip .dd-art-tip-title { font-weight: 700; font-size: 12px; }
+
+@keyframes dd-draw { to { stroke-dashoffset: 0; } }
+@keyframes dd-fade { to { opacity: 1; } }
+@keyframes dd-pop { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-art-line, .dd-art-area, .dd-art-cross, .dd-art-dot, .dd-art-tip { animation: none; opacity: 1; stroke-dashoffset: 0; }
+  .dd-reveal { opacity: 1; transform: none; transition: none; }
+  .dd-card, .dd-thumb img { transition: none; }
+}
+
+.dd-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 1rem;
+}
+
+.dd-feature {
+  padding: 1.2rem 1.2rem 1rem;
+  border: 1px solid var(--dd-line);
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface);
+}
+
+.dd-feature h3 {
+  font-size: 1.05rem;
+  margin: .7rem 0 .4rem;
+}
+
+.dd-feature p {
+  margin: 0;
+  font-size: .9rem;
+  color: var(--dd-muted);
+}
+
+.dd-feature-icon {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--dd-blue), #7b5cd6);
+}
+
+.dd-feature:nth-child(2) .dd-feature-icon { background: linear-gradient(135deg, var(--dd-yellow), var(--dd-coral)); }
+.dd-feature:nth-child(3) .dd-feature-icon { background: linear-gradient(135deg, var(--dd-teal), #3ca951); }
+
+.dd-section-title {
+  margin-top: 2.8rem;
+  font-weight: 800;
+}
+
+.dd-section-lead {
+  color: var(--dd-muted);
+  margin-top: -.3rem;
+}
+
+.dd-more {
+  text-align: right;
+  font-weight: 600;
+}
+
+.dd-more a { text-decoration: none; }
+
+.dd-families {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: .9rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.dd-family {
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+  padding: .7rem;
+  border: 1px solid var(--dd-line);
+  border-radius: var(--dd-radius);
+  background: var(--dd-surface);
+  color: inherit;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+
+.dd-family:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dd-shadow-hover);
+  border-color: color-mix(in srgb, var(--dd-blue) 45%, var(--dd-line));
+  color: inherit;
+}
+
+.dd-family img {
+  width: 86px;
+  height: 64px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 9px;
+  background: #fff;
+  border: 1px solid var(--dd-line);
+  flex: none;
+}
+
+.dd-family h3 {
+  font-size: .98rem;
+  margin: 0 0 .2rem;
+}
+
+.dd-family h3 span {
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--dd-blue);
+  background: color-mix(in srgb, var(--dd-blue) 12%, transparent);
+  border-radius: 999px;
+  padding: .05rem .45rem;
+  margin-left: .3rem;
+  vertical-align: middle;
+}
+
+.dd-family p {
+  margin: 0;
+  font-size: .82rem;
+  color: var(--dd-muted);
+  line-height: 1.4;
+}
+
+/* The home page hero carries its own title */
+.template-home .dd-hero h1 { display: block; }
+
+/* Sidebar ---------------------------------------------------------------------- */
+
+aside h2, #toc h2 {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--dd-muted);
+}
+
+#toc .nav-link.active {
+  font-weight: 600;
+  color: var(--dd-blue);
+  border-left-color: var(--dd-blue);
+}
+
+/* Reference index ------------------------------------------------------------- */
+
+.template-reference-index dl dt {
+  font-weight: 600;
+}
+
+.template-reference-index h2 {
+  border-bottom: 1px solid var(--dd-line);
+  padding-bottom: .4rem;
+}
+
+/* Back to top -------------------------------------------------------------------- */
+
+.dd-top {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 20;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--dd-line);
+  border-radius: 50%;
+  background: var(--dd-surface);
+  color: var(--dd-ink);
+  box-shadow: var(--dd-shadow-hover);
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity .2s, transform .2s;
+}
+
+.dd-top.dd-show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+
+/* Footer --------------------------------------------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--dd-line);
+  margin-top: 3rem;
+}
+
+/* Small screens ------------------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+  .dd-hero {
+    grid-template-columns: 1fr;
+    padding: 1.4rem;
+    gap: 1.2rem;
+  }
+  .dd-features { grid-template-columns: 1fr; }
+  .dd-gallery { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .8rem; }
+  .dd-gallery-tools { top: 3.8rem; }
+  .dd-search { max-width: none; }
+  .dd-chooser td:first-child { white-space: normal; }
+  .dd-install { font-size: .8rem; }
+}
+
+/* pkgdown wraps the first h1 of the home page in .page-header with the logo;
+   the hero has its own art, so drop the logo and the header rule there. */
+.dd-hero .page-header { border: 0; margin: 0; padding: 0; min-height: 0; }
+.dd-hero .page-header .logo,
+.template-home .dd-hero img.logo { display: none !important; }
+.dd-hero .page-header h1 { margin-top: 0; }
+
+[data-bs-theme="dark"] .dd-install { background: #0b0e16; border: 1px solid var(--dd-line); }

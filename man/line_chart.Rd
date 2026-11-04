@@ -2,93 +2,311 @@
 % Please edit documentation in R/linechart.R
 \name{line_chart}
 \alias{line_chart}
-\title{Create a line chart}
+\title{Create an interactive time series line chart}
 \usage{
 line_chart(
   data,
-  x,
-  y,
+  x = NULL,
+  y = NULL,
+  group = NULL,
+  lower = NULL,
+  upper = NULL,
+  colors = NULL,
+  stroke = NULL,
+  strokeWidth = 2,
   curve = "curveLinear",
-  stroke = "crimson",
-  strokeWidth = 1.5,
+  opacity = 1,
+  area = FALSE,
+  points = FALSE,
+  yScale = c("linear", "log"),
+  yZero = NULL,
+  transform = c("none", "index", "percent"),
+  indexBase = 100,
+  rollmean = NULL,
+  showRaw = TRUE,
+  events = NULL,
+  bands = NULL,
+  hlines = NULL,
+  legend = NULL,
+  endLabels = NULL,
+  tooltip = TRUE,
+  navigator = TRUE,
+  rangeButtons = TRUE,
+  zoom = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  dateFormat = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitleFontSize = 13,
   title = NULL,
-  titleFontSize = 22,
+  titleFontSize = 20,
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  xFontSize = 11,
+  yFontSize = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
-  opacity = 1,
-  axisCol = "black",
+  bgcol = "white",
+  gridCol = "#e9e9e9",
+  axisCol = "#333333",
   width = NULL,
   height = NULL
 )
 }
 \arguments{
-\item{data}{The data frame containing the variables to consider.}
+\item{data}{A data frame, or a \code{ts} / \code{mts} object.}
 
-\item{x}{The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.}
+\item{x}{The time variable. Can be a \code{Date}, a \code{POSIXct}
+date-time, a character column in "yyyy-mm-dd" format, or a numeric column
+(for example years). Not needed when \code{data} is a \code{ts} object.}
 
-\item{y}{The y-variable to consider.}
+\item{y}{The value variable(s). One column name, or several column names
+to draw one line per column (wide data). For a univariate \code{ts}
+object, it is the name given to the series (defaults to "value").}
 
-\item{curve}{The line's curve type to render.
-A complete list can be found here <https://github.com/d3/d3-shape#curves>.
-Defaults to 'curveLinear'.}
+\item{group}{Optional. For long data, the column whose values name the
+series (one line per value). Cannot be combined with several \code{y}
+columns.}
 
-\item{stroke}{The color of the line. Defaults to 'crimson'.}
+\item{lower, upper}{Optional. Columns holding the lower and upper bounds of
+a confidence or forecast interval, drawn as a shaded ribbon around the
+line. With several \code{y} columns, give one column per \code{y} column
+(use \code{NA} for series without a ribbon).}
 
-\item{strokeWidth}{The width of the line. Defaults to 1.5.}
+\item{colors}{Optional. Colors of the series. Either an unnamed vector
+(recycled in series order) or a vector named by series. Defaults to a
+built-in 10-color palette.}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{stroke}{The color of the line when there is a single series. When
+\code{NULL} (default), the first palette color is used.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{strokeWidth}{The width of the lines. Defaults to 2.}
+
+\item{curve}{The line's curve type. A complete list can be found here
+<https://github.com/d3/d3-shape#curves>. Defaults to 'curveLinear';
+'curveMonotoneX' gives smooth lines that never overshoot the data.}
+
+\item{opacity}{The opacity of the lines (from 0 to 1). Defaults to 1.}
+
+\item{area}{Logical. Fill the area under each line with a soft gradient.
+Defaults to \code{FALSE}.}
+
+\item{points}{Logical. Draw a marker on every data point. Defaults to
+\code{FALSE}.}
+
+\item{yScale}{Either "linear" (default) or "log".}
+
+\item{yZero}{Logical. Force the y axis to include 0. When \code{NULL}
+(default), 0 is included only when \code{area = TRUE}; otherwise the
+axis fits the data in view.}
+
+\item{transform}{How values are displayed: "none" (default), "index"
+(each series rebased to \code{indexBase} at the first visible date, so
+series on different scales can be compared) or "percent" (change since
+the first visible date). The base moves with the zoom.}
+
+\item{indexBase}{The value series are rebased to when
+\code{transform = "index"}. Defaults to 100.}
+
+\item{rollmean}{Optional. A window size (number of observations). When
+given, a trailing moving average is drawn as the main line.}
+
+\item{showRaw}{Logical. When \code{rollmean} is used, also draw the raw
+series as a thin faded line. Defaults to \code{TRUE}.}
+
+\item{events}{Optional. Dates to mark with a vertical line: either a
+vector of dates (names are used as labels) or a data frame whose first
+column holds the dates and whose second column (optional) holds labels.}
+
+\item{bands}{Optional. Periods to shade, as a data frame whose first two
+columns are the start and end dates. An optional third column holds the
+labels and an optional fourth column the fill colors.}
+
+\item{hlines}{Optional. Numeric reference values drawn as horizontal
+dashed lines (names are used as labels). Only drawn when
+\code{transform = "none"}.}
+
+\item{legend}{Logical. Show the interactive legend (click to hide or show
+a series, double-click to isolate it). When \code{NULL} (default), the
+legend is shown when there are two series or more.}
+
+\item{endLabels}{Logical. Label each line at its last visible point. When
+\code{NULL} (default), labels are shown when there are two series or
+more.}
+
+\item{tooltip}{Logical. Show the crosshair and the tooltip on hover.
+Defaults to \code{TRUE}.}
+
+\item{navigator}{Logical. Show the navigator (a miniature of the full
+series with a brush to select the visible range) under the chart.
+Defaults to \code{TRUE}; it is hidden automatically on very short
+charts.}
+
+\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+All, ...), chosen from the length and frequency of the data. Only used
+with dates. Defaults to \code{TRUE}.}
+
+\item{zoom}{Logical. Drag horizontally on the chart to zoom into a range;
+double-click to reset. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Draw the lines in with an animation on first
+render. Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+(see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
+with \code{transform = "percent"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+values on the y axis and in the tooltip, for example "$" or " km".}
+
+\item{dateFormat}{Optional. A d3-time-format string for the date in the
+tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
+(default), it is picked from the frequency of the data (yearly,
+quarterly, monthly, daily or intraday).}
+
+\item{xticks}{Optional. The approximate number of x-axis ticks.}
+
+\item{yticks}{Optional. The approximate number of y-axis ticks.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+
+\item{subtitle}{Optional. A subtitle shown under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+to 11.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the bars (from 0 to 1). Defaults to 1.}
+\item{gridCol}{The color of the horizontal grid lines. Defaults to
+"#e9e9e9".}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
 }
 \value{
-A SVG line chart.
+An interactive SVG line chart.
 }
 \description{
-Create a line chart
+Draws one or several time series as lines, with the interactions that
+people who work with time series expect: a crosshair tooltip that shows
+every series at the hovered date, a clickable legend, direct labels at the
+end of each line, range buttons (1M, 6M, YTD, 1Y, ...), a navigator with a
+brush under the chart, drag-to-zoom and double-click to reset. The y axis
+rescales to the data in view whenever you zoom.
+}
+\details{
+Series can be given in three ways:
+\itemize{
+  \item \strong{one column}: \code{y = "value"};
+  \item \strong{wide data}: several columns, \code{y = c("a", "b", "c")};
+  \item \strong{long data}: one value column and a \code{group} column that
+  names the series.
+}
+A \code{ts} or \code{mts} object (for example \code{AirPassengers} or
+\code{EuStockMarkets}) can also be passed directly as \code{data}, in which
+case \code{x} and \code{y} are not needed. Monthly, quarterly and yearly
+series get exact calendar dates; for other frequencies (for example the
+260 trading days a year of \code{EuStockMarkets}) the dates are
+interpolated from the decimal time index, so pass a data frame with a real
+date column when exact dates matter.
+
+Time-series extras: \code{transform = "index"} rebases every series to 100
+at the start of the visible range (or \code{"percent"} for the change since
+then), \code{rollmean} overlays a moving average, \code{lower} /
+\code{upper} draw a confidence or forecast ribbon, \code{bands} shade
+periods such as recessions, \code{events} mark dates with a vertical line
+and \code{hlines} draw reference values.
+
+Missing values (\code{NA}) leave a gap in the line.
 }
 \examples{
-# 1. converting AirPassengers to a tidy data frame
+# A ts object can be passed directly
+line_chart(AirPassengers, y = "passengers", title = "Airline passengers")
+
+# The classic data frame interface still works
 airpassengers <- data.frame(
   passengers = as.matrix(AirPassengers),
-  date= zoo::as.Date(time(AirPassengers))
+  date = zoo::as.Date(time(AirPassengers))
+)
+line_chart(data = airpassengers, x = "date", y = "passengers")
+
+# Several series from an mts object, rebased to 100 at the start of the
+# visible range: zoom with the range buttons or the navigator and the
+# comparison is recomputed
+line_chart(
+  EuStockMarkets,
+  transform = "index",
+  title = "European stock indices",
+  subtitle = "Daily closing prices, rebased to 100"
 )
 
-# 2. plotting the line chart
+# Long data with a group column, area fill and shaded recessions
+library(ggplot2) # for the economics data set
+
+recessions <- data.frame(
+  start = as.Date(c("1969-12-01", "1973-11-01", "1980-01-01", "1981-07-01",
+                    "1990-07-01", "2001-03-01", "2007-12-01")),
+  end   = as.Date(c("1970-11-01", "1975-03-01", "1980-07-01", "1982-11-01",
+                    "1991-03-01", "2001-11-01", "2009-06-01"))
+)
+
 line_chart(
-  data = airpassengers,
+  economics,
   x = "date",
-  y = "passengers"
+  y = "unemploy",
+  area = TRUE,
+  bands = recessions,
+  valueFormat = ",.0f",
+  valueSuffix = "k",
+  title = "US unemployment",
+  subtitle = "Thousands of persons, recessions shaded"
+)
+
+# A forecast with its prediction interval
+fit <- HoltWinters(log(AirPassengers))
+fc <- predict(fit, n.ahead = 24, prediction.interval = TRUE)
+fc_dates <- zoo::as.Date(time(fc))
+
+passengers <- rbind(
+  data.frame(date = zoo::as.Date(time(AirPassengers)),
+             value = as.numeric(AirPassengers), lo = NA, hi = NA,
+             series = "Observed"),
+  data.frame(date = fc_dates, value = exp(fc[, "fit"]),
+             lo = exp(fc[, "lwr"]), hi = exp(fc[, "upr"]),
+             series = "Forecast")
+)
+
+line_chart(
+  passengers,
+  x = "date", y = "value", group = "series",
+  lower = "lo", upper = "hi",
+  colors = c(Observed = "#4269d0", Forecast = "#ff725c"),
+  events = c("Forecast starts" = as.Date("1961-01-01")),
+  valueFormat = ",.0f",
+  title = "Airline passengers: Holt-Winters forecast"
 )
 }

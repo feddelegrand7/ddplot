@@ -1,0 +1,225 @@
+---
+title: "KPIs and monitoring"
+description: "Gauges, bullet charts, liquid fills and pulse grids."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE)
+library(ddplot)
+```
+
+Compact charts for dashboards: one value against its target or thresholds, or a grid that makes hot spots stand out.
+
+::: {.dd-chooser}
+
+| Chart | Use it when |
+|---|---|
+| [`gauge_chart()`](#gauge_chart) | You show one value against warning and danger thresholds |
+| [`bullet_chart()`](#bullet_chart) | You show one value against a target and qualitative ranges |
+| [`liquid_chart()`](#liquid_chart) | You show a single percentage in an eye-catching way |
+| [`pulse_grid()`](#pulse_grid) | You want the hottest cells of a matrix to stand out |
+
+:::
+
+## `gauge_chart()` {#gauge_chart}
+
+The `gauge_chart()` function renders a speedometer-style gauge. It takes a single numeric `value` and displays it on a circular dial spanning from `min` to `max`. The arc is divided into three zones: normal (plain), warning, and danger, each with its own color.
+
+```{r}
+gauge_chart(
+  value = 8,
+  title = "Memory"
+)
+```
+
+You can adjust the thresholds and colors to match your context. Here the warning zone starts at 60% and the danger zone at 80%:
+
+```{r}
+gauge_chart(
+  value = 72,
+  min = 0,
+  max = 100,
+  title = "CPU Load",
+  warningZone  = 60,
+  warningColor = "orange",
+  dangerZone   = 80,
+  dangerColor  = "red"
+)
+```
+
+The gauge is not limited to percentages, any numeric range works. Below is an example monitoring server response time in milliseconds, where anything above 400 ms is a warning and above 700 ms is critical:
+
+```{r}
+gauge_chart(
+  value = 530,
+  min = 0,
+  max = 1000,
+  title = "Response (ms)",
+  warningZone  = 400,
+  warningColor = "orange",
+  dangerZone   = 700,
+  dangerColor  = "red"
+)
+```
+
+## `bullet_chart()` {#bullet_chart}
+
+The `bullet_chart()` function renders a bullet chart — a compact alternative to gauge charts designed by Stephen Few. It displays one actual value (the dark bar) against shaded qualitative bands (e.g. poor / satisfactory / good) and an optional target marker (the short vertical line).
+
+The `ranges` argument defines the upper bound of each band; the first band starts at `min` (default 0). Colors default to a sequence of grays from darker (lower range) to lighter (higher range).
+
+```{r}
+bullet_chart(
+  value    = 270,
+  target   = 300,
+  ranges   = c(150, 225, 350),
+  title    = "Revenue",
+  subtitle = "USD thousands"
+)
+```
+
+You can stack several bullet charts side by side to compare multiple KPIs at a glance:
+
+```{r}
+bullet_chart(
+  value      = 7.4,
+  target     = 8.0,
+  ranges     = c(4, 7, 10),
+  title      = "Satisfaction",
+  subtitle   = "out of 10",
+  valueColor = "steelblue"
+)
+```
+
+When a lower value is better (e.g. response time), simply order your `rangeColors` from lightest (best, lowest range) to darkest (worst, highest range):
+
+```{r}
+bullet_chart(
+  value       = 320,
+  target      = 250,
+  ranges      = c(200, 500, 1000),
+  rangeColors = c("#f0f0f0", "#d9d9d9", "#bdbdbd"),
+  title       = "Response",
+  subtitle    = "ms"
+)
+```
+
+## `liquid_chart()` {#liquid_chart}
+
+`liquid_chart()` renders a single value as a circle filled with an animated liquid. The water rises from empty to the target level on load, two staggered wave layers give the surface a natural depth, and the label text switches color at the water line — appearing in `textColor` above the surface and in `waveTextColor` inside the water.
+
+```{r}
+liquid_chart(value = 0.55, title = "Memory")
+```
+
+Colors, wave behaviour, and the label are all configurable:
+
+```{r}
+liquid_chart(
+  value         = 0.28,
+  label         = "28%",
+  fillColor     = "tomato",
+  circleColor   = "tomato",
+  textColor     = "tomato",
+  waveTextColor = "white",
+  title         = "Errors"
+)
+```
+
+```{r}
+liquid_chart(
+  value         = 0.72,
+  label         = "72%",
+  fillColor     = "#27ae60",
+  waveAmplitude = 0.05,
+  waveCount     = 3,
+  waveSpeed     = 1.5,
+  title         = "Battery"
+)
+```
+
+## `pulse_grid()` {#pulse_grid}
+
+The `pulse_grid()` function is useful when you have a compact matrix of values and you want the viewer to immediately spot where activity, load, risk, or pressure is concentrated. It works especially well for operational monitoring and staffing views because the pulsing highlights the hottest cells without requiring interaction.
+
+### Example 1: Team workload by hour
+
+This is a good fit for support teams, call centers, or editorial desks. Instead of reading a table of numbers, you can see which teams are under the heaviest load at which times of day.
+
+```{r}
+workload_grid <- data.frame(
+  hour = c("09:00","12:00","15:00","18:00",
+           "09:00","12:00","15:00","18:00",
+           "09:00","12:00","15:00","18:00"),
+  team = c("North","North","North","North",
+           "South","South","South","South",
+           "East","East","East","East"),
+  load = c(0.35,0.72,0.56,0.91,
+           0.41,0.67,0.83,0.58,
+           0.28,0.49,0.77,0.63),
+  stringsAsFactors = FALSE
+)
+
+pulse_grid(
+  data = workload_grid,
+  x = "hour",
+  y = "team",
+  value = "load",
+  title = "Support Team Load Through the Day",
+  low = "#D9F0FF",
+  high = "red",
+  bgcol = "#0B132B",
+  stroke = "#1C2541",
+  strokeWidth = 1.5,
+  pulseStrength = 0.22
+)
+```
+
+Why this is useful: it gives managers a compact way to decide when to reallocate staff, stagger breaks, or add temporary coverage. The pulse effect makes the high-pressure windows stand out much faster than a plain heatmap.
+
+### Example 2: Reliability monitoring by service and weekday
+
+This second example works well for engineering or product teams. A pulse grid can summarize incident rate, latency, or error volume across services and days of the week, making it easier to see repeated pressure points in a weekly operating rhythm.
+
+```{r}
+reliability_grid <- data.frame(
+  day = c(
+    "Mon","Tue","Wed","Thu","Fri",
+    "Mon","Tue","Wed","Thu","Fri",
+    "Mon","Tue","Wed","Thu","Fri",
+    "Mon","Tue","Wed","Thu","Fri"
+  ),
+  service = c(
+    "API","API","API","API","API",
+    "Billing","Billing","Billing","Billing","Billing",
+    "Search","Search","Search","Search","Search",
+    "Auth","Auth","Auth","Auth","Auth"
+  ),
+  incident_score = c(
+    0.62, 0.44, 0.57, 0.78, 0.69,
+    0.31, 0.36, 0.40, 0.51, 0.47,
+    0.73, 0.81, 0.76, 0.88, 0.67,
+    0.22, 0.27, 0.25, 0.34, 0.29
+  ),
+  stringsAsFactors = FALSE
+)
+
+pulse_grid(
+  data = reliability_grid,
+  x = "day",
+  y = "service",
+  value = "incident_score",
+  title = "Service Reliability Pressure Map",
+  low = "lightgreen",
+  high = "#B00020",
+  bgcol = "#081C15",
+  labelColor = "#F1FAEE",
+  titleColor = "#F1FAEE",
+  stroke = "#2D6A4F",
+  showValues = TRUE,
+  digits = 2
+)
+```
+
+Why this is useful: repeated hot cells reveal where engineering effort should go first. In this example, a team can immediately see whether one service is consistently unstable or whether problems cluster around a particular day in the deployment cycle.
+

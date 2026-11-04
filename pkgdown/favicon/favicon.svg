@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 518 600" width="240" height="278" role="img" aria-label="ddplot logo"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22305c"></stop>
+      <stop offset="1" stop-color="#131a33"></stop>
+    </linearGradient>
+    <clipPath id="hex">
+      <polygon points="259,14 506,157 506,443 259,586 12,443 12,157"></polygon>
+    </clipPath>
+  </defs><polygon points="259,14 506,157 506,443 259,586 12,443 12,157" fill="url(#bg)"></polygon><g clip-path="url(#hex)"><g transform="translate(0,75)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="2">
+      <line x1="40" y1="250" x2="480" y2="250"></line>
+      <line x1="40" y1="320" x2="480" y2="320"></line>
+      <line x1="40" y1="390" x2="480" y2="390"></line>
+    </g>
+    <path d="M60,380 C110,370 130,300 180,310 S250,360 290,300 S360,200 410,230 S455,250 470,215" stroke="#6cc5b0" stroke-width="14" stroke-opacity="0.9"></path>
+    <path d="M60,330 C100,320 140,350 180,330 S240,250 290,265 S350,300 390,260 S440,175 470,165" stroke="#efb118" stroke-width="14"></path>
+    <path d="M60,420 C110,410 150,420 190,390 S250,360 300,370 S370,330 420,340 S460,300 470,300" stroke="#ff725c" stroke-width="14" stroke-opacity="0.9"></path>
+    <circle cx="470" cy="165" r="17" fill="#efb118"></circle>
+    <circle cx="290" cy="265" r="13" fill="#131a33" stroke="#efb118" stroke-width="8"></circle>
+  </g></g><text x="259" y="222" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Inter', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="104" fill="#ffffff" letter-spacing="-2">ddplot</text><polygon points="259,14 506,157 506,443 259,586 12,443 12,157" fill="none" stroke="#4269d0" stroke-width="20" stroke-linejoin="round"></polygon></svg>

@@ -1,0 +1,184 @@
+---
+title: "Distributions"
+description: "Histograms, violins, swarms and ridgelines."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE)
+library(ddplot)
+library(ggplot2) # mpg, diamonds
+library(dplyr)
+```
+
+Charts that show how a numeric variable is spread: where values concentrate, how wide the spread is, and how several groups differ.
+
+::: {.dd-chooser}
+
+| Chart | Use it when |
+|---|---|
+| [`histogram()`](#histogram) | You look at the distribution of a single numeric variable |
+| [`violin_plot()`](#violin_plot) | You compare distributions across groups, with quartiles |
+| [`beeswarm_plot()`](#beeswarm_plot) | You want to show every observation, not only a summary |
+| [`ridgeline_plot()`](#ridgeline_plot) | You compare the distributions of many groups |
+| [`animated_histogram()`](#animated_histogram) | You present a distribution and want the bars to grow on click |
+
+:::
+
+## `histogram()` {#histogram}
+
+The `histogram()` function allows you to visualize the distribution of a vector of data:
+
+```{r}
+histogram(
+  x = mpg$hwy,
+  bins = 20,
+  fill = "crimson",
+  stroke = "white",
+  strokeWidth = 1,
+  title = "Distribution of the hwy variable",
+  width = "20",
+  height = "10"
+)
+```
+
+## `violin_plot()` {#violin_plot}
+
+`violin_plot()` reproduces the look of [Plotly.js](https://plotly.com/javascript/) violin traces. Each group gets a mirrored kernel density, with an optional inner box plot, jittered raw points, and a hover tooltip showing the summary statistics.
+
+```{r}
+violin_plot(
+  data   = iris,
+  y      = "Sepal.Length",
+  group  = "Species",
+  title  = "Sepal length by species",
+  ytitle = "Sepal length (cm)"
+)
+```
+
+Use `points = "all"` to show every observation, `meanline` to mark the mean, `sort` to order the violins, and `scale = "count"` to make each violin's width proportional to its group size:
+
+```{r}
+violin_plot(
+  data         = mpg,
+  y            = "hwy",
+  group        = "class",
+  points       = "all",
+  meanline     = TRUE,
+  sort         = "median",
+  colorPalette = "Tableau10",
+  title        = "Highway fuel economy by vehicle class",
+  ytitle       = "Highway miles per gallon"
+)
+```
+
+## `beeswarm_plot()` {#beeswarm_plot}
+
+A beeswarm plot shows every individual data point along a numeric axis, spreading them sideways so they never overlap. It is far more transparent than a box plot because nothing is hidden behind a summary statistic — you see the full shape, outliers, and clusters of the raw data. The New York Times graphics desk uses this style regularly to remind readers that numbers represent real people.
+
+The layout is computed with a D3 force simulation: each point is pulled toward its true value on the x-axis while a collision force prevents any two circles from touching.
+
+```{r}
+library(ggplot2) # for the mpg dataset
+
+# Single swarm — full distribution of highway fuel economy
+beeswarm_plot(
+  data   = mpg,
+  x      = "hwy",
+  col    = "steelblue",
+  xtitle = "Highway miles per gallon",
+  title  = "Distribution of hwy"
+)
+```
+
+When a `group` column is provided, one swarm is drawn per group and colored automatically:
+
+```{r}
+beeswarm_plot(
+  data   = mpg,
+  x      = "hwy",
+  group  = "class",
+  xtitle = "Highway miles per gallon",
+  title  = "Highway fuel economy by vehicle class", 
+  tooltip = "manufacturer"
+)
+```
+
+You can swap the dataset and adjust the look freely. Here using the built-in `iris` dataset with a different color palette and larger points:
+
+```{r}
+beeswarm_plot(
+  data         = iris,
+  x            = "Sepal.Length",
+  group        = "Species",
+  colorPalette = "Set2",
+  radius       = 5,
+  opacity      = 0.8,
+  xtitle       = "Sepal length (cm)",
+  title        = "Sepal length by species"
+)
+```
+
+## `ridgeline_plot()` {#ridgeline_plot}
+
+A ridgeline plot, also known as a "joy plot", stacks several partially overlapping density curves, one per group, on a shared x-axis. The nickname comes from the cover of Joy Division's 1979 album *Unknown Pleasures*, which reproduces a 1970 plot of successive radio pulses from the first discovered pulsar. Claus Wilke's `ggridges` package made the format popular, and FiveThirtyEight and The Washington Post use it often. It is a good way to compare the shape of many distributions at once (shifts, spread, bimodality) without the space a grid of histograms would need.
+
+The densities are computed in the browser with a Gaussian (default) or Epanechnikov kernel. By default, one joint bandwidth is picked from the pooled data with Silverman's rule of thumb, so every ridge is smoothed the same way. Lower ridges are drawn in front of the ones above them. Hovering a ridge or its label brings it to the front and shows its number of observations and mean.
+
+```{r}
+set.seed(2024)
+
+reaction <- data.frame(
+  time = c(rnorm(200, 300, 40), rnorm(200, 340, 50),
+           rnorm(200, 380, 35), c(rnorm(100, 360, 25), rnorm(100, 460, 30)),
+           rnorm(200, 420, 60)),
+  condition = rep(c("Baseline", "Noise", "Fatigue", "Dual task", "Night"),
+                  each = 200)
+)
+
+ridgeline_plot(
+  data   = reaction,
+  x      = "time",
+  group  = "condition",
+  sort   = "mean",
+  stat   = "median",
+  title  = "Reaction time by condition",
+  xtitle = "Reaction time (ms)"
+)
+```
+
+Use `overlap` to control how far each ridge reaches into the one above it, and `fill`, `fillOpacity` and `lineCol` to change the look. `fill` can be a single colour or a named vector with one colour per group:
+
+```{r}
+library(ggplot2) # for the mpg dataset
+
+ridgeline_plot(
+  data        = mpg,
+  x           = "hwy",
+  group       = "class",
+  sort        = "median",
+  fill        = "#2c7fb8",
+  lineCol     = "white",
+  fillOpacity = 0.9,
+  overlap     = 2,
+  title       = "Highway fuel economy by vehicle class",
+  xtitle      = "Highway miles per gallon"
+)
+```
+
+## `animated_histogram()` {#animated_histogram}
+
+This function allows you to create a one-click histogram animation. Useful for presentation purposes. Click on the following empty plot and see what happens:
+
+```{r}
+animated_histogram(
+  x = mpg$hwy,
+  duration = 2000,
+  delay = 100,
+  fill = "lime",
+  stroke = "white",
+  bgcol = "white"
+  )
+```
+
+Note that you can customize the animation using the two parameters `duration` and `delay`.
+

@@ -1,5 +1,11 @@
 # ddplot (development version)
 
+### Improvements:
+- `line_chart()` has been rewritten for time series work. It now supports several series (wide `y = c(...)`, long `group =`, or `ts`/`mts` objects passed directly), a crosshair tooltip showing every series at the hovered date, a click/double-click legend, direct end labels, range buttons (1M ... All), a navigator brush, drag-to-zoom with an auto-rescaling y axis, `transform = "index"`/`"percent"` rebasing, `rollmean`, `lower`/`upper` forecast ribbons, `bands`, `events`, `hlines`, `yScale = "log"`, `area` and `points`. In Shiny, the zoom range and hidden series are kept across `renderD3()` updates. Existing calls keep working; the default look changed (white background, `strokeWidth = 2`, `titleFontSize = 20`, `xtitleFontSize`/`ytitleFontSize = 13`, left-aligned title, y-axis title above the axis, palette color instead of crimson for a single series unless `stroke` is set, y axis fitted to the data unless `yZero = TRUE` or `area = TRUE`).
+
+### Documentation:
+- The website has been redesigned (Bootstrap 5, light and dark themes). It has a new home page, a filterable gallery of every chart, and one guide per family of charts (time series, comparisons, distributions, relationships, part-to-whole, KPIs, playful indicators), ordered from the most commonly needed charts to the more specialised ones. The reference index is grouped the same way. The "Get started" vignette is now a short introduction; the chart-by-chart examples moved to the website guides.
+
 ### Bug fixes:
 - Charts now redraw correctly in `Shiny` with `r2d3::d3Output()` / `r2d3::renderD3()`. Previously r2d3 re-ran the chart script on the same SVG, so updates were drawn on top of the previous chart (or not visibly at all) and animation timers kept running. A shared preamble (`ddplotreset.js`) now clears the previous render and stops its timers before each redraw; this also fixes stacked timers after a widget resize.
 

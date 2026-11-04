@@ -1,0 +1,380 @@
+---
+title: "Time series and trends"
+description: "Lines, areas, streams and calendars for data that moves over time."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE)
+library(ddplot)
+library(ggplot2) # economics
+```
+
+Charts for data indexed by time. `line_chart()` is the workhorse: it handles several series, `ts` objects, zooming, annotations and forecast ribbons. The others cover totals and their components, ranges, many categories at once, and daily patterns.
+
+::: {.dd-chooser}
+
+| Chart | Use it when |
+|---|---|
+| [`line_chart()`](#line_chart) | You track one or many series over time and want to zoom, compare and annotate |
+| [`area_chart()`](#area_chart) | A single series where the volume under the line matters |
+| [`stacked_area_chart()`](#stacked_area_chart) | You show a total and how each component contributes over time |
+| [`area_band()`](#area_band) | You show a range over time, such as a min/max or an interval |
+| [`streamgraph()`](#streamgraph) | Many categories change over time and the overall shape matters more than exact values |
+| [`calendar_heatmap()`](#calendar_heatmap) | You look for daily, weekly or seasonal patterns in a daily series |
+| [`anim_line_chart()`](#anim_line_chart) | You present a single series and want it to draw itself on click |
+
+:::
+
+## `line_chart()` {#line_chart}
+
+`line_chart()` is built for time series. It draws one or many series and comes with the interactions people expect from financial and monitoring dashboards:
+
+- a **crosshair tooltip** that shows every series at the hovered date, sorted by value, with the series nearest to the pointer highlighted;
+- an **interactive legend**: click to hide or show a series, double-click to isolate it;
+- **direct labels** at the end of each line;
+- **zooming**: range buttons (1M, 6M, YTD, 1Y, 5Y, All, chosen from the data's frequency), a **navigator** with a brush under the chart, and drag on the chart to zoom into a range (double-click to reset). The y axis rescales to the data in view.
+
+A `ts` object can be passed directly. Monthly, quarterly and yearly series get exact calendar dates; for other frequencies the dates are interpolated from the time index, so use a data frame with a real date column when exact dates matter:
+
+```{r}
+line_chart(AirPassengers, y = "passengers", title = "Airline passengers, 1949-1960")
+```
+
+The data frame interface needs a date column (`Date`, `POSIXct`, "yyyy-mm-dd" strings, or numbers such as years) and one or several value columns:
+
+```{r}
+airpassengers <- data.frame(
+  passengers = as.matrix(AirPassengers),
+  date = zoo::as.Date(time(AirPassengers))
+)
+
+line_chart(
+  data = airpassengers,
+  x = "date",
+  y = "passengers",
+  curve = "curveMonotoneX",
+  area = TRUE
+)
+```
+
+### Several series and rebasing
+
+Pass several `y` columns (wide data), a `group` column (long data), or an `mts` object. With `transform = "index"`, every series is rebased to 100 at the first visible date. Zoom with the range buttons or the navigator and the comparison is recomputed from the new starting point; `transform = "percent"` shows the change since that point instead.
+
+```{r}
+line_chart(
+  EuStockMarkets,
+  transform = "index",
+  title = "European stock indices",
+  subtitle = "Daily closing prices, rebased to 100 at the start of the visible range"
+)
+```
+
+```{r}
+library(gapminder)
+
+countries <- gapminder[gapminder$country %in% c("China", "India", "United States",
+                                                "Brazil", "Nigeria", "Germany"), ]
+
+line_chart(
+  countries,
+  x = "year",
+  y = "lifeExp",
+  group = "country",
+  points = TRUE,
+  curve = "curveMonotoneX",
+  title = "Life expectancy at birth",
+  ytitle = "Years"
+)
+```
+
+### Annotations: periods, events and reference lines
+
+`bands` shades periods (here the NBER recessions), `events` marks dates with a vertical line, and `hlines` draws reference values.
+
+```{r}
+recessions <- data.frame(
+  start = as.Date(c("1969-12-01", "1973-11-01", "1980-01-01", "1981-07-01",
+                    "1990-07-01", "2001-03-01", "2007-12-01")),
+  end   = as.Date(c("1970-11-01", "1975-03-01", "1980-07-01", "1982-11-01",
+                    "1991-03-01", "2001-11-01", "2009-06-01"))
+)
+
+line_chart(
+  economics,
+  x = "date",
+  y = "unemploy",
+  area = TRUE,
+  bands = recessions,
+  valueFormat = ",.0f",
+  valueSuffix = "k",
+  title = "US unemployment",
+  subtitle = "Thousands of persons, recessions shaded"
+)
+```
+
+### Forecasts and moving averages
+
+`lower` and `upper` draw a confidence or forecast ribbon around a line. Here a Holt-Winters forecast from base R's `stats` package:
+
+```{r}
+fit <- HoltWinters(log(AirPassengers))
+fc <- predict(fit, n.ahead = 24, prediction.interval = TRUE)
+
+passengers <- rbind(
+  data.frame(date = zoo::as.Date(time(AirPassengers)),
+             value = as.numeric(AirPassengers), lo = NA, hi = NA,
+             series = "Observed"),
+  data.frame(date = zoo::as.Date(time(fc)), value = exp(fc[, "fit"]),
+             lo = exp(fc[, "lwr"]), hi = exp(fc[, "upr"]),
+             series = "Forecast")
+)
+
+line_chart(
+  passengers,
+  x = "date", y = "value", group = "series",
+  lower = "lo", upper = "hi",
+  colors = c(Observed = "#4269d0", Forecast = "#ff725c"),
+  events = c("Forecast starts" = as.Date("1961-01-01")),
+  valueFormat = ",.0f",
+  title = "Airline passengers: Holt-Winters forecast"
+)
+```
+
+`rollmean` draws a trailing moving average over the raw series, which is kept as a faint line (`showRaw = FALSE` hides it). Missing values leave gaps in the lines:
+
+```{r}
+set.seed(3)
+samples <- data.frame(
+  time = seq(as.POSIXct("2024-03-01 09:00", tz = "UTC"), by = "5 min", length.out = 400),
+  cpu  = 40 + cumsum(rnorm(400)),
+  mem  = 60 + cumsum(rnorm(400, 0, 0.5))
+)
+samples$cpu[150:170] <- NA # a monitoring outage
+
+line_chart(
+  samples,
+  x = "time",
+  y = c("cpu", "mem"),
+  rollmean = 12,
+  hlines = c(SLA = 70),
+  valueSuffix = "%",
+  title = "Server load",
+  subtitle = "5-minute samples with a 1-hour moving average"
+)
+```
+
+Other options include `yScale = "log"`, `yZero`, `dateFormat`, and turning off `navigator`, `rangeButtons`, `zoom`, `legend`, `endLabels` or `animate`.
+
+## `area_chart()` {#area_chart}
+
+`area_chart()` works similarly except that instead of a line you get an area.
+
+```{r}
+# 1. converting AirPassengers to a tidy data frame
+airpassengers <- data.frame(
+  passengers = as.matrix(AirPassengers),
+  date= zoo::as.Date(time(AirPassengers))
+)
+
+# 2. plotting the area chart
+area_chart(
+  data = airpassengers,
+  x = "date",
+  y = "passengers",
+  fill = "purple",
+  bgcol = "white"
+)
+```
+
+## `stacked_area_chart()` {#stacked_area_chart}
+
+This function allows you to create a stacked area chart. You need two components:
+
+- A data frame in wide format (see an example below). If it's in wide format, you can still use `pivot_wider()` from the `tidyr` package to make wider.
+- A date variable in `yyyy-mm-dd` format that will plotted in the x-axis.
+
+Let's work with the following data frame (shortened) provided by [Mike Bostock in his stacked area chart example](https://observablehq.com/@d3/stacked-area-chart):
+
+```{r}
+data <- data.frame(
+  date = c(
+    "2000-01-01", "2000-02-01", "2000-03-01", "2000-04-01",
+    "2000-05-01", "2000-06-01", "2000-07-01",
+    "2000-08-01", "2000-09-01", "2000-10-01"
+  ),
+  Trade = c(
+    2000,1023, 983, 2793, 1821, 1837, 1792, 1853, 791, 739
+  ),
+  Manufacturing = c(
+    734, 694, 739, 736, 685, 621, 708, 685, 667, 693
+  ),
+  Leisure = c(
+    1782, 1779, 1789, 658, 675, 833, 786, 675, 636, 691
+  ),
+  Agriculture = c(
+    655, 587,623, 517, 561, 2545, 636, 584, 559, 2504
+  )
+)
+
+data
+```
+
+Note that when running `stacked_area_chart()` all the variables available within the considered data frame will be plotted. If you want to restrict the plotting to only specific variables, just drop the unneeded columns:
+
+```{r}
+stacked_area_chart(
+  data = data,
+  x = "date",
+  legendTextSize = 14
+  )
+```
+
+You can modify the color scheme using the `colorCategory` parameter:
+
+```{r}
+stacked_area_chart(
+  data = data,
+  x = "date",
+  legendTextSize = 14,
+  curve = "curveCardinal",
+  colorCategory = "Accent",
+  bgcol = "white",
+  stroke = "black",
+  strokeWidth = 1
+  )
+```
+
+```{r}
+stacked_area_chart(
+  data = data,
+  x = "date",
+  legendTextSize = 14,
+  curve = "curveBasis",
+  colorCategory = "Set3",
+  bgcol = "black",
+  axisCol = "white",
+  xticks = 4,
+  stroke = "black"
+  )
+```
+
+You can find list of D3 categorical color schemes [here](https://github.com/d3/d3-scale-chromatic#categorical)
+
+Finally, if you hover over the chart you'll notice a tooltip that identified the different area categories.
+
+## `area_band()` {#area_band}
+
+`area_band()` lets you plot a filled area between two y-values. For the sake of the example, let's create an additional column `passengers_upper` that has an additional 40 passengers for each observation:
+
+```{r}
+airpassengers <- data.frame(
+  passengers_lower = as.matrix(AirPassengers),
+  passengers_upper = as.matrix(AirPassengers) + 40,
+  date= zoo::as.Date(time(AirPassengers))
+)
+
+area_band(
+  data = airpassengers,
+  x = "date",
+  yLower = "passengers_lower",
+  yUpper = "passengers_upper",
+  fill = "yellow",
+  stroke = "black"
+)
+```
+
+## `streamgraph()` {#streamgraph}
+
+`streamgraph()` is inspired by the [Highcharts](https://www.highcharts.com/) streamgraph: stacked areas flowing around a centred (wiggle) baseline, with labels drawn inside each layer, a crosshair tooltip and an interactive legend. Unlike `stacked_area_chart()`, it takes long data. Hover over a layer to highlight it, and click a legend item to hide or show it.
+
+```{r}
+set.seed(2024)
+years  <- 1980:2020
+genres <- c("Rock", "Pop", "Hip hop", "Electronic", "Country",
+            "R&B", "Jazz", "Metal", "Reggae", "Latin")
+peaks  <- c(1984, 1999, 2012, 2008, 1993, 2003, 1981, 1990, 1986, 2018)
+sizes  <- c(60, 55, 70, 40, 30, 35, 18, 25, 15, 45)
+music  <- expand.grid(year = years, genre = genres)
+idx    <- match(music$genre, genres)
+music$listeners <- round(
+  sizes[idx] * exp(-((music$year - peaks[idx]) / 9)^2) + runif(nrow(music), 1, 6)
+)
+
+streamgraph(
+  data        = music,
+  x           = "year",
+  group       = "genre",
+  value       = "listeners",
+  valueFormat = ",.0f",
+  xtitle      = "Year",
+  title       = "Music genres, 1980-2020 (simulated listeners)"
+)
+```
+
+`offset = "expand"` turns the stream into a 100% stacked view:
+
+```{r}
+phones <- data.frame(
+  year   = rep(as.numeric(rownames(WorldPhones)), ncol(WorldPhones)),
+  region = factor(rep(colnames(WorldPhones), each = nrow(WorldPhones)),
+                  levels = colnames(WorldPhones)),
+  phones = as.vector(WorldPhones)
+)
+
+streamgraph(phones, x = "year", group = "region", value = "phones",
+            offset = "expand", order = "descending", curve = "monotoneX",
+            colorPalette = "Set2", title = "Share of telephones by region")
+```
+
+## `calendar_heatmap()` {#calendar_heatmap}
+
+`calendar_heatmap()` is inspired by the signature heatmap of [Frappe Charts](https://frappe.io/charts) and by GitHub's contribution graph. It draws one rounded square per day on a week-by-weekday grid, one panel per year, with a "Less ... More" legend and a staggered fade-in. Hover over a day to see its value, or over a legend square to highlight every day in that color bucket.
+
+```{r}
+set.seed(2024)
+days <- seq(as.Date("2024-01-01"), as.Date("2024-12-31"), by = "day")
+weekday <- !(format(days, "%u") %in% c("6", "7"))
+activity <- data.frame(
+  day     = days,
+  commits = rpois(length(days), ifelse(weekday, 6, 1.5)) * rbinom(length(days), 1, 0.8)
+)
+
+calendar_heatmap(activity, date = "day", value = "commits", title = "Commits in 2024")
+```
+
+Data spanning several years is drawn as one panel per year:
+
+```{r}
+set.seed(1)
+days <- seq(as.Date("2021-01-01"), as.Date("2023-12-31"), by = "day")
+season <- 10 + 8 * sin(2 * pi * as.numeric(format(days, "%j")) / 365)
+rainfall <- data.frame(day = days, rain = pmax(0, rnorm(length(days), season, 6)))
+
+calendar_heatmap(
+  rainfall, date = "day", value = "rain", weekStart = "monday",
+  colors = c("#9be9a8", "#40c463", "#30a14e", "#216e39"),
+  valueLabel = "mm of rain", valueFormat = ",.1f",
+  title = "Daily rainfall, 2021-2023"
+)
+```
+
+## `anim_line_chart()` {#anim_line_chart}
+
+Heavily inspired by [Jure Stabuc's example](https://observablehq.com/@jurestabuc/animated-line-chart), `anim_line_chart()` draws an empty frame, and each click on it plays an animation that draws the line. The line stays in place once the animation ends. Click on the empty chart below:
+
+```{r}
+passengers_df <- data.frame(
+  passengers = as.matrix(AirPassengers),
+  date = zoo::as.Date(time(AirPassengers))
+)
+
+anim_line_chart(
+  data = passengers_df,
+  x = "date",
+  y = "passengers",
+  duration = 10000, # in milliseconds (10 seconds)
+  curve = "curveCardinal"
+  )
+```
+

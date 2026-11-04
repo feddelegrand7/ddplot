@@ -1,5 +1,5 @@
 
-# ddplot
+# ddplot <img src="man/figures/logo.svg" align="right" height="139" alt="ddplot logo" />
 
 <!-- badges: start -->
 [![metacran
@@ -8,7 +8,7 @@ downloads](https://cranlogs.r-pkg.org/badges/ddplot)](https://cran.r-project.org
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/ddplot)](https://cran.r-project.org/package=ddplot)
 <!-- badges: end -->
 
-`ddplot` is a package that allows you to create D3 based SVG graphics using a simple R API. 
+`ddplot` turns a data frame into an interactive D3 SVG chart with a single R function. It has more than 40 chart types, from line and bar charts to chord diagrams and sunbursts, and they work in the RStudio viewer, R Markdown, Quarto and Shiny.
 
 ## Installation
 
@@ -26,7 +26,9 @@ remotes::install_github("feddelegrand7/ddplot")
 
 ## Usage 
 
-You can get started [here](https://feddelegrand7.github.io/ddplot/articles/Start.html)
+- [Get started](https://feddelegrand7.github.io/ddplot/articles/Start.html)
+- [Gallery of all the charts](https://feddelegrand7.github.io/ddplot/articles/gallery.html)
+- [Reference](https://feddelegrand7.github.io/ddplot/reference/index.html)
 
 ## Code of Conduct
 

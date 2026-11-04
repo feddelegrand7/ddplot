@@ -1,0 +1,94 @@
+---
+title: "Playful indicators"
+description: "Hearts, glasses, plants, flames and flowers."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE)
+library(ddplot)
+```
+
+Illustrative SVG indicators. They show a single level and are meant for presentations, landing pages and dashboards that need a lighter touch.
+
+::: {.dd-chooser}
+
+| Chart | Use it when |
+|---|---|
+| [`heart_fill()`](#heart_fill) | You show a level from 0 to 1 as a filling heart |
+| [`glass_fill()`](#glass_fill) | You show a level from 0 to 1 as a filling glass |
+| [`plant_growth()`](#plant_growth) | You show progress as a growing plant |
+| [`flame()`](#flame) | You show an intensity, such as an error count, as a flame |
+| [`flower()`](#flower) | You want a decorative, optionally rotating, flower |
+
+:::
+
+## `heart_fill()` {#heart_fill}
+
+The `heart_fill` function allows you to display a heart indicator which will be filled according to a numerical value from 0 to 1: 
+
+```{r}
+heart_fill(fill_level = 0.8, titleText = NULL, renderFillLabel = FALSE)
+```
+
+## `glass_fill()` {#glass_fill}
+
+The `glass_fill` function works the same way as the `heart_fill` above: 
+
+```{r}
+glass_fill(fill_level = 0.8, titleText = "Glass of water", renderFillLabel = TRUE)
+```
+
+## `plant_growth()` {#plant_growth}
+
+The `plant_growth` function can also be used as a visual clue: 
+
+```{r}
+plant_growth(0.4)
+```
+```{r}
+plant_growth(1)
+```
+
+## `flame()` {#flame}
+
+You can create cool `flames` using the `flame` function, useful if you want to display the state of a critical information that yields a numerical values (for example, the number of errors encountered in a specific process):
+
+```{r}
+flame(
+  intensity = 20, 
+  flameGradientColors = c("yellow", "orange", "darkred"),
+  flameOutline = "darkred",
+  bgcol = "#fefefe"
+)
+```
+
+```{r}
+flame(
+  intensity = 80, 
+  flameGradientColors = c("green", "darkgreen", "darkblue"),
+  flameOutline = "#fefefe",
+  bgcol = "black"
+)
+```
+
+## `flower()` {#flower}
+
+The `flower()` function allows you to plot a simple flowers with a defined number of petals. You can also define the width/length of the petals and rotate them if needed: 
+
+```{r}
+flower(
+  petalCount = 7,
+  petalColor = "plum",
+  rotationSpeed = 0
+)
+```
+
+```{r}
+flower(
+  petalCount = 15,
+  petalWidth = 20,
+  petalColor = "plum",
+  rotationSpeed = 1.5
+)
+```
+

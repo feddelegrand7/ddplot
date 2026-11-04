@@ -1,0 +1,144 @@
+---
+title: "Relationships and flows"
+description: "Scatter plots, hexbins and chord diagrams."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE)
+library(ddplot)
+library(ggplot2) # mpg, diamonds
+library(dplyr)
+```
+
+Charts for the relationship between two numeric variables, and for flows between categories.
+
+::: {.dd-chooser}
+
+| Chart | Use it when |
+|---|---|
+| [`scatter_plot()`](#scatter_plot) | You look at the relationship between two numeric variables |
+| [`hexbin_plot()`](#hexbin_plot) | A scatter plot has too many points to read |
+| [`chord_diagram()`](#chord_diagram) | You show flows between categories, such as migration or trade |
+
+:::
+
+## `scatter_plot()` {#scatter_plot}
+
+Let's work with the `mpg` data frame from the `ggplot2` package.
+
+```{r}
+library(ggplot2) # needed for the mpg data frame
+
+scatter_plot(
+  data = mpg,
+  x = "hwy",
+  y = "cty",
+  xtitle = "hwy variable",
+  ytitle = "cty variable",
+  title = "cty and hwy relationship",
+  titleFontSize = 20
+)
+
+```
+
+In comparison to `ggplot2`, graphics' customization in `ddplot` is limited nonetheless you get a fully vectorized SVG which is cool.
+
+```{r}
+scatter_plot(
+  data = mpg,
+  x = "displ",
+  y = "cty",
+  col = "tomato",
+  bgcol = "pink",
+  size = 3,
+  stroke = "royalblue",
+  strokeWidth = 1,
+  xtitle = "displ variable",
+  ytitle = "cty variable",
+  xticks = 3,
+  yticks = 3)
+
+```
+
+## `hexbin_plot()` {#hexbin_plot}
+
+`hexbin_plot()` is inspired by the hexbin transform of [Observable Plot](https://observablehq.com/plot/transforms/hexbin). It groups points into a grid of hexagons coloured by the number of observations in each one, which keeps dense scatter plots readable. The binning is written by hand, since d3-hexbin is not bundled with r2d3.
+
+```{r}
+hexbin_plot(
+  data     = faithful,
+  x        = "waiting",
+  y        = "eruptions",
+  binWidth = 14,
+  xtitle   = "Waiting time to next eruption (min)",
+  ytitle   = "Eruption duration (min)",
+  title    = "Old Faithful eruptions"
+)
+```
+
+A log colour scale helps when counts are very skewed:
+
+```{r}
+set.seed(1)
+dsample <- diamonds[sample(nrow(diamonds), 10000), ]
+
+hexbin_plot(
+  data         = dsample,
+  x            = "carat",
+  y            = "price",
+  binWidth     = 8,
+  colorPalette = "Viridis",
+  colorScale   = "log",
+  title        = "Diamond price by carat"
+)
+```
+
+## `chord_diagram()` {#chord_diagram}
+
+`chord_diagram()` shows the flows between a set of entities as outer arcs joined by ribbons. Its look and hover behaviour are inspired by the chord chart of [Nivo](https://nivo.rocks/chord/): hovering over an entity fades every ribbon not connected to it, and clicking an arc pins the highlight.
+
+```{r}
+migration <- data.frame(
+  from  = c("Africa", "Africa", "Africa", "Asia", "Asia", "Asia",
+            "Europe", "Europe", "Latin America", "Latin America",
+            "North America", "Oceania", "Asia", "Europe"),
+  to    = c("Europe", "North America", "Asia", "Europe", "North America",
+            "Oceania", "North America", "Asia", "North America", "Europe",
+            "Europe", "Asia", "Africa", "Oceania"),
+  value = c(420, 150, 90, 610, 520, 230, 180, 120, 870, 260,
+            95, 40, 60, 75)
+)
+
+chord_diagram(
+  data        = migration,
+  from        = "from",
+  to          = "to",
+  value       = "value",
+  valueFormat = ",.0f",
+  title       = "Migration flows between regions (illustrative data)"
+)
+```
+
+A square matrix with dimnames works too:
+
+```{r}
+hair <- matrix(
+  c(11975,  5871, 8916, 2868,
+     1951, 10048, 2060, 6171,
+     8010, 16145, 8090, 8045,
+     1013,   990,  940, 6907),
+  nrow = 4, byrow = TRUE,
+  dimnames = list(c("Black", "Blond", "Brown", "Red"),
+                  c("Black", "Blond", "Brown", "Red"))
+)
+
+chord_diagram(
+  data        = hair,
+  colors      = c("#3b3b3b", "#f2c45a", "#8c5a3c", "#d0533a"),
+  ribbonColor = "gradient",
+  padAngle    = 0.05,
+  valueFormat = ",.0f",
+  title       = "Hair color flows"
+)
+```
+

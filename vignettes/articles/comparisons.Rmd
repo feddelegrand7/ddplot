@@ -1,0 +1,589 @@
+---
+title: "Comparing categories"
+description: "Bars, lollipops, dumbbells, slopes, ranks and bridges."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE)
+library(ddplot)
+library(ggplot2) # mpg, diamonds
+library(dplyr)
+```
+
+Charts for comparing values across categories, from the everyday bar chart to before/after comparisons, rankings over time and bridges that explain how a total was built. Most of them expect data that is already aggregated, one row per category; `dplyr::summarise()` is a convenient way to get there.
+
+::: {.dd-chooser}
+
+| Chart | Use it when |
+|---|---|
+| [`bar_chart()`](#bar_chart) | You compare a value across a handful of categories |
+| [`horz_bar_chart()`](#horz_bar_chart) | You have many categories or long labels |
+| [`lollipop_chart()`](#lollipop_chart) | You want a lighter alternative to a bar chart |
+| [`horz_lollipop()`](#horz_lollipop) | A lollipop chart with many categories or long labels |
+| [`dumbbell_chart()`](#dumbbell_chart) | You show the gap between two values for each category |
+| [`slope_chart()`](#slope_chart) | You compare two points in time and want to show who rose and who fell |
+| [`bump_chart()`](#bump_chart) | You follow how rankings change over several periods |
+| [`waterfall_chart()`](#waterfall_chart) | You explain how a starting value becomes a final value |
+| [`radar_chart()`](#radar_chart) | You compare a few items across several variables |
+| [`radial_bar_chart()`](#radial_bar_chart) | You show progress of a few items towards a goal |
+| [`bar_chart_race()`](#bar_chart_race) | You animate a ranking through time for a presentation |
+
+:::
+
+## `bar_chart()` {#bar_chart}
+
+The `bar_chart()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.
+
+```{r}
+library(dplyr)
+
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
+  bar_chart(
+    x = "manufacturer",
+    y = "mean_cty",
+    xFontSize = 10,
+    yFontSize = 10,
+    fill = "orange",
+    strokeWidth = 2,
+    ytitle = "average cty value",
+    title = "Average City Miles per Gallon by manufacturer"
+  )
+```
+
+The bars can be easily sorted in `ascending` or `descending` order using the `sort` parameter:
+
+```{r}
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
+  bar_chart(
+    x = "manufacturer",
+    y = "mean_cty",
+    sort = "ascending",
+    xFontSize = 10,
+    yFontSize = 10,
+    fill = "orange",
+    strokeWidth = 1,
+    ytitle = "average cty value",
+    title = "Average City Miles per Gallon by manufacturer",
+    titleFontSize = 16
+  )
+```
+
+## `horz_bar_chart()` {#horz_bar_chart}
+
+If you've many categories, it might be a good idea to go for a horizontal bar chart. It has the same parameters as the `bar_chart()` function except that the x-axis parameter is named `value` and the y-axis parameter named `label`, this naming convention aims to mitigate some confusion that can arise.
+
+If we want to replicate the above graphic in a horizontal way, we can do:
+
+```{r}
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
+  horz_bar_chart(
+    label = "manufacturer",
+    value = "mean_cty",
+    sort = "ascending",
+    labelFontSize  = 10,
+    valueFontSize = 10,
+    fill = "orange",
+    stroke = "crimson",
+    strokeWidth = 1,
+    valueTitle  = "average cty value",
+    title = "Average City Miles per Gallon by manufacturer",
+    titleFontSize = 16
+  )
+```
+
+As in `bar_chart()`, we can also sort in descending order:
+
+```{r}
+mpg %>% group_by(manufacturer) %>%
+  summarise(mean_cty = mean(cty)) %>%
+  horz_bar_chart(
+    label = "manufacturer",
+    value = "mean_cty",
+    sort = "descending",
+    labelFontSize  = 10,
+    valueFontSize = 10,
+    bgcol = "black",
+    axisCol = "white",
+    fill = "white",
+    stroke = "white",
+    strokeWidth = 1,
+    valueTitle  = "average cty value",
+    labelTitle = "Manufacturers",
+    title = "Average City Miles per Gallon by manufacturer",
+    titleFontSize = 16
+  )
+```
+
+## `lollipop_chart()` {#lollipop_chart}
+
+lollipop chart follows the same behavior as bar charts but instead of bars you get lollipops, hence the name. Below an example of a lollipop chart with `ddplot`:
+
+```{r}
+mpg %>% group_by(drv) %>%
+  summarise(median_cty = median(cty)) %>%
+  lollipop_chart(
+    x = "drv",
+    y = "median_cty",
+    sort = "ascending",
+    xtitle = "drv variable",
+    ytitle = "median cty",
+    title = "Median cty per drv",
+    xFontSize = 20
+  )
+```
+
+It's possible to grasp the distribution of some variable according to a specific categorical variable using the same function:
+
+```{r}
+
+mpg %>% filter(year == 2008) %>%
+lollipop_chart(
+    x = "manufacturer",
+    y = "hwy",
+    circleFill = 'red',
+    circleStroke = 'orange',
+    circleRadius = 5,
+    sort = "none",
+    xFontSize = 10
+  )
+```
+
+From above, it's quite easy to notice that although Toyota has two cars with high highway miles per gallon (hwy), it also produces many other vehicles with poor hwy.
+
+## `horz_lollipop()` {#horz_lollipop}
+
+Same with bar charts, if you have a variable that has many categorical values, you can work with the reversed version of `lollipop_chart()` which is `horz_lollipop()`:
+
+```{r}
+mpg %>% group_by(manufacturer) %>%
+  summarise(median_cty = median(cty)) %>%
+  horz_lollipop(
+    label = "manufacturer",
+    value = "median_cty",
+    sort = "descending")
+```
+You can also do:
+
+```{r}
+mpg %>% filter(year == 2008) %>%
+horz_lollipop(
+    label = "manufacturer",
+    value = "hwy",
+    circleFill = 'red',
+    circleStroke = 'orange',
+    circleRadius = 5,
+    sort = "none"
+  )
+```
+
+## `dumbbell_chart()` {#dumbbell_chart}
+
+A dumbbell chart (also called a connected dot plot) shows two values per category as dots joined by a horizontal line. It is the clearest way to communicate the gap or change between two groups, time points, or conditions across many categories , a grouped bar chart would require much more visual scanning to reach the same conclusion. The New York Times and The Economist use this format regularly.
+
+```{r}
+life_exp <- data.frame(
+  country   = c("Brazil", "China", "Egypt", "India",
+                "Japan", "Mexico", "Nigeria", "Turkey"),
+  year_1952 = c(50.9, 44.0, 41.9, 37.4, 63.0, 50.8, 36.3, 43.6),
+  year_2007 = c(72.4, 72.9, 71.3, 64.7, 82.6, 76.2, 46.9, 71.8)
+)
+
+dumbbell_chart(
+  data     = life_exp,
+  x1       = "year_1952",
+  x2       = "year_2007",
+  y        = "country",
+  x1Label  = "1952",
+  x2Label  = "2007",
+  title    = "Life expectancy: 1952 vs 2007",
+  xtitle   = "Life expectancy (years)",
+  sort     = "ascending"
+)
+```
+
+The chart works equally well for comparing two conditions within the same time period. Here we compare average city and highway fuel economy across vehicle classes using the `mpg` dataset:
+
+```{r}
+library(dplyr)
+
+mpg_summary <- mpg |>
+  group_by(class) |>
+  summarise(city = mean(cty), highway = mean(hwy))
+
+dumbbell_chart(
+  data    = mpg_summary,
+  x1      = "city",
+  x2      = "highway",
+  y       = "class",
+  x1Label = "City",
+  x2Label = "Highway",
+  col1    = "steelblue",
+  col2    = "darkorange",
+  title   = "City vs highway fuel economy by class",
+  xtitle  = "Miles per gallon",
+  sort    = "ascending"
+)
+```
+
+## `slope_chart()` {#slope_chart}
+
+A slope chart (or slopegraph) places two values per category on two vertical axes, typically "before" and "after" or two different years, and connects them with a straight line. The steepness and direction of each line tell you at a glance who rose, who fell, and how the ranking changed. Edward Tufte popularised the form in *The Visual Display of Quantitative Information* (1983) with his chart of government receipts across rich countries, and the New York Times graphics desk has used it regularly ever since. Use it when you have a small-to-moderate number of categories measured at exactly two points; with many categories or many time points, a line chart is the better choice.
+
+Each line is labelled with its category name and value at both ends, and labels that would overlap are nudged apart vertically. By default lines are colored by direction (increase or decrease). Hover over a line to emphasise it and fade the others.
+
+```{r}
+# Current receipts of government as a percentage of GDP, 1970 vs 1979
+# (adapted from Edward Tufte's classic slopegraph)
+receipts <- data.frame(
+  country = c("Sweden", "Netherlands", "Norway", "Britain", "France",
+              "Germany", "Belgium", "Canada", "Finland", "Italy",
+              "United States", "Greece", "Switzerland", "Spain", "Japan"),
+  y1970 = c(46.9, 44.0, 43.5, 40.7, 39.0, 37.5, 35.2, 35.2, 34.9, 30.4,
+            30.3, 26.8, 26.5, 22.5, 20.7),
+  y1979 = c(57.4, 55.8, 52.2, 39.0, 43.4, 42.9, 43.2, 35.8, 38.2, 35.7,
+            32.5, 30.6, 33.2, 27.1, 26.6)
+)
+
+slope_chart(
+  data       = receipts,
+  start      = "y1970",
+  end        = "y1979",
+  group      = "country",
+  startLabel = "1970",
+  endLabel   = "1979",
+  digits     = 1,
+  title      = "Government receipts as % of GDP",
+  height     = 520
+)
+```
+
+Use `highlight` to tell a story about a few categories: the rest are drawn in a muted grey so they give context without competing for attention. Here we compare life expectancy in 1952 and 2007 using the `gapminder` dataset:
+
+```{r}
+library(gapminder)
+library(dplyr)
+library(tidyr)
+
+countries <- c("China", "India", "Japan", "Brazil", "Nigeria",
+               "Egypt", "Germany", "United States", "South Africa")
+
+life <- filter(gapminder, year %in% c(1952, 2007), country %in% countries)
+life <- select(life, country, year, lifeExp)
+life <- pivot_wider(life, names_from = year, values_from = lifeExp,
+                    names_prefix = "y")
+
+slope_chart(
+  data       = life,
+  start      = "y1952",
+  end        = "y2007",
+  group      = "country",
+  startLabel = "1952",
+  endLabel   = "2007",
+  highlight  = c("China", "South Africa"),
+  digits     = 1,
+  title      = "Life expectancy: 1952 vs 2007"
+)
+```
+
+## `bump_chart()` {#bump_chart}
+
+A bump chart shows how the *rank* of several entities changes from one period to the next. Each entity is a smooth line that climbs or falls as it overtakes, or is overtaken by, the others, and a circle at every period displays its rank. The Financial Times, The Economist and FiveThirtyEight use this format for league tables, polls and country rankings: it is the right choice when the order matters more than the exact values.
+
+The data must be in long format, with one row per entity and period. By default `bump_chart()` computes the ranks for each period from the numeric `y` column (rank 1 = highest value, use `rankOrder = "asc"` to reverse). If your `y` column already holds ranks, set `ranked = TRUE`. Hover over a line to make it stand out.
+
+```{r}
+league <- data.frame(
+  season = rep(c("2021", "2022", "2023", "2024"), each = 5),
+  team   = rep(c("Lions", "Tigers", "Bears", "Wolves", "Eagles"), 4),
+  points = c(80, 75, 60, 55, 50,
+             70, 82, 58, 66, 49,
+             65, 78, 72, 69, 52,
+             60, 74, 81, 70, 77)
+)
+
+bump_chart(
+  data  = league,
+  x     = "season",
+  y     = "points",
+  group = "team",
+  title = "League ranking by season"
+)
+```
+
+Use `highlight` to bring a few entities forward and grey out the rest. Here are the GDP per capita ranks of eight Asian economies from the `gapminder` dataset:
+
+```{r}
+library(gapminder)
+
+countries <- c("Japan", "Singapore", "Hong Kong, China", "Taiwan",
+               "Korea, Rep.", "Malaysia", "Thailand", "China")
+
+gdp <- gapminder[gapminder$country %in% countries & gapminder$year >= 1967, ]
+gdp$country <- as.character(gdp$country)
+
+bump_chart(
+  data      = gdp,
+  x         = "year",
+  y         = "gdpPercap",
+  group     = "country",
+  highlight = c("Singapore", "Korea, Rep."),
+  title     = "GDP per capita rank, 1967-2007"
+)
+```
+
+## `waterfall_chart()` {#waterfall_chart}
+
+A waterfall chart shows how an initial value is built up or eroded by a sequence of positive and negative contributions. Each bar starts exactly where the previous one ended. It is the standard chart for P&L decomposition, budget variance analysis, and any "what changed and why" narrative.
+
+The optional `measure` column lets you mark certain bars as `"total"`, they span from zero to the running cumulative sum, making subtotals and final totals visually distinct. **Hovering over any bar shows a tooltip** with the label, the delta, and the running total.
+
+```{r}
+pnl <- data.frame(
+  label   = c("Revenue", "COGS", "Gross Profit",
+              "R&D", "S&M", "G&A", "Operating Income"),
+  value   = c(1200, -450, 750, -120, -90, -60, 480),
+  measure = c("relative", "relative", "total",
+              "relative", "relative", "relative", "total")
+)
+
+waterfall_chart(
+  data   = pnl,
+  x      = "label",
+  y      = "value",
+  measure = "measure",
+  title  = "P&L bridge",
+  ytitle = "USD thousands"
+)
+```
+
+Without a `measure` column every bar is a simple delta — useful for tracking a running balance over time:
+
+```{r}
+cashflow <- data.frame(
+  month = c("Jan", "Feb", "Mar", "Apr", "May", "Jun"),
+  delta = c(120, -30, 80, -60, 95, -20)
+)
+
+waterfall_chart(
+  data          = cashflow,
+  x             = "month",
+  y             = "delta",
+  title         = "Monthly cash flow",
+  ytitle        = "USD thousands",
+  positiveColor = "steelblue",
+  negativeColor = "tomato"
+)
+```
+
+## `radar_chart()` {#radar_chart}
+
+`radar_chart()` draws one translucent polygon per series over a polygonal grid, with one spoke per variable. Its look and feel is inspired by the radar chart of [Chart.js](https://www.chartjs.org/). Polygons grow out from the center, hovering over a point shows its value, and clicking a legend entry toggles that series.
+
+```{r}
+players <- data.frame(
+  player    = c("Ana", "Ben", "Chloe"),
+  speed     = c(88, 72, 65),
+  power     = c(60, 91, 70),
+  passing   = c(79, 58, 93),
+  dribbling = c(92, 64, 81),
+  defending = c(45, 83, 74),
+  stamina   = c(70, 77, 88)
+)
+
+radar_chart(
+  data     = players,
+  group    = "player",
+  axes     = c("speed", "power", "passing", "dribbling", "defending", "stamina"),
+  maxValue = 100,
+  title    = "Player skill ratings"
+)
+```
+
+When the variables are measured in different units, `scaleEachAxis = TRUE` gives each axis its own scale:
+
+```{r}
+cyl_means <- aggregate(cbind(mpg, hp, wt, qsec, disp) ~ cyl, data = mtcars, FUN = mean)
+cyl_means$cyl <- paste(cyl_means$cyl, "cylinders")
+
+radar_chart(
+  data          = cyl_means,
+  group         = "cyl",
+  axisLabels    = c("Miles/gallon", "Horsepower", "Weight (1000 lbs)",
+                    "1/4 mile time (s)", "Displacement (cu.in.)"),
+  scaleEachAxis = TRUE,
+  levels        = 4,
+  gridShape     = "circle",
+  valueFormat   = ".1f",
+  title         = "mtcars averages by number of cylinders"
+)
+```
+
+## `radial_bar_chart()` {#radial_bar_chart}
+
+`radial_bar_chart()` draws each category as a concentric circular progress track, inspired by the radialBar chart of [ApexCharts](https://apexcharts.com/). Each ring has a faint background track and a rounded arc that sweeps in on load, a label sits at the start of each track, and the average (or total) is shown in the center. Hover over a ring to put its name and value in the center.
+
+```{r}
+platforms <- data.frame(
+  platform = c("Vimeo", "Messenger", "Facebook", "LinkedIn"),
+  share    = c(76, 67, 61, 90)
+)
+
+radial_bar_chart(
+  data  = platforms,
+  label = "platform",
+  value = "share",
+  title = "Weekly active users (share of total, illustrative)"
+)
+```
+
+With `max` you can set the value that fills a whole ring, and with `endAngle = 360` the tracks make a full circle:
+
+```{r}
+sales <- data.frame(
+  region = c("North", "South", "East", "West", "Central"),
+  units  = c(420, 310, 275, 190, 120)
+)
+
+radial_bar_chart(
+  data        = sales,
+  label       = "region",
+  value       = "units",
+  max         = 500,
+  endAngle    = 360,
+  centerValue = "total",
+  centerLabel = "Units sold",
+  title       = "Units sold by region (target: 500)"
+)
+```
+
+## `bar_chart_race()` {#bar_chart_race}
+
+This function allows you to create an animated bar chart race. `bar_chart_race()` is similar to `bar_chart()` but takes a third variable mapped to the time dimension, with options for styling transitions.
+
+Let's make a bar chart race of population growth among various countries using a subset of the `gapminder` dataset from the [{gapminder} package](https://github.com/jennybc/gapminder):
+
+```{r, eval = FALSE}
+gapminder_subset <- gapminder::gapminder %>%
+  select(country, year, pop) %>% 
+  filter(country %in% c("Japan", "Mexico", "Germany", "Brazil", "Philippines", "Vietnam")) %>%
+  mutate(pop = pop/1e6)
+
+gapminder_subset %>%
+  slice_sample(n = 10)
+
+#>    year       pop     country
+#> 1  2007  91.07729 Philippines
+#> 2  1997  76.04900     Vietnam
+#> 3  1972 107.18827       Japan
+#> 4  1967  39.46391     Vietnam
+#> 5  1952  30.14432      Mexico
+#> 6  1987 142.93808      Brazil
+#> 7  1997 168.54672      Brazil
+#> 8  1962  41.12148      Mexico
+#> 9  1952  69.14595     Germany
+#> 10 1957  91.56301       Japan
+```
+
+```{r, echo = FALSE}
+gapminder_subset <- data.frame(
+  year = c(
+    1952L,1957L,1962L,1967L,1972L,1977L,
+    1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
+    1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
+    1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
+    1997L,2002L,2007L,1952L,1957L,1962L,1967L,1972L,1977L,
+    1982L,1987L,1992L,1997L,2002L,2007L,1952L,1957L,1962L,
+    1967L,1972L,1977L,1982L,1987L,1992L,1997L,2002L,2007L,
+    1952L,1957L,1962L,1967L,1972L,1977L,1982L,1987L,1992L,
+    1997L,2002L,2007L
+  ),
+  pop = c(
+    56.60256,65.551171,76.03939,88.049823,
+    100.840058,114.313951,128.962939,142.938076,155.975974,
+    168.546719,179.914212,190.010647,69.145952,71.019069,73.739117,
+    76.368453,78.717088,78.160773,78.335266,77.718298,
+    80.597764,82.011073,82.350671,82.400996,86.459025,91.563009,
+    95.831757,100.825279,107.188273,113.872473,118.454974,
+    122.091325,124.329269,125.956499,127.065841,127.467972,30.144317,
+    35.015548,41.121485,47.995559,55.984294,63.759976,
+    71.640904,80.122492,88.11103,95.895146,102.479927,108.700891,
+    22.438691,26.072194,30.325264,35.3566,40.850141,46.850962,
+    53.456774,60.017788,67.185766,75.012988,82.995088,91.077287,
+    26.246839,28.998543,33.79614,39.46391,44.655014,50.533506,
+    56.142181,62.826491,69.940728,76.048996,80.908147,
+    85.262356
+  ),
+  country = as.factor(c(
+    "Brazil","Brazil",
+    "Brazil","Brazil","Brazil","Brazil","Brazil",
+    "Brazil","Brazil","Brazil","Brazil","Brazil","Germany",
+    "Germany","Germany","Germany","Germany",
+    "Germany","Germany","Germany","Germany","Germany",
+    "Germany","Germany","Japan","Japan","Japan","Japan",
+    "Japan","Japan","Japan","Japan","Japan","Japan",
+    "Japan","Japan","Mexico","Mexico","Mexico",
+    "Mexico","Mexico","Mexico","Mexico","Mexico",
+    "Mexico","Mexico","Mexico","Mexico","Philippines",
+    "Philippines","Philippines","Philippines","Philippines",
+    "Philippines","Philippines","Philippines",
+    "Philippines","Philippines","Philippines","Philippines",
+    "Vietnam","Vietnam","Vietnam","Vietnam",
+    "Vietnam","Vietnam","Vietnam","Vietnam","Vietnam",
+    "Vietnam","Vietnam","Vietnam"
+  ))
+)
+```
+
+In this example, we simply pass call `bar_chart_race()` like `bar_chart()`, but with an additional variable mapped to the time dimension specified with `time = year`:
+
+```{r}
+gapminder_subset %>%
+  bar_chart_race(
+    x = "pop",
+    y = "country",
+    time = "year",
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations"
+  )
+```
+
+You can also stylize transitions with the `frameDur`, `transitionDur`,  and `ease` arguments. For example, setting the time spent pausing on each frame to zero with `frameDur = 0` will create a smooth animation:
+
+```{r}
+gapminder_subset %>%
+  bar_chart_race(
+    x = "pop",
+    y = "country",
+    time = "year",
+    transitionDur = 1000,
+    frameDur = 0,
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations"
+  )
+```
+
+As you might have noticed, the value of the column passed to the `time` argument is automatically labelled at the bottom-right corner of the plot panel. We can stylize this with a list of options passed to the `timeLabelOpts` argument (or turn it off with `timeLabel = FALSE`). We also give the bars a little bounce here with `ease = "BackInOut"` for fun.
+
+```{r}
+gapminder_subset %>%
+  bar_chart_race(
+    x = "pop",
+    y = "country",
+    time = "year",
+    ease = "BackInOut",
+    ytitle = "Country",
+    xtitle = "Population (in millions)",
+    title = "Bar chart race of country populations",
+    timeLabelOpts = list(
+      size = 40,
+      prefix = "Year: ",
+      xOffset = 0.2
+    )
+  )
+```
+

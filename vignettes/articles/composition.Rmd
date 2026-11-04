@@ -1,0 +1,284 @@
+---
+title: "Part-to-whole and hierarchies"
+description: "Pies, treemaps, waffles, sunbursts, mosaics and more."
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning = FALSE)
+library(ddplot)
+library(ggplot2) # mpg, diamonds
+library(dplyr)
+```
+
+Charts that split a whole into its parts, flat or nested.
+
+::: {.dd-chooser}
+
+| Chart | Use it when |
+|---|---|
+| [`pie_chart()`](#pie_chart) | You split a whole into a few parts |
+| [`treemap_chart()`](#treemap_chart) | You split a whole into many parts, optionally nested |
+| [`waffle_chart()`](#waffle_chart) | You show shares as a grid of 100 squares |
+| [`sunburst_chart()`](#sunburst_chart) | You explore a hierarchy with several levels |
+| [`mosaic_chart()`](#mosaic_chart) | You show how two categorical variables combine |
+| [`rose_chart()`](#rose_chart) | You show a cyclical breakdown, such as months, Nightingale-style |
+| [`parliament_chart()`](#parliament_chart) | You show seats won by each party |
+
+:::
+
+## `pie_chart()` {#pie_chart}
+
+Pie charts and donut charts are pretty straightforward to set up. We'll use a sample from the `starwars` data frame to plot a simple pie chart.
+
+```{r}
+# starwars is part of the dplyr data frame
+mini_starwars <- starwars %>% tidyr::drop_na(mass) %>%
+  sample_n(size = 5) # getting 5 random values
+
+pie_chart(
+  data = mini_starwars,
+  value = "mass",
+  label = "name"
+)
+```
+
+Using the `padRadius`, `padAngle` and `cornerRadius` parameters, one can get fancier pie charts:
+
+```{r}
+pie_chart(
+  data = mini_starwars,
+  value = "mass",
+  label = "name",
+  padRadius = 200,
+  padAngle = 0.1,
+  cornerRadius = 50,
+  innerRadius = 10
+)
+```
+If you need a donut chart, you just need to play with the `innerRadius` parameter:
+
+```{r}
+pie_chart(
+  data = mini_starwars,
+  value = "mass",
+  label = "name",
+  innerRadius = 120,
+  cornerRadius = 20,
+  title = "5 Starwars characters ranked by their mass",
+  titleFontSize = 16,
+  bgcol = "yellow"
+)
+```
+
+## `treemap_chart()` {#treemap_chart}
+
+A treemap shows part-to-whole data as nested rectangles whose areas are proportional to a value. Ben Shneiderman invented the technique in the early 1990s. It became famous through SmartMoney's "Map of the Market" and the New York Times' graphics of the US federal budget. Use it when you have many parts (optionally grouped into categories) and want to see at a glance which ones dominate the total. When you supply a `group` column, tiles are coloured by group and each group gets a header showing its total. Hover over a tile to see its value and its share of the total.
+
+```{r}
+budget <- data.frame(
+  department = c("Hospitals", "Primary care", "Public health",
+                 "Schools", "Universities", "Vocational training",
+                 "Army", "Navy", "Air force",
+                 "Roads", "Railways", "Airports",
+                 "Pensions", "Unemployment", "Family benefits"),
+  ministry   = c("Health", "Health", "Health",
+                 "Education", "Education", "Education",
+                 "Defence", "Defence", "Defence",
+                 "Transport", "Transport", "Transport",
+                 "Social security", "Social security", "Social security"),
+  spending   = c(5200, 2100, 800,
+                 3900, 1800, 600,
+                 2300, 1400, 1700,
+                 1500, 1100, 400,
+                 7400, 1900, 1300)
+)
+
+treemap_chart(
+  data        = budget,
+  value       = "spending",
+  label       = "department",
+  group       = "ministry",
+  valueFormat = "$,.0f",
+  title       = "Where the money goes (millions)"
+)
+```
+
+Labels are truncated or hidden automatically when a tile is too small to fit them, so the chart stays readable even with many rectangles. In the example below, most of the 142 countries are too small to label, but you can hover over any tile to identify it.
+
+```{r}
+library(gapminder)
+
+pop_2007 <- gapminder[gapminder$year == 2007, ]
+
+treemap_chart(
+  data        = pop_2007,
+  value       = "pop",
+  label       = "country",
+  group       = "continent",
+  valueFormat = ".3~s",
+  padding     = 1,
+  title       = "World population in 2007"
+)
+```
+
+## `waffle_chart()` {#waffle_chart}
+
+A waffle chart is a grid of squares, 10 x 10 by default, where each category fills a number of cells in proportion to its share of the whole. With 100 cells, each square reads as one percent, so "about a third" or "fewer than one in ten" is visible at a glance. Readers find this easier to judge than pie slices. Pew Research Center, FiveThirtyEight, The Economist and the Washington Post use the format often, and in R it was popularised by Bob Rudis's `waffle` package. Use it when a handful of categories make up a single whole, such as survey responses, vote shares or budget splits. Cells are allocated with the largest-remainder method, so the counts always add up exactly to the number of cells. Hover over a cell or a legend entry to highlight that category.
+
+```{r}
+survey <- data.frame(
+  response = c("Strongly agree", "Agree", "Neutral",
+               "Disagree", "Strongly disagree"),
+  n = c(312, 405, 158, 87, 38)
+)
+
+waffle_chart(
+  data     = survey,
+  category = "response",
+  value    = "n",
+  colors   = c("#1a9641", "#a6d96a", "#bdbdbd", "#fdae61", "#d7191c"),
+  title    = "Do you support the new policy?"
+)
+```
+
+You can change the grid size with `rows` and `cols`, and the fill order with `direction = "col"`. The example below shows each continent's share of the world population in 2007 on a 10 x 20 grid, where each cell is half a percent:
+
+```{r}
+library(gapminder)
+
+pop_2007 <- gapminder[gapminder$year == 2007, ]
+pop_continent <- aggregate(pop ~ continent, data = pop_2007, FUN = sum)
+
+waffle_chart(
+  data      = pop_continent,
+  category  = "continent",
+  value     = "pop",
+  direction = "col",
+  rows      = 10,
+  cols      = 20,
+  title     = "World population by continent, 2007"
+)
+```
+
+## `sunburst_chart()` {#sunburst_chart}
+
+`sunburst_chart()` draws hierarchical data as concentric rings. It is inspired by the signature sunburst chart of [Apache ECharts](https://echarts.apache.org/) and reimplemented in plain D3. Hover over a sector to highlight its branch, click it to zoom in, and click the centre to zoom back out.
+
+```{r}
+library(gapminder)
+
+pop_2007 <- gapminder[gapminder$year == 2007, ]
+
+sunburst_chart(
+  data        = pop_2007,
+  levels      = c("continent", "country"),
+  value       = "pop",
+  valueFormat = ".3~s",
+  rootLabel   = "World",
+  title       = "World population in 2007"
+)
+```
+
+Without a `value` column, sectors are sized by row counts:
+
+```{r}
+sunburst_chart(
+  data        = mpg,
+  levels      = c("class", "manufacturer"),
+  rootLabel   = "Cars",
+  labelRotate = "tangential",
+  title       = "Number of car models by class and manufacturer"
+)
+```
+
+## `mosaic_chart()` {#mosaic_chart}
+
+`mosaic_chart()` draws a mosaic (Marimekko) chart, inspired by the mosaic example in the [Vega-Lite](https://vega.github.io/vega-lite/) gallery. Each column's width is that category's share of the total, and each column is split into segments that add up to 100%, so every cell's area is proportional to its count. Hover over a cell to see its count, its column's share and its share within the column.
+
+```{r}
+titanic <- as.data.frame(Titanic)
+
+mosaic_chart(
+  data   = titanic,
+  x      = "Class",
+  fill   = "Survived",
+  value  = "Freq",
+  colors = c("#e45756", "#4c78a8"),
+  xtitle = "Share of passengers and crew",
+  ytitle = "Share within class",
+  title  = "Who survived the Titanic?"
+)
+```
+
+When `value` is omitted, rows are counted. Factor levels set the order of the columns and segments:
+
+```{r}
+cars <- mtcars
+cars$cyl  <- factor(cars$cyl,  levels = c(8, 6, 4), labels = c("8 cyl", "6 cyl", "4 cyl"))
+cars$gear <- factor(cars$gear, levels = c(3, 4, 5), labels = c("3 gears", "4 gears", "5 gears"))
+
+mosaic_chart(cars, x = "cyl", fill = "gear", labelType = "both",
+             legendTitle = "Gears", title = "Motor Trend cars: gears by cylinders")
+```
+
+## `rose_chart()` {#rose_chart}
+
+`rose_chart()` draws a Nightingale rose, also called a coxcomb or polar area chart. It is inspired by the polar-interval rose chart of [AntV G2](https://g2.antv.antgroup.com/). Every category gets a wedge of the same angle, and the radius follows a square-root scale so that each wedge's area stays proportional to its value. An optional `group` column stacks the wedges. The example below uses Florence Nightingale's own monthly death counts from the Crimean War, 1854–55 (the same values as `HistData::Nightingale`).
+
+```{r}
+mon <- c("Apr 1854", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+         "Dec", "Jan 1855", "Feb", "Mar")
+crimea <- data.frame(
+  month  = factor(rep(mon, times = 3), levels = mon),
+  cause  = factor(rep(c("Preventable disease", "Wounds", "Other causes"), each = 12),
+                  levels = c("Preventable disease", "Wounds", "Other causes")),
+  deaths = c(1, 12, 11, 359, 828, 788, 503, 844, 1725, 2761, 2120, 1205,
+             0, 0, 0, 0, 1, 81, 132, 287, 114, 83, 42, 32,
+             5, 9, 6, 23, 30, 70, 128, 106, 131, 324, 361, 172)
+)
+
+rose_chart(
+  data     = crimea,
+  category = "month",
+  value    = "deaths",
+  group    = "cause",
+  colors   = c("#7fa7c9", "#e0645c", "#4d4d4d"),
+  title    = "Causes of death in the army in the East, 1854-55",
+  height   = 560
+)
+```
+
+Use `sort` to order the wedges by size:
+
+```{r}
+rose_chart(
+  data        = data.frame(state = rownames(USArrests)[1:12],
+                           murder = USArrests$Murder[1:12]),
+  category    = "state",
+  value       = "murder",
+  sort        = "desc",
+  valueFormat = ".1f",
+  title       = "Murder arrests per 100,000 residents (1973)"
+)
+```
+
+## `parliament_chart()` {#parliament_chart}
+
+You can easily create a parliament chart using the `parliament_chart()` function, consider the following example: 
+
+```{r}
+# The data is a toy example and does not reflect the reality
+vote_results_germany <- data.frame(
+    political_party = c("SDP", "CDU", "Linke", "Grüne"),
+    number_of_seats = c(200, 40, 30, 20)
+)
+parliament_chart(
+  data = vote_results_germany,
+  categorical_column = "political_party",
+  numerical_column = "number_of_seats",
+  title = "German Bundestag",
+  seatSize = 10,
+  bgcol = "#fefefe"
+)
+```
+
