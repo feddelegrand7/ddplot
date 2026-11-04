@@ -146,7 +146,7 @@ line_chart(
 ```{r}
 set.seed(3)
 samples <- data.frame(
-  time = seq(as.POSIXct("2024-03-01 09:00", tz = "UTC"), by = "5 min", length.out = 400),
+  time = seq(as.POSIXct("2026-03-01 09:00", tz = "UTC"), by = "5 min", length.out = 400),
   cpu  = 40 + cumsum(rnorm(400)),
   mem  = 60 + cumsum(rnorm(400, 0, 0.5))
 )
@@ -289,7 +289,7 @@ area_band(
 `streamgraph()` is inspired by the [Highcharts](https://www.highcharts.com/) streamgraph: stacked areas flowing around a centred (wiggle) baseline, with labels drawn inside each layer, a crosshair tooltip and an interactive legend. Unlike `stacked_area_chart()`, it takes long data. Hover over a layer to highlight it, and click a legend item to hide or show it.
 
 ```{r}
-set.seed(2024)
+set.seed(2026)
 years  <- 1980:2020
 genres <- c("Rock", "Pop", "Hip hop", "Electronic", "Country",
             "R&B", "Jazz", "Metal", "Reggae", "Latin")
@@ -332,15 +332,15 @@ streamgraph(phones, x = "year", group = "region", value = "phones",
 `calendar_heatmap()` is inspired by the signature heatmap of [Frappe Charts](https://frappe.io/charts) and by GitHub's contribution graph. It draws one rounded square per day on a week-by-weekday grid, one panel per year, with a "Less ... More" legend and a staggered fade-in. Hover over a day to see its value, or over a legend square to highlight every day in that color bucket.
 
 ```{r}
-set.seed(2024)
-days <- seq(as.Date("2024-01-01"), as.Date("2024-12-31"), by = "day")
+set.seed(2026)
+days <- seq(as.Date("2026-01-01"), as.Date("2026-12-31"), by = "day")
 weekday <- !(format(days, "%u") %in% c("6", "7"))
 activity <- data.frame(
   day     = days,
   commits = rpois(length(days), ifelse(weekday, 6, 1.5)) * rbinom(length(days), 1, 0.8)
 )
 
-calendar_heatmap(activity, date = "day", value = "commits", title = "Commits in 2024")
+calendar_heatmap(activity, date = "day", value = "commits", title = "Commits in 2026")
 ```
 
 Data spanning several years is drawn as one panel per year:

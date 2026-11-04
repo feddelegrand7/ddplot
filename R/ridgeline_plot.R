@@ -77,7 +77,7 @@
 #'
 #' @examples
 #' # Simulated reaction times for five experimental conditions
-#' set.seed(2024)
+#' set.seed(2026)
 #' reaction <- data.frame(
 #'   time = c(rnorm(200, 300, 40), rnorm(200, 340, 50),
 #'            rnorm(200, 380, 35), c(rnorm(100, 360, 25), rnorm(100, 460, 30)),

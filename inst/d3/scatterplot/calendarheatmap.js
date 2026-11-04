@@ -160,7 +160,7 @@ years.forEach((yr, yi) => {
     });
   allDays.push.apply(allDays, days);
 
-  // Year header: "2024" + total
+  // Year header: "2026" + total
   if (showYear) {
     const withData = days.filter(d => d.value != null);
     const total    = d3.sum(withData, d => d.value);

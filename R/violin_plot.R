@@ -117,7 +117,7 @@
 #' )
 #'
 #' # A bimodal distribution, width proportional to group size, hard span
-#' set.seed(2024)
+#' set.seed(2026)
 #' waiting <- data.frame(
 #'   minutes = c(rnorm(300, 55, 6), rnorm(200, 80, 5),
 #'               rnorm(150, 70, 10), rnorm(60, 62, 4)),

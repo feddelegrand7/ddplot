@@ -125,7 +125,7 @@ A ridgeline plot, also known as a "joy plot", stacks several partially overlappi
 The densities are computed in the browser with a Gaussian (default) or Epanechnikov kernel. By default, one joint bandwidth is picked from the pooled data with Silverman's rule of thumb, so every ridge is smoothed the same way. Lower ridges are drawn in front of the ones above them. Hovering a ridge or its label brings it to the front and shows its number of observations and mean.
 
 ```{r}
-set.seed(2024)
+set.seed(2026)
 
 reaction <- data.frame(
   time = c(rnorm(200, 300, 40), rnorm(200, 340, 50),

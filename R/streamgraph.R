@@ -109,7 +109,7 @@
 #'
 #' @examples
 #' # Popularity of music genres over four decades (simulated)
-#' set.seed(2024)
+#' set.seed(2026)
 #' years  <- 1980:2020
 #' genres <- c("Rock", "Pop", "Hip hop", "Electronic", "Country",
 #'             "R&B", "Jazz", "Metal", "Reggae", "Latin")
@@ -154,7 +154,7 @@
 #'
 #' # Date x-axis with a silhouette baseline: weekly sign-ups per channel
 #' set.seed(7)
-#' weeks    <- seq(as.Date("2024-01-01"), by = "week", length.out = 52)
+#' weeks    <- seq(as.Date("2026-01-01"), by = "week", length.out = 52)
 #' channels <- c("Organic", "Paid search", "Social", "Referral", "Email")
 #' signups  <- expand.grid(week = weeks, channel = channels)
 #' t        <- as.numeric(signups$week - min(weeks)) / 7
@@ -172,7 +172,7 @@
 #'   xFormat = "%b %Y",
 #'   colors  = c("#2caffe", "#544fc5", "#00e272", "#fe6a35", "#6b8abc"),
 #'   legend  = FALSE,
-#'   title   = "Weekly sign-ups by channel, 2024"
+#'   title   = "Weekly sign-ups by channel, 2026"
 #' )
 streamgraph <- function(
     data,

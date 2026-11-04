@@ -44,7 +44,7 @@
 #' @param valueFormat A d3-format specifier used to display values (e.g.
 #' \code{",.0f"}, \code{"$,.2s"}). Defaults to \code{",.2~f"}.
 #' @param dateFormat A d3-time-format specifier used to display dates in the
-#' tooltip. Defaults to \code{"\%a \%b \%-d, \%Y"} (e.g. "Wed Jan 3, 2024").
+#' tooltip. Defaults to \code{"\%a \%b \%-d, \%Y"} (e.g. "Wed Jan 7, 2026").
 #' @param showYearLabel Whether to print the year and its total above each
 #' panel. Defaults to \code{TRUE}.
 #' @param showMonthLabels Whether to print month labels above the grid.
@@ -77,8 +77,8 @@
 #'
 #' @examples
 #' # One year of simulated daily activity, busier on weekdays
-#' set.seed(2024)
-#' days <- seq(as.Date("2024-01-01"), as.Date("2024-12-31"), by = "day")
+#' set.seed(2026)
+#' days <- seq(as.Date("2026-01-01"), as.Date("2026-12-31"), by = "day")
 #' weekday <- !(format(days, "%u") %in% c("6", "7"))
 #' activity <- data.frame(
 #'   day     = days,
@@ -90,7 +90,7 @@
 #'   data       = activity,
 #'   date       = "day",
 #'   value      = "commits",
-#'   title      = "Commits in 2024"
+#'   title      = "Commits in 2026"
 #' )
 #'
 #' # Several years stacked, weeks starting on Monday, GitHub-like greens

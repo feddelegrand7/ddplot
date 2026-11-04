@@ -113,7 +113,7 @@ already contains the ranks.
 \examples{
 # Points scored by five teams over four seasons
 league <- data.frame(
-  season = rep(c("2021", "2022", "2023", "2024"), each = 5),
+  season = rep(c("2023", "2024", "2025", "2026"), each = 5),
   team   = rep(c("Lions", "Tigers", "Bears", "Wolves", "Eagles"), 4),
   points = c(80, 75, 60, 55, 50,
              70, 82, 58, 66, 49,
