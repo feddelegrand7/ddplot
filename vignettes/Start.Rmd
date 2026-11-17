@@ -59,7 +59,7 @@ line_chart(
 
 ### Comparing categories
 
-Bar charts expect one row per category. Aggregate first, for instance with `dplyr`:
+Bar charts take one row per category, or raw rows that they count or aggregate for you (`agg`). Here the data is aggregated first with `dplyr`:
 
 ```{r}
 library(dplyr)
@@ -72,7 +72,6 @@ mpg %>%
     x = "manufacturer",
     y = "mean_cty",
     sort = "descending",
-    fill = "#4269d0",
     ytitle = "Average city miles per gallon",
     title = "City fuel economy by manufacturer"
   )

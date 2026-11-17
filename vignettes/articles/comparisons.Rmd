@@ -16,8 +16,8 @@ Charts for comparing values across categories, from the everyday bar chart to be
 
 | Chart | Use it when |
 |---|---|
-| [`bar_chart()`](#bar_chart) | You compare a value across a handful of categories |
-| [`horz_bar_chart()`](#horz_bar_chart) | You have many categories or long labels |
+| [`bar_chart()`](#bar_chart) | You compare a value across categories, optionally split into grouped or stacked bars |
+| [`horz_bar_chart()`](#horz_bar_chart) | You have many categories or long labels, or want 100% stacked bars |
 | [`lollipop_chart()`](#lollipop_chart) | You want a lighter alternative to a bar chart |
 | [`horz_lollipop()`](#horz_lollipop) | A lollipop chart with many categories or long labels |
 | [`dumbbell_chart()`](#dumbbell_chart) | You show the gap between two values for each category |
@@ -32,89 +32,137 @@ Charts for comparing values across categories, from the everyday bar chart to be
 
 ## `bar_chart()` {#bar_chart}
 
-The `bar_chart()` function allows you to create bar charts however you need to make the aggregation beforehand. In the following example, we will plot the average `cty` for each `manufacturer` using the `dplyr` package.
+`bar_chart()` draws one bar per category. Hover a bar to read its value, its share of the total and its rank. The buttons at the top right re-sort the bars (original order, largest first, smallest first) with an animation.
 
 ```{r}
 library(dplyr)
 
-mpg %>% group_by(manufacturer) %>%
+mpg %>%
+  group_by(manufacturer) %>%
   summarise(mean_cty = mean(cty)) %>%
   bar_chart(
     x = "manufacturer",
     y = "mean_cty",
-    xFontSize = 10,
-    yFontSize = 10,
-    fill = "orange",
-    strokeWidth = 2,
-    ytitle = "average cty value",
-    title = "Average City Miles per Gallon by manufacturer"
+    sort = "descending",
+    highlight = c("honda", "volkswagen"),
+    valueFormat = ".1f",
+    ytitle = "Average city miles per gallon",
+    title = "City fuel economy by manufacturer",
+    subtitle = "Honda and Volkswagen lead the field"
   )
 ```
 
-The bars can be easily sorted in `ascending` or `descending` order using the `sort` parameter:
+`highlight` keeps some bars in colour and greys out the others.
+
+### Counting and aggregating
+
+You do not have to aggregate first. Leave `y` empty to count the rows of each category, or set `agg` to `"mean"`, `"median"`, `"min"` or `"max"` (the default, `"sum"`, adds the rows up):
 
 ```{r}
-mpg %>% group_by(manufacturer) %>%
-  summarise(mean_cty = mean(cty)) %>%
-  bar_chart(
-    x = "manufacturer",
-    y = "mean_cty",
-    sort = "ascending",
-    xFontSize = 10,
-    yFontSize = 10,
-    fill = "orange",
-    strokeWidth = 1,
-    ytitle = "average cty value",
-    title = "Average City Miles per Gallon by manufacturer",
-    titleFontSize = 16
-  )
+bar_chart(mpg, x = "class", sort = "descending", title = "Cars per class")
+```
+
+```{r}
+bar_chart(mpg, x = "class", y = "hwy", agg = "median", sort = "descending",
+          title = "Median highway miles per gallon by class")
+```
+
+### Groups: grouped, stacked and 100%
+
+`group` splits each bar by a second variable. Use the **Grouped / Stacked / 100%** buttons to switch layouts; the legend hides a group on click and keeps only that group on double-click.
+
+```{r}
+bar_chart(
+  data = mpg,
+  x = "class",
+  group = "drv",
+  sort = "descending",
+  fill = c("4" = "#4269d0", "f" = "#efb118", "r" = "#ff725c"),
+  title = "Cars per class and drive train"
+)
+```
+
+`position` sets the starting layout. Stacked bars show a total above each bar, and `refLines` draws a target or an average:
+
+```{r}
+sales <- data.frame(
+  quarter = rep(c("Q1", "Q2", "Q3", "Q4"), each = 3),
+  region  = rep(c("North", "South", "West"), 4),
+  revenue = c(120, 95, 60, 135, 90, 72, 150, 110, 80, 170, 105, 96)
+)
+
+bar_chart(
+  sales,
+  x = "quarter",
+  y = "revenue",
+  group = "region",
+  position = "stacked",
+  refLines = c(Target = 300),
+  valuePrefix = "$",
+  valueSuffix = "k",
+  title = "Revenue by quarter"
+)
+```
+
+### In Shiny
+
+Clicking a bar sets `input$<id>_clicked` to the clicked `category` and `group`. The chosen layout, sort order and hidden groups are kept when the chart is updated:
+
+```{r, eval = FALSE}
+output$classes <- renderD3(bar_chart(mpg, "class", group = "drv"))
+observeEvent(input$classes_clicked, {
+  print(input$classes_clicked$category)
+})
 ```
 
 ## `horz_bar_chart()` {#horz_bar_chart}
 
-If you've many categories, it might be a good idea to go for a horizontal bar chart. It has the same parameters as the `bar_chart()` function except that the x-axis parameter is named `value` and the y-axis parameter named `label`, this naming convention aims to mitigate some confusion that can arise.
-
-If we want to replicate the above graphic in a horizontal way, we can do:
+`horz_bar_chart()` is the horizontal version, better for many categories or long labels. It has the same features; only the names of the first arguments differ (`label` for the categories, `value` for the numbers).
 
 ```{r}
-mpg %>% group_by(manufacturer) %>%
-  summarise(mean_cty = mean(cty)) %>%
+mpg %>%
+  group_by(manufacturer) %>%
+  summarise(median_hwy = median(hwy)) %>%
   horz_bar_chart(
     label = "manufacturer",
-    value = "mean_cty",
-    sort = "ascending",
-    labelFontSize  = 10,
-    valueFontSize = 10,
-    fill = "orange",
-    stroke = "crimson",
-    strokeWidth = 1,
-    valueTitle  = "average cty value",
-    title = "Average City Miles per Gallon by manufacturer",
-    titleFontSize = 16
+    value = "median_hwy",
+    sort = "descending",
+    valueTitle = "Median highway miles per gallon",
+    title = "Highway fuel economy by manufacturer"
   )
 ```
 
-As in `bar_chart()`, we can also sort in descending order:
+A 100% stacked layout shows the composition of each category:
 
 ```{r}
-mpg %>% group_by(manufacturer) %>%
-  summarise(mean_cty = mean(cty)) %>%
-  horz_bar_chart(
-    label = "manufacturer",
-    value = "mean_cty",
-    sort = "descending",
-    labelFontSize  = 10,
-    valueFontSize = 10,
-    bgcol = "black",
-    axisCol = "white",
-    fill = "white",
-    stroke = "white",
-    strokeWidth = 1,
-    valueTitle  = "average cty value",
-    labelTitle = "Manufacturers",
-    title = "Average City Miles per Gallon by manufacturer",
-    titleFontSize = 16
-  )
+horz_bar_chart(
+  data = mpg,
+  label = "manufacturer",
+  group = "drv",
+  position = "percent",
+  sort = "descending",
+  title = "Drive train by manufacturer"
+)
+```
+
+Negative values grow to the left of zero; `negativeFill` gives them their own colour:
+
+```{r}
+growth <- data.frame(
+  country = c("Spain", "France", "Italy", "Germany", "Poland", "Sweden"),
+  gdp     = c(2.4, 0.9, -0.3, -0.6, 3.1, 1.2)
+)
+
+horz_bar_chart(
+  growth,
+  label = "country",
+  value = "gdp",
+  sort = "descending",
+  negativeFill = "#ff725c",
+  valueSuffix = "%",
+  valueTitle = "GDP growth",
+  title = "Annual GDP growth (illustrative data)"
+)
 ```
 
 ## `lollipop_chart()` {#lollipop_chart}

@@ -2,110 +2,236 @@
 % Please edit documentation in R/barchart.R
 \name{bar_chart}
 \alias{bar_chart}
-\title{Create a bar chart.}
+\title{Create an interactive bar chart.}
 \usage{
 bar_chart(
   data,
   x,
-  y,
-  fill = "crimson",
+  y = NULL,
+  fill = NULL,
   sort = "none",
-  paddingWidth = 0.1,
+  paddingWidth = 0.2,
   xticks = NULL,
-  xFontSize = 10,
-  yFontSize = 10,
+  xFontSize = 11,
+  yFontSize = 11,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitleFontSize = 13,
   title = NULL,
-  titleFontSize = 22,
-  stroke = "crimson",
+  titleFontSize = 20,
+  stroke = NULL,
   strokeWidth = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
+  bgcol = "white",
   opacity = 1,
-  axisCol = "black",
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  group = NULL,
+  position = c("grouped", "stacked", "percent"),
+  agg = c("sum", "mean", "median", "min", "max", "count"),
+  labels = TRUE,
+  highlight = NULL,
+  refLines = NULL,
+  negativeFill = NULL,
+  cornerRadius = 3,
+  legend = NULL,
+  controls = TRUE,
+  tooltip = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  gridCol = "#e9e9e9"
 )
 }
 \arguments{
 \item{data}{The data frame containing the variables to consider.}
 
-\item{x}{The x-variable to consider.}
+\item{x}{The name of the categorical variable (one bar per value).}
 
-\item{y}{The y-variable to consider.}
+\item{y}{The name of the numeric variable. When \code{NULL}, the rows of
+each category are counted.}
 
-\item{fill}{The color of the bars. Defaults to 'crimson'.}
+\item{fill}{The colour of the bars. A single colour, or, without
+\code{group}, one colour per category (recycled; a named vector maps
+colours to categories). With \code{group}, one colour per group (a named
+vector maps colours to groups). Defaults to a built-in palette.}
 
-\item{sort}{Whether to sort or not the bars. Takes three values
-'none' which is the default, 'ascending' or 'descending'.}
+\item{sort}{The initial order of the bars: \code{"none"} (default, the
+order of the data or of the factor levels), \code{"ascending"} or
+\code{"descending"}. With \code{group}, categories are sorted by their
+total.}
 
-\item{paddingWidth}{The distance between each bar.
-The value goes from 0 to 0.99 included. Defaults to 0.1.}
+\item{paddingWidth}{The space between bars, from 0 to 0.99. Defaults to
+0.2.}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{xticks}{Not used; kept for compatibility.}
 
-\item{xFontSize}{the font size of the x-axis labels. Defaults to 10.}
+\item{xFontSize}{The font size of the category labels. Defaults to 11.}
 
-\item{yFontSize}{the font size of the y-axis labels. Defaults to 10.}
+\item{yFontSize}{The font size of the value axis labels. Defaults to 11.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{yticks}{Optional. The approximate number of value axis ticks.}
 
-\item{xtitle}{Optional. The title of the x-axis.}
+\item{xtitle}{Optional. The title of the category axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the category axis title. Defaults
+to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the value axis, drawn above it.
+Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the value axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
-\item{stroke}{The stroke color of the bars. Defaults to 'crimson'.}
+\item{stroke}{Optional. The stroke colour of the bars.}
 
-\item{strokeWidth}{Optional. the stroke width of the bars.}
+\item{strokeWidth}{Optional. The stroke width of the bars.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the bars (from 0 to 1). Defaults to 1.}
+\item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{group}{Optional. The name of a column that splits each bar into
+groups (one colour per group, with a clickable legend).}
+
+\item{position}{How groups are drawn: \code{"grouped"} (default, side by
+side), \code{"stacked"} or \code{"percent"} (stacked to 100\%). It can be
+changed from the chart when \code{controls = TRUE}.}
+
+\item{agg}{How rows with the same category (and group) are combined:
+\code{"sum"} (default), \code{"mean"}, \code{"median"}, \code{"min"},
+\code{"max"} or \code{"count"}. With one row per bar, every option but
+\code{"count"} returns the value itself.}
+
+\item{labels}{Logical. Write the values on the bars (labels that do not fit
+are skipped). Defaults to \code{TRUE}.}
+
+\item{highlight}{Optional. A character vector of categories to emphasise;
+the other bars are drawn in grey (or faded, with \code{group}).}
+
+\item{refLines}{Optional. Numeric values drawn as dashed reference lines
+across the bars (e.g. a target or an average); names are used as labels.}
+
+\item{negativeFill}{Optional. The colour of negative bars (without
+\code{group}).}
+
+\item{cornerRadius}{The radius of the rounded bar ends, in pixels.
+Defaults to 3; use 0 for square bars.}
+
+\item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
+shown when \code{group} is used.}
+
+\item{controls}{Logical. Show the layout and sort buttons. Defaults to
+\code{TRUE}.}
+
+\item{tooltip}{Logical. Show a tooltip on hover. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Animate the bars when the chart is first drawn.
+Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\code{",.0f"}, \code{".1f"} or \code{"~s"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+value, e.g. \code{"$"} or \code{" km"}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\code{NA} to hide them.}
 }
 \value{
-A SVG bar chart.
+An interactive SVG bar chart (an r2d3 htmlwidget).
 }
 \description{
-Create a bar chart.
+Draws one bar per category, or, with \code{group}, grouped, stacked or
+100\% stacked bars. The data can be one row per bar, or raw rows that are
+aggregated for you (\code{agg}); leave \code{y} empty to count rows. Bars
+grow in when the chart is drawn, show their values, and can be re-sorted
+and re-arranged from the chart itself.
 }
+\section{Interactions}{
+
+\itemize{
+  \item Hover a bar to see its value, its share of the total and its rank;
+    with \code{group}, the tooltip lists every group for that category.
+  \item The buttons at the top right switch between grouped, stacked and
+    100\% bars (with \code{group}) and between the original order, largest
+    first and smallest first.
+  \item Click a legend entry to hide or show a group, double-click it to
+    isolate it. Hovering a legend entry highlights the group.
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking a bar sets \code{input$id_clicked} to a list with the
+\code{category} and \code{group} of the bar. The layout, the sort order and
+the hidden groups are kept when the chart is re-rendered.
+}
+
 \examples{
-library(ggplot2) #needed for the mpg data frame
-library(dplyr) #needed for data wrangling
+library(ggplot2) # needed for the mpg data frame
+library(dplyr) # needed for data wrangling
 
 mpg \%>\% group_by(manufacturer) \%>\%
- summarise(mean_cty = mean(cty)) \%>\%
- bar_chart(
-   x = "manufacturer",
-   y = "mean_cty",
-   sort = "ascending",
-   xFontSize = 10,
-   yFontSize = 10,
-   fill = "orange",
-   strokeWidth = 1,
-   ytitle = "average cty value",
-   title = "Average City Miles per Gallon by manufacturer",
-   titleFontSize = 16
- )
+  summarise(mean_cty = mean(cty)) \%>\%
+  bar_chart(
+    x = "manufacturer",
+    y = "mean_cty",
+    sort = "descending",
+    ytitle = "Average city miles per gallon",
+    title = "City fuel economy by manufacturer",
+    highlight = c("honda", "volkswagen"),
+    valueFormat = ".1f"
+  )
+
+# Count rows, without aggregating first
+bar_chart(mpg, x = "class", sort = "descending", title = "Cars per class")
+
+# Grouped bars from raw data; switch to stacked or 100\% from the chart
+bar_chart(
+  data = mpg,
+  x = "class",
+  group = "drv",
+  sort = "descending",
+  title = "Cars per class and drive train",
+  fill = c("4" = "#4269d0", "f" = "#efb118", "r" = "#ff725c")
+)
+
+# Stacked, with a reference line
+sales <- data.frame(
+  quarter = rep(c("Q1", "Q2", "Q3", "Q4"), each = 3),
+  region  = rep(c("North", "South", "West"), 4),
+  revenue = c(120, 95, 60, 135, 90, 72, 150, 110, 80, 170, 105, 96)
+)
+bar_chart(
+  sales, x = "quarter", y = "revenue", group = "region",
+  position = "stacked", refLines = c(Target = 300),
+  valuePrefix = "$", valueSuffix = "k",
+  title = "Revenue by quarter"
+)
+
 }

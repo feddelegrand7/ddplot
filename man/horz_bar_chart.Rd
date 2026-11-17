@@ -2,100 +2,206 @@
 % Please edit documentation in R/horzBarChart.R
 \name{horz_bar_chart}
 \alias{horz_bar_chart}
-\title{Create a horizontal bar chart}
+\title{Create an interactive horizontal bar chart}
 \usage{
 horz_bar_chart(
   data,
   label,
-  value,
-  fill = "crimson",
+  value = NULL,
+  fill = NULL,
   sort = "none",
-  paddingWidth = 0.1,
+  paddingWidth = 0.2,
   stroke = NULL,
-  strokeWidth = 1,
-  bgcol = "#CAD0D3",
+  strokeWidth = NULL,
+  bgcol = "white",
   valueTicks = NULL,
-  valueFontSize = 10,
-  labelFontSize = 10,
+  valueFontSize = 11,
+  labelFontSize = 12,
   valueTitle = NULL,
-  valueTitleFontSize = 14,
+  valueTitleFontSize = 13,
   labelTitle = NULL,
-  labelTitleFontSize = 14,
+  labelTitleFontSize = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   title = NULL,
   titleFontSize = 20,
   opacity = 1,
-  axisCol = "black",
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  group = NULL,
+  position = c("grouped", "stacked", "percent"),
+  agg = c("sum", "mean", "median", "min", "max", "count"),
+  labels = TRUE,
+  highlight = NULL,
+  refLines = NULL,
+  negativeFill = NULL,
+  cornerRadius = 3,
+  legend = NULL,
+  controls = TRUE,
+  tooltip = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  gridCol = "#e9e9e9"
 )
 }
 \arguments{
 \item{data}{The data frame containing the variables to consider.}
 
-\item{label}{The categorical variable to consider. Will be plotted on the y-axis.}
+\item{label}{The name of the categorical variable, listed on the y-axis.}
 
-\item{value}{The numeric variable to consider. Will be plotted on the x-axis.}
+\item{value}{The name of the numeric variable, plotted along the x-axis.
+When \code{NULL}, the rows of each category are counted.}
 
-\item{fill}{The color of the bars. Defaults to 'crimson'.}
+\item{fill}{The colour of the bars. A single colour, or, without
+\code{group}, one colour per category (recycled; a named vector maps
+colours to categories). With \code{group}, one colour per group (a named
+vector maps colours to groups). Defaults to a built-in palette.}
 
-\item{sort}{Optional. Takes the following arguments:
-'none', 'ascending' or 'descending', default to 'none'}
+\item{sort}{The initial order of the bars: \code{"none"} (default, the
+order of the data or of the factor levels), \code{"ascending"} or
+\code{"descending"}. Descending puts the largest bar at the top.}
 
-\item{paddingWidth}{The distance between each bar.
-The value goes from 0 to 0.99 included. Defaults to 0.1.}
+\item{paddingWidth}{The space between bars, from 0 to 0.99. Defaults to
+0.2.}
 
-\item{stroke}{Optional. The color of the stroke of the bars.}
+\item{stroke}{Optional. The stroke colour of the bars.}
 
-\item{strokeWidth}{The width of the stroke of the bars. Defaults to 1 when the 'stroke' parameter is used.}
+\item{strokeWidth}{Optional. The stroke width of the bars.}
 
-\item{bgcol}{Optional. The color of the background, default to:
-'#CAD0D3'}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{valueTicks}{Optional. the number of x-axis ticks to consider.}
+\item{valueTicks}{Optional. The approximate number of value axis ticks.}
 
-\item{valueFontSize}{The font size of the x-axis values. Defaults to 10.}
+\item{valueFontSize}{The font size of the value axis labels. Defaults to 11.}
 
-\item{labelFontSize}{The font size of the y-axis labels. Defaults to 10.}
+\item{labelFontSize}{The font size of the category labels. Defaults to 12.}
 
-\item{valueTitle}{Optional. The title of the x-axis.}
+\item{valueTitle}{Optional. The title of the value axis. Defaults to the
+name of \code{value} (or "Count"); use \code{""} to hide it.}
 
-\item{valueTitleFontSize}{The font size of the x-axis title if specified. Defaults to 14.}
+\item{valueTitleFontSize}{The font size of the value axis title. Defaults
+to 13.}
 
-\item{labelTitle}{Optional. The title of the y-axis.}
+\item{labelTitle}{Optional. The title of the category axis, drawn above the
+labels.}
 
-\item{labelTitleFontSize}{The font size of the y-axis title. Defaults to 14.}
+\item{labelTitleFontSize}{The font size of the category axis title.
+Defaults to 13.}
 
-\item{font}{The font family of the text. Defaults to "Verdana, Geneva, Tahoma, sans-serif"}
+\item{font}{The font family to consider for the titles. Defaults to
+"Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{title}{Optional. The title of the overall graphic.}
+\item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the overall graphic's title when specified.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
-\item{opacity}{The color opacity of the bars. Goes from 0 to 1. Defaults to 1.}
+\item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{group}{Optional. The name of a column that splits each bar into
+groups (one colour per group, with a clickable legend).}
+
+\item{position}{How groups are drawn: \code{"grouped"} (default, side by
+side), \code{"stacked"} or \code{"percent"} (stacked to 100\%). It can be
+changed from the chart when \code{controls = TRUE}.}
+
+\item{agg}{How rows with the same category (and group) are combined:
+\code{"sum"} (default), \code{"mean"}, \code{"median"}, \code{"min"},
+\code{"max"} or \code{"count"}. With one row per bar, every option but
+\code{"count"} returns the value itself.}
+
+\item{labels}{Logical. Write the values on the bars (labels that do not fit
+are skipped). Defaults to \code{TRUE}.}
+
+\item{highlight}{Optional. A character vector of categories to emphasise;
+the other bars are drawn in grey (or faded, with \code{group}).}
+
+\item{refLines}{Optional. Numeric values drawn as dashed reference lines
+across the bars (e.g. a target or an average); names are used as labels.}
+
+\item{negativeFill}{Optional. The colour of negative bars (without
+\code{group}).}
+
+\item{cornerRadius}{The radius of the rounded bar ends, in pixels.
+Defaults to 3; use 0 for square bars.}
+
+\item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
+shown when \code{group} is used.}
+
+\item{controls}{Logical. Show the layout and sort buttons. Defaults to
+\code{TRUE}.}
+
+\item{tooltip}{Logical. Show a tooltip on hover. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Animate the bars when the chart is first drawn.
+Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\code{",.0f"}, \code{".1f"} or \code{"~s"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+value, e.g. \code{"$"} or \code{" km"}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\code{NA} to hide them.}
 }
 \value{
-A SVG horizontal bar chart.
+An interactive SVG horizontal bar chart (an r2d3 htmlwidget).
 }
 \description{
-Create a horizontal bar chart
+The horizontal version of \code{\link{bar_chart}()}: categories are listed
+down the left side, which suits many categories and long labels. It has
+the same features (groups, stacking, aggregation, value labels, sorting
+and layout buttons, tooltips, legend); see \code{\link{bar_chart}()} for
+the interactions and the Shiny inputs.
 }
 \examples{
 library(ggplot2) # needed for the mpg data frame
 library(dplyr) # needed for the data wrangling process
 
 mpg \%>\% group_by(manufacturer) \%>\%
- summarise(median_hwy = median(hwy)) \%>\%
- horz_bar_chart(
-   label = "manufacturer",
-   value = "median_hwy",
-   sort = "ascending"
- )
+  summarise(median_hwy = median(hwy)) \%>\%
+  horz_bar_chart(
+    label = "manufacturer",
+    value = "median_hwy",
+    sort = "descending",
+    title = "Median highway miles per gallon"
+  )
+
+# 100\% stacked bars from raw rows
+horz_bar_chart(
+  data = mpg,
+  label = "manufacturer",
+  group = "drv",
+  position = "percent",
+  sort = "descending",
+  title = "Drive train by manufacturer"
+)
+
+# Positive and negative values
+change <- data.frame(
+  country = c("Spain", "France", "Italy", "Germany", "Poland", "Sweden"),
+  growth  = c(2.4, 0.9, -0.3, -0.6, 3.1, 1.2)
+)
+horz_bar_chart(
+  change, label = "country", value = "growth",
+  sort = "descending", negativeFill = "#ff725c",
+  valueSuffix = "\%", valueTitle = "GDP growth",
+  title = "Annual GDP growth"
+)
+
 }

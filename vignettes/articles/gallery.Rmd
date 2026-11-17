@@ -39,8 +39,8 @@ area_band|time-series|Area band|You show a range over time, such as a min/max or
 streamgraph|time-series|Streamgraph|Many categories change over time and the overall shape matters more than exact values|interactive
 calendar_heatmap|time-series|Calendar heatmap|You look for daily, weekly or seasonal patterns in a daily series|interactive
 anim_line_chart|time-series|Animated line chart|You present a single series and want it to draw itself on click|animated
-bar_chart|comparisons|Bar chart|You compare a value across a handful of categories|
-horz_bar_chart|comparisons|Horizontal bar chart|You have many categories or long labels|
+bar_chart|comparisons|Bar chart|You compare a value across categories, as single, grouped, stacked or 100% bars|interactive,shiny
+horz_bar_chart|comparisons|Horizontal bar chart|You have many categories or long labels, or show the composition of each category|interactive,shiny
 lollipop_chart|comparisons|Lollipop chart|You want a lighter alternative to a bar chart|
 horz_lollipop|comparisons|Horizontal lollipop|A lollipop chart with many categories or long labels|
 dumbbell_chart|comparisons|Dumbbell chart|You show the gap between two values for each category|interactive

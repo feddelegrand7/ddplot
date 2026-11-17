@@ -1,36 +1,40 @@
-
-#' Create a horizontal bar chart
+#' Create an interactive horizontal bar chart
 #'
-#' @param data The data frame containing the variables to consider.
-#' @param value The numeric variable to consider. Will be plotted on the x-axis.
-#' @param label The categorical variable to consider. Will be plotted on the y-axis.
-#' @param fill The color of the bars. Defaults to 'crimson'.
-#' @param stroke Optional. The color of the stroke of the bars.
-#' @param strokeWidth The width of the stroke of the bars. Defaults to 1 when the 'stroke' parameter is used.
-#' @param paddingWidth The distance between each bar.
-#' The value goes from 0 to 0.99 included. Defaults to 0.1.
-#' @param valueTicks Optional. the number of x-axis ticks to consider.
-#' @param valueFontSize  The font size of the x-axis values. Defaults to 10.
-#' @param labelFontSize The font size of the y-axis labels. Defaults to 10.
-#' @param valueTitle Optional. The title of the x-axis.
-#' @param valueTitleFontSize The font size of the x-axis title if specified. Defaults to 14.
-#' @param labelTitle Optional. The title of the y-axis.
-#' @param labelTitleFontSize The font size of the y-axis title. Defaults to 14.
-#' @param font The font family of the text. Defaults to "Verdana, Geneva, Tahoma, sans-serif"
-#' @param title Optional. The title of the overall graphic.
-#' @param titleFontSize The font size of the overall graphic's title when specified.
-#' @param opacity The color opacity of the bars. Goes from 0 to 1. Defaults to 1.
-#' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
-#' Defaults to 'black'.
-#' @param width Optional. The width of the SVG output.
-#' @param height Optional. The height of the SVG output.
-#' @param sort Optional. Takes the following arguments:
-#' 'none', 'ascending' or 'descending', default to 'none'
+#' The horizontal version of \code{\link{bar_chart}()}: categories are listed
+#' down the left side, which suits many categories and long labels. It has
+#' the same features (groups, stacking, aggregation, value labels, sorting
+#' and layout buttons, tooltips, legend); see \code{\link{bar_chart}()} for
+#' the interactions and the Shiny inputs.
 #'
-#' @param bgcol Optional. The color of the background, default to:
-#' '#CAD0D3'
+#' @inheritParams bar_chart
+#' @param value The name of the numeric variable, plotted along the x-axis.
+#'   When \code{NULL}, the rows of each category are counted.
+#' @param label The name of the categorical variable, listed on the y-axis.
+#' @param fill The colour of the bars. A single colour, or, without
+#'   \code{group}, one colour per category (recycled; a named vector maps
+#'   colours to categories). With \code{group}, one colour per group (a named
+#'   vector maps colours to groups). Defaults to a built-in palette.
+#' @param stroke Optional. The stroke colour of the bars.
+#' @param strokeWidth Optional. The stroke width of the bars.
+#' @param paddingWidth The space between bars, from 0 to 0.99. Defaults to
+#'   0.2.
+#' @param valueTicks Optional. The approximate number of value axis ticks.
+#' @param valueFontSize The font size of the value axis labels. Defaults to 11.
+#' @param labelFontSize The font size of the category labels. Defaults to 12.
+#' @param valueTitle Optional. The title of the value axis. Defaults to the
+#'   name of \code{value} (or "Count"); use \code{""} to hide it.
+#' @param valueTitleFontSize The font size of the value axis title. Defaults
+#'   to 13.
+#' @param labelTitle Optional. The title of the category axis, drawn above the
+#'   labels.
+#' @param labelTitleFontSize The font size of the category axis title.
+#'   Defaults to 13.
+#' @param sort The initial order of the bars: \code{"none"} (default, the
+#'   order of the data or of the factor levels), \code{"ascending"} or
+#'   \code{"descending"}. Descending puts the largest bar at the top.
+#' @param bgcol The background color of the SVG. Defaults to "white".
 #'
-#' @return A SVG horizontal bar chart.
+#' @return An interactive SVG horizontal bar chart (an r2d3 htmlwidget).
 #' @export
 #'
 #' @examples
@@ -38,85 +42,99 @@
 #' library(dplyr) # needed for the data wrangling process
 #'
 #' mpg %>% group_by(manufacturer) %>%
-#'  summarise(median_hwy = median(hwy)) %>%
-#'  horz_bar_chart(
-#'    label = "manufacturer",
-#'    value = "median_hwy",
-#'    sort = "ascending"
-#'  )
-
+#'   summarise(median_hwy = median(hwy)) %>%
+#'   horz_bar_chart(
+#'     label = "manufacturer",
+#'     value = "median_hwy",
+#'     sort = "descending",
+#'     title = "Median highway miles per gallon"
+#'   )
+#'
+#' # 100% stacked bars from raw rows
+#' horz_bar_chart(
+#'   data = mpg,
+#'   label = "manufacturer",
+#'   group = "drv",
+#'   position = "percent",
+#'   sort = "descending",
+#'   title = "Drive train by manufacturer"
+#' )
+#'
+#' # Positive and negative values
+#' change <- data.frame(
+#'   country = c("Spain", "France", "Italy", "Germany", "Poland", "Sweden"),
+#'   growth  = c(2.4, 0.9, -0.3, -0.6, 3.1, 1.2)
+#' )
+#' horz_bar_chart(
+#'   change, label = "country", value = "growth",
+#'   sort = "descending", negativeFill = "#ff725c",
+#'   valueSuffix = "%", valueTitle = "GDP growth",
+#'   title = "Annual GDP growth"
+#' )
+#'
 horz_bar_chart <- function(data,
-                         label,
-                         value,
-                         fill = "crimson",
-                         sort = "none",
-                         paddingWidth = 0.1,
-                         stroke = NULL,
-                         strokeWidth = 1,
-                         bgcol = "#CAD0D3",
-                         valueTicks = NULL,
-                         valueFontSize = 10,
-                         labelFontSize = 10,
-                         valueTitle = NULL,
-                         valueTitleFontSize = 14,
-                         labelTitle = NULL,
-                         labelTitleFontSize = 14,
-                         font = "Verdana, Geneva, Tahoma, sans-serif",
-                         title = NULL,
-                         titleFontSize = 20,
-                         opacity = 1,
-                         axisCol = "black",
-                         width = NULL,
-                         height = NULL
-                         ) {
+                           label,
+                           value = NULL,
+                           fill = NULL,
+                           sort = "none",
+                           paddingWidth = 0.2,
+                           stroke = NULL,
+                           strokeWidth = NULL,
+                           bgcol = "white",
+                           valueTicks = NULL,
+                           valueFontSize = 11,
+                           labelFontSize = 12,
+                           valueTitle = NULL,
+                           valueTitleFontSize = 13,
+                           labelTitle = NULL,
+                           labelTitleFontSize = 13,
+                           font = "Verdana, Geneva, Tahoma, sans-serif",
+                           title = NULL,
+                           titleFontSize = 20,
+                           opacity = 1,
+                           axisCol = "#333333",
+                           width = NULL,
+                           height = NULL,
+                           group = NULL,
+                           position = c("grouped", "stacked", "percent"),
+                           agg = c("sum", "mean", "median", "min", "max", "count"),
+                           labels = TRUE,
+                           highlight = NULL,
+                           refLines = NULL,
+                           negativeFill = NULL,
+                           cornerRadius = 3,
+                           legend = NULL,
+                           controls = TRUE,
+                           tooltip = TRUE,
+                           animate = TRUE,
+                           valueFormat = NULL,
+                           valuePrefix = "",
+                           valueSuffix = "",
+                           subtitle = NULL,
+                           subtitleFontSize = 13,
+                           gridCol = "#e9e9e9"
+                           ) {
 
-
-  if (is.null(data[[value]]) || is.null(data[[label]])) {
+  if (!is.data.frame(data) || !is.character(label) || length(label) != 1 || is.null(data[[label]]) ||
+      (!is.null(value) && (!is.character(value) || length(value) != 1 || is.null(data[[value]])))) {
     stop("Please check that x and y belong to the specified data frame")
   }
 
-  if (!(any(c('none',
-              'ascending',
-              'descending') %in% sort))) {
-    stop("
-    the sort parameter can only take the following values:
-    'none', 'ascending' or 'descending'
-       ")
-  }
-
-  if (grepl(";", font)) {
-    stop("please remove the ';' character from your font argument")
-  }
-
-
-  r2d3::r2d3(
-    data = data,
-    script = ddplot_script("horzbarchart.js"),
-    options = list(
-      value = value,
-      label = label,
-      fill = fill,
-      paddingWidth = paddingWidth,
-      valueTicks = valueTicks,
-      valueFontSize = valueFontSize,
-      labelFontSize = labelFontSize,
-      valueTitle = valueTitle,
-      valueTitleFontSize = valueTitleFontSize,
-      labelTitle = labelTitle,
-      labelTitleFontSize = labelTitleFontSize,
-      font = font,
-      title = title,
-      titleFontSize = titleFontSize,
-      stroke = stroke,
-      strokeWidth = strokeWidth,
-      opacity = opacity,
-      width = width,
-      height = height,
-      sort = sort,
-      bgcol = bgcol,
-      axisCol = axisCol
-    )
+  bar_widget(
+    data = data, cat = label, val = value, orientation = "horizontal",
+    fill = fill, sort = sort, paddingWidth = paddingWidth,
+    catFontSize = labelFontSize, valFontSize = valueFontSize, valTicks = valueTicks,
+    catTitle = labelTitle, catTitleFontSize = labelTitleFontSize,
+    valTitle = valueTitle, valTitleFontSize = valueTitleFontSize,
+    title = title, titleFontSize = titleFontSize,
+    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
+    stroke = stroke, strokeWidth = strokeWidth, font = font, bgcol = bgcol,
+    opacity = opacity, axisCol = axisCol, gridCol = gridCol,
+    width = width, height = height,
+    group = group, position = match.arg(position), agg = match.arg(agg),
+    labels = labels, highlight = highlight, refLines = refLines,
+    negativeFill = negativeFill, cornerRadius = cornerRadius, legend = legend,
+    controls = controls, tooltip = tooltip, animate = animate,
+    valueFormat = valueFormat, valuePrefix = valuePrefix, valueSuffix = valueSuffix
   )
-
-
 }
