@@ -2,93 +2,207 @@
 % Please edit documentation in R/horzLollipop.R
 \name{horz_lollipop}
 \alias{horz_lollipop}
-\title{Create a horizontal lollipop chart}
+\title{Create an interactive horizontal lollipop chart}
 \usage{
 horz_lollipop(
   data,
   label,
-  value,
+  value = NULL,
   sort = "none",
   bgcol = "white",
   valueTicks = NULL,
   labelTicks = NULL,
-  valueFontSize = 12,
+  valueFontSize = 11,
   labelFontSize = 12,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   valueTitle = NULL,
-  valueTitleFontSize = 14,
+  valueTitleFontSize = 13,
   labelTitle = NULL,
-  labelTitleFontSize = 14,
+  labelTitleFontSize = 13,
   title = NULL,
   titleFontSize = 20,
-  lineStroke = "maroon",
-  lineStrokeWidth = 4,
-  circleFill = "lime",
-  circleStroke = "lime",
-  circleStrokeWidth = 1,
-  circleRadius = 5,
-  axisCol = "black",
+  lineStroke = NULL,
+  lineStrokeWidth = 2,
+  circleFill = NULL,
+  circleStroke = NULL,
+  circleStrokeWidth = 1.5,
+  circleRadius = 6,
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  group = NULL,
+  agg = c("sum", "mean", "median", "min", "max", "count"),
+  labels = TRUE,
+  highlight = NULL,
+  refLines = NULL,
+  negativeFill = NULL,
+  legend = NULL,
+  controls = TRUE,
+  tooltip = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  gridCol = "#e9e9e9",
+  opacity = 1
 )
 }
 \arguments{
 \item{data}{The data frame containing the variables to consider.}
 
-\item{label}{The categorical variable to consider. Will be plotted on the x-axis.}
+\item{label}{The name of the categorical variable, listed on the y-axis.}
 
-\item{value}{The numeric variable to consider. Will be plotted on the y-axis.}
+\item{value}{The name of the numeric variable, plotted along the x-axis.
+When \code{NULL}, the rows of each category are counted.}
 
-\item{sort}{Whether to sort or not the vertical lines. Takes three values
-'none' which is the default, 'ascending' or 'descending'.}
+\item{sort}{The initial order of the lollipops: \code{"none"} (default, the
+order of the data or of the factor levels), \code{"ascending"} or
+\code{"descending"}. Descending puts the largest value at the top.}
 
-\item{bgcol}{The background-color of the SVG output. Defaults to 'salmon'.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{valueTicks}{Optional. the number of x-axis ticks to consider.}
+\item{valueTicks}{Optional. The approximate number of value axis ticks.}
 
-\item{labelTicks}{Optional. The number of y-axis ticks to consider.}
+\item{labelTicks}{Not used; kept for compatibility.}
 
-\item{valueFontSize}{the font size of the x-axis labels. Defaults to 10.}
+\item{valueFontSize}{The font size of the value axis labels. Defaults to 11.}
 
-\item{labelFontSize}{the font size of the y-axis labels. Defaults to 10.}
+\item{labelFontSize}{The font size of the category labels. Defaults to 12.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{valueTitle}{Optional. The title of the x-axis.}
+\item{valueTitle}{Optional. The title of the value axis. Defaults to the
+name of \code{value} (or "Count"); use \code{""} to hide it.}
 
-\item{valueTitleFontSize}{The font size of the x-axis title. Defaults to 14.}
+\item{valueTitleFontSize}{The font size of the value axis title. Defaults
+to 13.}
 
-\item{labelTitle}{Optional. The title of the y-axis.}
+\item{labelTitle}{Optional. The title of the category axis, drawn above the
+labels.}
 
-\item{labelTitleFontSize}{The font size of the y-axis title. Defaults to 14.}
+\item{labelTitleFontSize}{The font size of the category axis title.
+Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
-\item{lineStroke}{The stroke color of the vertical lines. Defaults to 'maroon'.}
+\item{lineStroke}{Optional. The colour of the stems. Defaults to the colour
+of the dots.}
 
-\item{lineStrokeWidth}{The vertical lines stroke's width. Defaults to 4.}
+\item{lineStrokeWidth}{The width of the stems, in pixels. Defaults to 2.}
 
-\item{circleFill}{The color of the circles. Defaults to 'lime'.}
+\item{circleFill}{The colour of the dots. A single colour, or, without
+\code{group}, one colour per category (recycled; a named vector maps
+colours to categories). With \code{group}, one colour per group (a named
+vector maps colours to groups). Defaults to a built-in palette.}
 
-\item{circleStroke}{The color of the stroke surrounding the circle. Defaults to 'lime'.}
+\item{circleStroke}{Optional. The colour of the ring around the dots.
+Defaults to the background colour.}
 
-\item{circleStrokeWidth}{The width of the circles' stroke. Defaults to 1.}
+\item{circleStrokeWidth}{The width of the ring around the dots. Defaults to
+1.5.}
 
-\item{circleRadius}{The radius of the circles. Defaults to 10.}
+\item{circleRadius}{The radius of the dots, in pixels. Defaults to 6. Dots
+are made smaller when there is not enough room for them.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{group}{Optional. The name of a column that splits each category into
+groups, drawn side by side (one colour per group, with a clickable
+legend).}
+
+\item{agg}{How rows with the same category (and group) are combined:
+\code{"sum"} (default), \code{"mean"}, \code{"median"}, \code{"min"},
+\code{"max"} or \code{"count"}. With one row per bar, every option but
+\code{"count"} returns the value itself.}
+
+\item{labels}{Logical. Write the values next to the dots (when every label
+fits). Defaults to \code{TRUE}.}
+
+\item{highlight}{Optional. A character vector of categories to emphasise;
+the other lollipops are drawn in grey (or faded, with \code{group}).}
+
+\item{refLines}{Optional. Numeric values drawn as dashed reference lines
+across the bars (e.g. a target or an average); names are used as labels.}
+
+\item{negativeFill}{Optional. The colour of negative lollipops (without
+\code{group}).}
+
+\item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
+shown when \code{group} is used.}
+
+\item{controls}{Logical. Show the sort buttons. Defaults to \code{TRUE}.}
+
+\item{tooltip}{Logical. Show a tooltip on hover. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Animate the lollipops when the chart is first
+drawn. Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\code{",.0f"}, \code{".1f"} or \code{"~s"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+value, e.g. \code{"$"} or \code{" km"}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\code{NA} to hide them.}
+
+\item{opacity}{The opacity of the lollipops (from 0 to 1). Defaults to 1.}
 }
 \value{
-A SVG horizontal lollipop chart.
+An interactive SVG horizontal lollipop chart (an r2d3 htmlwidget).
 }
 \description{
-Create a horizontal lollipop chart
+The horizontal version of \code{\link{lollipop_chart}()}: categories are
+listed down the left side, which suits many categories and long labels. It
+has the same features (groups, aggregation, value labels, sort buttons,
+tooltips, legend); see \code{\link{lollipop_chart}()} for the interactions
+and the Shiny inputs.
+}
+\examples{
+library(ggplot2) # needed for the mpg data frame
+library(dplyr) # needed for data wrangling
+
+mpg \%>\% group_by(manufacturer) \%>\%
+  summarise(median_cty = median(cty)) \%>\%
+  horz_lollipop(
+    label = "manufacturer",
+    value = "median_cty",
+    sort = "descending",
+    title = "Median city miles per gallon"
+  )
+
+# Count rows, with an average line
+counts <- count(mpg, manufacturer)
+horz_lollipop(
+  mpg, label = "manufacturer", sort = "descending",
+  refLines = c(Average = mean(counts$n)),
+  title = "Models per manufacturer"
+)
+
+# Positive and negative values
+change <- data.frame(
+  country = c("Spain", "France", "Italy", "Germany", "Poland", "Sweden"),
+  growth  = c(2.4, 0.9, -0.3, -0.6, 3.1, 1.2)
+)
+horz_lollipop(
+  change, label = "country", value = "growth",
+  sort = "descending", negativeFill = "#ff725c",
+  valueSuffix = "\%", valueTitle = "GDP growth",
+  title = "Annual GDP growth"
+)
+
 }

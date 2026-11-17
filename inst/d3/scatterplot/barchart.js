@@ -1,10 +1,13 @@
-// bar_chart() and horz_bar_chart(): interactive bar charts.
+// bar_chart(), horz_bar_chart(), lollipop_chart() and horz_lollipop():
+// interactive bar and lollipop charts.
 //
 // data: rows {c, g, v, n} (category, group or "", aggregated value, number of
 // rows aggregated). options.orientation is "vertical" or "horizontal".
 // Groups can be drawn grouped, stacked or stacked to 100%; the layout, the
 // sort order and the hidden groups are kept in r2d3.ddplotState so a Shiny
-// update or a resize keeps them. Works with D3 v5 and v6.
+// update or a resize keeps them. With options.shape = "lollipop", each bar is
+// drawn as a thin stem ending in a dot (grouped layout only). Works with D3 v5
+// and v6.
 
 const o = options;
 const isV6 = typeof d3.pointer === "function";
@@ -15,6 +18,10 @@ const gridCol = o.gridCol || null;
 const bgcol = o.bgcol || "white";
 const ACCENT = "#4269d0", GREY = "#cdd2d8";
 const horiz = o.orientation === "horizontal";
+const lolli = o.shape === "lollipop";
+const dotR = lolli ? Math.max(0, +o.dotRadius || 0) : 0;
+let dotRe = dotR; // shrunk when the slots are too narrow for the dots
+const stemW = lolli ? Math.max(0.5, +o.stemWidth || 2) : 0;
 const uid = "ddbc" + Math.random().toString(36).slice(2, 9);
 const arr = v => (v === null || v === undefined) ? [] : [].concat(v);
 const num = v => (v === null || v === undefined || v === "NA" || !isFinite(+v)) ? null : +v;
@@ -77,11 +84,13 @@ if (!items.length) {
 
 const hidden = new Set(arr(st.hidden).filter(n => groupNames.indexOf(n) >= 0));
 if (hidden.size >= groups.length) hidden.clear();
-let mode = hasGroup ? (st.mode || o.position || "grouped") : "grouped";
+let mode = (hasGroup && !lolli) ? (st.mode || o.position || "grouped") : "grouped";
 let sortMode = st.sort || o.sort || "none";
 const firstRender = !st.drawn;
 st.drawn = true;
 const visGroups = () => groups.filter(g => !hidden.has(g.name));
+// shares and totals only make sense for values that add up (not for means...)
+const additive = ["mean", "median", "min", "max"].indexOf(o.agg) < 0;
 
 // ---- formats ----------------------------------------------------------------------
 const fmtCore = o.valueFormat ? d3.format(o.valueFormat) : null;
@@ -136,6 +145,10 @@ function computeValues() {
       c.outer = mode === "grouped";
     });
     it.total = d3.sum(it.cells, c => c.visible ? c.v : 0);
+    // sort key: the total, or the average of the groups when values do not add up
+    // (side by side only: stacked bars are as long as their total)
+    it.key = (additive || !hasGroup || mode !== "grouped") ? it.total
+      : (d3.mean(it.cells.filter(c => c.visible), c => c.v) || 0);
     it.pos = pos; it.neg = neg;
     if (mode !== "grouped") {
       const vis = it.cells.filter(c => c.visible && c.v !== 0);
@@ -157,8 +170,8 @@ function valueDomain() {
 }
 function orderedItems() {
   const list = items.slice();
-  if (sortMode === "ascending") list.sort((a, b) => (a.total - b.total) || (a.ci - b.ci));
-  else if (sortMode === "descending") list.sort((a, b) => (b.total - a.total) || (a.ci - b.ci));
+  if (sortMode === "ascending") list.sort((a, b) => (a.key - b.key) || (a.ci - b.ci));
+  else if (sortMode === "descending") list.sort((a, b) => (b.key - a.key) || (a.ci - b.ci));
   else list.sort((a, b) => a.ci - b.ci);
   return list;
 }
@@ -180,7 +193,7 @@ if (o.subtitle) {
 }
 
 const ctlGroups = [];
-if (o.controls && hasGroup) ctlGroups.push({ id: "mode", items: [
+if (o.controls && hasGroup && !lolli) ctlGroups.push({ id: "mode", items: [
   { k: "grouped", t: "Grouped", tip: "Bars side by side" },
   { k: "stacked", t: "Stacked", tip: "Bars stacked" },
   { k: "percent", t: "100%", tip: "Stacked to 100%" }] });
@@ -242,7 +255,7 @@ function tickFmt() {
 }
 
 // measure the widest value labels over every layout the chart can switch to
-const modes = hasGroup ? (o.controls ? ["grouped", "stacked", "percent"] : [mode]) : ["grouped"];
+const modes = (hasGroup && !lolli) ? (o.controls ? ["grouped", "stacked", "percent"] : [mode]) : ["grouped"];
 let maxTickW = 0, maxValLabelW = 0;
 (function () {
   const keep = mode;
@@ -264,7 +277,7 @@ let px0, px1, py0, py1, catRot = false, catEvery = 1, catLabelMax = 0;
 if (horiz) {
   catLabelMax = Math.min(W * 0.38, d3.max(items, it => tw(it.name, catFs)) || 0);
   px0 = padL + catLabelMax + 10;
-  px1 = W - padR - (o.labels ? Math.min(110, maxValLabelW + 10) : 0);
+  px1 = W - padR - (o.labels ? Math.min(110, maxValLabelW + 10) : 0) - (lolli ? dotR + 2 : 0);
   py0 = top;
   let bottom = 8 + 20;
   if (valTitle) bottom += o.valTitleFontSize + 8;
@@ -290,9 +303,12 @@ if (horiz) {
   py1 = H - bottom;
 }
 const plotW = Math.max(30, px1 - px0), plotH = Math.max(30, py1 - py0);
-const headroom = (!horiz && o.labels) ? lblFs + 6 : 0;
-if (horiz) { band.range([py0, py1]); val.range([px0, px1]); }
-else { band.range([px0, px1]); val.range([py1, py0 + headroom]); }
+const headroom = ((!horiz && o.labels) ? lblFs + 6 : 0) + (lolli ? dotR + 2 : 0);
+// room for the dots of negative lollipops (and their labels, vertically)
+const anyNeg = allCells.some(c => c.v !== null && c.v < 0);
+const negRoom = (lolli && anyNeg) ? dotR + 2 + ((!horiz && o.labels) ? lblFs + 6 : 0) : 0;
+if (horiz) { band.range([py0, py1]); val.range([px0 + negRoom, px1]); }
+else { band.range([px0, px1]); val.range([py1 - negRoom, py0 + headroom]); }
 
 // ---- static chrome ----------------------------------------------------------------
 const defs = svg.append("defs");
@@ -343,6 +359,9 @@ const bandHi = gBandHi.append("rect").attr("fill", axisCol).attr("fill-opacity",
 const zeroLine = gZero.append("line").attr("stroke", axisCol).attr("stroke-opacity", 0.55)
   .attr("stroke-width", 1).style("pointer-events", "none");
 
+// grouped lollipops sit close together, with room for their labels
+const lolliCap = Math.max(2 * dotR + 10, (o.labels && !horiz) ? maxValLabelW + 6 : 0);
+
 // ---- geometry ------------------------------------------------------------------------------
 function rpath(x0, y0, x1, y1, tl, tr, br, bl) {
   return `M${x0 + tl},${y0}L${x1 - tr},${y0}Q${x1},${y0} ${x1},${y0 + tr}` +
@@ -355,17 +374,26 @@ function cellBand(c) {
     const present = c.item.cells.filter(x => x.visible);
     const k = present.indexOf(c);
     if (k < 0) { const mid = b + band.bandwidth() / 2; return [mid, mid]; }
-    const step = inner.step(), bw = inner.bandwidth();
+    let step = inner.step(), bw = inner.bandwidth();
+    if (lolli && step > lolliCap) { bw = bw * lolliCap / step; step = lolliCap; }
     const s = b + (band.bandwidth() - present.length * step) / 2 + (step - bw) / 2 + k * step;
     return [s, s + bw];
   }
   return [b, b + band.bandwidth()];
 }
 function geom(c, collapsed) {
-  const [b0, b1] = cellBand(c);
+  let [b0, b1] = cellBand(c);
+  const mid = (b0 + b1) / 2;
+  if (lolli) { b0 = mid - stemW / 2; b1 = mid + stemW / 2; }
   const v0 = collapsed ? 0 : c.v0, v1 = collapsed ? 0 : c.v1;
   const a = val(collapsed && mode !== "grouped" ? 0 : v0), b = val(v1);
-  const lo = Math.min(a, b), hi = Math.max(a, b);
+  let lo = Math.min(a, b), hi = Math.max(a, b);
+  if (lolli && hi - lo > 0) {
+    // stop the stem at the edge of the dot, so it never shows through it
+    const endPx = val(c.visible && c.v < 0 ? v0 : v1);
+    const cut = Math.min(dotRe, hi - lo);
+    if (Math.abs(endPx - hi) < Math.abs(endPx - lo)) hi -= cut; else lo += cut;
+  }
   const thick = b1 - b0, len = hi - lo;
   const r = c.outer ? Math.max(0, Math.min(+o.cornerRadius || 0, thick / 2, len)) : 0;
   const positive = c.visible ? c.v >= 0 : true;
@@ -373,6 +401,11 @@ function geom(c, collapsed) {
   if (horiz) g = { x0: lo, x1: hi, y0: b0, y1: b1, tl: positive ? 0 : r, tr: positive ? r : 0, br: positive ? r : 0, bl: positive ? 0 : r };
   else g = { x0: b0, x1: b1, y0: lo, y1: hi, tl: positive ? r : 0, tr: positive ? r : 0, br: positive ? 0 : r, bl: positive ? 0 : r };
   g.d = rpath(g.x0, g.y0, g.x1, g.y1, g.tl, g.tr, g.br, g.bl);
+  // the dot sits at the end of the stem (the value)
+  const end = val(collapsed ? 0 : (c.visible && c.v < 0 ? v0 : v1));
+  g.mid = mid;
+  g.cx = horiz ? end : mid;
+  g.cy = horiz ? mid : end;
   return g;
 }
 function cellColor(c) {
@@ -392,18 +425,43 @@ function cellOpacity(c) {
 }
 
 // ---- bars ------------------------------------------------------------------------------------
+const stemColor = c => (o.stemColor && !(hl.size && !hl.has(c.item.name) && !hasGroup)) ? o.stemColor : cellColor(c);
 const bars = gBars.selectAll("path").data(allCells, c => c.key).enter().append("path")
-  .attr("fill", cellColor)
-  .attr("stroke", o.stroke || "none")
-  .attr("stroke-width", (o.strokeWidth === null || o.strokeWidth === undefined) ? (o.stroke ? 1 : 0) : +o.strokeWidth);
-function styleBars() {
+  .attr("fill", lolli ? stemColor : cellColor)
+  .attr("stroke", lolli ? "none" : (o.stroke || "none"))
+  .attr("stroke-width", lolli ? 0 : ((o.strokeWidth === null || o.strokeWidth === undefined) ? (o.stroke ? 1 : 0) : +o.strokeWidth));
+// lollipop heads (kept inside gBars so the layer order does not change)
+const dotStrokeW = (o.dotStrokeWidth === null || o.dotStrokeWidth === undefined) ? 1.5 : +o.dotStrokeWidth;
+const dots = lolli
+  ? gBars.append("g").selectAll("circle").data(allCells, c => c.key).enter().append("circle")
+      .attr("fill", cellColor).attr("r", 0)
+  : null;
+function dotRadius(c) {
+  if (!c.visible) return 0;
+  return hoverCell === c || (hoverItem === c.item && !hasGroup) ? dotRe + 2 : dotRe;
+}
+function styleBars(rDur) {
+  if (lolli) {
+    bars.attr("fill-opacity", cellOpacity);
+    dots.attr("fill-opacity", cellOpacity)
+      .attr("stroke", c => (hoverCell === c && hasGroup) ? axisCol : (o.dotStroke || bgcol))
+      .attr("stroke-width", c => (hoverCell === c && hasGroup) ? 1.5 : dotStrokeW)
+      .attr("stroke-opacity", c => Math.min(1, cellOpacity(c) * 1.5));
+    (rDur ? dots.transition("r").duration(rDur) : dots.interrupt("r")).attr("r", dotRadius);
+    return;
+  }
   bars.attr("fill-opacity", cellOpacity)
     .attr("stroke", c => (hoverCell === c && hasGroup) ? axisCol : (o.stroke || "none"))
     .attr("stroke-width", c => (hoverCell === c && hasGroup) ? 1.5
       : ((o.strokeWidth === null || o.strokeWidth === undefined) ? (o.stroke ? 1 : 0) : +o.strokeWidth));
 }
+function placeDots(sel, collapsed) {
+  sel.attr("cx", c => geom(c, collapsed).cx).attr("cy", c => geom(c, collapsed).cy);
+}
 
 // ---- value labels ------------------------------------------------------------------------------
+// room for a lollipop label: the distance to the neighbouring stem
+function slotThick() { return hasGroup ? Math.min(inner.step(), lolliCap) : band.step(); }
 function labelData() {
   if (!o.labels) return [];
   const out = [];
@@ -412,9 +470,21 @@ function labelData() {
   allCells.forEach(c => {
     if (!c.visible) return;
     const g = geom(c, false);
-    const thick = horiz ? g.y1 - g.y0 : g.x1 - g.x0;
+    const thick = lolli ? slotThick(c) : (horiz ? g.y1 - g.y0 : g.x1 - g.x0);
     const len = horiz ? g.x1 - g.x0 : g.y1 - g.y0;
-    if (mode === "grouped") {
+    if (mode === "grouped" && lolli) {
+      const text = fmtV(c.v), w = tw(text, lblFs, 600);
+      const off = dotRe + 5;
+      if (horiz) {
+        if (thick < lblFs - 1) return;
+        if (c.v >= 0) add(c.key, g.cx + off, g.cy, text, "start", axisCol, 600, c.item, c.g.name);
+        else add(c.key, g.cx - off, g.cy, text, "end", axisCol, 600, c.item, c.g.name);
+      } else {
+        if (w + 4 > thick) return;
+        if (c.v >= 0) add(c.key, g.cx, g.cy - off - lblFs * 0.4, text, "middle", axisCol, 600, c.item, c.g.name);
+        else add(c.key, g.cx, g.cy + off + lblFs * 0.4, text, "middle", axisCol, 600, c.item, c.g.name);
+      }
+    } else if (mode === "grouped") {
       const text = fmtV(c.v), w = tw(text, lblFs, 600);
       if (horiz) {
         if (thick < lblFs - 1) return;
@@ -437,8 +507,8 @@ function labelData() {
     const vis = allCells.filter(c => c.visible);
     const fitsAll = vis.every(c => {
       const g = geom(c, false);
-      const thick = horiz ? g.y1 - g.y0 : g.x1 - g.x0;
-      return horiz ? thick >= lblFs - 1 : tw(fmtV(c.v), lblFs, 600) <= thick + 8;
+      const thick = lolli ? slotThick(c) : (horiz ? g.y1 - g.y0 : g.x1 - g.x0);
+      return horiz ? thick >= lblFs - 1 : tw(fmtV(c.v), lblFs, 600) + (lolli ? 4 : -8) <= thick;
     });
     if (!fitsAll) out.length = 0;
   }
@@ -591,7 +661,7 @@ function buildTip(it, focusCell) {
     rows.push({ name: o.valTitle || o.valName, value: fmtV(c.v), bold: true });
     const grand = d3.sum(items, x => Math.abs(x.cells[0].v || 0));
     const allPos = items.every(x => (x.cells[0].v || 0) >= 0);
-    if (items.length > 1 && allPos && grand > 0) rows.push({ name: "Share of total", value: fmtPct1(Math.abs(c.v || 0) / grand) });
+    if (additive && items.length > 1 && allPos && grand > 0) rows.push({ name: "Share of total", value: fmtPct1(Math.abs(c.v || 0) / grand) });
     if (items.length > 1) rows.push({ name: "Rank", value: rankOf.get(it.name) + " of " + items.length });
     if (aggLabel[o.agg] && c.n > 1) rows.push({ name: aggLabel[o.agg], value: d3.format(",")(c.n) });
   } else {
@@ -601,7 +671,7 @@ function buildTip(it, focusCell) {
       name: c.g.name, value: fmtV(c.v), color: c.g.color, bold: c === focusCell,
       extra: (mode !== "grouped" && c.v !== null) ? fmtPct(c.share) : ""
     }));
-    if (vis.length > 1) rows.push({ name: "Total", value: fmtV(it.total), bold: true, sep: true });
+    if (vis.length > 1 && (additive || mode !== "grouped")) rows.push({ name: "Total", value: fmtV(it.total), bold: true, sep: true });
   }
   const head = truncate(it.name, 240, fs, 700);
   let y = pad + 9;
@@ -806,6 +876,10 @@ function update(dur, intro) {
   const order = orderedItems();
   band.domain(order.map(it => it.name));
   inner.domain(visGroups().map(g => g.name)).range([0, band.bandwidth()]);
+  if (lolli) {
+    const slot = hasGroup ? inner.step() : band.step();
+    dotRe = Math.min(dotR, Math.max(2.5, slot / 2 - 1));
+  }
   val.domain(valueDomain()).nice(nTicks);
   drawValueAxis(intro ? 0 : dur);
   if (valTitleSel) valTitleSel.text(valTitleText());
@@ -816,20 +890,27 @@ function update(dur, intro) {
   if (intro) {
     const rank = new Map(order.map((it, k) => [it.name, k]));
     const n = order.length;
+    const delay = c => rank.get(c.item.name) * Math.min(45, 500 / n) + (mode !== "grouped" ? c.gi * 60 : 0);
     bars.attr("d", c => geom(c, true).d);
     bars.transition().duration(700)
-      .delay(c => rank.get(c.item.name) * Math.min(45, 500 / n) + (mode !== "grouped" ? c.gi * 60 : 0))
+      .delay(delay)
       .ease(d3.easeCubicOut)
       .attr("d", c => geom(c, false).d);
+    if (lolli) {
+      placeDots(dots, true);
+      dots.transition().duration(700).delay(delay).ease(d3.easeCubicOut)
+        .attr("cx", c => geom(c, false).cx).attr("cy", c => geom(c, false).cy);
+    }
     gLabels.style("opacity", 0);
     drawLabels(0);
     gLabels.transition().delay(Math.min(900, 650 + n * 15)).duration(300).style("opacity", 1);
   } else {
     (dur ? bars.transition().duration(dur).ease(d3.easeCubicInOut) : bars).attr("d", c => geom(c, false).d);
+    if (lolli) placeDots(dur ? dots.transition().duration(dur).ease(d3.easeCubicInOut) : dots, false);
     gLabels.style("opacity", 1);
     drawLabels(dur);
   }
-  styleBars();
+  styleBars(intro ? 0 : dur);
   styleLegend();
   styleControls();
 }

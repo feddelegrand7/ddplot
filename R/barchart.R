@@ -209,9 +209,10 @@ bar_chart <- function(
 }
 
 
-# Shared builder for bar_chart() and horz_bar_chart(): validates the
-# arguments, aggregates the data to one value per category (and group), and
-# calls barchart.js.
+# Shared builder for bar_chart(), horz_bar_chart(), lollipop_chart() and
+# horz_lollipop(): validates the arguments, aggregates the data to one value
+# per category (and group), and calls barchart.js. shape = "lollipop" draws
+# stems and dots instead of bars.
 # @noRd
 bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
                        catFontSize, valFontSize, valTicks,
@@ -220,7 +221,9 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
                        stroke, strokeWidth, font, bgcol, opacity, axisCol, gridCol,
                        width, height, group, position, agg, labels, highlight,
                        refLines, negativeFill, cornerRadius, legend, controls,
-                       tooltip, animate, valueFormat, valuePrefix, valueSuffix) {
+                       tooltip, animate, valueFormat, valuePrefix, valueSuffix,
+                       shape = "bar", stemWidth = NULL, stemColor = NULL,
+                       dotRadius = NULL, dotStroke = NULL, dotStrokeWidth = NULL) {
 
   if (length(sort) != 1 || !sort %in% c("none", "ascending", "descending")) {
     stop("
@@ -351,7 +354,13 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
     script = ddplot_script("barchart.js"),
     options = list(
       orientation = orientation,
-      stateKey = paste(orientation, cat, val, group, agg, sep = "|"),
+      shape = shape,
+      stemWidth = stemWidth,
+      stemColor = stemColor,
+      dotRadius = dotRadius,
+      dotStroke = dotStroke,
+      dotStrokeWidth = dotStrokeWidth,
+      stateKey = paste(shape, orientation, cat, val, group, agg, sep = "|"),
       categories = as.list(cats),
       groups = as.list(groups),
       groupName = group,

@@ -2,96 +2,198 @@
 % Please edit documentation in R/lollipopChart.R
 \name{lollipop_chart}
 \alias{lollipop_chart}
-\title{Create a lollipop chart}
+\title{Create an interactive lollipop chart}
 \usage{
 lollipop_chart(
   data,
   x,
-  y,
+  y = NULL,
   sort = "none",
   bgcol = "white",
   xticks = NULL,
   yticks = NULL,
-  xFontSize = 12,
-  yFontSize = 12,
+  xFontSize = 11,
+  yFontSize = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   xtitle = NULL,
-  xtitleFontSize = 14,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 14,
+  ytitleFontSize = 13,
   title = NULL,
   titleFontSize = 20,
-  lineStroke = "maroon",
-  lineStrokeWidth = 4,
-  circleFill = "lime",
-  circleStroke = "lime",
-  circleStrokeWidth = 1,
-  circleRadius = 10,
-  axisCol = "black",
+  lineStroke = NULL,
+  lineStrokeWidth = 2,
+  circleFill = NULL,
+  circleStroke = NULL,
+  circleStrokeWidth = 1.5,
+  circleRadius = 6,
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  group = NULL,
+  agg = c("sum", "mean", "median", "min", "max", "count"),
+  labels = TRUE,
+  highlight = NULL,
+  refLines = NULL,
+  negativeFill = NULL,
+  legend = NULL,
+  controls = TRUE,
+  tooltip = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  gridCol = "#e9e9e9",
+  opacity = 1
 )
 }
 \arguments{
 \item{data}{The data frame containing the variables to consider.}
 
-\item{x}{The categorical variable to consider. Will be plotted on the x-axis.}
+\item{x}{The name of the categorical variable (one lollipop per value),
+plotted along the x-axis.}
 
-\item{y}{The numeric variable to consider. Will be plotted on the y-axis.}
+\item{y}{The name of the numeric variable, plotted along the y-axis. When
+\code{NULL}, the rows of each category are counted.}
 
-\item{sort}{Whether to sort or not the vertical lines. Takes three values
-'none' which is the default, 'ascending' or 'descending'.}
+\item{sort}{The initial order of the lollipops: \code{"none"} (default, the
+order of the data or of the factor levels), \code{"ascending"} or
+\code{"descending"}. With \code{group}, categories are sorted by their
+total.}
 
-\item{bgcol}{The background-color of the SVG output. Defaults to 'white'.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{xticks}{Not used; kept for compatibility.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{yticks}{Optional. The approximate number of y-axis ticks.}
 
-\item{xFontSize}{the font size of the x-axis labels. Defaults to 10.}
+\item{xFontSize}{The font size of the category labels. Defaults to 11.}
 
-\item{yFontSize}{the font size of the y-axis labels. Defaults to 10.}
+\item{yFontSize}{The font size of the value axis labels. Defaults to 11.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{xtitle}{Optional. The title of the x-axis.}
+\item{xtitle}{Optional. The title of the category axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the category axis title. Defaults
+to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the value axis, drawn above it.
+Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the value axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
-\item{lineStroke}{The stroke color of the vertical lines. Defaults to 'maroon'.}
+\item{lineStroke}{Optional. The colour of the stems. Defaults to the colour
+of the dots.}
 
-\item{lineStrokeWidth}{The vertical lines stroke's width. Defaults to 4.}
+\item{lineStrokeWidth}{The width of the stems, in pixels. Defaults to 2.}
 
-\item{circleFill}{The color of the circles. Defaults to 'lime'.}
+\item{circleFill}{The colour of the dots. A single colour, or, without
+\code{group}, one colour per category (recycled; a named vector maps
+colours to categories). With \code{group}, one colour per group (a named
+vector maps colours to groups). Defaults to a built-in palette.}
 
-\item{circleStroke}{The color of the stroke surrounding the circle. Defaults to 'lime'.}
+\item{circleStroke}{Optional. The colour of the ring around the dots.
+Defaults to the background colour.}
 
-\item{circleStrokeWidth}{The width of the circles' stroke. Defaults to 1.}
+\item{circleStrokeWidth}{The width of the ring around the dots. Defaults to
+1.5.}
 
-\item{circleRadius}{The radius of the circles. Defaults to 10.}
+\item{circleRadius}{The radius of the dots, in pixels. Defaults to 6. Dots
+are made smaller when there is not enough room for them.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{group}{Optional. The name of a column that splits each category into
+groups, drawn side by side (one colour per group, with a clickable
+legend).}
+
+\item{agg}{How rows with the same category (and group) are combined:
+\code{"sum"} (default), \code{"mean"}, \code{"median"}, \code{"min"},
+\code{"max"} or \code{"count"}. With one row per bar, every option but
+\code{"count"} returns the value itself.}
+
+\item{labels}{Logical. Write the values next to the dots (when every label
+fits). Defaults to \code{TRUE}.}
+
+\item{highlight}{Optional. A character vector of categories to emphasise;
+the other lollipops are drawn in grey (or faded, with \code{group}).}
+
+\item{refLines}{Optional. Numeric values drawn as dashed reference lines
+across the bars (e.g. a target or an average); names are used as labels.}
+
+\item{negativeFill}{Optional. The colour of negative lollipops (without
+\code{group}).}
+
+\item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
+shown when \code{group} is used.}
+
+\item{controls}{Logical. Show the sort buttons. Defaults to \code{TRUE}.}
+
+\item{tooltip}{Logical. Show a tooltip on hover. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Animate the lollipops when the chart is first
+drawn. Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\code{",.0f"}, \code{".1f"} or \code{"~s"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+value, e.g. \code{"$"} or \code{" km"}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\code{NA} to hide them.}
+
+\item{opacity}{The opacity of the lollipops (from 0 to 1). Defaults to 1.}
 }
 \value{
-A SVG lollipop chart.
+An interactive SVG lollipop chart (an r2d3 htmlwidget).
 }
 \description{
-Create a lollipop chart
+A lighter alternative to \code{\link{bar_chart}()}: each value is drawn as
+a thin stem ending in a dot. The data can be one row per category, or raw
+rows that are aggregated for you (\code{agg}); leave \code{y} empty to count
+rows. With \code{group}, each category gets one lollipop per group, side by
+side. Lollipops grow in when the chart is drawn, show their values, and can
+be re-sorted from the chart itself.
 }
+\section{Interactions}{
+
+\itemize{
+  \item Hover a lollipop to see its value, its share of the total and its
+    rank; with \code{group}, the tooltip lists every group for that
+    category.
+  \item The buttons at the top right switch between the original order,
+    largest first and smallest first.
+  \item Click a legend entry to hide or show a group, double-click it to
+    isolate it. Hovering a legend entry highlights the group.
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking a lollipop sets \code{input$id_clicked} to a list with the
+\code{category} and \code{group} of the lollipop. The sort order and the
+hidden groups are kept when the chart is re-rendered.
+}
+
 \examples{
 library(ggplot2) # needed for the mpg data frame
 library(dplyr) # needed for data wrangling
@@ -106,4 +208,18 @@ mpg \%>\% group_by(drv) \%>\%
     ytitle = "median cty",
     title = "Median cty per drv"
   )
+
+# Aggregate raw rows directly, and highlight two categories
+lollipop_chart(
+  mpg, x = "manufacturer", y = "hwy", agg = "median",
+  sort = "descending", highlight = c("honda", "toyota"),
+  title = "Median highway miles per gallon"
+)
+
+# One lollipop per group
+lollipop_chart(
+  mpg, x = "class", y = "cty", group = "year", agg = "mean",
+  valueFormat = ".1f", title = "City miles per gallon, 1999 and 2008"
+)
+
 }

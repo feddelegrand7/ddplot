@@ -18,7 +18,7 @@ Charts for comparing values across categories, from the everyday bar chart to be
 |---|---|
 | [`bar_chart()`](#bar_chart) | You compare a value across categories, optionally split into grouped or stacked bars |
 | [`horz_bar_chart()`](#horz_bar_chart) | You have many categories or long labels, or want 100% stacked bars |
-| [`lollipop_chart()`](#lollipop_chart) | You want a lighter alternative to a bar chart |
+| [`lollipop_chart()`](#lollipop_chart) | You want a lighter alternative to a bar chart, for many similar values |
 | [`horz_lollipop()`](#horz_lollipop) | A lollipop chart with many categories or long labels |
 | [`dumbbell_chart()`](#dumbbell_chart) | You show the gap between two values for each category |
 | [`slope_chart()`](#slope_chart) | You compare two points in time and want to show who rose and who fell |
@@ -167,64 +167,91 @@ horz_bar_chart(
 
 ## `lollipop_chart()` {#lollipop_chart}
 
-lollipop chart follows the same behavior as bar charts but instead of bars you get lollipops, hence the name. Below an example of a lollipop chart with `ddplot`:
+`lollipop_chart()` is a lighter alternative to a bar chart: each value is a thin stem ending in a dot, which keeps the chart readable when many categories have similar values. It works like `bar_chart()`: hover a lollipop to read its value and its rank, and use the buttons at the top right to re-sort the lollipops.
 
 ```{r}
-mpg %>% group_by(drv) %>%
-  summarise(median_cty = median(cty)) %>%
+mpg %>%
+  group_by(manufacturer) %>%
+  summarise(mean_hwy = mean(hwy)) %>%
   lollipop_chart(
-    x = "drv",
-    y = "median_cty",
-    sort = "ascending",
-    xtitle = "drv variable",
-    ytitle = "median cty",
-    title = "Median cty per drv",
-    xFontSize = 20
+    x = "manufacturer",
+    y = "mean_hwy",
+    sort = "descending",
+    ytitle = "Average highway miles per gallon",
+    title = "Highway fuel economy by manufacturer",
+    highlight = c("honda", "toyota"),
+    valueFormat = ".1f"
   )
 ```
 
-It's possible to grasp the distribution of some variable according to a specific categorical variable using the same function:
+You can pass raw rows: they are combined with `agg` (`"sum"` by default, or `"mean"`, `"median"`, `"min"`, `"max"`, `"count"`), and leaving `y` empty counts the rows. With `group`, each category gets one lollipop per group; click a legend entry to hide a group, double-click it to keep only that group.
 
 ```{r}
-
-mpg %>% filter(year == 2008) %>%
 lollipop_chart(
-    x = "manufacturer",
-    y = "hwy",
-    circleFill = 'red',
-    circleStroke = 'orange',
-    circleRadius = 5,
-    sort = "none",
-    xFontSize = 10
-  )
+  mpg,
+  x = "class",
+  y = "cty",
+  group = "year",
+  agg = "mean",
+  sort = "descending",
+  valueFormat = ".1f",
+  title = "City miles per gallon, 1999 and 2008"
+)
 ```
 
-From above, it's quite easy to notice that although Toyota has two cars with high highway miles per gallon (hwy), it also produces many other vehicles with poor hwy.
+The look is set with `circleFill`, `circleRadius`, `lineStroke` and `lineStrokeWidth`. Values below zero are drawn downwards, in `negativeFill` if you give one:
+
+```{r}
+change <- data.frame(
+  country = c("Spain", "France", "Italy", "Germany", "Poland", "Sweden"),
+  growth  = c(2.4, 0.9, -0.3, -0.6, 3.1, 1.2)
+)
+
+lollipop_chart(
+  change,
+  x = "country",
+  y = "growth",
+  negativeFill = "#ff725c",
+  valueSuffix = "%",
+  ytitle = "GDP growth",
+  title = "Annual GDP growth",
+  circleRadius = 8,
+  lineStroke = "#c9ced6"
+)
+```
+
+In Shiny, clicking a lollipop sets `input$<id>_clicked` to its `category` and `group`, and the sort order and hidden groups are kept when the chart is re-rendered.
 
 ## `horz_lollipop()` {#horz_lollipop}
 
-Same with bar charts, if you have a variable that has many categorical values, you can work with the reversed version of `lollipop_chart()` which is `horz_lollipop()`:
+`horz_lollipop()` is the horizontal version, for many categories or long labels. It takes the same arguments, with `label` and `value` instead of `x` and `y`.
 
 ```{r}
-mpg %>% group_by(manufacturer) %>%
+mpg %>%
+  group_by(manufacturer) %>%
   summarise(median_cty = median(cty)) %>%
   horz_lollipop(
     label = "manufacturer",
     value = "median_cty",
-    sort = "descending")
+    sort = "descending",
+    valueTitle = "Median city miles per gallon",
+    title = "City fuel economy by manufacturer"
+  )
 ```
-You can also do:
+
+Counting rows, with the average as a reference line:
 
 ```{r}
-mpg %>% filter(year == 2008) %>%
+counts <- count(mpg, manufacturer)
+
 horz_lollipop(
-    label = "manufacturer",
-    value = "hwy",
-    circleFill = 'red',
-    circleStroke = 'orange',
-    circleRadius = 5,
-    sort = "none"
-  )
+  mpg,
+  label = "manufacturer",
+  sort = "descending",
+  refLines = c(Average = mean(counts$n)),
+  valueTitle = "Number of models",
+  title = "Models per manufacturer"
+)
 ```
 
 ## `dumbbell_chart()` {#dumbbell_chart}
