@@ -2,96 +2,222 @@
 % Please edit documentation in R/areaband.R
 \name{area_band}
 \alias{area_band}
-\title{Create a band chart}
+\title{Create an interactive band chart}
 \usage{
 area_band(
   data,
   x,
   yLower,
   yUpper,
-  fill = "crimson",
+  fill = NULL,
   stroke = NULL,
   strokeWidth = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitleFontSize = 13,
   title = NULL,
-  titleFontSize = 22,
+  titleFontSize = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
-  opacity = 1,
-  axisCol = "black",
+  bgcol = "white",
+  opacity = NULL,
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  y = NULL,
+  group = NULL,
+  lineWidth = 2,
+  curve = "curveLinear",
+  yZero = FALSE,
+  events = NULL,
+  bands = NULL,
+  hlines = NULL,
+  legend = NULL,
+  endLabels = NULL,
+  tooltip = TRUE,
+  navigator = TRUE,
+  rangeButtons = TRUE,
+  zoom = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  dateFormat = NULL,
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  xFontSize = 11,
+  yFontSize = 11,
+  gridCol = "#e9e9e9"
 )
 }
 \arguments{
-\item{data}{The data frame containing the variables to consider.}
+\item{data}{A data frame, or a \code{ts} / \code{mts} object.}
 
-\item{x}{The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.}
+\item{x}{The time variable: a \code{Date}, a \code{POSIXct} date-time, a
+"yyyy-mm-dd" character column or a number.}
 
-\item{yLower}{The y-lower band variable to consider.}
+\item{yLower}{The column holding the lower bound of the band.}
 
-\item{yUpper}{The y-upper band variable to consider.}
+\item{yUpper}{The column holding the upper bound of the band.}
 
-\item{fill}{The color of the band. Defaults to 'crimson'.}
+\item{fill}{The colour of the band (and of the central line). A single
+colour, or one colour per group (a named vector maps colours to groups).
+Defaults to a built-in palette.}
 
-\item{stroke}{Optional. The color of the stroke of the band.}
+\item{stroke}{Optional. The colour of the band's outline. Without
+\code{y}, the outline defaults to a faded line in the band's colour.}
 
-\item{strokeWidth}{Optional. The width of the band stroke.}
+\item{strokeWidth}{Optional. The width of the band's outline. Defaults to
+1.}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{xticks}{Optional. The approximate number of x-axis ticks.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{yticks}{Optional. The approximate number of y-axis ticks.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the area chart (from 0 to 1). Defaults to 1.}
+\item{opacity}{Optional. The opacity of the band (from 0 to 1). Defaults
+to 0.3, or 0.22 with a central line.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{y}{Optional. A column drawn as a line inside the band.}
+
+\item{group}{Optional. The column whose values name the bands (one band
+per value, long data).}
+
+\item{lineWidth}{The width of the central line. Defaults to 2.}
+
+\item{curve}{The line's curve type. A complete list can be found here
+<https://github.com/d3/d3-shape#curves>. Defaults to 'curveLinear';
+'curveMonotoneX' gives smooth lines that never overshoot the data.}
+
+\item{yZero}{Logical. Force the y axis to include 0. Defaults to
+\code{FALSE}.}
+
+\item{events}{Optional. Dates to mark with a vertical line: either a
+vector of dates (names are used as labels) or a data frame whose first
+column holds the dates and whose second column (optional) holds labels.}
+
+\item{bands}{Optional. Periods to shade, as a data frame whose first two
+columns are the start and end dates. An optional third column holds the
+labels and an optional fourth column the fill colors.}
+
+\item{hlines}{Optional. Numeric reference values drawn as horizontal
+dashed lines (names are used as labels). Only drawn when
+\code{transform = "none"}.}
+
+\item{legend}{Logical. Show the interactive legend (click to hide or show
+a series, double-click to isolate it). When \code{NULL} (default), the
+legend is shown when there are two series or more.}
+
+\item{endLabels}{Logical. Label each line at its last visible point. When
+\code{NULL} (default), labels are shown when there are two series or
+more.}
+
+\item{tooltip}{Logical. Show the crosshair and the tooltip on hover.
+Defaults to \code{TRUE}.}
+
+\item{navigator}{Logical. Show the navigator (a miniature of the full
+series with a brush to select the visible range) under the chart.
+Defaults to \code{TRUE}; it is hidden automatically on very short
+charts.}
+
+\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+All, ...), chosen from the length and frequency of the data. Only used
+with dates. Defaults to \code{TRUE}.}
+
+\item{zoom}{Logical. Drag horizontally on the chart to zoom into a range;
+double-click to reset. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Draw the lines in with an animation on first
+render. Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+(see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
+with \code{transform = "percent"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+values on the y axis and in the tooltip, for example "$" or " km".}
+
+\item{dateFormat}{Optional. A d3-time-format string for the date in the
+tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
+(default), it is picked from the frequency of the data (yearly,
+quarterly, monthly, daily or intraday).}
+
+\item{subtitle}{Optional. A subtitle shown under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+to 11.}
+
+\item{gridCol}{The color of the horizontal grid lines. Defaults to
+"#e9e9e9".}
 }
 \value{
-A SVG band chart
+An interactive SVG band chart.
 }
 \description{
-Create a band chart
+Draws a shaded band between a lower and an upper value over time, such as
+a daily minimum and maximum, a confidence or forecast interval, or a
+target range, optionally with a central line (\code{y}, for example the
+mean or the median). With \code{group}, one band per group is drawn. It
+shares the interactions of \code{\link{line_chart}()}: a crosshair tooltip
+showing each band's range, range buttons, a navigator, drag-to-zoom
+(double-click to reset) and a clickable legend.
 }
 \examples{
 airpassengers <- data.frame(
- passengers_lower = as.matrix(AirPassengers),
- passengers_upper = as.matrix(AirPassengers) + 40,
- date= zoo::as.Date(time(AirPassengers))
+  passengers_lower = as.matrix(AirPassengers),
+  passengers_upper = as.matrix(AirPassengers) + 40,
+  date = zoo::as.Date(time(AirPassengers))
 )
 
 area_band(
- data = airpassengers,
- x = "date",
- yLower = "passengers_lower",
- yUpper = "passengers_upper",
- fill = "yellow",
- stroke = "black"
+  data = airpassengers,
+  x = "date",
+  yLower = "passengers_lower",
+  yUpper = "passengers_upper",
+  fill = "#efb118",
+  stroke = "#9c6b4e"
 )
+
+# A band around a central line, one band per group
+set.seed(1)
+days <- seq(as.Date("2026-01-01"), by = "day", length.out = 120)
+temps <- do.call(rbind, lapply(c("Oslo", "Madrid"), function(city) {
+  base <- if (city == "Oslo") -2 else 9
+  mid <- base + 8 * sin(seq_along(days) / 38) + rnorm(120, 0, 1)
+  data.frame(date = days, city = city, mean = mid,
+             low = mid - runif(120, 2, 5), high = mid + runif(120, 2, 5))
+}))
+area_band(
+  temps, x = "date", yLower = "low", yUpper = "high", y = "mean",
+  group = "city", valueFormat = ".1f", valueSuffix = " °C",
+  title = "Daily temperatures", subtitle = "Mean, with the daily minimum and maximum"
+)
+
 }

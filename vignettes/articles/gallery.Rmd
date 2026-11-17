@@ -33,9 +33,9 @@ categories <- list(
 catalogue <- read.csv(text = '
 fn|category|name|use|tags
 line_chart|time-series|Line chart|You track one or many series over time and want to zoom, compare and annotate|interactive,shiny
-area_chart|time-series|Area chart|A single series where the volume under the line matters|
-stacked_area_chart|time-series|Stacked area chart|You show a total and how each component contributes over time|interactive
-area_band|time-series|Area band|You show a range over time, such as a min/max or an interval|
+area_chart|time-series|Area chart|The volume under the line matters, or a series above and below a baseline|interactive
+stacked_area_chart|time-series|Stacked area chart|You show a total and how each component contributes over time, in values or shares|interactive
+area_band|time-series|Area band|You show a range over time, such as a min/max or an interval|interactive
 streamgraph|time-series|Streamgraph|Many categories change over time and the overall shape matters more than exact values|interactive
 calendar_heatmap|time-series|Calendar heatmap|You look for daily, weekly or seasonal patterns in a daily series|interactive
 anim_line_chart|time-series|Animated line chart|You present a single series and want it to draw itself on click|animated

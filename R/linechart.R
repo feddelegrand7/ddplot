@@ -254,6 +254,68 @@ line_chart <- function(
                       width = NULL,
                       height = NULL
                       ) {
+  do.call(line_widget, as.list(environment()))
+}
+
+
+# Shared builder for line_chart(), area_chart(), stacked_area_chart() and
+# area_band(): validates the arguments, reshapes the data to long rows
+# (t, s, v, lo, hi) and calls linechart.js. `extra` holds options used only
+# by the area charts (stacking, baseline, band styling, ...).
+# @noRd
+line_widget <- function(
+                      data,
+                      x = NULL,
+                      y = NULL,
+                      group = NULL,
+                      lower = NULL,
+                      upper = NULL,
+                      colors = NULL,
+                      stroke = NULL,
+                      strokeWidth = 2,
+                      curve = "curveLinear",
+                      opacity = 1,
+                      area = FALSE,
+                      points = FALSE,
+                      yScale = c("linear", "log"),
+                      yZero = NULL,
+                      transform = c("none", "index", "percent"),
+                      indexBase = 100,
+                      rollmean = NULL,
+                      showRaw = TRUE,
+                      events = NULL,
+                      bands = NULL,
+                      hlines = NULL,
+                      legend = NULL,
+                      endLabels = NULL,
+                      tooltip = TRUE,
+                      navigator = TRUE,
+                      rangeButtons = TRUE,
+                      zoom = TRUE,
+                      animate = TRUE,
+                      valueFormat = NULL,
+                      valuePrefix = "",
+                      valueSuffix = "",
+                      dateFormat = NULL,
+                      xticks = NULL,
+                      yticks = NULL,
+                      xtitle = NULL,
+                      xtitleFontSize = 13,
+                      ytitle = NULL,
+                      ytitleFontSize = 13,
+                      title = NULL,
+                      titleFontSize = 20,
+                      subtitle = NULL,
+                      subtitleFontSize = 13,
+                      xFontSize = 11,
+                      yFontSize = 11,
+                      font = "Verdana, Geneva, Tahoma, sans-serif",
+                      bgcol = "white",
+                      gridCol = "#e9e9e9",
+                      axisCol = "#333333",
+                      width = NULL,
+                      height = NULL,
+                      extra = list()) {
 
   yScale <- match.arg(yScale)
   transform <- match.arg(transform)
@@ -391,7 +453,7 @@ line_chart <- function(
   }
 
   long <- long[!is.na(long$t), , drop = FALSE]
-  if (!nrow(long) || all(is.na(long$v))) {
+  if (!nrow(long) || all(is.na(c(long$v, long$lo, long$hi)))) {
     stop("there is no non-missing value to plot")
   }
   long <- long[order(match(long$s, series), xt$order_key(long$t)), , drop = FALSE]
@@ -462,7 +524,7 @@ line_chart <- function(
   r2d3::r2d3(
     data = long,
     script = ddplot_script("linechart.js"),
-    options = list(
+    options = c(list(
       xType = x_type,
       series = as.list(series),
       colors = if (is.null(series_colors)) NULL else as.list(series_colors),
@@ -507,7 +569,7 @@ line_chart <- function(
       bgcol = bgcol,
       gridCol = gridCol,
       axisCol = axisCol
-    ),
+    ), extra),
     width = width,
     height = height
   )

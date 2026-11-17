@@ -2,88 +2,207 @@
 % Please edit documentation in R/stackedAreaChart.R
 \name{stacked_area_chart}
 \alias{stacked_area_chart}
-\title{Create a stacked area chart}
+\title{Create an interactive stacked area chart}
 \usage{
 stacked_area_chart(
   data,
-  x,
-  colorCategory = "Category10",
+  x = NULL,
+  colorCategory = NULL,
   curve = "curveLinear",
   stroke = NULL,
-  strokeWidth = 1.5,
+  strokeWidth = 1,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitleFontSize = 13,
   title = NULL,
-  titleFontSize = 22,
+  titleFontSize = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
-  opacity = 1,
-  axisCol = "black",
-  legendBoxSize = 18,
-  legendTextSize = 18,
+  bgcol = "white",
+  opacity = 0.85,
+  axisCol = "#333333",
+  legendBoxSize = NULL,
+  legendTextSize = NULL,
   width = NULL,
-  height = NULL
+  height = NULL,
+  y = NULL,
+  group = NULL,
+  colors = NULL,
+  position = c("stacked", "percent"),
+  controls = TRUE,
+  events = NULL,
+  bands = NULL,
+  hlines = NULL,
+  legend = NULL,
+  endLabels = NULL,
+  tooltip = TRUE,
+  navigator = TRUE,
+  rangeButtons = TRUE,
+  zoom = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  dateFormat = NULL,
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  xFontSize = 11,
+  yFontSize = 11,
+  gridCol = "#e9e9e9"
 )
 }
 \arguments{
-\item{data}{The data frame containing the variables to consider.}
+\item{data}{A data frame, or a \code{ts} / \code{mts} object.}
 
-\item{x}{The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.}
+\item{x}{The time variable: a \code{Date}, a \code{POSIXct} date-time, a
+"yyyy-mm-dd" character column or a number. Not needed when \code{data}
+is an \code{mts} object.}
 
-\item{colorCategory}{A D3 categorical color scheme, you can find more
-here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Category10'.}
+\item{colorCategory}{Optional. The name of a D3 categorical colour scheme
+(for example "Tableau10", "Set2" or "Accent", see
+<https://github.com/d3/d3-scale-chromatic#categorical>), used when
+\code{colors} is not given. Defaults to the ddplot palette.}
 
-\item{curve}{The line's curve type to render.
-A complete list can be found here <https://github.com/d3/d3-shape#curves>.
-Defaults to 'curveLinear'.}
+\item{curve}{The curve type of the layers. Defaults to 'curveLinear';
+'curveMonotoneX' gives smooth layers that never cross. A complete list
+can be found here <https://github.com/d3/d3-shape#curves>.}
 
-\item{stroke}{Optional. The color of the stroke of the area.}
+\item{stroke}{Optional. The colour of the line drawn on top of every
+layer, for example "white" to separate the layers. Defaults to the
+colour of each layer.}
 
-\item{strokeWidth}{The width of the line. Defaults to 1.5.}
+\item{strokeWidth}{The width of the line on top of every layer. Defaults
+to 1.}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{xticks}{Optional. The approximate number of x-axis ticks.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{yticks}{Optional. The approximate number of y-axis ticks.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the area chart (from 0 to 1). Defaults to 1.}
+\item{opacity}{The opacity of the layers (from 0 to 1). Defaults to 0.85.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+"#333333".}
 
-\item{legendBoxSize}{The size of the legend rectangles. Defaults to 18.}
-
-\item{legendTextSize}{The font size of the legend text Defaults to 18.}
+\item{legendBoxSize, legendTextSize}{Not used; kept for compatibility.}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{y}{Optional. The value columns (wide data), or the single value
+column of long data with \code{group}. When \code{NULL}, every numeric
+column other than \code{x} is stacked.}
+
+\item{group}{Optional. For long data, the column whose values name the
+layers.}
+
+\item{colors}{Optional. Colours of the layers, an unnamed vector
+(recycled) or a vector named by layer.}
+
+\item{position}{"stacked" (default) or "percent" (shares of the total).
+It can be changed from the chart when \code{controls = TRUE}.}
+
+\item{controls}{Logical. Show the Stacked / 100\% buttons. Defaults to
+\code{TRUE}.}
+
+\item{events}{Optional. Dates to mark with a vertical line: either a
+vector of dates (names are used as labels) or a data frame whose first
+column holds the dates and whose second column (optional) holds labels.}
+
+\item{bands}{Optional. Periods to shade, as a data frame whose first two
+columns are the start and end dates. An optional third column holds the
+labels and an optional fourth column the fill colors.}
+
+\item{hlines}{Optional. Numeric reference values drawn as horizontal
+dashed lines (names are used as labels). Only drawn when
+\code{transform = "none"}.}
+
+\item{legend}{Logical. Show the interactive legend (click to hide or show
+a series, double-click to isolate it). When \code{NULL} (default), the
+legend is shown when there are two series or more.}
+
+\item{endLabels}{Logical. Label each line at its last visible point. When
+\code{NULL} (default), labels are shown when there are two series or
+more.}
+
+\item{tooltip}{Logical. Show the crosshair and the tooltip on hover.
+Defaults to \code{TRUE}.}
+
+\item{navigator}{Logical. Show the navigator (a miniature of the full
+series with a brush to select the visible range) under the chart.
+Defaults to \code{TRUE}; it is hidden automatically on very short
+charts.}
+
+\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+All, ...), chosen from the length and frequency of the data. Only used
+with dates. Defaults to \code{TRUE}.}
+
+\item{zoom}{Logical. Drag horizontally on the chart to zoom into a range;
+double-click to reset. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Draw the lines in with an animation on first
+render. Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+(see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
+with \code{transform = "percent"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+values on the y axis and in the tooltip, for example "$" or " km".}
+
+\item{dateFormat}{Optional. A d3-time-format string for the date in the
+tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
+(default), it is picked from the frequency of the data (yearly,
+quarterly, monthly, daily or intraday).}
+
+\item{subtitle}{Optional. A subtitle shown under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+to 11.}
+
+\item{gridCol}{The color of the horizontal grid lines. Defaults to
+"#e9e9e9".}
 }
 \value{
-a SVG stacked area chart
+An interactive SVG stacked area chart.
 }
 \description{
-Create a stacked area chart
+Stacks several time series on top of each other, so you can read both the
+total and how each component contributes to it. Buttons on the chart
+switch between stacked values and shares of the total (100\%). It shares
+the interactions of \code{\link{line_chart}()}: a crosshair tooltip
+(every layer with its share, and the total), range buttons, a navigator,
+drag-to-zoom (double-click to reset), labels at the end of each layer and
+a legend: click an entry to hide a layer, double-click it to keep only
+that layer; the other layers re-stack.
+}
+\details{
+Series can be given as wide data (by default, every numeric column other
+than \code{x}; or the columns named in \code{y}), as long data (one
+\code{y} column and a \code{group} column), or as an \code{mts} object.
+Missing values count as zero when stacking, and negative values are
+stacked below zero.
 }
 \examples{
 data <- data.frame(
@@ -109,12 +228,17 @@ data <- data.frame(
 stacked_area_chart(
   data = data,
   x = "date",
-  legendTextSize = 14,
-  curve = "curveCardinal",
-  colorCategory = "Accent",
-  bgcol = "white",
-  stroke = "black",
-  strokeWidth = 1
+  curve = "curveMonotoneX",
+  stroke = "white",
+  title = "Employment by sector"
+)
+
+# Long data, shown as shares of the total
+library(ggplot2) # for the economics_long data set
+stacked_area_chart(
+  subset(economics_long, variable \%in\% c("pce", "psavert", "uempmed")),
+  x = "date", y = "value", group = "variable",
+  position = "percent"
 )
 
 }

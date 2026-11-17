@@ -2,93 +2,234 @@
 % Please edit documentation in R/areachart.R
 \name{area_chart}
 \alias{area_chart}
-\title{Create an area chart}
+\title{Create an interactive area chart}
 \usage{
 area_chart(
   data,
-  x,
-  y,
-  fill = "crimson",
+  x = NULL,
+  y = NULL,
+  fill = NULL,
   stroke = NULL,
-  strokeWidth = NULL,
+  strokeWidth = 2,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitleFontSize = 13,
   title = NULL,
-  titleFontSize = 22,
+  titleFontSize = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
-  opacity = 1,
-  axisCol = "black",
+  bgcol = "white",
+  opacity = NULL,
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  group = NULL,
+  baseline = NULL,
+  negativeFill = NULL,
+  curve = "curveLinear",
+  points = FALSE,
+  yZero = NULL,
+  events = NULL,
+  bands = NULL,
+  hlines = NULL,
+  legend = NULL,
+  endLabels = NULL,
+  tooltip = TRUE,
+  navigator = TRUE,
+  rangeButtons = TRUE,
+  zoom = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  dateFormat = NULL,
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  xFontSize = 11,
+  yFontSize = 11,
+  gridCol = "#e9e9e9"
 )
 }
 \arguments{
-\item{data}{The data frame containing the variables to consider.}
+\item{data}{A data frame, or a \code{ts} / \code{mts} object.}
 
-\item{x}{The x-variable to consider. Must be a date variable in 'yyyy-mm-dd' format.}
+\item{x}{The time variable: a \code{Date}, a \code{POSIXct} date-time, a
+"yyyy-mm-dd" character column or a number. Not needed when \code{data}
+is a \code{ts} object.}
 
-\item{y}{The y-variable to consider.}
+\item{y}{The value variable(s): one column name, or several to draw one
+area per column.}
 
-\item{fill}{The color of the area chart. Defaults to 'crimson'.}
+\item{fill}{The colour of the area (and of its line). A single colour, or
+one colour per series (a named vector maps colours to series). Defaults
+to a built-in palette.}
 
-\item{stroke}{Optional. The color of the stroke of the area.}
+\item{stroke}{Optional. The colour of the line on top of the area.
+Defaults to the colour of the area.}
 
-\item{strokeWidth}{Optional. The width of the area stroke.}
+\item{strokeWidth}{The width of the line on top of the area. Defaults to
+2; use 0 to hide the line.}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{xticks}{Optional. The approximate number of x-axis ticks.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{yticks}{Optional. The approximate number of y-axis ticks.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the area chart (from 0 to 1). Defaults to 1.}
+\item{opacity}{Optional. The opacity of the area fill (from 0 to 1). When
+\code{NULL} (default), the area is filled with a gradient that fades
+towards the axis.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{group}{Optional. For long data, the column whose values name the
+series (one area per value).}
+
+\item{baseline}{Optional. A number: the area is drawn between the line and
+this value instead of zero.}
+
+\item{negativeFill}{Optional. With \code{baseline}, the colour of the area
+(and line) below the baseline.}
+
+\item{curve}{The line's curve type. A complete list can be found here
+<https://github.com/d3/d3-shape#curves>. Defaults to 'curveLinear';
+'curveMonotoneX' gives smooth lines that never overshoot the data.}
+
+\item{points}{Logical. Draw a marker on every data point. Defaults to
+\code{FALSE}.}
+
+\item{yZero}{Logical. Force the y axis to include 0. When \code{NULL}
+(default), it does unless \code{baseline} is given.}
+
+\item{events}{Optional. Dates to mark with a vertical line: either a
+vector of dates (names are used as labels) or a data frame whose first
+column holds the dates and whose second column (optional) holds labels.}
+
+\item{bands}{Optional. Periods to shade, as a data frame whose first two
+columns are the start and end dates. An optional third column holds the
+labels and an optional fourth column the fill colors.}
+
+\item{hlines}{Optional. Numeric reference values drawn as horizontal
+dashed lines (names are used as labels). Only drawn when
+\code{transform = "none"}.}
+
+\item{legend}{Logical. Show the interactive legend (click to hide or show
+a series, double-click to isolate it). When \code{NULL} (default), the
+legend is shown when there are two series or more.}
+
+\item{endLabels}{Logical. Label each line at its last visible point. When
+\code{NULL} (default), labels are shown when there are two series or
+more.}
+
+\item{tooltip}{Logical. Show the crosshair and the tooltip on hover.
+Defaults to \code{TRUE}.}
+
+\item{navigator}{Logical. Show the navigator (a miniature of the full
+series with a brush to select the visible range) under the chart.
+Defaults to \code{TRUE}; it is hidden automatically on very short
+charts.}
+
+\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+All, ...), chosen from the length and frequency of the data. Only used
+with dates. Defaults to \code{TRUE}.}
+
+\item{zoom}{Logical. Drag horizontally on the chart to zoom into a range;
+double-click to reset. Defaults to \code{TRUE}.}
+
+\item{animate}{Logical. Draw the lines in with an animation on first
+render. Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+(see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
+with \code{transform = "percent"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+values on the y axis and in the tooltip, for example "$" or " km".}
+
+\item{dateFormat}{Optional. A d3-time-format string for the date in the
+tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
+(default), it is picked from the frequency of the data (yearly,
+quarterly, monthly, daily or intraday).}
+
+\item{subtitle}{Optional. A subtitle shown under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+to 11.}
+
+\item{gridCol}{The color of the horizontal grid lines. Defaults to
+"#e9e9e9".}
 }
 \value{
-a SVG area chart
+An interactive SVG area chart.
 }
 \description{
-Create an area chart
+An area chart for time series: the area under the line is filled with a
+soft gradient. It shares the interactions of \code{\link{line_chart}()}:
+a crosshair tooltip, range buttons (1M, 6M, YTD, 1Y, ...), a navigator
+with a brush under the chart, drag-to-zoom (double-click to reset) and,
+with several series, a clickable legend and labels at the end of each
+area.
+}
+\details{
+With \code{baseline}, the area is drawn between the line and that value
+instead of zero, and \code{negativeFill} colours the part below it, which
+suits anomalies, balances or profit and loss.
+
+The data can be one column (\code{y = "value"}), several columns
+(\code{y = c("a", "b")}), long data with a \code{group} column, or a
+\code{ts} / \code{mts} object passed directly as \code{data}. Several
+series are drawn on top of each other; use
+\code{\link{stacked_area_chart}()} to stack them.
 }
 \examples{
-# 1. converting AirPassengers to a tidy data frame
+# A ts object can be passed directly
+area_chart(AirPassengers, y = "passengers", title = "Airline passengers")
+
+# The classic data frame interface still works
 airpassengers <- data.frame(
   passengers = as.matrix(AirPassengers),
-  date= zoo::as.Date(time(AirPassengers))
+  date = zoo::as.Date(time(AirPassengers))
 )
-
-# 2. plotting the area chart
 area_chart(
   data = airpassengers,
   x = "date",
   y = "passengers",
-  fill = "purple",
-  bgcol = "white"
+  fill = "purple"
 )
+
+# Above and below a baseline
+library(ggplot2) # for the economics data set
+area_chart(
+  economics, x = "date", y = "psavert",
+  baseline = mean(economics$psavert),
+  fill = "#3ca951", negativeFill = "#ff725c",
+  valueSuffix = "\%",
+  title = "US personal savings rate",
+  subtitle = "Above and below its long-run average"
+)
+
 }

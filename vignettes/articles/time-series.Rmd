@@ -16,9 +16,9 @@ Charts for data indexed by time. `line_chart()` is the workhorse: it handles sev
 | Chart | Use it when |
 |---|---|
 | [`line_chart()`](#line_chart) | You track one or many series over time and want to zoom, compare and annotate |
-| [`area_chart()`](#area_chart) | A single series where the volume under the line matters |
-| [`stacked_area_chart()`](#stacked_area_chart) | You show a total and how each component contributes over time |
-| [`area_band()`](#area_band) | You show a range over time, such as a min/max or an interval |
+| [`area_chart()`](#area_chart) | The volume under the line matters, or you show a series above and below a baseline |
+| [`stacked_area_chart()`](#stacked_area_chart) | You show a total and how each component contributes over time, in values or shares |
+| [`area_band()`](#area_band) | You show a range over time, such as a min/max or an interval, with or without a central line |
 | [`streamgraph()`](#streamgraph) | Many categories change over time and the overall shape matters more than exact values |
 | [`calendar_heatmap()`](#calendar_heatmap) | You look for daily, weekly or seasonal patterns in a daily series |
 | [`anim_line_chart()`](#anim_line_chart) | You present a single series and want it to draw itself on click |
@@ -168,33 +168,35 @@ Other options include `yScale = "log"`, `yZero`, `dateFormat`, and turning off `
 
 ## `area_chart()` {#area_chart}
 
-`area_chart()` works similarly except that instead of a line you get an area.
+`area_chart()` fills the area under the line, which suits volumes and totals. It shares the interactions of `line_chart()`: crosshair tooltip, range buttons, navigator, drag-to-zoom (double-click to reset), and a clickable legend with several series. A `ts` object can be passed directly, and the classic data frame interface still works:
 
 ```{r}
-# 1. converting AirPassengers to a tidy data frame
-airpassengers <- data.frame(
-  passengers = as.matrix(AirPassengers),
-  date= zoo::as.Date(time(AirPassengers))
-)
+area_chart(AirPassengers, y = "passengers", title = "Airline passengers")
+```
 
-# 2. plotting the area chart
+With `baseline`, the area is drawn between the line and that value instead of zero, and `negativeFill` colours the part below it. This is the usual way to show anomalies, balances or a value against its average:
+
+```{r}
 area_chart(
-  data = airpassengers,
+  economics,
   x = "date",
-  y = "passengers",
-  fill = "purple",
-  bgcol = "white"
+  y = "psavert",
+  baseline = mean(economics$psavert),
+  fill = "#3ca951",
+  negativeFill = "#ff725c",
+  valueSuffix = "%",
+  title = "US personal savings rate",
+  subtitle = "Above and below its long-run average"
 )
 ```
 
+The area is filled with a gradient by default; `opacity` gives a flat fill instead, `stroke` and `strokeWidth` style the line on top. Several series (`y = c(...)`, `group` or an `mts` object) are drawn on top of each other; to add them up, use `stacked_area_chart()`.
+
 ## `stacked_area_chart()` {#stacked_area_chart}
 
-This function allows you to create a stacked area chart. You need two components:
+`stacked_area_chart()` stacks several series so you can read both the total and how each component contributes to it. The buttons at the top right switch between stacked values and shares of the total (100%). Hover the chart to read every layer with its share and the total; click a legend entry to hide a layer (the others re-stack), double-click it to keep only that layer.
 
-- A data frame in wide format (see an example below). If it's in wide format, you can still use `pivot_wider()` from the `tidyr` package to make wider.
-- A date variable in `yyyy-mm-dd` format that will plotted in the x-axis.
-
-Let's work with the following data frame (shortened) provided by [Mike Bostock in his stacked area chart example](https://observablehq.com/@d3/stacked-area-chart):
+The data can be wide, as in this example adapted from [Mike Bostock's stacked area chart](https://observablehq.com/@d3/stacked-area-chart): every numeric column other than `x` becomes a layer (or the columns named in `y`).
 
 ```{r}
 data <- data.frame(
@@ -217,61 +219,41 @@ data <- data.frame(
   )
 )
 
-data
-```
-
-Note that when running `stacked_area_chart()` all the variables available within the considered data frame will be plotted. If you want to restrict the plotting to only specific variables, just drop the unneeded columns:
-
-```{r}
 stacked_area_chart(
   data = data,
   x = "date",
-  legendTextSize = 14
-  )
+  curve = "curveMonotoneX",
+  stroke = "white",
+  title = "Employment by sector"
+)
 ```
 
-You can modify the color scheme using the `colorCategory` parameter:
+`curve = "curveMonotoneX"` gives smooth layers that never cross; curves such as `"curveCardinal"` can overshoot and make layers overlap. `stroke = "white"` draws a thin separator between the layers.
+
+Long data works too, with one value column and a `group` column. Here the chart starts in the 100% layout (`position = "percent"`):
 
 ```{r}
 stacked_area_chart(
-  data = data,
+  subset(economics_long, variable %in% c("pce", "psavert", "uempmed")),
   x = "date",
-  legendTextSize = 14,
-  curve = "curveCardinal",
-  colorCategory = "Accent",
-  bgcol = "white",
-  stroke = "black",
-  strokeWidth = 1
-  )
+  y = "value",
+  group = "variable",
+  position = "percent",
+  title = "Composition over time"
+)
 ```
 
-```{r}
-stacked_area_chart(
-  data = data,
-  x = "date",
-  legendTextSize = 14,
-  curve = "curveBasis",
-  colorCategory = "Set3",
-  bgcol = "black",
-  axisCol = "white",
-  xticks = 4,
-  stroke = "black"
-  )
-```
-
-You can find list of D3 categorical color schemes [here](https://github.com/d3/d3-scale-chromatic#categorical)
-
-Finally, if you hover over the chart you'll notice a tooltip that identified the different area categories.
+The colours come from the ddplot palette; `colors` sets them yourself, and `colorCategory` picks a [D3 categorical scheme](https://github.com/d3/d3-scale-chromatic#categorical) such as `"Tableau10"` or `"Set2"`. Missing values count as zero when stacking, and negative values are stacked below zero.
 
 ## `area_band()` {#area_band}
 
-`area_band()` lets you plot a filled area between two y-values. For the sake of the example, let's create an additional column `passengers_upper` that has an additional 40 passengers for each observation:
+`area_band()` shades the range between a lower and an upper value over time: a daily minimum and maximum, a confidence interval, a target range. Hover it to read the range at each date.
 
 ```{r}
 airpassengers <- data.frame(
   passengers_lower = as.matrix(AirPassengers),
   passengers_upper = as.matrix(AirPassengers) + 40,
-  date= zoo::as.Date(time(AirPassengers))
+  date = zoo::as.Date(time(AirPassengers))
 )
 
 area_band(
@@ -279,8 +261,34 @@ area_band(
   x = "date",
   yLower = "passengers_lower",
   yUpper = "passengers_upper",
-  fill = "yellow",
-  stroke = "black"
+  fill = "#efb118",
+  stroke = "#9c6b4e"
+)
+```
+
+`y` adds a line inside the band (a mean or a median, for example) and `group` draws one band per group, with a clickable legend. `fill` colours the band and its line; `stroke` outlines the band.
+
+```{r}
+set.seed(1)
+days <- seq(as.Date("2026-01-01"), by = "day", length.out = 120)
+temps <- do.call(rbind, lapply(c("Oslo", "Madrid"), function(city) {
+  base <- if (city == "Oslo") -2 else 9
+  mid <- base + 8 * sin(seq_along(days) / 38) + rnorm(120, 0, 1)
+  data.frame(date = days, city = city, mean = mid,
+             low = mid - runif(120, 2, 5), high = mid + runif(120, 2, 5))
+}))
+
+area_band(
+  temps,
+  x = "date",
+  yLower = "low",
+  yUpper = "high",
+  y = "mean",
+  group = "city",
+  valueFormat = ".1f",
+  valueSuffix = " °C",
+  title = "Daily temperatures",
+  subtitle = "Mean, with the daily minimum and maximum"
 )
 ```
 

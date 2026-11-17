@@ -1,9 +1,14 @@
-// line_chart(): interactive multi-series time series chart.
+// line_chart(), area_chart(), stacked_area_chart() and area_band():
+// interactive multi-series time series chart.
 //
 // data: long rows {t, s, v, lo, hi} (t = ISO date string or number,
 // s = series name, v = value, lo/hi = optional ribbon bounds).
 // Works with D3 v5 and v6 (r2d3 default). The zoom range and hidden series
 // are kept in r2d3.ddplotState so a Shiny update or a resize keeps the view.
+// Area options: o.stack ("stacked"/"percent", switchable from buttons),
+// o.baseline + o.negativeFill (area above/below a value in two colours),
+// o.areaOpacity (flat fill instead of a gradient), o.lineColor, and ribbons
+// without a line (band-only series, o.bandOpacity / o.bandStroke).
 
 const o = options;
 const isV6 = typeof d3.pointer === "function";
@@ -21,19 +26,26 @@ const uid = "ddlc" + Math.random().toString(36).slice(2, 9);
 const arr = v => (v === null || v === undefined) ? [] : [].concat(v);
 const num = v => (v === null || v === undefined || v === "NA" || !isFinite(+v)) ? null : +v;
 const parseT = isTime ? (s => new Date(s)) : (s => +s);
+const nz = (v, d) => (v === null || v === undefined) ? d : v;
 
 svg.style("background-color", bgcol).style("font-family", font);
 
 // ---- persistent state (Shiny updates / resizes) ------------------------------
 const state = r2d3.ddplotState || (r2d3.ddplotState = { timers: [] });
 state.line = state.line || {};
+const kind = o.kind || "line";
+if ((state.line.kind || "line") !== kind) state.line = {};
+state.line.kind = kind;
 
 // ---- series ----------------------------------------------------------------
 const names = arr(o.series).map(String);
 const userColors = arr(o.colors);
+const schemeArr = o.colorScheme ? d3["scheme" + o.colorScheme] : null;
+const scheme = Array.isArray(schemeArr) && typeof schemeArr[0] === "string" ? schemeArr : null;
 const series = names.map((name, i) => ({
   name, i,
-  color: userColors.length ? userColors[i % userColors.length] : PALETTE[i % PALETTE.length],
+  color: userColors.length ? userColors[i % userColors.length]
+    : (scheme ? scheme[i % scheme.length] : PALETTE[i % PALETTE.length]),
   pts: []
 }));
 const byName = new Map(series.map(s => [s.name, s]));
@@ -48,6 +60,7 @@ series.forEach(s => {
   const steps = d3.pairs(s.tn).map(([a, b]) => b - a).filter(d => d > 0);
   s.step = steps.length ? d3.median(steps) : 0;
   s.hasRibbon = s.pts.some(p => p.lo !== null && p.hi !== null);
+  s.bandOnly = s.hasRibbon && !s.pts.some(p => p.v !== null);
   // trailing moving average over complete windows
   if (o.rollmean) {
     const k = o.rollmean;
@@ -164,13 +177,20 @@ if (isTime && o.rangeButtons !== false) {
 const btnH = 22, btnGap = 4;
 buttons.forEach(b => { b.w = tw(b.label, 11, 600) + 16; });
 const buttonsW = buttons.length ? d3.sum(buttons, b => b.w) + btnGap * (buttons.length - 1) : 0;
+// stacked / 100% switch (stacked_area_chart)
+const modeBtns = (o.stack === "stacked" || o.stack === "percent") && o.stackControls !== false
+  ? [{ k: "stacked", label: "Stacked", tip: "Stacked values" }, { k: "percent", label: "100%", tip: "Shares of the total" }]
+  : [];
+modeBtns.forEach(b => { b.w = tw(b.label, 11, 600) + 18; });
+const modeW = modeBtns.length ? d3.sum(modeBtns, b => b.w) : 0;
+const rightW = buttonsW + (modeW ? modeW + (buttonsW ? 10 : 0) : 0);
 
 // legend items, wrapped
 const legendOn = o.legend && series.length > 0;
 const legendItems = [];
 let headerRows = 0;
-if (legendOn || buttons.length) {
-  const availW = W - padL - padR - (buttons.length ? buttonsW + 16 : 0);
+if (legendOn || buttons.length || modeBtns.length) {
+  const availW = W - padL - padR - (rightW ? rightW + 16 : 0);
   let lx = 0, row = 0;
   if (legendOn) {
     series.forEach(s => {
@@ -222,8 +242,70 @@ function tf(v, base) {
 const logOK = v => o.yScale !== "log" || (v !== null && v > 0);
 
 function visibleSeries() { return series.filter(s => !hidden.has(s.name)); }
+// value used to place a point: the main value, or the middle of a band
+function mainVal(s, p) {
+  if (!s.bandOnly) return p[mainKey];
+  return (p.lo !== null && p.hi !== null) ? (p.lo + p.hi) / 2 : null;
+}
+
+// ---- stacking (stacked_area_chart) ---------------------------------------------
+// Every series is stacked over the union of all dates (hidden series and
+// missing values count as 0), so paths keep the same points and animate.
+const stackable = o.stack === "stacked" || o.stack === "percent";
+let stackMode = null;
+if (stackable) {
+  const sm = state.line.stackMode;
+  stackMode = (sm === "stacked" || sm === "percent") ? sm : o.stack;
+}
+const unionT = stackable ? Array.from(new Set(allT)).sort((a, b) => a - b) : [];
+const unionIdx = new Map(unionT.map((t, k) => [t, k]));
+let stackTotal = [];
+function computeStack() {
+  if (!stackable) return;
+  series.forEach(s => {
+    if (!s.vmap) s.vmap = new Map(s.pts.map(p => [+p.t, p[mainKey]]));
+    s.sv = unionT.map(t => {
+      if (hidden.has(s.name)) return 0;
+      const v = s.vmap.get(t);
+      return (v === null || v === undefined || !isFinite(v)) ? 0 : v;
+    });
+  });
+  const absTot = unionT.map((t, k) => d3.sum(series, s => Math.abs(s.sv[k])));
+  stackTotal = unionT.map((t, k) => d3.sum(series, s => s.sv[k]));
+  const pos = unionT.map(() => 0), neg = unionT.map(() => 0);
+  series.forEach(s => {
+    s.stk = unionT.map((t, k) => {
+      let v = s.sv[k];
+      if (stackMode === "percent") v = absTot[k] ? v / absTot[k] : 0;
+      let y0, y1;
+      if (v >= 0) { y0 = pos[k]; y1 = y0 + v; pos[k] = y1; }
+      else { y1 = neg[k]; y0 = y1 + v; neg[k] = y0; }
+      const raw = s.vmap.get(t);
+      return {
+        tn: t, y0, y1, neg: v < 0,
+        raw: (raw === undefined || raw === null || !isFinite(raw)) ? null : raw,
+        share: absTot[k] ? Math.abs(s.sv[k]) / absTot[k] : 0
+      };
+    });
+  });
+}
+computeStack();
+const hasBase = o.baseline !== null && o.baseline !== undefined && transform === "none" && o.yScale !== "log";
+const splitNeg = hasBase && !!o.negativeFill;
 
 function yDomain() {
+  if (stackable) {
+    if (stackMode === "percent") return [0, 1];
+    let slo = 0, shi = 0;
+    const k0 = Math.max(0, d3.bisectLeft(unionT, view[0]) - 1);
+    const k1 = Math.min(unionT.length - 1, d3.bisectRight(unionT, view[1]));
+    visibleSeries().forEach(s => {
+      for (let k = k0; k <= k1; k++) { slo = Math.min(slo, s.stk[k].y0); shi = Math.max(shi, s.stk[k].y1); }
+    });
+    arr(o.hlines).forEach(h => { const v = num(h.value); if (v !== null) { slo = Math.min(slo, v); shi = Math.max(shi, v); } });
+    if (slo === shi) shi = slo + 1;
+    return [slo < 0 ? slo * 1.05 : 0, shi > 0 ? shi * 1.05 : 0];
+  }
   let lo = Infinity, hi = -Infinity;
   visibleSeries().forEach(s => {
     const b = baseOf(s);
@@ -245,6 +327,7 @@ function yDomain() {
     if (v !== null && logOK(v)) { lo = Math.min(lo, v); hi = Math.max(hi, v); }
   });
   if (!isFinite(lo)) { lo = o.yScale === "log" ? 1 : 0; hi = o.yScale === "log" ? 10 : 1; }
+  if (hasBase) { lo = Math.min(lo, +o.baseline); hi = Math.max(hi, +o.baseline); }
   if (o.yScale === "log") {
     if (lo === hi) { lo /= 2; hi *= 2; }
     return [lo / 1.08, hi * 1.08];
@@ -257,6 +340,7 @@ function yDomain() {
 
 // y tick format
 function yTickFormat(scale, n) {
+  if (stackMode === "percent") return d3.format(".0%");
   let f;
   if (transform === "percent") f = scale.tickFormat(n, "+%");
   else if (o.yScale === "log") f = scale.tickFormat(n, "~s");
@@ -281,8 +365,14 @@ y.domain(yDomain()).range([py1, py0]).nice();
 const plotHeight = py1 - py0;
 const nYTicks = o.yticks || Math.max(3, Math.round(plotHeight / 55));
 {
-  const f = yTickFormat(y, nYTicks);
-  const labels = y.ticks(nYTicks).map(f);
+  // widest tick label, over both layouts of a stacked chart
+  let labels = [];
+  const keep = stackMode;
+  (stackable ? ["stacked", "percent"] : [null]).forEach(m => {
+    if (stackable) { stackMode = m; computeStack(); y.domain(yDomain()).nice(); }
+    labels = labels.concat(y.ticks(nYTicks).map(yTickFormat(y, nYTicks)));
+  });
+  if (stackable) { stackMode = keep; computeStack(); y.domain(yDomain()).nice(); }
   px0 = padL + Math.max(28, d3.max(labels, l => tw(l, o.yFontSize)) + 14);
 }
 x.range([px0, px1]);
@@ -297,6 +387,10 @@ const shadow = defs.append("filter").attr("id", uid + "-shadow")
   .attr("x", "-20%").attr("y", "-20%").attr("width", "140%").attr("height", "140%");
 shadow.append("feDropShadow").attr("dx", 0).attr("dy", 2).attr("stdDeviation", 3)
   .attr("flood-color", "#000").attr("flood-opacity", 0.15);
+if (splitNeg) {
+  defs.append("clipPath").attr("id", uid + "-above").append("rect").attr("x", 0).attr("width", W);
+  defs.append("clipPath").attr("id", uid + "-below").append("rect").attr("x", 0).attr("width", W);
+}
 if (o.area) {
   series.forEach(s => {
     const g = defs.append("linearGradient").attr("id", uid + "-grad-" + s.i)
@@ -313,6 +407,7 @@ const gGrid = svg.append("g").attr("class", "y-grid");
 const gHlines = svg.append("g").attr("clip-path", `url(#${uid}-clip)`);
 const gEvents = svg.append("g").attr("clip-path", `url(#${uid}-clip)`);
 const gSeries = svg.append("g").attr("clip-path", `url(#${uid}-clip)`);
+const gStackLines = svg.append("g").attr("clip-path", `url(#${uid}-clip)`);
 const gEventLabels = svg.append("g");
 const gXAxis = svg.append("g").attr("transform", `translate(0,${py1})`);
 const gEnd = svg.append("g");
@@ -348,6 +443,7 @@ function ribbonFor(s) {
 }
 function areaFor(s) {
   const floor = () => {
+    if (hasBase) return y(+o.baseline);
     const d = y.domain();
     return o.yScale === "log" ? py1 : y(Math.max(d[0], Math.min(d[1], 0)));
   };
@@ -356,19 +452,57 @@ function areaFor(s) {
     .x(p => x(p.t)).y0(floor).y1(p => y(tf(p[mainKey], s.base))).curve(curve);
 }
 
+function stackAreaFor() {
+  return d3.area().x(d => x(d.tn)).y0(d => y(d.y0)).y1(d => y(d.y1)).curve(curve);
+}
+function stackLineFor() {
+  return d3.line().x(d => x(d.tn)).y(d => y(d.neg ? d.y0 : d.y1)).curve(curve);
+}
+function edgesFor(s) {
+  const ok = v => v !== null && isFinite(v) && logOK(v);
+  const mk = key => d3.line().defined(p => ok(tf(p[key], s.base)))
+    .x(p => x(p.t)).y(p => y(tf(p[key], s.base))).curve(curve)(s.pts) || "";
+  return mk("lo") + mk("hi");
+}
+
 // ---- series groups -------------------------------------------------------------
+const flatArea = o.areaOpacity !== null && o.areaOpacity !== undefined;
 series.forEach(s => {
   const g = gSeries.append("g").attr("class", "series");
   s.g = g;
-  if (s.hasRibbon) s.ribbon = g.append("path").attr("fill", s.color).attr("fill-opacity", 0.16);
-  if (o.area) s.area = g.append("path").attr("fill", `url(#${uid}-grad-${s.i})`);
+  if (s.hasRibbon) {
+    s.ribbon = g.append("path").attr("fill", s.color)
+      .attr("fill-opacity", nz(o.bandOpacity, s.bandOnly ? 0.3 : 0.16));
+    if (s.bandOnly || o.bandStroke) {
+      s.edges = g.append("path").attr("fill", "none").attr("stroke", o.bandStroke || s.color)
+        .attr("stroke-width", nz(o.bandStrokeWidth, 1)).attr("stroke-opacity", o.bandStroke ? 1 : 0.6);
+    }
+  }
+  if (stackable) {
+    s.area = g.append("path").attr("fill", s.color).attr("fill-opacity", flatArea ? o.areaOpacity : 0.85);
+  } else if (o.area) {
+    const flat = flatArea || hasBase;
+    s.area = g.append("path").attr("fill", flat ? s.color : `url(#${uid}-grad-${s.i})`);
+    if (flat) s.area.attr("fill-opacity", flatArea ? o.areaOpacity : 0.3);
+    if (splitNeg) {
+      s.area.attr("clip-path", `url(#${uid}-above)`);
+      s.areaNeg = g.append("path").attr("fill", o.negativeFill)
+        .attr("fill-opacity", flatArea ? o.areaOpacity : 0.3).attr("clip-path", `url(#${uid}-below)`);
+    }
+  }
   if (o.rollmean && o.showRaw) {
     s.raw = g.append("path").attr("fill", "none").attr("stroke", s.color)
       .attr("stroke-width", Math.max(1, o.strokeWidth * 0.5)).attr("stroke-opacity", 0.35);
   }
-  s.line = g.append("path").attr("fill", "none").attr("stroke", s.color)
+  s.line = (stackable ? gStackLines : g).append("path").attr("fill", "none").attr("stroke", o.lineColor || s.color)
     .attr("stroke-width", o.strokeWidth).attr("stroke-opacity", o.opacity)
     .attr("stroke-linejoin", "round").attr("stroke-linecap", "round");
+  if (splitNeg) {
+    s.line.attr("clip-path", `url(#${uid}-above)`);
+    s.lineNeg = g.append("path").attr("fill", "none").attr("stroke", o.negativeFill)
+      .attr("stroke-width", o.strokeWidth).attr("stroke-opacity", o.opacity)
+      .attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("clip-path", `url(#${uid}-below)`);
+  }
   if (o.points) {
     s.dots = g.append("g").selectAll("circle")
       .data(s.pts.filter(p => p[mainKey] !== null)).enter().append("circle")
@@ -450,6 +584,7 @@ function drawAnnotations(dur) {
   });
   T(eventLabels, dur).attr("x", e => e.ax).attr("y", e => py0 + 12 + e.row * 13)
     .style("opacity", e => e.visible ? 1 : 0);
+  hlineSel.style("display", stackMode === "percent" ? "none" : null);
   T(hlineSel.select("line"), dur).attr("x1", px0).attr("x2", px1)
     .attr("y1", h => y(h.value)).attr("y2", h => y(h.value));
   T(hlineSel.select("text"), dur).attr("x", px1 - 4).attr("y", h => y(h.value) - 5);
@@ -457,15 +592,29 @@ function drawAnnotations(dur) {
 
 // ---- series drawing ------------------------------------------------------------
 function drawSeries(dur) {
+  if (splitNeg) {
+    const yb = Math.max(py0 - 2, Math.min(py1 + 2, y(+o.baseline)));
+    T(defs.select(`#${uid}-above rect`), dur).attr("y", py0 - 2).attr("height", Math.max(0, yb - py0 + 2));
+    T(defs.select(`#${uid}-below rect`), dur).attr("y", yb).attr("height", Math.max(0, py1 + 2 - yb));
+  }
   series.forEach(s => {
     const vis = !hidden.has(s.name);
     T(s.g, dur).style("opacity", vis ? 1 : 0);
     s.g.style("pointer-events", vis ? null : "none");
+    if (stackable) {
+      // hidden layers keep moving (with no thickness) so they can grow back
+      T(s.area, dur).attr("d", stackAreaFor()(s.stk));
+      T(s.line, dur).style("opacity", vis ? 1 : 0).attr("d", stackLineFor()(s.stk));
+      return;
+    }
     if (!vis) return;
     if (s.ribbon) T(s.ribbon, dur).attr("d", ribbonFor(s)(s.pts));
+    if (s.edges) T(s.edges, dur).attr("d", edgesFor(s));
     if (s.area) T(s.area, dur).attr("d", areaFor(s)(s.pts));
+    if (s.areaNeg) T(s.areaNeg, dur).attr("d", areaFor(s)(s.pts));
     if (s.raw) T(s.raw, dur).attr("d", lineFor(s, "v")(s.pts));
     T(s.line, dur).attr("d", lineFor(s, mainKey)(s.pts));
+    if (s.lineNeg) T(s.lineNeg, dur).attr("d", lineFor(s, mainKey)(s.pts));
     if (s.dots) T(s.dots, dur).attr("cx", p => x(p.t)).attr("cy", p => {
       const v = tf(p[mainKey], s.base);
       return v === null || !logOK(v) ? -99 : y(v);
@@ -478,7 +627,7 @@ function lastVisible(s) {
   const i1 = Math.min(s.pts.length - 1, d3.bisectRight(s.tn, view[1]) - 1);
   const i0 = bisectIdx(s, view[0]);
   for (let i = i1; i >= i0; i--) {
-    const v = tf(s.pts[i][mainKey], s.base);
+    const v = tf(mainVal(s, s.pts[i]), s.base);
     if (v !== null && isFinite(v) && logOK(v)) return { p: s.pts[i], v };
   }
   return null;
@@ -486,7 +635,13 @@ function lastVisible(s) {
 function drawEndLabels(dur) {
   if (!endOn) return;
   const items = [];
-  visibleSeries().forEach(s => {
+  if (stackable) {
+    const k1 = d3.bisectRight(unionT, view[1]) - 1;
+    if (k1 >= 0) visibleSeries().forEach(s => {
+      const d = s.stk[k1];
+      items.push({ s, y0: y((d.y0 + d.y1) / 2), x0: x(d.tn), v: d.raw });
+    });
+  } else visibleSeries().forEach(s => {
     const lv = lastVisible(s);
     if (lv) items.push({ s, y0: y(lv.v), x0: x(lv.p.t), v: lv.v });
   });
@@ -528,8 +683,10 @@ function focusSeries(name) {
     s.line.interrupt("focus").transition("focus").duration(150)
       .attr("stroke-opacity", on ? o.opacity : 0.18)
       .attr("stroke-width", name !== null && on ? o.strokeWidth + 0.75 : o.strokeWidth);
-    [s.ribbon, s.area, s.raw].forEach(el => {
-      if (el) el.interrupt("focus").transition("focus").duration(150).style("opacity", on ? 1 : 0.15);
+    if (s.lineNeg) s.lineNeg.interrupt("focus").transition("focus").duration(150)
+      .attr("stroke-opacity", on ? o.opacity : 0.18);
+    [s.ribbon, s.area, s.raw, s.edges, s.areaNeg].forEach(el => {
+      if (el) el.interrupt("focus").transition("focus").duration(150).style("opacity", on ? 1 : (stackable ? 0.3 : 0.15));
     });
     if (s.dots) s.dots.style("opacity", on ? 1 : 0.15);
   });
@@ -545,8 +702,11 @@ if (legendOn) {
     .style("cursor", "pointer");
   items.append("rect").attr("x", -4).attr("y", 0).attr("height", 22).attr("width", d => d.w - 6)
     .attr("rx", 4).attr("fill", axisCol).attr("fill-opacity", 0);
-  items.append("line").attr("x1", 2).attr("x2", 18).attr("y1", 11).attr("y2", 11)
+  const squareSwatch = d => stackable || d.s.bandOnly || kind === "area";
+  items.filter(d => !squareSwatch(d)).append("line").attr("x1", 2).attr("x2", 18).attr("y1", 11).attr("y2", 11)
     .attr("stroke", d => d.s.color).attr("stroke-width", 3).attr("stroke-linecap", "round");
+  items.filter(squareSwatch).append("rect").attr("x", 4).attr("y", 5).attr("width", 12).attr("height", 12)
+    .attr("rx", 3).attr("fill", d => d.s.color);
   items.append("text").attr("x", 24).attr("y", 11).attr("dy", "0.35em")
     .style("font-size", "12px").style("fill", axisCol).text(d => d.s.name);
   let clickTimer = null;
@@ -590,6 +750,7 @@ function isolateSeries(name) {
 }
 function afterVisibilityChange() {
   state.line.hidden = Array.from(hidden);
+  computeStack();
   focused = undefined;
   focusSeries(null);
   styleLegend();
@@ -625,6 +786,47 @@ function styleButtons() {
     d3.select(this).select("text").style("fill", active ? ACCENT : axisCol);
   });
 }
+
+const modeG = svg.append("g").attr("class", "stack-modes")
+  .attr("transform", `translate(${W - padR - rightW},${headerTop})`)
+  .style("user-select", "none").style("-webkit-user-select", "none");
+if (modeBtns.length) {
+  modeG.append("rect").attr("width", modeW).attr("height", btnH).attr("rx", 5)
+    .attr("fill", bgcol).attr("stroke", axisCol).attr("stroke-opacity", 0.2);
+  let mx = 0;
+  modeBtns.forEach((b, k) => {
+    b.x = mx; mx += b.w;
+    if (k > 0) modeG.append("line").attr("x1", b.x).attr("x2", b.x).attr("y1", 4).attr("y2", btnH - 4)
+      .attr("stroke", axisCol).attr("stroke-opacity", 0.15);
+    const g = modeG.append("g").attr("class", "mode").attr("transform", `translate(${b.x},0)`)
+      .style("cursor", "pointer").datum(b);
+    g.append("title").text(b.tip);
+    b.bg = g.append("rect").attr("x", 1.5).attr("y", 1.5).attr("width", b.w - 3).attr("height", btnH - 3)
+      .attr("rx", 4).attr("fill", ACCENT).attr("fill-opacity", 0);
+    b.text = g.append("text").attr("x", b.w / 2).attr("y", btnH / 2).attr("dy", "0.35em")
+      .attr("text-anchor", "middle").style("font-size", "11px").style("font-weight", 600)
+      .style("fill", axisCol).text(b.label);
+    g.on("mouseenter", function () { if (stackMode !== b.k) b.bg.attr("fill-opacity", 0.06); })
+      .on("mouseleave", styleModes)
+      .on("click", function () {
+        if (stackMode === b.k) return;
+        stackMode = b.k;
+        state.line.stackMode = b.k;
+        computeStack();
+        update(600);
+        drawNavigator();
+        styleModes();
+      });
+  });
+}
+function styleModes() {
+  modeBtns.forEach(b => {
+    const on = stackMode === b.k;
+    b.bg.attr("fill-opacity", on ? 0.14 : 0);
+    b.text.style("fill", on ? ACCENT : axisCol);
+  });
+}
+styleModes();
 
 // ---- crosshair + tooltip ---------------------------------------------------------
 const crossLine = gCross.append("line").attr("y1", py0).attr("y2", py1)
@@ -675,16 +877,29 @@ function onMove(mx, my) {
   const cx = x(tSnap);
 
   const rows = [];
-  visibleSeries().forEach(s => {
+  let near = null;
+  if (stackable) {
+    const k = unionIdx.get(tSnap);
+    visibleSeries().forEach(s => {
+      const d = s.stk[k];
+      rows.push({ s, p: { t: tSnap }, v: d.raw, share: d.share, py: y(d.neg ? d.y0 : d.y1),
+        inside: my >= y(d.y1) - 0.5 && my <= y(d.y0) + 0.5 && d.y1 !== d.y0 });
+    });
+    const hit = rows.filter(r => r.inside).pop();
+    if (hit) near = hit.s.name;
+    rows.total = rows.some(r => r.v !== null) ? stackTotal[k] : null;
+  } else visibleSeries().forEach(s => {
     const p = nearestInSeries(s, tSnap);
     if (!p) return;
-    const v = tf(p[mainKey], s.base);
+    const v = tf(mainVal(s, p), s.base);
     if (v === null || !isFinite(v) || !logOK(v)) return;
-    rows.push({ s, p, v, py: y(v) });
+    const r = { s, p, v, py: y(v) };
+    if (s.bandOnly) { r.pys = [y(tf(p.lo, s.base)), y(tf(p.hi, s.base))]; r.inside = my >= r.pys[1] && my <= r.pys[0]; }
+    rows.push(r);
   });
   // nearest series to the pointer is focused
-  let near = null;
-  if (rows.length > 1) {
+  if (!stackable && rows.some(r => r.inside)) near = rows.filter(r => r.inside).pop().s.name;
+  else if (!stackable && rows.length > 1) {
     const r = d3.least ? d3.least(rows, r => Math.abs(r.py - my)) : rows.slice().sort((a, b) => Math.abs(a.py - my) - Math.abs(b.py - my))[0];
     if (r && Math.abs(r.py - my) < 26) near = r.s.name;
   }
@@ -692,11 +907,17 @@ function onMove(mx, my) {
 
   gCross.style("display", null);
   crossLine.attr("x1", cx).attr("x2", cx);
-  const dots = crossDots.selectAll("circle").data(rows, r => r.s.name);
+  const dotData = [];
+  rows.forEach(r => {
+    if (r.v === null) return;
+    if (r.pys) r.pys.forEach((py, j) => dotData.push({ key: r.s.name + "|" + j, r, py }));
+    else dotData.push({ key: r.s.name, r, py: r.py });
+  });
+  const dots = crossDots.selectAll("circle").data(dotData, d => d.key);
   dots.exit().remove();
   dots.enter().append("circle").attr("r", 4.5).attr("stroke", bgcol).attr("stroke-width", 2)
-    .merge(dots).attr("fill", r => r.s.color).attr("cx", r => x(r.p.t)).attr("cy", r => r.py)
-    .style("opacity", r => near === null || r.s.name === near ? 1 : 0.35);
+    .merge(dots).attr("fill", d => pointColor(d.r)).attr("cx", d => x(d.r.p.t)).attr("cy", d => d.py)
+    .style("opacity", d => near === null || d.r.s.name === near ? 1 : 0.35);
 
   const label = fmtDate(isTime ? new Date(tSnap) : tSnap);
   xPillText.text(label);
@@ -721,9 +942,14 @@ function onMove(mx, my) {
   gTip.attr("transform", `translate(${tx},${ty})`);
 }
 
+// below the baseline, points take the negative colour
+function pointColor(r) {
+  return (splitNeg && r.v !== null && r.v < +o.baseline) ? o.negativeFill : r.s.color;
+}
 function buildTip(label, rows, near) {
   tipBody.selectAll("*").remove();
-  const sorted = rows.slice().sort((a, b) => b.v - a.v);
+  // stacked: top layer first, like the chart; otherwise largest value first
+  const sorted = stackable ? rows.slice().sort((a, b) => b.s.i - a.s.i) : rows.slice().sort((a, b) => b.v - a.v);
   const maxRows = 12;
   const shown = sorted.slice(0, maxRows);
   const pad = 10, lh = 18;
@@ -733,7 +959,12 @@ function buildTip(label, rows, near) {
   shown.forEach(r => {
     r.name = truncate(r.s.name, 170, 11.5, r.s.name === near ? 700 : 400);
     r.val = fmtValue(r.v);
-    if (r.p.lo !== null && r.p.hi !== null && r.s.hasRibbon) {
+    if (stackable) {
+      r.extra = (r.v === null || rows.length < 2) ? "" : d3.format(".1%")(r.share);
+    } else if (r.s.bandOnly) {
+      r.val = fmtValue(tf(r.p.lo, r.s.base)) + " – " + fmtValue(tf(r.p.hi, r.s.base));
+      r.extra = "";
+    } else if (r.p.lo !== null && r.p.hi !== null && r.s.hasRibbon) {
       r.extra = "[" + fmtValue(tf(r.p.lo, r.s.base)) + " – " + fmtValue(tf(r.p.hi, r.s.base)) + "]";
     } else if (o.rollmean && r.p.v !== null) {
       r.extra = "raw " + fmtValue(tf(r.p.v, r.s.base));
@@ -749,7 +980,7 @@ function buildTip(label, rows, near) {
   shown.forEach((r, i) => {
     const yy = pad + 9 + (i + 1) * lh + 2;
     const bold = r.s.name === near ? 700 : 400;
-    tipBody.append("circle").attr("cx", pad + 4).attr("cy", yy - 4).attr("r", 4).attr("fill", r.s.color);
+    tipBody.append("circle").attr("cx", pad + 4).attr("cy", yy - 4).attr("r", 4).attr("fill", pointColor(r));
     tipBody.append("text").attr("x", colName).attr("y", yy)
       .style("font-size", "11.5px").style("font-weight", bold).style("fill", axisCol).text(r.name);
     tipBody.append("text").attr("x", colVal).attr("y", yy).attr("text-anchor", "end")
@@ -758,6 +989,17 @@ function buildTip(label, rows, near) {
       .style("font-size", "10.5px").style("fill", axisCol).style("fill-opacity", 0.55).text(r.extra);
   });
   let h = pad + 9 + shown.length * lh + pad + 4;
+  if (stackable && rows.length > 1 && rows.total !== undefined) {
+    const yy = pad + 9 + (shown.length + 1) * lh + 6;
+    const tv = fmtValue(rows.total);
+    tipBody.append("line").attr("x1", pad).attr("x2", Math.max(w, colVal + maxExtra + pad) - pad)
+      .attr("y1", yy - 14).attr("y2", yy - 14).attr("stroke", axisCol).attr("stroke-opacity", 0.15);
+    tipBody.append("text").attr("x", colName).attr("y", yy).style("font-size", "11.5px")
+      .style("font-weight", 700).style("fill", axisCol).text("Total");
+    tipBody.append("text").attr("x", colVal).attr("y", yy).attr("text-anchor", "end")
+      .style("font-size", "11.5px").style("font-weight", 700).style("fill", axisCol).text(tv);
+    h += lh + 4;
+  }
   if (sorted.length > maxRows) {
     tipBody.append("text").attr("x", colName).attr("y", h)
       .style("font-size", "10.5px").style("fill", axisCol).style("fill-opacity", 0.6)
@@ -840,17 +1082,21 @@ function drawNavigator() {
   if (!navOn) return;
   const vis = visibleSeries();
   let lo = Infinity, hi = -Infinity;
-  vis.forEach(s => s.pts.forEach(p => {
-    if (p.v !== null && logOK(p.v)) { lo = Math.min(lo, p.v); hi = Math.max(hi, p.v); }
+  if (stackable) vis.forEach(s => s.stk.forEach(d => { lo = Math.min(lo, d.y0); hi = Math.max(hi, d.y1); }));
+  else vis.forEach(s => s.pts.forEach(p => {
+    const v = mainVal(s, p) === null ? null : (s.bandOnly ? mainVal(s, p) : p.v);
+    if (v !== null && logOK(v)) { lo = Math.min(lo, v); hi = Math.max(hi, v); }
   }));
   if (!isFinite(lo)) { lo = 0; hi = 1; }
   const yN = (o.yScale === "log" && transform === "none" ? d3.scaleLog() : d3.scaleLinear())
     .domain(lo === hi ? [lo - 1, hi + 1] : [lo, hi]).range([ny1 - 4, ny0 + 4]);
-  const ln = d3.line().defined(p => p.v !== null && logOK(p.v)).x(p => xNav(p.t)).y(p => yN(p.v));
+  const nv = (s, p) => s.bandOnly ? mainVal(s, p) : p.v;
+  const ln = s => d3.line().defined(p => nv(s, p) !== null && logOK(nv(s, p))).x(p => xNav(p.t)).y(p => yN(nv(s, p)))(s.pts);
+  const lnStack = s => d3.line().x(d => xNav(d.tn)).y(d => yN(d.neg ? d.y0 : d.y1))(s.stk);
   const sel = navG.select(".navlines").selectAll("path").data(vis, s => s.name);
   sel.exit().remove();
   sel.enter().append("path").attr("fill", "none").attr("stroke-width", 1)
-    .merge(sel).attr("stroke", s => s.color).attr("stroke-opacity", 0.75).attr("d", s => ln(s.pts));
+    .merge(sel).attr("stroke", s => s.color).attr("stroke-opacity", 0.75).attr("d", s => stackable ? lnStack(s) : ln(s));
 }
 function syncNavigator() {
   if (!navOn) return;
@@ -905,7 +1151,8 @@ if (o.animate !== false && firstRender) {
           d3.select(this).attr("stroke-dasharray", null).attr("stroke-dashoffset", null);
         });
     }
-    [s.ribbon, s.area, s.raw].forEach(el => {
+    if (s.lineNeg) s.lineNeg.style("opacity", 0).transition("intro").delay(dur * 0.5).duration(dur * 0.6).style("opacity", 1);
+    [s.ribbon, s.area, s.raw, s.edges, s.areaNeg].forEach(el => {
       if (el) el.style("opacity", 0).transition("intro").delay(dur * 0.5).duration(dur * 0.6).style("opacity", 1);
     });
     if (s.dots) s.dots.style("opacity", 0).transition("intro").delay(dur * 0.6).duration(400).style("opacity", 1);
