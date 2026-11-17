@@ -42,7 +42,7 @@ GUIDES = {
 # Charts that start empty and animate on click.
 CLICK = {"anim_line_chart": 11000, "animated_histogram": 3500}
 # Charts whose thumbnail uses a later example (0-based index within the section).
-INDEX = {"flame": 1}
+INDEX = {"flame": 1, "scatter_plot": 2}
 # Charts that need longer to settle.
 WAIT = {"bar_chart_race": 9000, "liquid_chart": 3500, "beeswarm_plot": 3500}
 

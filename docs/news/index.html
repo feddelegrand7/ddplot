@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">ddplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,18 +56,26 @@
 <div class="section level4">
 <h4 id="improvements-development-version">Improvements:<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h4>
 <ul><li>
-<code><a href="../reference/line_chart.html">line_chart()</a></code> has been rewritten for time series work. It now supports several series (wide <code>y = c(...)</code>, long <code>group =</code>, or <code>ts</code>/<code>mts</code> objects passed directly), a crosshair tooltip showing every series at the hovered date, a click/double-click legend, direct end labels, range buttons (1M … All), a navigator brush, drag-to-zoom with an auto-rescaling y axis, <code>transform = "index"</code>/<code>"percent"</code> rebasing, <code>rollmean</code>, <code>lower</code>/<code>upper</code> forecast ribbons, <code>bands</code>, <code>events</code>, <code>hlines</code>, <code>yScale = "log"</code>, <code>area</code> and <code>points</code>. In Shiny, the zoom range and hidden series are kept across <code><a href="https://rstudio.github.io/r2d3//reference/d3-shiny.html" class="external-link">renderD3()</a></code> updates. Existing calls keep working; the default look changed (white background, <code>strokeWidth = 2</code>, <code>titleFontSize = 20</code>, <code>xtitleFontSize</code>/<code>ytitleFontSize = 13</code>, left-aligned title, y-axis title above the axis, palette color instead of crimson for a single series unless <code>stroke</code> is set, y axis fitted to the data unless <code>yZero = TRUE</code> or <code>area = TRUE</code>).</li>
+<code><a href="../reference/scatter_plot.html">scatter_plot()</a></code> has been upgraded. New arguments: <code>group</code> (categorical colours with a click/double-click legend, or a colour gradient for a numeric column), <code>sizeBy</code>/<code>sizeRange</code> (bubble chart), <code>label</code>/<code>showLabels</code> (tooltip titles and collision-free point labels), <code>tooltip</code> (extra columns), <code>trend = "lm"</code>/<code>"loess"</code> with a 95% confidence band (<code>ci</code>) and fit statistics on hover, <code>xScale</code>/<code>yScale = "log"</code>, <code>hlines</code>/<code>vlines</code>, <code>xFormat</code>/<code>yFormat</code>, <code>subtitle</code> and <code>gridCol</code>. Hovering a point shows its values with guides to both axes; dragging a box selects points, which can be zoomed into (double-click resets). In Shiny, <code>input$&lt;id&gt;_selected</code> and <code>input$&lt;id&gt;_clicked</code> return the selected and clicked row numbers, and hidden groups and the zoom are kept across <code>renderD3()</code> updates. Existing calls keep working; the default look changed (white background, grid lines, palette colour instead of crimson unless <code>col</code> is set, <code>size = 4</code>, <code>opacity = 0.8</code>, axis titles default to the column names, smaller title font sizes).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="ddplot-020">ddplot 0.2.0<a class="anchor" aria-label="anchor" href="#ddplot-020"></a></h2><p class="text-muted">CRAN release: 2026-11-04</p>
+<div class="section level4">
+<h4 id="improvements-0-2-0">Improvements:<a class="anchor" aria-label="anchor" href="#improvements-0-2-0"></a></h4>
+<ul><li>
+<code><a href="../reference/line_chart.html">line_chart()</a></code> has been rewritten for time series work. It now supports several series (wide <code>y = c(...)</code>, long <code>group =</code>, or <code>ts</code>/<code>mts</code> objects passed directly), a crosshair tooltip showing every series at the hovered date, a click/double-click legend, direct end labels, range buttons (1M … All), a navigator brush, drag-to-zoom with an auto-rescaling y axis, <code>transform = "index"</code>/<code>"percent"</code> rebasing, <code>rollmean</code>, <code>lower</code>/<code>upper</code> forecast ribbons, <code>bands</code>, <code>events</code>, <code>hlines</code>, <code>yScale = "log"</code>, <code>area</code> and <code>points</code>. In Shiny, the zoom range and hidden series are kept across <code>renderD3()</code> updates. Existing calls keep working; the default look changed (white background, <code>strokeWidth = 2</code>, <code>titleFontSize = 20</code>, <code>xtitleFontSize</code>/<code>ytitleFontSize = 13</code>, left-aligned title, y-axis title above the axis, palette color instead of crimson for a single series unless <code>stroke</code> is set, y axis fitted to the data unless <code>yZero = TRUE</code> or <code>area = TRUE</code>).</li>
 </ul></div>
 <div class="section level4">
-<h4 id="documentation-development-version">Documentation:<a class="anchor" aria-label="anchor" href="#documentation-development-version"></a></h4>
+<h4 id="documentation-0-2-0">Documentation:<a class="anchor" aria-label="anchor" href="#documentation-0-2-0"></a></h4>
 <ul><li>The website has been redesigned (Bootstrap 5, light and dark themes). It has a new home page, a filterable gallery of every chart, and one guide per family of charts (time series, comparisons, distributions, relationships, part-to-whole, KPIs, playful indicators), ordered from the most commonly needed charts to the more specialised ones. The reference index is grouped the same way. The “Get started” vignette is now a short introduction; the chart-by-chart examples moved to the website guides.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="bug-fixes-development-version">Bug fixes:<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h4>
+<h4 id="bug-fixes-0-2-0">Bug fixes:<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-0"></a></h4>
 <ul><li>Charts now redraw correctly in <code>Shiny</code> with <code><a href="https://rstudio.github.io/r2d3//reference/d3-shiny.html" class="external-link">r2d3::d3Output()</a></code> / <code><a href="https://rstudio.github.io/r2d3//reference/d3-shiny.html" class="external-link">r2d3::renderD3()</a></code>. Previously r2d3 re-ran the chart script on the same SVG, so updates were drawn on top of the previous chart (or not visibly at all) and animation timers kept running. A shared preamble (<code>ddplotreset.js</code>) now clears the previous render and stops its timers before each redraw; this also fixes stacked timers after a widget resize.</li>
 </ul></div>
 <div class="section level4">
-<h4 id="adding-new-functions-development-version">Adding new functions:<a class="anchor" aria-label="anchor" href="#adding-new-functions-development-version"></a></h4>
+<h4 id="adding-new-functions-0-2-0">Adding new functions:<a class="anchor" aria-label="anchor" href="#adding-new-functions-0-2-0"></a></h4>
 <ul><li>
 <code>slope_chart</code>: Tufte / New York Times style slopegraph comparing two values per category, with direction colouring, <code>highlight</code>, label collision avoidance and hover-to-focus.</li>
 <li>

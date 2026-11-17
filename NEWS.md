@@ -1,6 +1,11 @@
 # ddplot 0.2.0
 
 ### Improvements:
+- `scatter_plot()` has been upgraded. New arguments: `group` (categorical colours with a click/double-click legend, or a colour gradient for a numeric column), `sizeBy`/`sizeRange` (bubble chart), `label`/`showLabels` (tooltip titles and collision-free point labels), `tooltip` (extra columns), `trend = "lm"`/`"loess"` with a 95% confidence band (`ci`) and fit statistics on hover, `xScale`/`yScale = "log"`, `hlines`/`vlines`, `xFormat`/`yFormat`, `subtitle` and `gridCol`. Hovering a point shows its values with guides to both axes; dragging a box selects points, which can be zoomed into (double-click resets). In Shiny, `input$<id>_selected` and `input$<id>_clicked` return the selected and clicked row numbers, and hidden groups and the zoom are kept across `renderD3()` updates. Existing calls keep working; the default look changed (white background, grid lines, palette colour instead of crimson unless `col` is set, `size = 4`, `opacity = 0.8`, axis titles default to the column names, smaller title font sizes).
+
+# ddplot 0.2.0
+
+### Improvements:
 - `line_chart()` has been rewritten for time series work. It now supports several series (wide `y = c(...)`, long `group =`, or `ts`/`mts` objects passed directly), a crosshair tooltip showing every series at the hovered date, a click/double-click legend, direct end labels, range buttons (1M ... All), a navigator brush, drag-to-zoom with an auto-rescaling y axis, `transform = "index"`/`"percent"` rebasing, `rollmean`, `lower`/`upper` forecast ribbons, `bands`, `events`, `hlines`, `yScale = "log"`, `area` and `points`. In Shiny, the zoom range and hidden series are kept across `renderD3()` updates. Existing calls keep working; the default look changed (white background, `strokeWidth = 2`, `titleFontSize = 20`, `xtitleFontSize`/`ytitleFontSize = 13`, left-aligned title, y-axis title above the axis, palette color instead of crimson for a single series unless `stroke` is set, y axis fitted to the data unless `yZero = TRUE` or `area = TRUE`).
 
 ### Documentation:

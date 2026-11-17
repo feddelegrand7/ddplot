@@ -16,7 +16,7 @@ Charts for the relationship between two numeric variables, and for flows between
 
 | Chart | Use it when |
 |---|---|
-| [`scatter_plot()`](#scatter_plot) | You look at the relationship between two numeric variables |
+| [`scatter_plot()`](#scatter_plot) | You look at the relationship between two numeric variables, optionally by group, with bubbles or a trend line |
 | [`hexbin_plot()`](#hexbin_plot) | A scatter plot has too many points to read |
 | [`chord_diagram()`](#chord_diagram) | You show flows between categories, such as migration or trade |
 
@@ -24,40 +24,94 @@ Charts for the relationship between two numeric variables, and for flows between
 
 ## `scatter_plot()` {#scatter_plot}
 
-Let's work with the `mpg` data frame from the `ggplot2` package.
-
-```{r}
-library(ggplot2) # needed for the mpg data frame
-
-scatter_plot(
-  data = mpg,
-  x = "hwy",
-  y = "cty",
-  xtitle = "hwy variable",
-  ytitle = "cty variable",
-  title = "cty and hwy relationship",
-  titleFontSize = 20
-)
-
-```
-
-In comparison to `ggplot2`, graphics' customization in `ddplot` is limited nonetheless you get a fully vectorized SVG which is cool.
+A scatter plot shows how two numeric variables move together. Hover a point to read its values; drag a box to select points, then use **Zoom** to look closer (double-click resets the view).
 
 ```{r}
 scatter_plot(
   data = mpg,
   x = "displ",
-  y = "cty",
-  col = "tomato",
-  bgcol = "pink",
-  size = 3,
-  stroke = "royalblue",
-  strokeWidth = 1,
-  xtitle = "displ variable",
-  ytitle = "cty variable",
-  xticks = 3,
-  yticks = 3)
+  y = "hwy",
+  xtitle = "Engine displacement (litres)",
+  ytitle = "Highway miles per gallon",
+  title = "Bigger engines, fewer miles"
+)
+```
 
+### Groups and trend lines
+
+`group` colours the points by a column. The legend is interactive: click an entry to hide a group, double-click to keep only that group. `trend = "lm"` fits a linear regression per group, with its 95% confidence band; hover a line to read its slope, intercept and R².
+
+```{r}
+scatter_plot(
+  data = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  group = "Species",
+  trend = "lm",
+  title = "Petal and sepal length by species"
+)
+```
+
+### Bubbles, colour scales and labels
+
+`sizeBy` maps a third variable to the point area. A numeric `group` gives a colour gradient. `label` names each point in the tooltip, and `showLabels` writes some of them on the chart (labels that would overlap are skipped). `tooltip` adds more columns to the tooltip, and `trend = "loess"` draws a smooth curve.
+
+```{r}
+cars <- mtcars
+cars$model <- rownames(mtcars)
+
+scatter_plot(
+  data = cars,
+  x = "hp",
+  y = "mpg",
+  sizeBy = "disp",
+  group = "qsec",
+  label = "model",
+  showLabels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa", "Cadillac Fleetwood"),
+  tooltip = c("cyl", "gear"),
+  trend = "loess",
+  title = "Horsepower and fuel economy",
+  subtitle = "Bubble area: displacement. Colour: quarter-mile time (s)"
+)
+```
+
+### Log scales and reference lines
+
+Skewed variables are easier to read on a log scale (`xScale`, `yScale`). `hlines` and `vlines` draw labelled reference lines.
+
+```{r}
+states <- data.frame(
+  state      = rownames(state.x77),
+  region     = state.region,
+  area       = state.x77[, "Area"],
+  population = state.x77[, "Population"],
+  income     = state.x77[, "Income"]
+)
+
+scatter_plot(
+  data = states,
+  x = "area",
+  y = "population",
+  group = "region",
+  label = "state",
+  showLabels = TRUE,
+  tooltip = "income",
+  xScale = "log",
+  yScale = "log",
+  hlines = c("Median population" = median(states$population)),
+  xtitle = "Area (square miles)",
+  ytitle = "Population (thousands, 1975)",
+  title = "US states: area and population"
+)
+```
+
+### In Shiny
+
+Inside a Shiny app, the chart reports what the user selects. With `d3Output("cars")`, `input$cars_selected` holds the row numbers of `data` inside the brushed box, and `input$cars_clicked` the row of the last clicked point:
+
+```{r, eval = FALSE}
+output$cars <- renderD3(scatter_plot(mtcars, "wt", "mpg"))
+output$picked <- renderTable(mtcars[input$cars_selected, ])
 ```
 
 ## `hexbin_plot()` {#hexbin_plot}

@@ -85,8 +85,7 @@ scatter_plot(
   data = mpg,
   x = "displ",
   y = "hwy",
-  col = "#4269d0",
-  size = 4,
+  trend = "loess",
   xtitle = "Engine displacement (litres)",
   ytitle = "Highway miles per gallon",
   title = "Bigger engines, fewer miles"

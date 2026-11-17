@@ -2,89 +2,248 @@
 % Please edit documentation in R/scatterPlot.R
 \name{scatter_plot}
 \alias{scatter_plot}
-\title{Create a scatter plot.}
+\title{Create an interactive scatter plot.}
 \usage{
 scatter_plot(
   data,
   x,
   y,
-  col = "crimson",
-  size = 2,
+  col = NULL,
+  size = 4,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitleFontSize = 13,
   title = NULL,
-  titleFontSize = 22,
+  titleFontSize = 20,
   stroke = NULL,
   strokeWidth = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
-  opacity = 1,
-  axisCol = "black",
+  bgcol = "white",
+  opacity = 0.8,
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  group = NULL,
+  sizeBy = NULL,
+  sizeRange = c(3, 16),
+  label = NULL,
+  showLabels = NULL,
+  tooltip = TRUE,
+  trend = c("none", "lm", "loess"),
+  ci = TRUE,
+  span = 0.75,
+  xScale = c("linear", "log"),
+  yScale = c("linear", "log"),
+  hlines = NULL,
+  vlines = NULL,
+  legend = NULL,
+  brush = TRUE,
+  animate = TRUE,
+  xFormat = NULL,
+  yFormat = NULL,
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  gridCol = "#e9e9e9"
 )
 }
 \arguments{
-\item{data}{The data frame containing the quantitative variables.}
+\item{data}{The data frame containing the variables.}
 
-\item{x}{The x-variable to consider.}
+\item{x}{The name of the numeric x-variable.}
 
-\item{y}{The y-variable to consider.}
+\item{y}{The name of the numeric y-variable.}
 
-\item{col}{The color of the dots. Defaults to 'crimson'.}
+\item{col}{Colour of the points. A single colour when there is no
+\code{group}. With a categorical \code{group}, a vector of colours
+(recycled; a named vector maps colours to groups). With a numeric
+\code{group}, two colours or more define the gradient. Defaults to a
+built-in palette (viridis for a numeric \code{group}).}
 
-\item{size}{The size of the dots. Defaults to 2.}
+\item{size}{The radius of the points in pixels when \code{sizeBy} is not
+used. Defaults to 4.}
 
-\item{xticks}{Optional. The number of x-axis ticks to consider.}
+\item{xticks}{Optional. The approximate number of x-axis ticks.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{yticks}{Optional. The approximate number of y-axis ticks.}
 
-\item{xtitle}{Optional. the title of the x-axis.}
+\item{xtitle}{Optional. The title of the x-axis. Defaults to the name of
+\code{x}; use \code{""} to hide it.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the y-axis, drawn above the axis.
+Defaults to the name of \code{y}; use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
 
-\item{title}{Optional. the title of the plot.}
+\item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
-\item{stroke}{Optional. the stroke color of the dots.}
+\item{stroke}{Optional. The stroke colour of the points. Defaults to the
+background colour, which separates overlapping points.}
 
-\item{strokeWidth}{Optional. the stroke width of the dots.}
+\item{strokeWidth}{Optional. The stroke width of the points.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the dots (from 0 to 1). Defaults to 1.}
+\item{opacity}{The opacity of the points (from 0 to 1). Defaults to 0.8.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+"#333333".}
 
-\item{width}{Optional. the width of the SVG output.}
+\item{width}{Optional. The width of the SVG output.}
 
-\item{height}{Optional. the height of the SVG output.}
+\item{height}{Optional. The height of the SVG output.}
+
+\item{group}{Optional. The name of a column used to colour the points. A
+character, factor or logical column gives one colour per group and a
+clickable legend; a numeric column gives a colour gradient. Use
+\code{as.factor()} to treat a numeric column as categories.}
+
+\item{sizeBy}{Optional. The name of a numeric column mapped to the point
+area (bubble chart).}
+
+\item{sizeRange}{The minimum and maximum radius in pixels used with
+\code{sizeBy}. Defaults to \code{c(3, 16)}.}
+
+\item{label}{Optional. The name of a column identifying each point. It is
+used as the tooltip title and by \code{showLabels}.}
+
+\item{showLabels}{Optional. Draws text labels next to points:
+\code{TRUE} labels every point, a character vector labels the points
+whose \code{label} matches. Requires \code{label}.}
+
+\item{tooltip}{\code{TRUE} (default) shows a tooltip on hover,
+\code{FALSE} disables it. A character vector of column names adds those
+columns to the tooltip.}
+
+\item{trend}{Adds a trend line: \code{"none"} (default), \code{"lm"}
+(linear regression) or \code{"loess"}. With a categorical \code{group},
+one line is fitted per group. With a log scale, the fit is computed on
+the log values.}
+
+\item{ci}{Logical. Draw the 95\% confidence band around the trend line.
+Defaults to \code{TRUE}.}
+
+\item{span}{The LOESS smoothing parameter. Defaults to 0.75.}
+
+\item{xScale}{The x-axis scale: \code{"linear"} (default) or \code{"log"}.
+Rows with non-positive values are dropped with a log scale.}
+
+\item{yScale}{The y-axis scale: \code{"linear"} (default) or \code{"log"}.}
+
+\item{hlines}{Optional. Numeric values drawn as horizontal dashed
+reference lines; names are used as labels.}
+
+\item{vlines}{Optional. Numeric values drawn as vertical dashed reference
+lines; names are used as labels.}
+
+\item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
+shown when \code{group} or \code{sizeBy} is used.}
+
+\item{brush}{Logical. Enable drag-to-select and zoom. Defaults to
+\code{TRUE}.}
+
+\item{animate}{Logical. Animate the points when the chart is first drawn.
+Defaults to \code{TRUE}.}
+
+\item{xFormat, yFormat}{Optional. d3-format strings for the axes and the
+tooltip, e.g. \code{",.0f"}, \code{".1\%"} or \code{"$,.2f"}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\code{NA} to hide them.}
 }
 \value{
-A SVG scatter plot.
+An interactive SVG scatter plot (an r2d3 htmlwidget).
 }
 \description{
-Create a scatter plot.
+Plots two numeric variables against each other. Points can be coloured by
+a group (categorical or continuous), sized by a third variable (bubble
+chart), labelled, and summarised with a linear or LOESS trend line and its
+confidence band. The chart is interactive: hovering a point shows its
+values, the legend hides or isolates groups, and dragging a box selects
+points, which can then be zoomed into.
 }
+\section{Interactions}{
+
+\itemize{
+  \item Hover a point to see its values; hover a trend line to see the fit
+    (slope, intercept and R-squared for \code{trend = "lm"}).
+  \item Click a legend entry to hide or show a group, double-click it to
+    isolate it. Hovering a legend entry highlights the group.
+  \item Drag on the chart to select points (when \code{brush = TRUE}). The
+    toolbar then offers \emph{Zoom} and \emph{Clear}. Double-click the chart
+    to reset the zoom.
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+the chart sets two inputs: \code{input$id_selected}, the row numbers of
+\code{data} inside the brushed box (\code{NULL} when the selection is
+cleared), and \code{input$id_clicked}, the row number of the last clicked
+point. Hidden groups and the zoom are kept when the chart is re-rendered
+with the same \code{x} and \code{y}.
+}
+
 \examples{
 
 scatter_plot(
   data = mtcars,
-  x = "mpg",
-  y = "wt"
-  )
+  x = "wt",
+  y = "mpg"
+)
+
+# Colour by group, one linear fit per group
+scatter_plot(
+  data = iris,
+  x = "Sepal.Length",
+  y = "Petal.Length",
+  group = "Species",
+  trend = "lm",
+  title = "Petal and sepal length"
+)
+
+# Bubble chart with a continuous colour scale, labels and extra tooltip rows
+cars <- mtcars
+cars$model <- rownames(mtcars)
+scatter_plot(
+  data = cars,
+  x = "hp",
+  y = "mpg",
+  sizeBy = "disp",
+  group = "qsec",
+  label = "model",
+  showLabels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa"),
+  tooltip = c("cyl", "gear"),
+  trend = "loess",
+  title = "Horsepower and fuel economy",
+  subtitle = "Bubble area: displacement; colour: quarter-mile time"
+)
+
+# Log scales and reference lines
+scatter_plot(
+  data = data.frame(area = state.x77[, "Area"],
+                    population = state.x77[, "Population"],
+                    state = rownames(state.x77)),
+  x = "area",
+  y = "population",
+  label = "state",
+  xScale = "log",
+  yScale = "log",
+  hlines = c("Median" = 2838.5)
+)
 
 }
