@@ -2,90 +2,213 @@
 % Please edit documentation in R/piechart.R
 \name{pie_chart}
 \alias{pie_chart}
-\title{Create a pie chart}
+\title{Create an interactive pie or donut chart}
 \usage{
 pie_chart(
   data,
-  value,
+  value = NULL,
   label,
-  colorCategory = "Paired",
+  colorCategory = NULL,
   innerRadius = 0,
   outerRadius = "auto",
-  padRadius = 0,
+  padRadius = NULL,
   padAngle = NULL,
   cornerRadius = 0,
-  labelFont = "sans-serif",
+  labelFont = NULL,
   title = NULL,
-  titleFontSize = 22,
+  titleFontSize = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = 1,
-  labelHeight = 18,
+  labelHeight = NULL,
   width = NULL,
-  height = NULL
+  height = NULL,
+  fill = NULL,
+  sort = c("descending", "ascending", "none"),
+  maxSlices = NULL,
+  otherLabel = "Other",
+  labels = NULL,
+  labelPosition = c("auto", "inside", "outside"),
+  legend = TRUE,
+  centerLabel = NULL,
+  highlight = NULL,
+  startAngle = 0,
+  endAngle = 360,
+  stroke = NULL,
+  strokeWidth = NULL,
+  tooltip = TRUE,
+  animate = TRUE,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  axisCol = "#333333"
 )
 }
 \arguments{
 \item{data}{The data frame to consider.}
 
-\item{value}{The numeric variable to consider.}
+\item{value}{The name of the numeric variable (the size of the slices).
+When \code{NULL}, the rows of each label are counted. Rows with the same
+label are added up; negative and missing values are left out.}
 
-\item{label}{The labeling variable to consider.}
+\item{label}{The name of the labelling variable (one slice per value).}
 
-\item{colorCategory}{A D3 categorical color scheme, you can find more
-here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Paired'}
+\item{colorCategory}{Optional. The name of a D3 categorical colour scheme,
+such as "Tableau10", "Set2" or "Paired" (see
+<https://github.com/d3/d3-scale-chromatic#categorical>), used when
+\code{fill} is not given. Defaults to the ddplot palette.}
 
-\item{innerRadius}{The size of the inner radius of the pie.
-Defaults to 0. Set the inner radius to a higher value to plot
-a donut chart.}
+\item{innerRadius}{The inner radius, for a donut chart: a number below 1 is
+a fraction of the outer radius (e.g. 0.6), a larger number is a radius in
+pixels. Defaults to 0 (a pie).}
 
-\item{outerRadius}{The size of the outer radius of the pie.}
+\item{outerRadius}{The outer radius in pixels, or "auto" (default) to fill
+the space available.}
 
-\item{padRadius}{From the D3 official documentation, The pad radius compute
-the fixed linear distance separating adjacent arcs, defined as padRadius * padAngle.}
+\item{padRadius}{Optional. From the D3 documentation, the pad radius
+computes the fixed linear distance separating adjacent arcs, defined as
+padRadius * padAngle. Defaults to the D3 default.}
 
-\item{padAngle}{Optional. From the D3 official documentation, the padAngle is used to set the
-padding angle between consecutive arcs.}
+\item{padAngle}{Optional. The padding angle between consecutive slices, in
+radians (e.g. 0.02).}
 
-\item{cornerRadius}{From the D3 official documentation, the value of the corner radius for rounded corners.
-If the corner radius is greater than zero, the corners of the arc are rounded
-using circles of the given radius. Defaults to 0.}
+\item{cornerRadius}{The radius of the rounded slice corners, in pixels.
+Defaults to 0.}
 
-\item{labelFont}{The font family of the legend. Defaults to 'sans-serif'.}
+\item{labelFont}{Optional. The font family of the legend. Defaults to
+\code{font}.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles.
 Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
 
 \item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the pie (from 0 to 1). Defaults to 1.}
+\item{opacity}{The opacity of the slices (from 0 to 1). Defaults to 1.}
 
-\item{labelHeight}{The height of the legend. Defaults to 18.}
+\item{labelHeight}{Optional. The font size of the legend, in pixels.
+Defaults to 12.}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{fill}{Optional. The colours of the slices: one colour per slice, in
+the order of the slices (recycled), or a named vector mapping colours to
+labels.}
+
+\item{sort}{The order of the slices, clockwise from the top:
+\code{"descending"} (default, largest first), \code{"ascending"} or
+\code{"none"} (the order of the data, or of the factor levels).}
+
+\item{maxSlices}{Optional. The maximum number of slices: the smallest
+categories are combined into an "Other" slice so that at most
+\code{maxSlices} slices are drawn.}
+
+\item{otherLabel}{The label of the combined slice. Defaults to "Other".}
+
+\item{labels}{What to write for each slice: any of \code{"label"},
+\code{"value"} and \code{"percent"}, or \code{"none"}. Defaults to
+\code{"percent"} with a legend, \code{c("label", "percent")} without.}
+
+\item{labelPosition}{Where the slice labels go: \code{"auto"} (default,
+inside the slices that are large enough, outside with a leader line for
+the others), \code{"inside"} or \code{"outside"}.}
+
+\item{legend}{Logical. Show the legend (on the right when there is room,
+otherwise below). Defaults to \code{TRUE}.}
+
+\item{centerLabel}{For a donut chart, the text shown under the total in
+the centre: \code{NULL} (default, "Total"), a string, or \code{FALSE} to
+leave the centre empty.}
+
+\item{highlight}{Optional. A character vector of labels whose slices are
+pulled out.}
+
+\item{startAngle, endAngle}{The angles where the pie starts and ends, in
+degrees, clockwise from the top. Defaults to 0 and 360; use -90 and 90 for
+a half donut.}
+
+\item{stroke}{The colour of the lines between the slices. Defaults to the
+background colour.}
+
+\item{strokeWidth}{The width of the lines between the slices. Defaults to
+1.5 (0 when \code{padAngle} is given).}
+
+\item{tooltip}{Logical. Show a tooltip when hovering the slices. Defaults
+to \code{TRUE}.}
+
+\item{animate}{Logical. Sweep the slices in when the chart is first drawn.
+Defaults to \code{TRUE}.}
+
+\item{valueFormat}{Optional. A D3 format string for the values, such as
+\code{",.0f"} or \code{".2s"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text added before and after the
+values, such as \code{"$"} or \code{" kg"}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{axisCol}{The colour of the texts. Defaults to "#333333".}
 }
 \value{
-A SVG pie chart
+An interactive SVG pie chart (an r2d3 htmlwidget).
 }
 \description{
-Create a pie chart
+Draws one slice per category, with its share of the total written on the
+slice or next to it. Rows with the same label are added up, and the value
+can be left empty to count rows. Small slices can be combined into an
+"Other" slice. Set \code{innerRadius} to draw a donut chart, whose centre
+shows the total, or the hovered slice.
 }
+\section{Interactions}{
+
+\itemize{
+  \item Hover a slice (or its legend entry) to pull it out and see its
+    value, its share of the total and its rank; the "Other" slice lists the
+    categories it contains.
+  \item Click a legend entry to hide or show a slice (the shares are then
+    computed without it), double-click it to keep only that slice.
+  \item Click a slice to pull it out, click it again to put it back.
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking a slice sets \code{input$id_clicked} to its label. The hidden
+slices are kept when the chart is re-rendered.
+}
+
 \examples{
-library(dplyr) # needed for the starwars data frame
+library(ggplot2) # needed for the mpg data frame
 
-# starwars is part of the dplyr data frame
-mini_starwars <- starwars \%>\% tidyr::drop_na(mass) \%>\%
-  sample_n(size = 5) # getting 5 random values
+# Rows are counted when there is no value
+pie_chart(mpg, label = "class", title = "Cars by class")
 
-pie_chart(
-  data = mini_starwars,
-  value = "mass",
-  label = "name"
+# A donut chart with the total in the centre
+energy <- data.frame(
+  source = c("Nuclear", "Hydro", "Wind", "Solar", "Gas", "Coal", "Other"),
+  twh    = c(320, 58, 49, 23, 34, 3, 8)
 )
+pie_chart(
+  energy, value = "twh", label = "source",
+  innerRadius = 0.6, centerLabel = "TWh",
+  title = "Electricity generation by source"
+)
+
+# A half donut with the small slices combined
+pie_chart(
+  energy, value = "twh", label = "source",
+  innerRadius = 0.55, startAngle = -90, endAngle = 90,
+  maxSlices = 4, legend = FALSE
+)
+
 }

@@ -50,7 +50,7 @@ waterfall_chart|comparisons|Waterfall chart|You explain how a starting value bec
 radar_chart|comparisons|Radar chart|You compare a few items across several variables|interactive
 radial_bar_chart|comparisons|Radial bar chart|You show progress of a few items towards a goal|interactive
 bar_chart_race|comparisons|Bar chart race|You animate a ranking through time for a presentation|animated
-histogram|distributions|Histogram|You look at the distribution of a single numeric variable|
+histogram|distributions|Histogram|You look at the distribution of a single numeric variable|interactive,shiny
 violin_plot|distributions|Violin plot|You compare distributions across groups, with quartiles|interactive
 beeswarm_plot|distributions|Beeswarm plot|You want to show every observation, not only a summary|interactive
 ridgeline_plot|distributions|Ridgeline plot|You compare the distributions of many groups|interactive
@@ -58,7 +58,7 @@ animated_histogram|distributions|Animated histogram|You present a distribution a
 scatter_plot|relationships|Scatter plot|You look at the relationship between two numeric variables, by group, as bubbles or with a trend line|interactive,shiny
 hexbin_plot|relationships|Hexbin plot|A scatter plot has too many points to read|interactive
 chord_diagram|relationships|Chord diagram|You show flows between categories, such as migration or trade|interactive
-pie_chart|composition|Pie and donut chart|You split a whole into a few parts|
+pie_chart|composition|Pie and donut chart|You split a whole into a few parts|interactive,shiny
 treemap_chart|composition|Treemap|You split a whole into many parts, optionally nested|interactive
 waffle_chart|composition|Waffle chart|You show shares as a grid of 100 squares|interactive
 sunburst_chart|composition|Sunburst chart|You explore a hierarchy with several levels|interactive

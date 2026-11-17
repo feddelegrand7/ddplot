@@ -28,47 +28,66 @@ Charts that split a whole into its parts, flat or nested.
 
 ## `pie_chart()` {#pie_chart}
 
-Pie charts and donut charts are pretty straightforward to set up. We'll use a sample from the `starwars` data frame to plot a simple pie chart.
+`pie_chart()` draws one slice per category, with its share written on the slice, or next to it with a leader line when the slice is too small. Rows with the same label are added up, and without `value` the rows are counted, so raw data can be passed directly:
 
 ```{r}
-# starwars is part of the dplyr data frame
-mini_starwars <- starwars %>% tidyr::drop_na(mass) %>%
-  sample_n(size = 5) # getting 5 random values
+pie_chart(mpg, label = "class", title = "Cars by class")
+```
+
+Hover a slice or a legend entry to pull the slice out and see its value, its share and its rank. Click a legend entry to hide a slice (the shares are then recomputed without it), and double-click it to keep only that slice. Clicking a slice pulls it out.
+
+Set `innerRadius` to draw a donut chart: a number below 1 is a fraction of the radius, a larger number a radius in pixels. The centre shows the total, and the hovered slice's share and value:
+
+```{r}
+energy <- data.frame(
+  source = c("Nuclear", "Hydro", "Wind", "Solar", "Gas", "Coal", "Other"),
+  twh    = c(320, 58, 49, 23, 34, 3, 8)
+)
 
 pie_chart(
-  data = mini_starwars,
-  value = "mass",
-  label = "name"
+  energy,
+  value       = "twh",
+  label       = "source",
+  innerRadius = 0.6,
+  centerLabel = "TWh",
+  title       = "Electricity generation by source"
 )
 ```
 
-Using the `padRadius`, `padAngle` and `cornerRadius` parameters, one can get fancier pie charts:
+Pies are hard to read with many slices. `maxSlices` combines the smallest categories into an "Other" slice (its tooltip lists them). Without a legend, the labels show the category names. `startAngle` and `endAngle` draw part of a circle, such as a half donut:
 
 ```{r}
 pie_chart(
-  data = mini_starwars,
-  value = "mass",
-  label = "name",
-  padRadius = 200,
-  padAngle = 0.1,
-  cornerRadius = 50,
-  innerRadius = 10
+  mpg,
+  label       = "manufacturer",
+  maxSlices   = 7,
+  innerRadius = 0.55,
+  startAngle  = -90,
+  endAngle    = 90,
+  legend      = FALSE,
+  title       = "Cars by manufacturer"
 )
 ```
-If you need a donut chart, you just need to play with the `innerRadius` parameter:
+
+`labels` chooses what is written (`"label"`, `"value"`, `"percent"`), `labelPosition` where, and `padAngle` and `cornerRadius` separate and round the slices. `fill` sets the colours (a named vector maps them to the labels) and `colorCategory` picks a D3 colour scheme:
 
 ```{r}
 pie_chart(
-  data = mini_starwars,
-  value = "mass",
-  label = "name",
-  innerRadius = 120,
-  cornerRadius = 20,
-  title = "5 Starwars characters ranked by their mass",
-  titleFontSize = 16,
-  bgcol = "yellow"
+  energy,
+  value         = "twh",
+  label         = "source",
+  labels        = c("label", "value"),
+  labelPosition = "outside",
+  legend        = FALSE,
+  padAngle      = 0.02,
+  cornerRadius  = 4,
+  highlight     = "Wind",
+  colorCategory = "Set2",
+  valueSuffix   = " TWh"
 )
 ```
+
+In Shiny, `input$<id>_clicked` returns the label of the clicked slice.
 
 ## `treemap_chart()` {#treemap_chart}
 

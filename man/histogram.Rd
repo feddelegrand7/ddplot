@@ -2,93 +2,253 @@
 % Please edit documentation in R/histogram.R
 \name{histogram}
 \alias{histogram}
-\title{Create a histogram.}
+\title{Create an interactive histogram.}
 \usage{
 histogram(
   x,
   bins = 30,
-  fill = "crimson",
-  xFontSize = 10,
-  yFontSize = 10,
+  fill = NULL,
+  xFontSize = 11,
+  yFontSize = 11,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 13,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitleFontSize = 13,
   title = NULL,
-  titleFontSize = 22,
-  stroke = "crimson",
+  titleFontSize = 20,
+  stroke = NULL,
   strokeWidth = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
-  opacity = 1,
-  axisCol = "black",
+  bgcol = "white",
+  opacity = NULL,
+  axisCol = "#333333",
   width = NULL,
-  height = NULL
+  height = NULL,
+  data = NULL,
+  group = NULL,
+  binWidth = NULL,
+  breaks = NULL,
+  position = c("stacked", "overlay"),
+  stat = c("count", "percent", "density"),
+  density = FALSE,
+  stats = NULL,
+  refLines = NULL,
+  rug = FALSE,
+  summary = TRUE,
+  cornerRadius = 2,
+  legend = NULL,
+  controls = TRUE,
+  tooltip = TRUE,
+  animate = TRUE,
+  xFormat = NULL,
+  xPrefix = "",
+  xSuffix = "",
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  gridCol = "#e9e9e9"
 )
 }
 \arguments{
-\item{x}{A vector of data.}
+\item{x}{A numeric vector, or, when \code{data} is given, the name of a
+numeric column of \code{data}.}
 
-\item{bins}{The number of bins to consider. Defaults to 30.}
+\item{bins}{The approximate number of bins. The bins are given round
+widths (1, 2, 2.5 or 5 times a power of ten), so the actual number can
+differ slightly. Defaults to 30. Ignored when \code{binWidth} or
+\code{breaks} is given.}
 
-\item{fill}{The color of the bars. Defaults to 'crimson'.}
+\item{fill}{The colour of the bars. A single colour, or, with \code{group},
+one colour per group (a named vector maps colours to groups). Defaults to
+a built-in palette.}
 
-\item{xFontSize}{the font size of the x-axis labels. Defaults to 10.}
+\item{xFontSize}{The font size of the x-axis labels. Defaults to 11.}
 
-\item{yFontSize}{the font size of the y-axis labels. Defaults to 10.}
+\item{yFontSize}{The font size of the y-axis labels. Defaults to 11.}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{xticks}{Optional. The approximate number of x-axis ticks.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{yticks}{Optional. The approximate number of y-axis ticks.}
 
-\item{xtitle}{Optional. The title of the x-axis.}
+\item{xtitle}{Optional. The title of the x-axis. Defaults to the name of
+the variable (when it can be found); use \code{""} to hide it.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the y-axis, drawn above it. Defaults
+to "Count", "Percent" or "Density"; use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
-\item{stroke}{The stroke color of the bars. Defaults to 'crimson'.}
+\item{stroke}{Optional. The stroke colour of the bars.}
 
-\item{strokeWidth}{Optional. the stroke width of the bars.}
+\item{strokeWidth}{Optional. The stroke width of the bars.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{opacity}{The color opacity of the bars (from 0 to 1). Defaults to 1.}
+\item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1, or
+0.5 for overlaid groups.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
-Defaults to 'black'.}
+\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+"#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{data}{Optional. A data frame; \code{x} and \code{group} are then
+column names.}
+
+\item{group}{Optional. A vector of the same length as \code{x} (or, with
+\code{data}, the name of a column) splitting the observations into
+groups, with one colour per group and a clickable legend.}
+
+\item{binWidth}{Optional. The width of the bins, in the units of \code{x}.}
+
+\item{breaks}{Optional. A numeric vector of bin edges, for bins of unequal
+width (the bars are then scaled by density so their areas stay
+comparable). Values outside the edges are left out. The number of bins
+cannot be changed from the chart.}
+
+\item{position}{How groups are drawn: \code{"stacked"} (default) or
+\code{"overlay"} (semi-transparent bars drawn on top of each other). It
+can be changed from the chart when \code{controls = TRUE}.}
+
+\item{stat}{What the bar heights show: \code{"count"} (default),
+\code{"percent"} (share of the observations) or \code{"density"} (so
+that the areas of the bars add up to 1). Overlaid groups are each
+normalised by their own number of observations, so groups of different
+sizes can be compared.}
+
+\item{density}{Add a density curve: \code{TRUE} or \code{"kde"} for a
+kernel density estimate (Gaussian kernel, bandwidth from
+\code{stats::bw.nrd0()}), \code{"normal"} for the normal distribution
+with the mean and standard deviation of the data. The curve is scaled to
+the bars. With overlaid groups, one curve is drawn per group. Defaults to
+\code{FALSE}.}
+
+\item{stats}{Optional. Summary lines to draw across the bars: any of
+\code{"mean"} and \code{"median"} (\code{TRUE} draws both). With overlaid
+groups, one line is drawn per group.}
+
+\item{refLines}{Optional. Numeric values drawn as dashed vertical lines
+(e.g. a threshold or a target); names are used as labels.}
+
+\item{rug}{Logical. Draw a small tick under the bars for every observation
+(up to 5,000 observations). Defaults to \code{FALSE}.}
+
+\item{summary}{Logical. Show the number of observations, the mean, the
+median and the standard deviation above the bars (or those of the
+selected range). Defaults to \code{TRUE}.}
+
+\item{cornerRadius}{The radius of the rounded top corners of the bars, in
+pixels. Defaults to 2; use 0 for square bars.}
+
+\item{legend}{Logical. Show the legend (with \code{group}). Defaults to
+\code{TRUE} when there is a group.}
+
+\item{controls}{Logical. Show the buttons that change the bins, the
+counts / percentages and the layout. Defaults to \code{TRUE}.}
+
+\item{tooltip}{Logical. Show a tooltip when hovering the bins. Defaults to
+\code{TRUE}.}
+
+\item{animate}{Logical. Grow the bars when the chart is first drawn.
+Defaults to \code{TRUE}.}
+
+\item{xFormat}{Optional. A D3 format string for the values of \code{x}
+(axis, tooltip and summary), such as \code{",.0f"} or \code{".1f"}.}
+
+\item{xPrefix, xSuffix}{Optional. Text added before and after the values of
+\code{x}, such as \code{"$"} or \code{" km"}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{gridCol}{The colour of the horizontal grid lines. Defaults to
+"#e9e9e9"; use \code{NA} to hide them.}
 }
 \value{
-A SVG histogram.
+An interactive SVG histogram (an r2d3 htmlwidget).
 }
 \description{
-Create a histogram.
+Shows the distribution of a numeric variable as bars counting the
+observations in bins of equal width. The bins are computed in the browser,
+so their number can be changed from the chart. With \code{group}, the bars
+are split by group, stacked or overlaid. A density curve, mean and median
+lines, reference lines and a rug can be added, and a summary of the data
+(number of observations, mean, median, standard deviation) is shown above
+the bars.
 }
-\examples{
+\section{Interactions}{
 
+\itemize{
+  \item Hover a bin to see its range, its count, its share of the total and
+    the share of the observations below its upper edge; with \code{group},
+    the tooltip lists every group.
+  \item The buttons at the top right change the number of bins (− / +),
+    switch between counts and percentages and, with \code{group}, between
+    stacked and overlaid bars.
+  \item Drag across the bars to select a range: the summary then describes
+    the selected observations. "Zoom" re-bins the data within the range;
+    double-click or "Reset zoom" goes back to the full range.
+  \item Click a legend entry to hide or show a group, double-click it to
+    isolate it.
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking a bin sets \code{input$id_clicked} to a list with \code{from},
+\code{to}, \code{count} and \code{group}; selecting a range sets
+\code{input$id_selected} to a list with \code{from}, \code{to} and
+\code{count} (\code{NULL} when the selection is cleared). The number of
+bins, the layout, the hidden groups and the zoom are kept when the chart is
+re-rendered.
+}
+
+\examples{
 histogram(
   x = mtcars$mpg,
-  bins = 20,
-  fill = "crimson",
-  stroke = "white",
-  strokeWidth = 1,
-  title = "Distribution of the hwy variable",
-  width = "20",
-  height = "10"
+  bins = 10,
+  title = "Fuel economy",
+  xtitle = "Miles per gallon"
 )
+
+library(ggplot2) # needed for the diamonds and mpg data frames
+
+# A long-tailed variable, with its density and summary lines
+histogram(
+  x = "price",
+  data = diamonds,
+  bins = 50,
+  density = TRUE,
+  stats = c("mean", "median"),
+  xPrefix = "$",
+  xFormat = ",.0f",
+  title = "Diamond prices"
+)
+
+# Groups compared on a percentage scale
+histogram(
+  x = "hwy",
+  data = mpg,
+  group = "drv",
+  position = "overlay",
+  stat = "percent",
+  binWidth = 2,
+  density = TRUE,
+  title = "Highway fuel economy by drive train"
+)
+
 }

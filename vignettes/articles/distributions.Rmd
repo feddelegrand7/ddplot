@@ -26,20 +26,68 @@ Charts that show how a numeric variable is spread: where values concentrate, how
 
 ## `histogram()` {#histogram}
 
-The `histogram()` function allows you to visualize the distribution of a vector of data:
+`histogram()` shows how a numeric variable is spread, as bars counting the observations in bins of equal width. Give it a vector, or a data frame and the name of a column. The bins get round widths, and a summary of the data (number of observations, mean, median, standard deviation) is shown above the bars.
 
 ```{r}
 histogram(
-  x = mpg$hwy,
-  bins = 20,
-  fill = "crimson",
-  stroke = "white",
-  strokeWidth = 1,
-  title = "Distribution of the hwy variable",
-  width = "20",
-  height = "10"
+  x      = mpg$hwy,
+  title  = "Highway fuel economy",
+  xtitle = "Miles per gallon"
 )
 ```
+
+The chart is interactive:
+
+- the **− / +** buttons change the number of bins, and **Count / %** switches between counts and percentages;
+- hovering a bin shows its range, its count, its share of the total and the share of the observations up to that bin;
+- dragging across the bars selects a range, and the summary then describes the selected observations. **Zoom** re-bins the data inside the range (useful for long tails); double-click to go back.
+
+Add a density curve with `density = TRUE` (or `"normal"` for a fitted normal curve), mean and median lines with `stats`, and thresholds with `refLines`. `binWidth` sets the width of the bins, and `xPrefix`, `xSuffix` and `xFormat` format the values:
+
+```{r}
+histogram(
+  x        = "price",
+  data     = diamonds,
+  bins     = 50,
+  density  = TRUE,
+  stats    = c("mean", "median"),
+  xPrefix  = "$",
+  xFormat  = ",.0f",
+  title    = "Diamond prices",
+  subtitle = "Drag across the bars to select a range, then zoom in"
+)
+```
+
+With `group`, the bars are split by group, stacked or overlaid (switch with the buttons). `stat = "percent"` with overlaid groups divides each group by its own size, so groups of different sizes can be compared. Click a legend entry to hide a group, double-click it to isolate it:
+
+```{r}
+histogram(
+  x        = "hwy",
+  data     = mpg,
+  group    = "drv",
+  position = "overlay",
+  stat     = "percent",
+  binWidth = 2,
+  density  = TRUE,
+  fill     = c("4" = "#4269d0", f = "#efb118", r = "#ff725c"),
+  title    = "Highway fuel economy by drive train"
+)
+```
+
+`breaks` gives bins of unequal widths (the bars then show densities, so their areas stay comparable), and `rug = TRUE` draws a tick for every observation:
+
+```{r}
+histogram(
+  x       = faithful$eruptions,
+  breaks  = c(1.5, 2, 2.5, 3.5, 4, 4.5, 5.5),
+  rug     = TRUE,
+  title   = "Old Faithful eruptions",
+  xtitle  = "Duration (minutes)",
+  xSuffix = " min"
+)
+```
+
+In Shiny, `input$<id>_clicked` returns the clicked bin and `input$<id>_selected` the selected range.
 
 ## `violin_plot()` {#violin_plot}
 
