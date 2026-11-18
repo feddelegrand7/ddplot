@@ -2,70 +2,160 @@
 % Please edit documentation in R/flower.R
 \name{flower}
 \alias{flower}
-\title{Display a Rotating Flower Visualization}
+\title{Draw a blooming flower, or a flower chart}
 \usage{
 flower(
   petalCount = 6,
-  petalLength = 100,
-  petalWidth = 60,
-  petalColor = "lightpink",
-  petalStroke = "deeppink",
-  centerRadius = 20,
-  centerColor = "gold",
-  centerStroke = "darkorange",
+  petalLength = NULL,
+  petalWidth = NULL,
+  petalColor = "#ff8ab7",
+  petalStroke = NULL,
+  centerRadius = NULL,
+  centerColor = "#f6c445",
+  centerStroke = "#e09a1a",
   centerText = NULL,
   centerTextSize = 16,
-  centerTextColor = "black",
+  centerTextColor = "#222",
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  rotationSpeed = 2,
+  rotationSpeed = 0.5,
   width = NULL,
-  height = NULL
+  height = NULL,
+  petalValues = NULL,
+  petalLabels = NULL,
+  valueSuffix = "",
+  layers = 2,
+  stamens = TRUE,
+  pluck = TRUE,
+  bloom = TRUE,
+  titleText = NULL,
+  titleColor = NULL,
+  titleFontSize = 14
 )
 }
 \arguments{
-\item{petalCount}{The number of petals. Defaults to 6.}
+\item{petalCount}{The number of petals. Defaults to 6. Ignored when
+\code{petalValues} is given.}
 
-\item{petalLength}{The length of each petal. Defaults to 100.}
+\item{petalLength}{Optional. The length of the petals (the longest one
+with \code{petalValues}) in pixels. By default the flower fills the space
+available.}
 
-\item{petalWidth}{The width of each petal. Defaults to 60.}
+\item{petalWidth}{Optional. The width of the petals in pixels. By default
+it depends on their length and number.}
 
-\item{petalColor}{The fill color of the petals. Defaults to "lightpink".}
+\item{petalColor}{The colour of the petals: one colour, or one per petal
+(recycled). Defaults to "#ff8ab7", or to the ddplot palette with
+\code{petalValues}.}
 
-\item{petalStroke}{The stroke color of the petals. Defaults to "deeppink".}
+\item{petalStroke}{Optional. The outline colour of the petals. By default
+a darker shade of each petal colour is used.}
 
-\item{centerRadius}{The radius of the flower's center circle. Defaults to 20.}
+\item{centerRadius}{Optional. The radius of the centre in pixels. By
+default it is a fifth of the petal length.}
 
-\item{centerColor}{The fill color of the center. Defaults to "gold".}
+\item{centerColor}{The colour of the centre. Defaults to "#f6c445".}
 
-\item{centerStroke}{The stroke color of the center. Defaults to "darkorange".}
+\item{centerStroke}{The outline colour of the centre (and the colour of
+the stamens). Defaults to "#e09a1a".}
 
-\item{centerText}{Optional. Text to display inside the center (e.g., a number or emoji).}
+\item{centerText}{Optional. A text written in the centre (e.g. a number).}
 
-\item{centerTextSize}{The size of the center text. Defaults to 16.}
+\item{centerTextSize}{The font size of the centre text. Defaults to 16.}
 
-\item{centerTextColor}{The color of the center text. Defaults to "black".}
+\item{centerTextColor}{The colour of the centre text. Defaults to "#222".}
 
-\item{font}{The font family for the center text. Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
+\item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
+sans-serif".}
 
-\item{bgcol}{The background color of the visualization. Defaults to "white".}
+\item{bgcol}{The background colour. Defaults to "white".}
 
-\item{rotationSpeed}{The speed of rotation (degrees per animation frame). Defaults to 2.}
+\item{rotationSpeed}{The speed of rotation, in degrees per 20
+milliseconds (0 to stop it). Defaults to 0.5, or to 0 with
+\code{petalValues}.}
 
-\item{width}{The width of the SVG output. Optional.}
+\item{width}{Optional. The width of the chart.}
 
-\item{height}{The height of the SVG output. Optional.}
+\item{height}{Optional. The height of the chart.}
+
+\item{petalValues}{Optional. A numeric vector: one petal per value, with a
+length proportional to the value.}
+
+\item{petalLabels}{Optional. A character vector of labels for the petals
+(with \code{petalValues}), written at their tips and in the tooltips.}
+
+\item{valueSuffix}{A text added after the values in the tooltips, such as
+" pts". Defaults to "".}
+
+\item{layers}{The number of rings of petals: 1, or 2 (the default) for a
+second, darker ring behind the first. Ignored with \code{petalValues}.}
+
+\item{stamens}{Logical. Draw the stamens on the centre. Defaults to TRUE.}
+
+\item{pluck}{Logical. Let the viewer pluck the petals by clicking them.
+Defaults to TRUE.}
+
+\item{bloom}{Logical. Unfold the petals when the flower first comes into
+view. Defaults to TRUE.}
+
+\item{titleText}{Optional. A caption below the flower.}
+
+\item{titleColor}{Optional. The colour of the caption.}
+
+\item{titleFontSize}{The font size of the caption. Defaults to 14.}
 }
 \value{
-An animated rotating flower SVG.
+An r2d3 htmlwidget.
 }
 \description{
-Display a Rotating Flower Visualization
+Draws a flower that blooms when it scrolls into view (the petals unfold
+one after the other) and then turns slowly. The petals have soft gradients,
+a second ring of petals sits behind them and the centre is covered with
+stamens laid out on a golden-angle spiral. Petals can be plucked: "loves
+me, loves me not".
 }
+\details{
+With \code{petalValues}, the flower becomes a small chart: there is one
+petal per value, its length is proportional to the value, the petals are
+labelled with \code{petalLabels} and hovering a petal shows its value and
+share of the total.
+}
+\section{Interactions}{
+
+\itemize{
+  \item Hover the flower: it stops turning and the petal under the mouse
+    grows slightly (with \code{petalValues}, a tooltip shows its value and
+    share).
+  \item Click a petal to pluck it: it falls to the ground and the flower
+    says "loves me" or "loves me not". When the last petal is plucked, the
+    verdict is shown and the flower grows back. Click the centre to make
+    every petal grow back. With \code{petalValues}, clicking a petal
+    highlights it instead (click it again to clear).
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking a petal sets \code{input$id_clicked} to a list with \code{petal}
+(its number, 0 for the centre) and, when plucking, \code{plucked},
+\code{remaining} and \code{lovesMe}; with \code{petalValues}, it has
+\code{petal}, \code{label} and \code{value} (\code{NULL} when the
+highlight is cleared). The angle of the flower is kept when the chart is
+re-rendered, and the bloom is played only once.
+}
+
 \examples{
 flower(
   petalCount = 5,
   petalColor = "plum",
   rotationSpeed = 1.5
+)
+flower(petalCount = 12, petalColor = "#efb118", centerColor = "#5b3a29",
+  centerStroke = "#3b2416", centerText = "12", centerTextColor = "white")
+flower(
+  petalValues = c(8, 6, 9, 4, 7),
+  petalLabels = c("Speed", "Power", "Skill", "Luck", "Focus"),
+  titleText = "Player profile"
 )
 }

@@ -8,87 +8,144 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning 
 library(ddplot)
 ```
 
-Illustrative SVG indicators. They show a single level and are meant for presentations, landing pages and dashboards that need a lighter touch.
+Illustrative, animated SVG indicators. Each one shows a single level and is meant for presentations, landing pages and dashboards that need a lighter touch. They come to life when they scroll into view: the heart and the glass fill up, the plant grows, the flame ignites and the flower blooms, while the value counts up. They only animate while they are on screen, and they stay still for visitors who have asked their system for reduced motion.
+
+Every indicator reacts to the mouse, and the heart, the glass, the plant and the flame can be made `draggable = TRUE`. Viewers can then set the level themselves by dragging, or with the arrow keys. In Shiny, the new level arrives in `input$<id>_value`, and clicks arrive in `input$<id>_clicked`.
 
 ::: {.dd-chooser}
 
 | Chart | Use it when |
 |---|---|
-| [`heart_fill()`](#heart_fill) | You show a level from 0 to 1 as a filling heart |
-| [`glass_fill()`](#glass_fill) | You show a level from 0 to 1 as a filling glass |
-| [`plant_growth()`](#plant_growth) | You show progress as a growing plant |
+| [`heart_fill()`](#heart_fill) | You show a level from 0 to 1 as a beating heart filling with liquid |
+| [`glass_fill()`](#glass_fill) | You show a level from 0 to 1 as a glass of water |
+| [`plant_growth()`](#plant_growth) | You show progress as a plant that grows and blooms |
 | [`flame()`](#flame) | You show an intensity, such as an error count, as a flame |
-| [`flower()`](#flower) | You want a decorative, optionally rotating, flower |
+| [`flower()`](#flower) | You want a blooming flower, or a small flower chart of a few values |
 
 :::
 
 ## `heart_fill()` {#heart_fill}
 
-The `heart_fill` function allows you to display a heart indicator which will be filled according to a numerical value from 0 to 1: 
+`heart_fill()` shows a level from 0 to 1 as a heart filling with a wavy liquid. The heart beats, and the percentage written inside turns white where the liquid covers it. Hover the heart to make it beat faster, and click it to release a few small hearts. `target` marks a level to reach.
 
 ```{r}
-heart_fill(fill_level = 0.8, titleText = NULL, renderFillLabel = FALSE)
+heart_fill(fill_level = 0.8, titleText = NULL)
+```
+
+```{r}
+heart_fill(
+  fill_level = 0.45,
+  target = 0.75,
+  fillColor = "#ff8ab7",
+  strokeColor = "#c2185b",
+  titleText = "Daily activity goal"
+)
+```
+
+With `draggable = TRUE`, drag the heart up or down to set the level:
+
+```{r}
+heart_fill(0.3, draggable = TRUE, titleText = "Drag the heart", bpm = 80)
 ```
 
 ## `glass_fill()` {#glass_fill}
 
-The `glass_fill` function works the same way as the `heart_fill` above: 
+`glass_fill()` shows the level as a glass of water, with a moving surface and rising bubbles. Move the mouse across the chart to rock the water, and click the glass to drop some more in. `ticks = TRUE` adds a measuring scale.
 
 ```{r}
-glass_fill(fill_level = 0.8, titleText = "Glass of water", renderFillLabel = TRUE)
+glass_fill(fill_level = 0.8, titleText = "Glass of water")
+```
+
+```{r}
+glass_fill(
+  fill_level = 0.35,
+  target = 0.8,
+  ticks = TRUE,
+  titleText = "Water intake today"
+)
+```
+
+```{r}
+glass_fill(0.6, fillColor = "#efb118", draggable = TRUE, titleText = "Drag the water")
 ```
 
 ## `plant_growth()` {#plant_growth}
 
-The `plant_growth` function can also be used as a visual clue: 
+`plant_growth()` shows progress as a potted plant. As the level grows, the plant goes from a seed to a sprout, grows leaves, forms a bud from 55 percent and opens into a flower at 100 percent. The current stage is written under the percentage. Hover the plant to stir up the breeze, and click it to water it.
 
 ```{r}
 plant_growth(0.4)
 ```
+
 ```{r}
-plant_growth(1)
+plant_growth(1, titleText = "Project completed")
+```
+
+```{r}
+plant_growth(
+  0.7,
+  target = 0.9,
+  potColor = "#4269d0",
+  flowerColor = "#efb118",
+  draggable = TRUE,
+  titleText = "Drag the plant"
+)
 ```
 
 ## `flame()` {#flame}
 
-You can create cool `flames` using the `flame` function, useful if you want to display the state of a critical information that yields a numerical values (for example, the number of errors encountered in a specific process):
+`flame()` shows an intensity as a flickering flame. This is useful for a critical number, such as the number of errors in a process. The flame grows linearly with the intensity up to `maxIntensity` (100 by default). The higher the intensity, the faster it flickers and the more sparks it throws. The flame leans away from the mouse, and flares up when clicked. It can burn on its own, on a candle or on logs.
 
 ```{r}
 flame(
-  intensity = 20, 
-  flameGradientColors = c("yellow", "orange", "darkred"),
-  flameOutline = "darkred",
-  bgcol = "#fefefe"
+  intensity = 35,
+  base = "candle",
+  showValue = TRUE,
+  valueSuffix = " errors",
+  titleText = "Failed jobs today"
 )
 ```
 
 ```{r}
 flame(
-  intensity = 80, 
-  flameGradientColors = c("green", "darkgreen", "darkblue"),
-  flameOutline = "#fefefe",
-  bgcol = "black"
+  intensity = 80,
+  flameGradientColors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
+  bgcol = "#111111",
+  base = "logs"
 )
+```
+
+```{r}
+flame(intensity = 20, draggable = TRUE, showValue = TRUE, titleText = "Drag the flame")
 ```
 
 ## `flower()` {#flower}
 
-The `flower()` function allows you to plot a simple flowers with a defined number of petals. You can also define the width/length of the petals and rotate them if needed: 
+`flower()` draws a flower that blooms when it comes into view and then turns slowly. Click a petal to pluck it, and the flower says "loves me" or "loves me not". When the last petal falls, the verdict is shown and the flower grows back. Click the centre to make it grow back at any time.
 
 ```{r}
-flower(
-  petalCount = 7,
-  petalColor = "plum",
-  rotationSpeed = 0
-)
+flower(petalCount = 7, petalColor = "plum", rotationSpeed = 0)
 ```
 
 ```{r}
 flower(
-  petalCount = 15,
-  petalWidth = 20,
-  petalColor = "plum",
-  rotationSpeed = 1.5
+  petalCount = 14,
+  petalColor = "#efb118",
+  centerColor = "#5b3a29",
+  centerStroke = "#3b2416",
+  centerText = "14",
+  centerTextColor = "white",
+  rotationSpeed = 0.3
 )
 ```
 
+With `petalValues`, the flower becomes a small chart. There is one petal per value, its length is proportional to the value, and hovering a petal shows its value and share. Clicking a petal highlights it.
+
+```{r}
+flower(
+  petalValues = c(8, 6, 9, 4, 7, 5),
+  petalLabels = c("Speed", "Power", "Skill", "Luck", "Focus", "Stamina"),
+  valueSuffix = " / 10",
+  titleText = "Player profile"
+)
+```

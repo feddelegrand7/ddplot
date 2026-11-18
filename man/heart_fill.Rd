@@ -2,63 +2,127 @@
 % Please edit documentation in R/heart_fill.R
 \name{heart_fill}
 \alias{heart_fill}
-\title{Visualize a Heart Filling with Color using D3}
+\title{Show a level as a beating heart filling with liquid}
 \usage{
 heart_fill(
   fill_level = 0.65,
-  heartSize = 150,
-  strokeColor = "#C00",
-  strokeWidth = 4,
-  fillColor = "red",
+  heartSize = NULL,
+  strokeColor = "#b5172b",
+  strokeWidth = 3,
+  fillColor = "#e63950",
   renderFillLabel = TRUE,
   labelColor = "#333",
-  labelFontSize = "16px",
+  labelFontSize = NULL,
   titleText = "Fill level",
   titleColor = "#333",
-  titleFontSize = "14px",
-  font = "Verdana, Geneva, Tahoma, sans-serif"
+  titleFontSize = 14,
+  font = "Verdana, Geneva, Tahoma, sans-serif",
+  target = NULL,
+  waves = TRUE,
+  beat = TRUE,
+  bpm = 60,
+  draggable = FALSE,
+  animate = TRUE,
+  bgcol = "white",
+  width = NULL,
+  height = NULL
 )
 }
 \arguments{
-\item{fill_level}{Value between 0 and 1 indicating how full the heart should appear (e.g., 0.65).}
+\item{fill_level}{A number between 0 and 1: how full the heart is (values
+outside are clamped). Defaults to 0.65.}
 
-\item{heartSize}{Width/height scale of the heart in pixels.}
+\item{heartSize}{Optional. The width of the heart in pixels. By default
+the heart fills the space available (up to 360 pixels).}
 
-\item{strokeColor}{Color of the heart outline.}
+\item{strokeColor}{The colour of the outline. Defaults to "#b5172b".}
 
-\item{strokeWidth}{Width of the heart outline stroke.}
+\item{strokeWidth}{The width of the outline. Defaults to 3.}
 
-\item{fillColor}{Color used to fill the heart based on the fill level.}
+\item{fillColor}{The colour of the liquid. Defaults to "#e63950". The
+empty part of the heart is a pale shade of it.}
 
-\item{renderFillLabel}{Whether to display a percentage label above the heart.}
+\item{renderFillLabel}{Logical. Show the percentage inside the heart.
+Defaults to TRUE.}
 
-\item{labelColor}{Color of the percentage label text.}
+\item{labelColor}{The colour of the percentage (where the liquid does not
+cover it) and of the target label. Defaults to "#333".}
 
-\item{labelFontSize}{Font size of the percentage label text (e.g., "16px").}
+\item{labelFontSize}{Optional. The font size of the percentage, a number
+or a CSS size such as "16px". By default it grows with the heart.}
 
-\item{titleText}{Optional title displayed below the heart.}
+\item{titleText}{Optional. A caption below the heart. Defaults to
+"Fill level"; use \code{NULL} to hide it.}
 
-\item{titleColor}{Color of the title text.}
+\item{titleColor}{The colour of the caption. Defaults to "#333".}
 
-\item{titleFontSize}{Font size of the title text (e.g., "14px").}
+\item{titleFontSize}{The font size of the caption, a number or a CSS size
+such as "14px". Defaults to 14.}
 
-\item{font}{Font family used for text labels and title.}
+\item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
+sans-serif".}
+
+\item{target}{Optional. A level between 0 and 1 marked with a dashed line
+and a label.}
+
+\item{waves}{Logical. Animate the surface of the liquid. Defaults to TRUE.}
+
+\item{beat}{Logical. Make the heart beat. Defaults to TRUE.}
+
+\item{bpm}{The heart rate, in beats per minute. Defaults to 60.}
+
+\item{draggable}{Logical. Let the viewer change the level by dragging or
+with the arrow keys. Defaults to FALSE.}
+
+\item{animate}{Logical. Fill the heart from empty when it first comes into
+view. Defaults to TRUE.}
+
+\item{bgcol}{The background colour. Defaults to "white".}
+
+\item{width}{Optional. The width of the chart.}
+
+\item{height}{Optional. The height of the chart.}
 }
 \value{
-An interactive D3 heart fill visualization rendered in the RStudio Viewer or web browser.
+An r2d3 htmlwidget.
 }
 \description{
-This function renders a heart-shaped SVG graphic that fills from the bottom up based on the provided level.
-The appearance of the heart and the optional label can be fully customized. It uses the `r2d3` package to
-render the visualization with D3.js.
+Draws a heart filled from the bottom up to a level between 0 and 1. The
+liquid has a gently moving wavy surface and the heart beats. When the chart
+scrolls into view, the liquid rises from empty to the level and the
+percentage counts up with it. The percentage is written inside the heart,
+in white where the liquid covers it.
 }
+\section{Interactions}{
+
+\itemize{
+  \item Hover the heart: it beats faster.
+  \item Click the heart: small hearts float up from where you clicked.
+  \item With \code{draggable = TRUE}, drag up or down on the heart to set
+    the level, or focus the chart (click it or press Tab) and use the arrow
+    keys (1 percent per press, 10 with Shift).
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking the heart sets \code{input$id_clicked} to a list with
+\code{value}, and, with \code{draggable = TRUE}, setting a level sets
+\code{input$id_value} to the new level (a number between 0 and 1). When the
+chart is re-rendered with a new level, the liquid moves from the old level
+to the new one.
+}
+
 \examples{
 heart_fill(fill_level = 0.9)
 heart_fill(
   fill_level = 0.4,
-  fillColor = "pink",
-  labelColor = "#C00",
-  strokeColor = "#900"
+  target = 0.75,
+  fillColor = "#ff8ab7",
+  strokeColor = "#c2185b",
+  titleText = "Daily activity goal"
 )
+heart_fill(0.55, draggable = TRUE, titleText = "Drag me")
 
 }

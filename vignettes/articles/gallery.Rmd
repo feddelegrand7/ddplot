@@ -77,11 +77,11 @@ gauge_chart|kpis|Gauge|You show one value against warning and danger thresholds|
 bullet_chart|kpis|Bullet chart|You show one value against a target and qualitative ranges|
 liquid_chart|kpis|Liquid fill|You show a single percentage in an eye-catching way|animated
 pulse_grid|kpis|Pulse grid|You want the hottest cells of a matrix to stand out|animated
-heart_fill|playful|Heart fill|You show a level from 0 to 1 as a filling heart|
-glass_fill|playful|Glass fill|You show a level from 0 to 1 as a filling glass|
-plant_growth|playful|Plant growth|You show progress as a growing plant|
-flame|playful|Flame|You show an intensity, such as an error count, as a flame|animated
-flower|playful|Flower|You want a decorative, optionally rotating, flower|animated
+heart_fill|playful|Heart fill|You show a level from 0 to 1 as a beating heart filling with liquid|animated,interactive,shiny
+glass_fill|playful|Glass fill|You show a level from 0 to 1 as a glass of water|animated,interactive,shiny
+plant_growth|playful|Plant growth|You show progress as a plant that grows and blooms|animated,interactive,shiny
+flame|playful|Flame|You show an intensity, such as an error count, as a flame|animated,interactive,shiny
+flower|playful|Flower|You want a blooming flower, or a small flower chart of a few values|animated,interactive,shiny
 ', sep = "|", stringsAsFactors = FALSE, na.strings = "")
 ```
 

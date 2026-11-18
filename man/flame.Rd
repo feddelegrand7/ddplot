@@ -2,45 +2,135 @@
 % Please edit documentation in R/flame.R
 \name{flame}
 \alias{flame}
-\title{Display an Animated Flame Visualization}
+\title{Show an intensity as a flickering flame}
 \usage{
 flame(
   intensity = 50,
-  flameGradientColors = c("white", "yellow", "darkred"),
-  flameOutline = "darkred",
+  flameGradientColors = c("#fffbe6", "#ffc233", "#e8452c"),
+  flameOutline = NULL,
   bgcol = "white",
   width = NULL,
-  height = NULL
+  height = NULL,
+  maxIntensity = 100,
+  base = c("none", "candle", "logs"),
+  showValue = FALSE,
+  valueSuffix = "",
+  titleText = NULL,
+  titleColor = NULL,
+  titleFontSize = 14,
+  labelColor = NULL,
+  labelFontSize = NULL,
+  font = "Verdana, Geneva, Tahoma, sans-serif",
+  flicker = TRUE,
+  sparks = TRUE,
+  draggable = FALSE,
+  animate = TRUE
 )
 }
 \arguments{
-\item{intensity}{Numeric value controlling the size of the flame. Values greater than 100
-cause the flame to grow beyond default scaling, while smaller values shrink it.
-Defaults to 50.}
+\item{intensity}{A non-negative number: the intensity of the flame. The
+height of the flame grows linearly with it up to \code{maxIntensity},
+where the flame reaches the top of the chart. Defaults to 50.}
 
-\item{flameGradientColors}{A length-3 character vector specifying the colors of the flame gradient,
-from the center outward. Defaults to \code{c("white", "yellow", "darkred")}.}
+\item{flameGradientColors}{A length-3 character vector of colours, from
+the core of the flame outwards. Defaults to
+\code{c("#fffbe6", "#ffc233", "#e8452c")}.}
 
-\item{flameOutline}{Color string for the flame's outline stroke. Defaults to "darkred".}
+\item{flameOutline}{Optional. The colour of an outline drawn around the
+flame. By default the flame has no outline.}
 
-\item{bgcol}{Background color of the SVG canvas. Defaults to "white".}
+\item{bgcol}{The background colour. Defaults to "white". The flame glows
+more on dark backgrounds.}
 
-\item{width}{Optional width of the SVG output.}
+\item{width}{Optional. The width of the chart.}
 
-\item{height}{Optional height of the SVG output.}
+\item{height}{Optional. The height of the chart.}
+
+\item{maxIntensity}{The intensity at which the flame reaches its full
+height. Defaults to 100. Higher intensities do not make the flame taller.}
+
+\item{base}{What the flame burns on: "none" (the default), "candle" or
+"logs".}
+
+\item{showValue}{Logical. Write the intensity below the flame. Defaults to
+FALSE.}
+
+\item{valueSuffix}{A text added after the value, such as " errors".
+Defaults to "".}
+
+\item{titleText}{Optional. A caption below the flame.}
+
+\item{titleColor}{Optional. The colour of the caption. Defaults to
+\code{labelColor}.}
+
+\item{titleFontSize}{The font size of the caption. Defaults to 14.}
+
+\item{labelColor}{Optional. The colour of the value. Defaults to dark grey
+on light backgrounds and light grey on dark ones.}
+
+\item{labelFontSize}{Optional. The font size of the value. By default it
+depends on the size of the chart.}
+
+\item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
+sans-serif".}
+
+\item{flicker}{Logical. Animate the flame. Defaults to TRUE.}
+
+\item{sparks}{Logical. Show sparks rising from the flame. Defaults to TRUE.}
+
+\item{draggable}{Logical. Let the viewer change the intensity by dragging
+or with the arrow keys. Defaults to FALSE.}
+
+\item{animate}{Logical. Ignite the flame when it first comes into view.
+Defaults to TRUE.}
 }
 \value{
-An \code{r2d3} object displaying the animated flame visualization.
+An r2d3 htmlwidget.
 }
 \description{
-Creates an animated flame SVG visualization whose size and color gradient
-can be customized. The flame grows or shrinks based on the intensity parameter,
-with smooth pulsing and wobbling animation.
+Draws a flame whose height follows an intensity: the higher the
+intensity, the taller the flame, the faster it flickers and the more sparks
+it throws. The flame is made of three layers (outer, middle and core) with a
+warm glow behind it, and can burn on its own, on a candle or on logs. Useful
+to show the state of a critical number, such as the number of errors in a
+process. When the chart scrolls into view, the flame ignites and grows to
+its height while the value (with \code{showValue = TRUE}) counts up.
 }
+\section{Interactions}{
+
+\itemize{
+  \item Move the mouse near the flame: it leans away, as if you were
+    blowing on it.
+  \item Click the flame: it flares up and throws a burst of sparks.
+  \item With \code{draggable = TRUE}, drag up or down on the flame to set
+    the intensity, or focus the chart (click it or press Tab) and use the
+    arrow keys.
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking the flame sets \code{input$id_clicked} to a list with
+\code{intensity}, and, with \code{draggable = TRUE}, setting the intensity
+sets \code{input$id_value} to the new intensity. When the chart is
+re-rendered with a new intensity, the flame grows or shrinks from the old
+height to the new one.
+}
+
 \examples{
-flame(intensity = 5)
+flame(intensity = 20)
 flame(
-  intensity = 50,
-  flameGradientColors = c("lightblue", "blue", "darkblue")
+  intensity = 80,
+  flameGradientColors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
+  bgcol = "#111111",
+  base = "logs"
+)
+flame(
+  intensity = 35,
+  base = "candle",
+  showValue = TRUE,
+  valueSuffix = " errors",
+  titleText = "Failed jobs today"
 )
 }
