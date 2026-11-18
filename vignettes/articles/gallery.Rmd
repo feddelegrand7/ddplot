@@ -22,6 +22,9 @@ categories <- list(
   list(id = "composition", title = "Part-to-whole and hierarchies",
        desc = "Pies, treemaps, waffles, sunbursts, mosaics and more.",
        intro = "Charts that split a whole into its parts, flat or nested."),
+  list(id = "races", title = "Race charts",
+       desc = "Bar, line, bubble, radial, treemap and donut races.",
+       intro = "Animated charts that replay data through time. Each one has a player: pause, drag the timeline, change the speed, step with the arrow keys, and hover or click the items while they move."),
   list(id = "kpis", title = "KPIs and monitoring",
        desc = "Gauges, bullet charts, liquid fills and pulse grids.",
        intro = "Compact charts for dashboards: one value against its target or thresholds, or a grid that makes hot spots stand out."),
@@ -49,7 +52,6 @@ bump_chart|comparisons|Bump chart|You follow how rankings change over several pe
 waterfall_chart|comparisons|Waterfall chart|You explain how a starting value becomes a final value|interactive
 radar_chart|comparisons|Radar chart|You compare a few items across several variables|interactive
 radial_bar_chart|comparisons|Radial bar chart|You show progress of a few items towards a goal|interactive
-bar_chart_race|comparisons|Bar chart race|You animate a ranking through time for a presentation|animated
 histogram|distributions|Histogram|You look at the distribution of a single numeric variable|interactive,shiny
 violin_plot|distributions|Violin plot|You compare distributions across groups, with quartiles|interactive
 beeswarm_plot|distributions|Beeswarm plot|You want to show every observation, not only a summary|interactive
@@ -65,6 +67,12 @@ sunburst_chart|composition|Sunburst chart|You explore a hierarchy with several l
 mosaic_chart|composition|Mosaic chart|You show how two categorical variables combine|interactive
 rose_chart|composition|Rose chart|You show a cyclical breakdown, such as months, Nightingale-style|interactive
 parliament_chart|composition|Parliament chart|You show seats won by each party|
+bar_chart_race|races|Bar chart race|You animate a ranking through time, with the bars overtaking each other|animated,interactive,shiny
+line_race|races|Line race|You replay several series drawing themselves, by value or by rank|animated,interactive,shiny
+bubble_race|races|Bubble race|You replay a scatter plot through time, Gapminder style|animated,interactive,shiny
+radial_bar_race|races|Radial bar race|You animate a ranking around a circle|animated,interactive,shiny
+treemap_race|races|Treemap race|You replay how a whole and its parts change through time|animated,interactive,shiny
+donut_race|races|Donut race|You replay shares through time, with a live league table|animated,interactive,shiny
 gauge_chart|kpis|Gauge|You show one value against warning and danger thresholds|
 bullet_chart|kpis|Bullet chart|You show one value against a target and qualitative ranges|
 liquid_chart|kpis|Liquid fill|You show a single percentage in an eye-catching way|animated
@@ -81,7 +89,7 @@ flower|playful|Flower|You want a decorative, optionally rotating, flower|animate
 esc <- function(x) htmltools::htmlEscape(x, attribute = TRUE)
 short <- c("time-series" = "Time series", comparisons = "Comparisons",
            distributions = "Distributions", relationships = "Relationships",
-           composition = "Part-to-whole", kpis = "KPIs", playful = "Playful")
+           composition = "Part-to-whole", races = "Races", kpis = "KPIs", playful = "Playful")
 
 chips <- c(
   sprintf('<button type="button" class="dd-chip active" data-filter="all">All <span>%d</span></button>', nrow(catalogue)),

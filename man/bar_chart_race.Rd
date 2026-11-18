@@ -2,7 +2,7 @@
 % Please edit documentation in R/barChartRace.R
 \name{bar_chart_race}
 \alias{bar_chart_race}
-\title{Create a bar chart race.}
+\title{Create an animated, interactive bar chart race.}
 \usage{
 bar_chart_race(
   data,
@@ -10,107 +10,265 @@ bar_chart_race(
   y,
   time,
   ease = "Linear",
-  frameDur = 500,
-  transitionDur = 500,
-  colorCategory = "Accent",
+  frameDur = 0,
+  transitionDur = 1000,
+  colorCategory = NULL,
   sort = "descending",
-  paddingWidth = 0.1,
+  paddingWidth = 0.2,
   xFontSize = 10,
-  yFontSize = 10,
-  xticks = 10,
+  yFontSize = 12,
+  xticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitleFontSize = 12,
   ytitle = NULL,
-  ytitleFontSize = 14,
+  ytitleFontSize = 12,
   title = NULL,
-  titleFontSize = 22,
-  stroke = "black",
+  titleFontSize = 20,
+  stroke = NULL,
   strokeWidth = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
-  panelcol = "#EBEBEBFF",
-  xgridlinecol = "white",
+  bgcol = "white",
+  panelcol = NULL,
+  xgridlinecol = NULL,
   opacity = 1,
   timeLabel = TRUE,
-  timeLabelOpts = list(size = 32, prefix = "", suffix = "", xOffset = 0.5, yOffset = 1),
+  timeLabelOpts = list(size = NULL, prefix = "", suffix = "", xOffset = 0, yOffset = 0),
   width = NULL,
-  height = NULL
+  height = NULL,
+  topN = 10,
+  group = NULL,
+  fill = NULL,
+  highlight = NULL,
+  labels = TRUE,
+  namePosition = c("left", "inside"),
+  total = FALSE,
+  rankFlash = TRUE,
+  agg = c("sum", "mean", "max", "min", "last"),
+  cornerRadius = 3,
+  controls = TRUE,
+  autoplay = TRUE,
+  loop = FALSE,
+  startFrame = "first",
+  timeFormat = NULL,
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  valueFormat = NULL,
+  valuePrefix = "",
+  valueSuffix = "",
+  tooltip = TRUE,
+  axisCol = "#333333"
 )
 }
 \arguments{
-\item{data}{The data frame containing the variables to consider.}
+\item{data}{The data frame containing the variables to consider (one row
+per item and period).}
 
-\item{x}{The x-variable to consider.}
+\item{x}{The name of the numeric column giving the length of the bars.}
 
-\item{y}{The y-variable to consider.}
+\item{y}{The name of the column giving the items (one bar per value).}
 
-\item{time}{The time variable to consider.}
+\item{time}{The name of the column giving the periods: numeric (e.g.
+years), \code{Date}, \code{POSIXct}, or a factor or character column
+(factor levels, or the sorted values, give the order).}
 
-\item{ease}{The easing method, you can find more
-here <https://github.com/d3/d3-ease>. Defaults to 'Linear'.}
+\item{ease}{The easing used within each period, a d3-ease name such as
+\code{"Linear"} (default, a steady race), \code{"CubicInOut"} (slows down
+on every period) or \code{"BackInOut"} (a little bounce). See
+<https://github.com/d3/d3-ease>.}
 
-\item{frameDur}{The time spent paused on each frame (time point) in milliseconds.}
+\item{frameDur}{The time, in milliseconds, the race pauses on each period
+before moving to the next one. Defaults to 0 (no pause). Each period
+lasts \code{frameDur + transitionDur} milliseconds at 1x speed: the bars
+rest for \code{frameDur}, then move for \code{transitionDur}.}
 
-\item{transitionDur}{The time spent transitioning between frames in milliseconds.}
+\item{transitionDur}{The time, in milliseconds, spent moving from one period
+to the next. Defaults to 1000.}
 
-\item{colorCategory}{A D3 categorical color scheme, you can find more
-here <https://github.com/d3/d3-scale-chromatic#categorical>. Defaults to 'Accent'.}
+\item{colorCategory}{Optional. The name of a D3 categorical colour scheme
+(e.g. \code{"Accent"}, \code{"Tableau10"}, \code{"Set2"}), see
+<https://github.com/d3/d3-scale-chromatic#categorical>. When \code{NULL}
+(default), the ddplot palette is used. \code{fill} takes precedence.}
 
-\item{sort}{Whether to sort or not the bars. Takes three values
-'none' which is the default, 'ascending' or 'descending'. Defaults to 'descending'.}
+\item{sort}{How the bars are ranked: \code{"descending"} (default, the
+largest value on top), \code{"ascending"} (the smallest value on top) or
+\code{"none"} (the bars keep the order of the data, or of the factor
+levels of \code{y}, and only the first \code{topN} items are shown).}
 
-\item{paddingWidth}{The distance between each bar.
-The value goes from 0 to 0.99 included. Defaults to 0.1.}
+\item{paddingWidth}{The space between bars, as a share of the row height,
+from 0 to 0.99. Defaults to 0.2.}
 
-\item{xFontSize}{the font size of the x-axis labels. Defaults to 10.}
+\item{xFontSize}{The font size of the value axis labels. Defaults to 10.}
 
-\item{yFontSize}{the font size of the y-axis labels. Defaults to 10.}
+\item{yFontSize}{The font size of the item names (shrunk when the bars are
+thin). Defaults to 12.}
 
-\item{xticks}{the number of y-axis ticks to consider. Defaults to 10.}
+\item{xticks}{Optional. The approximate number of value axis ticks.}
 
-\item{xtitle}{Optional. The title of the x-axis.}
+\item{xtitle}{Optional. The title of the value axis, drawn above it. It is
+also used as the name of the value in the tooltip.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitleFontSize}{The font size of the value axis title. Defaults to 12.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{ytitle}{Optional. The title of the item names, drawn above them.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 14.}
+\item{ytitleFontSize}{The font size of the item axis title. Defaults to 12.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
 
-\item{stroke}{The stroke color of the bars. Defaults to 'black'.}
+\item{stroke}{Optional. The stroke colour of the bars.}
 
-\item{strokeWidth}{Optional. the stroke width of the bars.}
+\item{strokeWidth}{Optional. The stroke width of the bars (1 when only
+\code{stroke} is given).}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bgcol}{The background colour of the SVG. Defaults to "white".}
 
-\item{panelcol}{The background color of the panel. Defaults to "#EBEBEBFF" HEX color.}
+\item{panelcol}{Optional. The background colour of the panel behind the
+bars (none by default).}
 
-\item{xgridlinecol}{The color of the x-axis grid lines. Defaults to 'white'.}
+\item{xgridlinecol}{The colour of the vertical grid lines. When \code{NULL}
+(default), a light grey, or white when \code{panelcol} is given. Use
+\code{NA} to hide them.}
 
-\item{opacity}{The color opacity of the bars (from 0 to 1). Defaults to 1.}
+\item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1.}
 
-\item{timeLabel}{Whether to show a label for the value of the time variable. Defaults to TRUE.}
+\item{timeLabel}{Logical. Show the big period label in the bottom right
+corner. Defaults to \code{TRUE}.}
 
-\item{timeLabelOpts}{Options for labeling the value of the time variable.
-Takes a list specifying the `size`, `prefix`, `suffix`, `xOffset`, and `yOffset`.
-Offsets are scaled relative to the dimensions of the label, from the bottom-right corner of the panel.}
+\item{timeLabelOpts}{A list of options for the period label: \code{size}
+(font size in pixels, chosen from the chart size when \code{NULL}),
+\code{prefix} and \code{suffix} (text around the period), \code{xOffset}
+and \code{yOffset} (shifts to the left and upwards, as a share of the
+width and height of the label, from the bottom right corner of the panel;
+both default to 0). Missing entries keep their defaults.}
 
 \item{width}{Optional. The width of the SVG output.}
 
 \item{height}{Optional. The height of the SVG output.}
+
+\item{topN}{The number of bars shown. Defaults to 10 (or the number of
+items, when there are fewer).}
+
+\item{group}{Optional. The name of a column grouping the items (e.g. the
+continent of each country). The bars are coloured by group, with a
+clickable legend.}
+
+\item{fill}{Optional. The colours of the bars: a single colour, an unnamed
+vector (recycled over the items, or the groups with \code{group}), or a
+named vector mapping items (or groups) to colours, the others taking the
+palette.}
+
+\item{highlight}{Optional. A character vector of items followed from the
+start (the other bars are dimmed, see Interactions).}
+
+\item{labels}{Logical. Show the value at the end of each bar, counting
+smoothly between periods. Defaults to \code{TRUE}.}
+
+\item{namePosition}{Where the item names go: \code{"left"} (default, in a
+column left of the bars) or \code{"inside"} (inside the end of the bar,
+or just after it when the bar is too short).}
+
+\item{total}{Show the total of all the items under the period label, and
+the share of the total in the tooltip: \code{FALSE} (default), \code{TRUE}
+or a label such as \code{"World"}. Only meaningful for values that add up.}
+
+\item{rankFlash}{Logical. Flash a small arrow next to a bar that overtakes
+another one. Defaults to \code{TRUE}.}
+
+\item{agg}{How rows with the same item and period are combined:
+\code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
+\code{"last"}.}
+
+\item{cornerRadius}{The radius of the rounded bar ends, in pixels.
+Defaults to 3; use 0 for square bars.}
+
+\item{controls}{Logical. Show the player (play / pause, timeline, speed,
+loop) and the ranking length buttons. Defaults to \code{TRUE}.}
+
+\item{autoplay}{Logical. Start playing when the chart scrolls into view.
+Defaults to \code{TRUE}.}
+
+\item{loop}{Logical. Start again at the end. Defaults to \code{FALSE}; it
+can be toggled from the player.}
+
+\item{startFrame}{The period shown first: \code{"first"} (default),
+\code{"last"} or a period number.}
+
+\item{timeFormat}{Optional. A d3-time-format string for date periods, e.g.
+\code{"\%b \%Y"}. Chosen from the spacing of the dates when \code{NULL}.}
+
+\item{subtitle}{Optional. A subtitle drawn under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\code{",.0f"}, \code{".1f"} or \code{".3~s"}.}
+
+\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+value, e.g. \code{"$"} or \code{" years"}.}
+
+\item{tooltip}{Logical. Show a tooltip on hover. Defaults to \code{TRUE}.}
+
+\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+"#333333".}
 }
 \value{
-An animated SVG bar chart race, wrapped in a div.
+An animated, interactive SVG bar chart race (an r2d3 htmlwidget).
 }
 \description{
-Create a bar chart race.
+Ranks items (countries, products, teams...) by a value and animates the
+ranking through time: the bars glide past each other when they overtake,
+new items slide up from below the cut and leaving ones sink and fade, the
+value labels count smoothly, the axis follows the leader and a big period
+label sits in the corner. A player at the bottom plays, pauses and scrubs
+the animation.
 }
+\details{
+The data is long: one row per item and period, with the item names in
+\code{y}, the values in \code{x} and the periods in \code{time} (numbers
+such as years, dates, or a factor or character column whose levels give
+the order). Gaps inside an item are interpolated; items missing before
+their first or after their last period enter and leave the race.
+}
+\section{Interactions}{
+
+\itemize{
+  \item The player at the bottom plays and pauses the race (also with the
+    space bar), the timeline can be dragged or clicked, the arrow keys step
+    one period, Home and End jump to the start and the end. The speed button
+    cycles from 0.5x to 4x, the loop button repeats the race.
+  \item Hover a bar to see its value, its rank, its change over the last
+    period and (with \code{total}) its share of the total. The tooltip keeps
+    updating while the race plays.
+  \item Click a bar to follow it: it stays highlighted, the others are
+    dimmed, and when it falls out of the top \code{topN} it is still shown
+    under the cut with its rank. Click it again, or press Escape, to stop
+    following. \code{highlight} follows items from the start.
+  \item With \code{group}, click a legend entry to hide or show a group (the
+    ranks are recomputed without it), double-click it to isolate it, hover
+    it to highlight its bars.
+  \item When there are more items than \code{topN}, the buttons at the top
+    right switch between the top \code{topN} and a longer ranking.
+  \item A small green arrow flashes next to a bar that overtakes another
+    (\code{rankFlash}).
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking a bar sets \code{input$id_clicked} to a list with the
+\code{item}, its \code{group}, \code{value}, \code{rank}, \code{period} and
+whether it is now \code{followed}; \code{input$id_frame} gives the period
+shown (\code{index} and \code{label}). The current time, the speed, the
+followed items, the hidden groups and the ranking length are kept when the
+chart is re-rendered.
+}
+
 \examples{
 library(gapminder)
 library(dplyr)
@@ -128,5 +286,33 @@ time = "year",
 ytitle = "Country",
 xtitle = "Life expectancy",
 title = "Bar chart race of countries life expectancy"
+)
+
+# Every country, the top 10 coloured by continent, following France
+bar_chart_race(
+  data = gapminder::gapminder,
+  x = "pop",
+  y = "country",
+  time = "year",
+  group = "continent",
+  highlight = "France",
+  total = "World",
+  title = "The most populous countries",
+  subtitle = "Population, 1952 to 2007"
+)
+
+# Monthly dates, names inside the bars
+set.seed(1)
+months <- seq(as.Date("2023-01-01"), by = "month", length.out = 12)
+sales <- data.frame(
+  brand = rep(c("Alpha", "Bravo", "Comet", "Delta", "Echo", "Fusion"), 12),
+  month = rep(months, each = 6),
+  units = round(runif(72, 20, 80))
+)
+sales$units <- ave(sales$units, sales$brand, FUN = cumsum)
+bar_chart_race(
+  sales, x = "units", y = "brand", time = "month",
+  namePosition = "inside", ease = "CubicInOut",
+  valueSuffix = " units", title = "Units sold, year to date"
 )
 }

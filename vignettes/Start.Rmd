@@ -115,10 +115,11 @@ Each function's help page lists its full set of options, for example `?line_char
 | Guide | Charts |
 |---|---|
 | [Time series and trends](https://feddelegrand7.github.io/ddplot/articles/time-series.html) | `line_chart()`, `area_chart()`, `stacked_area_chart()`, `area_band()`, `streamgraph()`, `calendar_heatmap()`, `anim_line_chart()` |
-| [Comparing categories](https://feddelegrand7.github.io/ddplot/articles/comparisons.html) | `bar_chart()`, `horz_bar_chart()`, `lollipop_chart()`, `horz_lollipop()`, `dumbbell_chart()`, `slope_chart()`, `bump_chart()`, `waterfall_chart()`, `radar_chart()`, `radial_bar_chart()`, `bar_chart_race()` |
+| [Comparing categories](https://feddelegrand7.github.io/ddplot/articles/comparisons.html) | `bar_chart()`, `horz_bar_chart()`, `lollipop_chart()`, `horz_lollipop()`, `dumbbell_chart()`, `slope_chart()`, `bump_chart()`, `waterfall_chart()`, `radar_chart()`, `radial_bar_chart()` |
 | [Distributions](https://feddelegrand7.github.io/ddplot/articles/distributions.html) | `histogram()`, `violin_plot()`, `beeswarm_plot()`, `ridgeline_plot()`, `animated_histogram()` |
 | [Relationships and flows](https://feddelegrand7.github.io/ddplot/articles/relationships.html) | `scatter_plot()`, `hexbin_plot()`, `chord_diagram()` |
 | [Part-to-whole and hierarchies](https://feddelegrand7.github.io/ddplot/articles/composition.html) | `pie_chart()`, `treemap_chart()`, `waffle_chart()`, `sunburst_chart()`, `mosaic_chart()`, `rose_chart()`, `parliament_chart()` |
+| [Race charts](https://feddelegrand7.github.io/ddplot/articles/races.html) | `bar_chart_race()`, `line_race()`, `bubble_race()`, `radial_bar_race()`, `treemap_race()`, `donut_race()` |
 | [KPIs and monitoring](https://feddelegrand7.github.io/ddplot/articles/kpis.html) | `gauge_chart()`, `bullet_chart()`, `liquid_chart()`, `pulse_grid()` |
 | [Playful indicators](https://feddelegrand7.github.io/ddplot/articles/playful.html) | `heart_fill()`, `glass_fill()`, `plant_growth()`, `flame()`, `flower()` |
 

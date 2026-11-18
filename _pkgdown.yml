@@ -47,6 +47,8 @@ navbar:
         href: articles/relationships.html
       - text: Part-to-whole and hierarchies
         href: articles/composition.html
+      - text: Race charts
+        href: articles/races.html
       - text: KPIs and monitoring
         href: articles/kpis.html
       - text: Playful indicators
@@ -72,6 +74,7 @@ articles:
   - articles/distributions
   - articles/relationships
   - articles/composition
+  - articles/races
   - articles/kpis
   - articles/playful
 
@@ -99,7 +102,6 @@ reference:
   - waterfall_chart
   - radar_chart
   - radial_bar_chart
-  - bar_chart_race
 - title: Distributions
   desc: How a numeric variable is spread, alone or across groups.
   contents:
@@ -124,6 +126,15 @@ reference:
   - mosaic_chart
   - rose_chart
   - parliament_chart
+- title: Race charts
+  desc: Animated charts that replay data through time, with a player to pause, scrub and step.
+  contents:
+  - bar_chart_race
+  - line_race
+  - bubble_race
+  - radial_bar_race
+  - treemap_race
+  - donut_race
 - title: KPIs and monitoring
   desc: One value against a target or thresholds, and hot-spot grids.
   contents:

@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://feddelegrand7.github.io/ddplot/404.html</loc></url>
+<url><loc>https://feddelegrand7.github.io/ddplot/CLAUDE.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/CODE_OF_CONDUCT.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/LICENSE.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/articles/Start.html</loc></url>
@@ -10,6 +11,7 @@
 <url><loc>https://feddelegrand7.github.io/ddplot/articles/index.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/articles/kpis.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/articles/playful.html</loc></url>
+<url><loc>https://feddelegrand7.github.io/ddplot/articles/races.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/articles/relationships.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/articles/time-series.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/authors.html</loc></url>
@@ -22,10 +24,12 @@
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/bar_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/bar_chart_race.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/beeswarm_plot.html</loc></url>
+<url><loc>https://feddelegrand7.github.io/ddplot/reference/bubble_race.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/bullet_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/bump_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/calendar_heatmap.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/chord_diagram.html</loc></url>
+<url><loc>https://feddelegrand7.github.io/ddplot/reference/donut_race.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/dumbbell_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/flame.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/flower.html</loc></url>
@@ -38,6 +42,7 @@
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/horz_lollipop.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/index.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/line_chart.html</loc></url>
+<url><loc>https://feddelegrand7.github.io/ddplot/reference/line_race.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/liquid_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/lollipop_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/mosaic_chart.html</loc></url>
@@ -47,6 +52,7 @@
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/pulse_grid.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/radar_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/radial_bar_chart.html</loc></url>
+<url><loc>https://feddelegrand7.github.io/ddplot/reference/radial_bar_race.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/ridgeline_plot.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/rose_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/scatter_plot.html</loc></url>
@@ -55,6 +61,7 @@
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/streamgraph.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/sunburst_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/treemap_chart.html</loc></url>
+<url><loc>https://feddelegrand7.github.io/ddplot/reference/treemap_race.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/violin_plot.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/waffle_chart.html</loc></url>
 <url><loc>https://feddelegrand7.github.io/ddplot/reference/waterfall_chart.html</loc></url>

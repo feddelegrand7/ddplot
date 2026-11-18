@@ -51,6 +51,7 @@
     <li><a class="dropdown-item" href="../articles/distributions.html">Distributions</a></li>
     <li><a class="dropdown-item" href="../articles/relationships.html">Relationships and flows</a></li>
     <li><a class="dropdown-item" href="../articles/composition.html">Part-to-whole and hierarchies</a></li>
+    <li><a class="dropdown-item" href="../articles/races.html">Race charts</a></li>
     <li><a class="dropdown-item" href="../articles/kpis.html">KPIs and monitoring</a></li>
     <li><a class="dropdown-item" href="../articles/playful.html">Playful indicators</a></li>
     <li><hr class="dropdown-divider"></li>
@@ -101,13 +102,13 @@ full list of arguments.</p>
 <div class="dd-gallery-tools">
 <input type="search" class="form-control dd-search" placeholder="Search charts, e.g. ranking, flows, KPI" aria-label="Search charts"><div class="dd-chips" role="group" aria-label="Filter by family">
 <button type="button" class="dd-chip active" data-filter="all">
-All <span>42</span>
+All <span>47</span>
 </button>
 <button type="button" class="dd-chip" data-filter="time-series">
 Time series <span>7</span>
 </button>
 <button type="button" class="dd-chip" data-filter="comparisons">
-Comparisons <span>11</span>
+Comparisons <span>10</span>
 </button>
 <button type="button" class="dd-chip" data-filter="distributions">
 Distributions <span>5</span>
@@ -117,6 +118,9 @@ Relationships <span>3</span>
 </button>
 <button type="button" class="dd-chip" data-filter="composition">
 Part-to-whole <span>7</span>
+</button>
+<button type="button" class="dd-chip" data-filter="races">
+Races <span>6</span>
 </button>
 <button type="button" class="dd-chip" data-filter="kpis">
 KPIs <span>4</span>
@@ -438,24 +442,6 @@ You show progress of a few items towards a goal.
 <a class="dd-card-ref" href="../reference/radial_bar_chart.html" title="Reference"><code>radial_bar_chart()</code></a>
 </div>
 </div>
-<div class="dd-card" data-category="comparisons" data-search="bar_chart_race bar chart race you animate a ranking through time for a presentation comparisons animated">
-<div class="dd-thumb">
-<img src="../gallery/bar_chart_race.png" alt="Bar chart race" loading="lazy">
-</div>
-<div class="dd-card-body">
-<div class="dd-card-meta">
-<span class="dd-card-cat">Comparisons</span><span class="dd-badge dd-badge-animated">animated</span>
-</div>
-<h3 data-toc-skip>
-<a class="stretched-link" href="comparisons.html#bar_chart_race">Bar
-chart race</a>
-</h3>
-<p>
-You animate a ranking through time for a presentation.
-</p>
-<a class="dd-card-ref" href="../reference/bar_chart_race.html" title="Reference"><code>bar_chart_race()</code></a>
-</div>
-</div>
 <div class="dd-card" data-category="distributions" data-search="histogram histogram you look at the distribution of a single numeric variable distributions interactive,shiny">
 <div class="dd-thumb">
 <img src="../gallery/histogram.png" alt="Histogram" loading="lazy">
@@ -723,6 +709,111 @@ chart</a>
 You show seats won by each party.
 </p>
 <a class="dd-card-ref" href="../reference/parliament_chart.html" title="Reference"><code>parliament_chart()</code></a>
+</div>
+</div>
+<div class="dd-card" data-category="races" data-search="bar_chart_race bar chart race you animate a ranking through time, with the bars overtaking each other races animated,interactive,shiny">
+<div class="dd-thumb">
+<img src="../gallery/bar_chart_race.png" alt="Bar chart race" loading="lazy">
+</div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Races</span><span class="dd-badge dd-badge-animated">animated</span><span class="dd-badge dd-badge-interactive">interactive</span><span class="dd-badge dd-badge-shiny">shiny</span>
+</div>
+<h3 data-toc-skip>
+<a class="stretched-link" href="races.html#bar_chart_race">Bar chart
+race</a>
+</h3>
+<p>
+You animate a ranking through time, with the bars overtaking each other.
+</p>
+<a class="dd-card-ref" href="../reference/bar_chart_race.html" title="Reference"><code>bar_chart_race()</code></a>
+</div>
+</div>
+<div class="dd-card" data-category="races" data-search="line_race line race you replay several series drawing themselves, by value or by rank races animated,interactive,shiny">
+<div class="dd-thumb">
+<img src="../gallery/line_race.png" alt="Line race" loading="lazy">
+</div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Races</span><span class="dd-badge dd-badge-animated">animated</span><span class="dd-badge dd-badge-interactive">interactive</span><span class="dd-badge dd-badge-shiny">shiny</span>
+</div>
+<h3 data-toc-skip>
+<a class="stretched-link" href="races.html#line_race">Line race</a>
+</h3>
+<p>
+You replay several series drawing themselves, by value or by rank.
+</p>
+<a class="dd-card-ref" href="../reference/line_race.html" title="Reference"><code>line_race()</code></a>
+</div>
+</div>
+<div class="dd-card" data-category="races" data-search="bubble_race bubble race you replay a scatter plot through time, gapminder style races animated,interactive,shiny">
+<div class="dd-thumb">
+<img src="../gallery/bubble_race.png" alt="Bubble race" loading="lazy">
+</div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Races</span><span class="dd-badge dd-badge-animated">animated</span><span class="dd-badge dd-badge-interactive">interactive</span><span class="dd-badge dd-badge-shiny">shiny</span>
+</div>
+<h3 data-toc-skip>
+<a class="stretched-link" href="races.html#bubble_race">Bubble race</a>
+</h3>
+<p>
+You replay a scatter plot through time, Gapminder style.
+</p>
+<a class="dd-card-ref" href="../reference/bubble_race.html" title="Reference"><code>bubble_race()</code></a>
+</div>
+</div>
+<div class="dd-card" data-category="races" data-search="radial_bar_race radial bar race you animate a ranking around a circle races animated,interactive,shiny">
+<div class="dd-thumb">
+<img src="../gallery/radial_bar_race.png" alt="Radial bar race" loading="lazy">
+</div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Races</span><span class="dd-badge dd-badge-animated">animated</span><span class="dd-badge dd-badge-interactive">interactive</span><span class="dd-badge dd-badge-shiny">shiny</span>
+</div>
+<h3 data-toc-skip>
+<a class="stretched-link" href="races.html#radial_bar_race">Radial bar
+race</a>
+</h3>
+<p>
+You animate a ranking around a circle.
+</p>
+<a class="dd-card-ref" href="../reference/radial_bar_race.html" title="Reference"><code>radial_bar_race()</code></a>
+</div>
+</div>
+<div class="dd-card" data-category="races" data-search="treemap_race treemap race you replay how a whole and its parts change through time races animated,interactive,shiny">
+<div class="dd-thumb">
+<img src="../gallery/treemap_race.png" alt="Treemap race" loading="lazy">
+</div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Races</span><span class="dd-badge dd-badge-animated">animated</span><span class="dd-badge dd-badge-interactive">interactive</span><span class="dd-badge dd-badge-shiny">shiny</span>
+</div>
+<h3 data-toc-skip>
+<a class="stretched-link" href="races.html#treemap_race">Treemap
+race</a>
+</h3>
+<p>
+You replay how a whole and its parts change through time.
+</p>
+<a class="dd-card-ref" href="../reference/treemap_race.html" title="Reference"><code>treemap_race()</code></a>
+</div>
+</div>
+<div class="dd-card" data-category="races" data-search="donut_race donut race you replay shares through time, with a live league table races animated,interactive,shiny">
+<div class="dd-thumb">
+<img src="../gallery/donut_race.png" alt="Donut race" loading="lazy">
+</div>
+<div class="dd-card-body">
+<div class="dd-card-meta">
+<span class="dd-card-cat">Races</span><span class="dd-badge dd-badge-animated">animated</span><span class="dd-badge dd-badge-interactive">interactive</span><span class="dd-badge dd-badge-shiny">shiny</span>
+</div>
+<h3 data-toc-skip>
+<a class="stretched-link" href="races.html#donut_race">Donut race</a>
+</h3>
+<p>
+You replay shares through time, with a live league table.
+</p>
+<a class="dd-card-ref" href="../reference/donut_race.html" title="Reference"><code>donut_race()</code></a>
 </div>
 </div>
 <div class="dd-card" data-category="kpis" data-search="gauge_chart gauge you show one value against warning and danger thresholds kpis na">

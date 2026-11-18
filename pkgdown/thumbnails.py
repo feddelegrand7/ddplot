@@ -29,12 +29,14 @@ GUIDES = {
                     "streamgraph", "calendar_heatmap", "anim_line_chart"],
     "comparisons": ["bar_chart", "horz_bar_chart", "lollipop_chart", "horz_lollipop",
                     "dumbbell_chart", "slope_chart", "bump_chart", "waterfall_chart",
-                    "radar_chart", "radial_bar_chart", "bar_chart_race"],
+                    "radar_chart", "radial_bar_chart"],
     "distributions": ["histogram", "violin_plot", "beeswarm_plot", "ridgeline_plot",
                       "animated_histogram"],
     "relationships": ["scatter_plot", "hexbin_plot", "chord_diagram"],
     "composition": ["pie_chart", "treemap_chart", "waffle_chart", "sunburst_chart",
                     "mosaic_chart", "rose_chart", "parliament_chart"],
+    "races": ["bar_chart_race", "line_race", "bubble_race", "radial_bar_race",
+              "treemap_race", "donut_race"],
     "kpis": ["gauge_chart", "bullet_chart", "liquid_chart", "pulse_grid"],
     "playful": ["heart_fill", "glass_fill", "plant_growth", "flame", "flower"],
 }
@@ -45,7 +47,8 @@ CLICK = {"anim_line_chart": 11000, "animated_histogram": 3500}
 INDEX = {"flame": 1, "scatter_plot": 2, "bar_chart": 3, "horz_bar_chart": 1, "lollipop_chart": 1, "area_chart": 1, "area_band": 1,
          "histogram": 1, "pie_chart": 1}
 # Charts that need longer to settle.
-WAIT = {"bar_chart_race": 9000, "liquid_chart": 3500, "beeswarm_plot": 3500}
+WAIT = {"bar_chart_race": 6000, "line_race": 6000, "bubble_race": 6000,
+        "radial_bar_race": 6000, "treemap_race": 6000, "donut_race": 6000, "liquid_chart": 3500, "beeswarm_plot": 3500}
 
 
 def serve(directory):
