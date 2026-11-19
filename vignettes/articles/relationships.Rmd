@@ -54,7 +54,7 @@ scatter_plot(
 
 ### Bubbles, colour scales and labels
 
-`sizeBy` maps a third variable to the point area. A numeric `group` gives a colour gradient. `label` names each point in the tooltip, and `showLabels` writes some of them on the chart (labels that would overlap are skipped). `tooltip` adds more columns to the tooltip, and `trend = "loess"` draws a smooth curve.
+`size_by` maps a third variable to the point area. A numeric `group` gives a colour gradient. `label` names each point in the tooltip, and `show_labels` writes some of them on the chart (labels that would overlap are skipped). `tooltip` adds more columns to the tooltip, and `trend = "loess"` draws a smooth curve.
 
 ```{r}
 cars <- mtcars
@@ -64,10 +64,10 @@ scatter_plot(
   data = cars,
   x = "hp",
   y = "mpg",
-  sizeBy = "disp",
+  size_by = "disp",
   group = "qsec",
   label = "model",
-  showLabels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa", "Cadillac Fleetwood"),
+  show_labels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa", "Cadillac Fleetwood"),
   tooltip = c("cyl", "gear"),
   trend = "loess",
   title = "Horsepower and fuel economy",
@@ -77,7 +77,7 @@ scatter_plot(
 
 ### Log scales and reference lines
 
-Skewed variables are easier to read on a log scale (`xScale`, `yScale`). `hlines` and `vlines` draw labelled reference lines.
+Skewed variables are easier to read on a log scale (`x_scale`, `y_scale`). `hlines` and `vlines` draw labelled reference lines.
 
 ```{r}
 states <- data.frame(
@@ -94,10 +94,10 @@ scatter_plot(
   y = "population",
   group = "region",
   label = "state",
-  showLabels = TRUE,
+  show_labels = TRUE,
   tooltip = "income",
-  xScale = "log",
-  yScale = "log",
+  x_scale = "log",
+  y_scale = "log",
   hlines = c("Median population" = median(states$population)),
   xtitle = "Area (square miles)",
   ytitle = "Population (thousands, 1975)",
@@ -123,7 +123,7 @@ hexbin_plot(
   data     = faithful,
   x        = "waiting",
   y        = "eruptions",
-  binWidth = 14,
+  bin_width = 14,
   xtitle   = "Waiting time to next eruption (min)",
   ytitle   = "Eruption duration (min)",
   title    = "Old Faithful eruptions"
@@ -140,9 +140,9 @@ hexbin_plot(
   data         = dsample,
   x            = "carat",
   y            = "price",
-  binWidth     = 8,
-  colorPalette = "Viridis",
-  colorScale   = "log",
+  bin_width     = 8,
+  color_palette = "Viridis",
+  color_scale   = "log",
   title        = "Diamond price by carat"
 )
 ```
@@ -168,7 +168,7 @@ chord_diagram(
   from        = "from",
   to          = "to",
   value       = "value",
-  valueFormat = ",.0f",
+  value_format = ",.0f",
   title       = "Migration flows between regions (illustrative data)"
 )
 ```
@@ -189,9 +189,9 @@ hair <- matrix(
 chord_diagram(
   data        = hair,
   colors      = c("#3b3b3b", "#f2c45a", "#8c5a3c", "#d0533a"),
-  ribbonColor = "gradient",
-  padAngle    = 0.05,
-  valueFormat = ",.0f",
+  ribbon_color = "gradient",
+  pad_angle    = 0.05,
+  value_format = ",.0f",
   title       = "Hair color flows"
 )
 ```

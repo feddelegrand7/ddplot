@@ -10,23 +10,23 @@ bar_chart(
   y = NULL,
   fill = NULL,
   sort = "none",
-  paddingWidth = 0.2,
+  padding_width = 0.2,
   xticks = NULL,
-  xFontSize = 11,
-  yFontSize = 11,
+  x_font_size = 11,
+  y_font_size = 11,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = 1,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   group = NULL,
@@ -34,19 +34,19 @@ bar_chart(
   agg = c("sum", "mean", "median", "min", "max", "count"),
   labels = TRUE,
   highlight = NULL,
-  refLines = NULL,
-  negativeFill = NULL,
-  cornerRadius = 3,
+  ref_lines = NULL,
+  negative_fill = NULL,
+  corner_radius = 3,
   legend = NULL,
   controls = TRUE,
   tooltip = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
   subtitle = NULL,
-  subtitleFontSize = 13,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  grid_col = "#e9e9e9"
 )
 }
 \arguments{
@@ -67,34 +67,34 @@ order of the data or of the factor levels), \code{"ascending"} or
 \code{"descending"}. With \code{group}, categories are sorted by their
 total.}
 
-\item{paddingWidth}{The space between bars, from 0 to 0.99. Defaults to
+\item{padding_width}{The space between bars, from 0 to 0.99. Defaults to
 0.2.}
 
 \item{xticks}{Not used; kept for compatibility.}
 
-\item{xFontSize}{The font size of the category labels. Defaults to 11.}
+\item{x_font_size}{The font size of the category labels. Defaults to 11.}
 
-\item{yFontSize}{The font size of the value axis labels. Defaults to 11.}
+\item{y_font_size}{The font size of the value axis labels. Defaults to 11.}
 
 \item{yticks}{Optional. The approximate number of value axis ticks.}
 
 \item{xtitle}{Optional. The title of the category axis.}
 
-\item{xtitleFontSize}{The font size of the category axis title. Defaults
+\item{xtitle_font_size}{The font size of the category axis title. Defaults
 to 13.}
 
 \item{ytitle}{Optional. The title of the value axis, drawn above it.
 Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the value axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the value axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{stroke}{Optional. The stroke colour of the bars.}
 
-\item{strokeWidth}{Optional. The stroke width of the bars.}
+\item{stroke_width}{Optional. The stroke width of the bars.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -103,7 +103,7 @@ Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 
 \item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1.}
 
-\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+\item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -128,13 +128,13 @@ are skipped). Defaults to \code{TRUE}.}
 \item{highlight}{Optional. A character vector of categories to emphasise;
 the other bars are drawn in grey (or faded, with \code{group}).}
 
-\item{refLines}{Optional. Numeric values drawn as dashed reference lines
+\item{ref_lines}{Optional. Numeric values drawn as dashed reference lines
 across the bars (e.g. a target or an average); names are used as labels.}
 
-\item{negativeFill}{Optional. The colour of negative bars (without
+\item{negative_fill}{Optional. The colour of negative bars (without
 \code{group}).}
 
-\item{cornerRadius}{The radius of the rounded bar ends, in pixels.
+\item{corner_radius}{The radius of the rounded bar ends, in pixels.
 Defaults to 3; use 0 for square bars.}
 
 \item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
@@ -148,17 +148,17 @@ shown when \code{group} is used.}
 \item{animate}{Logical. Animate the bars when the chart is first drawn.
 Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\item{value_format}{Optional. A d3-format string for the values, e.g.
 \code{",.0f"}, \code{".1f"} or \code{"~s"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+\item{value_prefix, value_suffix}{Optional. Text added before or after every
 value, e.g. \code{"$"} or \code{" km"}.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\item{grid_col}{The colour of the grid lines. Defaults to "#e9e9e9"; use
 \code{NA} to hide them.}
 }
 \value{
@@ -205,7 +205,7 @@ mpg \%>\% group_by(manufacturer) \%>\%
     ytitle = "Average city miles per gallon",
     title = "City fuel economy by manufacturer",
     highlight = c("honda", "volkswagen"),
-    valueFormat = ".1f"
+    value_format = ".1f"
   )
 
 # Count rows, without aggregating first
@@ -229,8 +229,8 @@ sales <- data.frame(
 )
 bar_chart(
   sales, x = "quarter", y = "revenue", group = "region",
-  position = "stacked", refLines = c(Target = 300),
-  valuePrefix = "$", valueSuffix = "k",
+  position = "stacked", ref_lines = c(Target = 300),
+  value_prefix = "$", value_suffix = "k",
   title = "Revenue by quarter"
 )
 

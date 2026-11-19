@@ -11,28 +11,28 @@ rose_chart(
   group = NULL,
   colors = NULL,
   sort = c("none", "desc", "asc"),
-  innerRadius = 0,
-  startAngle = 0,
-  padAngle = 0,
-  cornerRadius = 0,
+  inner_radius = 0,
+  start_angle = 0,
+  pad_angle = 0,
+  corner_radius = 0,
   opacity = 0.9,
-  strokeCol = "white",
-  strokeWidth = 1,
-  gridLines = 4,
-  gridCol = "#e0e0e0",
-  gridFontSize = 10,
-  showLabels = TRUE,
-  labelFontSize = 11,
-  valueFormat = ",.0f",
+  stroke_col = "white",
+  stroke_width = 1,
+  grid_lines = 4,
+  grid_col = "#e0e0e0",
+  grid_font_size = 10,
+  show_labels = TRUE,
+  label_font_size = 11,
+  value_format = ",.0f",
   hover = TRUE,
   animate = TRUE,
   legend = TRUE,
-  legendFontSize = 11,
+  legend_font_size = 11,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -60,42 +60,42 @@ needed). A single color paints every wedge alike. Defaults to
 \item{sort}{How to order the wedges: \code{"none"} (data or factor
 order, the default), \code{"desc"} or \code{"asc"} by category total.}
 
-\item{innerRadius}{Size of an empty hole in the middle, as a fraction of
+\item{inner_radius}{Size of an empty hole in the middle, as a fraction of
 the outer radius (between 0 and 0.9). Defaults to \code{0}.}
 
-\item{startAngle}{Angle, in degrees clockwise from 12 o'clock, at which
+\item{start_angle}{Angle, in degrees clockwise from 12 o'clock, at which
 the first wedge starts. Defaults to \code{0}.}
 
-\item{padAngle}{Gap between adjacent wedges, in radians. Defaults to
+\item{pad_angle}{Gap between adjacent wedges, in radians. Defaults to
 \code{0}.}
 
-\item{cornerRadius}{Corner rounding of the wedges, in pixels. Defaults to
+\item{corner_radius}{Corner rounding of the wedges, in pixels. Defaults to
 \code{0}.}
 
 \item{opacity}{Fill opacity of the wedges (0 to 1). Defaults to
 \code{0.9}.}
 
-\item{strokeCol}{Color of the wedge outlines. Defaults to \code{"white"}.}
+\item{stroke_col}{Color of the wedge outlines. Defaults to \code{"white"}.}
 
-\item{strokeWidth}{Width of the wedge outlines in pixels. Defaults to
+\item{stroke_width}{Width of the wedge outlines in pixels. Defaults to
 \code{1}.}
 
-\item{gridLines}{Approximate number of radial grid circles (value rings).
+\item{grid_lines}{Approximate number of radial grid circles (value rings).
 Use \code{0} to hide them. Defaults to \code{4}.}
 
-\item{gridCol}{Color of the grid circles and spokes. Defaults to
+\item{grid_col}{Color of the grid circles and spokes. Defaults to
 \code{"#e0e0e0"}.}
 
-\item{gridFontSize}{Font size of the grid value labels. Defaults to
+\item{grid_font_size}{Font size of the grid value labels. Defaults to
 \code{10}.}
 
-\item{showLabels}{Whether to display the category labels around the
+\item{show_labels}{Whether to display the category labels around the
 chart. Defaults to \code{TRUE}.}
 
-\item{labelFontSize}{Font size of the category labels. Defaults to
+\item{label_font_size}{Font size of the category labels. Defaults to
 \code{11}.}
 
-\item{valueFormat}{A d3-format specifier used to display values in the
+\item{value_format}{A d3-format specifier used to display values in the
 tooltip (e.g. \code{",.0f"}, \code{".1f"}, \code{"$,.2s"}). Defaults to
 \code{",.0f"}.}
 
@@ -108,18 +108,18 @@ Defaults to \code{TRUE}.}
 \item{legend}{Whether to display a legend of the groups (only used when
 \code{group} is supplied). Defaults to \code{TRUE}.}
 
-\item{legendFontSize}{Font size of the legend text. Defaults to \code{11}.}
+\item{legend_font_size}{Font size of the legend text. Defaults to \code{11}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of the title, labels and grid value labels. Defaults
+\item{axis_col}{Color of the title, labels and grid value labels. Defaults
 to \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -181,7 +181,7 @@ rose_chart(
   category = "state",
   value    = "murder",
   sort     = "desc",
-  valueFormat = ".1f",
+  value_format = ".1f",
   title    = "Murder arrests per 100,000 residents (1973)"
 )
 
@@ -191,9 +191,9 @@ rose_chart(
   category     = "gear",
   value        = "Freq",
   group        = "cyl",
-  innerRadius  = 0.25,
-  padAngle     = 0.03,
-  cornerRadius = 4,
+  inner_radius  = 0.25,
+  pad_angle     = 0.03,
+  corner_radius = 4,
   title        = "Cars by number of gears and cylinders"
 )
 }

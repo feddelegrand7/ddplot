@@ -19,7 +19,7 @@
 #' @param x The time variable: a \code{Date}, a \code{POSIXct} date-time, a
 #'   "yyyy-mm-dd" character column or a number. Not needed when \code{data}
 #'   is an \code{mts} object.
-#' @param colorCategory Optional. The name of a D3 categorical colour scheme
+#' @param color_category Optional. The name of a D3 categorical colour scheme
 #'   (for example "Tableau10", "Set2" or "Accent", see
 #'   <https://github.com/d3/d3-scale-chromatic#categorical>), used when
 #'   \code{colors} is not given. Defaults to the ddplot palette.
@@ -29,14 +29,14 @@
 #' @param stroke Optional. The colour of the line drawn on top of every
 #'   layer, for example "white" to separate the layers. Defaults to the
 #'   colour of each layer.
-#' @param strokeWidth The width of the line on top of every layer. Defaults
+#' @param stroke_width The width of the line on top of every layer. Defaults
 #'   to 1.
 #' @param opacity The opacity of the layers (from 0 to 1). Defaults to 0.85.
 #' @param ytitle Optional. The title of the y-axis, shown above the axis.
 #' @param bgcol The background color of the SVG. Defaults to "white".
-#' @param axisCol The color of the axis text, ticks and titles. Defaults to
+#' @param axis_col The color of the axis text, ticks and titles. Defaults to
 #'   "#333333".
-#' @param legendBoxSize,legendTextSize Not used; kept for compatibility.
+#' @param legend_box_size,legend_text_size Not used; kept for compatibility.
 #' @param y Optional. The value columns (wide data), or the single value
 #'   column of long data with \code{group}. When \code{NULL}, every numeric
 #'   column other than \code{x} is stacked.
@@ -91,24 +91,24 @@
 stacked_area_chart <- function(
   data,
   x = NULL,
-  colorCategory = NULL,
+  color_category = NULL,
   curve = "curveLinear",
   stroke = NULL,
-  strokeWidth = 1,
+  stroke_width = 1,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = 0.85,
-  axisCol = "#333333",
-  legendBoxSize = NULL,
-  legendTextSize = NULL,
+  axis_col = "#333333",
+  legend_box_size = NULL,
+  legend_text_size = NULL,
   width = NULL,
   height = NULL,
   y = NULL,
@@ -120,33 +120,33 @@ stacked_area_chart <- function(
   bands = NULL,
   hlines = NULL,
   legend = NULL,
-  endLabels = NULL,
+  end_labels = NULL,
   tooltip = TRUE,
   navigator = TRUE,
-  rangeButtons = TRUE,
+  range_buttons = TRUE,
   zoom = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
-  dateFormat = NULL,
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
+  date_format = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
+  grid_col = "#e9e9e9"
 ) {
 
   position <- match.arg(position)
   if (!is.numeric(opacity) || length(opacity) != 1 || opacity < 0 || opacity > 1) {
     stop("'opacity' must be a single number between 0 and 1")
   }
-  if (is.null(strokeWidth)) strokeWidth <- 1
-  if (!is.numeric(strokeWidth) || length(strokeWidth) != 1 || strokeWidth < 0) {
-    stop("'strokeWidth' must be a single number, 0 or more")
+  if (is.null(stroke_width)) stroke_width <- 1
+  if (!is.numeric(stroke_width) || length(stroke_width) != 1 || stroke_width < 0) {
+    stop("'stroke_width' must be a single number, 0 or more")
   }
-  if (!is.null(colorCategory) && (!is.character(colorCategory) || length(colorCategory) != 1)) {
-    stop("'colorCategory' must be the name of a D3 colour scheme, such as \"Tableau10\"")
+  if (!is.null(color_category) && (!is.character(color_category) || length(color_category) != 1)) {
+    stop("'color_category' must be the name of a D3 colour scheme, such as \"Tableau10\"")
   }
 
   if (!stats::is.ts(data)) {
@@ -163,28 +163,28 @@ stacked_area_chart <- function(
 
   line_widget(
     data = data, x = x, y = y, group = group, colors = colors,
-    strokeWidth = if (strokeWidth == 0) 1 else strokeWidth, curve = curve,
-    area = FALSE, yZero = TRUE,
+    stroke_width = if (stroke_width == 0) 1 else stroke_width, curve = curve,
+    area = FALSE, y_zero = TRUE,
     events = events, bands = bands, hlines = hlines,
     legend = if (is.null(legend)) TRUE else legend,
-    endLabels = endLabels, tooltip = tooltip, navigator = navigator,
-    rangeButtons = rangeButtons, zoom = zoom, animate = animate,
-    valueFormat = valueFormat, valuePrefix = valuePrefix, valueSuffix = valueSuffix,
-    dateFormat = dateFormat, xticks = xticks, yticks = yticks,
-    xtitle = xtitle, xtitleFontSize = xtitleFontSize,
-    ytitle = ytitle, ytitleFontSize = ytitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    xFontSize = xFontSize, yFontSize = yFontSize, font = font,
-    bgcol = bgcol, gridCol = gridCol, axisCol = axisCol,
+    end_labels = end_labels, tooltip = tooltip, navigator = navigator,
+    range_buttons = range_buttons, zoom = zoom, animate = animate,
+    value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix,
+    date_format = date_format, xticks = xticks, yticks = yticks,
+    xtitle = xtitle, xtitle_font_size = xtitle_font_size,
+    ytitle = ytitle, ytitle_font_size = ytitle_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    x_font_size = x_font_size, y_font_size = y_font_size, font = font,
+    bgcol = bgcol, grid_col = grid_col, axis_col = axis_col,
     width = width, height = height,
     extra = list(
       kind = "stack",
       stack = position,
       stackControls = isTRUE(controls),
       areaOpacity = opacity,
-      lineColor = if (strokeWidth == 0) "none" else stroke,
-      colorScheme = if (is.null(colors)) colorCategory else NULL
+      lineColor = if (stroke_width == 0) "none" else stroke,
+      colorScheme = if (is.null(colors)) color_category else NULL
     )
   )
 }

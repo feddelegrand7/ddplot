@@ -22,24 +22,24 @@
 #' @param data The data frame containing the variables to consider.
 #' @param x The name of the numeric column mapped to the horizontal axis.
 #' @param y The name of the numeric column mapped to the vertical axis.
-#' @param binWidth The radius of each hexagon in pixels (distance from its
+#' @param bin_width The radius of each hexagon in pixels (distance from its
 #' center to a corner). Larger values give fewer, coarser bins. Defaults to
 #' \code{12}.
-#' @param sizeByCount Logical. When \code{TRUE}, the area of each hexagon is
+#' @param size_by_count Logical. When \code{TRUE}, the area of each hexagon is
 #' also proportional to its count (the largest bin fills its cell), in
 #' addition to the fill color. Defaults to \code{FALSE}.
-#' @param colorPalette The name of a D3 sequential color interpolator,
+#' @param color_palette The name of a D3 sequential color interpolator,
 #' without the \code{"interpolate"} prefix (e.g. \code{"Viridis"},
 #' \code{"Blues"}, \code{"YlGnBu"}, \code{"Magma"}, \code{"Turbo"}).
 #' Defaults to \code{"YlGnBu"}.
-#' @param reverseColors Logical. Whether to reverse the direction of the
+#' @param reverse_colors Logical. Whether to reverse the direction of the
 #' color palette. Defaults to \code{FALSE}.
-#' @param colorScale How counts are mapped to colors: \code{"linear"}
+#' @param color_scale How counts are mapped to colors: \code{"linear"}
 #' (default), \code{"sqrt"} or \code{"log"}. Use \code{"sqrt"} or
 #' \code{"log"} when a few very dense bins wash out the rest.
 #' @param legend Logical. Whether to draw the continuous color legend.
 #' Defaults to \code{TRUE}.
-#' @param legendTitle Title of the color legend. Defaults to \code{"Count"}.
+#' @param legend_title Title of the color legend. Defaults to \code{"Count"}.
 #' @param tooltip Logical. Whether to show a tooltip when a hexagon is
 #' hovered. Defaults to \code{TRUE}.
 #' @param hover Logical. When \code{TRUE} (default), hovering a hexagon
@@ -48,25 +48,25 @@
 #' place with a short staggered entry animation on first render.
 #' @param opacity Fill opacity of the hexagons (0 to 1). Defaults to \code{1}.
 #' @param stroke Stroke color of the hexagons. Defaults to \code{"white"}.
-#' @param strokeWidth Stroke width of the hexagons in pixels. Defaults to
+#' @param stroke_width Stroke width of the hexagons in pixels. Defaults to
 #' \code{0.5}.
 #' @param grid Logical. Whether to draw light gridlines behind the hexagons.
 #' Defaults to \code{TRUE}.
-#' @param gridCol Color of the gridlines. Defaults to \code{"#e5e5e5"}.
+#' @param grid_col Color of the gridlines. Defaults to \code{"#e5e5e5"}.
 #' @param xtitle Optional. Title of the x-axis. Defaults to the value of
 #' \code{x}.
 #' @param ytitle Optional. Title of the y-axis. Defaults to the value of
 #' \code{y}.
-#' @param xtitleFontSize Font size of the x-axis title. Defaults to \code{13}.
-#' @param ytitleFontSize Font size of the y-axis title. Defaults to \code{13}.
+#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
+#' @param ytitle_font_size Font size of the y-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
-#' @param xFontSize Font size of the x-axis tick labels. Defaults to \code{11}.
-#' @param yFontSize Font size of the y-axis tick labels. Defaults to \code{11}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
+#' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
+#' @param y_font_size Font size of the y-axis tick labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of axis lines, ticks, labels and titles. Defaults to
+#' @param axis_col Color of axis lines, ticks, labels and titles. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -80,7 +80,7 @@
 #'   data     = faithful,
 #'   x        = "waiting",
 #'   y        = "eruptions",
-#'   binWidth = 14,
+#'   bin_width = 14,
 #'   xtitle   = "Waiting time to next eruption (min)",
 #'   ytitle   = "Eruption duration (min)",
 #'   title    = "Old Faithful eruptions"
@@ -95,9 +95,9 @@
 #'   data         = dsample,
 #'   x            = "carat",
 #'   y            = "price",
-#'   binWidth     = 8,
-#'   colorPalette = "Viridis",
-#'   colorScale   = "log",
+#'   bin_width     = 8,
+#'   color_palette = "Viridis",
+#'   color_scale   = "log",
 #'   xtitle       = "Carat",
 #'   ytitle       = "Price (USD)",
 #'   title        = "Diamond price by carat"
@@ -114,42 +114,42 @@
 #'   data         = pts,
 #'   x            = "a",
 #'   y            = "b",
-#'   binWidth     = 13,
-#'   sizeByCount  = TRUE,
-#'   colorPalette = "Magma",
-#'   reverseColors = TRUE,
+#'   bin_width     = 13,
+#'   size_by_count  = TRUE,
+#'   color_palette = "Magma",
+#'   reverse_colors = TRUE,
 #'   title        = "Two bivariate normal clusters"
 #' )
 hexbin_plot <- function(
     data,
     x,
     y,
-    binWidth       = 12,
-    sizeByCount    = FALSE,
-    colorPalette   = "YlGnBu",
-    reverseColors  = FALSE,
-    colorScale     = c("linear", "sqrt", "log"),
+    bin_width       = 12,
+    size_by_count    = FALSE,
+    color_palette   = "YlGnBu",
+    reverse_colors  = FALSE,
+    color_scale     = c("linear", "sqrt", "log"),
     legend         = TRUE,
-    legendTitle    = "Count",
+    legend_title    = "Count",
     tooltip        = TRUE,
     hover          = TRUE,
     animate        = TRUE,
     opacity        = 1,
     stroke         = "white",
-    strokeWidth    = 0.5,
+    stroke_width    = 0.5,
     grid           = TRUE,
-    gridCol        = "#e5e5e5",
+    grid_col        = "#e5e5e5",
     xtitle         = NULL,
     ytitle         = NULL,
-    xtitleFontSize = 13,
-    ytitleFontSize = 13,
+    xtitle_font_size = 13,
+    ytitle_font_size = 13,
     title          = NULL,
-    titleFontSize  = 16,
-    xFontSize      = 11,
-    yFontSize      = 11,
+    title_font_size  = 16,
+    x_font_size      = 11,
+    y_font_size      = 11,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol          = "white",
-    axisCol        = "black",
+    axis_col        = "black",
     width          = NULL,
     height         = NULL
 ) {
@@ -172,13 +172,13 @@ hexbin_plot <- function(
   if (!is.numeric(data[[x]])) stop("Column '", x, "' must be numeric.")
   if (!is.numeric(data[[y]])) stop("Column '", y, "' must be numeric.")
 
-  if (!is.numeric(binWidth) || length(binWidth) != 1 ||
-      !is.finite(binWidth) || binWidth <= 0) {
-    stop("'binWidth' must be a single positive number (hexagon radius in pixels).")
+  if (!is.numeric(bin_width) || length(bin_width) != 1 ||
+      !is.finite(bin_width) || bin_width <= 0) {
+    stop("'bin_width' must be a single positive number (hexagon radius in pixels).")
   }
 
-  if (!is.character(colorPalette) || length(colorPalette) != 1) {
-    stop("'colorPalette' must be a single D3 interpolator name, e.g. \"Viridis\" or \"Blues\".")
+  if (!is.character(color_palette) || length(color_palette) != 1) {
+    stop("'color_palette' must be a single D3 interpolator name, e.g. \"Viridis\" or \"Blues\".")
   }
 
   if (!is.numeric(opacity) || length(opacity) != 1 ||
@@ -186,7 +186,7 @@ hexbin_plot <- function(
     stop("'opacity' must be a single number between 0 and 1.")
   }
 
-  colorScale <- match.arg(colorScale)
+  color_scale <- match.arg(color_scale)
 
   if (grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
@@ -214,32 +214,32 @@ hexbin_plot <- function(
     options = list(
       xName          = x,
       yName          = y,
-      binWidth       = binWidth,
-      sizeByCount    = sizeByCount,
-      colorPalette   = colorPalette,
-      reverseColors  = reverseColors,
-      colorScale     = colorScale,
+      binWidth       = bin_width,
+      sizeByCount    = size_by_count,
+      colorPalette   = color_palette,
+      reverseColors  = reverse_colors,
+      colorScale     = color_scale,
       legend         = legend,
-      legendTitle    = legendTitle,
+      legendTitle    = legend_title,
       tooltip        = tooltip,
       hover          = hover,
       animate        = animate,
       opacity        = opacity,
       stroke         = stroke,
-      strokeWidth    = strokeWidth,
+      strokeWidth    = stroke_width,
       grid           = grid,
-      gridCol        = gridCol,
+      gridCol        = grid_col,
       xtitle         = xtitle,
       ytitle         = ytitle,
-      xtitleFontSize = xtitleFontSize,
-      ytitleFontSize = ytitleFontSize,
+      xtitleFontSize = xtitle_font_size,
+      ytitleFontSize = ytitle_font_size,
       title          = title,
-      titleFontSize  = titleFontSize,
-      xFontSize      = xFontSize,
-      yFontSize      = yFontSize,
+      titleFontSize  = title_font_size,
+      xFontSize      = x_font_size,
+      yFontSize      = y_font_size,
       font           = font,
       bgcol          = bgcol,
-      axisCol        = axisCol
+      axisCol        = axis_col
     ),
     width  = width,
     height = height

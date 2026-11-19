@@ -9,27 +9,27 @@ sunburst_chart(
   levels,
   value = NULL,
   colors = NULL,
-  valueFormat = ",.0f",
-  innerRadius = 0.22,
-  cornerRadius = 0,
-  padAngle = 0,
-  strokeCol = "white",
-  strokeWidth = 1,
-  showLabels = TRUE,
-  labelRotate = c("radial", "tangential"),
-  labelFontSize = 11,
-  labelCol = NULL,
-  rootLabel = "Total",
-  centerFontSize = 13,
+  value_format = ",.0f",
+  inner_radius = 0.22,
+  corner_radius = 0,
+  pad_angle = 0,
+  stroke_col = "white",
+  stroke_width = 1,
+  show_labels = TRUE,
+  label_rotate = c("radial", "tangential"),
+  label_font_size = 11,
+  label_col = NULL,
+  root_label = "Total",
+  center_font_size = 13,
   zoom = TRUE,
   hover = TRUE,
   animate = TRUE,
   duration = 750,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  textCol = "black",
+  text_col = "black",
   width = NULL,
   height = NULL
 )
@@ -53,44 +53,44 @@ each row counts as 1 (sector sizes are row counts).}
 their branch color. Defaults to \code{NULL}, which uses a built-in
 10-color palette.}
 
-\item{valueFormat}{A d3-format specifier used to display values in the
+\item{value_format}{A d3-format specifier used to display values in the
 centre and the tooltip (e.g. \code{",.0f"}, \code{"$,.2s"},
 \code{".3~s"}). Defaults to \code{",.0f"}.}
 
-\item{innerRadius}{Radius of the centre circle as a fraction of the
+\item{inner_radius}{Radius of the centre circle as a fraction of the
 chart's radius, between \code{0} and \code{0.9}. The centre shows the
 current root and its value, and is clicked to zoom out. Defaults to
 \code{0.22}.}
 
-\item{cornerRadius}{Corner radius of the sectors in pixels. Defaults to
+\item{corner_radius}{Corner radius of the sectors in pixels. Defaults to
 \code{0}.}
 
-\item{padAngle}{Angular padding between sectors in radians (e.g.
+\item{pad_angle}{Angular padding between sectors in radians (e.g.
 \code{0.005}). Defaults to \code{0}.}
 
-\item{strokeCol}{Color of the sector borders. Defaults to \code{"white"}.}
+\item{stroke_col}{Color of the sector borders. Defaults to \code{"white"}.}
 
-\item{strokeWidth}{Width of the sector borders in pixels. Defaults to
+\item{stroke_width}{Width of the sector borders in pixels. Defaults to
 \code{1}.}
 
-\item{showLabels}{Whether to display the sector labels. Labels are
+\item{show_labels}{Whether to display the sector labels. Labels are
 truncated or hidden automatically when a sector is too small. Defaults to
 \code{TRUE}.}
 
-\item{labelRotate}{Orientation of the sector labels: \code{"radial"}
+\item{label_rotate}{Orientation of the sector labels: \code{"radial"}
 (default, along the radius) or \code{"tangential"} (along the arc).}
 
-\item{labelFontSize}{Font size of the sector labels. Defaults to
+\item{label_font_size}{Font size of the sector labels. Defaults to
 \code{11}.}
 
-\item{labelCol}{Optional. Color of the sector labels. Defaults to
+\item{label_col}{Optional. Color of the sector labels. Defaults to
 \code{NULL}, which picks white or near-black automatically for contrast
 with each sector's fill.}
 
-\item{rootLabel}{Label shown in the centre (and used as the root name)
+\item{root_label}{Label shown in the centre (and used as the root name)
 when the chart is not zoomed. Defaults to \code{"Total"}.}
 
-\item{centerFontSize}{Maximum font size of the centre label. Defaults to
+\item{center_font_size}{Maximum font size of the centre label. Defaults to
 \code{13}.}
 
 \item{zoom}{Whether clicking a sector zooms into it and clicking the centre
@@ -107,14 +107,14 @@ to \code{750}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{textCol}{Color of the title and the centre label. Defaults to
+\item{text_col}{Color of the title and the centre label. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -146,8 +146,8 @@ sunburst_chart(
   data        = pop_2007,
   levels      = c("continent", "country"),
   value       = "pop",
-  valueFormat = ".3~s",
-  rootLabel   = "World",
+  value_format = ".3~s",
+  root_label   = "World",
   title       = "World population in 2007"
 )
 
@@ -167,10 +167,10 @@ sunburst_chart(
   data        = staff,
   levels      = c("division", "team", "role"),
   value       = "people",
-  rootLabel   = "Company",
-  labelRotate = "tangential",
-  padAngle    = 0.006,
-  cornerRadius = 3,
+  root_label   = "Company",
+  label_rotate = "tangential",
+  pad_angle    = 0.006,
+  corner_radius = 3,
   title       = "Headcount by division, team and role"
 )
 
@@ -180,7 +180,7 @@ library(ggplot2) # for the mpg dataset
 sunburst_chart(
   data      = mpg,
   levels    = c("class", "manufacturer"),
-  rootLabel = "Cars",
+  root_label = "Cars",
   title     = "Number of car models by class and manufacturer"
 )
 }

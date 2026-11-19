@@ -11,19 +11,19 @@ anim_line_chart(
   curve = "curveLinear",
   duration = 5000,
   stroke = "crimson",
-  strokeWidth = 1.5,
+  stroke_width = 1.5,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitle_font_size = 16,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitle_font_size = 16,
   title = NULL,
-  titleFontSize = 22,
+  title_font_size = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#CAD0D3",
   opacity = 1,
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -43,7 +43,7 @@ Defaults to 'curveLinear'.}
 
 \item{stroke}{The color of the line. Defaults to 'crimson'.}
 
-\item{strokeWidth}{The width of the line. Defaults to 1.5.}
+\item{stroke_width}{The width of the line. Defaults to 1.5.}
 
 \item{xticks}{Optional. the number of x-axis ticks to consider.}
 
@@ -51,15 +51,15 @@ Defaults to 'curveLinear'.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 16.}
 
 \item{ytitle}{Optional. The title of the y-axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 16.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{title_font_size}{The font size of the plot title. Defaults to 22.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -68,7 +68,7 @@ Defaults to 'curveLinear'.}
 
 \item{opacity}{The color opacity of the bars (from 0 to 1). Defaults to 1.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
+\item{axis_col}{the color of the x and y axis. It includes the ticks, the labels and titles.
 Defaults to 'black'.}
 
 \item{width}{Optional. The width of the SVG output.}

@@ -8,32 +8,32 @@ hexbin_plot(
   data,
   x,
   y,
-  binWidth = 12,
-  sizeByCount = FALSE,
-  colorPalette = "YlGnBu",
-  reverseColors = FALSE,
-  colorScale = c("linear", "sqrt", "log"),
+  bin_width = 12,
+  size_by_count = FALSE,
+  color_palette = "YlGnBu",
+  reverse_colors = FALSE,
+  color_scale = c("linear", "sqrt", "log"),
   legend = TRUE,
-  legendTitle = "Count",
+  legend_title = "Count",
   tooltip = TRUE,
   hover = TRUE,
   animate = TRUE,
   opacity = 1,
   stroke = "white",
-  strokeWidth = 0.5,
+  stroke_width = 0.5,
   grid = TRUE,
-  gridCol = "#e5e5e5",
+  grid_col = "#e5e5e5",
   xtitle = NULL,
   ytitle = NULL,
-  xtitleFontSize = 13,
-  ytitleFontSize = 13,
+  xtitle_font_size = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 16,
-  xFontSize = 11,
-  yFontSize = 11,
+  title_font_size = 16,
+  x_font_size = 11,
+  y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -45,30 +45,30 @@ hexbin_plot(
 
 \item{y}{The name of the numeric column mapped to the vertical axis.}
 
-\item{binWidth}{The radius of each hexagon in pixels (distance from its
+\item{bin_width}{The radius of each hexagon in pixels (distance from its
 center to a corner). Larger values give fewer, coarser bins. Defaults to
 \code{12}.}
 
-\item{sizeByCount}{Logical. When \code{TRUE}, the area of each hexagon is
+\item{size_by_count}{Logical. When \code{TRUE}, the area of each hexagon is
 also proportional to its count (the largest bin fills its cell), in
 addition to the fill color. Defaults to \code{FALSE}.}
 
-\item{colorPalette}{The name of a D3 sequential color interpolator,
+\item{color_palette}{The name of a D3 sequential color interpolator,
 without the \code{"interpolate"} prefix (e.g. \code{"Viridis"},
 \code{"Blues"}, \code{"YlGnBu"}, \code{"Magma"}, \code{"Turbo"}).
 Defaults to \code{"YlGnBu"}.}
 
-\item{reverseColors}{Logical. Whether to reverse the direction of the
+\item{reverse_colors}{Logical. Whether to reverse the direction of the
 color palette. Defaults to \code{FALSE}.}
 
-\item{colorScale}{How counts are mapped to colors: \code{"linear"}
+\item{color_scale}{How counts are mapped to colors: \code{"linear"}
 (default), \code{"sqrt"} or \code{"log"}. Use \code{"sqrt"} or
 \code{"log"} when a few very dense bins wash out the rest.}
 
 \item{legend}{Logical. Whether to draw the continuous color legend.
 Defaults to \code{TRUE}.}
 
-\item{legendTitle}{Title of the color legend. Defaults to \code{"Count"}.}
+\item{legend_title}{Title of the color legend. Defaults to \code{"Count"}.}
 
 \item{tooltip}{Logical. Whether to show a tooltip when a hexagon is
 hovered. Defaults to \code{TRUE}.}
@@ -83,13 +83,13 @@ place with a short staggered entry animation on first render.}
 
 \item{stroke}{Stroke color of the hexagons. Defaults to \code{"white"}.}
 
-\item{strokeWidth}{Stroke width of the hexagons in pixels. Defaults to
+\item{stroke_width}{Stroke width of the hexagons in pixels. Defaults to
 \code{0.5}.}
 
 \item{grid}{Logical. Whether to draw light gridlines behind the hexagons.
 Defaults to \code{TRUE}.}
 
-\item{gridCol}{Color of the gridlines. Defaults to \code{"#e5e5e5"}.}
+\item{grid_col}{Color of the gridlines. Defaults to \code{"#e5e5e5"}.}
 
 \item{xtitle}{Optional. Title of the x-axis. Defaults to the value of
 \code{x}.}
@@ -97,24 +97,24 @@ Defaults to \code{TRUE}.}
 \item{ytitle}{Optional. Title of the y-axis. Defaults to the value of
 \code{y}.}
 
-\item{xtitleFontSize}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
-\item{ytitleFontSize}{Font size of the y-axis title. Defaults to \code{13}.}
+\item{ytitle_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
-\item{xFontSize}{Font size of the x-axis tick labels. Defaults to \code{11}.}
+\item{x_font_size}{Font size of the x-axis tick labels. Defaults to \code{11}.}
 
-\item{yFontSize}{Font size of the y-axis tick labels. Defaults to \code{11}.}
+\item{y_font_size}{Font size of the y-axis tick labels. Defaults to \code{11}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of axis lines, ticks, labels and titles. Defaults to
+\item{axis_col}{Color of axis lines, ticks, labels and titles. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -149,7 +149,7 @@ hexbin_plot(
   data     = faithful,
   x        = "waiting",
   y        = "eruptions",
-  binWidth = 14,
+  bin_width = 14,
   xtitle   = "Waiting time to next eruption (min)",
   ytitle   = "Eruption duration (min)",
   title    = "Old Faithful eruptions"
@@ -164,9 +164,9 @@ hexbin_plot(
   data         = dsample,
   x            = "carat",
   y            = "price",
-  binWidth     = 8,
-  colorPalette = "Viridis",
-  colorScale   = "log",
+  bin_width     = 8,
+  color_palette = "Viridis",
+  color_scale   = "log",
   xtitle       = "Carat",
   ytitle       = "Price (USD)",
   title        = "Diamond price by carat"
@@ -183,10 +183,10 @@ hexbin_plot(
   data         = pts,
   x            = "a",
   y            = "b",
-  binWidth     = 13,
-  sizeByCount  = TRUE,
-  colorPalette = "Magma",
-  reverseColors = TRUE,
+  bin_width     = 13,
+  size_by_count  = TRUE,
+  color_palette = "Magma",
+  reverse_colors = TRUE,
   title        = "Two bivariate normal clusters"
 )
 }

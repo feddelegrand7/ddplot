@@ -12,22 +12,22 @@ beeswarm_plot(
   hover = TRUE,
   animate = TRUE,
   stat = c("none", "mean", "median"),
-  statColor = "#d62728",
+  stat_color = "#d62728",
   col = "steelblue",
-  colorPalette = "Tableau10",
+  color_palette = "Tableau10",
   radius = 4,
   opacity = 0.75,
   stroke = "white",
-  strokeWidth = 0.5,
+  stroke_width = 0.5,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   title = NULL,
-  titleFontSize = 16,
-  xFontSize = 11,
-  yFontSize = 11,
+  title_font_size = 16,
+  x_font_size = 11,
+  y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -55,13 +55,13 @@ place with a short staggered entry animation on first render.}
 \code{"mean"} or \code{"median"} of the values. Defaults to
 \code{"none"} (no line).}
 
-\item{statColor}{Color of the mean/median reference line and its label.
+\item{stat_color}{Color of the mean/median reference line and its label.
 Defaults to \code{"#d62728"}.}
 
 \item{col}{Fill color of the points when no \code{group} is supplied.
 Defaults to \code{"steelblue"}.}
 
-\item{colorPalette}{D3 categorical color scheme used when \code{group}
+\item{color_palette}{D3 categorical color scheme used when \code{group}
 is supplied (e.g. \code{"Tableau10"}, \code{"Category10"}, \code{"Set2"}).
 Defaults to \code{"Tableau10"}.}
 
@@ -71,26 +71,26 @@ Defaults to \code{"Tableau10"}.}
 
 \item{stroke}{Stroke color of the points. Defaults to \code{"white"}.}
 
-\item{strokeWidth}{Stroke width in pixels. Defaults to \code{0.5}.}
+\item{stroke_width}{Stroke width in pixels. Defaults to \code{0.5}.}
 
 \item{xtitle}{Optional. Title of the x-axis.}
 
-\item{xtitleFontSize}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
-\item{xFontSize}{Font size of the x-axis tick labels. Defaults to \code{11}.}
+\item{x_font_size}{Font size of the x-axis tick labels. Defaults to \code{11}.}
 
-\item{yFontSize}{Font size of the y-axis group labels. Defaults to \code{11}.}
+\item{y_font_size}{Font size of the y-axis group labels. Defaults to \code{11}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of axis lines, ticks, and labels. Defaults to
+\item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -145,7 +145,7 @@ beeswarm_plot(
   data         = iris,
   x            = "Sepal.Length",
   group        = "Species",
-  colorPalette = "Set2",
+  color_palette = "Set2",
   radius       = 5,
   xtitle       = "Sepal length (cm)",
   title        = "Sepal length by species"

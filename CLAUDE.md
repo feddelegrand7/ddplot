@@ -41,4 +41,4 @@ pkgdown::build_site()
 
 ## Naming conventions
 
-Function names use `snake_case` (e.g. `bar_chart`, `pulse_grid`). The corresponding JS files use lowercase with no separators (e.g. `barchart.js`, `pulsegrid.js`). Some older R source files still use camelCase filenames — new files should use snake_case for the R file.
+Function names and argument names use `snake_case` (e.g. `bar_chart`, `pulse_grid`, `title_font_size`). The keys of the `options` list passed to the JS stay camelCase (`options = list(titleFontSize = title_font_size)`). The corresponding JS files use lowercase with no separators (e.g. `barchart.js`, `pulsegrid.js`). Some older R source files still use camelCase filenames — new files should use snake_case for the R file.

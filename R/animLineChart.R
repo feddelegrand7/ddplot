@@ -10,20 +10,20 @@
 #' Defaults to 'curveLinear'.
 #' @param duration The duration in Milliseconds of the animation. Defaults to 5000.
 #' @param stroke The color of the line. Defaults to 'crimson'.
-#' @param strokeWidth The width of the line. Defaults to 1.5.
+#' @param stroke_width The width of the line. Defaults to 1.5.
 #' @param xticks Optional. the number of x-axis ticks to consider.
 #' @param yticks Optional. The number of y-axis ticks to consider.
 #' @param xtitle Optional. The title of the x-axis.
-#' @param xtitleFontSize The font size of the x-axis title. Defaults to 16.
+#' @param xtitle_font_size The font size of the x-axis title. Defaults to 16.
 #' @param ytitle Optional. The title of the y-axis.
-#' @param ytitleFontSize The font size of the y-axis title. Defaults to 16.
+#' @param ytitle_font_size The font size of the y-axis title. Defaults to 16.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 22.
+#' @param title_font_size The font size of the plot title. Defaults to 22.
 #' @param font The font family to consider for the titles. Defaults to
 #' "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "#CAD0D3" HEX color.
 #' @param opacity The color opacity of the bars (from 0 to 1). Defaults to 1.
-#' @param axisCol the color of the x and y axis. It includes the ticks, the labels and titles.
+#' @param axis_col the color of the x and y axis. It includes the ticks, the labels and titles.
 #' Defaults to 'black'.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -51,19 +51,19 @@ anim_line_chart <- function(
     curve = "curveLinear",
     duration = 5000,
   stroke = "crimson",
-  strokeWidth = 1.5,
+  stroke_width = 1.5,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitle_font_size = 16,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitle_font_size = 16,
   title = NULL,
-  titleFontSize = 22,
+  title_font_size = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#CAD0D3",
   opacity = 1,
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 ) {
@@ -92,15 +92,15 @@ anim_line_chart <- function(
       title = title,
       font = font,
       stroke = stroke,
-      strokeWidth = strokeWidth,
+      strokeWidth = stroke_width,
       width = width,
       height = height,
-      xtitleFontSize = xtitleFontSize,
-      ytitleFontSize = ytitleFontSize,
-      titleFontSize = titleFontSize,
+      xtitleFontSize = xtitle_font_size,
+      ytitleFontSize = ytitle_font_size,
+      titleFontSize = title_font_size,
       bgcol = bgcol,
       opacity = opacity,
-      axisCol = axisCol
+      axisCol = axis_col
     )
   )
 }

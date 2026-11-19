@@ -6,20 +6,20 @@
 \usage{
 flame(
   intensity = 50,
-  flameGradientColors = c("#fffbe6", "#ffc233", "#e8452c"),
-  flameOutline = NULL,
+  flame_gradient_colors = c("#fffbe6", "#ffc233", "#e8452c"),
+  flame_outline = NULL,
   bgcol = "white",
   width = NULL,
   height = NULL,
-  maxIntensity = 100,
+  max_intensity = 100,
   base = c("none", "candle", "logs"),
-  showValue = FALSE,
-  valueSuffix = "",
-  titleText = NULL,
-  titleColor = NULL,
-  titleFontSize = 14,
-  labelColor = NULL,
-  labelFontSize = NULL,
+  show_value = FALSE,
+  value_suffix = "",
+  title_text = NULL,
+  title_color = NULL,
+  title_font_size = 14,
+  label_color = NULL,
+  label_font_size = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   flicker = TRUE,
   sparks = TRUE,
@@ -29,14 +29,14 @@ flame(
 }
 \arguments{
 \item{intensity}{A non-negative number: the intensity of the flame. The
-height of the flame grows linearly with it up to \code{maxIntensity},
+height of the flame grows linearly with it up to \code{max_intensity},
 where the flame reaches the top of the chart. Defaults to 50.}
 
-\item{flameGradientColors}{A length-3 character vector of colours, from
+\item{flame_gradient_colors}{A length-3 character vector of colours, from
 the core of the flame outwards. Defaults to
 \code{c("#fffbe6", "#ffc233", "#e8452c")}.}
 
-\item{flameOutline}{Optional. The colour of an outline drawn around the
+\item{flame_outline}{Optional. The colour of an outline drawn around the
 flame. By default the flame has no outline.}
 
 \item{bgcol}{The background colour. Defaults to "white". The flame glows
@@ -46,29 +46,29 @@ more on dark backgrounds.}
 
 \item{height}{Optional. The height of the chart.}
 
-\item{maxIntensity}{The intensity at which the flame reaches its full
+\item{max_intensity}{The intensity at which the flame reaches its full
 height. Defaults to 100. Higher intensities do not make the flame taller.}
 
 \item{base}{What the flame burns on: "none" (the default), "candle" or
 "logs".}
 
-\item{showValue}{Logical. Write the intensity below the flame. Defaults to
+\item{show_value}{Logical. Write the intensity below the flame. Defaults to
 FALSE.}
 
-\item{valueSuffix}{A text added after the value, such as " errors".
+\item{value_suffix}{A text added after the value, such as " errors".
 Defaults to "".}
 
-\item{titleText}{Optional. A caption below the flame.}
+\item{title_text}{Optional. A caption below the flame.}
 
-\item{titleColor}{Optional. The colour of the caption. Defaults to
-\code{labelColor}.}
+\item{title_color}{Optional. The colour of the caption. Defaults to
+\code{label_color}.}
 
-\item{titleFontSize}{The font size of the caption. Defaults to 14.}
+\item{title_font_size}{The font size of the caption. Defaults to 14.}
 
-\item{labelColor}{Optional. The colour of the value. Defaults to dark grey
+\item{label_color}{Optional. The colour of the value. Defaults to dark grey
 on light backgrounds and light grey on dark ones.}
 
-\item{labelFontSize}{Optional. The font size of the value. By default it
+\item{label_font_size}{Optional. The font size of the value. By default it
 depends on the size of the chart.}
 
 \item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
@@ -94,7 +94,7 @@ it throws. The flame is made of three layers (outer, middle and core) with a
 warm glow behind it, and can burn on its own, on a candle or on logs. Useful
 to show the state of a critical number, such as the number of errors in a
 process. When the chart scrolls into view, the flame ignites and grows to
-its height while the value (with \code{showValue = TRUE}) counts up.
+its height while the value (with \code{show_value = TRUE}) counts up.
 }
 \section{Interactions}{
 
@@ -122,15 +122,15 @@ height to the new one.
 flame(intensity = 20)
 flame(
   intensity = 80,
-  flameGradientColors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
+  flame_gradient_colors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
   bgcol = "#111111",
   base = "logs"
 )
 flame(
   intensity = 35,
   base = "candle",
-  showValue = TRUE,
-  valueSuffix = " errors",
-  titleText = "Failed jobs today"
+  show_value = TRUE,
+  value_suffix = " errors",
+  title_text = "Failed jobs today"
 )
 }

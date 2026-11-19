@@ -34,27 +34,27 @@
 #' @param stat Character. Draws a reference line per swarm at the
 #' \code{"mean"} or \code{"median"} of the values. Defaults to
 #' \code{"none"} (no line).
-#' @param statColor Color of the mean/median reference line and its label.
+#' @param stat_color Color of the mean/median reference line and its label.
 #' Defaults to \code{"#d62728"}.
 #' @param col Fill color of the points when no \code{group} is supplied.
 #' Defaults to \code{"steelblue"}.
-#' @param colorPalette D3 categorical color scheme used when \code{group}
+#' @param color_palette D3 categorical color scheme used when \code{group}
 #' is supplied (e.g. \code{"Tableau10"}, \code{"Category10"}, \code{"Set2"}).
 #' Defaults to \code{"Tableau10"}.
 #' @param radius Radius of each point in pixels. Defaults to \code{4}.
 #' @param opacity Fill opacity of the points (0 to 1). Defaults to \code{0.75}.
 #' @param stroke Stroke color of the points. Defaults to \code{"white"}.
-#' @param strokeWidth Stroke width in pixels. Defaults to \code{0.5}.
+#' @param stroke_width Stroke width in pixels. Defaults to \code{0.5}.
 #' @param xtitle Optional. Title of the x-axis.
-#' @param xtitleFontSize Font size of the x-axis title. Defaults to \code{13}.
+#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
-#' @param xFontSize Font size of the x-axis tick labels. Defaults to \code{11}.
-#' @param yFontSize Font size of the y-axis group labels. Defaults to \code{11}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
+#' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
+#' @param y_font_size Font size of the y-axis group labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of axis lines, ticks, and labels. Defaults to
+#' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -88,7 +88,7 @@
 #'   data         = iris,
 #'   x            = "Sepal.Length",
 #'   group        = "Species",
-#'   colorPalette = "Set2",
+#'   color_palette = "Set2",
 #'   radius       = 5,
 #'   xtitle       = "Sepal length (cm)",
 #'   title        = "Sepal length by species"
@@ -112,22 +112,22 @@ beeswarm_plot <- function(
     hover        = TRUE,
     animate      = TRUE,
     stat         = c("none", "mean", "median"),
-    statColor    = "#d62728",
+    stat_color    = "#d62728",
     col          = "steelblue",
-    colorPalette = "Tableau10",
+    color_palette = "Tableau10",
     radius       = 4,
     opacity      = 0.75,
     stroke       = "white",
-    strokeWidth  = 0.5,
+    stroke_width  = 0.5,
     xtitle       = NULL,
-    xtitleFontSize = 13,
+    xtitle_font_size = 13,
     title        = NULL,
-    titleFontSize  = 16,
-    xFontSize    = 11,
-    yFontSize    = 11,
+    title_font_size  = 16,
+    x_font_size    = 11,
+    y_font_size    = 11,
     font         = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol        = "white",
-    axisCol      = "black",
+    axis_col      = "black",
     width        = NULL,
     height       = NULL
 ) {
@@ -168,22 +168,22 @@ beeswarm_plot <- function(
       hover        = hover,
       animate      = animate,
       stat         = stat,
-      statColor    = statColor,
+      statColor    = stat_color,
       col          = col,
-      colorPalette = colorPalette,
+      colorPalette = color_palette,
       radius       = radius,
       opacity      = opacity,
       stroke       = stroke,
-      strokeWidth  = strokeWidth,
+      strokeWidth  = stroke_width,
       xtitle       = xtitle,
-      xtitleFontSize = xtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
       title        = title,
-      titleFontSize  = titleFontSize,
-      xFontSize    = xFontSize,
-      yFontSize    = yFontSize,
+      titleFontSize  = title_font_size,
+      xFontSize    = x_font_size,
+      yFontSize    = y_font_size,
       font         = font,
       bgcol        = bgcol,
-      axisCol      = axisCol
+      axisCol      = axis_col
     ),
     width  = width,
     height = height

@@ -25,22 +25,22 @@
 #'
 #' @param fill_level A number between 0 and 1: how full the heart is (values
 #'   outside are clamped). Defaults to 0.65.
-#' @param heartSize Optional. The width of the heart in pixels. By default
+#' @param heart_size Optional. The width of the heart in pixels. By default
 #'   the heart fills the space available (up to 360 pixels).
-#' @param strokeColor The colour of the outline. Defaults to "#b5172b".
-#' @param strokeWidth The width of the outline. Defaults to 3.
-#' @param fillColor The colour of the liquid. Defaults to "#e63950". The
+#' @param stroke_color The colour of the outline. Defaults to "#b5172b".
+#' @param stroke_width The width of the outline. Defaults to 3.
+#' @param fill_color The colour of the liquid. Defaults to "#e63950". The
 #'   empty part of the heart is a pale shade of it.
-#' @param renderFillLabel Logical. Show the percentage inside the heart.
+#' @param render_fill_label Logical. Show the percentage inside the heart.
 #'   Defaults to TRUE.
-#' @param labelColor The colour of the percentage (where the liquid does not
+#' @param label_color The colour of the percentage (where the liquid does not
 #'   cover it) and of the target label. Defaults to "#333".
-#' @param labelFontSize Optional. The font size of the percentage, a number
+#' @param label_font_size Optional. The font size of the percentage, a number
 #'   or a CSS size such as "16px". By default it grows with the heart.
-#' @param titleText Optional. A caption below the heart. Defaults to
+#' @param title_text Optional. A caption below the heart. Defaults to
 #'   "Fill level"; use \code{NULL} to hide it.
-#' @param titleColor The colour of the caption. Defaults to "#333".
-#' @param titleFontSize The font size of the caption, a number or a CSS size
+#' @param title_color The colour of the caption. Defaults to "#333".
+#' @param title_font_size The font size of the caption, a number or a CSS size
 #'   such as "14px". Defaults to 14.
 #' @param font The font family. Defaults to "Verdana, Geneva, Tahoma,
 #'   sans-serif".
@@ -64,25 +64,25 @@
 #' heart_fill(
 #'   fill_level = 0.4,
 #'   target = 0.75,
-#'   fillColor = "#ff8ab7",
-#'   strokeColor = "#c2185b",
-#'   titleText = "Daily activity goal"
+#'   fill_color = "#ff8ab7",
+#'   stroke_color = "#c2185b",
+#'   title_text = "Daily activity goal"
 #' )
-#' heart_fill(0.55, draggable = TRUE, titleText = "Drag me")
+#' heart_fill(0.55, draggable = TRUE, title_text = "Drag me")
 #'
 #' @export
 heart_fill <- function(
     fill_level = 0.65,
-    heartSize = NULL,
-    strokeColor = "#b5172b",
-    strokeWidth = 3,
-    fillColor = "#e63950",
-    renderFillLabel = TRUE,
-    labelColor = "#333",
-    labelFontSize = NULL,
-    titleText = "Fill level",
-    titleColor = "#333",
-    titleFontSize = 14,
+    heart_size = NULL,
+    stroke_color = "#b5172b",
+    stroke_width = 3,
+    fill_color = "#e63950",
+    render_fill_label = TRUE,
+    label_color = "#333",
+    label_font_size = NULL,
+    title_text = "Fill level",
+    title_color = "#333",
+    title_font_size = 14,
     font = "Verdana, Geneva, Tahoma, sans-serif",
     target = NULL,
     waves = TRUE,
@@ -108,16 +108,16 @@ heart_fill <- function(
     height = height,
     options = list(
       level = fill_level,
-      heartSize = play_size(heartSize, "heartSize"),
-      strokeColor = strokeColor,
-      strokeWidth = strokeWidth,
-      fillColor = fillColor,
-      renderFillLabel = play_flag(renderFillLabel, "renderFillLabel"),
-      labelColor = labelColor,
-      labelFontSize = play_size(labelFontSize, "labelFontSize"),
-      titleText = titleText,
-      titleColor = titleColor,
-      titleFontSize = play_size(titleFontSize, "titleFontSize"),
+      heartSize = play_size(heart_size, "heart_size"),
+      strokeColor = stroke_color,
+      strokeWidth = stroke_width,
+      fillColor = fill_color,
+      renderFillLabel = play_flag(render_fill_label, "render_fill_label"),
+      labelColor = label_color,
+      labelFontSize = play_size(label_font_size, "label_font_size"),
+      titleText = title_text,
+      titleColor = title_color,
+      titleFontSize = play_size(title_font_size, "title_font_size"),
       font = font,
       target = target,
       waves = play_flag(waves, "waves"),

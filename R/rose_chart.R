@@ -36,30 +36,30 @@
 #' \code{NULL}, which uses an AntV-style ten-color palette.
 #' @param sort How to order the wedges: \code{"none"} (data or factor
 #' order, the default), \code{"desc"} or \code{"asc"} by category total.
-#' @param innerRadius Size of an empty hole in the middle, as a fraction of
+#' @param inner_radius Size of an empty hole in the middle, as a fraction of
 #' the outer radius (between 0 and 0.9). Defaults to \code{0}.
-#' @param startAngle Angle, in degrees clockwise from 12 o'clock, at which
+#' @param start_angle Angle, in degrees clockwise from 12 o'clock, at which
 #' the first wedge starts. Defaults to \code{0}.
-#' @param padAngle Gap between adjacent wedges, in radians. Defaults to
+#' @param pad_angle Gap between adjacent wedges, in radians. Defaults to
 #' \code{0}.
-#' @param cornerRadius Corner rounding of the wedges, in pixels. Defaults to
+#' @param corner_radius Corner rounding of the wedges, in pixels. Defaults to
 #' \code{0}.
 #' @param opacity Fill opacity of the wedges (0 to 1). Defaults to
 #' \code{0.9}.
-#' @param strokeCol Color of the wedge outlines. Defaults to \code{"white"}.
-#' @param strokeWidth Width of the wedge outlines in pixels. Defaults to
+#' @param stroke_col Color of the wedge outlines. Defaults to \code{"white"}.
+#' @param stroke_width Width of the wedge outlines in pixels. Defaults to
 #' \code{1}.
-#' @param gridLines Approximate number of radial grid circles (value rings).
+#' @param grid_lines Approximate number of radial grid circles (value rings).
 #' Use \code{0} to hide them. Defaults to \code{4}.
-#' @param gridCol Color of the grid circles and spokes. Defaults to
+#' @param grid_col Color of the grid circles and spokes. Defaults to
 #' \code{"#e0e0e0"}.
-#' @param gridFontSize Font size of the grid value labels. Defaults to
+#' @param grid_font_size Font size of the grid value labels. Defaults to
 #' \code{10}.
-#' @param showLabels Whether to display the category labels around the
+#' @param show_labels Whether to display the category labels around the
 #' chart. Defaults to \code{TRUE}.
-#' @param labelFontSize Font size of the category labels. Defaults to
+#' @param label_font_size Font size of the category labels. Defaults to
 #' \code{11}.
-#' @param valueFormat A d3-format specifier used to display values in the
+#' @param value_format A d3-format specifier used to display values in the
 #' tooltip (e.g. \code{",.0f"}, \code{".1f"}, \code{"$,.2s"}). Defaults to
 #' \code{",.0f"}.
 #' @param hover Whether hovering a wedge pops it outward and shows a
@@ -68,13 +68,13 @@
 #' Defaults to \code{TRUE}.
 #' @param legend Whether to display a legend of the groups (only used when
 #' \code{group} is supplied). Defaults to \code{TRUE}.
-#' @param legendFontSize Font size of the legend text. Defaults to \code{11}.
+#' @param legend_font_size Font size of the legend text. Defaults to \code{11}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of the title, labels and grid value labels. Defaults
+#' @param axis_col Color of the title, labels and grid value labels. Defaults
 #' to \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -114,7 +114,7 @@
 #'   category = "state",
 #'   value    = "murder",
 #'   sort     = "desc",
-#'   valueFormat = ".1f",
+#'   value_format = ".1f",
 #'   title    = "Murder arrests per 100,000 residents (1973)"
 #' )
 #'
@@ -124,9 +124,9 @@
 #'   category     = "gear",
 #'   value        = "Freq",
 #'   group        = "cyl",
-#'   innerRadius  = 0.25,
-#'   padAngle     = 0.03,
-#'   cornerRadius = 4,
+#'   inner_radius  = 0.25,
+#'   pad_angle     = 0.03,
+#'   corner_radius = 4,
 #'   title        = "Cars by number of gears and cylinders"
 #' )
 rose_chart <- function(
@@ -136,28 +136,28 @@ rose_chart <- function(
     group          = NULL,
     colors         = NULL,
     sort           = c("none", "desc", "asc"),
-    innerRadius    = 0,
-    startAngle     = 0,
-    padAngle       = 0,
-    cornerRadius   = 0,
+    inner_radius    = 0,
+    start_angle     = 0,
+    pad_angle       = 0,
+    corner_radius   = 0,
     opacity        = 0.9,
-    strokeCol      = "white",
-    strokeWidth    = 1,
-    gridLines      = 4,
-    gridCol        = "#e0e0e0",
-    gridFontSize   = 10,
-    showLabels     = TRUE,
-    labelFontSize  = 11,
-    valueFormat    = ",.0f",
+    stroke_col      = "white",
+    stroke_width    = 1,
+    grid_lines      = 4,
+    grid_col        = "#e0e0e0",
+    grid_font_size   = 10,
+    show_labels     = TRUE,
+    label_font_size  = 11,
+    value_format    = ",.0f",
     hover          = TRUE,
     animate        = TRUE,
     legend         = TRUE,
-    legendFontSize = 11,
+    legend_font_size = 11,
     title          = NULL,
-    titleFontSize  = 16,
+    title_font_size  = 16,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol          = "white",
-    axisCol        = "black",
+    axis_col        = "black",
     width          = NULL,
     height         = NULL
 ) {
@@ -181,25 +181,25 @@ rose_chart <- function(
 
   num1 <- function(x) is.numeric(x) && length(x) == 1 && !is.na(x)
 
-  if (!num1(innerRadius) || innerRadius < 0 || innerRadius > 0.9) {
-    stop("'innerRadius' must be a single number between 0 and 0.9.")
+  if (!num1(inner_radius) || inner_radius < 0 || inner_radius > 0.9) {
+    stop("'inner_radius' must be a single number between 0 and 0.9.")
   }
-  if (!num1(startAngle)) stop("'startAngle' must be a single number (degrees).")
-  if (!num1(padAngle) || padAngle < 0) {
-    stop("'padAngle' must be a single non-negative number (radians).")
+  if (!num1(start_angle)) stop("'start_angle' must be a single number (degrees).")
+  if (!num1(pad_angle) || pad_angle < 0) {
+    stop("'pad_angle' must be a single non-negative number (radians).")
   }
-  if (!num1(cornerRadius) || cornerRadius < 0) {
-    stop("'cornerRadius' must be a single non-negative number.")
+  if (!num1(corner_radius) || corner_radius < 0) {
+    stop("'corner_radius' must be a single non-negative number.")
   }
   if (!num1(opacity) || opacity < 0 || opacity > 1) {
     stop("'opacity' must be a single number between 0 and 1.")
   }
-  if (!num1(gridLines) || gridLines < 0) {
-    stop("'gridLines' must be a single non-negative number.")
+  if (!num1(grid_lines) || grid_lines < 0) {
+    stop("'grid_lines' must be a single non-negative number.")
   }
 
-  if (!is.character(valueFormat) || length(valueFormat) != 1) {
-    stop("'valueFormat' must be a single d3-format string, e.g. ',.0f'.")
+  if (!is.character(value_format) || length(value_format) != 1) {
+    stop("'value_format' must be a single d3-format string, e.g. ',.0f'.")
   }
 
   if (!is.null(colors) && !is.character(colors)) {
@@ -223,28 +223,28 @@ rose_chart <- function(
       groupLevels    = if (is.null(group)) NULL else levels_of(data[[group]]),
       colors         = if (is.null(colors)) NULL else as.list(colors),
       sort           = sort,
-      innerRadius    = innerRadius,
-      startAngle     = startAngle,
-      padAngle       = padAngle,
-      cornerRadius   = cornerRadius,
+      innerRadius    = inner_radius,
+      startAngle     = start_angle,
+      padAngle       = pad_angle,
+      cornerRadius   = corner_radius,
       opacity        = opacity,
-      strokeCol      = strokeCol,
-      strokeWidth    = strokeWidth,
-      gridLines      = gridLines,
-      gridCol        = gridCol,
-      gridFontSize   = gridFontSize,
-      showLabels     = showLabels,
-      labelFontSize  = labelFontSize,
-      valueFormat    = valueFormat,
+      strokeCol      = stroke_col,
+      strokeWidth    = stroke_width,
+      gridLines      = grid_lines,
+      gridCol        = grid_col,
+      gridFontSize   = grid_font_size,
+      showLabels     = show_labels,
+      labelFontSize  = label_font_size,
+      valueFormat    = value_format,
       hover          = hover,
       animate        = animate,
       legend         = legend,
-      legendFontSize = legendFontSize,
+      legendFontSize = legend_font_size,
       title          = title,
-      titleFontSize  = titleFontSize,
+      titleFontSize  = title_font_size,
       font           = font,
       bgcol          = bgcol,
-      axisCol        = axisCol
+      axisCol        = axis_col
     ),
     width  = width,
     height = height

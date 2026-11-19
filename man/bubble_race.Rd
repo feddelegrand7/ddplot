@@ -12,41 +12,41 @@ bubble_race(
   time,
   size = NULL,
   group = NULL,
-  xScale = c("linear", "log"),
-  yScale = c("linear", "log"),
-  sizeRange = c(3, 40),
+  x_scale = c("linear", "log"),
+  y_scale = c("linear", "log"),
+  size_range = c(3, 40),
   fill = NULL,
-  colorCategory = NULL,
+  color_category = NULL,
   opacity = 0.85,
   highlight = NULL,
   trails = FALSE,
   labels = 5,
   legend = NULL,
-  sizeLegend = TRUE,
+  size_legend = TRUE,
   buttons = TRUE,
   xtitle = NULL,
   ytitle = NULL,
-  sizeTitle = NULL,
+  size_title = NULL,
   agg = c("mean", "sum", "max", "min", "last"),
-  fillGaps = TRUE,
-  frameDur = 1000,
+  fill_gaps = TRUE,
+  frame_dur = 1000,
   ease = "Linear",
   autoplay = TRUE,
   loop = FALSE,
   controls = TRUE,
-  startFrame = "first",
-  timeFormat = NULL,
+  start_frame = "first",
+  time_format = NULL,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   subtitle = NULL,
-  subtitleFontSize = 13,
+  subtitle_font_size = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "#333333",
-  gridCol = "#ebebeb",
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
+  axis_col = "#333333",
+  grid_col = "#ebebeb",
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
   tooltip = TRUE,
   width = NULL,
   height = NULL
@@ -69,16 +69,16 @@ the factor levels).}
 
 \item{size}{Optional. The name of a numeric, non-negative column giving the
 size of the bubbles (their area is proportional to it). Without it, every
-bubble has the same radius (7 pixels, or \code{sizeRange[1]} if larger).}
+bubble has the same radius (7 pixels, or \code{size_range[1]} if larger).}
 
 \item{group}{Optional. The name of a column grouping the items (e.g. a
 continent). It sets the colours and adds a clickable legend.}
 
-\item{xScale, yScale}{The scales of the axes: \code{"linear"} (default) or
+\item{x_scale, y_scale}{The scales of the axes: \code{"linear"} (default) or
 \code{"log"}. On a log scale, values that are not positive are dropped
 (with a warning). Both can be switched from the chart.}
 
-\item{sizeRange}{A numeric vector of length 2: the smallest and the largest
+\item{size_range}{A numeric vector of length 2: the smallest and the largest
 bubble radius in pixels (the largest is reduced on small charts).
 Defaults to \code{c(3, 40)}.}
 
@@ -88,7 +88,7 @@ colour per group (a named vector maps colours to groups). Without
 (recycled; a named vector maps colours to items). Defaults to a built-in
 palette.}
 
-\item{colorCategory}{Optional. The name of a D3 categorical colour scheme
+\item{color_category}{Optional. The name of a D3 categorical colour scheme
 used instead of the built-in palette, e.g. \code{"Tableau10"},
 \code{"Set2"} or \code{"Dark2"}. Ignored when \code{fill} is given.}
 
@@ -109,7 +109,7 @@ bubbles are followed, only they are labelled. Defaults to 5.}
 \item{legend}{Logical. Show the group legend. When \code{NULL} (default),
 it is shown when \code{group} is used.}
 
-\item{sizeLegend}{Logical. Show a legend of reference circles for
+\item{size_legend}{Logical. Show a legend of reference circles for
 \code{size}, drawn in the emptiest corner of the plot. Defaults to
 \code{TRUE}.}
 
@@ -119,18 +119,18 @@ trails, clear). Defaults to \code{TRUE}.}
 \item{xtitle, ytitle}{Optional. The titles of the axes. They default to the
 names of \code{x} and \code{y}; use \code{""} to hide them.}
 
-\item{sizeTitle}{Optional. The title of the size legend and the name of
+\item{size_title}{Optional. The title of the size legend and the name of
 the size in the tooltip. Defaults to the name of \code{size}.}
 
 \item{agg}{How rows with the same item and period are combined:
 \code{"mean"} (default), \code{"sum"}, \code{"max"}, \code{"min"} or
 \code{"last"}.}
 
-\item{fillGaps}{Logical. Interpolate the values of an item between the
+\item{fill_gaps}{Logical. Interpolate the values of an item between the
 periods where it is known, so that it does not blink out in a gap.
 Defaults to \code{TRUE}.}
 
-\item{frameDur}{The duration of one period, in milliseconds. Defaults to
+\item{frame_dur}{The duration of one period, in milliseconds. Defaults to
 1000.}
 
 \item{ease}{The easing used between two periods, the name of a D3 easing
@@ -147,41 +147,41 @@ player. Defaults to \code{FALSE}.}
 \item{controls}{Logical. Show the player (play / pause, timeline, speed,
 loop) at the bottom. Defaults to \code{TRUE}.}
 
-\item{startFrame}{The first period shown: \code{"first"} (default),
+\item{start_frame}{The first period shown: \code{"first"} (default),
 \code{"last"} or a period number (1 for the first one).}
 
-\item{timeFormat}{Optional. A d3-time-format string used for Date and
+\item{time_format}{Optional. A d3-time-format string used for Date and
 POSIXct periods, e.g. \code{"\%b \%Y"}. Chosen from the spacing of the
 periods by default.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
 \item{font}{The font family of the texts. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
 \item{bgcol}{The background colour of the SVG. Defaults to "white".}
 
-\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+\item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
 
-\item{gridCol}{The colour of the grid lines. Defaults to "#ebebeb"; use
+\item{grid_col}{The colour of the grid lines. Defaults to "#ebebeb"; use
 \code{NA} to hide them.}
 
-\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\item{value_format}{Optional. A d3-format string for the values, e.g.
 \code{",.0f"} or \code{".3s"}. A single string applies to \code{x},
 \code{y} and \code{size}; a named vector sets them one by one, e.g.
 \code{c(x = "$,.0f", y = ".1f")}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text added before or after the
-values, e.g. \code{"$"} or \code{" years"}. As for \code{valueFormat}, a
+\item{value_prefix, value_suffix}{Optional. Text added before or after the
+values, e.g. \code{"$"} or \code{" years"}. As for \code{value_format}, a
 single string applies to every value and a named vector sets them one by
-one, e.g. \code{valuePrefix = c(x = "$")}.}
+one, e.g. \code{value_prefix = c(x = "$")}.}
 
 \item{tooltip}{Logical. Show a tooltip on hover. Defaults to \code{TRUE}.}
 
@@ -246,12 +246,12 @@ bubble_race(
   gapminder,
   x = "gdpPercap", y = "lifeExp", id = "country", time = "year",
   size = "pop", group = "continent",
-  xScale = "log",
+  x_scale = "log",
   highlight = c("China", "India"),
   xtitle = "GDP per capita", ytitle = "Life expectancy",
-  sizeTitle = "Population",
-  valuePrefix = c(x = "$"), valueSuffix = c(y = " years"),
-  valueFormat = c(x = ",.0f", y = ".1f"),
+  size_title = "Population",
+  value_prefix = c(x = "$"), value_suffix = c(y = " years"),
+  value_format = c(x = ",.0f", y = ".1f"),
   title = "Health and wealth of nations"
 )
 
@@ -261,7 +261,7 @@ gapminder \%>\%
   filter(country \%in\% c("China", "India", "Japan", "Brazil", "Nigeria")) \%>\%
   bubble_race(
     x = "gdpPercap", y = "lifeExp", id = "country", time = "year",
-    size = "pop", xScale = "log", trails = TRUE, labels = TRUE,
+    size = "pop", x_scale = "log", trails = TRUE, labels = TRUE,
     title = "Five countries, 1952 to 2007"
   )
 

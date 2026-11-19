@@ -47,43 +47,43 @@
 #' the violin's width at the point's value. Points therefore always stay
 #' inside their violin. Defaults to \code{0.6}. Use \code{0} to align them
 #' on the center line.
-#' @param pointRadius Radius of the points in pixels. Defaults to \code{2.5}.
-#' @param pointOpacity Fill opacity of the points (0 to 1). Defaults to
+#' @param point_radius Radius of the points in pixels. Defaults to \code{2.5}.
+#' @param point_opacity Fill opacity of the points (0 to 1). Defaults to
 #' \code{0.7}.
 #' @param sort How to order the violins from left to right. One of
 #' \code{"none"} (default, factor level order or order of appearance),
 #' \code{"mean"}, or \code{"median"} (ascending).
-#' @param colorPalette The violin colors. Either the name of a D3 categorical
+#' @param color_palette The violin colors. Either the name of a D3 categorical
 #' color scheme (e.g. \code{"Category10"}, the default, which is also
 #' Plotly's classic colorway, \code{"Tableau10"}, \code{"Set2"}), a single
 #' color applied to every violin, an unnamed vector of colors recycled over
 #' the groups (in their original order), or a named vector whose names match
 #' the group values.
-#' @param fillOpacity Fill opacity of the violins (0 to 1). Defaults to
+#' @param fill_opacity Fill opacity of the violins (0 to 1). Defaults to
 #' \code{0.5}.
-#' @param lineWidth Width of the violin outline in pixels. Defaults to
+#' @param line_width Width of the violin outline in pixels. Defaults to
 #' \code{1.5}.
-#' @param violinWidth Maximum width of a violin, as a fraction (0 to 1] of
+#' @param violin_width Maximum width of a violin, as a fraction (0 to 1] of
 #' the space allotted to each group. Defaults to \code{0.8}.
 #' @param hover Logical. When \code{TRUE} (default), hovering a violin
 #' highlights it and shows a tooltip with its summary statistics.
 #' @param animate Logical. When \code{TRUE} (default), the violins grow from
 #' their center line and the points fade in on first render.
 #' @param ytitle Optional. Title of the y-axis.
-#' @param ytitleFontSize Font size of the y-axis title. Defaults to \code{13}.
+#' @param ytitle_font_size Font size of the y-axis title. Defaults to \code{13}.
 #' @param xtitle Optional. Title of the x-axis.
-#' @param xtitleFontSize Font size of the x-axis title. Defaults to \code{13}.
+#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
-#' @param xFontSize Font size of the group labels. Defaults to \code{11}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
+#' @param x_font_size Font size of the group labels. Defaults to \code{11}.
 #' Labels are rotated automatically when they do not fit.
-#' @param yFontSize Font size of the y-axis tick labels. Defaults to \code{11}.
+#' @param y_font_size Font size of the y-axis tick labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of axis lines, ticks, and labels. Defaults to
+#' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
-#' @param gridCol Color of the horizontal grid lines. Defaults to
+#' @param grid_col Color of the horizontal grid lines. Defaults to
 #' \code{"#e6e6e6"}. Use \code{"none"} to hide them.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -111,7 +111,7 @@
 #'   points       = "all",
 #'   meanline     = TRUE,
 #'   sort         = "median",
-#'   colorPalette = "Tableau10",
+#'   color_palette = "Tableau10",
 #'   title        = "Highway fuel economy by vehicle class",
 #'   ytitle       = "Highway miles per gallon"
 #' )
@@ -130,7 +130,7 @@
 #'   group        = "station",
 #'   scale        = "count",
 #'   span         = "hard",
-#'   colorPalette = c(North = "#636efa", Central = "#ef553b",
+#'   color_palette = c(North = "#636efa", Central = "#ef553b",
 #'                    South = "#00cc96"),
 #'   title        = "Waiting time by station",
 #'   ytitle       = "Minutes",
@@ -142,7 +142,7 @@
 #'   data         = faithful,
 #'   y            = "eruptions",
 #'   bandwidth    = 0.2,
-#'   colorPalette = "#9467bd",
+#'   color_palette = "#9467bd",
 #'   points       = "all",
 #'   ytitle       = "Eruption time (min)"
 #' )
@@ -157,27 +157,27 @@ violin_plot <- function(
     meanline       = FALSE,
     points         = c("outliers", "all", "none"),
     jitter         = 0.6,
-    pointRadius    = 2.5,
-    pointOpacity   = 0.7,
+    point_radius    = 2.5,
+    point_opacity   = 0.7,
     sort           = c("none", "mean", "median"),
-    colorPalette   = "Category10",
-    fillOpacity    = 0.5,
-    lineWidth      = 1.5,
-    violinWidth    = 0.8,
+    color_palette   = "Category10",
+    fill_opacity    = 0.5,
+    line_width      = 1.5,
+    violin_width    = 0.8,
     hover          = TRUE,
     animate        = TRUE,
     ytitle         = NULL,
-    ytitleFontSize = 13,
+    ytitle_font_size = 13,
     xtitle         = NULL,
-    xtitleFontSize = 13,
+    xtitle_font_size = 13,
     title          = NULL,
-    titleFontSize  = 16,
-    xFontSize      = 11,
-    yFontSize      = 11,
+    title_font_size  = 16,
+    x_font_size      = 11,
+    y_font_size      = 11,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol          = "white",
-    axisCol        = "black",
-    gridCol        = "#e6e6e6",
+    axis_col        = "black",
+    grid_col        = "#e6e6e6",
     width          = NULL,
     height         = NULL
 ) {
@@ -233,22 +233,22 @@ violin_plot <- function(
     }
   }
   check_unit(jitter,       "jitter")
-  check_unit(pointOpacity, "pointOpacity")
-  check_unit(fillOpacity,  "fillOpacity")
+  check_unit(point_opacity, "point_opacity")
+  check_unit(fill_opacity,  "fill_opacity")
 
-  if (!is.numeric(violinWidth) || length(violinWidth) != 1 ||
-      !is.finite(violinWidth) || violinWidth <= 0 || violinWidth > 1) {
-    stop("'violinWidth' must be a single number greater than 0 and at most 1.")
+  if (!is.numeric(violin_width) || length(violin_width) != 1 ||
+      !is.finite(violin_width) || violin_width <= 0 || violin_width > 1) {
+    stop("'violin_width' must be a single number greater than 0 and at most 1.")
   }
 
-  if (!is.numeric(pointRadius) || length(pointRadius) != 1 ||
-      !is.finite(pointRadius) || pointRadius <= 0) {
-    stop("'pointRadius' must be a single positive number.")
+  if (!is.numeric(point_radius) || length(point_radius) != 1 ||
+      !is.finite(point_radius) || point_radius <= 0) {
+    stop("'point_radius' must be a single positive number.")
   }
 
-  if (!is.numeric(lineWidth) || length(lineWidth) != 1 ||
-      !is.finite(lineWidth) || lineWidth < 0) {
-    stop("'lineWidth' must be a single non-negative number.")
+  if (!is.numeric(line_width) || length(line_width) != 1 ||
+      !is.finite(line_width) || line_width < 0) {
+    stop("'line_width' must be a single non-negative number.")
   }
 
   span   <- match.arg(span)
@@ -273,28 +273,28 @@ violin_plot <- function(
     group_levels <- character(0)
   }
 
-  # Resolve 'colorPalette': a single string (D3 scheme name or one color) is
+  # Resolve 'color_palette': a single string (D3 scheme name or one color) is
   # passed as is and resolved in JS; a vector becomes one color per group.
-  if (!is.character(colorPalette) || length(colorPalette) == 0 ||
-      anyNA(colorPalette)) {
-    stop("'colorPalette' must be a D3 scheme name or a character vector of colors.")
+  if (!is.character(color_palette) || length(color_palette) == 0 ||
+      anyNA(color_palette)) {
+    stop("'color_palette' must be a D3 scheme name or a character vector of colors.")
   }
-  if (length(colorPalette) > 1 || !is.null(names(colorPalette))) {
-    if (!is.null(names(colorPalette))) {
+  if (length(color_palette) > 1 || !is.null(names(color_palette))) {
+    if (!is.null(names(color_palette))) {
       if (is.null(group)) {
-        stop("'colorPalette' cannot be a named vector when 'group' is NULL.")
+        stop("'color_palette' cannot be a named vector when 'group' is NULL.")
       }
-      missing_grps <- setdiff(group_levels, names(colorPalette))
+      missing_grps <- setdiff(group_levels, names(color_palette))
       if (length(missing_grps) > 0) {
-        stop("'colorPalette' is a named vector but has no color for group(s): ",
+        stop("'color_palette' is a named vector but has no color for group(s): ",
              paste(missing_grps, collapse = ", "))
       }
-      colorPalette <- unname(colorPalette[group_levels])
+      color_palette <- unname(color_palette[group_levels])
     } else if (!is.null(group)) {
-      colorPalette <- rep_len(colorPalette, length(group_levels))
+      color_palette <- rep_len(color_palette, length(group_levels))
     }
     # Keep it a JSON array even with a single group
-    colorPalette <- as.list(colorPalette)
+    color_palette <- as.list(color_palette)
   }
 
   # Only ship the columns the chart needs
@@ -314,27 +314,27 @@ violin_plot <- function(
       meanline       = meanline,
       points         = points,
       jitter         = jitter,
-      pointRadius    = pointRadius,
-      pointOpacity   = pointOpacity,
+      pointRadius    = point_radius,
+      pointOpacity   = point_opacity,
       sort           = sort,
-      colorPalette   = colorPalette,
-      fillOpacity    = fillOpacity,
-      lineWidth      = lineWidth,
-      violinWidth    = violinWidth,
+      colorPalette   = color_palette,
+      fillOpacity    = fill_opacity,
+      lineWidth      = line_width,
+      violinWidth    = violin_width,
       hover          = hover,
       animate        = animate,
       ytitle         = ytitle,
-      ytitleFontSize = ytitleFontSize,
+      ytitleFontSize = ytitle_font_size,
       xtitle         = xtitle,
-      xtitleFontSize = xtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
       title          = title,
-      titleFontSize  = titleFontSize,
-      xFontSize      = xFontSize,
-      yFontSize      = yFontSize,
+      titleFontSize  = title_font_size,
+      xFontSize      = x_font_size,
+      yFontSize      = y_font_size,
       font           = font,
       bgcol          = bgcol,
-      axisCol        = axisCol,
-      gridCol        = gridCol
+      axisCol        = axis_col,
+      gridCol        = grid_col
     ),
     width  = width,
     height = height

@@ -13,47 +13,47 @@ line_chart(
   upper = NULL,
   colors = NULL,
   stroke = NULL,
-  strokeWidth = 2,
+  stroke_width = 2,
   curve = "curveLinear",
   opacity = 1,
   area = FALSE,
   points = FALSE,
-  yScale = c("linear", "log"),
-  yZero = NULL,
+  y_scale = c("linear", "log"),
+  y_zero = NULL,
   transform = c("none", "index", "percent"),
-  indexBase = 100,
+  index_base = 100,
   rollmean = NULL,
-  showRaw = TRUE,
+  show_raw = TRUE,
   events = NULL,
   bands = NULL,
   hlines = NULL,
   legend = NULL,
-  endLabels = NULL,
+  end_labels = NULL,
   tooltip = TRUE,
   navigator = TRUE,
-  rangeButtons = TRUE,
+  range_buttons = TRUE,
   zoom = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
-  dateFormat = NULL,
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
+  date_format = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
+  subtitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  gridCol = "#e9e9e9",
-  axisCol = "#333333",
+  grid_col = "#e9e9e9",
+  axis_col = "#333333",
   width = NULL,
   height = NULL
 )
@@ -85,7 +85,7 @@ built-in 10-color palette.}
 \item{stroke}{The color of the line when there is a single series. When
 \code{NULL} (default), the first palette color is used.}
 
-\item{strokeWidth}{The width of the lines. Defaults to 2.}
+\item{stroke_width}{The width of the lines. Defaults to 2.}
 
 \item{curve}{The line's curve type. A complete list can be found here
 <https://github.com/d3/d3-shape#curves>. Defaults to 'curveLinear';
@@ -99,24 +99,24 @@ Defaults to \code{FALSE}.}
 \item{points}{Logical. Draw a marker on every data point. Defaults to
 \code{FALSE}.}
 
-\item{yScale}{Either "linear" (default) or "log".}
+\item{y_scale}{Either "linear" (default) or "log".}
 
-\item{yZero}{Logical. Force the y axis to include 0. When \code{NULL}
+\item{y_zero}{Logical. Force the y axis to include 0. When \code{NULL}
 (default), 0 is included only when \code{area = TRUE}; otherwise the
 axis fits the data in view.}
 
 \item{transform}{How values are displayed: "none" (default), "index"
-(each series rebased to \code{indexBase} at the first visible date, so
+(each series rebased to \code{index_base} at the first visible date, so
 series on different scales can be compared) or "percent" (change since
 the first visible date). The base moves with the zoom.}
 
-\item{indexBase}{The value series are rebased to when
+\item{index_base}{The value series are rebased to when
 \code{transform = "index"}. Defaults to 100.}
 
 \item{rollmean}{Optional. A window size (number of observations). When
 given, a trailing moving average is drawn as the main line.}
 
-\item{showRaw}{Logical. When \code{rollmean} is used, also draw the raw
+\item{show_raw}{Logical. When \code{rollmean} is used, also draw the raw
 series as a thin faded line. Defaults to \code{TRUE}.}
 
 \item{events}{Optional. Dates to mark with a vertical line: either a
@@ -135,7 +135,7 @@ dashed lines (names are used as labels). Only drawn when
 a series, double-click to isolate it). When \code{NULL} (default), the
 legend is shown when there are two series or more.}
 
-\item{endLabels}{Logical. Label each line at its last visible point. When
+\item{end_labels}{Logical. Label each line at its last visible point. When
 \code{NULL} (default), labels are shown when there are two series or
 more.}
 
@@ -147,7 +147,7 @@ series with a brush to select the visible range) under the chart.
 Defaults to \code{TRUE}; it is hidden automatically on very short
 charts.}
 
-\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+\item{range_buttons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
 All, ...), chosen from the length and frequency of the data. Only used
 with dates. Defaults to \code{TRUE}.}
 
@@ -157,14 +157,14 @@ double-click to reset. Defaults to \code{TRUE}.}
 \item{animate}{Logical. Draw the lines in with an animation on first
 render. Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+\item{value_format}{Optional. A d3-format string for values in the tooltip
 (see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
 with \code{transform = "percent"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+\item{value_prefix, value_suffix}{Optional. Text placed before and after the
 values on the y axis and in the tooltip, for example "$" or " km".}
 
-\item{dateFormat}{Optional. A d3-time-format string for the date in the
+\item{date_format}{Optional. A d3-time-format string for the date in the
 tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
 (default), it is picked from the frequency of the data (yearly,
 quarterly, monthly, daily or intraday).}
@@ -175,21 +175,21 @@ quarterly, monthly, daily or intraday).}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
 
 \item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{subtitle}{Optional. A subtitle shown under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+\item{x_font_size, y_font_size}{The font size of the axis tick labels. Defaults
 to 11.}
 
 \item{font}{The font family to consider for the titles. Defaults to
@@ -197,10 +197,10 @@ to 11.}
 
 \item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{gridCol}{The color of the horizontal grid lines. Defaults to
+\item{grid_col}{The color of the horizontal grid lines. Defaults to
 "#e9e9e9".}
 
-\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+\item{axis_col}{The color of the axis text, ticks and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -280,8 +280,8 @@ line_chart(
   y = "unemploy",
   area = TRUE,
   bands = recessions,
-  valueFormat = ",.0f",
-  valueSuffix = "k",
+  value_format = ",.0f",
+  value_suffix = "k",
   title = "US unemployment",
   subtitle = "Thousands of persons, recessions shaded"
 )
@@ -306,7 +306,7 @@ line_chart(
   lower = "lo", upper = "hi",
   colors = c(Observed = "#4269d0", Forecast = "#ff725c"),
   events = c("Forecast starts" = as.Date("1961-01-01")),
-  valueFormat = ",.0f",
+  value_format = ",.0f",
   title = "Airline passengers: Holt-Winters forecast"
 )
 }

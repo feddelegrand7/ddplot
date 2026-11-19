@@ -35,26 +35,26 @@
 #'   (recycled; a named vector maps colours to groups). With a numeric
 #'   \code{group}, two colours or more define the gradient. Defaults to a
 #'   built-in palette (viridis for a numeric \code{group}).
-#' @param size The radius of the points in pixels when \code{sizeBy} is not
+#' @param size The radius of the points in pixels when \code{size_by} is not
 #'   used. Defaults to 4.
 #' @param xticks Optional. The approximate number of x-axis ticks.
 #' @param yticks Optional. The approximate number of y-axis ticks.
 #' @param xtitle Optional. The title of the x-axis. Defaults to the name of
 #'   \code{x}; use \code{""} to hide it.
-#' @param xtitleFontSize The font size of the x-axis title. Defaults to 13.
+#' @param xtitle_font_size The font size of the x-axis title. Defaults to 13.
 #' @param ytitle Optional. The title of the y-axis, drawn above the axis.
 #'   Defaults to the name of \code{y}; use \code{""} to hide it.
-#' @param ytitleFontSize The font size of the y-axis title. Defaults to 13.
+#' @param ytitle_font_size The font size of the y-axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 20.
+#' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param stroke Optional. The stroke colour of the points. Defaults to the
 #'   background colour, which separates overlapping points.
-#' @param strokeWidth Optional. The stroke width of the points.
+#' @param stroke_width Optional. The stroke width of the points.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "white".
 #' @param opacity The opacity of the points (from 0 to 1). Defaults to 0.8.
-#' @param axisCol The colour of the axes, labels and titles. Defaults to
+#' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -62,13 +62,13 @@
 #'   character, factor or logical column gives one colour per group and a
 #'   clickable legend; a numeric column gives a colour gradient. Use
 #'   \code{as.factor()} to treat a numeric column as categories.
-#' @param sizeBy Optional. The name of a numeric column mapped to the point
+#' @param size_by Optional. The name of a numeric column mapped to the point
 #'   area (bubble chart).
-#' @param sizeRange The minimum and maximum radius in pixels used with
-#'   \code{sizeBy}. Defaults to \code{c(3, 16)}.
+#' @param size_range The minimum and maximum radius in pixels used with
+#'   \code{size_by}. Defaults to \code{c(3, 16)}.
 #' @param label Optional. The name of a column identifying each point. It is
-#'   used as the tooltip title and by \code{showLabels}.
-#' @param showLabels Optional. Draws text labels next to points:
+#'   used as the tooltip title and by \code{show_labels}.
+#' @param show_labels Optional. Draws text labels next to points:
 #'   \code{TRUE} labels every point, a character vector labels the points
 #'   whose \code{label} matches. Requires \code{label}.
 #' @param tooltip \code{TRUE} (default) shows a tooltip on hover,
@@ -81,24 +81,24 @@
 #' @param ci Logical. Draw the 95\% confidence band around the trend line.
 #'   Defaults to \code{TRUE}.
 #' @param span The LOESS smoothing parameter. Defaults to 0.75.
-#' @param xScale The x-axis scale: \code{"linear"} (default) or \code{"log"}.
+#' @param x_scale The x-axis scale: \code{"linear"} (default) or \code{"log"}.
 #'   Rows with non-positive values are dropped with a log scale.
-#' @param yScale The y-axis scale: \code{"linear"} (default) or \code{"log"}.
+#' @param y_scale The y-axis scale: \code{"linear"} (default) or \code{"log"}.
 #' @param hlines Optional. Numeric values drawn as horizontal dashed
 #'   reference lines; names are used as labels.
 #' @param vlines Optional. Numeric values drawn as vertical dashed reference
 #'   lines; names are used as labels.
 #' @param legend Logical. Show the legend. When \code{NULL} (default), it is
-#'   shown when \code{group} or \code{sizeBy} is used.
+#'   shown when \code{group} or \code{size_by} is used.
 #' @param brush Logical. Enable drag-to-select and zoom. Defaults to
 #'   \code{TRUE}.
 #' @param animate Logical. Animate the points when the chart is first drawn.
 #'   Defaults to \code{TRUE}.
-#' @param xFormat,yFormat Optional. d3-format strings for the axes and the
+#' @param x_format,y_format Optional. d3-format strings for the axes and the
 #'   tooltip, e.g. \code{",.0f"}, \code{".1\%"} or \code{"$,.2f"}.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
-#' @param gridCol The colour of the grid lines. Defaults to "#e9e9e9"; use
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
+#' @param grid_col The colour of the grid lines. Defaults to "#e9e9e9"; use
 #'   \code{NA} to hide them.
 #'
 #' @return An interactive SVG scatter plot (an r2d3 htmlwidget).
@@ -129,10 +129,10 @@
 #'   data = cars,
 #'   x = "hp",
 #'   y = "mpg",
-#'   sizeBy = "disp",
+#'   size_by = "disp",
 #'   group = "qsec",
 #'   label = "model",
-#'   showLabels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa"),
+#'   show_labels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa"),
 #'   tooltip = c("cyl", "gear"),
 #'   trend = "loess",
 #'   title = "Horsepower and fuel economy",
@@ -147,8 +147,8 @@
 #'   x = "area",
 #'   y = "population",
 #'   label = "state",
-#'   xScale = "log",
-#'   yScale = "log",
+#'   x_scale = "log",
+#'   y_scale = "log",
 #'   hlines = c("Median" = 2838.5)
 #' )
 #'
@@ -161,45 +161,45 @@ scatter_plot <- function(
                         xticks = NULL,
                         yticks = NULL,
                         xtitle = NULL,
-                        xtitleFontSize = 13,
+                        xtitle_font_size = 13,
                         ytitle = NULL,
-                        ytitleFontSize = 13,
+                        ytitle_font_size = 13,
                         title = NULL,
-                        titleFontSize = 20,
+                        title_font_size = 20,
                         stroke = NULL,
-                        strokeWidth = NULL,
+                        stroke_width = NULL,
                         font = "Verdana, Geneva, Tahoma, sans-serif",
                         bgcol = "white",
                         opacity = 0.8,
-                        axisCol = "#333333",
+                        axis_col = "#333333",
                         width = NULL,
                         height = NULL,
                         group = NULL,
-                        sizeBy = NULL,
-                        sizeRange = c(3, 16),
+                        size_by = NULL,
+                        size_range = c(3, 16),
                         label = NULL,
-                        showLabels = NULL,
+                        show_labels = NULL,
                         tooltip = TRUE,
                         trend = c("none", "lm", "loess"),
                         ci = TRUE,
                         span = 0.75,
-                        xScale = c("linear", "log"),
-                        yScale = c("linear", "log"),
+                        x_scale = c("linear", "log"),
+                        y_scale = c("linear", "log"),
                         hlines = NULL,
                         vlines = NULL,
                         legend = NULL,
                         brush = TRUE,
                         animate = TRUE,
-                        xFormat = NULL,
-                        yFormat = NULL,
+                        x_format = NULL,
+                        y_format = NULL,
                         subtitle = NULL,
-                        subtitleFontSize = 13,
-                        gridCol = "#e9e9e9"
+                        subtitle_font_size = 13,
+                        grid_col = "#e9e9e9"
                         ) {
 
   trend <- match.arg(trend)
-  xScale <- match.arg(xScale)
-  yScale <- match.arg(yScale)
+  x_scale <- match.arg(x_scale)
+  y_scale <- match.arg(y_scale)
 
   if (!is.data.frame(data)) {
     stop("'data' must be a data frame")
@@ -218,7 +218,7 @@ scatter_plot <- function(
     }
   }
   check_column(group, "group")
-  check_column(sizeBy, "sizeBy")
+  check_column(size_by, "size_by")
   check_column(label, "label")
 
   xv <- data[[x]]
@@ -229,25 +229,25 @@ scatter_plot <- function(
   if (!is.numeric(size) || length(size) != 1 || size <= 0) {
     stop("'size' must be a positive number")
   }
-  if (!is.numeric(sizeRange) || length(sizeRange) != 2 || any(sizeRange <= 0)) {
-    stop("'sizeRange' must be two positive numbers")
+  if (!is.numeric(size_range) || length(size_range) != 2 || any(size_range <= 0)) {
+    stop("'size_range' must be two positive numbers")
   }
   if (!is.numeric(opacity) || length(opacity) != 1 || opacity < 0 || opacity > 1) {
     stop("'opacity' must be a number between 0 and 1")
   }
-  if (!is.null(showLabels) && is.null(label)) {
-    stop("'showLabels' requires 'label'")
+  if (!is.null(show_labels) && is.null(label)) {
+    stop("'show_labels' requires 'label'")
   }
 
   n <- nrow(data)
   keep <- is.finite(xv) & is.finite(yv)
 
-  if (xScale == "log" && any(keep & xv <= 0)) {
-    warning("Rows with x <= 0 are dropped with xScale = \"log\"")
+  if (x_scale == "log" && any(keep & xv <= 0)) {
+    warning("Rows with x <= 0 are dropped with x_scale = \"log\"")
     keep <- keep & xv > 0
   }
-  if (yScale == "log" && any(keep & yv <= 0)) {
-    warning("Rows with y <= 0 are dropped with yScale = \"log\"")
+  if (y_scale == "log" && any(keep & yv <= 0)) {
+    warning("Rows with y <= 0 are dropped with y_scale = \"log\"")
     keep <- keep & yv > 0
   }
 
@@ -299,20 +299,20 @@ scatter_plot <- function(
   point_col <- if (is.null(col) || group_type != "none") palette[1] else as.character(col)[1]
 
   # ---- size, label, tooltip --------------------------------------------------
-  if (!is.null(sizeBy)) {
-    sv <- data[[sizeBy]]
-    if (!is.numeric(sv)) stop("'sizeBy' must be a numeric column")
+  if (!is.null(size_by)) {
+    sv <- data[[size_by]]
+    if (!is.numeric(sv)) stop("'size_by' must be a numeric column")
     pts$s <- ifelse(is.finite(sv), sv, NA)
   }
 
   if (!is.null(label)) {
     pts$l <- as.character(data[[label]])
-    if (isTRUE(showLabels)) {
+    if (isTRUE(show_labels)) {
       pts$a <- TRUE
-    } else if (is.character(showLabels)) {
-      pts$a <- pts$l %in% showLabels
-    } else if (!is.null(showLabels) && !isFALSE(showLabels)) {
-      stop("'showLabels' must be TRUE, FALSE or a character vector of labels")
+    } else if (is.character(show_labels)) {
+      pts$a <- pts$l %in% show_labels
+    } else if (!is.null(show_labels) && !isFALSE(show_labels)) {
+      stop("'show_labels' must be TRUE, FALSE or a character vector of labels")
     }
   }
 
@@ -345,11 +345,11 @@ scatter_plot <- function(
       trends <- lapply(levels, function(lv) {
         sub <- pts[pts$g == lv, , drop = FALSE]
         fit_scatter_trend(sub$x, sub$y, trend, ci, span,
-                          xScale == "log", yScale == "log", lv)
+                          x_scale == "log", y_scale == "log", lv)
       })
     } else {
       trends <- list(fit_scatter_trend(pts$x, pts$y, trend, ci, span,
-                                       xScale == "log", yScale == "log", NULL))
+                                       x_scale == "log", y_scale == "log", NULL))
     }
     trends <- Filter(Negate(is.null), trends)
     if (length(trends) == 0) trends <- NULL
@@ -363,7 +363,7 @@ scatter_plot <- function(
     lapply(seq_along(v), function(k) list(value = unname(v[k]), label = lab[k]))
   }
 
-  if (is.null(legend)) legend <- group_type != "none" || !is.null(sizeBy)
+  if (is.null(legend)) legend <- group_type != "none" || !is.null(size_by)
 
   r2d3::r2d3(
     data = pts,
@@ -377,23 +377,23 @@ scatter_plot <- function(
       group = group,
       levels = as.list(levels),
       colors = as.list(colors),
-      sizeBy = sizeBy,
-      sizeRange = sizeRange,
+      sizeBy = size_by,
+      sizeRange = size_range,
       label = label,
       tooltip = tooltip_on,
       tipNames = as.list(tip_names),
       trend = trend,
       trends = trends,
       span = span,
-      xScale = xScale,
-      yScale = yScale,
+      xScale = x_scale,
+      yScale = y_scale,
       hlines = ref_lines(hlines, "hlines"),
       vlines = ref_lines(vlines, "vlines"),
       legend = isTRUE(legend),
       brush = isTRUE(brush),
       animate = isTRUE(animate),
-      xFormat = xFormat,
-      yFormat = yFormat,
+      xFormat = x_format,
+      yFormat = y_format,
       xticks = xticks,
       yticks = yticks,
       xtitle = if (is.null(xtitle)) x else xtitle,
@@ -402,17 +402,17 @@ scatter_plot <- function(
       subtitle = subtitle,
       font = font,
       stroke = stroke,
-      strokeWidth = strokeWidth,
+      strokeWidth = stroke_width,
       width = width,
       height = height,
-      xtitleFontSize = xtitleFontSize,
-      ytitleFontSize = ytitleFontSize,
-      titleFontSize = titleFontSize,
-      subtitleFontSize = subtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
+      ytitleFontSize = ytitle_font_size,
+      titleFontSize = title_font_size,
+      subtitleFontSize = subtitle_font_size,
       bgcol = bgcol,
-      gridCol = if (is.null(gridCol) || is.na(gridCol)) NULL else gridCol,
+      gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,
       opacity = opacity,
-      axisCol = axisCol
+      axisCol = axis_col
     )
   )
 }

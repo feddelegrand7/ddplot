@@ -6,7 +6,7 @@
 #' warm glow behind it, and can burn on its own, on a candle or on logs. Useful
 #' to show the state of a critical number, such as the number of errors in a
 #' process. When the chart scrolls into view, the flame ignites and grows to
-#' its height while the value (with \code{showValue = TRUE}) counts up.
+#' its height while the value (with \code{show_value = TRUE}) counts up.
 #'
 #' @section Interactions:
 #' \itemize{
@@ -27,32 +27,32 @@
 #' height to the new one.
 #'
 #' @param intensity A non-negative number: the intensity of the flame. The
-#'   height of the flame grows linearly with it up to \code{maxIntensity},
+#'   height of the flame grows linearly with it up to \code{max_intensity},
 #'   where the flame reaches the top of the chart. Defaults to 50.
-#' @param flameGradientColors A length-3 character vector of colours, from
+#' @param flame_gradient_colors A length-3 character vector of colours, from
 #'   the core of the flame outwards. Defaults to
 #'   \code{c("#fffbe6", "#ffc233", "#e8452c")}.
-#' @param flameOutline Optional. The colour of an outline drawn around the
+#' @param flame_outline Optional. The colour of an outline drawn around the
 #'   flame. By default the flame has no outline.
 #' @param bgcol The background colour. Defaults to "white". The flame glows
 #'   more on dark backgrounds.
 #' @param width Optional. The width of the chart.
 #' @param height Optional. The height of the chart.
-#' @param maxIntensity The intensity at which the flame reaches its full
+#' @param max_intensity The intensity at which the flame reaches its full
 #'   height. Defaults to 100. Higher intensities do not make the flame taller.
 #' @param base What the flame burns on: "none" (the default), "candle" or
 #'   "logs".
-#' @param showValue Logical. Write the intensity below the flame. Defaults to
+#' @param show_value Logical. Write the intensity below the flame. Defaults to
 #'   FALSE.
-#' @param valueSuffix A text added after the value, such as " errors".
+#' @param value_suffix A text added after the value, such as " errors".
 #'   Defaults to "".
-#' @param titleText Optional. A caption below the flame.
-#' @param titleColor Optional. The colour of the caption. Defaults to
-#'   \code{labelColor}.
-#' @param titleFontSize The font size of the caption. Defaults to 14.
-#' @param labelColor Optional. The colour of the value. Defaults to dark grey
+#' @param title_text Optional. A caption below the flame.
+#' @param title_color Optional. The colour of the caption. Defaults to
+#'   \code{label_color}.
+#' @param title_font_size The font size of the caption. Defaults to 14.
+#' @param label_color Optional. The colour of the value. Defaults to dark grey
 #'   on light backgrounds and light grey on dark ones.
-#' @param labelFontSize Optional. The font size of the value. By default it
+#' @param label_font_size Optional. The font size of the value. By default it
 #'   depends on the size of the chart.
 #' @param font The font family. Defaults to "Verdana, Geneva, Tahoma,
 #'   sans-serif".
@@ -70,49 +70,49 @@
 #' flame(intensity = 20)
 #' flame(
 #'   intensity = 80,
-#'   flameGradientColors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
+#'   flame_gradient_colors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
 #'   bgcol = "#111111",
 #'   base = "logs"
 #' )
 #' flame(
 #'   intensity = 35,
 #'   base = "candle",
-#'   showValue = TRUE,
-#'   valueSuffix = " errors",
-#'   titleText = "Failed jobs today"
+#'   show_value = TRUE,
+#'   value_suffix = " errors",
+#'   title_text = "Failed jobs today"
 #' )
 flame <- function(
     intensity = 50,
-    flameGradientColors = c("#fffbe6", "#ffc233", "#e8452c"),
-    flameOutline = NULL,
+    flame_gradient_colors = c("#fffbe6", "#ffc233", "#e8452c"),
+    flame_outline = NULL,
     bgcol = "white",
     width = NULL,
     height = NULL,
-    maxIntensity = 100,
+    max_intensity = 100,
     base = c("none", "candle", "logs"),
-    showValue = FALSE,
-    valueSuffix = "",
-    titleText = NULL,
-    titleColor = NULL,
-    titleFontSize = 14,
-    labelColor = NULL,
-    labelFontSize = NULL,
+    show_value = FALSE,
+    value_suffix = "",
+    title_text = NULL,
+    title_color = NULL,
+    title_font_size = 14,
+    label_color = NULL,
+    label_font_size = NULL,
     font = "Verdana, Geneva, Tahoma, sans-serif",
     flicker = TRUE,
     sparks = TRUE,
     draggable = FALSE,
     animate = TRUE
 ) {
-  if (!length(flameGradientColors) == 3) {
+  if (!length(flame_gradient_colors) == 3) {
     stop(
-      "flameGradientColors must be a length-3 vector of colors"
+      "flame_gradient_colors must be a length-3 vector of colors"
     )
   }
   if (!is.numeric(intensity) || length(intensity) != 1 || is.na(intensity) || intensity < 0) {
     stop("'intensity' must be a single non-negative number")
   }
-  if (!is.numeric(maxIntensity) || length(maxIntensity) != 1 || is.na(maxIntensity) || maxIntensity <= 0) {
-    stop("'maxIntensity' must be a positive number")
+  if (!is.numeric(max_intensity) || length(max_intensity) != 1 || is.na(max_intensity) || max_intensity <= 0) {
+    stop("'max_intensity' must be a positive number")
   }
   base <- match.arg(base)
   font <- play_font(font)
@@ -124,20 +124,20 @@ flame <- function(
     height = height,
     options = list(
       intensity = intensity,
-      flameColor0 = flameGradientColors[[1]],
-      flameColor1 = flameGradientColors[[2]],
-      flameColor2 = flameGradientColors[[3]],
-      flameOutline = flameOutline,
+      flameColor0 = flame_gradient_colors[[1]],
+      flameColor1 = flame_gradient_colors[[2]],
+      flameColor2 = flame_gradient_colors[[3]],
+      flameOutline = flame_outline,
       bgcol = bgcol,
-      maxIntensity = maxIntensity,
+      maxIntensity = max_intensity,
       base = base,
-      showValue = play_flag(showValue, "showValue"),
-      valueSuffix = valueSuffix,
-      titleText = titleText,
-      titleColor = titleColor,
-      titleFontSize = play_size(titleFontSize, "titleFontSize"),
-      labelColor = labelColor,
-      labelFontSize = play_size(labelFontSize, "labelFontSize"),
+      showValue = play_flag(show_value, "show_value"),
+      valueSuffix = value_suffix,
+      titleText = title_text,
+      titleColor = title_color,
+      titleFontSize = play_size(title_font_size, "title_font_size"),
+      labelColor = label_color,
+      labelFontSize = play_size(label_font_size, "label_font_size"),
       font = font,
       flicker = play_flag(flicker, "flicker"),
       sparks = play_flag(sparks, "sparks"),

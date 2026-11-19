@@ -35,7 +35,7 @@ Every race chart has the same player at the bottom:
 - the **speed** button cycles through 0.5×, 1×, 2× and 4×, and the **loop** button replays the race forever;
 - the arrow keys step one period back or forward, and Home and End jump to the start or the end (click the chart first).
 
-The race starts when the chart scrolls into view. Use `autoplay = FALSE` to wait for a click, `startFrame = "last"` to open on the last period, `loop = TRUE` to loop, `controls = FALSE` to hide the player, and `frameDur` to set the time spent on each period, in milliseconds. Tooltips keep updating while the race plays, and clicking an item pins or follows it.
+The race starts when the chart scrolls into view. Use `autoplay = FALSE` to wait for a click, `start_frame = "last"` to open on the last period, `loop = TRUE` to loop, `controls = FALSE` to hide the player, and `frame_dur` to set the time spent on each period, in milliseconds. Tooltips keep updating while the race plays, and clicking an item pins or follows it.
 
 In Shiny, `input$<id>_frame` reports the period on show, and `input$<id>_clicked` the item clicked. The period, the speed, and what is pinned or hidden are kept when the chart is re-rendered.
 
@@ -43,7 +43,7 @@ In Shiny, `input$<id>_frame` reports the period on show, and `input$<id>_clicked
 
 `bar_chart_race()` ranks items by a value and animates the ranking through time. The data is long: one row per item and period, with the values in `x`, the item names in `y` and the periods in `time` (years, dates, or a factor). Bars glide past each other when they overtake, new items rise from below the cut and leaving ones sink and fade, the value labels count smoothly and a big period label sits in the corner.
 
-Hover a bar to see its value, its rank and its change since the previous period, even while the race plays. Click a bar to follow it: the others are dimmed and, if it falls out of the top `topN`, it stays visible under the cut with its rank. With `group`, bars are coloured by group and the legend hides (click) or isolates (double-click) a group, recomputing the ranking. The buttons at the top right switch between the top 10 and the top 20.
+Hover a bar to see its value, its rank and its change since the previous period, even while the race plays. Click a bar to follow it: the others are dimmed and, if it falls out of the top `top_n`, it stays visible under the cut with its rank. With `group`, bars are coloured by group and the legend hides (click) or isolates (double-click) a group, recomputing the ranking. The buttons at the top right switch between the top 10 and the top 20.
 
 ```{r}
 bar_chart_race(
@@ -53,16 +53,16 @@ bar_chart_race(
 )
 ```
 
-`frameDur` is the pause on each period and `transitionDur` the time spent moving to the next one, so each period lasts `frameDur + transitionDur` milliseconds. `ease` shapes the move, for instance with a little bounce, and `timeLabelOpts` styles the period label:
+`frame_dur` is the pause on each period and `transition_dur` the time spent moving to the next one, so each period lasts `frame_dur + transition_dur` milliseconds. `ease` shapes the move, for instance with a little bounce, and `time_label_opts` styles the period label:
 
 ```{r}
 gapminder %>%
   filter(country %in% c("Algeria", "Mexico", "Iceland", "Greece", "Finland")) %>%
   bar_chart_race(
     x = "lifeExp", y = "country", time = "year",
-    frameDur = 300, transitionDur = 900, ease = "BackInOut",
-    xtitle = "Life expectancy", valueFormat = ".1f",
-    timeLabelOpts = list(size = 40, prefix = "Year "),
+    frame_dur = 300, transition_dur = 900, ease = "BackInOut",
+    xtitle = "Life expectancy", value_format = ".1f",
+    time_label_opts = list(size = 40, prefix = "Year "),
     title = "Life expectancy in five countries"
   )
 ```
@@ -81,8 +81,8 @@ sales$units <- ave(sales$units, sales$brand, FUN = cumsum)
 
 bar_chart_race(
   sales, x = "units", y = "brand", time = "month",
-  namePosition = "inside", ease = "CubicInOut", frameDur = 300,
-  valueSuffix = " units", title = "Units sold, year to date"
+  name_position = "inside", ease = "CubicInOut", frame_dur = 300,
+  value_suffix = " units", title = "Units sold, year to date"
 )
 ```
 
@@ -90,7 +90,7 @@ bar_chart_race(
 
 `line_race()` turns a long data frame (one row per line and period) into a racing line chart. The lines grow as time advances, each with a moving head showing its name and live value; the axes rescale smoothly and the labels spread out so they never overlap. The time column can hold years, dates or ordered period labels such as quarters.
 
-Use `topN` to colour and label only the current leaders, with every other line drawn as a thin grey line in the background. The buttons at the top right switch the same race to ranks: the chart becomes a bump chart where rank 1 sits at the top. `window` keeps only the last periods on screen, `grow` lets the time axis grow with the race, and `events` adds annotations that pop up when the race reaches them.
+Use `top_n` to colour and label only the current leaders, with every other line drawn as a thin grey line in the background. The buttons at the top right switch the same race to ranks: the chart becomes a bump chart where rank 1 sits at the top. `window` keeps only the last periods on screen, `grow` lets the time axis grow with the race, and `events` adds annotations that pop up when the race reaches them.
 
 Hover the chart to see a crosshair listing the leading values at that period, hover a label for a summary of the line, and click a line or a label to pin it. With `category`, the legend hides (click) or isolates (double-click) groups of lines.
 
@@ -100,7 +100,7 @@ gapminder %>%
                         "Indonesia", "Thailand", "Vietnam", "Philippines")) %>%
   line_race(
     x = "year", y = "gdpPercap", group = "country",
-    yScale = "log", valuePrefix = "$", valueFormat = ",.0f",
+    y_scale = "log", value_prefix = "$", value_format = ",.0f",
     ytitle = "GDP per capita (log scale)",
     title = "The Asian growth race",
     events = c("Reforms in China" = 1978, "Asian crisis" = 1997)
@@ -110,8 +110,8 @@ gapminder %>%
 ```{r}
 line_race(
   gapminder, x = "year", y = "lifeExp", group = "country",
-  category = "continent", topN = 10, yZero = FALSE,
-  valueFormat = ".1f", ytitle = "Life expectancy (years)",
+  category = "continent", top_n = 10, y_zero = FALSE,
+  value_format = ".1f", ytitle = "Life expectancy (years)",
   highlight = "Japan", title = "Life expectancy, 1952 to 2007"
 )
 ```
@@ -121,7 +121,7 @@ With dates, a sliding `window` keeps the last periods on screen:
 ```{r}
 line_race(
   economics_long, x = "date", y = "value", group = "variable",
-  yScale = "log", window = 120, frameDur = 60,
+  y_scale = "log", window = 120, frame_dur = 60,
   title = "US economic indicators", ytitle = "Value (log scale)"
 )
 ```
@@ -138,11 +138,11 @@ The buttons at the top right switch each axis between a linear and a log scale (
 bubble_race(
   gapminder,
   x = "gdpPercap", y = "lifeExp", id = "country", time = "year",
-  size = "pop", group = "continent", xScale = "log",
+  size = "pop", group = "continent", x_scale = "log",
   highlight = c("China", "India"),
-  xtitle = "GDP per capita", ytitle = "Life expectancy", sizeTitle = "Population",
-  valuePrefix = c(x = "$"), valueSuffix = c(y = " years"),
-  valueFormat = c(x = ",.0f", y = ".1f"),
+  xtitle = "GDP per capita", ytitle = "Life expectancy", size_title = "Population",
+  value_prefix = c(x = "$"), value_suffix = c(y = " years"),
+  value_format = c(x = ",.0f", y = ".1f"),
   title = "Health and wealth of nations"
 )
 ```
@@ -152,14 +152,14 @@ gapminder %>%
   filter(country %in% c("China", "India", "Japan", "Brazil", "Nigeria")) %>%
   bubble_race(
     x = "gdpPercap", y = "lifeExp", id = "country", time = "year",
-    size = "pop", xScale = "log", trails = TRUE, labels = TRUE,
+    size = "pop", x_scale = "log", trails = TRUE, labels = TRUE,
     title = "Five countries, 1952 to 2007"
   )
 ```
 
 ## `radial_bar_race()` {#radial_bar_race}
 
-`radial_bar_race()` turns a bar chart race into a circle. At every period, the top `topN` items are drawn around a central disc, sorted by value clockwise from the top, and they glide to their new place when their rank changes. Items entering or leaving the top slide in from, or out to, the gap at 12 o'clock. The centre shows the period and the total (or the average) of the items on show.
+`radial_bar_race()` turns a bar chart race into a circle. At every period, the top `top_n` items are drawn around a central disc, sorted by value clockwise from the top, and they glide to their new place when their rank changes. Items entering or leaving the top slide in from, or out to, the gap at 12 o'clock. The centre shows the period and the total (or the average) of the items on show.
 
 Two layouts are available and the buttons at the top right morph one into the other, even while the race plays. With `"spokes"` each item is a bar radiating from the centre, labelled with its name and live value. With `"rings"` each item is a concentric arc, the leader on the outside, which works best with up to about 12 items.
 
@@ -183,11 +183,11 @@ radial_bar_race(
   time = "year",
   value = "gdpPercap",
   group = "continent",
-  topN = 10,
+  top_n = 10,
   layout = "rings",
   highlight = c("Japan", "Kuwait"),
-  valuePrefix = "$",
-  valueFormat = ",.0f",
+  value_prefix = "$",
+  value_format = ",.0f",
   title = "GDP per capita"
 )
 ```
@@ -198,11 +198,11 @@ radial_bar_race(
   label = "country",
   time = "year",
   value = "lifeExp",
-  topN = 20,
-  centerValue = "average",
+  top_n = 20,
+  center_value = "average",
   scale = "area",
-  valueFormat = ".1f",
-  valueSuffix = " years",
+  value_format = ".1f",
+  value_suffix = " years",
   title = "Life expectancy"
 )
 ```
@@ -234,8 +234,8 @@ gapminder %>%
   mutate(gdp = gdpPercap * pop / 1e9) %>%
   treemap_race(
     label = "country", value = "gdp", time = "year",
-    colorBy = "growth", labelMode = "share",
-    valuePrefix = "$", valueSuffix = "B", valueFormat = ",.0f",
+    color_by = "growth", label_mode = "share",
+    value_prefix = "$", value_suffix = "B", value_format = ",.0f",
     title = "GDP of five European countries"
   )
 ```
@@ -244,7 +244,7 @@ gapminder %>%
 
 `donut_race()` shows how a total is shared between items through time: the share of each browser, energy source or continent, period after period. A donut (or a pie) is paired with a live league table. When an item overtakes another, its slice slides past it smoothly and its row moves up the table, with a green or red arrow showing the places gained or lost.
 
-The centre of the donut shows the period and a total that counts smoothly. With `maxSlices`, the smallest items of each period are grouped into an "Other" slice: items flow into it and out of it as they cross the cut, while the table still ranks every item.
+The centre of the donut shows the period and a total that counts smoothly. With `max_slices`, the smallest items of each period are grouped into an "Other" slice: items flow into it and out of it as they cross the cut, while the table still ranks every item.
 
 Hover a slice or a row to highlight both and read the value, the share, the rank and the change since the previous period. Click to pin an item, and alt-click a row (or use the small cross) to hide it: the shares are recomputed without it. The buttons at the top right switch the slices between the ranking and a fixed order.
 
@@ -258,12 +258,12 @@ donut_race(
 ```{r}
 donut_race(
   gapminder, label = "country", value = "pop", time = "year",
-  maxSlices = 8, innerRadius = 0.55, highlight = "India",
+  max_slices = 8, inner_radius = 0.55, highlight = "India",
   title = "Who holds the world population?"
 )
 ```
 
-Periods can also be text, here decades, and `innerRadius = 0` draws a pie:
+Periods can also be text, here decades, and `inner_radius = 0` draws a pie:
 
 ```{r}
 energy <- data.frame(
@@ -273,7 +273,7 @@ energy <- data.frame(
 )
 donut_race(
   energy, label = "source", value = "twh", time = "period",
-  innerRadius = 0, sort = "fixed", table = FALSE, valueSuffix = " TWh"
+  inner_radius = 0, sort = "fixed", table = FALSE, value_suffix = " TWh"
 )
 ```
 

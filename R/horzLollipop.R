@@ -13,17 +13,17 @@
 #' @param sort The initial order of the lollipops: \code{"none"} (default, the
 #'   order of the data or of the factor levels), \code{"ascending"} or
 #'   \code{"descending"}. Descending puts the largest value at the top.
-#' @param valueTicks Optional. The approximate number of value axis ticks.
-#' @param labelTicks Not used; kept for compatibility.
-#' @param valueFontSize The font size of the value axis labels. Defaults to 11.
-#' @param labelFontSize The font size of the category labels. Defaults to 12.
-#' @param valueTitle Optional. The title of the value axis. Defaults to the
+#' @param value_ticks Optional. The approximate number of value axis ticks.
+#' @param label_ticks Not used; kept for compatibility.
+#' @param value_font_size The font size of the value axis labels. Defaults to 11.
+#' @param label_font_size The font size of the category labels. Defaults to 12.
+#' @param value_title Optional. The title of the value axis. Defaults to the
 #'   name of \code{value} (or "Count"); use \code{""} to hide it.
-#' @param valueTitleFontSize The font size of the value axis title. Defaults
+#' @param value_title_font_size The font size of the value axis title. Defaults
 #'   to 13.
-#' @param labelTitle Optional. The title of the category axis, drawn above the
+#' @param label_title Optional. The title of the category axis, drawn above the
 #'   labels.
-#' @param labelTitleFontSize The font size of the category axis title.
+#' @param label_title_font_size The font size of the category axis title.
 #'   Defaults to 13.
 #'
 #' @return An interactive SVG horizontal lollipop chart (an r2d3 htmlwidget).
@@ -46,7 +46,7 @@
 #' counts <- count(mpg, manufacturer)
 #' horz_lollipop(
 #'   mpg, label = "manufacturer", sort = "descending",
-#'   refLines = c(Average = mean(counts$n)),
+#'   ref_lines = c(Average = mean(counts$n)),
 #'   title = "Models per manufacturer"
 #' )
 #'
@@ -57,8 +57,8 @@
 #' )
 #' horz_lollipop(
 #'   change, label = "country", value = "growth",
-#'   sort = "descending", negativeFill = "#ff725c",
-#'   valueSuffix = "%", valueTitle = "GDP growth",
+#'   sort = "descending", negative_fill = "#ff725c",
+#'   value_suffix = "%", value_title = "GDP growth",
 #'   title = "Annual GDP growth"
 #' )
 #'
@@ -67,42 +67,42 @@ horz_lollipop <- function(data,
                           value = NULL,
                           sort = "none",
                           bgcol = "white",
-                          valueTicks = NULL,
-                          labelTicks = NULL,
-                          valueFontSize = 11,
-                          labelFontSize = 12,
+                          value_ticks = NULL,
+                          label_ticks = NULL,
+                          value_font_size = 11,
+                          label_font_size = 12,
                           font = "Verdana, Geneva, Tahoma, sans-serif",
-                          valueTitle = NULL,
-                          valueTitleFontSize = 13,
-                          labelTitle = NULL,
-                          labelTitleFontSize = 13,
+                          value_title = NULL,
+                          value_title_font_size = 13,
+                          label_title = NULL,
+                          label_title_font_size = 13,
                           title = NULL,
-                          titleFontSize = 20,
-                          lineStroke = NULL,
-                          lineStrokeWidth = 2,
-                          circleFill = NULL,
-                          circleStroke = NULL,
-                          circleStrokeWidth = 1.5,
-                          circleRadius = 6,
-                          axisCol = "#333333",
+                          title_font_size = 20,
+                          line_stroke = NULL,
+                          line_stroke_width = 2,
+                          circle_fill = NULL,
+                          circle_stroke = NULL,
+                          circle_stroke_width = 1.5,
+                          circle_radius = 6,
+                          axis_col = "#333333",
                           width = NULL,
                           height = NULL,
                           group = NULL,
                           agg = c("sum", "mean", "median", "min", "max", "count"),
                           labels = TRUE,
                           highlight = NULL,
-                          refLines = NULL,
-                          negativeFill = NULL,
+                          ref_lines = NULL,
+                          negative_fill = NULL,
                           legend = NULL,
                           controls = TRUE,
                           tooltip = TRUE,
                           animate = TRUE,
-                          valueFormat = NULL,
-                          valuePrefix = "",
-                          valueSuffix = "",
+                          value_format = NULL,
+                          value_prefix = "",
+                          value_suffix = "",
                           subtitle = NULL,
-                          subtitleFontSize = 13,
-                          gridCol = "#e9e9e9",
+                          subtitle_font_size = 13,
+                          grid_col = "#e9e9e9",
                           opacity = 1
                           ) {
 
@@ -113,19 +113,19 @@ horz_lollipop <- function(data,
 
   lollipop_widget(
     data = data, cat = label, val = value, orientation = "horizontal", sort = sort,
-    catFontSize = labelFontSize, valFontSize = valueFontSize, valTicks = valueTicks,
-    catTitle = labelTitle, catTitleFontSize = labelTitleFontSize,
-    valTitle = valueTitle, valTitleFontSize = valueTitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    lineStroke = lineStroke, lineStrokeWidth = lineStrokeWidth,
-    circleFill = circleFill, circleStroke = circleStroke,
-    circleStrokeWidth = circleStrokeWidth, circleRadius = circleRadius,
-    font = font, bgcol = bgcol, opacity = opacity, axisCol = axisCol, gridCol = gridCol,
+    cat_font_size = label_font_size, val_font_size = value_font_size, val_ticks = value_ticks,
+    cat_title = label_title, cat_title_font_size = label_title_font_size,
+    val_title = value_title, val_title_font_size = value_title_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    line_stroke = line_stroke, line_stroke_width = line_stroke_width,
+    circle_fill = circle_fill, circle_stroke = circle_stroke,
+    circle_stroke_width = circle_stroke_width, circle_radius = circle_radius,
+    font = font, bgcol = bgcol, opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height, group = group, agg = match.arg(agg),
-    labels = labels, highlight = highlight, refLines = refLines,
-    negativeFill = negativeFill, legend = legend, controls = controls,
-    tooltip = tooltip, animate = animate, valueFormat = valueFormat,
-    valuePrefix = valuePrefix, valueSuffix = valueSuffix
+    labels = labels, highlight = highlight, ref_lines = ref_lines,
+    negative_fill = negative_fill, legend = legend, controls = controls,
+    tooltip = tooltip, animate = animate, value_format = value_format,
+    value_prefix = value_prefix, value_suffix = value_suffix
   )
 }

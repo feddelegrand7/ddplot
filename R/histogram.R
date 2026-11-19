@@ -36,31 +36,31 @@
 #'   numeric column of \code{data}.
 #' @param bins The approximate number of bins. The bins are given round
 #'   widths (1, 2, 2.5 or 5 times a power of ten), so the actual number can
-#'   differ slightly. Defaults to 30. Ignored when \code{binWidth} or
+#'   differ slightly. Defaults to 30. Ignored when \code{bin_width} or
 #'   \code{breaks} is given.
 #' @param fill The colour of the bars. A single colour, or, with \code{group},
 #'   one colour per group (a named vector maps colours to groups). Defaults to
 #'   a built-in palette.
-#' @param xFontSize The font size of the x-axis labels. Defaults to 11.
-#' @param yFontSize The font size of the y-axis labels. Defaults to 11.
+#' @param x_font_size The font size of the x-axis labels. Defaults to 11.
+#' @param y_font_size The font size of the y-axis labels. Defaults to 11.
 #' @param xticks Optional. The approximate number of x-axis ticks.
 #' @param yticks Optional. The approximate number of y-axis ticks.
 #' @param xtitle Optional. The title of the x-axis. Defaults to the name of
 #'   the variable (when it can be found); use \code{""} to hide it.
-#' @param xtitleFontSize The font size of the x-axis title. Defaults to 13.
+#' @param xtitle_font_size The font size of the x-axis title. Defaults to 13.
 #' @param ytitle Optional. The title of the y-axis, drawn above it. Defaults
 #'   to "Count", "Percent" or "Density"; use \code{""} to hide it.
-#' @param ytitleFontSize The font size of the y-axis title. Defaults to 13.
+#' @param ytitle_font_size The font size of the y-axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 20.
+#' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param stroke Optional. The stroke colour of the bars.
-#' @param strokeWidth Optional. The stroke width of the bars.
+#' @param stroke_width Optional. The stroke width of the bars.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "white".
 #' @param opacity The opacity of the bars (from 0 to 1). Defaults to 1, or
 #'   0.5 for overlaid groups.
-#' @param axisCol The colour of the axes, labels and titles. Defaults to
+#' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -69,7 +69,7 @@
 #' @param group Optional. A vector of the same length as \code{x} (or, with
 #'   \code{data}, the name of a column) splitting the observations into
 #'   groups, with one colour per group and a clickable legend.
-#' @param binWidth Optional. The width of the bins, in the units of \code{x}.
+#' @param bin_width Optional. The width of the bins, in the units of \code{x}.
 #' @param breaks Optional. A numeric vector of bin edges, for bins of unequal
 #'   width (the bars are then scaled by density so their areas stay
 #'   comparable). Values outside the edges are left out. The number of bins
@@ -91,14 +91,14 @@
 #' @param stats Optional. Summary lines to draw across the bars: any of
 #'   \code{"mean"} and \code{"median"} (\code{TRUE} draws both). With overlaid
 #'   groups, one line is drawn per group.
-#' @param refLines Optional. Numeric values drawn as dashed vertical lines
+#' @param ref_lines Optional. Numeric values drawn as dashed vertical lines
 #'   (e.g. a threshold or a target); names are used as labels.
 #' @param rug Logical. Draw a small tick under the bars for every observation
 #'   (up to 5,000 observations). Defaults to \code{FALSE}.
 #' @param summary Logical. Show the number of observations, the mean, the
 #'   median and the standard deviation above the bars (or those of the
 #'   selected range). Defaults to \code{TRUE}.
-#' @param cornerRadius The radius of the rounded top corners of the bars, in
+#' @param corner_radius The radius of the rounded top corners of the bars, in
 #'   pixels. Defaults to 2; use 0 for square bars.
 #' @param legend Logical. Show the legend (with \code{group}). Defaults to
 #'   \code{TRUE} when there is a group.
@@ -108,13 +108,13 @@
 #'   \code{TRUE}.
 #' @param animate Logical. Grow the bars when the chart is first drawn.
 #'   Defaults to \code{TRUE}.
-#' @param xFormat Optional. A D3 format string for the values of \code{x}
+#' @param x_format Optional. A D3 format string for the values of \code{x}
 #'   (axis, tooltip and summary), such as \code{",.0f"} or \code{".1f"}.
-#' @param xPrefix,xSuffix Optional. Text added before and after the values of
+#' @param x_prefix,x_suffix Optional. Text added before and after the values of
 #'   \code{x}, such as \code{"$"} or \code{" km"}.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
-#' @param gridCol The colour of the horizontal grid lines. Defaults to
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
+#' @param grid_col The colour of the horizontal grid lines. Defaults to
 #'   "#e9e9e9"; use \code{NA} to hide them.
 #'
 #' @return An interactive SVG histogram (an r2d3 htmlwidget).
@@ -136,8 +136,8 @@
 #'   bins = 50,
 #'   density = TRUE,
 #'   stats = c("mean", "median"),
-#'   xPrefix = "$",
-#'   xFormat = ",.0f",
+#'   x_prefix = "$",
+#'   x_format = ",.0f",
 #'   title = "Diamond prices"
 #' )
 #'
@@ -148,7 +148,7 @@
 #'   group = "drv",
 #'   position = "overlay",
 #'   stat = "percent",
-#'   binWidth = 2,
+#'   bin_width = 2,
 #'   density = TRUE,
 #'   title = "Highway fuel economy by drive train"
 #' )
@@ -157,46 +157,46 @@ histogram <- function(
   x,
   bins = 30,
   fill = NULL,
-  xFontSize = 11,
-  yFontSize = 11,
+  x_font_size = 11,
+  y_font_size = 11,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = NULL,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   data = NULL,
   group = NULL,
-  binWidth = NULL,
+  bin_width = NULL,
   breaks = NULL,
   position = c("stacked", "overlay"),
   stat = c("count", "percent", "density"),
   density = FALSE,
   stats = NULL,
-  refLines = NULL,
+  ref_lines = NULL,
   rug = FALSE,
   summary = TRUE,
-  cornerRadius = 2,
+  corner_radius = 2,
   legend = NULL,
   controls = TRUE,
   tooltip = TRUE,
   animate = TRUE,
-  xFormat = NULL,
-  xPrefix = "",
-  xSuffix = "",
+  x_format = NULL,
+  x_prefix = "",
+  x_suffix = "",
   subtitle = NULL,
-  subtitleFontSize = 13,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  grid_col = "#e9e9e9"
 ) {
 
   # the name of the variable, used as the default x-axis title
@@ -272,8 +272,8 @@ histogram <- function(
   if (!is.numeric(bins) || length(bins) != 1 || !is.finite(bins) || bins < 1) {
     stop("'bins' must be a single number, 1 or more")
   }
-  if (!is.null(binWidth) && (!is.numeric(binWidth) || length(binWidth) != 1 || !(binWidth > 0))) {
-    stop("'binWidth' must be a single positive number")
+  if (!is.null(bin_width) && (!is.numeric(bin_width) || length(bin_width) != 1 || !(bin_width > 0))) {
+    stop("'bin_width' must be a single positive number")
   }
   if (!is.null(breaks)) {
     if (!is.numeric(breaks) || length(breaks) < 2 || any(!is.finite(breaks))) {
@@ -295,13 +295,13 @@ histogram <- function(
   if (!is.null(stats) && (!is.character(stats) || !all(stats %in% c("mean", "median")))) {
     stop("'stats' must be any of \"mean\" and \"median\"")
   }
-  if (!is.null(refLines) && !is.numeric(refLines)) {
-    stop("'refLines' must be a numeric vector")
+  if (!is.null(ref_lines) && !is.numeric(ref_lines)) {
+    stop("'ref_lines' must be a numeric vector")
   }
   ref_list <- NULL
-  if (!is.null(refLines)) {
-    lab <- if (is.null(names(refLines))) rep("", length(refLines)) else names(refLines)
-    ref_list <- lapply(seq_along(refLines), function(k) list(value = unname(refLines[k]), label = lab[k]))
+  if (!is.null(ref_lines)) {
+    lab <- if (is.null(names(ref_lines))) rep("", length(ref_lines)) else names(ref_lines)
+    ref_list <- lapply(seq_along(ref_lines), function(k) list(value = unname(ref_lines[k]), label = lab[k]))
   }
 
   # ---- colours -------------------------------------------------------------------------
@@ -337,7 +337,7 @@ histogram <- function(
       fill = bar_fill,
       colors = as.list(group_colors),
       bins = bins,
-      binWidth = binWidth,
+      binWidth = bin_width,
       breaks = if (is.null(breaks)) NULL else as.list(breaks),
       position = position,
       stat = stat,
@@ -347,14 +347,14 @@ histogram <- function(
       rug = isTRUE(rug),
       summary = isTRUE(summary),
       nMissing = n_missing,
-      cornerRadius = cornerRadius,
+      cornerRadius = corner_radius,
       legend = isTRUE(legend),
       controls = isTRUE(controls),
       tooltip = isTRUE(tooltip),
       animate = isTRUE(animate),
-      xFormat = xFormat,
-      xPrefix = xPrefix,
-      xSuffix = xSuffix,
+      xFormat = x_format,
+      xPrefix = x_prefix,
+      xSuffix = x_suffix,
       xticks = xticks,
       yticks = yticks,
       xtitle = xtitle,
@@ -363,17 +363,17 @@ histogram <- function(
       subtitle = subtitle,
       font = font,
       stroke = stroke,
-      strokeWidth = strokeWidth,
-      xFontSize = xFontSize,
-      yFontSize = yFontSize,
-      xtitleFontSize = xtitleFontSize,
-      ytitleFontSize = ytitleFontSize,
-      titleFontSize = titleFontSize,
-      subtitleFontSize = subtitleFontSize,
+      strokeWidth = stroke_width,
+      xFontSize = x_font_size,
+      yFontSize = y_font_size,
+      xtitleFontSize = xtitle_font_size,
+      ytitleFontSize = ytitle_font_size,
+      titleFontSize = title_font_size,
+      subtitleFontSize = subtitle_font_size,
       bgcol = bgcol,
       opacity = opacity,
-      axisCol = axisCol,
-      gridCol = if (is.null(gridCol) || is.na(gridCol)) NULL else gridCol,
+      axisCol = axis_col,
+      gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,
       width = width,
       height = height
     )

@@ -12,40 +12,40 @@ lollipop_chart(
   bgcol = "white",
   xticks = NULL,
   yticks = NULL,
-  xFontSize = 11,
-  yFontSize = 11,
+  x_font_size = 11,
+  y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
-  lineStroke = NULL,
-  lineStrokeWidth = 2,
-  circleFill = NULL,
-  circleStroke = NULL,
-  circleStrokeWidth = 1.5,
-  circleRadius = 6,
-  axisCol = "#333333",
+  title_font_size = 20,
+  line_stroke = NULL,
+  line_stroke_width = 2,
+  circle_fill = NULL,
+  circle_stroke = NULL,
+  circle_stroke_width = 1.5,
+  circle_radius = 6,
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   group = NULL,
   agg = c("sum", "mean", "median", "min", "max", "count"),
   labels = TRUE,
   highlight = NULL,
-  refLines = NULL,
-  negativeFill = NULL,
+  ref_lines = NULL,
+  negative_fill = NULL,
   legend = NULL,
   controls = TRUE,
   tooltip = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
   subtitle = NULL,
-  subtitleFontSize = 13,
-  gridCol = "#e9e9e9",
+  subtitle_font_size = 13,
+  grid_col = "#e9e9e9",
   opacity = 1
 )
 }
@@ -69,47 +69,47 @@ total.}
 
 \item{yticks}{Optional. The approximate number of y-axis ticks.}
 
-\item{xFontSize}{The font size of the category labels. Defaults to 11.}
+\item{x_font_size}{The font size of the category labels. Defaults to 11.}
 
-\item{yFontSize}{The font size of the value axis labels. Defaults to 11.}
+\item{y_font_size}{The font size of the value axis labels. Defaults to 11.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
 \item{xtitle}{Optional. The title of the category axis.}
 
-\item{xtitleFontSize}{The font size of the category axis title. Defaults
+\item{xtitle_font_size}{The font size of the category axis title. Defaults
 to 13.}
 
 \item{ytitle}{Optional. The title of the value axis, drawn above it.
 Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the value axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the value axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
-\item{lineStroke}{Optional. The colour of the stems. Defaults to the colour
+\item{line_stroke}{Optional. The colour of the stems. Defaults to the colour
 of the dots.}
 
-\item{lineStrokeWidth}{The width of the stems, in pixels. Defaults to 2.}
+\item{line_stroke_width}{The width of the stems, in pixels. Defaults to 2.}
 
-\item{circleFill}{The colour of the dots. A single colour, or, without
+\item{circle_fill}{The colour of the dots. A single colour, or, without
 \code{group}, one colour per category (recycled; a named vector maps
 colours to categories). With \code{group}, one colour per group (a named
 vector maps colours to groups). Defaults to a built-in palette.}
 
-\item{circleStroke}{Optional. The colour of the ring around the dots.
+\item{circle_stroke}{Optional. The colour of the ring around the dots.
 Defaults to the background colour.}
 
-\item{circleStrokeWidth}{The width of the ring around the dots. Defaults to
+\item{circle_stroke_width}{The width of the ring around the dots. Defaults to
 1.5.}
 
-\item{circleRadius}{The radius of the dots, in pixels. Defaults to 6. Dots
+\item{circle_radius}{The radius of the dots, in pixels. Defaults to 6. Dots
 are made smaller when there is not enough room for them.}
 
-\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+\item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -131,10 +131,10 @@ fits). Defaults to \code{TRUE}.}
 \item{highlight}{Optional. A character vector of categories to emphasise;
 the other lollipops are drawn in grey (or faded, with \code{group}).}
 
-\item{refLines}{Optional. Numeric values drawn as dashed reference lines
+\item{ref_lines}{Optional. Numeric values drawn as dashed reference lines
 across the bars (e.g. a target or an average); names are used as labels.}
 
-\item{negativeFill}{Optional. The colour of negative lollipops (without
+\item{negative_fill}{Optional. The colour of negative lollipops (without
 \code{group}).}
 
 \item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
@@ -147,17 +147,17 @@ shown when \code{group} is used.}
 \item{animate}{Logical. Animate the lollipops when the chart is first
 drawn. Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\item{value_format}{Optional. A d3-format string for the values, e.g.
 \code{",.0f"}, \code{".1f"} or \code{"~s"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+\item{value_prefix, value_suffix}{Optional. Text added before or after every
 value, e.g. \code{"$"} or \code{" km"}.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\item{grid_col}{The colour of the grid lines. Defaults to "#e9e9e9"; use
 \code{NA} to hide them.}
 
 \item{opacity}{The opacity of the lollipops (from 0 to 1). Defaults to 1.}
@@ -219,7 +219,7 @@ lollipop_chart(
 # One lollipop per group
 lollipop_chart(
   mpg, x = "class", y = "cty", group = "year", agg = "mean",
-  valueFormat = ".1f", title = "City miles per gallon, 1999 and 2008"
+  value_format = ".1f", title = "City miles per gallon, 1999 and 2008"
 )
 
 }

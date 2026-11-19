@@ -15,7 +15,7 @@
 #' levels give the order). Rows with the same item and period are combined
 #' with \code{agg}. Gaps inside an item are interpolated; items missing before
 #' their first or after their last period grow in from zero and fade out.
-#' With \code{maxSlices}, the smallest items of each period are grouped into
+#' With \code{max_slices}, the smallest items of each period are grouped into
 #' an "Other" slice: items flow into it and out of it smoothly when they cross
 #' the cut, and the table still ranks every item.
 #'
@@ -62,30 +62,30 @@
 #' @param time The name of the column giving the periods: numeric (e.g.
 #'   years), \code{Date}, \code{POSIXct}, or a factor or character column
 #'   (in the order of its levels, or alphabetical).
-#' @param innerRadius The inner radius of the donut, as a fraction of the
+#' @param inner_radius The inner radius of the donut, as a fraction of the
 #'   outer radius (from 0 to 0.9). Defaults to 0.6; 0 draws a pie.
 #' @param sort The order of the slices, clockwise from the top:
 #'   \code{"value"} (default, the ranking of each period, largest first; the
 #'   slices slide past each other when the ranking changes) or \code{"fixed"}
 #'   (the order of the data, or of the factor levels, so that each slice stays
 #'   in place and only grows or shrinks). The table is always ranked.
-#' @param maxSlices Optional. The maximum number of slices: in each period,
+#' @param max_slices Optional. The maximum number of slices: in each period,
 #'   the smallest items are grouped into an "Other" slice so that at most
-#'   \code{maxSlices} slices are drawn.
-#' @param otherLabel The label of the grouped slice. Defaults to "Other".
+#'   \code{max_slices} slices are drawn.
+#' @param other_label The label of the grouped slice. Defaults to "Other".
 #' @param table Logical. Show the league table next to the donut (or under
 #'   it when the chart is narrow). Defaults to \code{TRUE}.
-#' @param tableRows Optional. The maximum number of rows of the table.
+#' @param table_rows Optional. The maximum number of rows of the table.
 #'   Defaults to as many as fit.
 #' @param labels Logical. Write the share on the slices that are large enough.
 #'   Defaults to \code{TRUE}.
-#' @param centerLabel The caption under the total in the centre of the donut.
+#' @param center_label The caption under the total in the centre of the donut.
 #'   Defaults to "Total"; \code{FALSE} hides the total.
 #' @param fill Optional. The colours of the items: a single colour, one colour
 #'   per item (in order of appearance, recycled), or a named vector mapping
 #'   colours to items (the palette is used for the others). By default, the
 #'   first colours of the palette go to the largest items.
-#' @param colorCategory Optional. The name of a D3 categorical colour scheme,
+#' @param color_category Optional. The name of a D3 categorical colour scheme,
 #'   such as "Tableau10" or "Set2", used when \code{fill} is not given.
 #'   Defaults to the ddplot palette.
 #' @param highlight Optional. A character vector of items pinned from the
@@ -93,9 +93,9 @@
 #' @param agg How rows with the same item and period are combined:
 #'   \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 #'   \code{"last"}.
-#' @param fillGaps Logical. Interpolate the missing values of an item between
+#' @param fill_gaps Logical. Interpolate the missing values of an item between
 #'   two periods where it is known. Defaults to \code{TRUE}.
-#' @param frameDur The duration of one period of the animation, in
+#' @param frame_dur The duration of one period of the animation, in
 #'   milliseconds. Defaults to 900.
 #' @param ease The easing used inside each period, the name of a D3 easing
 #'   function without the "ease" prefix, such as "Linear" or "CubicInOut"
@@ -106,22 +106,22 @@
 #'   can be switched in the player).
 #' @param controls Logical. Show the player (play button, timeline, speed and
 #'   loop buttons). Defaults to \code{TRUE}.
-#' @param startFrame Where the animation starts: \code{"first"} (default),
+#' @param start_frame Where the animation starts: \code{"first"} (default),
 #'   \code{"last"} or a period number (1 for the first).
-#' @param timeFormat Optional. A D3 time format for date periods, such as
+#' @param time_format Optional. A D3 time format for date periods, such as
 #'   \code{"\%b \%Y"}. Defaults to a format chosen from the spacing of the
 #'   periods.
 #' @param title Optional. The title of the chart.
-#' @param titleFontSize The font size of the title. Defaults to 20.
+#' @param title_font_size The font size of the title. Defaults to 20.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family of the chart. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background colour. Defaults to "white".
-#' @param axisCol The colour of the texts. Defaults to "#333333".
-#' @param valueFormat Optional. A D3 format string for the values, such as
+#' @param axis_col The colour of the texts. Defaults to "#333333".
+#' @param value_format Optional. A D3 format string for the values, such as
 #'   \code{",.0f"} or \code{".2s"}.
-#' @param valuePrefix,valueSuffix Optional. Text added before and after the
+#' @param value_prefix,value_suffix Optional. Text added before and after the
 #'   values, such as \code{"$"} or \code{" TWh"}.
 #' @param tooltip Logical. Show a tooltip when hovering the slices and the
 #'   rows. Defaults to \code{TRUE}.
@@ -143,7 +143,7 @@
 #' # The 7 most populous countries of each period, the others grouped
 #' donut_race(
 #'   gapminder, label = "country", value = "pop", time = "year",
-#'   maxSlices = 8, innerRadius = 0.55, highlight = "India",
+#'   max_slices = 8, inner_radius = 0.55, highlight = "India",
 #'   title = "Who holds the world population?"
 #' )
 #'
@@ -155,43 +155,43 @@
 #' )
 #' donut_race(
 #'   energy, label = "source", value = "twh", time = "period",
-#'   innerRadius = 0, sort = "fixed", valueSuffix = " %"
+#'   inner_radius = 0, sort = "fixed", value_suffix = " %"
 #' )
 #'
 donut_race <- function(data,
                        label,
                        value,
                        time,
-                       innerRadius = 0.6,
+                       inner_radius = 0.6,
                        sort = c("value", "fixed"),
-                       maxSlices = NULL,
-                       otherLabel = "Other",
+                       max_slices = NULL,
+                       other_label = "Other",
                        table = TRUE,
-                       tableRows = NULL,
+                       table_rows = NULL,
                        labels = TRUE,
-                       centerLabel = "Total",
+                       center_label = "Total",
                        fill = NULL,
-                       colorCategory = NULL,
+                       color_category = NULL,
                        highlight = NULL,
                        agg = c("sum", "mean", "max", "min", "last"),
-                       fillGaps = TRUE,
-                       frameDur = 900,
+                       fill_gaps = TRUE,
+                       frame_dur = 900,
                        ease = "CubicInOut",
                        autoplay = TRUE,
                        loop = FALSE,
                        controls = TRUE,
-                       startFrame = "first",
-                       timeFormat = NULL,
+                       start_frame = "first",
+                       time_format = NULL,
                        title = NULL,
-                       titleFontSize = 20,
+                       title_font_size = 20,
                        subtitle = NULL,
-                       subtitleFontSize = 13,
+                       subtitle_font_size = 13,
                        font = "Verdana, Geneva, Tahoma, sans-serif",
                        bgcol = "white",
-                       axisCol = "#333333",
-                       valueFormat = NULL,
-                       valuePrefix = "",
-                       valueSuffix = "",
+                       axis_col = "#333333",
+                       value_format = NULL,
+                       value_prefix = "",
+                       value_suffix = "",
                        tooltip = TRUE,
                        width = NULL,
                        height = NULL) {
@@ -207,34 +207,34 @@ donut_race <- function(data,
     }
   }
   if (!is.numeric(data[[value]])) stop("'", value, "' must be a numeric column")
-  if (!is.numeric(innerRadius) || length(innerRadius) != 1 || !is.finite(innerRadius) ||
-      innerRadius < 0 || innerRadius > 0.9) {
-    stop("'innerRadius' must be a number between 0 and 0.9")
+  if (!is.numeric(inner_radius) || length(inner_radius) != 1 || !is.finite(inner_radius) ||
+      inner_radius < 0 || inner_radius > 0.9) {
+    stop("'inner_radius' must be a number between 0 and 0.9")
   }
-  if (!is.null(maxSlices) && (!is.numeric(maxSlices) || length(maxSlices) != 1 ||
-                              !is.finite(maxSlices) || maxSlices < 2)) {
-    stop("'maxSlices' must be a single number, 2 or more")
+  if (!is.null(max_slices) && (!is.numeric(max_slices) || length(max_slices) != 1 ||
+                              !is.finite(max_slices) || max_slices < 2)) {
+    stop("'max_slices' must be a single number, 2 or more")
   }
-  if (!is.null(tableRows) && (!is.numeric(tableRows) || length(tableRows) != 1 ||
-                              !is.finite(tableRows) || tableRows < 1)) {
-    stop("'tableRows' must be a single number, 1 or more")
+  if (!is.null(table_rows) && (!is.numeric(table_rows) || length(table_rows) != 1 ||
+                              !is.finite(table_rows) || table_rows < 1)) {
+    stop("'table_rows' must be a single number, 1 or more")
   }
-  if (!is.character(otherLabel) || length(otherLabel) != 1) {
-    stop("'otherLabel' must be a single string")
+  if (!is.character(other_label) || length(other_label) != 1) {
+    stop("'other_label' must be a single string")
   }
-  if (isFALSE(centerLabel)) centerLabel <- ""
-  if (is.null(centerLabel)) centerLabel <- "Total"
-  if (!is.character(centerLabel) || length(centerLabel) != 1) {
-    stop("'centerLabel' must be a single string or FALSE")
+  if (isFALSE(center_label)) center_label <- ""
+  if (is.null(center_label)) center_label <- "Total"
+  if (!is.character(center_label) || length(center_label) != 1) {
+    stop("'center_label' must be a single string or FALSE")
   }
-  for (k in c("table", "labels", "fillGaps", "autoplay", "loop", "controls", "tooltip")) {
+  for (k in c("table", "labels", "fill_gaps", "autoplay", "loop", "controls", "tooltip")) {
     v <- get(k)
     if (!is.logical(v) || length(v) != 1 || is.na(v)) stop("'", k, "' must be TRUE or FALSE")
   }
   if (!is.character(font) || length(font) != 1) stop("'font' must be a single string")
   if (grepl(";", font)) stop("please remove the ';' character from your font argument")
-  if (!is.null(colorCategory) && (!is.character(colorCategory) || length(colorCategory) != 1)) {
-    stop("'colorCategory' must be the name of a D3 colour scheme, such as \"Tableau10\"")
+  if (!is.null(color_category) && (!is.character(color_category) || length(color_category) != 1)) {
+    stop("'color_category' must be the name of a D3 colour scheme, such as \"Tableau10\"")
   }
   if (!is.null(highlight) && !is.character(highlight) && !is.factor(highlight)) {
     stop("'highlight' must be a character vector of items")
@@ -250,7 +250,7 @@ donut_race <- function(data,
     data[[value]][is.finite(vv) & vv < 0] <- NA
   }
   race <- race_prepare(data, id = label, time = time, values = value,
-                       agg = agg, fill_gaps = fillGaps)
+                       agg = agg, fill_gaps = fill_gaps)
   if (!length(race$items)) stop("there is no item to plot")
   names(race$series) <- "v"
 
@@ -260,7 +260,7 @@ donut_race <- function(data,
   size_rank <- integer(length(size))
   size_rank[size_order] <- seq_along(size) - 1L
   cols <- NULL
-  if (is.null(fill) && is.null(colorCategory)) {
+  if (is.null(fill) && is.null(color_category)) {
     cols <- race_colors(race$items[size_order])[size_rank + 1L]
   } else if (!is.null(fill)) {
     if (!is.null(names(fill))) {
@@ -273,9 +273,9 @@ donut_race <- function(data,
     }
   }
 
-  player <- race_player_options(frameDur, ease, autoplay, loop, controls, startFrame, timeFormat)
+  player <- race_player_options(frame_dur, ease, autoplay, loop, controls, start_frame, time_format)
   player$stateKey <- paste("donutrace", label, value, time, agg,
-                           if (is.null(maxSlices)) "" else maxSlices, sep = "|")
+                           if (is.null(max_slices)) "" else max_slices, sep = "|")
 
   r2d3::r2d3(
     data = NULL,
@@ -284,28 +284,28 @@ donut_race <- function(data,
       race = race,
       player = player,
       colors = if (is.null(cols)) NULL else I(cols),
-      colorCategory = colorCategory,
+      colorCategory = color_category,
       sizeOrder = I(size_rank),
       valueName = value,
-      innerRadius = innerRadius,
+      innerRadius = inner_radius,
       sort = sort,
-      maxSlices = if (is.null(maxSlices)) NULL else floor(maxSlices),
-      otherLabel = otherLabel,
+      maxSlices = if (is.null(max_slices)) NULL else floor(max_slices),
+      otherLabel = other_label,
       table = isTRUE(table),
-      tableRows = if (is.null(tableRows)) NULL else floor(tableRows),
+      tableRows = if (is.null(table_rows)) NULL else floor(table_rows),
       labels = isTRUE(labels),
-      centerLabel = centerLabel,
+      centerLabel = center_label,
       highlight = I(as.character(highlight)),
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       subtitle = subtitle,
-      subtitleFontSize = subtitleFontSize,
+      subtitleFontSize = subtitle_font_size,
       font = font,
       bgcol = bgcol,
-      axisCol = axisCol,
-      valueFormat = valueFormat,
-      valuePrefix = valuePrefix,
-      valueSuffix = valueSuffix,
+      axisCol = axis_col,
+      valueFormat = value_format,
+      valuePrefix = value_prefix,
+      valueSuffix = value_suffix,
       tooltip = isTRUE(tooltip)
     ),
     width = width,

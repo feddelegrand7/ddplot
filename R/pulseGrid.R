@@ -10,25 +10,25 @@
 #' @param low The low end color of the value scale. Defaults to '#E0FBFC'.
 #' @param high The high end color of the value scale. Defaults to '#0B525B'.
 #' @param stroke The border color of each tile. Defaults to 'white'.
-#' @param strokeWidth Border width of each tile. Defaults to 1.
-#' @param cellPadding Space between tiles, from 0 to 0.9. Defaults to 0.12.
-#' @param cornerRadius Corner radius of each tile. Defaults to 10.
+#' @param stroke_width Border width of each tile. Defaults to 1.
+#' @param cell_padding Space between tiles, from 0 to 0.9. Defaults to 0.12.
+#' @param corner_radius Corner radius of each tile. Defaults to 10.
 #' @param pulse Logical. Whether to animate the tiles. Defaults to `TRUE`.
-#' @param pulseStrength Numeric multiplier controlling pulse amplitude.
+#' @param pulse_strength Numeric multiplier controlling pulse amplitude.
 #' Defaults to 0.18.
-#' @param showValues Logical. Whether to print values inside tiles.
+#' @param show_values Logical. Whether to print values inside tiles.
 #' Defaults to `TRUE`.
 #' @param digits Number of digits used for in-cell labels. Defaults to 1.
-#' @param valueFontSize Font size of in-cell labels. Defaults to 12.
-#' @param xFontSize Font size of the column labels. Defaults to 12.
-#' @param yFontSize Font size of the row labels. Defaults to 12.
+#' @param value_font_size Font size of in-cell labels. Defaults to 12.
+#' @param x_font_size Font size of the column labels. Defaults to 12.
+#' @param y_font_size Font size of the row labels. Defaults to 12.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize Font size of the plot title. Defaults to 22.
+#' @param title_font_size Font size of the plot title. Defaults to 22.
 #' @param font The font family used in labels and title. Defaults to
 #' 'Verdana, Geneva, Tahoma, sans-serif'.
 #' @param bgcol Background color of the SVG. Defaults to '#0F172A'.
-#' @param labelColor Color of the row and column labels. Defaults to '#F8FAFC'.
-#' @param titleColor Color of the title. Defaults to '#F8FAFC'.
+#' @param label_color Color of the row and column labels. Defaults to '#F8FAFC'.
+#' @param title_color Color of the title. Defaults to '#F8FAFC'.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
@@ -63,22 +63,22 @@ pulse_grid <- function(
   low = "#E0FBFC",
   high = "#0B525B",
   stroke = "white",
-  strokeWidth = 1,
-  cellPadding = 0.12,
-  cornerRadius = 10,
+  stroke_width = 1,
+  cell_padding = 0.12,
+  corner_radius = 10,
   pulse = TRUE,
-  pulseStrength = 0.18,
-  showValues = TRUE,
+  pulse_strength = 0.18,
+  show_values = TRUE,
   digits = 1,
-  valueFontSize = 12,
-  xFontSize = 12,
-  yFontSize = 12,
+  value_font_size = 12,
+  x_font_size = 12,
+  y_font_size = 12,
   title = NULL,
-  titleFontSize = 22,
+  title_font_size = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#0F172A",
-  labelColor = "#F8FAFC",
-  titleColor = "#F8FAFC",
+  label_color = "#F8FAFC",
+  title_color = "#F8FAFC",
   width = NULL,
   height = NULL
 ) {
@@ -95,12 +95,12 @@ pulse_grid <- function(
     stop("please remove the ';' character from your font argument")
   }
 
-  if (cellPadding < 0 || cellPadding >= 1) {
-    stop("cellPadding must be between 0 and 0.99")
+  if (cell_padding < 0 || cell_padding >= 1) {
+    stop("cell_padding must be between 0 and 0.99")
   }
 
-  if (pulseStrength < 0) {
-    stop("pulseStrength must be non-negative")
+  if (pulse_strength < 0) {
+    stop("pulse_strength must be non-negative")
   }
 
   r2d3::r2d3(
@@ -113,22 +113,22 @@ pulse_grid <- function(
       low = low,
       high = high,
       stroke = stroke,
-      strokeWidth = strokeWidth,
-      cellPadding = cellPadding,
-      cornerRadius = cornerRadius,
+      strokeWidth = stroke_width,
+      cellPadding = cell_padding,
+      cornerRadius = corner_radius,
       pulse = pulse,
-      pulseStrength = pulseStrength,
-      showValues = showValues,
+      pulseStrength = pulse_strength,
+      showValues = show_values,
       digits = digits,
-      valueFontSize = valueFontSize,
-      xFontSize = xFontSize,
-      yFontSize = yFontSize,
+      valueFontSize = value_font_size,
+      xFontSize = x_font_size,
+      yFontSize = y_font_size,
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       font = font,
       bgcol = bgcol,
-      labelColor = labelColor,
-      titleColor = titleColor,
+      labelColor = label_color,
+      titleColor = title_color,
       width = width,
       height = height
     )

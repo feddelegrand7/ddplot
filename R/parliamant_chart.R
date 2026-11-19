@@ -36,27 +36,27 @@
 #' @param categorical_column The name of the column giving the parties.
 #' @param numerical_column The name of the column giving the number of seats
 #'   (whole numbers; other numbers are rounded with a warning).
-#' @param seatSize Optional. The diameter of the seats in pixels. By default
+#' @param seat_size Optional. The diameter of the seats in pixels. By default
 #'   the seats are as large as the chart allows. When the seats do not fit,
 #'   they are made smaller.
 #' @param padding Optional. The space between two seats, in pixels. By
 #'   default a fifth of the space given to each seat.
-#' @param maxRows Optional. The number of rows of seats. By default the
+#' @param max_rows Optional. The number of rows of seats. By default the
 #'   number of rows that gives the largest seats.
 #' @param title Optional. The title of the chart.
-#' @param titleFontSize The font size of the title. Defaults to 20.
+#' @param title_font_size The font size of the title. Defaults to 20.
 #' @param font The font family. Defaults to "Verdana, Geneva, Tahoma,
 #'   sans-serif".
 #' @param bgcol The background colour. Defaults to "white".
 #' @param width Optional. The width of the chart.
 #' @param height Optional. The height of the chart.
 #' @param subtitle Optional. A subtitle under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param fill Optional. The colours of the parties: one colour per party
 #'   (recycled, in the order of the data), or a named vector mapping colours
 #'   to parties (for instance \code{c(Greens = "#3ca951")}); the other
 #'   parties get the ddplot palette.
-#' @param colorCategory Optional. The name of a D3 categorical colour scheme,
+#' @param color_category Optional. The name of a D3 categorical colour scheme,
 #'   such as "Tableau10" or "Set2", used when \code{fill} is not given.
 #' @param previous Optional. The name of a column giving the seats of each
 #'   party at the previous election: the gains and losses are then shown in
@@ -67,7 +67,7 @@
 #'   draw no majority line.
 #' @param coalition Optional. A character vector of parties that form the
 #'   coalition when the chart is first drawn.
-#' @param coalitionBuilder Logical. Let the viewer build a coalition by
+#' @param coalition_builder Logical. Let the viewer build a coalition by
 #'   clicking parties, with a gauge under the hemicycle. Defaults to
 #'   \code{TRUE}.
 #' @param regroup Logical. Move the seats of the coalition to the left of the
@@ -78,11 +78,11 @@
 #'   first) or \code{"ascending"}.
 #' @param arc The angle covered by the seats, in degrees, from 180 (default,
 #'   a hemicycle) to 360 (a full ring).
-#' @param innerRadius The radius of the empty centre, as a fraction of the
+#' @param inner_radius The radius of the empty centre, as a fraction of the
 #'   outer radius. Defaults to 0.4.
-#' @param seatShape The shape of the seats: \code{"circle"} (default) or
+#' @param seat_shape The shape of the seats: \code{"circle"} (default) or
 #'   \code{"square"}.
-#' @param centerLabel The text under the number of seats in the centre.
+#' @param center_label The text under the number of seats in the centre.
 #'   Defaults to "seats"; \code{FALSE} leaves the centre empty.
 #' @param legend Logical. Show the legend, with the seats and shares (on the
 #'   right when there is room, otherwise below). Defaults to \code{TRUE}.
@@ -90,7 +90,7 @@
 #'   to \code{TRUE}.
 #' @param animate Logical. Fill the seats from left to right when the chart
 #'   comes into view. Defaults to \code{TRUE}.
-#' @param axisCol The colour of the texts. Defaults to "#333333".
+#' @param axis_col The colour of the texts. Defaults to "#333333".
 #'
 #' @return An interactive parliament chart (an r2d3 htmlwidget).
 #' @export
@@ -126,33 +126,33 @@ parliament_chart <- function(
     data,
     categorical_column,
     numerical_column,
-    seatSize = NULL,
+    seat_size = NULL,
     padding = NULL,
-    maxRows = NULL,
+    max_rows = NULL,
     title = NULL,
-    titleFontSize = 20,
+    title_font_size = 20,
     font = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol = "white",
     width = NULL,
     height = NULL,
     subtitle = NULL,
-    subtitleFontSize = 13,
+    subtitle_font_size = 13,
     fill = NULL,
-    colorCategory = NULL,
+    color_category = NULL,
     previous = NULL,
     majority = TRUE,
     coalition = NULL,
-    coalitionBuilder = TRUE,
+    coalition_builder = TRUE,
     regroup = TRUE,
     sort = c("none", "descending", "ascending"),
     arc = 180,
-    innerRadius = 0.4,
-    seatShape = c("circle", "square"),
-    centerLabel = "seats",
+    inner_radius = 0.4,
+    seat_shape = c("circle", "square"),
+    center_label = "seats",
     legend = TRUE,
     tooltip = TRUE,
     animate = TRUE,
-    axisCol = "#333333"
+    axis_col = "#333333"
 ) {
   if (!is.character(font) || length(font) != 1 || grepl(";", font)) {
     stop("Please remove the ';' character from your font argument.")
@@ -173,7 +173,7 @@ parliament_chart <- function(
     stop("the 'previous' column is not in your data.frame")
   }
   sort <- match.arg(sort)
-  seatShape <- match.arg(seatShape)
+  seat_shape <- match.arg(seat_shape)
   num1 <- function(x, name, lo = -Inf, hi = Inf) {
     if (is.null(x)) return(NULL)
     if (!is.numeric(x) || length(x) != 1 || is.na(x) || x < lo || x > hi) {
@@ -183,13 +183,13 @@ parliament_chart <- function(
     }
     as.numeric(x)
   }
-  seatSize <- num1(seatSize, "seatSize", 0.5)
+  seat_size <- num1(seat_size, "seat_size", 0.5)
   padding <- num1(padding, "padding", 0)
-  maxRows <- num1(maxRows, "maxRows", 1)
+  max_rows <- num1(max_rows, "max_rows", 1)
   arc <- num1(arc, "arc", 180, 360)
-  innerRadius <- num1(innerRadius, "innerRadius", 0, 0.9)
-  if (!is.null(colorCategory) && !one_col(colorCategory)) {
-    stop("'colorCategory' must be the name of a D3 colour scheme, such as \"Tableau10\"")
+  inner_radius <- num1(inner_radius, "inner_radius", 0, 0.9)
+  if (!is.null(color_category) && !one_col(color_category)) {
+    stop("'color_category' must be the name of a D3 colour scheme, such as \"Tableau10\"")
   }
 
   # ---- parties -------------------------------------------------------------------
@@ -241,7 +241,7 @@ parliament_chart <- function(
   }
 
   # ---- colours -----------------------------------------------------------------------
-  parties$color <- if (is.null(fill) && !is.null(colorCategory)) NA_character_
+  parties$color <- if (is.null(fill) && !is.null(color_category)) NA_character_
                    else race_colors(parties$label, fill)
 
   # ---- majority ----------------------------------------------------------------------
@@ -269,7 +269,7 @@ parliament_chart <- function(
     coalition <- intersect(coalition, parties$label)
   }
 
-  if (isFALSE(centerLabel) || is.null(centerLabel)) centerLabel <- ""
+  if (isFALSE(center_label) || is.null(center_label)) center_label <- ""
 
   r2d3::r2d3(
     data = parties,
@@ -280,29 +280,29 @@ parliament_chart <- function(
       stateKey = paste("parliament", categorical_column, numerical_column, sep = "|"),
       valueName = numerical_column,
       hasPrevious = !is.null(previous),
-      seatSize = seatSize,
+      seatSize = seat_size,
       padding = padding,
-      maxRows = maxRows,
+      maxRows = max_rows,
       title = title,
-      titleFontSize = play_size(titleFontSize, "titleFontSize"),
+      titleFontSize = play_size(title_font_size, "title_font_size"),
       subtitle = subtitle,
-      subtitleFontSize = play_size(subtitleFontSize, "subtitleFontSize"),
+      subtitleFontSize = play_size(subtitle_font_size, "subtitle_font_size"),
       font = font,
       bgcol = bgcol,
-      colorCategory = colorCategory,
+      colorCategory = color_category,
       majority = majority_seats,
       coalition = if (is.null(coalition)) NULL else I(coalition),
-      coalitionBuilder = play_flag(coalitionBuilder, "coalitionBuilder"),
+      coalitionBuilder = play_flag(coalition_builder, "coalition_builder"),
       regroup = play_flag(regroup, "regroup"),
       sort = sort,
       arc = arc,
-      innerRadius = innerRadius,
-      seatShape = seatShape,
-      centerLabel = as.character(centerLabel),
+      innerRadius = inner_radius,
+      seatShape = seat_shape,
+      centerLabel = as.character(center_label),
       legend = play_flag(legend, "legend"),
       tooltip = play_flag(tooltip, "tooltip"),
       animate = play_flag(animate, "animate"),
-      axisCol = axisCol
+      axisCol = axis_col
     )
   )
 }

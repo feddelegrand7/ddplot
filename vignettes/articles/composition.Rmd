@@ -36,7 +36,7 @@ pie_chart(mpg, label = "class", title = "Cars by class")
 
 Hover a slice or a legend entry to pull the slice out and see its value, its share and its rank. Click a legend entry to hide a slice (the shares are then recomputed without it), and double-click it to keep only that slice. Clicking a slice pulls it out.
 
-Set `innerRadius` to draw a donut chart: a number below 1 is a fraction of the radius, a larger number a radius in pixels. The centre shows the total, and the hovered slice's share and value:
+Set `inner_radius` to draw a donut chart: a number below 1 is a fraction of the radius, a larger number a radius in pixels. The centre shows the total, and the hovered slice's share and value:
 
 ```{r}
 energy <- data.frame(
@@ -48,28 +48,28 @@ pie_chart(
   energy,
   value       = "twh",
   label       = "source",
-  innerRadius = 0.6,
-  centerLabel = "TWh",
+  inner_radius = 0.6,
+  center_label = "TWh",
   title       = "Electricity generation by source"
 )
 ```
 
-Pies are hard to read with many slices. `maxSlices` combines the smallest categories into an "Other" slice (its tooltip lists them). Without a legend, the labels show the category names. `startAngle` and `endAngle` draw part of a circle, such as a half donut:
+Pies are hard to read with many slices. `max_slices` combines the smallest categories into an "Other" slice (its tooltip lists them). Without a legend, the labels show the category names. `start_angle` and `end_angle` draw part of a circle, such as a half donut:
 
 ```{r}
 pie_chart(
   mpg,
   label       = "manufacturer",
-  maxSlices   = 7,
-  innerRadius = 0.55,
-  startAngle  = -90,
-  endAngle    = 90,
+  max_slices   = 7,
+  inner_radius = 0.55,
+  start_angle  = -90,
+  end_angle    = 90,
   legend      = FALSE,
   title       = "Cars by manufacturer"
 )
 ```
 
-`labels` chooses what is written (`"label"`, `"value"`, `"percent"`), `labelPosition` where, and `padAngle` and `cornerRadius` separate and round the slices. `fill` sets the colours (a named vector maps them to the labels) and `colorCategory` picks a D3 colour scheme:
+`labels` chooses what is written (`"label"`, `"value"`, `"percent"`), `label_position` where, and `pad_angle` and `corner_radius` separate and round the slices. `fill` sets the colours (a named vector maps them to the labels) and `color_category` picks a D3 colour scheme:
 
 ```{r}
 pie_chart(
@@ -77,13 +77,13 @@ pie_chart(
   value         = "twh",
   label         = "source",
   labels        = c("label", "value"),
-  labelPosition = "outside",
+  label_position = "outside",
   legend        = FALSE,
-  padAngle      = 0.02,
-  cornerRadius  = 4,
+  pad_angle      = 0.02,
+  corner_radius  = 4,
   highlight     = "Wind",
-  colorCategory = "Set2",
-  valueSuffix   = " TWh"
+  color_category = "Set2",
+  value_suffix   = " TWh"
 )
 ```
 
@@ -117,7 +117,7 @@ treemap_chart(
   value       = "spending",
   label       = "department",
   group       = "ministry",
-  valueFormat = "$,.0f",
+  value_format = "$,.0f",
   title       = "Where the money goes (millions)"
 )
 ```
@@ -134,7 +134,7 @@ treemap_chart(
   value       = "pop",
   label       = "country",
   group       = "continent",
-  valueFormat = ".3~s",
+  value_format = ".3~s",
   padding     = 1,
   title       = "World population in 2007"
 )
@@ -192,8 +192,8 @@ sunburst_chart(
   data        = pop_2007,
   levels      = c("continent", "country"),
   value       = "pop",
-  valueFormat = ".3~s",
-  rootLabel   = "World",
+  value_format = ".3~s",
+  root_label   = "World",
   title       = "World population in 2007"
 )
 ```
@@ -204,8 +204,8 @@ Without a `value` column, sectors are sized by row counts:
 sunburst_chart(
   data        = mpg,
   levels      = c("class", "manufacturer"),
-  rootLabel   = "Cars",
-  labelRotate = "tangential",
+  root_label   = "Cars",
+  label_rotate = "tangential",
   title       = "Number of car models by class and manufacturer"
 )
 ```
@@ -236,8 +236,8 @@ cars <- mtcars
 cars$cyl  <- factor(cars$cyl,  levels = c(8, 6, 4), labels = c("8 cyl", "6 cyl", "4 cyl"))
 cars$gear <- factor(cars$gear, levels = c(3, 4, 5), labels = c("3 gears", "4 gears", "5 gears"))
 
-mosaic_chart(cars, x = "cyl", fill = "gear", labelType = "both",
-             legendTitle = "Gears", title = "Motor Trend cars: gears by cylinders")
+mosaic_chart(cars, x = "cyl", fill = "gear", label_type = "both",
+             legend_title = "Gears", title = "Motor Trend cars: gears by cylinders")
 ```
 
 ## `rose_chart()` {#rose_chart}
@@ -276,7 +276,7 @@ rose_chart(
   category    = "state",
   value       = "murder",
   sort        = "desc",
-  valueFormat = ".1f",
+  value_format = ".1f",
   title       = "Murder arrests per 100,000 residents (1973)"
 )
 ```
@@ -319,14 +319,14 @@ parliament_chart(
 )
 ```
 
-`arc` bends the seats into a horseshoe (or a full ring at 360 degrees), `seatShape = "square"` draws square seats and `majority` sets another threshold, such as a two-thirds majority.
+`arc` bends the seats into a horseshoe (or a full ring at 360 degrees), `seat_shape = "square"` draws square seats and `majority` sets another threshold, such as a two-thirds majority.
 
 ```{r}
 parliament_chart(
   assembly, "party", "seats",
   arc = 280,
-  innerRadius = 0.5,
-  seatShape = "square",
+  inner_radius = 0.5,
+  seat_shape = "square",
   majority = 2 / 3,
   sort = "descending",
   title = "A two-thirds majority"

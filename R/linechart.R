@@ -50,7 +50,7 @@
 #'   built-in 10-color palette.
 #' @param stroke The color of the line when there is a single series. When
 #'   \code{NULL} (default), the first palette color is used.
-#' @param strokeWidth The width of the lines. Defaults to 2.
+#' @param stroke_width The width of the lines. Defaults to 2.
 #' @param curve The line's curve type. A complete list can be found here
 #'   <https://github.com/d3/d3-shape#curves>. Defaults to 'curveLinear';
 #'   'curveMonotoneX' gives smooth lines that never overshoot the data.
@@ -59,19 +59,19 @@
 #'   Defaults to \code{FALSE}.
 #' @param points Logical. Draw a marker on every data point. Defaults to
 #'   \code{FALSE}.
-#' @param yScale Either "linear" (default) or "log".
-#' @param yZero Logical. Force the y axis to include 0. When \code{NULL}
+#' @param y_scale Either "linear" (default) or "log".
+#' @param y_zero Logical. Force the y axis to include 0. When \code{NULL}
 #'   (default), 0 is included only when \code{area = TRUE}; otherwise the
 #'   axis fits the data in view.
 #' @param transform How values are displayed: "none" (default), "index"
-#'   (each series rebased to \code{indexBase} at the first visible date, so
+#'   (each series rebased to \code{index_base} at the first visible date, so
 #'   series on different scales can be compared) or "percent" (change since
 #'   the first visible date). The base moves with the zoom.
-#' @param indexBase The value series are rebased to when
+#' @param index_base The value series are rebased to when
 #'   \code{transform = "index"}. Defaults to 100.
 #' @param rollmean Optional. A window size (number of observations). When
 #'   given, a trailing moving average is drawn as the main line.
-#' @param showRaw Logical. When \code{rollmean} is used, also draw the raw
+#' @param show_raw Logical. When \code{rollmean} is used, also draw the raw
 #'   series as a thin faded line. Defaults to \code{TRUE}.
 #' @param events Optional. Dates to mark with a vertical line: either a
 #'   vector of dates (names are used as labels) or a data frame whose first
@@ -85,7 +85,7 @@
 #' @param legend Logical. Show the interactive legend (click to hide or show
 #'   a series, double-click to isolate it). When \code{NULL} (default), the
 #'   legend is shown when there are two series or more.
-#' @param endLabels Logical. Label each line at its last visible point. When
+#' @param end_labels Logical. Label each line at its last visible point. When
 #'   \code{NULL} (default), labels are shown when there are two series or
 #'   more.
 #' @param tooltip Logical. Show the crosshair and the tooltip on hover.
@@ -94,40 +94,40 @@
 #'   series with a brush to select the visible range) under the chart.
 #'   Defaults to \code{TRUE}; it is hidden automatically on very short
 #'   charts.
-#' @param rangeButtons Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+#' @param range_buttons Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
 #'   All, ...), chosen from the length and frequency of the data. Only used
 #'   with dates. Defaults to \code{TRUE}.
 #' @param zoom Logical. Drag horizontally on the chart to zoom into a range;
 #'   double-click to reset. Defaults to \code{TRUE}.
 #' @param animate Logical. Draw the lines in with an animation on first
 #'   render. Defaults to \code{TRUE}.
-#' @param valueFormat Optional. A d3-format string for values in the tooltip
+#' @param value_format Optional. A d3-format string for values in the tooltip
 #'   (see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
 #'   with \code{transform = "percent"}.
-#' @param valuePrefix,valueSuffix Optional. Text placed before and after the
+#' @param value_prefix,value_suffix Optional. Text placed before and after the
 #'   values on the y axis and in the tooltip, for example "$" or " km".
-#' @param dateFormat Optional. A d3-time-format string for the date in the
+#' @param date_format Optional. A d3-time-format string for the date in the
 #'   tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
 #'   (default), it is picked from the frequency of the data (yearly,
 #'   quarterly, monthly, daily or intraday).
 #' @param xticks Optional. The approximate number of x-axis ticks.
 #' @param yticks Optional. The approximate number of y-axis ticks.
 #' @param xtitle Optional. The title of the x-axis.
-#' @param xtitleFontSize The font size of the x-axis title. Defaults to 13.
+#' @param xtitle_font_size The font size of the x-axis title. Defaults to 13.
 #' @param ytitle Optional. The title of the y-axis, shown above the axis.
-#' @param ytitleFontSize The font size of the y-axis title. Defaults to 13.
+#' @param ytitle_font_size The font size of the y-axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 20.
+#' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param subtitle Optional. A subtitle shown under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
-#' @param xFontSize,yFontSize The font size of the axis tick labels. Defaults
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
+#' @param x_font_size,y_font_size The font size of the axis tick labels. Defaults
 #'   to 11.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "white".
-#' @param gridCol The color of the horizontal grid lines. Defaults to
+#' @param grid_col The color of the horizontal grid lines. Defaults to
 #'   "#e9e9e9".
-#' @param axisCol The color of the axis text, ticks and titles. Defaults to
+#' @param axis_col The color of the axis text, ticks and titles. Defaults to
 #'   "#333333".
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -172,8 +172,8 @@
 #'   y = "unemploy",
 #'   area = TRUE,
 #'   bands = recessions,
-#'   valueFormat = ",.0f",
-#'   valueSuffix = "k",
+#'   value_format = ",.0f",
+#'   value_suffix = "k",
 #'   title = "US unemployment",
 #'   subtitle = "Thousands of persons, recessions shaded"
 #' )
@@ -198,7 +198,7 @@
 #'   lower = "lo", upper = "hi",
 #'   colors = c(Observed = "#4269d0", Forecast = "#ff725c"),
 #'   events = c("Forecast starts" = as.Date("1961-01-01")),
-#'   valueFormat = ",.0f",
+#'   value_format = ",.0f",
 #'   title = "Airline passengers: Holt-Winters forecast"
 #' )
 line_chart <- function(
@@ -210,47 +210,47 @@ line_chart <- function(
                       upper = NULL,
                       colors = NULL,
                       stroke = NULL,
-                      strokeWidth = 2,
+                      stroke_width = 2,
                       curve = "curveLinear",
                       opacity = 1,
                       area = FALSE,
                       points = FALSE,
-                      yScale = c("linear", "log"),
-                      yZero = NULL,
+                      y_scale = c("linear", "log"),
+                      y_zero = NULL,
                       transform = c("none", "index", "percent"),
-                      indexBase = 100,
+                      index_base = 100,
                       rollmean = NULL,
-                      showRaw = TRUE,
+                      show_raw = TRUE,
                       events = NULL,
                       bands = NULL,
                       hlines = NULL,
                       legend = NULL,
-                      endLabels = NULL,
+                      end_labels = NULL,
                       tooltip = TRUE,
                       navigator = TRUE,
-                      rangeButtons = TRUE,
+                      range_buttons = TRUE,
                       zoom = TRUE,
                       animate = TRUE,
-                      valueFormat = NULL,
-                      valuePrefix = "",
-                      valueSuffix = "",
-                      dateFormat = NULL,
+                      value_format = NULL,
+                      value_prefix = "",
+                      value_suffix = "",
+                      date_format = NULL,
                       xticks = NULL,
                       yticks = NULL,
                       xtitle = NULL,
-                      xtitleFontSize = 13,
+                      xtitle_font_size = 13,
                       ytitle = NULL,
-                      ytitleFontSize = 13,
+                      ytitle_font_size = 13,
                       title = NULL,
-                      titleFontSize = 20,
+                      title_font_size = 20,
                       subtitle = NULL,
-                      subtitleFontSize = 13,
-                      xFontSize = 11,
-                      yFontSize = 11,
+                      subtitle_font_size = 13,
+                      x_font_size = 11,
+                      y_font_size = 11,
                       font = "Verdana, Geneva, Tahoma, sans-serif",
                       bgcol = "white",
-                      gridCol = "#e9e9e9",
-                      axisCol = "#333333",
+                      grid_col = "#e9e9e9",
+                      axis_col = "#333333",
                       width = NULL,
                       height = NULL
                       ) {
@@ -272,52 +272,52 @@ line_widget <- function(
                       upper = NULL,
                       colors = NULL,
                       stroke = NULL,
-                      strokeWidth = 2,
+                      stroke_width = 2,
                       curve = "curveLinear",
                       opacity = 1,
                       area = FALSE,
                       points = FALSE,
-                      yScale = c("linear", "log"),
-                      yZero = NULL,
+                      y_scale = c("linear", "log"),
+                      y_zero = NULL,
                       transform = c("none", "index", "percent"),
-                      indexBase = 100,
+                      index_base = 100,
                       rollmean = NULL,
-                      showRaw = TRUE,
+                      show_raw = TRUE,
                       events = NULL,
                       bands = NULL,
                       hlines = NULL,
                       legend = NULL,
-                      endLabels = NULL,
+                      end_labels = NULL,
                       tooltip = TRUE,
                       navigator = TRUE,
-                      rangeButtons = TRUE,
+                      range_buttons = TRUE,
                       zoom = TRUE,
                       animate = TRUE,
-                      valueFormat = NULL,
-                      valuePrefix = "",
-                      valueSuffix = "",
-                      dateFormat = NULL,
+                      value_format = NULL,
+                      value_prefix = "",
+                      value_suffix = "",
+                      date_format = NULL,
                       xticks = NULL,
                       yticks = NULL,
                       xtitle = NULL,
-                      xtitleFontSize = 13,
+                      xtitle_font_size = 13,
                       ytitle = NULL,
-                      ytitleFontSize = 13,
+                      ytitle_font_size = 13,
                       title = NULL,
-                      titleFontSize = 20,
+                      title_font_size = 20,
                       subtitle = NULL,
-                      subtitleFontSize = 13,
-                      xFontSize = 11,
-                      yFontSize = 11,
+                      subtitle_font_size = 13,
+                      x_font_size = 11,
+                      y_font_size = 11,
                       font = "Verdana, Geneva, Tahoma, sans-serif",
                       bgcol = "white",
-                      gridCol = "#e9e9e9",
-                      axisCol = "#333333",
+                      grid_col = "#e9e9e9",
+                      axis_col = "#333333",
                       width = NULL,
                       height = NULL,
                       extra = list()) {
 
-  yScale <- match.arg(yScale)
+  y_scale <- match.arg(y_scale)
   transform <- match.arg(transform)
 
   # ---- ts / mts input --------------------------------------------------------
@@ -388,8 +388,8 @@ line_widget <- function(
   if (grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
   }
-  if (!is.numeric(strokeWidth) || length(strokeWidth) != 1 || strokeWidth <= 0) {
-    stop("'strokeWidth' must be a single positive number")
+  if (!is.numeric(stroke_width) || length(stroke_width) != 1 || stroke_width <= 0) {
+    stop("'stroke_width' must be a single positive number")
   }
   if (!is.numeric(opacity) || length(opacity) != 1 || opacity < 0 || opacity > 1) {
     stop("'opacity' must be a single number between 0 and 1")
@@ -400,17 +400,17 @@ line_widget <- function(
     }
     rollmean <- as.integer(round(rollmean))
   }
-  if (!is.numeric(indexBase) || length(indexBase) != 1 || indexBase <= 0) {
-    stop("'indexBase' must be a single positive number")
+  if (!is.numeric(index_base) || length(index_base) != 1 || index_base <= 0) {
+    stop("'index_base' must be a single positive number")
   }
-  for (arg in c("area", "points", "showRaw", "tooltip", "navigator",
-                "rangeButtons", "zoom", "animate")) {
+  for (arg in c("area", "points", "show_raw", "tooltip", "navigator",
+                "range_buttons", "zoom", "animate")) {
     val <- get(arg)
     if (!is.logical(val) || length(val) != 1 || is.na(val)) {
       stop("'", arg, "' must be TRUE or FALSE")
     }
   }
-  for (arg in c("yZero", "legend", "endLabels")) {
+  for (arg in c("y_zero", "legend", "end_labels")) {
     val <- get(arg)
     if (!is.null(val) && (!is.logical(val) || length(val) != 1 || is.na(val))) {
       stop("'", arg, "' must be TRUE, FALSE or NULL")
@@ -461,7 +461,7 @@ line_widget <- function(
   long$lo[!is.finite(long$lo)] <- NA
   long$hi[!is.finite(long$hi)] <- NA
 
-  if (yScale == "log" && transform == "none" &&
+  if (y_scale == "log" && transform == "none" &&
       any(c(long$v, long$lo, long$hi) <= 0, na.rm = TRUE)) {
     stop("a log scale needs strictly positive values")
   }
@@ -529,46 +529,46 @@ line_widget <- function(
       series = as.list(series),
       colors = if (is.null(series_colors)) NULL else as.list(series_colors),
       curve = curve,
-      strokeWidth = strokeWidth,
+      strokeWidth = stroke_width,
       opacity = opacity,
       area = area,
       points = points,
-      yScale = yScale,
-      yZero = if (is.null(yZero)) area else yZero,
+      yScale = y_scale,
+      yZero = if (is.null(y_zero)) area else y_zero,
       transform = transform,
-      indexBase = indexBase,
+      indexBase = index_base,
       rollmean = rollmean,
-      showRaw = showRaw,
+      showRaw = show_raw,
       events = events_list,
       bands = bands_list,
       hlines = hlines_list,
       legend = if (is.null(legend)) length(series) > 1 else legend,
-      endLabels = if (is.null(endLabels)) length(series) > 1 else endLabels,
+      endLabels = if (is.null(end_labels)) length(series) > 1 else end_labels,
       tooltip = tooltip,
       navigator = navigator,
-      rangeButtons = rangeButtons,
+      rangeButtons = range_buttons,
       zoom = zoom,
       animate = animate,
-      valueFormat = valueFormat,
-      valuePrefix = valuePrefix,
-      valueSuffix = valueSuffix,
-      dateFormat = dateFormat,
+      valueFormat = value_format,
+      valuePrefix = value_prefix,
+      valueSuffix = value_suffix,
+      dateFormat = date_format,
       xticks = xticks,
       yticks = yticks,
       xtitle = xtitle,
-      xtitleFontSize = xtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
       ytitle = ytitle,
-      ytitleFontSize = ytitleFontSize,
+      ytitleFontSize = ytitle_font_size,
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       subtitle = subtitle,
-      subtitleFontSize = subtitleFontSize,
-      xFontSize = xFontSize,
-      yFontSize = yFontSize,
+      subtitleFontSize = subtitle_font_size,
+      xFontSize = x_font_size,
+      yFontSize = y_font_size,
       font = font,
       bgcol = bgcol,
-      gridCol = gridCol,
-      axisCol = axisCol
+      gridCol = grid_col,
+      axisCol = axis_col
     ), extra),
     width = width,
     height = height

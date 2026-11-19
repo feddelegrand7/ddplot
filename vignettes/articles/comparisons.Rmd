@@ -44,7 +44,7 @@ mpg %>%
     y = "mean_cty",
     sort = "descending",
     highlight = c("honda", "volkswagen"),
-    valueFormat = ".1f",
+    value_format = ".1f",
     ytitle = "Average city miles per gallon",
     title = "City fuel economy by manufacturer",
     subtitle = "Honda and Volkswagen lead the field"
@@ -81,7 +81,7 @@ bar_chart(
 )
 ```
 
-`position` sets the starting layout. Stacked bars show a total above each bar, and `refLines` draws a target or an average:
+`position` sets the starting layout. Stacked bars show a total above each bar, and `ref_lines` draws a target or an average:
 
 ```{r}
 sales <- data.frame(
@@ -96,9 +96,9 @@ bar_chart(
   y = "revenue",
   group = "region",
   position = "stacked",
-  refLines = c(Target = 300),
-  valuePrefix = "$",
-  valueSuffix = "k",
+  ref_lines = c(Target = 300),
+  value_prefix = "$",
+  value_suffix = "k",
   title = "Revenue by quarter"
 )
 ```
@@ -126,7 +126,7 @@ mpg %>%
     label = "manufacturer",
     value = "median_hwy",
     sort = "descending",
-    valueTitle = "Median highway miles per gallon",
+    value_title = "Median highway miles per gallon",
     title = "Highway fuel economy by manufacturer"
   )
 ```
@@ -144,7 +144,7 @@ horz_bar_chart(
 )
 ```
 
-Negative values grow to the left of zero; `negativeFill` gives them their own colour:
+Negative values grow to the left of zero; `negative_fill` gives them their own colour:
 
 ```{r}
 growth <- data.frame(
@@ -157,9 +157,9 @@ horz_bar_chart(
   label = "country",
   value = "gdp",
   sort = "descending",
-  negativeFill = "#ff725c",
-  valueSuffix = "%",
-  valueTitle = "GDP growth",
+  negative_fill = "#ff725c",
+  value_suffix = "%",
+  value_title = "GDP growth",
   title = "Annual GDP growth (illustrative data)"
 )
 ```
@@ -179,7 +179,7 @@ mpg %>%
     ytitle = "Average highway miles per gallon",
     title = "Highway fuel economy by manufacturer",
     highlight = c("honda", "toyota"),
-    valueFormat = ".1f"
+    value_format = ".1f"
   )
 ```
 
@@ -193,12 +193,12 @@ lollipop_chart(
   group = "year",
   agg = "mean",
   sort = "descending",
-  valueFormat = ".1f",
+  value_format = ".1f",
   title = "City miles per gallon, 1999 and 2008"
 )
 ```
 
-The look is set with `circleFill`, `circleRadius`, `lineStroke` and `lineStrokeWidth`. Values below zero are drawn downwards, in `negativeFill` if you give one:
+The look is set with `circle_fill`, `circle_radius`, `line_stroke` and `line_stroke_width`. Values below zero are drawn downwards, in `negative_fill` if you give one:
 
 ```{r}
 change <- data.frame(
@@ -210,12 +210,12 @@ lollipop_chart(
   change,
   x = "country",
   y = "growth",
-  negativeFill = "#ff725c",
-  valueSuffix = "%",
+  negative_fill = "#ff725c",
+  value_suffix = "%",
   ytitle = "GDP growth",
   title = "Annual GDP growth",
-  circleRadius = 8,
-  lineStroke = "#c9ced6"
+  circle_radius = 8,
+  line_stroke = "#c9ced6"
 )
 ```
 
@@ -233,7 +233,7 @@ mpg %>%
     label = "manufacturer",
     value = "median_cty",
     sort = "descending",
-    valueTitle = "Median city miles per gallon",
+    value_title = "Median city miles per gallon",
     title = "City fuel economy by manufacturer"
   )
 ```
@@ -247,8 +247,8 @@ horz_lollipop(
   mpg,
   label = "manufacturer",
   sort = "descending",
-  refLines = c(Average = mean(counts$n)),
-  valueTitle = "Number of models",
+  ref_lines = c(Average = mean(counts$n)),
+  value_title = "Number of models",
   title = "Models per manufacturer"
 )
 ```
@@ -270,8 +270,8 @@ dumbbell_chart(
   x1       = "year_1952",
   x2       = "year_2007",
   y        = "country",
-  x1Label  = "1952",
-  x2Label  = "2007",
+  x1_label  = "1952",
+  x2_label  = "2007",
   title    = "Life expectancy: 1952 vs 2007",
   xtitle   = "Life expectancy (years)",
   sort     = "ascending"
@@ -292,8 +292,8 @@ dumbbell_chart(
   x1      = "city",
   x2      = "highway",
   y       = "class",
-  x1Label = "City",
-  x2Label = "Highway",
+  x1_label = "City",
+  x2_label = "Highway",
   col1    = "steelblue",
   col2    = "darkorange",
   title   = "City vs highway fuel economy by class",
@@ -326,8 +326,8 @@ slope_chart(
   start      = "y1970",
   end        = "y1979",
   group      = "country",
-  startLabel = "1970",
-  endLabel   = "1979",
+  start_label = "1970",
+  end_label   = "1979",
   digits     = 1,
   title      = "Government receipts as % of GDP",
   height     = 520
@@ -354,8 +354,8 @@ slope_chart(
   start      = "y1952",
   end        = "y2007",
   group      = "country",
-  startLabel = "1952",
-  endLabel   = "2007",
+  start_label = "1952",
+  end_label   = "2007",
   highlight  = c("China", "South Africa"),
   digits     = 1,
   title      = "Life expectancy: 1952 vs 2007"
@@ -366,7 +366,7 @@ slope_chart(
 
 A bump chart shows how the *rank* of several entities changes from one period to the next. Each entity is a smooth line that climbs or falls as it overtakes, or is overtaken by, the others, and a circle at every period displays its rank. The Financial Times, The Economist and FiveThirtyEight use this format for league tables, polls and country rankings: it is the right choice when the order matters more than the exact values.
 
-The data must be in long format, with one row per entity and period. By default `bump_chart()` computes the ranks for each period from the numeric `y` column (rank 1 = highest value, use `rankOrder = "asc"` to reverse). If your `y` column already holds ranks, set `ranked = TRUE`. Hover over a line to make it stand out.
+The data must be in long format, with one row per entity and period. By default `bump_chart()` computes the ranks for each period from the numeric `y` column (rank 1 = highest value, use `rank_order = "asc"` to reverse). If your `y` column already holds ranks, set `ranked = TRUE`. Hover over a line to make it stand out.
 
 ```{r}
 league <- data.frame(
@@ -447,8 +447,8 @@ waterfall_chart(
   y             = "delta",
   title         = "Monthly cash flow",
   ytitle        = "USD thousands",
-  positiveColor = "steelblue",
-  negativeColor = "tomato"
+  positive_color = "steelblue",
+  negative_color = "tomato"
 )
 ```
 
@@ -471,12 +471,12 @@ radar_chart(
   data     = players,
   group    = "player",
   axes     = c("speed", "power", "passing", "dribbling", "defending", "stamina"),
-  maxValue = 100,
+  max_value = 100,
   title    = "Player skill ratings"
 )
 ```
 
-When the variables are measured in different units, `scaleEachAxis = TRUE` gives each axis its own scale:
+When the variables are measured in different units, `scale_each_axis = TRUE` gives each axis its own scale:
 
 ```{r}
 cyl_means <- aggregate(cbind(mpg, hp, wt, qsec, disp) ~ cyl, data = mtcars, FUN = mean)
@@ -485,12 +485,12 @@ cyl_means$cyl <- paste(cyl_means$cyl, "cylinders")
 radar_chart(
   data          = cyl_means,
   group         = "cyl",
-  axisLabels    = c("Miles/gallon", "Horsepower", "Weight (1000 lbs)",
+  axis_labels    = c("Miles/gallon", "Horsepower", "Weight (1000 lbs)",
                     "1/4 mile time (s)", "Displacement (cu.in.)"),
-  scaleEachAxis = TRUE,
+  scale_each_axis = TRUE,
   levels        = 4,
-  gridShape     = "circle",
-  valueFormat   = ".1f",
+  grid_shape     = "circle",
+  value_format   = ".1f",
   title         = "mtcars averages by number of cylinders"
 )
 ```
@@ -513,7 +513,7 @@ radial_bar_chart(
 )
 ```
 
-With `max` you can set the value that fills a whole ring, and with `endAngle = 360` the tracks make a full circle:
+With `max` you can set the value that fills a whole ring, and with `end_angle = 360` the tracks make a full circle:
 
 ```{r}
 sales <- data.frame(
@@ -526,9 +526,9 @@ radial_bar_chart(
   label       = "region",
   value       = "units",
   max         = 500,
-  endAngle    = 360,
-  centerValue = "total",
-  centerLabel = "Units sold",
+  end_angle    = 360,
+  center_value = "total",
+  center_label = "Units sold",
   title       = "Units sold by region (target: 500)"
 )
 ```

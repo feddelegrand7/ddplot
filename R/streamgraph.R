@@ -48,22 +48,22 @@
 #' \code{"catmullRom"}, \code{"monotoneX"}, \code{"linear"} or
 #' \code{"step"}.
 #' @param colors Optional. A vector of colors, one per layer (recycled if
-#' shorter). Defaults to \code{NULL}, which uses \code{colorPalette}.
-#' @param colorPalette D3 categorical color scheme used when \code{colors} is
+#' shorter). Defaults to \code{NULL}, which uses \code{color_palette}.
+#' @param color_palette D3 categorical color scheme used when \code{colors} is
 #' \code{NULL} (e.g. \code{"Tableau10"}, \code{"Category10"}, \code{"Set2"},
 #' \code{"Paired"}). Defaults to \code{"Tableau10"}.
 #' @param opacity Fill opacity of the layers (0 to 1). Defaults to
 #' \code{0.9}.
-#' @param strokeCol Color of the thin line separating the layers. Defaults
+#' @param stroke_col Color of the thin line separating the layers. Defaults
 #' to \code{"white"}.
-#' @param strokeWidth Width of the separating line in pixels. Defaults to
+#' @param stroke_width Width of the separating line in pixels. Defaults to
 #' \code{0.5}.
 #' @param labels Whether to write each layer's name inside the layer, at its
 #' thickest point. Labels that do not fit their layer are hidden. Defaults to
 #' \code{TRUE}.
-#' @param labelFontSize Font size of the inline layer labels. Defaults to
+#' @param label_font_size Font size of the inline layer labels. Defaults to
 #' \code{11}.
-#' @param labelCol Optional. Color of the inline labels. Defaults to
+#' @param label_col Optional. Color of the inline labels. Defaults to
 #' \code{NULL}, which picks white or near-black automatically for contrast
 #' with each layer's fill.
 #' @param tooltip Whether to show the vertical crosshair and the tooltip
@@ -75,31 +75,31 @@
 #' @param legend Whether to show an interactive legend under the chart
 #' (hover to focus a layer, click to hide or show it). Defaults to
 #' \code{TRUE}.
-#' @param legendFontSize Font size of the legend text. Defaults to \code{11}.
-#' @param valueFormat A d3-format specifier used to display the values in the
+#' @param legend_font_size Font size of the legend text. Defaults to \code{11}.
+#' @param value_format A d3-format specifier used to display the values in the
 #' tooltip (e.g. \code{",.0f"}, \code{"$,.2s"}, \code{".1f"}). Defaults to
 #' \code{",.2~f"}.
-#' @param xFormat Optional. Format of the x values on the axis and in the
+#' @param x_format Optional. Format of the x values on the axis and in the
 #' tooltip header: a d3-format specifier for numeric \code{x} (e.g.
 #' \code{"d"}) or a d3-time-format specifier for dates (e.g.
 #' \code{"\%b \%Y"}). Defaults to \code{NULL}, which picks a sensible format
 #' automatically.
 #' @param xticks Optional. Approximate number of x-axis ticks. Defaults to
 #' \code{NULL} (chosen from the chart width).
-#' @param xFontSize Font size of the x-axis tick labels. Defaults to
+#' @param x_font_size Font size of the x-axis tick labels. Defaults to
 #' \code{11}.
-#' @param gridCol Color of the vertical grid lines drawn at each x tick. Use
+#' @param grid_col Color of the vertical grid lines drawn at each x tick. Use
 #' \code{NA} or \code{"transparent"} to hide them. Defaults to
 #' \code{"#e6e6e6"}.
 #' @param xtitle Optional. Title of the x-axis.
-#' @param xtitleFontSize Font size of the x-axis title. Defaults to
+#' @param xtitle_font_size Font size of the x-axis title. Defaults to
 #' \code{13}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of the x-axis, the titles, the crosshair and the
+#' @param axis_col Color of the x-axis, the titles, the crosshair and the
 #' legend text. Defaults to \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -126,7 +126,7 @@
 #'   x      = "year",
 #'   group  = "genre",
 #'   value  = "listeners",
-#'   valueFormat = ",.0f",
+#'   value_format = ",.0f",
 #'   xtitle = "Year",
 #'   title  = "Music genres, 1980-2020 (millions of listeners)"
 #' )
@@ -147,8 +147,8 @@
 #'   offset       = "expand",
 #'   order        = "descending",
 #'   curve        = "monotoneX",
-#'   colorPalette = "Set2",
-#'   valueFormat  = ",.0f",
+#'   color_palette = "Set2",
+#'   value_format  = ",.0f",
 #'   title        = "Telephones by region, 1951-1961 (thousands)"
 #' )
 #'
@@ -169,7 +169,7 @@
 #'   group   = "channel",
 #'   value   = "n",
 #'   offset  = "silhouette",
-#'   xFormat = "%b %Y",
+#'   x_format = "%b %Y",
 #'   colors  = c("#2caffe", "#544fc5", "#00e272", "#fe6a35", "#6b8abc"),
 #'   legend  = FALSE,
 #'   title   = "Weekly sign-ups by channel, 2026"
@@ -183,30 +183,30 @@ streamgraph <- function(
     order          = c("insideOut", "none", "reverse", "ascending", "descending"),
     curve          = c("basis", "catmullRom", "monotoneX", "linear", "step"),
     colors         = NULL,
-    colorPalette   = "Tableau10",
+    color_palette   = "Tableau10",
     opacity        = 0.9,
-    strokeCol      = "white",
-    strokeWidth    = 0.5,
+    stroke_col      = "white",
+    stroke_width    = 0.5,
     labels         = TRUE,
-    labelFontSize  = 11,
-    labelCol       = NULL,
+    label_font_size  = 11,
+    label_col       = NULL,
     tooltip        = TRUE,
     hover          = TRUE,
     animate        = TRUE,
     legend         = TRUE,
-    legendFontSize = 11,
-    valueFormat    = ",.2~f",
-    xFormat        = NULL,
+    legend_font_size = 11,
+    value_format    = ",.2~f",
+    x_format        = NULL,
     xticks         = NULL,
-    xFontSize      = 11,
-    gridCol        = "#e6e6e6",
+    x_font_size      = 11,
+    grid_col        = "#e6e6e6",
     xtitle         = NULL,
-    xtitleFontSize = 13,
+    xtitle_font_size = 13,
     title          = NULL,
-    titleFontSize  = 16,
+    title_font_size  = 16,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol          = "white",
-    axisCol        = "black",
+    axis_col        = "black",
     width          = NULL,
     height         = NULL
 ) {
@@ -297,30 +297,30 @@ streamgraph <- function(
       order          = order,
       curve          = curve,
       colors         = as.list(colors),
-      colorPalette   = colorPalette,
+      colorPalette   = color_palette,
       opacity        = opacity,
-      strokeCol      = strokeCol,
-      strokeWidth    = strokeWidth,
+      strokeCol      = stroke_col,
+      strokeWidth    = stroke_width,
       labels         = labels,
-      labelFontSize  = labelFontSize,
-      labelCol       = labelCol,
+      labelFontSize  = label_font_size,
+      labelCol       = label_col,
       tooltip        = tooltip,
       hover          = hover,
       animate        = animate,
       legend         = legend,
-      legendFontSize = legendFontSize,
-      valueFormat    = valueFormat,
-      xFormat        = xFormat,
+      legendFontSize = legend_font_size,
+      valueFormat    = value_format,
+      xFormat        = x_format,
       xticks         = xticks,
-      xFontSize      = xFontSize,
-      gridCol        = if (is.null(gridCol) || is.na(gridCol)) "transparent" else gridCol,
+      xFontSize      = x_font_size,
+      gridCol        = if (is.null(grid_col) || is.na(grid_col)) "transparent" else grid_col,
       xtitle         = xtitle,
-      xtitleFontSize = xtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
       title          = title,
-      titleFontSize  = titleFontSize,
+      titleFontSize  = title_font_size,
       font           = font,
       bgcol          = bgcol,
-      axisCol        = axisCol
+      axisCol        = axis_col
     ),
     width  = width,
     height = height

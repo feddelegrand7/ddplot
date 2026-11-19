@@ -11,27 +11,27 @@ chord_diagram(
   value = "value",
   directed = TRUE,
   colors = NULL,
-  colorPalette = "Tableau10",
-  ribbonColor = c("source", "target", "gradient"),
-  sortGroups = c("none", "descending", "ascending"),
-  padAngle = 0.03,
-  innerRadiusRatio = 0.92,
-  arcOpacity = 1,
-  ribbonOpacity = 0.6,
-  fadeOpacity = 0.1,
-  strokeWidth = 0.5,
-  showLabels = TRUE,
-  rotateLabels = FALSE,
-  labelFontSize = 11,
-  labelOffset = 10,
-  valueFormat = ",~f",
+  color_palette = "Tableau10",
+  ribbon_color = c("source", "target", "gradient"),
+  sort_groups = c("none", "descending", "ascending"),
+  pad_angle = 0.03,
+  inner_radius_ratio = 0.92,
+  arc_opacity = 1,
+  ribbon_opacity = 0.6,
+  fade_opacity = 0.1,
+  stroke_width = 0.5,
+  show_labels = TRUE,
+  rotate_labels = FALSE,
+  label_font_size = 11,
+  label_offset = 10,
+  value_format = ",~f",
   hover = TRUE,
   animate = TRUE,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  textCol = "black",
+  text_col = "black",
   width = NULL,
   height = NULL
 )
@@ -62,56 +62,56 @@ by adding its transpose (the diagonal is left unchanged).}
 
 \item{colors}{Optional. A vector of colors for the entities, recycled if
 needed. A named vector maps colors to entity names (unnamed entities fall
-back to \code{colorPalette}). Defaults to \code{NULL}.}
+back to \code{color_palette}). Defaults to \code{NULL}.}
 
-\item{colorPalette}{D3 categorical color scheme used when \code{colors}
+\item{color_palette}{D3 categorical color scheme used when \code{colors}
 is \code{NULL} (e.g. \code{"Tableau10"}, \code{"Category10"},
 \code{"Set2"}, \code{"Dark2"}, \code{"Paired"}). Defaults to
 \code{"Tableau10"}.}
 
-\item{ribbonColor}{How ribbons are colored: \code{"source"} (default,
+\item{ribbon_color}{How ribbons are colored: \code{"source"} (default,
 the color of the entity with the larger outgoing flow of the pair),
 \code{"target"}, or \code{"gradient"} (a gradient from one entity's color
 to the other's).}
 
-\item{sortGroups}{Order of the arcs around the circle: \code{"none"}
+\item{sort_groups}{Order of the arcs around the circle: \code{"none"}
 (default, the order of first appearance in the edge list, the factor
 levels, or the matrix order), \code{"descending"} or \code{"ascending"}
 (by total flow).}
 
-\item{padAngle}{Gap between adjacent arcs, in radians. Defaults to
+\item{pad_angle}{Gap between adjacent arcs, in radians. Defaults to
 \code{0.03}.}
 
-\item{innerRadiusRatio}{Inner radius of the arcs as a fraction of their
+\item{inner_radius_ratio}{Inner radius of the arcs as a fraction of their
 outer radius (between 0.5 and 0.99). Larger values give thinner arcs.
 Defaults to \code{0.92}.}
 
-\item{arcOpacity}{Fill opacity of the arcs (0 to 1). Defaults to
+\item{arc_opacity}{Fill opacity of the arcs (0 to 1). Defaults to
 \code{1}.}
 
-\item{ribbonOpacity}{Fill opacity of the ribbons (0 to 1). Defaults to
+\item{ribbon_opacity}{Fill opacity of the ribbons (0 to 1). Defaults to
 \code{0.6}.}
 
-\item{fadeOpacity}{Opacity of the ribbons and arcs that are faded out
+\item{fade_opacity}{Opacity of the ribbons and arcs that are faded out
 while another element is hovered (0 to 1). Defaults to \code{0.1}.}
 
-\item{strokeWidth}{Width of the arc and ribbon borders in pixels (the
+\item{stroke_width}{Width of the arc and ribbon borders in pixels (the
 border uses a darker shade of the fill). Defaults to \code{0.5}.}
 
-\item{showLabels}{Whether to display the entity names outside the arcs.
+\item{show_labels}{Whether to display the entity names outside the arcs.
 Labels of arcs too small to hold them are hidden. Defaults to
 \code{TRUE}.}
 
-\item{rotateLabels}{Whether to orient the labels along the radius of the
+\item{rotate_labels}{Whether to orient the labels along the radius of the
 circle (useful with many entities). When \code{FALSE} (default), labels
 are horizontal.}
 
-\item{labelFontSize}{Font size of the labels. Defaults to \code{11}.}
+\item{label_font_size}{Font size of the labels. Defaults to \code{11}.}
 
-\item{labelOffset}{Distance in pixels between the arcs and their labels.
+\item{label_offset}{Distance in pixels between the arcs and their labels.
 Defaults to \code{10}.}
 
-\item{valueFormat}{A d3-format specifier used to display values in the
+\item{value_format}{A d3-format specifier used to display values in the
 tooltip (e.g. \code{",.0f"}, \code{".2s"}, \code{"$,.1f"}). Defaults to
 \code{",~f"}.}
 
@@ -123,14 +123,14 @@ render. Defaults to \code{TRUE}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{textCol}{Color of the title and the labels. Defaults to
+\item{text_col}{Color of the title and the labels. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -175,7 +175,7 @@ chord_diagram(
   from        = "from",
   to          = "to",
   value       = "value",
-  valueFormat = ",.0f",
+  value_format = ",.0f",
   title       = "Migration flows between regions (thousands)"
 )
 
@@ -193,9 +193,9 @@ hair <- matrix(
 chord_diagram(
   data        = hair,
   colors      = c("#3b3b3b", "#f2c45a", "#8c5a3c", "#d0533a"),
-  ribbonColor = "gradient",
-  padAngle    = 0.05,
-  valueFormat = ",.0f",
+  ribbon_color = "gradient",
+  pad_angle    = 0.05,
+  value_format = ",.0f",
   title       = "Hair color flows"
 )
 
@@ -214,11 +214,11 @@ coauthors <- data.frame(
 chord_diagram(
   data         = coauthors,
   directed     = FALSE,
-  sortGroups   = "descending",
-  colorPalette = "Set2",
-  ribbonOpacity = 0.7,
+  sort_groups   = "descending",
+  color_palette = "Set2",
+  ribbon_opacity = 0.7,
   bgcol        = "#1e1e2e",
-  textCol      = "#f0f0f0",
+  text_col      = "#f0f0f0",
   title        = "Joint publications between departments"
 )
 }

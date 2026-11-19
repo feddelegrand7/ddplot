@@ -188,21 +188,21 @@ race_prepare <- function(data, id, time, values, group = NULL,
 
 # The player options shared by every race chart.
 # @noRd
-race_player_options <- function(frameDur, ease, autoplay, loop, controls,
-                                 startFrame, timeFormat) {
-  if (!is.numeric(frameDur) || length(frameDur) != 1 || !(frameDur > 0)) {
-    stop("'frameDur' must be a positive number of milliseconds")
+race_player_options <- function(frame_dur, ease, autoplay, loop, controls,
+                                 start_frame, time_format) {
+  if (!is.numeric(frame_dur) || length(frame_dur) != 1 || !(frame_dur > 0)) {
+    stop("'frame_dur' must be a positive number of milliseconds")
   }
-  if (!is.character(startFrame) && !is.numeric(startFrame)) {
-    stop("'startFrame' must be \"first\", \"last\" or a frame number")
+  if (!is.character(start_frame) && !is.numeric(start_frame)) {
+    stop("'start_frame' must be \"first\", \"last\" or a frame number")
   }
   list(
-    frameDur = frameDur,
+    frameDur = frame_dur,
     ease = ease,
     autoplay = isTRUE(autoplay),
     loop = isTRUE(loop),
     controls = isTRUE(controls),
-    startFrame = startFrame,
-    timeFormat = timeFormat
+    startFrame = start_frame,
+    timeFormat = time_format
   )
 }

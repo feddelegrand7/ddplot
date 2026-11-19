@@ -81,11 +81,11 @@
 #'   \code{group}, one colour per item (recycled, or a named vector mapping
 #'   colours to items). Defaults to the ddplot palette, the largest groups or
 #'   items getting the first colours.
-#' @param colorCategory Optional. The name of a D3 categorical colour scheme
+#' @param color_category Optional. The name of a D3 categorical colour scheme
 #'   (e.g. \code{"Tableau10"}, \code{"Set2"}), see
 #'   <https://github.com/d3/d3-scale-chromatic#categorical>, used when
 #'   \code{fill} is not given.
-#' @param colorBy How the tiles are coloured at first: \code{"group"}
+#' @param color_by How the tiles are coloured at first: \code{"group"}
 #'   (default, the palette: by group, or by item without \code{group}) or
 #'   \code{"growth"} (a heat map of the growth since the previous period, red
 #'   for shrinking items, green for growing ones). It can be changed from the
@@ -95,22 +95,22 @@
 #' @param labels Logical. Write the names and values in the tiles (labels that
 #'   do not fit are hidden, their font size follows the tile size). Defaults
 #'   to \code{TRUE}.
-#' @param labelMode What the labels show under the names at first:
+#' @param label_mode What the labels show under the names at first:
 #'   \code{"value"} (default), \code{"share"} (share of the total, or of the
 #'   group when zoomed in) or \code{"growth"} (change since the previous
 #'   period). It can be changed from the chart when \code{controls = TRUE}.
 #' @param padding The space between tiles, in pixels. Defaults to 2.
-#' @param maxLabelSize The largest font size of the tile labels, in pixels.
+#' @param max_label_size The largest font size of the tile labels, in pixels.
 #'   Defaults to 26.
 #' @param legend Logical. Show the legend of the groups. When \code{NULL}
 #'   (default), it is shown when \code{group} is used.
 #' @param agg How rows with the same item and period are combined:
 #'   \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 #'   \code{"last"}.
-#' @param fillGaps Logical. Interpolate the value of an item between the
+#' @param fill_gaps Logical. Interpolate the value of an item between the
 #'   periods where it is known. Defaults to \code{TRUE}; when \code{FALSE},
 #'   the tile shrinks away during the missing periods.
-#' @param frameDur The duration of one period, in milliseconds, at 1x speed.
+#' @param frame_dur The duration of one period, in milliseconds, at 1x speed.
 #'   Defaults to 900.
 #' @param ease The easing used within each period, a d3-ease name such as
 #'   \code{"Linear"} (a steady animation) or \code{"CubicInOut"} (default,
@@ -121,23 +121,23 @@
 #'   Defaults to \code{FALSE} (it can be changed from the player).
 #' @param controls Logical. Show the player at the bottom and the label and
 #'   colour buttons at the top. Defaults to \code{TRUE}.
-#' @param startFrame The period shown first: \code{"first"} (default),
+#' @param start_frame The period shown first: \code{"first"} (default),
 #'   \code{"last"} or a period number (1 for the first one).
-#' @param timeFormat Optional. A d3-time-format string used for dates, e.g.
+#' @param time_format Optional. A d3-time-format string used for dates, e.g.
 #'   \code{"\%b \%Y"}. Chosen from the spacing of the periods when \code{NULL}.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 20.
+#' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family to consider for all the text. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background colour of the SVG. Defaults to "white".
-#' @param axisCol The colour of the titles, headers and controls. Defaults to
+#' @param axis_col The colour of the titles, headers and controls. Defaults to
 #'   "#333333".
-#' @param valueFormat Optional. A d3-format string for the values, e.g.
+#' @param value_format Optional. A d3-format string for the values, e.g.
 #'   \code{",.0f"}, \code{".1f"} or \code{".3~s"}. Compact values
 #'   ("1.23M") are used when \code{NULL}.
-#' @param valuePrefix,valueSuffix Optional. Text added before or after every
+#' @param value_prefix,value_suffix Optional. Text added before or after every
 #'   value, e.g. \code{"$"} or \code{" t"}.
 #' @param tooltip Logical. Show a tooltip on hover. Defaults to \code{TRUE}.
 #' @param width Optional. The width of the SVG output.
@@ -169,8 +169,8 @@
 #'   mutate(gdp = gdpPercap * pop / 1e9) %>%
 #'   treemap_race(
 #'     label = "country", value = "gdp", time = "year",
-#'     colorBy = "growth", labelMode = "share",
-#'     valuePrefix = "$", valueSuffix = "B", valueFormat = ",.0f",
+#'     color_by = "growth", label_mode = "share",
+#'     value_prefix = "$", value_suffix = "B", value_format = ",.0f",
 #'     title = "GDP of five European countries"
 #'   )
 #'
@@ -182,33 +182,33 @@ treemap_race <- function(
                          group = NULL,
                          tile = c("resquarify", "squarify", "binary", "slice", "dice", "sliceDice"),
                          fill = NULL,
-                         colorCategory = NULL,
-                         colorBy = c("group", "growth"),
+                         color_category = NULL,
+                         color_by = c("group", "growth"),
                          highlight = NULL,
                          labels = TRUE,
-                         labelMode = c("value", "share", "growth"),
+                         label_mode = c("value", "share", "growth"),
                          padding = 2,
-                         maxLabelSize = 26,
+                         max_label_size = 26,
                          legend = NULL,
                          agg = c("sum", "mean", "max", "min", "last"),
-                         fillGaps = TRUE,
-                         frameDur = 900,
+                         fill_gaps = TRUE,
+                         frame_dur = 900,
                          ease = "CubicInOut",
                          autoplay = TRUE,
                          loop = FALSE,
                          controls = TRUE,
-                         startFrame = "first",
-                         timeFormat = NULL,
+                         start_frame = "first",
+                         time_format = NULL,
                          title = NULL,
-                         titleFontSize = 20,
+                         title_font_size = 20,
                          subtitle = NULL,
-                         subtitleFontSize = 13,
+                         subtitle_font_size = 13,
                          font = "Verdana, Geneva, Tahoma, sans-serif",
                          bgcol = "white",
-                         axisCol = "#333333",
-                         valueFormat = NULL,
-                         valuePrefix = "",
-                         valueSuffix = "",
+                         axis_col = "#333333",
+                         value_format = NULL,
+                         value_prefix = "",
+                         value_suffix = "",
                          tooltip = TRUE,
                          width = NULL,
                          height = NULL) {
@@ -225,8 +225,8 @@ treemap_race <- function(
     stop("'group' must be the name of a column of 'data'")
   }
   tile <- match.arg(tile)
-  colorBy <- match.arg(colorBy)
-  labelMode <- match.arg(labelMode)
+  color_by <- match.arg(color_by)
+  label_mode <- match.arg(label_mode)
   agg <- match.arg(agg)
   if (!is.character(font) || length(font) != 1 || grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
@@ -234,11 +234,11 @@ treemap_race <- function(
   if (!is.numeric(padding) || length(padding) != 1 || !is.finite(padding) || padding < 0) {
     stop("'padding' must be a non-negative number of pixels")
   }
-  if (!is.numeric(maxLabelSize) || length(maxLabelSize) != 1 || !(maxLabelSize >= 8)) {
-    stop("'maxLabelSize' must be a number of pixels (8 or more)")
+  if (!is.numeric(max_label_size) || length(max_label_size) != 1 || !(max_label_size >= 8)) {
+    stop("'max_label_size' must be a number of pixels (8 or more)")
   }
-  if (!is.null(colorCategory) && (!is.character(colorCategory) || length(colorCategory) != 1)) {
-    stop("'colorCategory' must be the name of a D3 colour scheme, such as \"Tableau10\"")
+  if (!is.null(color_category) && (!is.character(color_category) || length(color_category) != 1)) {
+    stop("'color_category' must be the name of a D3 colour scheme, such as \"Tableau10\"")
   }
   if (!is.null(highlight) && !is.atomic(highlight)) {
     stop("'highlight' must be a character vector of items")
@@ -255,7 +255,7 @@ treemap_race <- function(
   data[[value]] <- vv
 
   race <- race_prepare(data, label, time, value, group = group, agg = agg,
-                       fill_gaps = isTRUE(fillGaps))
+                       fill_gaps = isTRUE(fill_gaps))
   names(race$series) <- "v"
   if (!any(vapply(race$series$v, function(s) any(is.finite(s) & s > 0), TRUE))) {
     stop("there is no positive value to plot")
@@ -278,12 +278,12 @@ treemap_race <- function(
     } else {
       group_levels <- names(sort(totals, decreasing = TRUE))
     }
-    if (!is.null(fill) || is.null(colorCategory)) {
+    if (!is.null(fill) || is.null(color_category)) {
       by_size <- names(sort(totals, decreasing = TRUE))
       cols <- race_colors(by_size, if (length(fill) == 1 && is.null(names(fill))) NULL else fill)
       group_colors <- cols[match(group_levels, by_size)]
     }
-  } else if (!is.null(fill) || is.null(colorCategory)) {
+  } else if (!is.null(fill) || is.null(color_category)) {
     by_size <- order(-mean_val)
     cols <- race_colors(race$items[by_size], fill)
     item_colors <- character(length(race$items))
@@ -292,7 +292,7 @@ treemap_race <- function(
 
   if (is.null(legend)) legend <- !is.null(group)
 
-  player <- race_player_options(frameDur, ease, autoplay, loop, controls, startFrame, timeFormat)
+  player <- race_player_options(frame_dur, ease, autoplay, loop, controls, start_frame, time_format)
   player$stateKey <- paste("treemaprace", label, value, time, group, sep = "|")
 
   r2d3::r2d3(
@@ -308,27 +308,27 @@ treemap_race <- function(
       groupColors = if (is.null(group_colors)) NULL else I(group_colors),
       itemColors = if (is.null(item_colors)) NULL else I(item_colors),
       meanValues = I(mean_val),
-      colorCategory = colorCategory,
+      colorCategory = color_category,
       tile = tile,
-      colorBy = colorBy,
+      colorBy = color_by,
       highlight = I(as.character(highlight)),
       labels = isTRUE(labels),
-      labelMode = labelMode,
+      labelMode = label_mode,
       padding = padding,
-      maxLabelSize = maxLabelSize,
+      maxLabelSize = max_label_size,
       legend = isTRUE(legend) && !is.null(group),
       controls = isTRUE(controls),
       tooltip = isTRUE(tooltip),
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       subtitle = subtitle,
-      subtitleFontSize = subtitleFontSize,
+      subtitleFontSize = subtitle_font_size,
       font = font,
       bgcol = bgcol,
-      axisCol = axisCol,
-      valueFormat = valueFormat,
-      valuePrefix = valuePrefix,
-      valueSuffix = valueSuffix
+      axisCol = axis_col,
+      valueFormat = value_format,
+      valuePrefix = value_prefix,
+      valueSuffix = value_suffix
     ),
     width = width,
     height = height

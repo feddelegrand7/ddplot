@@ -9,25 +9,25 @@ waterfall_chart(
   x,
   y,
   measure = NULL,
-  positiveColor = "#4CAF50",
-  negativeColor = "#F44336",
-  totalColor = "#5C85D6",
+  positive_color = "#4CAF50",
+  negative_color = "#F44336",
+  total_color = "#5C85D6",
   connector = TRUE,
-  connectorColor = "#aaaaaa",
-  showLabels = TRUE,
-  labelFontSize = 10,
+  connector_color = "#aaaaaa",
+  show_labels = TRUE,
+  label_font_size = 10,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
+  ytitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
   opacity = 1,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -45,42 +45,42 @@ increases, negative for decreases).}
 \code{"total"} (a bar spanning from zero to the current running total,
 used for subtotals and the final total).}
 
-\item{positiveColor}{Fill color for bars representing an increase.
+\item{positive_color}{Fill color for bars representing an increase.
 Defaults to \code{"#4CAF50"}.}
 
-\item{negativeColor}{Fill color for bars representing a decrease.
+\item{negative_color}{Fill color for bars representing a decrease.
 Defaults to \code{"#F44336"}.}
 
-\item{totalColor}{Fill color for \code{"total"} measure bars.
+\item{total_color}{Fill color for \code{"total"} measure bars.
 Defaults to \code{"#5C85D6"}.}
 
 \item{connector}{Logical. Whether to draw dashed connector lines between
 consecutive bars. Defaults to \code{TRUE}.}
 
-\item{connectorColor}{Color of the connector lines. Defaults to
+\item{connector_color}{Color of the connector lines. Defaults to
 \code{"#aaaaaa"}.}
 
-\item{showLabels}{Logical. Whether to display the delta value above or
+\item{show_labels}{Logical. Whether to display the delta value above or
 below each bar. Defaults to \code{TRUE}.}
 
-\item{labelFontSize}{Font size of the bar value labels. Defaults to
+\item{label_font_size}{Font size of the bar value labels. Defaults to
 \code{10}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{xtitle}{Optional. Title of the x-axis.}
 
-\item{xtitleFontSize}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{ytitle}{Optional. Title of the y-axis.}
 
-\item{ytitleFontSize}{Font size of the y-axis title. Defaults to \code{13}.}
+\item{ytitle_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
 
-\item{xFontSize}{Font size of the x-axis tick labels. Defaults to \code{11}.}
+\item{x_font_size}{Font size of the x-axis tick labels. Defaults to \code{11}.}
 
-\item{yFontSize}{Font size of the y-axis tick labels. Defaults to \code{11}.}
+\item{y_font_size}{Font size of the y-axis tick labels. Defaults to \code{11}.}
 
 \item{opacity}{Opacity of the bars (0 to 1). Defaults to \code{1}.}
 
@@ -89,7 +89,7 @@ below each bar. Defaults to \code{TRUE}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of axis lines, ticks, and labels. Defaults to
+\item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -141,7 +141,7 @@ waterfall_chart(
   y              = "delta",
   title          = "Monthly cash flow",
   ytitle         = "USD thousands",
-  positiveColor  = "steelblue",
-  negativeColor  = "tomato"
+  positive_color  = "steelblue",
+  negative_color  = "tomato"
 )
 }

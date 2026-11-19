@@ -10,22 +10,22 @@ horz_bar_chart(
   value = NULL,
   fill = NULL,
   sort = "none",
-  paddingWidth = 0.2,
+  padding_width = 0.2,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   bgcol = "white",
-  valueTicks = NULL,
-  valueFontSize = 11,
-  labelFontSize = 12,
-  valueTitle = NULL,
-  valueTitleFontSize = 13,
-  labelTitle = NULL,
-  labelTitleFontSize = 13,
+  value_ticks = NULL,
+  value_font_size = 11,
+  label_font_size = 12,
+  value_title = NULL,
+  value_title_font_size = 13,
+  label_title = NULL,
+  label_title_font_size = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   opacity = 1,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   group = NULL,
@@ -33,19 +33,19 @@ horz_bar_chart(
   agg = c("sum", "mean", "median", "min", "max", "count"),
   labels = TRUE,
   highlight = NULL,
-  refLines = NULL,
-  negativeFill = NULL,
-  cornerRadius = 3,
+  ref_lines = NULL,
+  negative_fill = NULL,
+  corner_radius = 3,
   legend = NULL,
   controls = TRUE,
   tooltip = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
   subtitle = NULL,
-  subtitleFontSize = 13,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  grid_col = "#e9e9e9"
 )
 }
 \arguments{
@@ -65,31 +65,31 @@ vector maps colours to groups). Defaults to a built-in palette.}
 order of the data or of the factor levels), \code{"ascending"} or
 \code{"descending"}. Descending puts the largest bar at the top.}
 
-\item{paddingWidth}{The space between bars, from 0 to 0.99. Defaults to
+\item{padding_width}{The space between bars, from 0 to 0.99. Defaults to
 0.2.}
 
 \item{stroke}{Optional. The stroke colour of the bars.}
 
-\item{strokeWidth}{Optional. The stroke width of the bars.}
+\item{stroke_width}{Optional. The stroke width of the bars.}
 
 \item{bgcol}{The background color of the SVG. Defaults to "white".}
 
-\item{valueTicks}{Optional. The approximate number of value axis ticks.}
+\item{value_ticks}{Optional. The approximate number of value axis ticks.}
 
-\item{valueFontSize}{The font size of the value axis labels. Defaults to 11.}
+\item{value_font_size}{The font size of the value axis labels. Defaults to 11.}
 
-\item{labelFontSize}{The font size of the category labels. Defaults to 12.}
+\item{label_font_size}{The font size of the category labels. Defaults to 12.}
 
-\item{valueTitle}{Optional. The title of the value axis. Defaults to the
+\item{value_title}{Optional. The title of the value axis. Defaults to the
 name of \code{value} (or "Count"); use \code{""} to hide it.}
 
-\item{valueTitleFontSize}{The font size of the value axis title. Defaults
+\item{value_title_font_size}{The font size of the value axis title. Defaults
 to 13.}
 
-\item{labelTitle}{Optional. The title of the category axis, drawn above the
+\item{label_title}{Optional. The title of the category axis, drawn above the
 labels.}
 
-\item{labelTitleFontSize}{The font size of the category axis title.
+\item{label_title_font_size}{The font size of the category axis title.
 Defaults to 13.}
 
 \item{font}{The font family to consider for the titles. Defaults to
@@ -97,11 +97,11 @@ Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1.}
 
-\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+\item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -126,13 +126,13 @@ are skipped). Defaults to \code{TRUE}.}
 \item{highlight}{Optional. A character vector of categories to emphasise;
 the other bars are drawn in grey (or faded, with \code{group}).}
 
-\item{refLines}{Optional. Numeric values drawn as dashed reference lines
+\item{ref_lines}{Optional. Numeric values drawn as dashed reference lines
 across the bars (e.g. a target or an average); names are used as labels.}
 
-\item{negativeFill}{Optional. The colour of negative bars (without
+\item{negative_fill}{Optional. The colour of negative bars (without
 \code{group}).}
 
-\item{cornerRadius}{The radius of the rounded bar ends, in pixels.
+\item{corner_radius}{The radius of the rounded bar ends, in pixels.
 Defaults to 3; use 0 for square bars.}
 
 \item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
@@ -146,17 +146,17 @@ shown when \code{group} is used.}
 \item{animate}{Logical. Animate the bars when the chart is first drawn.
 Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\item{value_format}{Optional. A d3-format string for the values, e.g.
 \code{",.0f"}, \code{".1f"} or \code{"~s"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+\item{value_prefix, value_suffix}{Optional. Text added before or after every
 value, e.g. \code{"$"} or \code{" km"}.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\item{grid_col}{The colour of the grid lines. Defaults to "#e9e9e9"; use
 \code{NA} to hide them.}
 }
 \value{
@@ -199,8 +199,8 @@ change <- data.frame(
 )
 horz_bar_chart(
   change, label = "country", value = "growth",
-  sort = "descending", negativeFill = "#ff725c",
-  valueSuffix = "\%", valueTitle = "GDP growth",
+  sort = "descending", negative_fill = "#ff725c",
+  value_suffix = "\%", value_title = "GDP growth",
   title = "Annual GDP growth"
 )
 

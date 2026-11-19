@@ -53,13 +53,13 @@
 #'   the factor levels).
 #' @param size Optional. The name of a numeric, non-negative column giving the
 #'   size of the bubbles (their area is proportional to it). Without it, every
-#'   bubble has the same radius (7 pixels, or \code{sizeRange[1]} if larger).
+#'   bubble has the same radius (7 pixels, or \code{size_range[1]} if larger).
 #' @param group Optional. The name of a column grouping the items (e.g. a
 #'   continent). It sets the colours and adds a clickable legend.
-#' @param xScale,yScale The scales of the axes: \code{"linear"} (default) or
+#' @param x_scale,y_scale The scales of the axes: \code{"linear"} (default) or
 #'   \code{"log"}. On a log scale, values that are not positive are dropped
 #'   (with a warning). Both can be switched from the chart.
-#' @param sizeRange A numeric vector of length 2: the smallest and the largest
+#' @param size_range A numeric vector of length 2: the smallest and the largest
 #'   bubble radius in pixels (the largest is reduced on small charts).
 #'   Defaults to \code{c(3, 40)}.
 #' @param fill Optional. The colours of the bubbles. With \code{group}, one
@@ -67,7 +67,7 @@
 #'   \code{group}, a single colour for every bubble, or one colour per item
 #'   (recycled; a named vector maps colours to items). Defaults to a built-in
 #'   palette.
-#' @param colorCategory Optional. The name of a D3 categorical colour scheme
+#' @param color_category Optional. The name of a D3 categorical colour scheme
 #'   used instead of the built-in palette, e.g. \code{"Tableau10"},
 #'   \code{"Set2"} or \code{"Dark2"}. Ignored when \code{fill} is given.
 #' @param opacity The opacity of the bubbles, from 0 to 1. Defaults to 0.85.
@@ -82,22 +82,22 @@
 #'   bubbles are followed, only they are labelled. Defaults to 5.
 #' @param legend Logical. Show the group legend. When \code{NULL} (default),
 #'   it is shown when \code{group} is used.
-#' @param sizeLegend Logical. Show a legend of reference circles for
+#' @param size_legend Logical. Show a legend of reference circles for
 #'   \code{size}, drawn in the emptiest corner of the plot. Defaults to
 #'   \code{TRUE}.
 #' @param buttons Logical. Show the buttons at the top right (log scales,
 #'   trails, clear). Defaults to \code{TRUE}.
 #' @param xtitle,ytitle Optional. The titles of the axes. They default to the
 #'   names of \code{x} and \code{y}; use \code{""} to hide them.
-#' @param sizeTitle Optional. The title of the size legend and the name of
+#' @param size_title Optional. The title of the size legend and the name of
 #'   the size in the tooltip. Defaults to the name of \code{size}.
 #' @param agg How rows with the same item and period are combined:
 #'   \code{"mean"} (default), \code{"sum"}, \code{"max"}, \code{"min"} or
 #'   \code{"last"}.
-#' @param fillGaps Logical. Interpolate the values of an item between the
+#' @param fill_gaps Logical. Interpolate the values of an item between the
 #'   periods where it is known, so that it does not blink out in a gap.
 #'   Defaults to \code{TRUE}.
-#' @param frameDur The duration of one period, in milliseconds. Defaults to
+#' @param frame_dur The duration of one period, in milliseconds. Defaults to
 #'   1000.
 #' @param ease The easing used between two periods, the name of a D3 easing
 #'   function without the "ease" prefix: \code{"Linear"} (default, a smooth
@@ -109,30 +109,30 @@
 #'   player. Defaults to \code{FALSE}.
 #' @param controls Logical. Show the player (play / pause, timeline, speed,
 #'   loop) at the bottom. Defaults to \code{TRUE}.
-#' @param startFrame The first period shown: \code{"first"} (default),
+#' @param start_frame The first period shown: \code{"first"} (default),
 #'   \code{"last"} or a period number (1 for the first one).
-#' @param timeFormat Optional. A d3-time-format string used for Date and
+#' @param time_format Optional. A d3-time-format string used for Date and
 #'   POSIXct periods, e.g. \code{"\%b \%Y"}. Chosen from the spacing of the
 #'   periods by default.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 20.
+#' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family of the texts. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background colour of the SVG. Defaults to "white".
-#' @param axisCol The colour of the axes, labels and titles. Defaults to
+#' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
-#' @param gridCol The colour of the grid lines. Defaults to "#ebebeb"; use
+#' @param grid_col The colour of the grid lines. Defaults to "#ebebeb"; use
 #'   \code{NA} to hide them.
-#' @param valueFormat Optional. A d3-format string for the values, e.g.
+#' @param value_format Optional. A d3-format string for the values, e.g.
 #'   \code{",.0f"} or \code{".3s"}. A single string applies to \code{x},
 #'   \code{y} and \code{size}; a named vector sets them one by one, e.g.
 #'   \code{c(x = "$,.0f", y = ".1f")}.
-#' @param valuePrefix,valueSuffix Optional. Text added before or after the
-#'   values, e.g. \code{"$"} or \code{" years"}. As for \code{valueFormat}, a
+#' @param value_prefix,value_suffix Optional. Text added before or after the
+#'   values, e.g. \code{"$"} or \code{" years"}. As for \code{value_format}, a
 #'   single string applies to every value and a named vector sets them one by
-#'   one, e.g. \code{valuePrefix = c(x = "$")}.
+#'   one, e.g. \code{value_prefix = c(x = "$")}.
 #' @param tooltip Logical. Show a tooltip on hover. Defaults to \code{TRUE}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -147,12 +147,12 @@
 #'   gapminder,
 #'   x = "gdpPercap", y = "lifeExp", id = "country", time = "year",
 #'   size = "pop", group = "continent",
-#'   xScale = "log",
+#'   x_scale = "log",
 #'   highlight = c("China", "India"),
 #'   xtitle = "GDP per capita", ytitle = "Life expectancy",
-#'   sizeTitle = "Population",
-#'   valuePrefix = c(x = "$"), valueSuffix = c(y = " years"),
-#'   valueFormat = c(x = ",.0f", y = ".1f"),
+#'   size_title = "Population",
+#'   value_prefix = c(x = "$"), value_suffix = c(y = " years"),
+#'   value_format = c(x = ",.0f", y = ".1f"),
 #'   title = "Health and wealth of nations"
 #' )
 #'
@@ -162,7 +162,7 @@
 #'   filter(country %in% c("China", "India", "Japan", "Brazil", "Nigeria")) %>%
 #'   bubble_race(
 #'     x = "gdpPercap", y = "lifeExp", id = "country", time = "year",
-#'     size = "pop", xScale = "log", trails = TRUE, labels = TRUE,
+#'     size = "pop", x_scale = "log", trails = TRUE, labels = TRUE,
 #'     title = "Five countries, 1952 to 2007"
 #'   )
 #'
@@ -173,47 +173,47 @@ bubble_race <- function(data,
                         time,
                         size = NULL,
                         group = NULL,
-                        xScale = c("linear", "log"),
-                        yScale = c("linear", "log"),
-                        sizeRange = c(3, 40),
+                        x_scale = c("linear", "log"),
+                        y_scale = c("linear", "log"),
+                        size_range = c(3, 40),
                         fill = NULL,
-                        colorCategory = NULL,
+                        color_category = NULL,
                         opacity = 0.85,
                         highlight = NULL,
                         trails = FALSE,
                         labels = 5,
                         legend = NULL,
-                        sizeLegend = TRUE,
+                        size_legend = TRUE,
                         buttons = TRUE,
                         xtitle = NULL,
                         ytitle = NULL,
-                        sizeTitle = NULL,
+                        size_title = NULL,
                         agg = c("mean", "sum", "max", "min", "last"),
-                        fillGaps = TRUE,
-                        frameDur = 1000,
+                        fill_gaps = TRUE,
+                        frame_dur = 1000,
                         ease = "Linear",
                         autoplay = TRUE,
                         loop = FALSE,
                         controls = TRUE,
-                        startFrame = "first",
-                        timeFormat = NULL,
+                        start_frame = "first",
+                        time_format = NULL,
                         title = NULL,
-                        titleFontSize = 20,
+                        title_font_size = 20,
                         subtitle = NULL,
-                        subtitleFontSize = 13,
+                        subtitle_font_size = 13,
                         font = "Verdana, Geneva, Tahoma, sans-serif",
                         bgcol = "white",
-                        axisCol = "#333333",
-                        gridCol = "#ebebeb",
-                        valueFormat = NULL,
-                        valuePrefix = "",
-                        valueSuffix = "",
+                        axis_col = "#333333",
+                        grid_col = "#ebebeb",
+                        value_format = NULL,
+                        value_prefix = "",
+                        value_suffix = "",
                         tooltip = TRUE,
                         width = NULL,
                         height = NULL) {
 
-  xScale <- match.arg(xScale)
-  yScale <- match.arg(yScale)
+  x_scale <- match.arg(x_scale)
+  y_scale <- match.arg(y_scale)
   agg <- match.arg(agg)
 
   if (!is.data.frame(data)) stop("'data' must be a data frame")
@@ -230,9 +230,9 @@ bubble_race <- function(data,
   if (!is.null(group) && !is_col(group)) {
     stop("'group' must be the name of a column of 'data'")
   }
-  if (!is.numeric(sizeRange) || length(sizeRange) != 2 || anyNA(sizeRange) ||
-      sizeRange[1] < 0 || sizeRange[2] < sizeRange[1]) {
-    stop("'sizeRange' must be two numbers, the smallest and the largest radius (0 <= min <= max)")
+  if (!is.numeric(size_range) || length(size_range) != 2 || anyNA(size_range) ||
+      size_range[1] < 0 || size_range[2] < size_range[1]) {
+    stop("'size_range' must be two numbers, the smallest and the largest radius (0 <= min <= max)")
   }
   if (!is.numeric(opacity) || length(opacity) != 1 || is.na(opacity) || opacity < 0 || opacity > 1) {
     stop("'opacity' must be a number between 0 and 1")
@@ -240,8 +240,8 @@ bubble_race <- function(data,
   if (!is.character(font) || length(font) != 1 || grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
   }
-  if (!is.null(colorCategory) && (!is.character(colorCategory) || length(colorCategory) != 1)) {
-    stop("'colorCategory' must be the name of a D3 colour scheme, e.g. \"Tableau10\"")
+  if (!is.null(color_category) && (!is.character(color_category) || length(color_category) != 1)) {
+    stop("'color_category' must be the name of a D3 colour scheme, e.g. \"Tableau10\"")
   }
   if (isTRUE(labels)) {
     labels <- -1
@@ -261,8 +261,8 @@ bubble_race <- function(data,
       data[[col]][which(bad)] <<- NA
     }
   }
-  if (xScale == "log") drop_bad(x, data[[x]] <= 0, "non-positive values (log scale)")
-  if (yScale == "log") drop_bad(y, data[[y]] <= 0, "non-positive values (log scale)")
+  if (x_scale == "log") drop_bad(x, data[[x]] <= 0, "non-positive values (log scale)")
+  if (y_scale == "log") drop_bad(y, data[[y]] <= 0, "non-positive values (log scale)")
   if (!is.null(size)) drop_bad(size, data[[size]] < 0, "negative values")
 
   # one format / prefix / suffix per value: x, y and size
@@ -279,13 +279,13 @@ bubble_race <- function(data,
     for (k in names(v)) out[[k]] <- unname(v[[k]])
     out
   }
-  fmts <- per_value(valueFormat, "valueFormat", NULL)
-  pres <- per_value(valuePrefix, "valuePrefix", "")
-  sufs <- per_value(valueSuffix, "valueSuffix", "")
+  fmts <- per_value(value_format, "value_format", NULL)
+  pres <- per_value(value_prefix, "value_prefix", "")
+  sufs <- per_value(value_suffix, "value_suffix", "")
 
   values <- unique(c(x, y, size))
   r <- race_prepare(data, id = id, time = time, values = values, group = group,
-                    agg = agg, fill_gaps = isTRUE(fillGaps))
+                    agg = agg, fill_gaps = isTRUE(fill_gaps))
 
   # groups, in the order of the factor levels or sorted
   group_levels <- NULL
@@ -305,7 +305,7 @@ bubble_race <- function(data,
     } else {
       colors <- race_colors(keys, fill)
     }
-  } else if (is.null(colorCategory)) {
+  } else if (is.null(color_category)) {
     colors <- race_colors(keys)
   }
 
@@ -318,7 +318,7 @@ bubble_race <- function(data,
     highlight <- intersect(highlight, as.character(r$items))
   }
 
-  player <- race_player_options(frameDur, ease, autoplay, loop, controls, startFrame, timeFormat)
+  player <- race_player_options(frame_dur, ease, autoplay, loop, controls, start_frame, time_format)
   player$stateKey <- paste("bubble", id, time, x, y, size, group, sep = "|")
 
   r2d3::r2d3(
@@ -335,32 +335,32 @@ bubble_race <- function(data,
       timeName = time,
       groupLevels = if (is.null(group_levels)) NULL else I(group_levels),
       colors = if (is.null(colors)) NULL else I(colors),
-      colorCategory = colorCategory,
-      xScale = xScale,
-      yScale = yScale,
-      sizeRange = I(as.numeric(sizeRange)),
+      colorCategory = color_category,
+      xScale = x_scale,
+      yScale = y_scale,
+      sizeRange = I(as.numeric(size_range)),
       opacity = opacity,
       highlight = if (is.null(highlight)) NULL else I(highlight),
       trails = isTRUE(trails),
       labels = as.numeric(labels),
       legend = if (is.null(legend)) !is.null(group) else isTRUE(legend),
-      sizeLegend = isTRUE(sizeLegend) && !is.null(size),
+      sizeLegend = isTRUE(size_legend) && !is.null(size),
       buttons = isTRUE(buttons),
       xtitle = if (is.null(xtitle)) x else xtitle,
       ytitle = if (is.null(ytitle)) y else ytitle,
-      sizeTitle = if (is.null(sizeTitle)) size else sizeTitle,
+      sizeTitle = if (is.null(size_title)) size else size_title,
       formats = fmts,
       prefixes = pres,
       suffixes = sufs,
       tooltip = isTRUE(tooltip),
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       subtitle = subtitle,
-      subtitleFontSize = subtitleFontSize,
+      subtitleFontSize = subtitle_font_size,
       font = font,
       bgcol = bgcol,
-      axisCol = axisCol,
-      gridCol = if (is.null(gridCol) || is.na(gridCol)) NULL else gridCol
+      axisCol = axis_col,
+      gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col
     ),
     width = width,
     height = height

@@ -5,7 +5,7 @@
 #' and its live value. The axes rescale smoothly as the race goes, the labels
 #' spread so they never overlap, and a ranking emerges. Switch to the rank
 #' mode to watch the same race as a bump chart (rank 1 at the top), keep only
-#' the leaders in colour with \code{topN}, follow a sliding window of the last
+#' the leaders in colour with \code{top_n}, follow a sliding window of the last
 #' periods with \code{window}, and annotate key moments with \code{events}.
 #'
 #' The data must be in long format: one row per line and period. The time
@@ -27,7 +27,7 @@
 #'   \item Hover a label to see a summary of the line (value, rank, change
 #'     since its first period, peak).
 #'   \item Click a line or a label to pin it: it stays highlighted (and
-#'     coloured and labelled, even outside the \code{topN}) until clicked
+#'     coloured and labelled, even outside the \code{top_n}) until clicked
 #'     again. Click an empty area of the chart to clear the pins.
 #'   \item The buttons at the top right switch between values and ranks.
 #'   \item With \code{category}, click a legend entry to hide or show a
@@ -54,23 +54,23 @@
 #' @param mode What the vertical axis shows: \code{"value"} (default) or
 #'   \code{"rank"} (a bump chart race, rank 1 at the top). It can be changed
 #'   from the chart when \code{controls = TRUE}.
-#' @param topN Optional. A number of lines: only the current top \code{topN}
+#' @param top_n Optional. A number of lines: only the current top \code{top_n}
 #'   lines are coloured and labelled, the others are drawn as thin grey lines
 #'   in the background. The set changes as the race goes. In rank mode, the
-#'   vertical axis shows the first \code{topN} ranks.
+#'   vertical axis shows the first \code{top_n} ranks.
 #' @param fill Optional. The colour of the lines: a single colour, a vector
 #'   of colours (recycled), or a named vector mapping colours to lines (or to
 #'   categories, with \code{category}). Defaults to a built-in palette.
 #' @param category Optional. The name of a column grouping the lines (e.g. a
 #'   continent): the lines are coloured by category, with a clickable legend.
-#' @param colorCategory Optional. The name of a D3 categorical colour scheme,
+#' @param color_category Optional. The name of a D3 categorical colour scheme,
 #'   such as "Tableau10", "Set2" or "Dark2", used when \code{fill} is not
 #'   given. Defaults to the ddplot palette.
 #' @param highlight Optional. A character vector of lines to pin from the
 #'   start (they are highlighted, coloured and labelled).
-#' @param yScale The scale of the values: \code{"linear"} (default) or
+#' @param y_scale The scale of the values: \code{"linear"} (default) or
 #'   \code{"log"} (values that are not positive are dropped).
-#' @param yZero Logical. Start the value axis at zero (linear scale only).
+#' @param y_zero Logical. Start the value axis at zero (linear scale only).
 #'   Defaults to \code{TRUE}; use \code{FALSE} to zoom on the range of the
 #'   values seen so far.
 #' @param window Optional. A number of periods: the time axis then slides to
@@ -85,10 +85,10 @@
 #'   of the \code{x} column (numbers, dates or period labels).
 #' @param labels Logical. Show the name and the live value next to the head
 #'   of each line. Defaults to \code{TRUE}.
-#' @param strokeWidth The width of the lines, in pixels. Defaults to 2.5.
-#' @param dotRadius The radius of the dot at the head of each line, in
+#' @param stroke_width The width of the lines, in pixels. Defaults to 2.5.
+#' @param dot_radius The radius of the dot at the head of each line, in
 #'   pixels. Defaults to 4.5.
-#' @param fillGaps Logical. Interpolate the values of a line between the
+#' @param fill_gaps Logical. Interpolate the values of a line between the
 #'   periods where it is known (otherwise the line is broken). Defaults to
 #'   \code{TRUE}.
 #' @param agg How rows with the same line and period are combined:
@@ -97,7 +97,7 @@
 #' @param xtitle Optional. The title of the time axis.
 #' @param ytitle Optional. The title of the value axis, drawn above it.
 #'   Defaults to the name of \code{y}; use \code{""} to hide it.
-#' @param frameDur The duration of one period, in milliseconds. Defaults to
+#' @param frame_dur The duration of one period, in milliseconds. Defaults to
 #'   700.
 #' @param ease The easing of the movement within a period, the name of a D3
 #'   easing function without its \code{ease} prefix, e.g. \code{"Linear"}
@@ -108,24 +108,24 @@
 #'   can be changed from the player.
 #' @param controls Logical. Show the player and the mode buttons. Defaults to
 #'   \code{TRUE}.
-#' @param startFrame The period shown first: \code{"first"} (default),
+#' @param start_frame The period shown first: \code{"first"} (default),
 #'   \code{"last"} (the full lines) or a period number.
-#' @param timeFormat Optional. A d3 time format for date periods, e.g.
+#' @param time_format Optional. A d3 time format for date periods, e.g.
 #'   \code{"\%b \%Y"}.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 20.
+#' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "white".
-#' @param axisCol The colour of the axes, labels and titles. Defaults to
+#' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
-#' @param gridCol The colour of the grid lines. Defaults to "#ececec"; use
+#' @param grid_col The colour of the grid lines. Defaults to "#ececec"; use
 #'   \code{NA} to hide them.
-#' @param valueFormat Optional. A d3-format string for the values, e.g.
+#' @param value_format Optional. A d3-format string for the values, e.g.
 #'   \code{",.0f"}, \code{".1f"} or \code{"~s"}.
-#' @param valuePrefix,valueSuffix Optional. Text added before or after every
+#' @param value_prefix,value_suffix Optional. Text added before or after every
 #'   value, e.g. \code{"$"} or \code{" years"}.
 #' @param tooltip Logical. Show tooltips on hover. Defaults to \code{TRUE}.
 #' @param width Optional. The width of the SVG output.
@@ -143,7 +143,7 @@
 #'                         "Indonesia", "Thailand", "Vietnam", "Philippines")) %>%
 #'   line_race(
 #'     x = "year", y = "gdpPercap", group = "country",
-#'     yScale = "log", valuePrefix = "$", valueFormat = ",.0f",
+#'     y_scale = "log", value_prefix = "$", value_format = ",.0f",
 #'     ytitle = "GDP per capita (log scale)",
 #'     title = "The Asian growth race",
 #'     events = c("Reforms in China" = 1978, "Asian crisis" = 1997)
@@ -152,8 +152,8 @@
 #' # Every country, the ten longest lives in colour; switch to ranks live
 #' line_race(
 #'   gapminder, x = "year", y = "lifeExp", group = "country",
-#'   category = "continent", topN = 10, yZero = FALSE,
-#'   valueFormat = ".1f", ytitle = "Life expectancy (years)",
+#'   category = "continent", top_n = 10, y_zero = FALSE,
+#'   value_format = ".1f", ytitle = "Life expectancy (years)",
 #'   highlight = "Japan", title = "Life expectancy, 1952 to 2007"
 #' )
 #'
@@ -167,54 +167,54 @@
 #'             30, 27, 22, 20, 21, 24, 30, 35)
 #' )
 #' line_race(sales, x = "quarter", y = "units", group = "brand",
-#'           mode = "rank", frameDur = 900, title = "Units sold per quarter")
+#'           mode = "rank", frame_dur = 900, title = "Units sold per quarter")
 #'
 line_race <- function(data,
                       x,
                       y,
                       group,
                       mode = c("value", "rank"),
-                      topN = NULL,
+                      top_n = NULL,
                       fill = NULL,
                       category = NULL,
-                      colorCategory = NULL,
+                      color_category = NULL,
                       highlight = NULL,
-                      yScale = c("linear", "log"),
-                      yZero = TRUE,
+                      y_scale = c("linear", "log"),
+                      y_zero = TRUE,
                       window = NULL,
                       grow = FALSE,
                       events = NULL,
                       labels = TRUE,
-                      strokeWidth = 2.5,
-                      dotRadius = 4.5,
-                      fillGaps = TRUE,
+                      stroke_width = 2.5,
+                      dot_radius = 4.5,
+                      fill_gaps = TRUE,
                       agg = c("sum", "mean", "max", "min", "last"),
                       xtitle = NULL,
                       ytitle = NULL,
-                      frameDur = 700,
+                      frame_dur = 700,
                       ease = "Linear",
                       autoplay = TRUE,
                       loop = FALSE,
                       controls = TRUE,
-                      startFrame = "first",
-                      timeFormat = NULL,
+                      start_frame = "first",
+                      time_format = NULL,
                       title = NULL,
-                      titleFontSize = 20,
+                      title_font_size = 20,
                       subtitle = NULL,
-                      subtitleFontSize = 13,
+                      subtitle_font_size = 13,
                       font = "Verdana, Geneva, Tahoma, sans-serif",
                       bgcol = "white",
-                      axisCol = "#333333",
-                      gridCol = "#ececec",
-                      valueFormat = NULL,
-                      valuePrefix = "",
-                      valueSuffix = "",
+                      axis_col = "#333333",
+                      grid_col = "#ececec",
+                      value_format = NULL,
+                      value_prefix = "",
+                      value_suffix = "",
                       tooltip = TRUE,
                       width = NULL,
                       height = NULL) {
 
   mode <- match.arg(mode)
-  yScale <- match.arg(yScale)
+  y_scale <- match.arg(y_scale)
   agg <- match.arg(agg)
 
   if (!is.data.frame(data)) stop("'data' must be a data frame")
@@ -234,22 +234,22 @@ line_race <- function(data,
                              is.null(data[[category]]))) {
     stop("'category' must be the name of a column of 'data'")
   }
-  if (!is.null(colorCategory) && (!is.character(colorCategory) || length(colorCategory) != 1)) {
-    stop("'colorCategory' must be the name of a D3 categorical colour scheme, e.g. \"Tableau10\"")
+  if (!is.null(color_category) && (!is.character(color_category) || length(color_category) != 1)) {
+    stop("'color_category' must be the name of a D3 categorical colour scheme, e.g. \"Tableau10\"")
   }
-  if (!is.null(topN) && (!is.numeric(topN) || length(topN) != 1 || !is.finite(topN) || topN < 1)) {
-    stop("'topN' must be a positive number")
+  if (!is.null(top_n) && (!is.numeric(top_n) || length(top_n) != 1 || !is.finite(top_n) || top_n < 1)) {
+    stop("'top_n' must be a positive number")
   }
   if (!is.null(window) && (!is.numeric(window) || length(window) != 1 || !is.finite(window) || window < 1)) {
     stop("'window' must be a number of periods (at least 1)")
   }
-  if (!is.logical(yZero) || length(yZero) != 1 || is.na(yZero)) stop("'yZero' must be TRUE or FALSE")
+  if (!is.logical(y_zero) || length(y_zero) != 1 || is.na(y_zero)) stop("'y_zero' must be TRUE or FALSE")
   if (!is.logical(grow) || length(grow) != 1 || is.na(grow)) stop("'grow' must be TRUE or FALSE")
-  if (!is.numeric(strokeWidth) || length(strokeWidth) != 1 || !(strokeWidth > 0)) {
-    stop("'strokeWidth' must be a positive number")
+  if (!is.numeric(stroke_width) || length(stroke_width) != 1 || !(stroke_width > 0)) {
+    stop("'stroke_width' must be a positive number")
   }
-  if (!is.numeric(dotRadius) || length(dotRadius) != 1 || !(dotRadius >= 0)) {
-    stop("'dotRadius' must be a non-negative number")
+  if (!is.numeric(dot_radius) || length(dot_radius) != 1 || !(dot_radius >= 0)) {
+    stop("'dot_radius' must be a non-negative number")
   }
   if (!is.character(font) || length(font) != 1 || grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
@@ -261,7 +261,7 @@ line_race <- function(data,
     stop("'ease' must be the name of a D3 easing function, e.g. \"Linear\"")
   }
 
-  if (yScale == "log") {
+  if (y_scale == "log") {
     bad <- is.finite(data[[y]]) & data[[y]] <= 0
     if (any(bad)) {
       warning(sum(bad), " values that are not positive were dropped (log scale)")
@@ -270,7 +270,7 @@ line_race <- function(data,
   }
 
   race <- race_prepare(data, id = group, time = x, values = y, group = category,
-                       agg = agg, fill_gaps = isTRUE(fillGaps))
+                       agg = agg, fill_gaps = isTRUE(fill_gaps))
   names(race$series) <- "v"
   items <- as.character(race$items)
   if (!any(vapply(race$series$v, function(s) any(is.finite(s)), TRUE))) {
@@ -285,7 +285,7 @@ line_race <- function(data,
     lv <- if (is.factor(cv)) levels(droplevels(cv)) else sort(unique(as.character(cv[!is.na(cv)])))
     if (anyNA(cv)) lv <- c(lv, "(missing)")
     categories <- lv[lv %in% as.character(race$groups)]
-    if (is.null(fill) && !is.null(colorCategory)) {
+    if (is.null(fill) && !is.null(color_category)) {
       cat_colors <- NULL # a D3 scheme, picked in the browser
     } else if (length(fill) == 1 && is.null(names(fill))) {
       cat_colors <- race_colors(categories, NULL) # one colour cannot tell categories apart
@@ -294,7 +294,7 @@ line_race <- function(data,
     }
     colors <- if (is.null(cat_colors)) NULL else cat_colors[match(as.character(race$groups), categories)]
   } else {
-    colors <- if (is.null(fill) && !is.null(colorCategory)) NULL else race_colors(items, fill)
+    colors <- if (is.null(fill) && !is.null(color_category)) NULL else race_colors(items, fill)
   }
 
   # ---- events --------------------------------------------------------------------
@@ -336,7 +336,7 @@ line_race <- function(data,
     hl <- intersect(hl, items)
   }
 
-  player <- race_player_options(frameDur, ease, autoplay, loop, controls, startFrame, timeFormat)
+  player <- race_player_options(frame_dur, ease, autoplay, loop, controls, start_frame, time_format)
   player$stateKey <- paste("linerace", x, y, group, if (is.null(category)) "" else category,
                            nrow(data), sep = "|")
 
@@ -348,37 +348,37 @@ line_race <- function(data,
       player = player,
       stateKey = player$stateKey,
       colors = if (is.null(colors)) NULL else I(colors),
-      colorCategory = colorCategory,
+      colorCategory = color_category,
       categories = if (is.null(categories)) NULL else I(categories),
       catColors = if (is.null(cat_colors)) NULL else I(cat_colors),
       catName = category,
       groupName = group,
       yName = y,
       mode = mode,
-      topN = if (is.null(topN)) NULL else as.integer(round(topN)),
+      topN = if (is.null(top_n)) NULL else as.integer(round(top_n)),
       highlight = if (is.null(hl)) NULL else I(hl),
-      yScale = yScale,
-      yZero = isTRUE(yZero),
+      yScale = y_scale,
+      yZero = isTRUE(y_zero),
       window = window,
       grow = isTRUE(grow),
       events = ev,
       labels = isTRUE(labels),
-      strokeWidth = strokeWidth,
-      dotRadius = dotRadius,
+      strokeWidth = stroke_width,
+      dotRadius = dot_radius,
       xtitle = xtitle,
       ytitle = if (is.null(ytitle)) y else ytitle,
       controls = isTRUE(controls),
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       subtitle = subtitle,
-      subtitleFontSize = subtitleFontSize,
+      subtitleFontSize = subtitle_font_size,
       font = font,
       bgcol = bgcol,
-      axisCol = axisCol,
-      gridCol = if (is.null(gridCol) || is.na(gridCol)) NULL else gridCol,
-      valueFormat = valueFormat,
-      valuePrefix = valuePrefix,
-      valueSuffix = valueSuffix,
+      axisCol = axis_col,
+      gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,
+      valueFormat = value_format,
+      valuePrefix = value_prefix,
+      valueSuffix = value_suffix,
       tooltip = isTRUE(tooltip)
     ),
     width = width,

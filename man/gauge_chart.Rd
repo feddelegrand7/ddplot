@@ -9,19 +9,19 @@ gauge_chart(
   min = 0,
   max = 100,
   title = "",
-  warningZone = NULL,
-  warningColor = "orange",
-  dangerZone = NULL,
-  dangerColor = "red",
-  arcBgColor = "#ddd",
-  needleColor = "crimson",
-  pivotColor = "steelblue",
-  titleFontSize = 16,
-  valueFontSize = 14,
+  warning_zone = NULL,
+  warning_color = "orange",
+  danger_zone = NULL,
+  danger_color = "red",
+  arc_bg_color = "#ddd",
+  needle_color = "crimson",
+  pivot_color = "steelblue",
+  title_font_size = 16,
+  value_font_size = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   animate = TRUE,
-  animationDuration = 1500,
+  animation_duration = 1500,
   width = NULL,
   height = NULL
 )
@@ -35,25 +35,25 @@ gauge_chart(
 
 \item{title}{Character. Label shown inside the gauge. Defaults to "".}
 
-\item{warningZone}{Numeric. The value at which the warning (first) arc begins.
+\item{warning_zone}{Numeric. The value at which the warning (first) arc begins.
 Defaults to 75\% of max.}
 
-\item{warningColor}{The color of the warning zone arc. Defaults to "orange".}
+\item{warning_color}{The color of the warning zone arc. Defaults to "orange".}
 
-\item{dangerZone}{Numeric. The value at which the danger (second, critical) arc begins.
+\item{danger_zone}{Numeric. The value at which the danger (second, critical) arc begins.
 Defaults to 90\% of max.}
 
-\item{dangerColor}{The color of the danger zone arc. Defaults to "red".}
+\item{danger_color}{The color of the danger zone arc. Defaults to "red".}
 
-\item{arcBgColor}{The background color of the gauge arc track. Defaults to "#ddd".}
+\item{arc_bg_color}{The background color of the gauge arc track. Defaults to "#ddd".}
 
-\item{needleColor}{The color of the needle. Defaults to "crimson".}
+\item{needle_color}{The color of the needle. Defaults to "crimson".}
 
-\item{pivotColor}{The color of the center pivot circle. Defaults to "steelblue".}
+\item{pivot_color}{The color of the center pivot circle. Defaults to "steelblue".}
 
-\item{titleFontSize}{The font size of the gauge title. Defaults to 16.}
+\item{title_font_size}{The font size of the gauge title. Defaults to 16.}
 
-\item{valueFontSize}{The font size of the current value label. Defaults to 14.}
+\item{value_font_size}{The font size of the current value label. Defaults to 14.}
 
 \item{font}{The font family used for all text. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -64,7 +64,7 @@ Defaults to 90\% of max.}
 the minimum up to the value on load and settles with a small wobble. Set to
 \code{FALSE} to draw the needle at the value immediately with no animation.}
 
-\item{animationDuration}{Numeric. Duration of the needle sweep in
+\item{animation_duration}{Numeric. Duration of the needle sweep in
 milliseconds. Defaults to 1500.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -90,10 +90,10 @@ gauge_chart(
   min = 0,
   max = 100,
   title = "CPU Load",
-  warningZone  = 60,
-  warningColor = "orange",
-  dangerZone   = 80,
-  dangerColor  = "red"
+  warning_zone  = 60,
+  warning_color = "orange",
+  danger_zone   = 80,
+  danger_color  = "red"
 )
 
 # Non-percentage range (response time in ms)
@@ -102,7 +102,7 @@ gauge_chart(
   min = 0,
   max = 1000,
   title = "Response (ms)",
-  warningZone  = 400,
-  dangerZone   = 700
+  warning_zone  = 400,
+  danger_zone   = 700
 )
 }

@@ -7,49 +7,49 @@
 area_band(
   data,
   x,
-  yLower,
-  yUpper,
+  y_lower,
+  y_upper,
   fill = NULL,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = NULL,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   y = NULL,
   group = NULL,
-  lineWidth = 2,
+  line_width = 2,
   curve = "curveLinear",
-  yZero = FALSE,
+  y_zero = FALSE,
   events = NULL,
   bands = NULL,
   hlines = NULL,
   legend = NULL,
-  endLabels = NULL,
+  end_labels = NULL,
   tooltip = TRUE,
   navigator = TRUE,
-  rangeButtons = TRUE,
+  range_buttons = TRUE,
   zoom = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
-  dateFormat = NULL,
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
+  date_format = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
+  grid_col = "#e9e9e9"
 )
 }
 \arguments{
@@ -58,9 +58,9 @@ area_band(
 \item{x}{The time variable: a \code{Date}, a \code{POSIXct} date-time, a
 "yyyy-mm-dd" character column or a number.}
 
-\item{yLower}{The column holding the lower bound of the band.}
+\item{y_lower}{The column holding the lower bound of the band.}
 
-\item{yUpper}{The column holding the upper bound of the band.}
+\item{y_upper}{The column holding the upper bound of the band.}
 
 \item{fill}{The colour of the band (and of the central line). A single
 colour, or one colour per group (a named vector maps colours to groups).
@@ -69,7 +69,7 @@ Defaults to a built-in palette.}
 \item{stroke}{Optional. The colour of the band's outline. Without
 \code{y}, the outline defaults to a faded line in the band's colour.}
 
-\item{strokeWidth}{Optional. The width of the band's outline. Defaults to
+\item{stroke_width}{Optional. The width of the band's outline. Defaults to
 1.}
 
 \item{xticks}{Optional. The approximate number of x-axis ticks.}
@@ -78,15 +78,15 @@ Defaults to a built-in palette.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
 
 \item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -96,7 +96,7 @@ Defaults to a built-in palette.}
 \item{opacity}{Optional. The opacity of the band (from 0 to 1). Defaults
 to 0.3, or 0.22 with a central line.}
 
-\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+\item{axis_col}{The color of the axis text, ticks and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -108,13 +108,13 @@ to 0.3, or 0.22 with a central line.}
 \item{group}{Optional. The column whose values name the bands (one band
 per value, long data).}
 
-\item{lineWidth}{The width of the central line. Defaults to 2.}
+\item{line_width}{The width of the central line. Defaults to 2.}
 
 \item{curve}{The line's curve type. A complete list can be found here
 <https://github.com/d3/d3-shape#curves>. Defaults to 'curveLinear';
 'curveMonotoneX' gives smooth lines that never overshoot the data.}
 
-\item{yZero}{Logical. Force the y axis to include 0. Defaults to
+\item{y_zero}{Logical. Force the y axis to include 0. Defaults to
 \code{FALSE}.}
 
 \item{events}{Optional. Dates to mark with a vertical line: either a
@@ -133,7 +133,7 @@ dashed lines (names are used as labels). Only drawn when
 a series, double-click to isolate it). When \code{NULL} (default), the
 legend is shown when there are two series or more.}
 
-\item{endLabels}{Logical. Label each line at its last visible point. When
+\item{end_labels}{Logical. Label each line at its last visible point. When
 \code{NULL} (default), labels are shown when there are two series or
 more.}
 
@@ -145,7 +145,7 @@ series with a brush to select the visible range) under the chart.
 Defaults to \code{TRUE}; it is hidden automatically on very short
 charts.}
 
-\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+\item{range_buttons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
 All, ...), chosen from the length and frequency of the data. Only used
 with dates. Defaults to \code{TRUE}.}
 
@@ -155,26 +155,26 @@ double-click to reset. Defaults to \code{TRUE}.}
 \item{animate}{Logical. Draw the lines in with an animation on first
 render. Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+\item{value_format}{Optional. A d3-format string for values in the tooltip
 (see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
 with \code{transform = "percent"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+\item{value_prefix, value_suffix}{Optional. Text placed before and after the
 values on the y axis and in the tooltip, for example "$" or " km".}
 
-\item{dateFormat}{Optional. A d3-time-format string for the date in the
+\item{date_format}{Optional. A d3-time-format string for the date in the
 tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
 (default), it is picked from the frequency of the data (yearly,
 quarterly, monthly, daily or intraday).}
 
 \item{subtitle}{Optional. A subtitle shown under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+\item{x_font_size, y_font_size}{The font size of the axis tick labels. Defaults
 to 11.}
 
-\item{gridCol}{The color of the horizontal grid lines. Defaults to
+\item{grid_col}{The color of the horizontal grid lines. Defaults to
 "#e9e9e9".}
 }
 \value{
@@ -199,8 +199,8 @@ airpassengers <- data.frame(
 area_band(
   data = airpassengers,
   x = "date",
-  yLower = "passengers_lower",
-  yUpper = "passengers_upper",
+  y_lower = "passengers_lower",
+  y_upper = "passengers_upper",
   fill = "#efb118",
   stroke = "#9c6b4e"
 )
@@ -215,8 +215,8 @@ temps <- do.call(rbind, lapply(c("Oslo", "Madrid"), function(city) {
              low = mid - runif(120, 2, 5), high = mid + runif(120, 2, 5))
 }))
 area_band(
-  temps, x = "date", yLower = "low", yUpper = "high", y = "mean",
-  group = "city", valueFormat = ".1f", valueSuffix = " °C",
+  temps, x = "date", y_lower = "low", y_upper = "high", y = "mean",
+  group = "city", value_format = ".1f", value_suffix = " °C",
   title = "Daily temperatures", subtitle = "Mean, with the daily minimum and maximum"
 )
 

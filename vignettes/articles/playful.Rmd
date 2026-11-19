@@ -29,23 +29,23 @@ Every indicator reacts to the mouse, and the heart, the glass, the plant and the
 `heart_fill()` shows a level from 0 to 1 as a heart filling with a wavy liquid. The heart beats, and the percentage written inside turns white where the liquid covers it. Hover the heart to make it beat faster, and click it to release a few small hearts. `target` marks a level to reach.
 
 ```{r}
-heart_fill(fill_level = 0.8, titleText = NULL)
+heart_fill(fill_level = 0.8, title_text = NULL)
 ```
 
 ```{r}
 heart_fill(
   fill_level = 0.45,
   target = 0.75,
-  fillColor = "#ff8ab7",
-  strokeColor = "#c2185b",
-  titleText = "Daily activity goal"
+  fill_color = "#ff8ab7",
+  stroke_color = "#c2185b",
+  title_text = "Daily activity goal"
 )
 ```
 
 With `draggable = TRUE`, drag the heart up or down to set the level:
 
 ```{r}
-heart_fill(0.3, draggable = TRUE, titleText = "Drag the heart", bpm = 80)
+heart_fill(0.3, draggable = TRUE, title_text = "Drag the heart", bpm = 80)
 ```
 
 ## `glass_fill()` {#glass_fill}
@@ -53,7 +53,7 @@ heart_fill(0.3, draggable = TRUE, titleText = "Drag the heart", bpm = 80)
 `glass_fill()` shows the level as a glass of water, with a moving surface and rising bubbles. Move the mouse across the chart to rock the water, and click the glass to drop some more in. `ticks = TRUE` adds a measuring scale.
 
 ```{r}
-glass_fill(fill_level = 0.8, titleText = "Glass of water")
+glass_fill(fill_level = 0.8, title_text = "Glass of water")
 ```
 
 ```{r}
@@ -61,12 +61,12 @@ glass_fill(
   fill_level = 0.35,
   target = 0.8,
   ticks = TRUE,
-  titleText = "Water intake today"
+  title_text = "Water intake today"
 )
 ```
 
 ```{r}
-glass_fill(0.6, fillColor = "#efb118", draggable = TRUE, titleText = "Drag the water")
+glass_fill(0.6, fill_color = "#efb118", draggable = TRUE, title_text = "Drag the water")
 ```
 
 ## `plant_growth()` {#plant_growth}
@@ -78,45 +78,45 @@ plant_growth(0.4)
 ```
 
 ```{r}
-plant_growth(1, titleText = "Project completed")
+plant_growth(1, title_text = "Project completed")
 ```
 
 ```{r}
 plant_growth(
   0.7,
   target = 0.9,
-  potColor = "#4269d0",
-  flowerColor = "#efb118",
+  pot_color = "#4269d0",
+  flower_color = "#efb118",
   draggable = TRUE,
-  titleText = "Drag the plant"
+  title_text = "Drag the plant"
 )
 ```
 
 ## `flame()` {#flame}
 
-`flame()` shows an intensity as a flickering flame. This is useful for a critical number, such as the number of errors in a process. The flame grows linearly with the intensity up to `maxIntensity` (100 by default). The higher the intensity, the faster it flickers and the more sparks it throws. The flame leans away from the mouse, and flares up when clicked. It can burn on its own, on a candle or on logs.
+`flame()` shows an intensity as a flickering flame. This is useful for a critical number, such as the number of errors in a process. The flame grows linearly with the intensity up to `max_intensity` (100 by default). The higher the intensity, the faster it flickers and the more sparks it throws. The flame leans away from the mouse, and flares up when clicked. It can burn on its own, on a candle or on logs.
 
 ```{r}
 flame(
   intensity = 35,
   base = "candle",
-  showValue = TRUE,
-  valueSuffix = " errors",
-  titleText = "Failed jobs today"
+  show_value = TRUE,
+  value_suffix = " errors",
+  title_text = "Failed jobs today"
 )
 ```
 
 ```{r}
 flame(
   intensity = 80,
-  flameGradientColors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
+  flame_gradient_colors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
   bgcol = "#111111",
   base = "logs"
 )
 ```
 
 ```{r}
-flame(intensity = 20, draggable = TRUE, showValue = TRUE, titleText = "Drag the flame")
+flame(intensity = 20, draggable = TRUE, show_value = TRUE, title_text = "Drag the flame")
 ```
 
 ## `flower()` {#flower}
@@ -124,28 +124,28 @@ flame(intensity = 20, draggable = TRUE, showValue = TRUE, titleText = "Drag the 
 `flower()` draws a flower that blooms when it comes into view and then turns slowly. Click a petal to pluck it, and the flower says "loves me" or "loves me not". When the last petal falls, the verdict is shown and the flower grows back. Click the centre to make it grow back at any time.
 
 ```{r}
-flower(petalCount = 7, petalColor = "plum", rotationSpeed = 0)
+flower(petal_count = 7, petal_color = "plum", rotation_speed = 0)
 ```
 
 ```{r}
 flower(
-  petalCount = 14,
-  petalColor = "#efb118",
-  centerColor = "#5b3a29",
-  centerStroke = "#3b2416",
-  centerText = "14",
-  centerTextColor = "white",
-  rotationSpeed = 0.3
+  petal_count = 14,
+  petal_color = "#efb118",
+  center_color = "#5b3a29",
+  center_stroke = "#3b2416",
+  center_text = "14",
+  center_text_color = "white",
+  rotation_speed = 0.3
 )
 ```
 
-With `petalValues`, the flower becomes a small chart. There is one petal per value, its length is proportional to the value, and hovering a petal shows its value and share. Clicking a petal highlights it.
+With `petal_values`, the flower becomes a small chart. There is one petal per value, its length is proportional to the value, and hovering a petal shows its value and share. Clicking a petal highlights it.
 
 ```{r}
 flower(
-  petalValues = c(8, 6, 9, 4, 7, 5),
-  petalLabels = c("Speed", "Power", "Skill", "Luck", "Focus", "Stamina"),
-  valueSuffix = " / 10",
-  titleText = "Player profile"
+  petal_values = c(8, 6, 9, 4, 7, 5),
+  petal_labels = c("Speed", "Power", "Skill", "Luck", "Focus", "Stamina"),
+  value_suffix = " / 10",
+  title_text = "Player profile"
 )
 ```

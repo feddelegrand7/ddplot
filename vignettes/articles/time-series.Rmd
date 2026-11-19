@@ -106,8 +106,8 @@ line_chart(
   y = "unemploy",
   area = TRUE,
   bands = recessions,
-  valueFormat = ",.0f",
-  valueSuffix = "k",
+  value_format = ",.0f",
+  value_suffix = "k",
   title = "US unemployment",
   subtitle = "Thousands of persons, recessions shaded"
 )
@@ -136,12 +136,12 @@ line_chart(
   lower = "lo", upper = "hi",
   colors = c(Observed = "#4269d0", Forecast = "#ff725c"),
   events = c("Forecast starts" = as.Date("1961-01-01")),
-  valueFormat = ",.0f",
+  value_format = ",.0f",
   title = "Airline passengers: Holt-Winters forecast"
 )
 ```
 
-`rollmean` draws a trailing moving average over the raw series, which is kept as a faint line (`showRaw = FALSE` hides it). Missing values leave gaps in the lines:
+`rollmean` draws a trailing moving average over the raw series, which is kept as a faint line (`show_raw = FALSE` hides it). Missing values leave gaps in the lines:
 
 ```{r}
 set.seed(3)
@@ -158,13 +158,13 @@ line_chart(
   y = c("cpu", "mem"),
   rollmean = 12,
   hlines = c(SLA = 70),
-  valueSuffix = "%",
+  value_suffix = "%",
   title = "Server load",
   subtitle = "5-minute samples with a 1-hour moving average"
 )
 ```
 
-Other options include `yScale = "log"`, `yZero`, `dateFormat`, and turning off `navigator`, `rangeButtons`, `zoom`, `legend`, `endLabels` or `animate`.
+Other options include `y_scale = "log"`, `y_zero`, `date_format`, and turning off `navigator`, `range_buttons`, `zoom`, `legend`, `end_labels` or `animate`.
 
 ## `area_chart()` {#area_chart}
 
@@ -174,7 +174,7 @@ Other options include `yScale = "log"`, `yZero`, `dateFormat`, and turning off `
 area_chart(AirPassengers, y = "passengers", title = "Airline passengers")
 ```
 
-With `baseline`, the area is drawn between the line and that value instead of zero, and `negativeFill` colours the part below it. This is the usual way to show anomalies, balances or a value against its average:
+With `baseline`, the area is drawn between the line and that value instead of zero, and `negative_fill` colours the part below it. This is the usual way to show anomalies, balances or a value against its average:
 
 ```{r}
 area_chart(
@@ -183,14 +183,14 @@ area_chart(
   y = "psavert",
   baseline = mean(economics$psavert),
   fill = "#3ca951",
-  negativeFill = "#ff725c",
-  valueSuffix = "%",
+  negative_fill = "#ff725c",
+  value_suffix = "%",
   title = "US personal savings rate",
   subtitle = "Above and below its long-run average"
 )
 ```
 
-The area is filled with a gradient by default; `opacity` gives a flat fill instead, `stroke` and `strokeWidth` style the line on top. Several series (`y = c(...)`, `group` or an `mts` object) are drawn on top of each other; to add them up, use `stacked_area_chart()`.
+The area is filled with a gradient by default; `opacity` gives a flat fill instead, `stroke` and `stroke_width` style the line on top. Several series (`y = c(...)`, `group` or an `mts` object) are drawn on top of each other; to add them up, use `stacked_area_chart()`.
 
 ## `stacked_area_chart()` {#stacked_area_chart}
 
@@ -243,7 +243,7 @@ stacked_area_chart(
 )
 ```
 
-The colours come from the ddplot palette; `colors` sets them yourself, and `colorCategory` picks a [D3 categorical scheme](https://github.com/d3/d3-scale-chromatic#categorical) such as `"Tableau10"` or `"Set2"`. Missing values count as zero when stacking, and negative values are stacked below zero.
+The colours come from the ddplot palette; `colors` sets them yourself, and `color_category` picks a [D3 categorical scheme](https://github.com/d3/d3-scale-chromatic#categorical) such as `"Tableau10"` or `"Set2"`. Missing values count as zero when stacking, and negative values are stacked below zero.
 
 ## `area_band()` {#area_band}
 
@@ -259,8 +259,8 @@ airpassengers <- data.frame(
 area_band(
   data = airpassengers,
   x = "date",
-  yLower = "passengers_lower",
-  yUpper = "passengers_upper",
+  y_lower = "passengers_lower",
+  y_upper = "passengers_upper",
   fill = "#efb118",
   stroke = "#9c6b4e"
 )
@@ -281,12 +281,12 @@ temps <- do.call(rbind, lapply(c("Oslo", "Madrid"), function(city) {
 area_band(
   temps,
   x = "date",
-  yLower = "low",
-  yUpper = "high",
+  y_lower = "low",
+  y_upper = "high",
   y = "mean",
   group = "city",
-  valueFormat = ".1f",
-  valueSuffix = " °C",
+  value_format = ".1f",
+  value_suffix = " °C",
   title = "Daily temperatures",
   subtitle = "Mean, with the daily minimum and maximum"
 )
@@ -314,7 +314,7 @@ streamgraph(
   x           = "year",
   group       = "genre",
   value       = "listeners",
-  valueFormat = ",.0f",
+  value_format = ",.0f",
   xtitle      = "Year",
   title       = "Music genres, 1980-2020 (simulated listeners)"
 )
@@ -332,7 +332,7 @@ phones <- data.frame(
 
 streamgraph(phones, x = "year", group = "region", value = "phones",
             offset = "expand", order = "descending", curve = "monotoneX",
-            colorPalette = "Set2", title = "Share of telephones by region")
+            color_palette = "Set2", title = "Share of telephones by region")
 ```
 
 ## `calendar_heatmap()` {#calendar_heatmap}
@@ -360,9 +360,9 @@ season <- 10 + 8 * sin(2 * pi * as.numeric(format(days, "%j")) / 365)
 rainfall <- data.frame(day = days, rain = pmax(0, rnorm(length(days), season, 6)))
 
 calendar_heatmap(
-  rainfall, date = "day", value = "rain", weekStart = "monday",
+  rainfall, date = "day", value = "rain", week_start = "monday",
   colors = c("#9be9a8", "#40c463", "#30a14e", "#216e39"),
-  valueLabel = "mm of rain", valueFormat = ",.1f",
+  value_label = "mm of rain", value_format = ",.1f",
   title = "Daily rainfall, 2021-2023"
 )
 ```

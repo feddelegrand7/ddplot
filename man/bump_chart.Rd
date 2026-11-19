@@ -10,20 +10,20 @@ bump_chart(
   y,
   group,
   ranked = FALSE,
-  rankOrder = "desc",
+  rank_order = "desc",
   colors = NULL,
   highlight = NULL,
-  greyCol = "#d3d3d3",
-  lineWidth = 3,
-  circleRadius = 11,
-  showRank = TRUE,
+  grey_col = "#d3d3d3",
+  line_width = 3,
+  circle_radius = 11,
+  show_rank = TRUE,
   title = NULL,
-  titleFontSize = 16,
-  xFontSize = 11,
-  labelFontSize = 11,
+  title_font_size = 16,
+  x_font_size = 11,
+  label_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -45,7 +45,7 @@ entity). Each group can appear at most once per period.}
 \item{ranked}{Whether \code{y} already contains ranks. Defaults to
 \code{FALSE}, in which case ranks are computed per period from \code{y}.}
 
-\item{rankOrder}{How ranks are computed when \code{ranked = FALSE}. One of
+\item{rank_order}{How ranks are computed when \code{ranked = FALSE}. One of
 \code{"desc"} (default, the highest value gets rank 1) or \code{"asc"}
 (the lowest value gets rank 1). Ties are broken by order of appearance in
 the data.}
@@ -57,28 +57,28 @@ colors. Colors must be valid CSS colors (e.g. \code{"steelblue"} or
 by the browser. Defaults to the D3 Tableau 10 palette.}
 
 \item{highlight}{Optional. A character vector of group names to highlight.
-All other groups are drawn in \code{greyCol}.}
+All other groups are drawn in \code{grey_col}.}
 
-\item{greyCol}{Color used for groups that are not highlighted. Defaults to
+\item{grey_col}{Color used for groups that are not highlighted. Defaults to
 \code{"#d3d3d3"}.}
 
-\item{lineWidth}{Width of the lines in pixels. Defaults to \code{3}.}
+\item{line_width}{Width of the lines in pixels. Defaults to \code{3}.}
 
-\item{circleRadius}{Maximum radius of the circles in pixels. It is
+\item{circle_radius}{Maximum radius of the circles in pixels. It is
 reduced automatically when there are many groups or periods. Defaults to
 \code{11}.}
 
-\item{showRank}{Whether to print the rank number inside each circle.
+\item{show_rank}{Whether to print the rank number inside each circle.
 Defaults to \code{TRUE}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
-\item{xFontSize}{Font size of the period labels on the x-axis. Defaults
+\item{x_font_size}{Font size of the period labels on the x-axis. Defaults
 to \code{11}.}
 
-\item{labelFontSize}{Font size of the group labels drawn at both ends of
+\item{label_font_size}{Font size of the group labels drawn at both ends of
 each line. Defaults to \code{11}.}
 
 \item{font}{The font family used for all text. Defaults to
@@ -86,7 +86,7 @@ each line. Defaults to \code{11}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of the period labels, grid lines and title. Defaults
+\item{axis_col}{Color of the period labels, grid lines and title. Defaults
 to \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}

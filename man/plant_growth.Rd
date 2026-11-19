@@ -6,22 +6,22 @@
 \usage{
 plant_growth(
   fill_level = 0.5,
-  potWidth = NULL,
-  potHeight = NULL,
-  plantMaxHeight = NULL,
-  stemColor = "#3ca951",
-  potColor = "#c96f45",
-  flowerColor = "#ff8ab7",
-  strokeColor = NULL,
-  strokeWidth = 1.5,
-  renderFillLabel = TRUE,
-  titleText = "Plant growth",
-  titleColor = "#333",
-  titleFontSize = 14,
+  pot_width = NULL,
+  pot_height = NULL,
+  plant_max_height = NULL,
+  stem_color = "#3ca951",
+  pot_color = "#c96f45",
+  flower_color = "#ff8ab7",
+  stroke_color = NULL,
+  stroke_width = 1.5,
+  render_fill_label = TRUE,
+  title_text = "Plant growth",
+  title_color = "#333",
+  title_font_size = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  labelColor = "#333",
-  labelFontSize = NULL,
-  soilColor = "#5b3a29",
+  label_color = "#333",
+  label_font_size = NULL,
+  soil_color = "#5b3a29",
   target = NULL,
   sway = TRUE,
   draggable = FALSE,
@@ -35,49 +35,49 @@ plant_growth(
 \item{fill_level}{A number between 0 and 1: how grown the plant is (values
 outside are clamped). Defaults to 0.5.}
 
-\item{potWidth}{Optional. The width of the pot in pixels. By default it
+\item{pot_width}{Optional. The width of the pot in pixels. By default it
 depends on the size of the chart.}
 
-\item{potHeight}{Optional. The height of the pot in pixels.}
+\item{pot_height}{Optional. The height of the pot in pixels.}
 
-\item{plantMaxHeight}{Optional. The height of the fully grown plant (above
+\item{plant_max_height}{Optional. The height of the fully grown plant (above
 the soil) in pixels. By default the plant uses the height available.}
 
-\item{stemColor}{The colour of the stem and the leaves. Defaults to
+\item{stem_color}{The colour of the stem and the leaves. Defaults to
 "#3ca951".}
 
-\item{potColor}{The colour of the pot. Defaults to "#c96f45".}
+\item{pot_color}{The colour of the pot. Defaults to "#c96f45".}
 
-\item{flowerColor}{The colour of the petals of the bud and the flower.
+\item{flower_color}{The colour of the petals of the bud and the flower.
 Defaults to "#ff8ab7".}
 
-\item{strokeColor}{Optional. The outline colour of the pot. Defaults to a
-darker shade of \code{potColor}.}
+\item{stroke_color}{Optional. The outline colour of the pot. Defaults to a
+darker shade of \code{pot_color}.}
 
-\item{strokeWidth}{The outline width of the pot. Defaults to 1.5.}
+\item{stroke_width}{The outline width of the pot. Defaults to 1.5.}
 
-\item{renderFillLabel}{Logical. Show the percentage and the stage above
+\item{render_fill_label}{Logical. Show the percentage and the stage above
 the plant. Defaults to TRUE.}
 
-\item{titleText}{Optional. A caption below the pot. Defaults to "Plant
+\item{title_text}{Optional. A caption below the pot. Defaults to "Plant
 growth"; use \code{NULL} to hide it.}
 
-\item{titleColor}{The colour of the caption. Defaults to "#333".}
+\item{title_color}{The colour of the caption. Defaults to "#333".}
 
-\item{titleFontSize}{The font size of the caption, a number or a CSS size
+\item{title_font_size}{The font size of the caption, a number or a CSS size
 such as "14px". Defaults to 14.}
 
 \item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
 sans-serif".}
 
-\item{labelColor}{The colour of the percentage and the target label.
+\item{label_color}{The colour of the percentage and the target label.
 Defaults to "#333".}
 
-\item{labelFontSize}{Optional. The font size of the percentage, a number
+\item{label_font_size}{Optional. The font size of the percentage, a number
 or a CSS size such as "16px". By default it depends on the size of the
 chart.}
 
-\item{soilColor}{The colour of the soil. Defaults to "#5b3a29".}
+\item{soil_color}{The colour of the soil. Defaults to "#5b3a29".}
 
 \item{target}{Optional. A level between 0 and 1 marked with a dashed line
 at the corresponding height.}
@@ -130,12 +130,12 @@ shrinks) from the old level to the new one.
 
 \examples{
 plant_growth(0.4)
-plant_growth(1, titleText = "Project completed")
+plant_growth(1, title_text = "Project completed")
 plant_growth(
   0.7,
   target = 0.9,
-  potColor = "#4269d0",
-  flowerColor = "#efb118",
+  pot_color = "#4269d0",
+  flower_color = "#efb118",
   draggable = TRUE
 )
 

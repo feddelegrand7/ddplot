@@ -7,24 +7,24 @@
 stacked_area_chart(
   data,
   x = NULL,
-  colorCategory = NULL,
+  color_category = NULL,
   curve = "curveLinear",
   stroke = NULL,
-  strokeWidth = 1,
+  stroke_width = 1,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = 0.85,
-  axisCol = "#333333",
-  legendBoxSize = NULL,
-  legendTextSize = NULL,
+  axis_col = "#333333",
+  legend_box_size = NULL,
+  legend_text_size = NULL,
   width = NULL,
   height = NULL,
   y = NULL,
@@ -36,21 +36,21 @@ stacked_area_chart(
   bands = NULL,
   hlines = NULL,
   legend = NULL,
-  endLabels = NULL,
+  end_labels = NULL,
   tooltip = TRUE,
   navigator = TRUE,
-  rangeButtons = TRUE,
+  range_buttons = TRUE,
   zoom = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
-  dateFormat = NULL,
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
+  date_format = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
+  grid_col = "#e9e9e9"
 )
 }
 \arguments{
@@ -60,7 +60,7 @@ stacked_area_chart(
 "yyyy-mm-dd" character column or a number. Not needed when \code{data}
 is an \code{mts} object.}
 
-\item{colorCategory}{Optional. The name of a D3 categorical colour scheme
+\item{color_category}{Optional. The name of a D3 categorical colour scheme
 (for example "Tableau10", "Set2" or "Accent", see
 <https://github.com/d3/d3-scale-chromatic#categorical>), used when
 \code{colors} is not given. Defaults to the ddplot palette.}
@@ -73,7 +73,7 @@ can be found here <https://github.com/d3/d3-shape#curves>.}
 layer, for example "white" to separate the layers. Defaults to the
 colour of each layer.}
 
-\item{strokeWidth}{The width of the line on top of every layer. Defaults
+\item{stroke_width}{The width of the line on top of every layer. Defaults
 to 1.}
 
 \item{xticks}{Optional. The approximate number of x-axis ticks.}
@@ -82,15 +82,15 @@ to 1.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
 
 \item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -99,10 +99,10 @@ to 1.}
 
 \item{opacity}{The opacity of the layers (from 0 to 1). Defaults to 0.85.}
 
-\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+\item{axis_col}{The color of the axis text, ticks and titles. Defaults to
 "#333333".}
 
-\item{legendBoxSize, legendTextSize}{Not used; kept for compatibility.}
+\item{legend_box_size, legend_text_size}{Not used; kept for compatibility.}
 
 \item{width}{Optional. The width of the SVG output.}
 
@@ -140,7 +140,7 @@ dashed lines (names are used as labels). Only drawn when
 a series, double-click to isolate it). When \code{NULL} (default), the
 legend is shown when there are two series or more.}
 
-\item{endLabels}{Logical. Label each line at its last visible point. When
+\item{end_labels}{Logical. Label each line at its last visible point. When
 \code{NULL} (default), labels are shown when there are two series or
 more.}
 
@@ -152,7 +152,7 @@ series with a brush to select the visible range) under the chart.
 Defaults to \code{TRUE}; it is hidden automatically on very short
 charts.}
 
-\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+\item{range_buttons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
 All, ...), chosen from the length and frequency of the data. Only used
 with dates. Defaults to \code{TRUE}.}
 
@@ -162,26 +162,26 @@ double-click to reset. Defaults to \code{TRUE}.}
 \item{animate}{Logical. Draw the lines in with an animation on first
 render. Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+\item{value_format}{Optional. A d3-format string for values in the tooltip
 (see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
 with \code{transform = "percent"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+\item{value_prefix, value_suffix}{Optional. Text placed before and after the
 values on the y axis and in the tooltip, for example "$" or " km".}
 
-\item{dateFormat}{Optional. A d3-time-format string for the date in the
+\item{date_format}{Optional. A d3-time-format string for the date in the
 tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
 (default), it is picked from the frequency of the data (yearly,
 quarterly, monthly, daily or intraday).}
 
 \item{subtitle}{Optional. A subtitle shown under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+\item{x_font_size, y_font_size}{The font size of the axis tick labels. Defaults
 to 11.}
 
-\item{gridCol}{The color of the horizontal grid lines. Defaults to
+\item{grid_col}{The color of the horizontal grid lines. Defaults to
 "#e9e9e9".}
 }
 \value{

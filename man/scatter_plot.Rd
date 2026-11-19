@@ -13,40 +13,40 @@ scatter_plot(
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = 0.8,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   group = NULL,
-  sizeBy = NULL,
-  sizeRange = c(3, 16),
+  size_by = NULL,
+  size_range = c(3, 16),
   label = NULL,
-  showLabels = NULL,
+  show_labels = NULL,
   tooltip = TRUE,
   trend = c("none", "lm", "loess"),
   ci = TRUE,
   span = 0.75,
-  xScale = c("linear", "log"),
-  yScale = c("linear", "log"),
+  x_scale = c("linear", "log"),
+  y_scale = c("linear", "log"),
   hlines = NULL,
   vlines = NULL,
   legend = NULL,
   brush = TRUE,
   animate = TRUE,
-  xFormat = NULL,
-  yFormat = NULL,
+  x_format = NULL,
+  y_format = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  grid_col = "#e9e9e9"
 )
 }
 \arguments{
@@ -62,7 +62,7 @@ scatter_plot(
 \code{group}, two colours or more define the gradient. Defaults to a
 built-in palette (viridis for a numeric \code{group}).}
 
-\item{size}{The radius of the points in pixels when \code{sizeBy} is not
+\item{size}{The radius of the points in pixels when \code{size_by} is not
 used. Defaults to 4.}
 
 \item{xticks}{Optional. The approximate number of x-axis ticks.}
@@ -72,21 +72,21 @@ used. Defaults to 4.}
 \item{xtitle}{Optional. The title of the x-axis. Defaults to the name of
 \code{x}; use \code{""} to hide it.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
 
 \item{ytitle}{Optional. The title of the y-axis, drawn above the axis.
 Defaults to the name of \code{y}; use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{stroke}{Optional. The stroke colour of the points. Defaults to the
 background colour, which separates overlapping points.}
 
-\item{strokeWidth}{Optional. The stroke width of the points.}
+\item{stroke_width}{Optional. The stroke width of the points.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -95,7 +95,7 @@ background colour, which separates overlapping points.}
 
 \item{opacity}{The opacity of the points (from 0 to 1). Defaults to 0.8.}
 
-\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+\item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -107,16 +107,16 @@ character, factor or logical column gives one colour per group and a
 clickable legend; a numeric column gives a colour gradient. Use
 \code{as.factor()} to treat a numeric column as categories.}
 
-\item{sizeBy}{Optional. The name of a numeric column mapped to the point
+\item{size_by}{Optional. The name of a numeric column mapped to the point
 area (bubble chart).}
 
-\item{sizeRange}{The minimum and maximum radius in pixels used with
-\code{sizeBy}. Defaults to \code{c(3, 16)}.}
+\item{size_range}{The minimum and maximum radius in pixels used with
+\code{size_by}. Defaults to \code{c(3, 16)}.}
 
 \item{label}{Optional. The name of a column identifying each point. It is
-used as the tooltip title and by \code{showLabels}.}
+used as the tooltip title and by \code{show_labels}.}
 
-\item{showLabels}{Optional. Draws text labels next to points:
+\item{show_labels}{Optional. Draws text labels next to points:
 \code{TRUE} labels every point, a character vector labels the points
 whose \code{label} matches. Requires \code{label}.}
 
@@ -134,10 +134,10 @@ Defaults to \code{TRUE}.}
 
 \item{span}{The LOESS smoothing parameter. Defaults to 0.75.}
 
-\item{xScale}{The x-axis scale: \code{"linear"} (default) or \code{"log"}.
+\item{x_scale}{The x-axis scale: \code{"linear"} (default) or \code{"log"}.
 Rows with non-positive values are dropped with a log scale.}
 
-\item{yScale}{The y-axis scale: \code{"linear"} (default) or \code{"log"}.}
+\item{y_scale}{The y-axis scale: \code{"linear"} (default) or \code{"log"}.}
 
 \item{hlines}{Optional. Numeric values drawn as horizontal dashed
 reference lines; names are used as labels.}
@@ -146,7 +146,7 @@ reference lines; names are used as labels.}
 lines; names are used as labels.}
 
 \item{legend}{Logical. Show the legend. When \code{NULL} (default), it is
-shown when \code{group} or \code{sizeBy} is used.}
+shown when \code{group} or \code{size_by} is used.}
 
 \item{brush}{Logical. Enable drag-to-select and zoom. Defaults to
 \code{TRUE}.}
@@ -154,14 +154,14 @@ shown when \code{group} or \code{sizeBy} is used.}
 \item{animate}{Logical. Animate the points when the chart is first drawn.
 Defaults to \code{TRUE}.}
 
-\item{xFormat, yFormat}{Optional. d3-format strings for the axes and the
+\item{x_format, y_format}{Optional. d3-format strings for the axes and the
 tooltip, e.g. \code{",.0f"}, \code{".1\%"} or \code{"$,.2f"}.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{gridCol}{The colour of the grid lines. Defaults to "#e9e9e9"; use
+\item{grid_col}{The colour of the grid lines. Defaults to "#e9e9e9"; use
 \code{NA} to hide them.}
 }
 \value{
@@ -223,10 +223,10 @@ scatter_plot(
   data = cars,
   x = "hp",
   y = "mpg",
-  sizeBy = "disp",
+  size_by = "disp",
   group = "qsec",
   label = "model",
-  showLabels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa"),
+  show_labels = c("Maserati Bora", "Toyota Corolla", "Lotus Europa"),
   tooltip = c("cyl", "gear"),
   trend = "loess",
   title = "Horsepower and fuel economy",
@@ -241,8 +241,8 @@ scatter_plot(
   x = "area",
   y = "population",
   label = "state",
-  xScale = "log",
-  yScale = "log",
+  x_scale = "log",
+  y_scale = "log",
   hlines = c("Median" = 2838.5)
 )
 

@@ -11,33 +11,33 @@
 #' @param x1 The name of the column for the first value (left dot).
 #' @param x2 The name of the column for the second value (right dot).
 #' @param y The name of the categorical column used as row labels.
-#' @param x1Label Legend label for the first value. Defaults to the value of
+#' @param x1_label Legend label for the first value. Defaults to the value of
 #' \code{x1}.
-#' @param x2Label Legend label for the second value. Defaults to the value of
+#' @param x2_label Legend label for the second value. Defaults to the value of
 #' \code{x2}.
 #' @param col1 Color of the first dot. Defaults to \code{"steelblue"}.
 #' @param col2 Color of the second dot. Defaults to \code{"crimson"}.
-#' @param lineCol Color of the line connecting the two dots. Defaults to
+#' @param line_col Color of the line connecting the two dots. Defaults to
 #' \code{"#aaaaaa"}.
-#' @param lineWidth Width of the connecting line in pixels. Defaults to
+#' @param line_width Width of the connecting line in pixels. Defaults to
 #' \code{2}.
-#' @param circleRadius Radius of the dots in pixels. Defaults to \code{6}.
+#' @param circle_radius Radius of the dots in pixels. Defaults to \code{6}.
 #' @param sort Whether to sort the rows. One of \code{"none"} (default),
 #' \code{"ascending"}, or \code{"descending"}, ordered by the \code{x1}
 #' value.
 #' @param xtitle Optional. Title of the x-axis.
-#' @param xtitleFontSize Font size of the x-axis title. Defaults to \code{13}.
+#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
-#' @param xFontSize Font size of the x-axis tick labels. Defaults to \code{11}.
-#' @param yFontSize Font size of the y-axis category labels. Defaults to
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
+#' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
+#' @param y_font_size Font size of the y-axis category labels. Defaults to
 #' \code{11}.
 #' @param legend Whether to display a legend. Defaults to \code{TRUE}.
-#' @param legendFontSize Font size of the legend text. Defaults to \code{11}.
+#' @param legend_font_size Font size of the legend text. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of axis lines, ticks, and labels. Defaults to
+#' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -59,8 +59,8 @@
 #'   x1       = "year_1952",
 #'   x2       = "year_2007",
 #'   y        = "country",
-#'   x1Label  = "1952",
-#'   x2Label  = "2007",
+#'   x1_label  = "1952",
+#'   x2_label  = "2007",
 #'   title    = "Life expectancy: 1952 vs 2007",
 #'   xtitle   = "Life expectancy (years)",
 #'   sort     = "ascending"
@@ -78,8 +78,8 @@
 #'   x1      = "city",
 #'   x2      = "highway",
 #'   y       = "class",
-#'   x1Label = "City",
-#'   x2Label = "Highway",
+#'   x1_label = "City",
+#'   x2_label = "Highway",
 #'   col1    = "steelblue",
 #'   col2    = "darkorange",
 #'   title   = "City vs highway fuel economy by class",
@@ -91,25 +91,25 @@ dumbbell_chart <- function(
     x1,
     x2,
     y,
-    x1Label       = NULL,
-    x2Label       = NULL,
+    x1_label       = NULL,
+    x2_label       = NULL,
     col1          = "steelblue",
     col2          = "crimson",
-    lineCol       = "#aaaaaa",
-    lineWidth     = 2,
-    circleRadius  = 6,
+    line_col       = "#aaaaaa",
+    line_width     = 2,
+    circle_radius  = 6,
     sort          = "none",
     xtitle        = NULL,
-    xtitleFontSize = 13,
+    xtitle_font_size = 13,
     title         = NULL,
-    titleFontSize  = 16,
-    xFontSize     = 11,
-    yFontSize     = 11,
+    title_font_size  = 16,
+    x_font_size     = 11,
+    y_font_size     = 11,
     legend        = TRUE,
-    legendFontSize = 11,
+    legend_font_size = 11,
     font          = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol         = "white",
-    axisCol       = "black",
+    axis_col       = "black",
     width         = NULL,
     height        = NULL
 ) {
@@ -129,8 +129,8 @@ dumbbell_chart <- function(
     stop("please remove the ';' character from your font argument")
   }
 
-  if (is.null(x1Label)) x1Label <- x1
-  if (is.null(x2Label)) x2Label <- x2
+  if (is.null(x1_label)) x1_label <- x1
+  if (is.null(x2_label)) x2_label <- x2
 
   r2d3::r2d3(
     data   = data,
@@ -139,25 +139,25 @@ dumbbell_chart <- function(
       x1            = x1,
       x2            = x2,
       y             = y,
-      x1Label       = x1Label,
-      x2Label       = x2Label,
+      x1Label       = x1_label,
+      x2Label       = x2_label,
       col1          = col1,
       col2          = col2,
-      lineCol       = lineCol,
-      lineWidth     = lineWidth,
-      circleRadius  = circleRadius,
+      lineCol       = line_col,
+      lineWidth     = line_width,
+      circleRadius  = circle_radius,
       sort          = sort,
       xtitle        = xtitle,
-      xtitleFontSize = xtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
       title         = title,
-      titleFontSize  = titleFontSize,
-      xFontSize     = xFontSize,
-      yFontSize     = yFontSize,
+      titleFontSize  = title_font_size,
+      xFontSize     = x_font_size,
+      yFontSize     = y_font_size,
       legend        = legend,
-      legendFontSize = legendFontSize,
+      legendFontSize = legend_font_size,
       font          = font,
       bgcol         = bgcol,
-      axisCol       = axisCol
+      axisCol       = axis_col
     ),
     width  = width,
     height = height

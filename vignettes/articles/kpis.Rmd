@@ -40,10 +40,10 @@ gauge_chart(
   min = 0,
   max = 100,
   title = "CPU Load",
-  warningZone  = 60,
-  warningColor = "orange",
-  dangerZone   = 80,
-  dangerColor  = "red"
+  warning_zone  = 60,
+  warning_color = "orange",
+  danger_zone   = 80,
+  danger_color  = "red"
 )
 ```
 
@@ -55,10 +55,10 @@ gauge_chart(
   min = 0,
   max = 1000,
   title = "Response (ms)",
-  warningZone  = 400,
-  warningColor = "orange",
-  dangerZone   = 700,
-  dangerColor  = "red"
+  warning_zone  = 400,
+  warning_color = "orange",
+  danger_zone   = 700,
+  danger_color  = "red"
 )
 ```
 
@@ -87,18 +87,18 @@ bullet_chart(
   ranges     = c(4, 7, 10),
   title      = "Satisfaction",
   subtitle   = "out of 10",
-  valueColor = "steelblue"
+  value_color = "steelblue"
 )
 ```
 
-When a lower value is better (e.g. response time), simply order your `rangeColors` from lightest (best, lowest range) to darkest (worst, highest range):
+When a lower value is better (e.g. response time), simply order your `range_colors` from lightest (best, lowest range) to darkest (worst, highest range):
 
 ```{r}
 bullet_chart(
   value       = 320,
   target      = 250,
   ranges      = c(200, 500, 1000),
-  rangeColors = c("#f0f0f0", "#d9d9d9", "#bdbdbd"),
+  range_colors = c("#f0f0f0", "#d9d9d9", "#bdbdbd"),
   title       = "Response",
   subtitle    = "ms"
 )
@@ -106,7 +106,7 @@ bullet_chart(
 
 ## `liquid_chart()` {#liquid_chart}
 
-`liquid_chart()` renders a single value as a circle filled with an animated liquid. The water rises from empty to the target level on load, two staggered wave layers give the surface a natural depth, and the label text switches color at the water line — appearing in `textColor` above the surface and in `waveTextColor` inside the water.
+`liquid_chart()` renders a single value as a circle filled with an animated liquid. The water rises from empty to the target level on load, two staggered wave layers give the surface a natural depth, and the label text switches color at the water line — appearing in `text_color` above the surface and in `wave_text_color` inside the water.
 
 ```{r}
 liquid_chart(value = 0.55, title = "Memory")
@@ -118,10 +118,10 @@ Colors, wave behaviour, and the label are all configurable:
 liquid_chart(
   value         = 0.28,
   label         = "28%",
-  fillColor     = "tomato",
-  circleColor   = "tomato",
-  textColor     = "tomato",
-  waveTextColor = "white",
+  fill_color     = "tomato",
+  circle_color   = "tomato",
+  text_color     = "tomato",
+  wave_text_color = "white",
   title         = "Errors"
 )
 ```
@@ -130,10 +130,10 @@ liquid_chart(
 liquid_chart(
   value         = 0.72,
   label         = "72%",
-  fillColor     = "#27ae60",
-  waveAmplitude = 0.05,
-  waveCount     = 3,
-  waveSpeed     = 1.5,
+  fill_color     = "#27ae60",
+  wave_amplitude = 0.05,
+  wave_count     = 3,
+  wave_speed     = 1.5,
   title         = "Battery"
 )
 ```
@@ -170,8 +170,8 @@ pulse_grid(
   high = "red",
   bgcol = "#0B132B",
   stroke = "#1C2541",
-  strokeWidth = 1.5,
-  pulseStrength = 0.22
+  stroke_width = 1.5,
+  pulse_strength = 0.22
 )
 ```
 
@@ -213,10 +213,10 @@ pulse_grid(
   low = "lightgreen",
   high = "#B00020",
   bgcol = "#081C15",
-  labelColor = "#F1FAEE",
-  titleColor = "#F1FAEE",
+  label_color = "#F1FAEE",
+  title_color = "#F1FAEE",
   stroke = "#2D6A4F",
-  showValues = TRUE,
+  show_values = TRUE,
   digits = 2
 )
 ```

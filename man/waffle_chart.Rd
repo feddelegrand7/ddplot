@@ -12,20 +12,20 @@ waffle_chart(
   cols = 10,
   total = NULL,
   colors = NULL,
-  emptyCol = "#e5e5e5",
-  cellPadding = 2,
-  cellRadius = 2,
+  empty_col = "#e5e5e5",
+  cell_padding = 2,
+  cell_radius = 2,
   direction = "row",
   legend = TRUE,
-  legendFontSize = 12,
+  legend_font_size = 12,
   hover = TRUE,
   animate = TRUE,
-  animationDuration = 1200,
+  animation_duration = 1200,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  textCol = "black",
+  text_col = "black",
   width = NULL,
   height = NULL
 )
@@ -46,16 +46,16 @@ number of cells is \code{rows * cols}.}
 
 \item{total}{Optional. The value represented by the whole grid. Defaults to
 the sum of \code{value}. When larger than that sum, the remaining cells are
-left unfilled and drawn with \code{emptyCol}.}
+left unfilled and drawn with \code{empty_col}.}
 
 \item{colors}{Optional. A character vector of colors, one per category
 (recycled if shorter). Defaults to a Tableau-10 style palette.}
 
-\item{emptyCol}{Color of the unfilled cells. Defaults to \code{"#e5e5e5"}.}
+\item{empty_col}{Color of the unfilled cells. Defaults to \code{"#e5e5e5"}.}
 
-\item{cellPadding}{Gap between cells in pixels. Defaults to \code{2}.}
+\item{cell_padding}{Gap between cells in pixels. Defaults to \code{2}.}
 
-\item{cellRadius}{Corner radius of each cell in pixels. Defaults to
+\item{cell_radius}{Corner radius of each cell in pixels. Defaults to
 \code{2}. Use \code{0} for sharp squares.}
 
 \item{direction}{Fill direction. \code{"row"} (default) fills row by row
@@ -65,7 +65,7 @@ fills column by column starting from the bottom-left corner.}
 \item{legend}{Whether to display a legend showing each category and its
 percentage. Defaults to \code{TRUE}.}
 
-\item{legendFontSize}{Font size of the legend text. Defaults to \code{12}.}
+\item{legend_font_size}{Font size of the legend text. Defaults to \code{12}.}
 
 \item{hover}{Whether hovering a cell or a legend entry highlights that
 category and shows a label with its value and percentage. Defaults to
@@ -74,19 +74,19 @@ category and shows a label with its value and percentage. Defaults to
 \item{animate}{Whether the cells pop in sequentially when the chart loads.
 Defaults to \code{TRUE}.}
 
-\item{animationDuration}{Total duration of the load animation in
+\item{animation_duration}{Total duration of the load animation in
 milliseconds. Defaults to \code{1200}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{textCol}{Color of the title and legend text. Defaults to
+\item{text_col}{Color of the title and legend text. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}

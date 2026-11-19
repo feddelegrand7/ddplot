@@ -9,27 +9,27 @@ calendar_heatmap(
   date,
   value = NULL,
   aggregate = c("sum", "mean", "max", "min", "count"),
-  weekStart = c("sunday", "monday"),
+  week_start = c("sunday", "monday"),
   colors = c("#c0ddf9", "#73b3f3", "#3886e1", "#17459e"),
-  emptyCol = "#ebedf0",
-  cellRadius = 2,
-  cellGap = 3,
-  valueLabel = NULL,
-  valueFormat = ",.2~f",
-  dateFormat = "\%a \%b \%-d, \%Y",
-  showYearLabel = TRUE,
-  showMonthLabels = TRUE,
-  showWeekdayLabels = TRUE,
-  labelFontSize = 10,
+  empty_col = "#ebedf0",
+  cell_radius = 2,
+  cell_gap = 3,
+  value_label = NULL,
+  value_format = ",.2~f",
+  date_format = "\%a \%b \%-d, \%Y",
+  show_year_label = TRUE,
+  show_month_labels = TRUE,
+  show_weekday_labels = TRUE,
+  label_font_size = 10,
   legend = TRUE,
-  legendLabels = c("Less", "More"),
+  legend_labels = c("Less", "More"),
   hover = TRUE,
   animate = TRUE,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "#555555",
+  axis_col = "#555555",
   width = NULL,
   height = NULL
 )
@@ -50,7 +50,7 @@ of \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 \code{"count"}. Ignored (always \code{"count"}) when \code{value} is
 \code{NULL}.}
 
-\item{weekStart}{The first day of the week, i.e. the top row of the grid.
+\item{week_start}{The first day of the week, i.e. the top row of the grid.
 Either \code{"sunday"} (default) or \code{"monday"}.}
 
 \item{colors}{A vector of colors, from low to high, used to fill days that
@@ -58,40 +58,40 @@ have a value. Values are split into \code{length(colors)} equal-width
 buckets. Defaults to a Frappe-like blue ramp
 \code{c("#c0ddf9", "#73b3f3", "#3886e1", "#17459e")}.}
 
-\item{emptyCol}{Fill color of days without data (or with a value of zero
+\item{empty_col}{Fill color of days without data (or with a value of zero
 when all values are non-negative). Defaults to \code{"#ebedf0"}.}
 
-\item{cellRadius}{Corner radius of the day squares in pixels. Defaults to
+\item{cell_radius}{Corner radius of the day squares in pixels. Defaults to
 \code{2}.}
 
-\item{cellGap}{Gap between day squares in pixels. Defaults to \code{3}.}
+\item{cell_gap}{Gap between day squares in pixels. Defaults to \code{3}.}
 
-\item{valueLabel}{Optional. The unit shown after the value in the tooltip
+\item{value_label}{Optional. The unit shown after the value in the tooltip
 and year totals (e.g. \code{"commits"}). Defaults to the name of the
 \code{value} column, or \code{"events"} when \code{value} is \code{NULL}.}
 
-\item{valueFormat}{A d3-format specifier used to display values (e.g.
+\item{value_format}{A d3-format specifier used to display values (e.g.
 \code{",.0f"}, \code{"$,.2s"}). Defaults to \code{",.2~f"}.}
 
-\item{dateFormat}{A d3-time-format specifier used to display dates in the
+\item{date_format}{A d3-time-format specifier used to display dates in the
 tooltip. Defaults to \code{"\%a \%b \%-d, \%Y"} (e.g. "Wed Jan 7, 2026").}
 
-\item{showYearLabel}{Whether to print the year and its total above each
+\item{show_year_label}{Whether to print the year and its total above each
 panel. Defaults to \code{TRUE}.}
 
-\item{showMonthLabels}{Whether to print month labels above the grid.
+\item{show_month_labels}{Whether to print month labels above the grid.
 Defaults to \code{TRUE}.}
 
-\item{showWeekdayLabels}{Whether to print weekday labels (Mon, Wed, Fri) on
+\item{show_weekday_labels}{Whether to print weekday labels (Mon, Wed, Fri) on
 the left of the grid. Defaults to \code{TRUE}.}
 
-\item{labelFontSize}{Font size of the month, weekday, year and legend
+\item{label_font_size}{Font size of the month, weekday, year and legend
 labels. Defaults to \code{10}.}
 
 \item{legend}{Whether to display the "Less ... More" legend. Defaults to
 \code{TRUE}.}
 
-\item{legendLabels}{A character vector of length 2 giving the text drawn
+\item{legend_labels}{A character vector of length 2 giving the text drawn
 on each side of the legend. Defaults to \code{c("Less", "More")}.}
 
 \item{hover}{Whether to highlight the hovered day and show a tooltip.
@@ -102,14 +102,14 @@ on first render. Defaults to \code{TRUE}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of the title and of the month, weekday, year and
+\item{axis_col}{Color of the title and of the month, weekday, year and
 legend labels. Defaults to \code{"#555555"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -132,7 +132,7 @@ the Frappe Charts library.
 Month labels are drawn above the grid, weekday labels on its left, and a
 "Less ... More" legend underneath. When the data span several years, one
 panel is stacked per year. Days without data (and, when all values are
-non-negative, days with a value of zero) are drawn in \code{emptyCol}.
+non-negative, days with a value of zero) are drawn in \code{empty_col}.
 Hovering over a day shows a tooltip with its value and date, and hovering
 over a legend square highlights the days that fall in that color bucket.
 }
@@ -164,10 +164,10 @@ calendar_heatmap(
   data        = rainfall,
   date        = "day",
   value       = "rain",
-  weekStart   = "monday",
+  week_start   = "monday",
   colors      = c("#9be9a8", "#40c463", "#30a14e", "#216e39"),
-  valueLabel  = "mm of rain",
-  valueFormat = ",.1f",
+  value_label  = "mm of rain",
+  value_format = ",.1f",
   title       = "Daily rainfall, 2021-2023"
 )
 
@@ -180,10 +180,10 @@ events <- data.frame(
 calendar_heatmap(
   data       = events,
   date       = "when",
-  valueLabel = "orders",
+  value_label = "orders",
   colors     = c("#fde0c5", "#facba6", "#f59e72", "#e8603c", "#c0392b"),
-  emptyCol   = "#f2f2f2",
-  cellRadius = 3,
+  empty_col   = "#f2f2f2",
+  cell_radius = 3,
   title      = "Orders per day"
 )
 }

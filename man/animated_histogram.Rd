@@ -10,22 +10,22 @@ animated_histogram(
   duration = 2000,
   delay = 100,
   fill = "crimson",
-  xFontSize = 10,
-  yFontSize = 10,
+  x_font_size = 10,
+  y_font_size = 10,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 16,
+  xtitle_font_size = 16,
   ytitle = NULL,
-  ytitleFontSize = 16,
+  ytitle_font_size = 16,
   title = NULL,
-  titleFontSize = 22,
+  title_font_size = 22,
   stroke = "crimson",
-  strokeWidth = NULL,
+  stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#CAD0D3",
   opacity = 1,
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -42,9 +42,9 @@ precedes before triggering the appearance of each bar. Defaults to 100.}
 
 \item{fill}{The color of the bars. Defaults to 'crimson'.}
 
-\item{xFontSize}{the font size of the x-axis labels. Defaults to 10.}
+\item{x_font_size}{the font size of the x-axis labels. Defaults to 10.}
 
-\item{yFontSize}{the font size of the y-axis labels. Defaults to 10.}
+\item{y_font_size}{the font size of the y-axis labels. Defaults to 10.}
 
 \item{xticks}{Optional. the number of x-axis ticks to consider.}
 
@@ -52,19 +52,19 @@ precedes before triggering the appearance of each bar. Defaults to 100.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 16.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 16.}
 
 \item{ytitle}{Optional. The title of the y-axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 16.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 16.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 22.}
+\item{title_font_size}{The font size of the plot title. Defaults to 22.}
 
 \item{stroke}{The stroke color of the bars. Defaults to 'crimson'.}
 
-\item{strokeWidth}{Optional. the stroke width of the bars.}
+\item{stroke_width}{Optional. the stroke width of the bars.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -73,7 +73,7 @@ precedes before triggering the appearance of each bar. Defaults to 100.}
 
 \item{opacity}{The color opacity of the bars (from 0 to 1). Defaults to 1.}
 
-\item{axisCol}{the color of the x and y axis. It includes the ticks, the labels and titles.
+\item{axis_col}{the color of the x and y axis. It includes the ticks, the labels and titles.
 Defaults to 'black'.}
 
 \item{width}{Optional. The width of the SVG output.}

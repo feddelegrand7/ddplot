@@ -23,41 +23,41 @@
 #' the right axis.
 #' @param group The name of the column holding the category labels (one line
 #' per category).
-#' @param startLabel Header displayed above the left axis. Defaults to the
+#' @param start_label Header displayed above the left axis. Defaults to the
 #' value of \code{start}.
-#' @param endLabel Header displayed above the right axis. Defaults to the
+#' @param end_label Header displayed above the right axis. Defaults to the
 #' value of \code{end}.
-#' @param colorByDirection Whether to color lines by direction of change
-#' (\code{upCol}, \code{downCol}, \code{flatCol}). If \code{FALSE}, every
-#' line uses \code{lineCol}. Defaults to \code{TRUE}.
-#' @param upCol Color of lines that increase. Defaults to \code{"#1a9850"}.
-#' @param downCol Color of lines that decrease. Defaults to \code{"#d73027"}.
-#' @param flatCol Color of lines with no change. Defaults to \code{"#888888"}.
-#' @param lineCol Color of all lines when \code{colorByDirection = FALSE}.
+#' @param color_by_direction Whether to color lines by direction of change
+#' (\code{up_col}, \code{down_col}, \code{flat_col}). If \code{FALSE}, every
+#' line uses \code{line_col}. Defaults to \code{TRUE}.
+#' @param up_col Color of lines that increase. Defaults to \code{"#1a9850"}.
+#' @param down_col Color of lines that decrease. Defaults to \code{"#d73027"}.
+#' @param flat_col Color of lines with no change. Defaults to \code{"#888888"}.
+#' @param line_col Color of all lines when \code{color_by_direction = FALSE}.
 #' Defaults to \code{"steelblue"}.
 #' @param highlight Optional. A character vector of categories (values of the
 #' \code{group} column) to emphasise. All other lines are drawn in
-#' \code{mutedCol}. Defaults to \code{NULL} (no emphasis).
-#' @param mutedCol Color of non-highlighted lines when \code{highlight} is
+#' \code{muted_col}. Defaults to \code{NULL} (no emphasis).
+#' @param muted_col Color of non-highlighted lines when \code{highlight} is
 #' used (their labels are drawn semi-transparent). Defaults to
 #' \code{"#cccccc"}.
-#' @param lineWidth Width of the lines in pixels. Defaults to \code{2}.
-#' @param circleRadius Radius of the end-point dots in pixels. Defaults to
+#' @param line_width Width of the lines in pixels. Defaults to \code{2}.
+#' @param circle_radius Radius of the end-point dots in pixels. Defaults to
 #' \code{4}. Use \code{0} to hide the dots.
-#' @param showValues Whether to print the value next to each category label.
+#' @param show_values Whether to print the value next to each category label.
 #' Defaults to \code{TRUE}.
 #' @param digits Optional. Number of decimal places used to print the values.
 #' Defaults to \code{NULL}, which prints the values as they are.
-#' @param labelFontSize Font size of the category and value labels. Defaults
+#' @param label_font_size Font size of the category and value labels. Defaults
 #' to \code{11}.
-#' @param headerFontSize Font size of the two axis headers. Defaults to
+#' @param header_font_size Font size of the two axis headers. Defaults to
 #' \code{13}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of the two vertical axes, the headers, the title and
+#' @param axis_col Color of the two vertical axes, the headers, the title and
 #' the labels. Defaults to \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -83,8 +83,8 @@
 #'   start      = "y1970",
 #'   end        = "y1979",
 #'   group      = "country",
-#'   startLabel = "1970",
-#'   endLabel   = "1979",
+#'   start_label = "1970",
+#'   end_label   = "1979",
 #'   digits     = 1,
 #'   title      = "Government receipts as % of GDP",
 #'   height     = 520
@@ -108,8 +108,8 @@
 #'   start      = "y1952",
 #'   end        = "y2007",
 #'   group      = "country",
-#'   startLabel = "1952",
-#'   endLabel   = "2007",
+#'   start_label = "1952",
+#'   end_label   = "2007",
 #'   highlight  = c("China", "South Africa"),
 #'   digits     = 1,
 #'   title      = "Life expectancy: 1952 vs 2007"
@@ -119,26 +119,26 @@ slope_chart <- function(
     start,
     end,
     group,
-    startLabel       = NULL,
-    endLabel         = NULL,
-    colorByDirection = TRUE,
-    upCol            = "#1a9850",
-    downCol          = "#d73027",
-    flatCol          = "#888888",
-    lineCol          = "steelblue",
+    start_label       = NULL,
+    end_label         = NULL,
+    color_by_direction = TRUE,
+    up_col            = "#1a9850",
+    down_col          = "#d73027",
+    flat_col          = "#888888",
+    line_col          = "steelblue",
     highlight        = NULL,
-    mutedCol         = "#cccccc",
-    lineWidth        = 2,
-    circleRadius     = 4,
-    showValues       = TRUE,
+    muted_col         = "#cccccc",
+    line_width        = 2,
+    circle_radius     = 4,
+    show_values       = TRUE,
     digits           = NULL,
-    labelFontSize    = 11,
-    headerFontSize   = 13,
+    label_font_size    = 11,
+    header_font_size   = 13,
     title            = NULL,
-    titleFontSize    = 16,
+    title_font_size    = 16,
     font             = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol            = "white",
-    axisCol          = "black",
+    axis_col          = "black",
     width            = NULL,
     height           = NULL
 ) {
@@ -167,8 +167,8 @@ slope_chart <- function(
     stop("please remove the ';' character from your font argument")
   }
 
-  if (is.null(startLabel)) startLabel <- start
-  if (is.null(endLabel))   endLabel   <- end
+  if (is.null(start_label)) start_label <- start
+  if (is.null(end_label))   end_label   <- end
 
   r2d3::r2d3(
     data   = data,
@@ -177,26 +177,26 @@ slope_chart <- function(
       start            = start,
       end              = end,
       group            = group,
-      startLabel       = startLabel,
-      endLabel         = endLabel,
-      colorByDirection = colorByDirection,
-      upCol            = upCol,
-      downCol          = downCol,
-      flatCol          = flatCol,
-      lineCol          = lineCol,
+      startLabel       = start_label,
+      endLabel         = end_label,
+      colorByDirection = color_by_direction,
+      upCol            = up_col,
+      downCol          = down_col,
+      flatCol          = flat_col,
+      lineCol          = line_col,
       highlight        = as.list(highlight),
-      mutedCol         = mutedCol,
-      lineWidth        = lineWidth,
-      circleRadius     = circleRadius,
-      showValues       = showValues,
+      mutedCol         = muted_col,
+      lineWidth        = line_width,
+      circleRadius     = circle_radius,
+      showValues       = show_values,
       digits           = digits,
-      labelFontSize    = labelFontSize,
-      headerFontSize   = headerFontSize,
+      labelFontSize    = label_font_size,
+      headerFontSize   = header_font_size,
       title            = title,
-      titleFontSize    = titleFontSize,
+      titleFontSize    = title_font_size,
       font             = font,
       bgcol            = bgcol,
-      axisCol          = axisCol
+      axisCol          = axis_col
     ),
     width  = width,
     height = height

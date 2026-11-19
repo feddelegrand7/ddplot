@@ -7,17 +7,17 @@
 liquid_chart(
   value,
   label = NULL,
-  fillColor = "steelblue",
-  circleColor = NULL,
-  circleThickness = 0.05,
-  textColor = NULL,
-  waveTextColor = "white",
-  textSize = 0.38,
-  waveAmplitude = 0.09,
-  waveCount = 2,
-  waveSpeed = 1,
+  fill_color = "steelblue",
+  circle_color = NULL,
+  circle_thickness = 0.05,
+  text_color = NULL,
+  wave_text_color = "white",
+  text_size = 0.38,
+  wave_amplitude = 0.09,
+  wave_count = 2,
+  wave_speed = 1,
   title = NULL,
-  titleFontSize = 14,
+  title_font_size = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   width = NULL,
@@ -30,35 +30,35 @@ liquid_chart(
 \item{label}{Character. Text displayed in the center of the gauge. Defaults
 to \code{value} formatted as a percentage (e.g. \code{"55\%"}).}
 
-\item{fillColor}{The color of the liquid. Defaults to \code{"steelblue"}.}
+\item{fill_color}{The color of the liquid. Defaults to \code{"steelblue"}.}
 
-\item{circleColor}{The color of the outer ring. Defaults to
-\code{fillColor}.}
+\item{circle_color}{The color of the outer ring. Defaults to
+\code{fill_color}.}
 
-\item{circleThickness}{Thickness of the outer ring as a fraction of the
+\item{circle_thickness}{Thickness of the outer ring as a fraction of the
 circle radius. Defaults to \code{0.05}.}
 
-\item{textColor}{Color of the label text above the water surface. Defaults
-to \code{fillColor}.}
+\item{text_color}{Color of the label text above the water surface. Defaults
+to \code{fill_color}.}
 
-\item{waveTextColor}{Color of the label text below (inside) the water
+\item{wave_text_color}{Color of the label text below (inside) the water
 surface. Defaults to \code{"white"}.}
 
-\item{textSize}{Font size of the label as a fraction of the circle radius.
+\item{text_size}{Font size of the label as a fraction of the circle radius.
 Defaults to \code{0.38}.}
 
-\item{waveAmplitude}{Height of the wave as a fraction of the circle radius.
+\item{wave_amplitude}{Height of the wave as a fraction of the circle radius.
 Defaults to \code{0.09}.}
 
-\item{waveCount}{Number of full wave cycles visible across the circle.
+\item{wave_count}{Number of full wave cycles visible across the circle.
 Defaults to \code{2}.}
 
-\item{waveSpeed}{Speed of the horizontal wave animation. Higher values are
+\item{wave_speed}{Speed of the horizontal wave animation. Higher values are
 faster. Defaults to \code{1}.}
 
 \item{title}{Optional. A label displayed below the circle.}
 
-\item{titleFontSize}{Font size of the title in pixels. Defaults to \code{14}.}
+\item{title_font_size}{Font size of the title in pixels. Defaults to \code{14}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
@@ -76,8 +76,8 @@ An animated SVG liquid fill gauge.
 A liquid fill gauge represents a single value as a circle filled with an
 animated liquid up to the corresponding level. The fill rises smoothly on
 load, two wave layers give the water a natural depth, and the label text
-changes color at the water surface — appearing in \code{textColor} above
-the water and in \code{waveTextColor} below it.
+changes color at the water surface — appearing in \code{text_color} above
+the water and in \code{wave_text_color} below it.
 }
 \examples{
 # Basic usage — 55\% fill
@@ -87,7 +87,7 @@ liquid_chart(value = 0.55)
 liquid_chart(
   value     = 0.72,
   label     = "72\%",
-  fillColor = "#e67e22",
+  fill_color = "#e67e22",
   title     = "Disk usage"
 )
 
@@ -95,9 +95,9 @@ liquid_chart(
 liquid_chart(
   value         = 0.28,
   label         = "28\%",
-  fillColor     = "tomato",
-  circleColor   = "tomato",
-  textColor     = "tomato",
-  waveTextColor = "white"
+  fill_color     = "tomato",
+  circle_color   = "tomato",
+  text_color     = "tomato",
+  wave_text_color = "white"
 )
 }

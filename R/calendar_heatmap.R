@@ -12,7 +12,7 @@
 #' Month labels are drawn above the grid, weekday labels on its left, and a
 #' "Less ... More" legend underneath. When the data span several years, one
 #' panel is stacked per year. Days without data (and, when all values are
-#' non-negative, days with a value of zero) are drawn in \code{emptyCol}.
+#' non-negative, days with a value of zero) are drawn in \code{empty_col}.
 #' Hovering over a day shows a tooltip with its value and date, and hovering
 #' over a legend square highlights the days that fall in that color bucket.
 #'
@@ -27,46 +27,46 @@
 #' of \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 #' \code{"count"}. Ignored (always \code{"count"}) when \code{value} is
 #' \code{NULL}.
-#' @param weekStart The first day of the week, i.e. the top row of the grid.
+#' @param week_start The first day of the week, i.e. the top row of the grid.
 #' Either \code{"sunday"} (default) or \code{"monday"}.
 #' @param colors A vector of colors, from low to high, used to fill days that
 #' have a value. Values are split into \code{length(colors)} equal-width
 #' buckets. Defaults to a Frappe-like blue ramp
 #' \code{c("#c0ddf9", "#73b3f3", "#3886e1", "#17459e")}.
-#' @param emptyCol Fill color of days without data (or with a value of zero
+#' @param empty_col Fill color of days without data (or with a value of zero
 #' when all values are non-negative). Defaults to \code{"#ebedf0"}.
-#' @param cellRadius Corner radius of the day squares in pixels. Defaults to
+#' @param cell_radius Corner radius of the day squares in pixels. Defaults to
 #' \code{2}.
-#' @param cellGap Gap between day squares in pixels. Defaults to \code{3}.
-#' @param valueLabel Optional. The unit shown after the value in the tooltip
+#' @param cell_gap Gap between day squares in pixels. Defaults to \code{3}.
+#' @param value_label Optional. The unit shown after the value in the tooltip
 #' and year totals (e.g. \code{"commits"}). Defaults to the name of the
 #' \code{value} column, or \code{"events"} when \code{value} is \code{NULL}.
-#' @param valueFormat A d3-format specifier used to display values (e.g.
+#' @param value_format A d3-format specifier used to display values (e.g.
 #' \code{",.0f"}, \code{"$,.2s"}). Defaults to \code{",.2~f"}.
-#' @param dateFormat A d3-time-format specifier used to display dates in the
+#' @param date_format A d3-time-format specifier used to display dates in the
 #' tooltip. Defaults to \code{"\%a \%b \%-d, \%Y"} (e.g. "Wed Jan 7, 2026").
-#' @param showYearLabel Whether to print the year and its total above each
+#' @param show_year_label Whether to print the year and its total above each
 #' panel. Defaults to \code{TRUE}.
-#' @param showMonthLabels Whether to print month labels above the grid.
+#' @param show_month_labels Whether to print month labels above the grid.
 #' Defaults to \code{TRUE}.
-#' @param showWeekdayLabels Whether to print weekday labels (Mon, Wed, Fri) on
+#' @param show_weekday_labels Whether to print weekday labels (Mon, Wed, Fri) on
 #' the left of the grid. Defaults to \code{TRUE}.
-#' @param labelFontSize Font size of the month, weekday, year and legend
+#' @param label_font_size Font size of the month, weekday, year and legend
 #' labels. Defaults to \code{10}.
 #' @param legend Whether to display the "Less ... More" legend. Defaults to
 #' \code{TRUE}.
-#' @param legendLabels A character vector of length 2 giving the text drawn
+#' @param legend_labels A character vector of length 2 giving the text drawn
 #' on each side of the legend. Defaults to \code{c("Less", "More")}.
 #' @param hover Whether to highlight the hovered day and show a tooltip.
 #' Defaults to \code{TRUE}.
 #' @param animate Whether the day squares fade in with a staggered animation
 #' on first render. Defaults to \code{TRUE}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of the title and of the month, weekday, year and
+#' @param axis_col Color of the title and of the month, weekday, year and
 #' legend labels. Defaults to \code{"#555555"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output. Defaults to a height
@@ -103,10 +103,10 @@
 #'   data        = rainfall,
 #'   date        = "day",
 #'   value       = "rain",
-#'   weekStart   = "monday",
+#'   week_start   = "monday",
 #'   colors      = c("#9be9a8", "#40c463", "#30a14e", "#216e39"),
-#'   valueLabel  = "mm of rain",
-#'   valueFormat = ",.1f",
+#'   value_label  = "mm of rain",
+#'   value_format = ",.1f",
 #'   title       = "Daily rainfall, 2021-2023"
 #' )
 #'
@@ -119,10 +119,10 @@
 #' calendar_heatmap(
 #'   data       = events,
 #'   date       = "when",
-#'   valueLabel = "orders",
+#'   value_label = "orders",
 #'   colors     = c("#fde0c5", "#facba6", "#f59e72", "#e8603c", "#c0392b"),
-#'   emptyCol   = "#f2f2f2",
-#'   cellRadius = 3,
+#'   empty_col   = "#f2f2f2",
+#'   cell_radius = 3,
 #'   title      = "Orders per day"
 #' )
 calendar_heatmap <- function(
@@ -130,27 +130,27 @@ calendar_heatmap <- function(
     date,
     value             = NULL,
     aggregate         = c("sum", "mean", "max", "min", "count"),
-    weekStart         = c("sunday", "monday"),
+    week_start         = c("sunday", "monday"),
     colors            = c("#c0ddf9", "#73b3f3", "#3886e1", "#17459e"),
-    emptyCol          = "#ebedf0",
-    cellRadius        = 2,
-    cellGap           = 3,
-    valueLabel        = NULL,
-    valueFormat       = ",.2~f",
-    dateFormat        = "%a %b %-d, %Y",
-    showYearLabel     = TRUE,
-    showMonthLabels   = TRUE,
-    showWeekdayLabels = TRUE,
-    labelFontSize     = 10,
+    empty_col          = "#ebedf0",
+    cell_radius        = 2,
+    cell_gap           = 3,
+    value_label        = NULL,
+    value_format       = ",.2~f",
+    date_format        = "%a %b %-d, %Y",
+    show_year_label     = TRUE,
+    show_month_labels   = TRUE,
+    show_weekday_labels = TRUE,
+    label_font_size     = 10,
     legend            = TRUE,
-    legendLabels      = c("Less", "More"),
+    legend_labels      = c("Less", "More"),
     hover             = TRUE,
     animate           = TRUE,
     title             = NULL,
-    titleFontSize     = 16,
+    title_font_size     = 16,
     font              = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol             = "white",
-    axisCol           = "#555555",
+    axis_col           = "#555555",
     width             = NULL,
     height            = NULL
 ) {
@@ -171,7 +171,7 @@ calendar_heatmap <- function(
   }
 
   aggregate <- match.arg(aggregate)
-  weekStart <- match.arg(weekStart)
+  week_start <- match.arg(week_start)
 
   # Convert the date column to Date
   raw_dates <- data[[date]]
@@ -222,38 +222,38 @@ calendar_heatmap <- function(
   if (!is.character(colors) || length(colors) < 1) {
     stop("'colors' must be a character vector of at least one color.")
   }
-  if (!is.character(emptyCol) || length(emptyCol) != 1) {
-    stop("'emptyCol' must be a single color.")
+  if (!is.character(empty_col) || length(empty_col) != 1) {
+    stop("'empty_col' must be a single color.")
   }
-  if (!is.numeric(cellRadius) || length(cellRadius) != 1 || cellRadius < 0) {
-    stop("'cellRadius' must be a single non-negative number.")
+  if (!is.numeric(cell_radius) || length(cell_radius) != 1 || cell_radius < 0) {
+    stop("'cell_radius' must be a single non-negative number.")
   }
-  if (!is.numeric(cellGap) || length(cellGap) != 1 || cellGap < 0) {
-    stop("'cellGap' must be a single non-negative number.")
+  if (!is.numeric(cell_gap) || length(cell_gap) != 1 || cell_gap < 0) {
+    stop("'cell_gap' must be a single non-negative number.")
   }
-  if (!is.character(legendLabels) || length(legendLabels) != 2) {
-    stop("'legendLabels' must be a character vector of length 2.")
+  if (!is.character(legend_labels) || length(legend_labels) != 2) {
+    stop("'legend_labels' must be a character vector of length 2.")
   }
-  if (!is.character(valueFormat) || length(valueFormat) != 1) {
-    stop("'valueFormat' must be a single d3-format string, e.g. ',.0f'.")
+  if (!is.character(value_format) || length(value_format) != 1) {
+    stop("'value_format' must be a single d3-format string, e.g. ',.0f'.")
   }
-  if (!is.character(dateFormat) || length(dateFormat) != 1) {
-    stop("'dateFormat' must be a single d3-time-format string.")
+  if (!is.character(date_format) || length(date_format) != 1) {
+    stop("'date_format' must be a single d3-time-format string.")
   }
 
   if (grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
   }
 
-  if (is.null(valueLabel)) {
-    valueLabel <- if (is.null(value)) "events" else value
+  if (is.null(value_label)) {
+    value_label <- if (is.null(value)) "events" else value
   }
 
   # Default height: fits the stacked year panels
   if (is.null(height)) {
     years <- as.integer(format(range(dates), "%Y"))
     n_years <- years[2] - years[1] + 1
-    height <- (if (!is.null(title)) titleFontSize + 18 else 0) +
+    height <- (if (!is.null(title)) title_font_size + 18 else 0) +
       n_years * 160 + (if (legend) 34 else 6)
   }
 
@@ -261,27 +261,27 @@ calendar_heatmap <- function(
     data   = daily,
     script = ddplot_script("calendarheatmap.js"),
     options = list(
-      weekStart         = weekStart,
+      weekStart         = week_start,
       colors            = as.list(colors),
-      emptyCol          = emptyCol,
-      cellRadius        = cellRadius,
-      cellGap           = cellGap,
-      valueLabel        = valueLabel,
-      valueFormat       = valueFormat,
-      dateFormat        = dateFormat,
-      showYearLabel     = showYearLabel,
-      showMonthLabels   = showMonthLabels,
-      showWeekdayLabels = showWeekdayLabels,
-      labelFontSize     = labelFontSize,
+      emptyCol          = empty_col,
+      cellRadius        = cell_radius,
+      cellGap           = cell_gap,
+      valueLabel        = value_label,
+      valueFormat       = value_format,
+      dateFormat        = date_format,
+      showYearLabel     = show_year_label,
+      showMonthLabels   = show_month_labels,
+      showWeekdayLabels = show_weekday_labels,
+      labelFontSize     = label_font_size,
       legend            = legend,
-      legendLabels      = as.list(legendLabels),
+      legendLabels      = as.list(legend_labels),
       hover             = hover,
       animate           = animate,
       title             = title,
-      titleFontSize     = titleFontSize,
+      titleFontSize     = title_font_size,
       font              = font,
       bgcol             = bgcol,
-      axisCol           = axisCol
+      axisCol           = axis_col
     ),
     width  = width,
     height = height

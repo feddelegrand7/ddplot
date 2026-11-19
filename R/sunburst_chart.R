@@ -26,33 +26,33 @@
 #' (recycled if needed). Deeper levels use progressively lighter shades of
 #' their branch color. Defaults to \code{NULL}, which uses a built-in
 #' 10-color palette.
-#' @param valueFormat A d3-format specifier used to display values in the
+#' @param value_format A d3-format specifier used to display values in the
 #' centre and the tooltip (e.g. \code{",.0f"}, \code{"$,.2s"},
 #' \code{".3~s"}). Defaults to \code{",.0f"}.
-#' @param innerRadius Radius of the centre circle as a fraction of the
+#' @param inner_radius Radius of the centre circle as a fraction of the
 #' chart's radius, between \code{0} and \code{0.9}. The centre shows the
 #' current root and its value, and is clicked to zoom out. Defaults to
 #' \code{0.22}.
-#' @param cornerRadius Corner radius of the sectors in pixels. Defaults to
+#' @param corner_radius Corner radius of the sectors in pixels. Defaults to
 #' \code{0}.
-#' @param padAngle Angular padding between sectors in radians (e.g.
+#' @param pad_angle Angular padding between sectors in radians (e.g.
 #' \code{0.005}). Defaults to \code{0}.
-#' @param strokeCol Color of the sector borders. Defaults to \code{"white"}.
-#' @param strokeWidth Width of the sector borders in pixels. Defaults to
+#' @param stroke_col Color of the sector borders. Defaults to \code{"white"}.
+#' @param stroke_width Width of the sector borders in pixels. Defaults to
 #' \code{1}.
-#' @param showLabels Whether to display the sector labels. Labels are
+#' @param show_labels Whether to display the sector labels. Labels are
 #' truncated or hidden automatically when a sector is too small. Defaults to
 #' \code{TRUE}.
-#' @param labelRotate Orientation of the sector labels: \code{"radial"}
+#' @param label_rotate Orientation of the sector labels: \code{"radial"}
 #' (default, along the radius) or \code{"tangential"} (along the arc).
-#' @param labelFontSize Font size of the sector labels. Defaults to
+#' @param label_font_size Font size of the sector labels. Defaults to
 #' \code{11}.
-#' @param labelCol Optional. Color of the sector labels. Defaults to
+#' @param label_col Optional. Color of the sector labels. Defaults to
 #' \code{NULL}, which picks white or near-black automatically for contrast
 #' with each sector's fill.
-#' @param rootLabel Label shown in the centre (and used as the root name)
+#' @param root_label Label shown in the centre (and used as the root name)
 #' when the chart is not zoomed. Defaults to \code{"Total"}.
-#' @param centerFontSize Maximum font size of the centre label. Defaults to
+#' @param center_font_size Maximum font size of the centre label. Defaults to
 #' \code{13}.
 #' @param zoom Whether clicking a sector zooms into it and clicking the centre
 #' zooms out. Defaults to \code{TRUE}.
@@ -63,11 +63,11 @@
 #' @param duration Duration of the zoom transition in milliseconds. Defaults
 #' to \code{750}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param textCol Color of the title and the centre label. Defaults to
+#' @param text_col Color of the title and the centre label. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -85,8 +85,8 @@
 #'   data        = pop_2007,
 #'   levels      = c("continent", "country"),
 #'   value       = "pop",
-#'   valueFormat = ".3~s",
-#'   rootLabel   = "World",
+#'   value_format = ".3~s",
+#'   root_label   = "World",
 #'   title       = "World population in 2007"
 #' )
 #'
@@ -106,10 +106,10 @@
 #'   data        = staff,
 #'   levels      = c("division", "team", "role"),
 #'   value       = "people",
-#'   rootLabel   = "Company",
-#'   labelRotate = "tangential",
-#'   padAngle    = 0.006,
-#'   cornerRadius = 3,
+#'   root_label   = "Company",
+#'   label_rotate = "tangential",
+#'   pad_angle    = 0.006,
+#'   corner_radius = 3,
 #'   title       = "Headcount by division, team and role"
 #' )
 #'
@@ -119,7 +119,7 @@
 #' sunburst_chart(
 #'   data      = mpg,
 #'   levels    = c("class", "manufacturer"),
-#'   rootLabel = "Cars",
+#'   root_label = "Cars",
 #'   title     = "Number of car models by class and manufacturer"
 #' )
 sunburst_chart <- function(
@@ -127,27 +127,27 @@ sunburst_chart <- function(
     levels,
     value          = NULL,
     colors         = NULL,
-    valueFormat    = ",.0f",
-    innerRadius    = 0.22,
-    cornerRadius   = 0,
-    padAngle       = 0,
-    strokeCol      = "white",
-    strokeWidth    = 1,
-    showLabels     = TRUE,
-    labelRotate    = c("radial", "tangential"),
-    labelFontSize  = 11,
-    labelCol       = NULL,
-    rootLabel      = "Total",
-    centerFontSize = 13,
+    value_format    = ",.0f",
+    inner_radius    = 0.22,
+    corner_radius   = 0,
+    pad_angle       = 0,
+    stroke_col      = "white",
+    stroke_width    = 1,
+    show_labels     = TRUE,
+    label_rotate    = c("radial", "tangential"),
+    label_font_size  = 11,
+    label_col       = NULL,
+    root_label      = "Total",
+    center_font_size = 13,
     zoom           = TRUE,
     hover          = TRUE,
     animate        = TRUE,
     duration       = 750,
     title          = NULL,
-    titleFontSize  = 16,
+    title_font_size  = 16,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol          = "white",
-    textCol        = "black",
+    text_col        = "black",
     width          = NULL,
     height         = NULL
 ) {
@@ -176,27 +176,27 @@ sunburst_chart <- function(
     }
   }
 
-  labelRotate <- match.arg(labelRotate)
+  label_rotate <- match.arg(label_rotate)
 
-  if (!is.numeric(innerRadius) || length(innerRadius) != 1 ||
-      innerRadius < 0 || innerRadius > 0.9) {
-    stop("'innerRadius' must be a single number between 0 and 0.9.")
+  if (!is.numeric(inner_radius) || length(inner_radius) != 1 ||
+      inner_radius < 0 || inner_radius > 0.9) {
+    stop("'inner_radius' must be a single number between 0 and 0.9.")
   }
 
-  if (!is.numeric(cornerRadius) || length(cornerRadius) != 1 || cornerRadius < 0) {
-    stop("'cornerRadius' must be a single non-negative number.")
+  if (!is.numeric(corner_radius) || length(corner_radius) != 1 || corner_radius < 0) {
+    stop("'corner_radius' must be a single non-negative number.")
   }
 
-  if (!is.numeric(padAngle) || length(padAngle) != 1 || padAngle < 0) {
-    stop("'padAngle' must be a single non-negative number (in radians).")
+  if (!is.numeric(pad_angle) || length(pad_angle) != 1 || pad_angle < 0) {
+    stop("'pad_angle' must be a single non-negative number (in radians).")
   }
 
   if (!is.numeric(duration) || length(duration) != 1 || duration < 0) {
     stop("'duration' must be a single non-negative number of milliseconds.")
   }
 
-  if (!is.character(valueFormat) || length(valueFormat) != 1) {
-    stop("'valueFormat' must be a single d3-format string, e.g. ',.0f'.")
+  if (!is.character(value_format) || length(value_format) != 1) {
+    stop("'value_format' must be a single d3-format string, e.g. ',.0f'.")
   }
 
   if (!is.null(colors) && !is.character(colors)) {
@@ -219,27 +219,27 @@ sunburst_chart <- function(
       levels         = as.list(levels),
       value          = value,
       colors         = if (is.null(colors)) NULL else as.list(colors),
-      valueFormat    = valueFormat,
-      innerRadius    = innerRadius,
-      cornerRadius   = cornerRadius,
-      padAngle       = padAngle,
-      strokeCol      = strokeCol,
-      strokeWidth    = strokeWidth,
-      showLabels     = showLabels,
-      labelRotate    = labelRotate,
-      labelFontSize  = labelFontSize,
-      labelCol       = labelCol,
-      rootLabel      = rootLabel,
-      centerFontSize = centerFontSize,
+      valueFormat    = value_format,
+      innerRadius    = inner_radius,
+      cornerRadius   = corner_radius,
+      padAngle       = pad_angle,
+      strokeCol      = stroke_col,
+      strokeWidth    = stroke_width,
+      showLabels     = show_labels,
+      labelRotate    = label_rotate,
+      labelFontSize  = label_font_size,
+      labelCol       = label_col,
+      rootLabel      = root_label,
+      centerFontSize = center_font_size,
       zoom           = zoom,
       hover          = hover,
       animate        = animate,
       duration       = duration,
       title          = title,
-      titleFontSize  = titleFontSize,
+      titleFontSize  = title_font_size,
       font           = font,
       bgcol          = bgcol,
-      textCol        = textCol
+      textCol        = text_col
     ),
     width  = width,
     height = height

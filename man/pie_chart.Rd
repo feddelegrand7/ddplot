@@ -8,42 +8,42 @@ pie_chart(
   data,
   value = NULL,
   label,
-  colorCategory = NULL,
-  innerRadius = 0,
-  outerRadius = "auto",
-  padRadius = NULL,
-  padAngle = NULL,
-  cornerRadius = 0,
-  labelFont = NULL,
+  color_category = NULL,
+  inner_radius = 0,
+  outer_radius = "auto",
+  pad_radius = NULL,
+  pad_angle = NULL,
+  corner_radius = 0,
+  label_font = NULL,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = 1,
-  labelHeight = NULL,
+  label_height = NULL,
   width = NULL,
   height = NULL,
   fill = NULL,
   sort = c("descending", "ascending", "none"),
-  maxSlices = NULL,
-  otherLabel = "Other",
+  max_slices = NULL,
+  other_label = "Other",
   labels = NULL,
-  labelPosition = c("auto", "inside", "outside"),
+  label_position = c("auto", "inside", "outside"),
   legend = TRUE,
-  centerLabel = NULL,
+  center_label = NULL,
   highlight = NULL,
-  startAngle = 0,
-  endAngle = 360,
+  start_angle = 0,
+  end_angle = 360,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   tooltip = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
   subtitle = NULL,
-  subtitleFontSize = 13,
-  axisCol = "#333333"
+  subtitle_font_size = 13,
+  axis_col = "#333333"
 )
 }
 \arguments{
@@ -55,34 +55,34 @@ label are added up; negative and missing values are left out.}
 
 \item{label}{The name of the labelling variable (one slice per value).}
 
-\item{colorCategory}{Optional. The name of a D3 categorical colour scheme,
+\item{color_category}{Optional. The name of a D3 categorical colour scheme,
 such as "Tableau10", "Set2" or "Paired" (see
 <https://github.com/d3/d3-scale-chromatic#categorical>), used when
 \code{fill} is not given. Defaults to the ddplot palette.}
 
-\item{innerRadius}{The inner radius, for a donut chart: a number below 1 is
+\item{inner_radius}{The inner radius, for a donut chart: a number below 1 is
 a fraction of the outer radius (e.g. 0.6), a larger number is a radius in
 pixels. Defaults to 0 (a pie).}
 
-\item{outerRadius}{The outer radius in pixels, or "auto" (default) to fill
+\item{outer_radius}{The outer radius in pixels, or "auto" (default) to fill
 the space available.}
 
-\item{padRadius}{Optional. From the D3 documentation, the pad radius
+\item{pad_radius}{Optional. From the D3 documentation, the pad radius
 computes the fixed linear distance separating adjacent arcs, defined as
-padRadius * padAngle. Defaults to the D3 default.}
+pad_radius * pad_angle. Defaults to the D3 default.}
 
-\item{padAngle}{Optional. The padding angle between consecutive slices, in
+\item{pad_angle}{Optional. The padding angle between consecutive slices, in
 radians (e.g. 0.02).}
 
-\item{cornerRadius}{The radius of the rounded slice corners, in pixels.
+\item{corner_radius}{The radius of the rounded slice corners, in pixels.
 Defaults to 0.}
 
-\item{labelFont}{Optional. The font family of the legend. Defaults to
+\item{label_font}{Optional. The font family of the legend. Defaults to
 \code{font}.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles.
 Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
@@ -91,7 +91,7 @@ Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
 
 \item{opacity}{The opacity of the slices (from 0 to 1). Defaults to 1.}
 
-\item{labelHeight}{Optional. The font size of the legend, in pixels.
+\item{label_height}{Optional. The font size of the legend, in pixels.
 Defaults to 12.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -106,39 +106,39 @@ labels.}
 \code{"descending"} (default, largest first), \code{"ascending"} or
 \code{"none"} (the order of the data, or of the factor levels).}
 
-\item{maxSlices}{Optional. The maximum number of slices: the smallest
+\item{max_slices}{Optional. The maximum number of slices: the smallest
 categories are combined into an "Other" slice so that at most
-\code{maxSlices} slices are drawn.}
+\code{max_slices} slices are drawn.}
 
-\item{otherLabel}{The label of the combined slice. Defaults to "Other".}
+\item{other_label}{The label of the combined slice. Defaults to "Other".}
 
 \item{labels}{What to write for each slice: any of \code{"label"},
 \code{"value"} and \code{"percent"}, or \code{"none"}. Defaults to
 \code{"percent"} with a legend, \code{c("label", "percent")} without.}
 
-\item{labelPosition}{Where the slice labels go: \code{"auto"} (default,
+\item{label_position}{Where the slice labels go: \code{"auto"} (default,
 inside the slices that are large enough, outside with a leader line for
 the others), \code{"inside"} or \code{"outside"}.}
 
 \item{legend}{Logical. Show the legend (on the right when there is room,
 otherwise below). Defaults to \code{TRUE}.}
 
-\item{centerLabel}{For a donut chart, the text shown under the total in
+\item{center_label}{For a donut chart, the text shown under the total in
 the centre: \code{NULL} (default, "Total"), a string, or \code{FALSE} to
 leave the centre empty.}
 
 \item{highlight}{Optional. A character vector of labels whose slices are
 pulled out.}
 
-\item{startAngle, endAngle}{The angles where the pie starts and ends, in
+\item{start_angle, end_angle}{The angles where the pie starts and ends, in
 degrees, clockwise from the top. Defaults to 0 and 360; use -90 and 90 for
 a half donut.}
 
 \item{stroke}{The colour of the lines between the slices. Defaults to the
 background colour.}
 
-\item{strokeWidth}{The width of the lines between the slices. Defaults to
-1.5 (0 when \code{padAngle} is given).}
+\item{stroke_width}{The width of the lines between the slices. Defaults to
+1.5 (0 when \code{pad_angle} is given).}
 
 \item{tooltip}{Logical. Show a tooltip when hovering the slices. Defaults
 to \code{TRUE}.}
@@ -146,17 +146,17 @@ to \code{TRUE}.}
 \item{animate}{Logical. Sweep the slices in when the chart is first drawn.
 Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A D3 format string for the values, such as
+\item{value_format}{Optional. A D3 format string for the values, such as
 \code{",.0f"} or \code{".2s"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text added before and after the
+\item{value_prefix, value_suffix}{Optional. Text added before and after the
 values, such as \code{"$"} or \code{" kg"}.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{axisCol}{The colour of the texts. Defaults to "#333333".}
+\item{axis_col}{The colour of the texts. Defaults to "#333333".}
 }
 \value{
 An interactive SVG pie chart (an r2d3 htmlwidget).
@@ -165,7 +165,7 @@ An interactive SVG pie chart (an r2d3 htmlwidget).
 Draws one slice per category, with its share of the total written on the
 slice or next to it. Rows with the same label are added up, and the value
 can be left empty to count rows. Small slices can be combined into an
-"Other" slice. Set \code{innerRadius} to draw a donut chart, whose centre
+"Other" slice. Set \code{inner_radius} to draw a donut chart, whose centre
 shows the total, or the hovered slice.
 }
 \section{Interactions}{
@@ -200,15 +200,15 @@ energy <- data.frame(
 )
 pie_chart(
   energy, value = "twh", label = "source",
-  innerRadius = 0.6, centerLabel = "TWh",
+  inner_radius = 0.6, center_label = "TWh",
   title = "Electricity generation by source"
 )
 
 # A half donut with the small slices combined
 pie_chart(
   energy, value = "twh", label = "source",
-  innerRadius = 0.55, startAngle = -90, endAngle = 90,
-  maxSlices = 4, legend = FALSE
+  inner_radius = 0.55, start_angle = -90, end_angle = 90,
+  max_slices = 4, legend = FALSE
 )
 
 }

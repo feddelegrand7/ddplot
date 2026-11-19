@@ -42,7 +42,7 @@ The chart is interactive:
 - hovering a bin shows its range, its count, its share of the total and the share of the observations up to that bin;
 - dragging across the bars selects a range, and the summary then describes the selected observations. **Zoom** re-bins the data inside the range (useful for long tails); double-click to go back.
 
-Add a density curve with `density = TRUE` (or `"normal"` for a fitted normal curve), mean and median lines with `stats`, and thresholds with `refLines`. `binWidth` sets the width of the bins, and `xPrefix`, `xSuffix` and `xFormat` format the values:
+Add a density curve with `density = TRUE` (or `"normal"` for a fitted normal curve), mean and median lines with `stats`, and thresholds with `ref_lines`. `bin_width` sets the width of the bins, and `x_prefix`, `x_suffix` and `x_format` format the values:
 
 ```{r}
 histogram(
@@ -51,8 +51,8 @@ histogram(
   bins     = 50,
   density  = TRUE,
   stats    = c("mean", "median"),
-  xPrefix  = "$",
-  xFormat  = ",.0f",
+  x_prefix  = "$",
+  x_format  = ",.0f",
   title    = "Diamond prices",
   subtitle = "Drag across the bars to select a range, then zoom in"
 )
@@ -67,7 +67,7 @@ histogram(
   group    = "drv",
   position = "overlay",
   stat     = "percent",
-  binWidth = 2,
+  bin_width = 2,
   density  = TRUE,
   fill     = c("4" = "#4269d0", f = "#efb118", r = "#ff725c"),
   title    = "Highway fuel economy by drive train"
@@ -83,7 +83,7 @@ histogram(
   rug     = TRUE,
   title   = "Old Faithful eruptions",
   xtitle  = "Duration (minutes)",
-  xSuffix = " min"
+  x_suffix = " min"
 )
 ```
 
@@ -113,7 +113,7 @@ violin_plot(
   points       = "all",
   meanline     = TRUE,
   sort         = "median",
-  colorPalette = "Tableau10",
+  color_palette = "Tableau10",
   title        = "Highway fuel economy by vehicle class",
   ytitle       = "Highway miles per gallon"
 )
@@ -158,7 +158,7 @@ beeswarm_plot(
   data         = iris,
   x            = "Sepal.Length",
   group        = "Species",
-  colorPalette = "Set2",
+  color_palette = "Set2",
   radius       = 5,
   opacity      = 0.8,
   xtitle       = "Sepal length (cm)",
@@ -194,7 +194,7 @@ ridgeline_plot(
 )
 ```
 
-Use `overlap` to control how far each ridge reaches into the one above it, and `fill`, `fillOpacity` and `lineCol` to change the look. `fill` can be a single colour or a named vector with one colour per group:
+Use `overlap` to control how far each ridge reaches into the one above it, and `fill`, `fill_opacity` and `line_col` to change the look. `fill` can be a single colour or a named vector with one colour per group:
 
 ```{r}
 library(ggplot2) # for the mpg dataset
@@ -205,8 +205,8 @@ ridgeline_plot(
   group       = "class",
   sort        = "median",
   fill        = "#2c7fb8",
-  lineCol     = "white",
-  fillOpacity = 0.9,
+  line_col     = "white",
+  fill_opacity = 0.9,
   overlap     = 2,
   title       = "Highway fuel economy by vehicle class",
   xtitle      = "Highway miles per gallon"

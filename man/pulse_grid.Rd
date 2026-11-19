@@ -12,22 +12,22 @@ pulse_grid(
   low = "#E0FBFC",
   high = "#0B525B",
   stroke = "white",
-  strokeWidth = 1,
-  cellPadding = 0.12,
-  cornerRadius = 10,
+  stroke_width = 1,
+  cell_padding = 0.12,
+  corner_radius = 10,
   pulse = TRUE,
-  pulseStrength = 0.18,
-  showValues = TRUE,
+  pulse_strength = 0.18,
+  show_values = TRUE,
   digits = 1,
-  valueFontSize = 12,
-  xFontSize = 12,
-  yFontSize = 12,
+  value_font_size = 12,
+  x_font_size = 12,
+  y_font_size = 12,
   title = NULL,
-  titleFontSize = 22,
+  title_font_size = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "#0F172A",
-  labelColor = "#F8FAFC",
-  titleColor = "#F8FAFC",
+  label_color = "#F8FAFC",
+  title_color = "#F8FAFC",
   width = NULL,
   height = NULL
 )
@@ -47,40 +47,40 @@ pulse_grid(
 
 \item{stroke}{The border color of each tile. Defaults to 'white'.}
 
-\item{strokeWidth}{Border width of each tile. Defaults to 1.}
+\item{stroke_width}{Border width of each tile. Defaults to 1.}
 
-\item{cellPadding}{Space between tiles, from 0 to 0.9. Defaults to 0.12.}
+\item{cell_padding}{Space between tiles, from 0 to 0.9. Defaults to 0.12.}
 
-\item{cornerRadius}{Corner radius of each tile. Defaults to 10.}
+\item{corner_radius}{Corner radius of each tile. Defaults to 10.}
 
 \item{pulse}{Logical. Whether to animate the tiles. Defaults to `TRUE`.}
 
-\item{pulseStrength}{Numeric multiplier controlling pulse amplitude.
+\item{pulse_strength}{Numeric multiplier controlling pulse amplitude.
 Defaults to 0.18.}
 
-\item{showValues}{Logical. Whether to print values inside tiles.
+\item{show_values}{Logical. Whether to print values inside tiles.
 Defaults to `TRUE`.}
 
 \item{digits}{Number of digits used for in-cell labels. Defaults to 1.}
 
-\item{valueFontSize}{Font size of in-cell labels. Defaults to 12.}
+\item{value_font_size}{Font size of in-cell labels. Defaults to 12.}
 
-\item{xFontSize}{Font size of the column labels. Defaults to 12.}
+\item{x_font_size}{Font size of the column labels. Defaults to 12.}
 
-\item{yFontSize}{Font size of the row labels. Defaults to 12.}
+\item{y_font_size}{Font size of the row labels. Defaults to 12.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{Font size of the plot title. Defaults to 22.}
+\item{title_font_size}{Font size of the plot title. Defaults to 22.}
 
 \item{font}{The font family used in labels and title. Defaults to
 'Verdana, Geneva, Tahoma, sans-serif'.}
 
 \item{bgcol}{Background color of the SVG. Defaults to '#0F172A'.}
 
-\item{labelColor}{Color of the row and column labels. Defaults to '#F8FAFC'.}
+\item{label_color}{Color of the row and column labels. Defaults to '#F8FAFC'.}
 
-\item{titleColor}{Color of the title. Defaults to '#F8FAFC'.}
+\item{title_color}{Color of the title. Defaults to '#F8FAFC'.}
 
 \item{width}{Optional. The width of the SVG output.}
 

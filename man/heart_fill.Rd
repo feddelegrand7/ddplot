@@ -6,16 +6,16 @@
 \usage{
 heart_fill(
   fill_level = 0.65,
-  heartSize = NULL,
-  strokeColor = "#b5172b",
-  strokeWidth = 3,
-  fillColor = "#e63950",
-  renderFillLabel = TRUE,
-  labelColor = "#333",
-  labelFontSize = NULL,
-  titleText = "Fill level",
-  titleColor = "#333",
-  titleFontSize = 14,
+  heart_size = NULL,
+  stroke_color = "#b5172b",
+  stroke_width = 3,
+  fill_color = "#e63950",
+  render_fill_label = TRUE,
+  label_color = "#333",
+  label_font_size = NULL,
+  title_text = "Fill level",
+  title_color = "#333",
+  title_font_size = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   target = NULL,
   waves = TRUE,
@@ -32,31 +32,31 @@ heart_fill(
 \item{fill_level}{A number between 0 and 1: how full the heart is (values
 outside are clamped). Defaults to 0.65.}
 
-\item{heartSize}{Optional. The width of the heart in pixels. By default
+\item{heart_size}{Optional. The width of the heart in pixels. By default
 the heart fills the space available (up to 360 pixels).}
 
-\item{strokeColor}{The colour of the outline. Defaults to "#b5172b".}
+\item{stroke_color}{The colour of the outline. Defaults to "#b5172b".}
 
-\item{strokeWidth}{The width of the outline. Defaults to 3.}
+\item{stroke_width}{The width of the outline. Defaults to 3.}
 
-\item{fillColor}{The colour of the liquid. Defaults to "#e63950". The
+\item{fill_color}{The colour of the liquid. Defaults to "#e63950". The
 empty part of the heart is a pale shade of it.}
 
-\item{renderFillLabel}{Logical. Show the percentage inside the heart.
+\item{render_fill_label}{Logical. Show the percentage inside the heart.
 Defaults to TRUE.}
 
-\item{labelColor}{The colour of the percentage (where the liquid does not
+\item{label_color}{The colour of the percentage (where the liquid does not
 cover it) and of the target label. Defaults to "#333".}
 
-\item{labelFontSize}{Optional. The font size of the percentage, a number
+\item{label_font_size}{Optional. The font size of the percentage, a number
 or a CSS size such as "16px". By default it grows with the heart.}
 
-\item{titleText}{Optional. A caption below the heart. Defaults to
+\item{title_text}{Optional. A caption below the heart. Defaults to
 "Fill level"; use \code{NULL} to hide it.}
 
-\item{titleColor}{The colour of the caption. Defaults to "#333".}
+\item{title_color}{The colour of the caption. Defaults to "#333".}
 
-\item{titleFontSize}{The font size of the caption, a number or a CSS size
+\item{title_font_size}{The font size of the caption, a number or a CSS size
 such as "14px". Defaults to 14.}
 
 \item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
@@ -119,10 +119,10 @@ heart_fill(fill_level = 0.9)
 heart_fill(
   fill_level = 0.4,
   target = 0.75,
-  fillColor = "#ff8ab7",
-  strokeColor = "#c2185b",
-  titleText = "Daily activity goal"
+  fill_color = "#ff8ab7",
+  stroke_color = "#c2185b",
+  title_text = "Daily activity goal"
 )
-heart_fill(0.55, draggable = TRUE, titleText = "Drag me")
+heart_fill(0.55, draggable = TRUE, title_text = "Drag me")
 
 }

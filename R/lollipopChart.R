@@ -35,27 +35,27 @@
 #'   total.
 #' @param xticks Not used; kept for compatibility.
 #' @param yticks Optional. The approximate number of y-axis ticks.
-#' @param xFontSize The font size of the category labels. Defaults to 11.
-#' @param yFontSize The font size of the value axis labels. Defaults to 11.
-#' @param lineStroke Optional. The colour of the stems. Defaults to the colour
+#' @param x_font_size The font size of the category labels. Defaults to 11.
+#' @param y_font_size The font size of the value axis labels. Defaults to 11.
+#' @param line_stroke Optional. The colour of the stems. Defaults to the colour
 #'   of the dots.
-#' @param lineStrokeWidth The width of the stems, in pixels. Defaults to 2.
-#' @param circleFill The colour of the dots. A single colour, or, without
+#' @param line_stroke_width The width of the stems, in pixels. Defaults to 2.
+#' @param circle_fill The colour of the dots. A single colour, or, without
 #'   \code{group}, one colour per category (recycled; a named vector maps
 #'   colours to categories). With \code{group}, one colour per group (a named
 #'   vector maps colours to groups). Defaults to a built-in palette.
-#' @param circleStroke Optional. The colour of the ring around the dots.
+#' @param circle_stroke Optional. The colour of the ring around the dots.
 #'   Defaults to the background colour.
-#' @param circleStrokeWidth The width of the ring around the dots. Defaults to
+#' @param circle_stroke_width The width of the ring around the dots. Defaults to
 #'   1.5.
-#' @param circleRadius The radius of the dots, in pixels. Defaults to 6. Dots
+#' @param circle_radius The radius of the dots, in pixels. Defaults to 6. Dots
 #'   are made smaller when there is not enough room for them.
 #' @param opacity The opacity of the lollipops (from 0 to 1). Defaults to 1.
 #' @param labels Logical. Write the values next to the dots (when every label
 #'   fits). Defaults to \code{TRUE}.
 #' @param highlight Optional. A character vector of categories to emphasise;
 #'   the other lollipops are drawn in grey (or faded, with \code{group}).
-#' @param negativeFill Optional. The colour of negative lollipops (without
+#' @param negative_fill Optional. The colour of negative lollipops (without
 #'   \code{group}).
 #' @param group Optional. The name of a column that splits each category into
 #'   groups, drawn side by side (one colour per group, with a clickable
@@ -92,7 +92,7 @@
 #' # One lollipop per group
 #' lollipop_chart(
 #'   mpg, x = "class", y = "cty", group = "year", agg = "mean",
-#'   valueFormat = ".1f", title = "City miles per gallon, 1999 and 2008"
+#'   value_format = ".1f", title = "City miles per gallon, 1999 and 2008"
 #' )
 #'
 lollipop_chart <- function(data,
@@ -102,40 +102,40 @@ lollipop_chart <- function(data,
                            bgcol = "white",
                            xticks = NULL,
                            yticks = NULL,
-                           xFontSize = 11,
-                           yFontSize = 11,
+                           x_font_size = 11,
+                           y_font_size = 11,
                            font = "Verdana, Geneva, Tahoma, sans-serif",
                            xtitle = NULL,
-                           xtitleFontSize = 13,
+                           xtitle_font_size = 13,
                            ytitle = NULL,
-                           ytitleFontSize = 13,
+                           ytitle_font_size = 13,
                            title = NULL,
-                           titleFontSize = 20,
-                           lineStroke = NULL,
-                           lineStrokeWidth = 2,
-                           circleFill = NULL,
-                           circleStroke = NULL,
-                           circleStrokeWidth = 1.5,
-                           circleRadius = 6,
-                           axisCol = "#333333",
+                           title_font_size = 20,
+                           line_stroke = NULL,
+                           line_stroke_width = 2,
+                           circle_fill = NULL,
+                           circle_stroke = NULL,
+                           circle_stroke_width = 1.5,
+                           circle_radius = 6,
+                           axis_col = "#333333",
                            width = NULL,
                            height = NULL,
                            group = NULL,
                            agg = c("sum", "mean", "median", "min", "max", "count"),
                            labels = TRUE,
                            highlight = NULL,
-                           refLines = NULL,
-                           negativeFill = NULL,
+                           ref_lines = NULL,
+                           negative_fill = NULL,
                            legend = NULL,
                            controls = TRUE,
                            tooltip = TRUE,
                            animate = TRUE,
-                           valueFormat = NULL,
-                           valuePrefix = "",
-                           valueSuffix = "",
+                           value_format = NULL,
+                           value_prefix = "",
+                           value_suffix = "",
                            subtitle = NULL,
-                           subtitleFontSize = 13,
-                           gridCol = "#e9e9e9",
+                           subtitle_font_size = 13,
+                           grid_col = "#e9e9e9",
                            opacity = 1
                            ) {
 
@@ -146,20 +146,20 @@ lollipop_chart <- function(data,
 
   lollipop_widget(
     data = data, cat = x, val = y, orientation = "vertical", sort = sort,
-    catFontSize = xFontSize, valFontSize = yFontSize, valTicks = yticks,
-    catTitle = xtitle, catTitleFontSize = xtitleFontSize,
-    valTitle = ytitle, valTitleFontSize = ytitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    lineStroke = lineStroke, lineStrokeWidth = lineStrokeWidth,
-    circleFill = circleFill, circleStroke = circleStroke,
-    circleStrokeWidth = circleStrokeWidth, circleRadius = circleRadius,
-    font = font, bgcol = bgcol, opacity = opacity, axisCol = axisCol, gridCol = gridCol,
+    cat_font_size = x_font_size, val_font_size = y_font_size, val_ticks = yticks,
+    cat_title = xtitle, cat_title_font_size = xtitle_font_size,
+    val_title = ytitle, val_title_font_size = ytitle_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    line_stroke = line_stroke, line_stroke_width = line_stroke_width,
+    circle_fill = circle_fill, circle_stroke = circle_stroke,
+    circle_stroke_width = circle_stroke_width, circle_radius = circle_radius,
+    font = font, bgcol = bgcol, opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height, group = group, agg = match.arg(agg),
-    labels = labels, highlight = highlight, refLines = refLines,
-    negativeFill = negativeFill, legend = legend, controls = controls,
-    tooltip = tooltip, animate = animate, valueFormat = valueFormat,
-    valuePrefix = valuePrefix, valueSuffix = valueSuffix
+    labels = labels, highlight = highlight, ref_lines = ref_lines,
+    negative_fill = negative_fill, legend = legend, controls = controls,
+    tooltip = tooltip, animate = animate, value_format = value_format,
+    value_prefix = value_prefix, value_suffix = value_suffix
   )
 }
 
@@ -168,47 +168,47 @@ lollipop_chart <- function(data,
 # lollipop arguments and draws through bar_widget(shape = "lollipop").
 # @noRd
 lollipop_widget <- function(data, cat, val, orientation, sort,
-                            catFontSize, valFontSize, valTicks,
-                            catTitle, catTitleFontSize, valTitle, valTitleFontSize,
-                            title, titleFontSize, subtitle, subtitleFontSize,
-                            lineStroke, lineStrokeWidth, circleFill, circleStroke,
-                            circleStrokeWidth, circleRadius,
-                            font, bgcol, opacity, axisCol, gridCol, width, height,
-                            group, agg, labels, highlight, refLines, negativeFill,
+                            cat_font_size, val_font_size, val_ticks,
+                            cat_title, cat_title_font_size, val_title, val_title_font_size,
+                            title, title_font_size, subtitle, subtitle_font_size,
+                            line_stroke, line_stroke_width, circle_fill, circle_stroke,
+                            circle_stroke_width, circle_radius,
+                            font, bgcol, opacity, axis_col, grid_col, width, height,
+                            group, agg, labels, highlight, ref_lines, negative_fill,
                             legend, controls, tooltip, animate,
-                            valueFormat, valuePrefix, valueSuffix) {
+                            value_format, value_prefix, value_suffix) {
 
-  if (!is.numeric(circleRadius) || length(circleRadius) != 1 || circleRadius < 0) {
-    stop("'circleRadius' must be a non-negative number")
+  if (!is.numeric(circle_radius) || length(circle_radius) != 1 || circle_radius < 0) {
+    stop("'circle_radius' must be a non-negative number")
   }
-  if (!is.numeric(lineStrokeWidth) || length(lineStrokeWidth) != 1 || lineStrokeWidth <= 0) {
-    stop("'lineStrokeWidth' must be a positive number")
+  if (!is.numeric(line_stroke_width) || length(line_stroke_width) != 1 || line_stroke_width <= 0) {
+    stop("'line_stroke_width' must be a positive number")
   }
-  if (!is.numeric(circleStrokeWidth) || length(circleStrokeWidth) != 1 || circleStrokeWidth < 0) {
-    stop("'circleStrokeWidth' must be a non-negative number")
+  if (!is.numeric(circle_stroke_width) || length(circle_stroke_width) != 1 || circle_stroke_width < 0) {
+    stop("'circle_stroke_width' must be a non-negative number")
   }
-  if (!is.null(lineStroke) && length(lineStroke) != 1) {
-    stop("'lineStroke' must be a single colour")
+  if (!is.null(line_stroke) && length(line_stroke) != 1) {
+    stop("'line_stroke' must be a single colour")
   }
 
   bar_widget(
     data = data, cat = cat, val = val, orientation = orientation,
-    fill = circleFill, sort = sort, paddingWidth = 0.2,
-    catFontSize = catFontSize, valFontSize = valFontSize, valTicks = valTicks,
-    catTitle = catTitle, catTitleFontSize = catTitleFontSize,
-    valTitle = valTitle, valTitleFontSize = valTitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    stroke = NULL, strokeWidth = NULL, font = font, bgcol = bgcol,
-    opacity = opacity, axisCol = axisCol, gridCol = gridCol,
+    fill = circle_fill, sort = sort, padding_width = 0.2,
+    cat_font_size = cat_font_size, val_font_size = val_font_size, val_ticks = val_ticks,
+    cat_title = cat_title, cat_title_font_size = cat_title_font_size,
+    val_title = val_title, val_title_font_size = val_title_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    stroke = NULL, stroke_width = NULL, font = font, bgcol = bgcol,
+    opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height,
     group = group, position = "grouped", agg = agg,
-    labels = labels, highlight = highlight, refLines = refLines,
-    negativeFill = negativeFill, cornerRadius = 0, legend = legend,
+    labels = labels, highlight = highlight, ref_lines = ref_lines,
+    negative_fill = negative_fill, corner_radius = 0, legend = legend,
     controls = controls, tooltip = tooltip, animate = animate,
-    valueFormat = valueFormat, valuePrefix = valuePrefix, valueSuffix = valueSuffix,
-    shape = "lollipop", stemWidth = lineStrokeWidth, stemColor = lineStroke,
-    dotRadius = circleRadius, dotStroke = circleStroke,
-    dotStrokeWidth = circleStrokeWidth
+    value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix,
+    shape = "lollipop", stem_width = line_stroke_width, stem_color = line_stroke,
+    dot_radius = circle_radius, dot_stroke = circle_stroke,
+    dot_stroke_width = circle_stroke_width
   )
 }

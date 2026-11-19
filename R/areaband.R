@@ -11,26 +11,26 @@
 #' @inheritParams line_chart
 #' @param x The time variable: a \code{Date}, a \code{POSIXct} date-time, a
 #'   "yyyy-mm-dd" character column or a number.
-#' @param yLower The column holding the lower bound of the band.
-#' @param yUpper The column holding the upper bound of the band.
+#' @param y_lower The column holding the lower bound of the band.
+#' @param y_upper The column holding the upper bound of the band.
 #' @param fill The colour of the band (and of the central line). A single
 #'   colour, or one colour per group (a named vector maps colours to groups).
 #'   Defaults to a built-in palette.
 #' @param stroke Optional. The colour of the band's outline. Without
 #'   \code{y}, the outline defaults to a faded line in the band's colour.
-#' @param strokeWidth Optional. The width of the band's outline. Defaults to
+#' @param stroke_width Optional. The width of the band's outline. Defaults to
 #'   1.
 #' @param opacity Optional. The opacity of the band (from 0 to 1). Defaults
 #'   to 0.3, or 0.22 with a central line.
 #' @param ytitle Optional. The title of the y-axis, shown above the axis.
 #' @param bgcol The background color of the SVG. Defaults to "white".
-#' @param axisCol The color of the axis text, ticks and titles. Defaults to
+#' @param axis_col The color of the axis text, ticks and titles. Defaults to
 #'   "#333333".
 #' @param y Optional. A column drawn as a line inside the band.
 #' @param group Optional. The column whose values name the bands (one band
 #'   per value, long data).
-#' @param lineWidth The width of the central line. Defaults to 2.
-#' @param yZero Logical. Force the y axis to include 0. Defaults to
+#' @param line_width The width of the central line. Defaults to 2.
+#' @param y_zero Logical. Force the y axis to include 0. Defaults to
 #'   \code{FALSE}.
 #'
 #' @return An interactive SVG band chart.
@@ -46,8 +46,8 @@
 #' area_band(
 #'   data = airpassengers,
 #'   x = "date",
-#'   yLower = "passengers_lower",
-#'   yUpper = "passengers_upper",
+#'   y_lower = "passengers_lower",
+#'   y_upper = "passengers_upper",
 #'   fill = "#efb118",
 #'   stroke = "#9c6b4e"
 #' )
@@ -62,68 +62,68 @@
 #'              low = mid - runif(120, 2, 5), high = mid + runif(120, 2, 5))
 #' }))
 #' area_band(
-#'   temps, x = "date", yLower = "low", yUpper = "high", y = "mean",
-#'   group = "city", valueFormat = ".1f", valueSuffix = " °C",
+#'   temps, x = "date", y_lower = "low", y_upper = "high", y = "mean",
+#'   group = "city", value_format = ".1f", value_suffix = " °C",
 #'   title = "Daily temperatures", subtitle = "Mean, with the daily minimum and maximum"
 #' )
 #'
 area_band <- function(
   data,
   x,
-  yLower,
-  yUpper,
+  y_lower,
+  y_upper,
   fill = NULL,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = NULL,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   y = NULL,
   group = NULL,
-  lineWidth = 2,
+  line_width = 2,
   curve = "curveLinear",
-  yZero = FALSE,
+  y_zero = FALSE,
   events = NULL,
   bands = NULL,
   hlines = NULL,
   legend = NULL,
-  endLabels = NULL,
+  end_labels = NULL,
   tooltip = TRUE,
   navigator = TRUE,
-  rangeButtons = TRUE,
+  range_buttons = TRUE,
   zoom = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
-  dateFormat = NULL,
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
+  date_format = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
+  grid_col = "#e9e9e9"
 ) {
 
   if (!is.data.frame(data)) stop("'data' must be a data frame")
-  if (is.null(data[[x]]) || is.null(data[[yLower]]) || is.null(data[[yUpper]])) {
-    stop("Please check that x and yLower and yUpper belong to the specified data frame")
+  if (is.null(data[[x]]) || is.null(data[[y_lower]]) || is.null(data[[y_upper]])) {
+    stop("Please check that x and y_lower and y_upper belong to the specified data frame")
   }
   if (!is.null(opacity) && (!is.numeric(opacity) || length(opacity) != 1 || opacity < 0 || opacity > 1)) {
     stop("'opacity' must be a single number between 0 and 1")
   }
-  if (!is.null(strokeWidth) && (!is.numeric(strokeWidth) || length(strokeWidth) != 1 || strokeWidth < 0)) {
-    stop("'strokeWidth' must be a single number, 0 or more")
+  if (!is.null(stroke_width) && (!is.numeric(stroke_width) || length(stroke_width) != 1 || stroke_width < 0)) {
+    stop("'stroke_width' must be a single number, 0 or more")
   }
 
   if (is.null(y)) {
@@ -136,25 +136,25 @@ area_band <- function(
   }
 
   line_widget(
-    data = data, x = x, y = y, group = group, lower = yLower, upper = yUpper,
-    colors = fill, strokeWidth = lineWidth, curve = curve, yZero = yZero,
+    data = data, x = x, y = y, group = group, lower = y_lower, upper = y_upper,
+    colors = fill, stroke_width = line_width, curve = curve, y_zero = y_zero,
     events = events, bands = bands, hlines = hlines, legend = legend,
-    endLabels = endLabels, tooltip = tooltip, navigator = navigator,
-    rangeButtons = rangeButtons, zoom = zoom, animate = animate,
-    valueFormat = valueFormat, valuePrefix = valuePrefix, valueSuffix = valueSuffix,
-    dateFormat = dateFormat, xticks = xticks, yticks = yticks,
-    xtitle = xtitle, xtitleFontSize = xtitleFontSize,
-    ytitle = ytitle, ytitleFontSize = ytitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    xFontSize = xFontSize, yFontSize = yFontSize, font = font,
-    bgcol = bgcol, gridCol = gridCol, axisCol = axisCol,
+    end_labels = end_labels, tooltip = tooltip, navigator = navigator,
+    range_buttons = range_buttons, zoom = zoom, animate = animate,
+    value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix,
+    date_format = date_format, xticks = xticks, yticks = yticks,
+    xtitle = xtitle, xtitle_font_size = xtitle_font_size,
+    ytitle = ytitle, ytitle_font_size = ytitle_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    x_font_size = x_font_size, y_font_size = y_font_size, font = font,
+    bgcol = bgcol, grid_col = grid_col, axis_col = axis_col,
     width = width, height = height,
     extra = list(
       kind = "band",
       bandOpacity = band_opacity,
-      bandStroke = if (!is.null(strokeWidth) && strokeWidth == 0) "none" else stroke,
-      bandStrokeWidth = strokeWidth
+      bandStroke = if (!is.null(stroke_width) && stroke_width == 0) "none" else stroke,
+      bandStrokeWidth = stroke_width
     )
   )
 }

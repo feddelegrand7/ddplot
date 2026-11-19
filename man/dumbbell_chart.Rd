@@ -9,25 +9,25 @@ dumbbell_chart(
   x1,
   x2,
   y,
-  x1Label = NULL,
-  x2Label = NULL,
+  x1_label = NULL,
+  x2_label = NULL,
   col1 = "steelblue",
   col2 = "crimson",
-  lineCol = "#aaaaaa",
-  lineWidth = 2,
-  circleRadius = 6,
+  line_col = "#aaaaaa",
+  line_width = 2,
+  circle_radius = 6,
   sort = "none",
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   title = NULL,
-  titleFontSize = 16,
-  xFontSize = 11,
-  yFontSize = 11,
+  title_font_size = 16,
+  x_font_size = 11,
+  y_font_size = 11,
   legend = TRUE,
-  legendFontSize = 11,
+  legend_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -41,23 +41,23 @@ dumbbell_chart(
 
 \item{y}{The name of the categorical column used as row labels.}
 
-\item{x1Label}{Legend label for the first value. Defaults to the value of
+\item{x1_label}{Legend label for the first value. Defaults to the value of
 \code{x1}.}
 
-\item{x2Label}{Legend label for the second value. Defaults to the value of
+\item{x2_label}{Legend label for the second value. Defaults to the value of
 \code{x2}.}
 
 \item{col1}{Color of the first dot. Defaults to \code{"steelblue"}.}
 
 \item{col2}{Color of the second dot. Defaults to \code{"crimson"}.}
 
-\item{lineCol}{Color of the line connecting the two dots. Defaults to
+\item{line_col}{Color of the line connecting the two dots. Defaults to
 \code{"#aaaaaa"}.}
 
-\item{lineWidth}{Width of the connecting line in pixels. Defaults to
+\item{line_width}{Width of the connecting line in pixels. Defaults to
 \code{2}.}
 
-\item{circleRadius}{Radius of the dots in pixels. Defaults to \code{6}.}
+\item{circle_radius}{Radius of the dots in pixels. Defaults to \code{6}.}
 
 \item{sort}{Whether to sort the rows. One of \code{"none"} (default),
 \code{"ascending"}, or \code{"descending"}, ordered by the \code{x1}
@@ -65,27 +65,27 @@ value.}
 
 \item{xtitle}{Optional. Title of the x-axis.}
 
-\item{xtitleFontSize}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
-\item{xFontSize}{Font size of the x-axis tick labels. Defaults to \code{11}.}
+\item{x_font_size}{Font size of the x-axis tick labels. Defaults to \code{11}.}
 
-\item{yFontSize}{Font size of the y-axis category labels. Defaults to
+\item{y_font_size}{Font size of the y-axis category labels. Defaults to
 \code{11}.}
 
 \item{legend}{Whether to display a legend. Defaults to \code{TRUE}.}
 
-\item{legendFontSize}{Font size of the legend text. Defaults to \code{11}.}
+\item{legend_font_size}{Font size of the legend text. Defaults to \code{11}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of axis lines, ticks, and labels. Defaults to
+\item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -116,8 +116,8 @@ dumbbell_chart(
   x1       = "year_1952",
   x2       = "year_2007",
   y        = "country",
-  x1Label  = "1952",
-  x2Label  = "2007",
+  x1_label  = "1952",
+  x2_label  = "2007",
   title    = "Life expectancy: 1952 vs 2007",
   xtitle   = "Life expectancy (years)",
   sort     = "ascending"
@@ -135,8 +135,8 @@ dumbbell_chart(
   x1      = "city",
   x2      = "highway",
   y       = "class",
-  x1Label = "City",
-  x2Label = "Highway",
+  x1_label = "City",
+  x2_label = "Highway",
   col1    = "steelblue",
   col2    = "darkorange",
   title   = "City vs highway fuel economy by class",

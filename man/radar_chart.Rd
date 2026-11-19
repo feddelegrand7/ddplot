@@ -8,29 +8,29 @@ radar_chart(
   data,
   group,
   axes = NULL,
-  axisLabels = NULL,
-  maxValue = NULL,
-  scaleEachAxis = FALSE,
+  axis_labels = NULL,
+  max_value = NULL,
+  scale_each_axis = FALSE,
   levels = 5,
-  gridShape = c("polygon", "circle"),
+  grid_shape = c("polygon", "circle"),
   colors = NULL,
-  fillOpacity = 0.2,
-  lineWidth = 2,
-  pointRadius = 3,
-  showTicks = TRUE,
-  valueFormat = ",",
-  gridCol = "#dddddd",
+  fill_opacity = 0.2,
+  line_width = 2,
+  point_radius = 3,
+  show_ticks = TRUE,
+  value_format = ",",
+  grid_col = "#dddddd",
   hover = TRUE,
   animate = TRUE,
   legend = TRUE,
-  legendFontSize = 12,
-  labelFontSize = 12,
-  tickFontSize = 10,
+  legend_font_size = 12,
+  label_font_size = 12,
+  tick_font_size = 10,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -46,47 +46,47 @@ must be unique (one row per series).}
 names, each drawn as a spoke of the radar. Defaults to \code{NULL}, which
 uses every numeric column except \code{group}.}
 
-\item{axisLabels}{Optional. A character vector, the same length as
+\item{axis_labels}{Optional. A character vector, the same length as
 \code{axes}, of labels displayed at the end of each spoke. Defaults to the
 column names.}
 
-\item{maxValue}{Optional. The value of the outer ring. With a shared scale,
-a single positive number; with \code{scaleEachAxis = TRUE}, either a single
+\item{max_value}{Optional. The value of the outer ring. With a shared scale,
+a single positive number; with \code{scale_each_axis = TRUE}, either a single
 number or one number per axis. Defaults to \code{NULL}, which rounds the
-data maximum up to a "nice" value. Values above \code{maxValue} are drawn
+data maximum up to a "nice" value. Values above \code{max_value} are drawn
 on the outer ring.}
 
-\item{scaleEachAxis}{Whether every axis gets its own scale running from 0 to
+\item{scale_each_axis}{Whether every axis gets its own scale running from 0 to
 that axis' (nice) maximum. Useful when the axes are measured in different
 units. The ring tick labels are then hidden and each axis label shows its
 maximum instead. Defaults to \code{FALSE} (one scale shared by all axes).}
 
 \item{levels}{The number of concentric grid rings. Defaults to \code{5}.}
 
-\item{gridShape}{Shape of the grid rings, either \code{"polygon"} (default)
+\item{grid_shape}{Shape of the grid rings, either \code{"polygon"} (default)
 or \code{"circle"}.}
 
 \item{colors}{Optional. A vector of colors, one per series (recycled if
 shorter). Defaults to \code{NULL}, which uses a soft palette in the spirit
 of Chart.js.}
 
-\item{fillOpacity}{Opacity of the polygon fills, between 0 and 1. Defaults
+\item{fill_opacity}{Opacity of the polygon fills, between 0 and 1. Defaults
 to \code{0.2}.}
 
-\item{lineWidth}{Width of the polygon outlines in pixels. Defaults to
+\item{line_width}{Width of the polygon outlines in pixels. Defaults to
 \code{2}.}
 
-\item{pointRadius}{Radius of the point markers in pixels. Defaults to
+\item{point_radius}{Radius of the point markers in pixels. Defaults to
 \code{3}. Use \code{0} to hide the markers.}
 
-\item{showTicks}{Whether to print the value of each grid ring along the top
+\item{show_ticks}{Whether to print the value of each grid ring along the top
 spoke (shared scale only). Defaults to \code{TRUE}.}
 
-\item{valueFormat}{A d3-format specifier used to display values in the
+\item{value_format}{A d3-format specifier used to display values in the
 ticks and the tooltip, e.g. \code{".1f"} or \code{".0\%"}. Defaults to
 \code{","} (thousands separator, insignificant zeros trimmed).}
 
-\item{gridCol}{Color of the grid rings and spokes. Defaults to
+\item{grid_col}{Color of the grid rings and spokes. Defaults to
 \code{"#dddddd"}.}
 
 \item{hover}{Whether to show a tooltip and highlight the hovered series.
@@ -98,23 +98,23 @@ render. Defaults to \code{TRUE}.}
 \item{legend}{Whether to display a clickable legend of the series. Defaults
 to \code{TRUE}.}
 
-\item{legendFontSize}{Font size of the legend text. Defaults to \code{12}.}
+\item{legend_font_size}{Font size of the legend text. Defaults to \code{12}.}
 
-\item{labelFontSize}{Font size of the axis labels. Defaults to \code{12}.}
+\item{label_font_size}{Font size of the axis labels. Defaults to \code{12}.}
 
-\item{tickFontSize}{Font size of the grid ring tick labels. Defaults to
+\item{tick_font_size}{Font size of the grid ring tick labels. Defaults to
 \code{10}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of the axis labels, tick labels, legend text and
+\item{axis_col}{Color of the axis labels, tick labels, legend text and
 title. Defaults to \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -156,7 +156,7 @@ radar_chart(
   group    = "player",
   axes     = c("speed", "power", "passing", "dribbling",
                "defending", "stamina"),
-  maxValue = 100,
+  max_value = 100,
   title    = "Player skill ratings"
 )
 
@@ -168,12 +168,12 @@ cyl_means$cyl <- paste(cyl_means$cyl, "cylinders")
 radar_chart(
   data          = cyl_means,
   group         = "cyl",
-  axisLabels    = c("Miles/gallon", "Horsepower", "Weight (1000 lbs)",
+  axis_labels    = c("Miles/gallon", "Horsepower", "Weight (1000 lbs)",
                     "1/4 mile time (s)", "Displacement (cu.in.)"),
-  scaleEachAxis = TRUE,
+  scale_each_axis = TRUE,
   levels        = 4,
-  gridShape     = "circle",
-  valueFormat   = ".1f",
+  grid_shape     = "circle",
+  value_format   = ".1f",
   title         = "mtcars averages by number of cylinders"
 )
 }

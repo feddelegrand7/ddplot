@@ -41,10 +41,10 @@
 #' \code{"steelblue"}) applied to every ridge, an unnamed vector of colors
 #' recycled over the groups (in their original order), or a named vector
 #' whose names match the group values.
-#' @param fillOpacity Fill opacity of the ridges (0 to 1). Defaults to
+#' @param fill_opacity Fill opacity of the ridges (0 to 1). Defaults to
 #' \code{0.8}.
-#' @param lineCol Color of the density outline. Defaults to \code{"#333333"}.
-#' @param lineWidth Width of the density outline in pixels. Defaults to
+#' @param line_col Color of the density outline. Defaults to \code{"#333333"}.
+#' @param line_width Width of the density outline in pixels. Defaults to
 #' \code{1}.
 #' @param sort How to order the ridges from top to bottom. One of
 #' \code{"none"} (default, factor level order or order of appearance),
@@ -53,21 +53,21 @@
 #' @param stat Character. Draws a vertical line inside each ridge at the
 #' \code{"mean"} or \code{"median"} of its values. Defaults to \code{"none"}
 #' (no line).
-#' @param statColor Color of the mean/median line. Defaults to
+#' @param stat_color Color of the mean/median line. Defaults to
 #' \code{"#d62728"}.
 #' @param hover Logical. When \code{TRUE} (default), hovering a ridge or its
 #' label raises and highlights it and shows its number of observations and
 #' mean.
 #' @param xtitle Optional. Title of the x-axis.
-#' @param xtitleFontSize Font size of the x-axis title. Defaults to \code{13}.
+#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
-#' @param xFontSize Font size of the x-axis tick labels. Defaults to \code{11}.
-#' @param yFontSize Font size of the group labels. Defaults to \code{11}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
+#' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
+#' @param y_font_size Font size of the group labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of axis lines, ticks, and labels. Defaults to
+#' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -105,8 +105,8 @@
 #'   group       = "class",
 #'   sort        = "median",
 #'   fill        = "#2c7fb8",
-#'   lineCol     = "white",
-#'   fillOpacity = 0.9,
+#'   line_col     = "white",
+#'   fill_opacity = 0.9,
 #'   overlap     = 2,
 #'   title       = "Highway fuel economy by vehicle class",
 #'   xtitle      = "Highway miles per gallon"
@@ -132,22 +132,22 @@ ridgeline_plot <- function(
     kernel       = c("gaussian", "epanechnikov"),
     overlap      = 1.5,
     fill         = "steelblue",
-    fillOpacity  = 0.8,
-    lineCol      = "#333333",
-    lineWidth    = 1,
+    fill_opacity  = 0.8,
+    line_col      = "#333333",
+    line_width    = 1,
     sort         = c("none", "mean", "median"),
     stat         = c("none", "mean", "median"),
-    statColor    = "#d62728",
+    stat_color    = "#d62728",
     hover        = TRUE,
     xtitle       = NULL,
-    xtitleFontSize = 13,
+    xtitle_font_size = 13,
     title        = NULL,
-    titleFontSize  = 16,
-    xFontSize    = 11,
-    yFontSize    = 11,
+    title_font_size  = 16,
+    x_font_size    = 11,
+    y_font_size    = 11,
     font         = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol        = "white",
-    axisCol      = "black",
+    axis_col      = "black",
     width        = NULL,
     height       = NULL
 ) {
@@ -175,9 +175,9 @@ ridgeline_plot <- function(
     stop("'overlap' must be a single positive number.")
   }
 
-  if (!is.numeric(fillOpacity) || length(fillOpacity) != 1 ||
-      fillOpacity < 0 || fillOpacity > 1) {
-    stop("'fillOpacity' must be a single number between 0 and 1.")
+  if (!is.numeric(fill_opacity) || length(fill_opacity) != 1 ||
+      fill_opacity < 0 || fill_opacity > 1) {
+    stop("'fill_opacity' must be a single number between 0 and 1.")
   }
 
   kernel <- match.arg(kernel)
@@ -227,22 +227,22 @@ ridgeline_plot <- function(
       kernel       = kernel,
       overlap      = overlap,
       fill         = fill,
-      fillOpacity  = fillOpacity,
-      lineCol      = lineCol,
-      lineWidth    = lineWidth,
+      fillOpacity  = fill_opacity,
+      lineCol      = line_col,
+      lineWidth    = line_width,
       sort         = sort,
       stat         = stat,
-      statColor    = statColor,
+      statColor    = stat_color,
       hover        = hover,
       xtitle       = xtitle,
-      xtitleFontSize = xtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
       title        = title,
-      titleFontSize  = titleFontSize,
-      xFontSize    = xFontSize,
-      yFontSize    = yFontSize,
+      titleFontSize  = title_font_size,
+      xFontSize    = x_font_size,
+      yFontSize    = y_font_size,
       font         = font,
       bgcol        = bgcol,
-      axisCol      = axisCol
+      axisCol      = axis_col
     ),
     width  = width,
     height = height

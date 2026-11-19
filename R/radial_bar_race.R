@@ -1,6 +1,6 @@
 #' Create an animated radial bar chart race
 #'
-#' A circular bar chart race: at every period, the top \code{topN} items are
+#' A circular bar chart race: at every period, the top \code{top_n} items are
 #' drawn around a central circle, sorted by value clockwise from the top, and
 #' they glide to their new place when their rank changes. Two layouts are
 #' available: \code{"spokes"}, where each item is a bar radiating from the
@@ -52,11 +52,11 @@
 #' @param group Optional. The name of a column grouping the items (e.g. a
 #'   continent): the bars are then coloured by group, with a clickable
 #'   legend.
-#' @param topN The number of items on show at every period. Defaults to 12.
+#' @param top_n The number of items on show at every period. Defaults to 12.
 #' @param layout The initial layout: \code{"spokes"} (default, bars radiating
 #'   from the centre) or \code{"rings"} (concentric arcs, best with
-#'   \code{topN} up to about 12). It can be changed from the chart.
-#' @param innerRadius The radius of the central circle: a number below 1 is
+#'   \code{top_n} up to about 12). It can be changed from the chart.
+#' @param inner_radius The radius of the central circle: a number below 1 is
 #'   a fraction of the radius of the chart, a larger number is a radius in
 #'   pixels. Defaults to 0.25.
 #' @param scale How the values are mapped to the length of the spokes:
@@ -69,25 +69,25 @@
 #' @param agg How rows with the same item and period are combined:
 #'   \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 #'   \code{"last"}.
-#' @param fillGaps Logical. Interpolate the values of an item between the
+#' @param fill_gaps Logical. Interpolate the values of an item between the
 #'   periods where it is known. Defaults to \code{TRUE}.
 #' @param fill Optional. The colours: a single colour, a vector of colours
 #'   (recycled), or a named vector mapping colours to items (or to groups,
 #'   with \code{group}). Defaults to the ddplot palette.
-#' @param colorCategory Optional. The name of a D3 categorical colour scheme,
+#' @param color_category Optional. The name of a D3 categorical colour scheme,
 #'   such as "Tableau10", "Set2" or "Paired", used when \code{fill} is not
 #'   given.
 #' @param highlight Optional. A character vector of items to pin from the
 #'   start.
-#' @param centerValue What the centre shows under the period:
+#' @param center_value What the centre shows under the period:
 #'   \code{"total"} (default, the total of the items on show),
 #'   \code{"average"} (their average, better for rates such as a life
 #'   expectancy) or \code{"none"}.
 #' @param legend Logical. Show the legend of the groups. When \code{NULL}
 #'   (default), it is shown when \code{group} is used.
-#' @param layoutButtons Logical. Show the Spokes / Rings buttons. Defaults to
+#' @param layout_buttons Logical. Show the Spokes / Rings buttons. Defaults to
 #'   \code{TRUE}.
-#' @param frameDur The duration of one period, in milliseconds. Defaults to
+#' @param frame_dur The duration of one period, in milliseconds. Defaults to
 #'   900.
 #' @param ease The easing used within a period, the name of a D3 easing
 #'   function without the "ease" prefix, e.g. \code{"CubicInOut"} (default),
@@ -98,22 +98,22 @@
 #'   can be toggled from the player.
 #' @param controls Logical. Show the player (play / pause, timeline, speed,
 #'   loop). Defaults to \code{TRUE}.
-#' @param startFrame The period shown first: \code{"first"} (default),
+#' @param start_frame The period shown first: \code{"first"} (default),
 #'   \code{"last"} or a period number (1 for the first).
-#' @param timeFormat Optional. A d3-time-format string for date periods, e.g.
+#' @param time_format Optional. A d3-time-format string for date periods, e.g.
 #'   \code{"\%b \%Y"}.
 #' @param title Optional. The title of the chart.
-#' @param titleFontSize The font size of the title. Defaults to 20.
+#' @param title_font_size The font size of the title. Defaults to 20.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background colour. Defaults to "white".
-#' @param axisCol The colour of the texts, grid and controls. Defaults to
+#' @param axis_col The colour of the texts, grid and controls. Defaults to
 #'   "#333333".
-#' @param valueFormat Optional. A d3-format string for the values, e.g.
+#' @param value_format Optional. A d3-format string for the values, e.g.
 #'   \code{",.0f"}, \code{".1f"} or \code{"~s"}.
-#' @param valuePrefix,valueSuffix Optional. Text added before or after every
+#' @param value_prefix,value_suffix Optional. Text added before or after every
 #'   value, e.g. \code{"$"} or \code{" km"}.
 #' @param tooltip Logical. Show a tooltip on hover. Defaults to \code{TRUE}.
 #' @param width Optional. The width of the chart.
@@ -141,10 +141,10 @@
 #'   time = "year",
 #'   value = "gdpPercap",
 #'   group = "continent",
-#'   topN = 10,
+#'   top_n = 10,
 #'   layout = "rings",
-#'   valuePrefix = "$",
-#'   valueFormat = ",.0f",
+#'   value_prefix = "$",
+#'   value_format = ",.0f",
 #'   title = "GDP per capita"
 #' )
 #'
@@ -156,43 +156,43 @@
 #'              80, 70, 76, 61, 66)
 #' )
 #' radial_bar_race(scores, label = "team", time = "round", value = "points",
-#'                 max = 100, frameDur = 1400)
+#'                 max = 100, frame_dur = 1400)
 #'
 radial_bar_race <- function(data,
                             label,
                             value,
                             time,
                             group = NULL,
-                            topN = 12,
+                            top_n = 12,
                             layout = c("spokes", "rings"),
-                            innerRadius = 0.25,
+                            inner_radius = 0.25,
                             scale = c("linear", "area"),
                             max = NULL,
                             agg = c("sum", "mean", "max", "min", "last"),
-                            fillGaps = TRUE,
+                            fill_gaps = TRUE,
                             fill = NULL,
-                            colorCategory = NULL,
+                            color_category = NULL,
                             highlight = NULL,
-                            centerValue = c("total", "average", "none"),
+                            center_value = c("total", "average", "none"),
                             legend = NULL,
-                            layoutButtons = TRUE,
-                            frameDur = 900,
+                            layout_buttons = TRUE,
+                            frame_dur = 900,
                             ease = "CubicInOut",
                             autoplay = TRUE,
                             loop = FALSE,
                             controls = TRUE,
-                            startFrame = "first",
-                            timeFormat = NULL,
+                            start_frame = "first",
+                            time_format = NULL,
                             title = NULL,
-                            titleFontSize = 20,
+                            title_font_size = 20,
                             subtitle = NULL,
-                            subtitleFontSize = 13,
+                            subtitle_font_size = 13,
                             font = "Verdana, Geneva, Tahoma, sans-serif",
                             bgcol = "white",
-                            axisCol = "#333333",
-                            valueFormat = NULL,
-                            valuePrefix = "",
-                            valueSuffix = "",
+                            axis_col = "#333333",
+                            value_format = NULL,
+                            value_prefix = "",
+                            value_suffix = "",
                             tooltip = TRUE,
                             width = NULL,
                             height = NULL) {
@@ -208,14 +208,14 @@ radial_bar_race <- function(data,
   layout <- match.arg(layout)
   scale <- match.arg(scale)
   agg <- match.arg(agg)
-  centerValue <- match.arg(centerValue)
-  if (!is.numeric(topN) || length(topN) != 1 || !is.finite(topN) || topN < 1) {
-    stop("'topN' must be a positive whole number")
+  center_value <- match.arg(center_value)
+  if (!is.numeric(top_n) || length(top_n) != 1 || !is.finite(top_n) || top_n < 1) {
+    stop("'top_n' must be a positive whole number")
   }
-  topN <- as.integer(round(topN))
-  if (!is.numeric(innerRadius) || length(innerRadius) != 1 || !is.finite(innerRadius) ||
-      innerRadius < 0 || (innerRadius >= 0.9 && innerRadius < 1)) {
-    stop("'innerRadius' must be a fraction below 0.9 or a radius in pixels")
+  top_n <- as.integer(round(top_n))
+  if (!is.numeric(inner_radius) || length(inner_radius) != 1 || !is.finite(inner_radius) ||
+      inner_radius < 0 || (inner_radius >= 0.9 && inner_radius < 1)) {
+    stop("'inner_radius' must be a fraction below 0.9 or a radius in pixels")
   }
   if (!is.null(max) && (!is.numeric(max) || length(max) != 1 || !is.finite(max) || max <= 0)) {
     stop("'max' must be a positive number")
@@ -223,30 +223,30 @@ radial_bar_race <- function(data,
   if (!is.character(font) || length(font) != 1 || grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
   }
-  if (!is.null(colorCategory) && (!is.character(colorCategory) || length(colorCategory) != 1)) {
-    stop("'colorCategory' must be the name of a D3 colour scheme, such as \"Tableau10\"")
+  if (!is.null(color_category) && (!is.character(color_category) || length(color_category) != 1)) {
+    stop("'color_category' must be the name of a D3 colour scheme, such as \"Tableau10\"")
   }
   if (!is.null(highlight) && !is.character(highlight) && !is.factor(highlight)) {
     stop("'highlight' must be a character vector of items")
   }
-  for (k in c("titleFontSize", "subtitleFontSize")) {
+  for (k in c("title_font_size", "subtitle_font_size")) {
     v <- get(k)
     if (!is.numeric(v) || length(v) != 1 || !(v > 0)) stop("'", k, "' must be a positive number")
   }
 
   race <- race_prepare(data, id = label, time = time, values = value, group = group,
-                       agg = agg, fill_gaps = isTRUE(fillGaps))
+                       agg = agg, fill_gaps = isTRUE(fill_gaps))
   names(race$series) <- "value"
   if (any(vapply(race$series$value, function(s) any(s < 0, na.rm = TRUE), TRUE))) {
     warning("negative values are drawn as zero")
   }
 
-  player <- race_player_options(frameDur, ease, autoplay, loop, controls, startFrame, timeFormat)
+  player <- race_player_options(frame_dur, ease, autoplay, loop, controls, start_frame, time_format)
   player$stateKey <- paste("radialbarrace", label, time, value, if (is.null(group)) "" else group,
                            agg, sep = "|")
 
   keys <- if (is.null(group)) as.character(race$items) else unique(as.character(race$groups))
-  colors <- if (!is.null(fill) || is.null(colorCategory)) race_colors(keys, fill) else NULL
+  colors <- if (!is.null(fill) || is.null(color_category)) race_colors(keys, fill) else NULL
 
   if (is.null(legend)) legend <- !is.null(group)
 
@@ -258,29 +258,29 @@ radial_bar_race <- function(data,
       player = player,
       groupKeys = if (is.null(group)) NULL else I(keys),
       colors = if (is.null(colors)) NULL else I(colors),
-      colorCategory = colorCategory,
+      colorCategory = color_category,
       labelName = label,
       valueName = value,
       groupName = group,
-      topN = topN,
+      topN = top_n,
       layout = layout,
-      innerRadius = innerRadius,
+      innerRadius = inner_radius,
       scale = scale,
       max = max,
       highlight = I(as.character(highlight)),
-      centerValue = centerValue,
+      centerValue = center_value,
       legend = isTRUE(legend) && !is.null(group),
-      layoutButtons = isTRUE(layoutButtons),
+      layoutButtons = isTRUE(layout_buttons),
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       subtitle = subtitle,
-      subtitleFontSize = subtitleFontSize,
+      subtitleFontSize = subtitle_font_size,
       font = font,
       bgcol = bgcol,
-      axisCol = axisCol,
-      valueFormat = valueFormat,
-      valuePrefix = valuePrefix,
-      valueSuffix = valueSuffix,
+      axisCol = axis_col,
+      valueFormat = value_format,
+      valuePrefix = value_prefix,
+      valueSuffix = value_suffix,
       tooltip = isTRUE(tooltip)
     ),
     width = width,

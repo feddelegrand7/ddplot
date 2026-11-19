@@ -25,7 +25,7 @@
 #' entity). Each group can appear at most once per period.
 #' @param ranked Whether \code{y} already contains ranks. Defaults to
 #' \code{FALSE}, in which case ranks are computed per period from \code{y}.
-#' @param rankOrder How ranks are computed when \code{ranked = FALSE}. One of
+#' @param rank_order How ranks are computed when \code{ranked = FALSE}. One of
 #' \code{"desc"} (default, the highest value gets rank 1) or \code{"asc"}
 #' (the lowest value gets rank 1). Ties are broken by order of appearance in
 #' the data.
@@ -35,25 +35,25 @@
 #' \code{"#1f77b4"}); R-only names such as \code{"grey40"} are not understood
 #' by the browser. Defaults to the D3 Tableau 10 palette.
 #' @param highlight Optional. A character vector of group names to highlight.
-#' All other groups are drawn in \code{greyCol}.
-#' @param greyCol Color used for groups that are not highlighted. Defaults to
+#' All other groups are drawn in \code{grey_col}.
+#' @param grey_col Color used for groups that are not highlighted. Defaults to
 #' \code{"#d3d3d3"}.
-#' @param lineWidth Width of the lines in pixels. Defaults to \code{3}.
-#' @param circleRadius Maximum radius of the circles in pixels. It is
+#' @param line_width Width of the lines in pixels. Defaults to \code{3}.
+#' @param circle_radius Maximum radius of the circles in pixels. It is
 #' reduced automatically when there are many groups or periods. Defaults to
 #' \code{11}.
-#' @param showRank Whether to print the rank number inside each circle.
+#' @param show_rank Whether to print the rank number inside each circle.
 #' Defaults to \code{TRUE}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
-#' @param xFontSize Font size of the period labels on the x-axis. Defaults
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
+#' @param x_font_size Font size of the period labels on the x-axis. Defaults
 #' to \code{11}.
-#' @param labelFontSize Font size of the group labels drawn at both ends of
+#' @param label_font_size Font size of the group labels drawn at both ends of
 #' each line. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of the period labels, grid lines and title. Defaults
+#' @param axis_col Color of the period labels, grid lines and title. Defaults
 #' to \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -103,20 +103,20 @@ bump_chart <- function(
     y,
     group,
     ranked        = FALSE,
-    rankOrder     = "desc",
+    rank_order     = "desc",
     colors        = NULL,
     highlight     = NULL,
-    greyCol       = "#d3d3d3",
-    lineWidth     = 3,
-    circleRadius  = 11,
-    showRank      = TRUE,
+    grey_col       = "#d3d3d3",
+    line_width     = 3,
+    circle_radius  = 11,
+    show_rank      = TRUE,
     title         = NULL,
-    titleFontSize = 16,
-    xFontSize     = 11,
-    labelFontSize = 11,
+    title_font_size = 16,
+    x_font_size     = 11,
+    label_font_size = 11,
     font          = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol         = "white",
-    axisCol       = "black",
+    axis_col       = "black",
     width         = NULL,
     height        = NULL
 ) {
@@ -133,16 +133,16 @@ bump_chart <- function(
     stop("'ranked' must be TRUE or FALSE.")
   }
 
-  if (!rankOrder %in% c("desc", "asc")) {
-    stop("'rankOrder' must be one of 'desc' or 'asc'.")
+  if (!rank_order %in% c("desc", "asc")) {
+    stop("'rank_order' must be one of 'desc' or 'asc'.")
   }
 
-  if (!is.numeric(lineWidth) || lineWidth <= 0) {
-    stop("'lineWidth' must be a positive number.")
+  if (!is.numeric(line_width) || line_width <= 0) {
+    stop("'line_width' must be a positive number.")
   }
 
-  if (!is.numeric(circleRadius) || circleRadius <= 0) {
-    stop("'circleRadius' must be a positive number.")
+  if (!is.numeric(circle_radius) || circle_radius <= 0) {
+    stop("'circle_radius' must be a positive number.")
   }
 
   if (!is.null(colors) && !is.character(colors)) {
@@ -196,20 +196,20 @@ bump_chart <- function(
     options = list(
       periods       = as.list(periods),
       ranked        = ranked,
-      rankOrder     = rankOrder,
+      rankOrder     = rank_order,
       colors        = if (is.list(colors)) colors else as.list(colors),
       highlight     = as.list(highlight),
-      greyCol       = greyCol,
-      lineWidth     = lineWidth,
-      circleRadius  = circleRadius,
-      showRank      = showRank,
+      greyCol       = grey_col,
+      lineWidth     = line_width,
+      circleRadius  = circle_radius,
+      showRank      = show_rank,
       title         = title,
-      titleFontSize = titleFontSize,
-      xFontSize     = xFontSize,
-      labelFontSize = labelFontSize,
+      titleFontSize = title_font_size,
+      xFontSize     = x_font_size,
+      labelFontSize = label_font_size,
       font          = font,
       bgcol         = bgcol,
-      axisCol       = axisCol
+      axisCol       = axis_col
     ),
     width  = width,
     height = height

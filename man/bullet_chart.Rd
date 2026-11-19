@@ -8,14 +8,14 @@ bullet_chart(
   value,
   ranges,
   target = NULL,
-  rangeColors = NULL,
+  range_colors = NULL,
   title = "",
   subtitle = "",
   min = 0,
-  valueColor = "#1a1a2e",
-  targetColor = "#e63946",
-  tickCount = 5,
-  fontSize = 12,
+  value_color = "#1a1a2e",
+  target_color = "#e63946",
+  tick_count = 5,
+  font_size = 12,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   width = NULL,
@@ -32,7 +32,7 @@ first band is \code{min}.}
 \item{target}{Optional numeric. The target / goal value shown as a short
 vertical marker. Defaults to \code{NULL} (no marker drawn).}
 
-\item{rangeColors}{Character vector of colors for each band, in the same
+\item{range_colors}{Character vector of colors for each band, in the same
 order as \code{ranges}. Defaults to a sequence of grays from darker (low
 range) to lighter (high range).}
 
@@ -44,15 +44,15 @@ Defaults to \code{""}.}
 
 \item{min}{Numeric. The minimum value of the scale. Defaults to \code{0}.}
 
-\item{valueColor}{The color of the actual-value bar. Defaults to
+\item{value_color}{The color of the actual-value bar. Defaults to
 \code{"#1a1a2e"}.}
 
-\item{targetColor}{The color of the target marker. Defaults to
+\item{target_color}{The color of the target marker. Defaults to
 \code{"#e63946"}.}
 
-\item{tickCount}{Number of axis ticks. Defaults to \code{5}.}
+\item{tick_count}{Number of axis ticks. Defaults to \code{5}.}
 
-\item{fontSize}{Base font size in pixels. Defaults to \code{12}.}
+\item{font_size}{Base font size in pixels. Defaults to \code{12}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
@@ -89,7 +89,7 @@ bullet_chart(
   ranges = c(4, 7, 10),
   title  = "Satisfaction",
   subtitle = "out of 10",
-  valueColor = "steelblue"
+  value_color = "steelblue"
 )
 
 # Server response time (lower is better — ranges go poor → good left to right)
@@ -97,7 +97,7 @@ bullet_chart(
   value       = 320,
   target      = 250,
   ranges      = c(200, 500, 1000),
-  rangeColors = c("#f5f5f5", "#e0e0e0", "#c0c0c0"),
+  range_colors = c("#f5f5f5", "#e0e0e0", "#c0c0c0"),
   title       = "Response",
   subtitle    = "ms",
   min         = 0

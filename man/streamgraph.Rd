@@ -13,30 +13,30 @@ streamgraph(
   order = c("insideOut", "none", "reverse", "ascending", "descending"),
   curve = c("basis", "catmullRom", "monotoneX", "linear", "step"),
   colors = NULL,
-  colorPalette = "Tableau10",
+  color_palette = "Tableau10",
   opacity = 0.9,
-  strokeCol = "white",
-  strokeWidth = 0.5,
+  stroke_col = "white",
+  stroke_width = 0.5,
   labels = TRUE,
-  labelFontSize = 11,
-  labelCol = NULL,
+  label_font_size = 11,
+  label_col = NULL,
   tooltip = TRUE,
   hover = TRUE,
   animate = TRUE,
   legend = TRUE,
-  legendFontSize = 11,
-  valueFormat = ",.2~f",
-  xFormat = NULL,
+  legend_font_size = 11,
+  value_format = ",.2~f",
+  x_format = NULL,
   xticks = NULL,
-  xFontSize = 11,
-  gridCol = "#e6e6e6",
+  x_font_size = 11,
+  grid_col = "#e6e6e6",
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -75,29 +75,29 @@ first appearance), \code{"reverse"} reverses it, and \code{"ascending"} /
 \code{"step"}.}
 
 \item{colors}{Optional. A vector of colors, one per layer (recycled if
-shorter). Defaults to \code{NULL}, which uses \code{colorPalette}.}
+shorter). Defaults to \code{NULL}, which uses \code{color_palette}.}
 
-\item{colorPalette}{D3 categorical color scheme used when \code{colors} is
+\item{color_palette}{D3 categorical color scheme used when \code{colors} is
 \code{NULL} (e.g. \code{"Tableau10"}, \code{"Category10"}, \code{"Set2"},
 \code{"Paired"}). Defaults to \code{"Tableau10"}.}
 
 \item{opacity}{Fill opacity of the layers (0 to 1). Defaults to
 \code{0.9}.}
 
-\item{strokeCol}{Color of the thin line separating the layers. Defaults
+\item{stroke_col}{Color of the thin line separating the layers. Defaults
 to \code{"white"}.}
 
-\item{strokeWidth}{Width of the separating line in pixels. Defaults to
+\item{stroke_width}{Width of the separating line in pixels. Defaults to
 \code{0.5}.}
 
 \item{labels}{Whether to write each layer's name inside the layer, at its
 thickest point. Labels that do not fit their layer are hidden. Defaults to
 \code{TRUE}.}
 
-\item{labelFontSize}{Font size of the inline layer labels. Defaults to
+\item{label_font_size}{Font size of the inline layer labels. Defaults to
 \code{11}.}
 
-\item{labelCol}{Optional. Color of the inline labels. Defaults to
+\item{label_col}{Optional. Color of the inline labels. Defaults to
 \code{NULL}, which picks white or near-black automatically for contrast
 with each layer's fill.}
 
@@ -114,13 +114,13 @@ render. Defaults to \code{TRUE}.}
 (hover to focus a layer, click to hide or show it). Defaults to
 \code{TRUE}.}
 
-\item{legendFontSize}{Font size of the legend text. Defaults to \code{11}.}
+\item{legend_font_size}{Font size of the legend text. Defaults to \code{11}.}
 
-\item{valueFormat}{A d3-format specifier used to display the values in the
+\item{value_format}{A d3-format specifier used to display the values in the
 tooltip (e.g. \code{",.0f"}, \code{"$,.2s"}, \code{".1f"}). Defaults to
 \code{",.2~f"}.}
 
-\item{xFormat}{Optional. Format of the x values on the axis and in the
+\item{x_format}{Optional. Format of the x values on the axis and in the
 tooltip header: a d3-format specifier for numeric \code{x} (e.g.
 \code{"d"}) or a d3-time-format specifier for dates (e.g.
 \code{"\%b \%Y"}). Defaults to \code{NULL}, which picks a sensible format
@@ -129,28 +129,28 @@ automatically.}
 \item{xticks}{Optional. Approximate number of x-axis ticks. Defaults to
 \code{NULL} (chosen from the chart width).}
 
-\item{xFontSize}{Font size of the x-axis tick labels. Defaults to
+\item{x_font_size}{Font size of the x-axis tick labels. Defaults to
 \code{11}.}
 
-\item{gridCol}{Color of the vertical grid lines drawn at each x tick. Use
+\item{grid_col}{Color of the vertical grid lines drawn at each x tick. Use
 \code{NA} or \code{"transparent"} to hide them. Defaults to
 \code{"#e6e6e6"}.}
 
 \item{xtitle}{Optional. Title of the x-axis.}
 
-\item{xtitleFontSize}{Font size of the x-axis title. Defaults to
+\item{xtitle_font_size}{Font size of the x-axis title. Defaults to
 \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of the x-axis, the titles, the crosshair and the
+\item{axis_col}{Color of the x-axis, the titles, the crosshair and the
 legend text. Defaults to \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -201,7 +201,7 @@ streamgraph(
   x      = "year",
   group  = "genre",
   value  = "listeners",
-  valueFormat = ",.0f",
+  value_format = ",.0f",
   xtitle = "Year",
   title  = "Music genres, 1980-2020 (millions of listeners)"
 )
@@ -222,8 +222,8 @@ streamgraph(
   offset       = "expand",
   order        = "descending",
   curve        = "monotoneX",
-  colorPalette = "Set2",
-  valueFormat  = ",.0f",
+  color_palette = "Set2",
+  value_format  = ",.0f",
   title        = "Telephones by region, 1951-1961 (thousands)"
 )
 
@@ -244,7 +244,7 @@ streamgraph(
   group   = "channel",
   value   = "n",
   offset  = "silhouette",
-  xFormat = "\%b \%Y",
+  x_format = "\%b \%Y",
   colors  = c("#2caffe", "#544fc5", "#00e272", "#fe6a35", "#6b8abc"),
   legend  = FALSE,
   title   = "Weekly sign-ups by channel, 2026"

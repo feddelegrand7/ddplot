@@ -15,27 +15,27 @@ violin_plot(
   meanline = FALSE,
   points = c("outliers", "all", "none"),
   jitter = 0.6,
-  pointRadius = 2.5,
-  pointOpacity = 0.7,
+  point_radius = 2.5,
+  point_opacity = 0.7,
   sort = c("none", "mean", "median"),
-  colorPalette = "Category10",
-  fillOpacity = 0.5,
-  lineWidth = 1.5,
-  violinWidth = 0.8,
+  color_palette = "Category10",
+  fill_opacity = 0.5,
+  line_width = 1.5,
+  violin_width = 0.8,
   hover = TRUE,
   animate = TRUE,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   title = NULL,
-  titleFontSize = 16,
-  xFontSize = 11,
-  yFontSize = 11,
+  title_font_size = 16,
+  x_font_size = 11,
+  y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
-  gridCol = "#e6e6e6",
+  axis_col = "black",
+  grid_col = "#e6e6e6",
   width = NULL,
   height = NULL
 )
@@ -80,29 +80,29 @@ the violin's width at the point's value. Points therefore always stay
 inside their violin. Defaults to \code{0.6}. Use \code{0} to align them
 on the center line.}
 
-\item{pointRadius}{Radius of the points in pixels. Defaults to \code{2.5}.}
+\item{point_radius}{Radius of the points in pixels. Defaults to \code{2.5}.}
 
-\item{pointOpacity}{Fill opacity of the points (0 to 1). Defaults to
+\item{point_opacity}{Fill opacity of the points (0 to 1). Defaults to
 \code{0.7}.}
 
 \item{sort}{How to order the violins from left to right. One of
 \code{"none"} (default, factor level order or order of appearance),
 \code{"mean"}, or \code{"median"} (ascending).}
 
-\item{colorPalette}{The violin colors. Either the name of a D3 categorical
+\item{color_palette}{The violin colors. Either the name of a D3 categorical
 color scheme (e.g. \code{"Category10"}, the default, which is also
 Plotly's classic colorway, \code{"Tableau10"}, \code{"Set2"}), a single
 color applied to every violin, an unnamed vector of colors recycled over
 the groups (in their original order), or a named vector whose names match
 the group values.}
 
-\item{fillOpacity}{Fill opacity of the violins (0 to 1). Defaults to
+\item{fill_opacity}{Fill opacity of the violins (0 to 1). Defaults to
 \code{0.5}.}
 
-\item{lineWidth}{Width of the violin outline in pixels. Defaults to
+\item{line_width}{Width of the violin outline in pixels. Defaults to
 \code{1.5}.}
 
-\item{violinWidth}{Maximum width of a violin, as a fraction (0 to 1] of
+\item{violin_width}{Maximum width of a violin, as a fraction (0 to 1] of
 the space allotted to each group. Defaults to \code{0.8}.}
 
 \item{hover}{Logical. When \code{TRUE} (default), hovering a violin
@@ -113,30 +113,30 @@ their center line and the points fade in on first render.}
 
 \item{ytitle}{Optional. Title of the y-axis.}
 
-\item{ytitleFontSize}{Font size of the y-axis title. Defaults to \code{13}.}
+\item{ytitle_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
 
 \item{xtitle}{Optional. Title of the x-axis.}
 
-\item{xtitleFontSize}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
-\item{xFontSize}{Font size of the group labels. Defaults to \code{11}.
+\item{x_font_size}{Font size of the group labels. Defaults to \code{11}.
 Labels are rotated automatically when they do not fit.}
 
-\item{yFontSize}{Font size of the y-axis tick labels. Defaults to \code{11}.}
+\item{y_font_size}{Font size of the y-axis tick labels. Defaults to \code{11}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of axis lines, ticks, and labels. Defaults to
+\item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
 
-\item{gridCol}{Color of the horizontal grid lines. Defaults to
+\item{grid_col}{Color of the horizontal grid lines. Defaults to
 \code{"#e6e6e6"}. Use \code{"none"} to hide them.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -184,7 +184,7 @@ violin_plot(
   points       = "all",
   meanline     = TRUE,
   sort         = "median",
-  colorPalette = "Tableau10",
+  color_palette = "Tableau10",
   title        = "Highway fuel economy by vehicle class",
   ytitle       = "Highway miles per gallon"
 )
@@ -203,7 +203,7 @@ violin_plot(
   group        = "station",
   scale        = "count",
   span         = "hard",
-  colorPalette = c(North = "#636efa", Central = "#ef553b",
+  color_palette = c(North = "#636efa", Central = "#ef553b",
                    South = "#00cc96"),
   title        = "Waiting time by station",
   ytitle       = "Minutes",
@@ -215,7 +215,7 @@ violin_plot(
   data         = faithful,
   y            = "eruptions",
   bandwidth    = 0.2,
-  colorPalette = "#9467bd",
+  color_palette = "#9467bd",
   points       = "all",
   ytitle       = "Eruption time (min)"
 )

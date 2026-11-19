@@ -26,34 +26,34 @@
 #' one color is used per group; otherwise one color per rectangle. Colors are
 #' recycled if there are fewer colors than groups/rectangles. Defaults to
 #' \code{NULL}, which uses D3's Tableau 10 palette.
-#' @param valueFormat A d3-format specifier used to display values in the
+#' @param value_format A d3-format specifier used to display values in the
 #' labels and tooltip (e.g. \code{",.0f"}, \code{"$,.2s"}, \code{".3~s"}).
 #' Defaults to \code{",.0f"}.
-#' @param showValues Whether to display the formatted value under each label.
+#' @param show_values Whether to display the formatted value under each label.
 #' Defaults to \code{TRUE}.
-#' @param labelFontSize Font size of the rectangle labels. Labels are
+#' @param label_font_size Font size of the rectangle labels. Labels are
 #' automatically truncated or hidden when a rectangle is too small to fit
 #' them. Defaults to \code{11}.
-#' @param labelCol Optional. Color of the rectangle labels. Defaults to
+#' @param label_col Optional. Color of the rectangle labels. Defaults to
 #' \code{NULL}, which picks white or near-black automatically for contrast
 #' with each rectangle's fill.
-#' @param groupFontSize Font size of the group headers (only used when
+#' @param group_font_size Font size of the group headers (only used when
 #' \code{group} is supplied). Defaults to \code{12}.
-#' @param strokeCol Color of the rectangle borders. Defaults to
+#' @param stroke_col Color of the rectangle borders. Defaults to
 #' \code{"white"}.
-#' @param strokeWidth Width of the rectangle borders in pixels. Defaults to
+#' @param stroke_width Width of the rectangle borders in pixels. Defaults to
 #' \code{1}.
 #' @param hover Whether to highlight the hovered rectangle and show a tooltip.
 #' Defaults to \code{TRUE}.
 #' @param legend Whether to display a legend of the groups (only used when
 #' \code{group} is supplied). Defaults to \code{TRUE}.
-#' @param legendFontSize Font size of the legend text. Defaults to \code{11}.
+#' @param legend_font_size Font size of the legend text. Defaults to \code{11}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param textCol Color of the title and legend text. Defaults to
+#' @param text_col Color of the title and legend text. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -86,7 +86,7 @@
 #'   value       = "spending",
 #'   label       = "department",
 #'   group       = "ministry",
-#'   valueFormat = "$,.0f",
+#'   value_format = "$,.0f",
 #'   title       = "Where the money goes (millions)"
 #' )
 #'
@@ -100,7 +100,7 @@
 #'   value       = "pop",
 #'   label       = "country",
 #'   group       = "continent",
-#'   valueFormat = ".3~s",
+#'   value_format = ".3~s",
 #'   padding     = 1,
 #'   title       = "World population in 2007"
 #' )
@@ -112,21 +112,21 @@ treemap_chart <- function(
     tile           = "squarify",
     padding        = 2,
     colors         = NULL,
-    valueFormat    = ",.0f",
-    showValues     = TRUE,
-    labelFontSize  = 11,
-    labelCol       = NULL,
-    groupFontSize  = 12,
-    strokeCol      = "white",
-    strokeWidth    = 1,
+    value_format    = ",.0f",
+    show_values     = TRUE,
+    label_font_size  = 11,
+    label_col       = NULL,
+    group_font_size  = 12,
+    stroke_col      = "white",
+    stroke_width    = 1,
     hover          = TRUE,
     legend         = TRUE,
-    legendFontSize = 11,
+    legend_font_size = 11,
     title          = NULL,
-    titleFontSize  = 16,
+    title_font_size  = 16,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol          = "white",
-    textCol        = "black",
+    text_col        = "black",
     width          = NULL,
     height         = NULL
 ) {
@@ -152,8 +152,8 @@ treemap_chart <- function(
     stop("'padding' must be a single non-negative number.")
   }
 
-  if (!is.character(valueFormat) || length(valueFormat) != 1) {
-    stop("'valueFormat' must be a single d3-format string, e.g. ',.0f'.")
+  if (!is.character(value_format) || length(value_format) != 1) {
+    stop("'value_format' must be a single d3-format string, e.g. ',.0f'.")
   }
 
   if (!is.null(colors) && !is.character(colors)) {
@@ -174,21 +174,21 @@ treemap_chart <- function(
       tile           = tile,
       padding        = padding,
       colors         = if (is.null(colors)) NULL else as.list(colors),
-      valueFormat    = valueFormat,
-      showValues     = showValues,
-      labelFontSize  = labelFontSize,
-      labelCol       = labelCol,
-      groupFontSize  = groupFontSize,
-      strokeCol      = strokeCol,
-      strokeWidth    = strokeWidth,
+      valueFormat    = value_format,
+      showValues     = show_values,
+      labelFontSize  = label_font_size,
+      labelCol       = label_col,
+      groupFontSize  = group_font_size,
+      strokeCol      = stroke_col,
+      strokeWidth    = stroke_width,
       hover          = hover,
       legend         = legend,
-      legendFontSize = legendFontSize,
+      legendFontSize = legend_font_size,
       title          = title,
-      titleFontSize  = titleFontSize,
+      titleFontSize  = title_font_size,
       font           = font,
       bgcol          = bgcol,
-      textCol        = textCol
+      textCol        = text_col
     ),
     width  = width,
     height = height

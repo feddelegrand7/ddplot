@@ -9,26 +9,26 @@ slope_chart(
   start,
   end,
   group,
-  startLabel = NULL,
-  endLabel = NULL,
-  colorByDirection = TRUE,
-  upCol = "#1a9850",
-  downCol = "#d73027",
-  flatCol = "#888888",
-  lineCol = "steelblue",
+  start_label = NULL,
+  end_label = NULL,
+  color_by_direction = TRUE,
+  up_col = "#1a9850",
+  down_col = "#d73027",
+  flat_col = "#888888",
+  line_col = "steelblue",
   highlight = NULL,
-  mutedCol = "#cccccc",
-  lineWidth = 2,
-  circleRadius = 4,
-  showValues = TRUE,
+  muted_col = "#cccccc",
+  line_width = 2,
+  circle_radius = 4,
+  show_values = TRUE,
   digits = NULL,
-  labelFontSize = 11,
-  headerFontSize = 13,
+  label_font_size = 11,
+  header_font_size = 13,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -46,60 +46,60 @@ the right axis.}
 \item{group}{The name of the column holding the category labels (one line
 per category).}
 
-\item{startLabel}{Header displayed above the left axis. Defaults to the
+\item{start_label}{Header displayed above the left axis. Defaults to the
 value of \code{start}.}
 
-\item{endLabel}{Header displayed above the right axis. Defaults to the
+\item{end_label}{Header displayed above the right axis. Defaults to the
 value of \code{end}.}
 
-\item{colorByDirection}{Whether to color lines by direction of change
-(\code{upCol}, \code{downCol}, \code{flatCol}). If \code{FALSE}, every
-line uses \code{lineCol}. Defaults to \code{TRUE}.}
+\item{color_by_direction}{Whether to color lines by direction of change
+(\code{up_col}, \code{down_col}, \code{flat_col}). If \code{FALSE}, every
+line uses \code{line_col}. Defaults to \code{TRUE}.}
 
-\item{upCol}{Color of lines that increase. Defaults to \code{"#1a9850"}.}
+\item{up_col}{Color of lines that increase. Defaults to \code{"#1a9850"}.}
 
-\item{downCol}{Color of lines that decrease. Defaults to \code{"#d73027"}.}
+\item{down_col}{Color of lines that decrease. Defaults to \code{"#d73027"}.}
 
-\item{flatCol}{Color of lines with no change. Defaults to \code{"#888888"}.}
+\item{flat_col}{Color of lines with no change. Defaults to \code{"#888888"}.}
 
-\item{lineCol}{Color of all lines when \code{colorByDirection = FALSE}.
+\item{line_col}{Color of all lines when \code{color_by_direction = FALSE}.
 Defaults to \code{"steelblue"}.}
 
 \item{highlight}{Optional. A character vector of categories (values of the
 \code{group} column) to emphasise. All other lines are drawn in
-\code{mutedCol}. Defaults to \code{NULL} (no emphasis).}
+\code{muted_col}. Defaults to \code{NULL} (no emphasis).}
 
-\item{mutedCol}{Color of non-highlighted lines when \code{highlight} is
+\item{muted_col}{Color of non-highlighted lines when \code{highlight} is
 used (their labels are drawn semi-transparent). Defaults to
 \code{"#cccccc"}.}
 
-\item{lineWidth}{Width of the lines in pixels. Defaults to \code{2}.}
+\item{line_width}{Width of the lines in pixels. Defaults to \code{2}.}
 
-\item{circleRadius}{Radius of the end-point dots in pixels. Defaults to
+\item{circle_radius}{Radius of the end-point dots in pixels. Defaults to
 \code{4}. Use \code{0} to hide the dots.}
 
-\item{showValues}{Whether to print the value next to each category label.
+\item{show_values}{Whether to print the value next to each category label.
 Defaults to \code{TRUE}.}
 
 \item{digits}{Optional. Number of decimal places used to print the values.
 Defaults to \code{NULL}, which prints the values as they are.}
 
-\item{labelFontSize}{Font size of the category and value labels. Defaults
+\item{label_font_size}{Font size of the category and value labels. Defaults
 to \code{11}.}
 
-\item{headerFontSize}{Font size of the two axis headers. Defaults to
+\item{header_font_size}{Font size of the two axis headers. Defaults to
 \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of the two vertical axes, the headers, the title and
+\item{axis_col}{Color of the two vertical axes, the headers, the title and
 the labels. Defaults to \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -142,8 +142,8 @@ slope_chart(
   start      = "y1970",
   end        = "y1979",
   group      = "country",
-  startLabel = "1970",
-  endLabel   = "1979",
+  start_label = "1970",
+  end_label   = "1979",
   digits     = 1,
   title      = "Government receipts as \% of GDP",
   height     = 520
@@ -167,8 +167,8 @@ slope_chart(
   start      = "y1952",
   end        = "y2007",
   group      = "country",
-  startLabel = "1952",
-  endLabel   = "2007",
+  start_label = "1952",
+  end_label   = "2007",
   highlight  = c("China", "South Africa"),
   digits     = 1,
   title      = "Life expectancy: 1952 vs 2007"

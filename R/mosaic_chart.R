@@ -34,19 +34,19 @@
 #' palette.
 #' @param gap Width in pixels of the white gaps between columns and between
 #' segments. Defaults to \code{2}.
-#' @param labelType What to print inside each cell when there is room for it:
+#' @param label_type What to print inside each cell when there is room for it:
 #' \code{"percent"} (the share within the column, the default),
 #' \code{"count"} (the count or summed value), \code{"both"}, or
 #' \code{"none"}.
-#' @param valueFormat A d3-format specifier used to display counts or values
+#' @param value_format A d3-format specifier used to display counts or values
 #' in the labels and the tooltip (e.g. \code{",.0f"}, \code{".3~s"}).
 #' Defaults to \code{",.0f"}.
-#' @param labelFontSize Font size of the in-cell labels. Defaults to
+#' @param label_font_size Font size of the in-cell labels. Defaults to
 #' \code{11}.
-#' @param labelCol Optional. Color of the in-cell labels. Defaults to
+#' @param label_col Optional. Color of the in-cell labels. Defaults to
 #' \code{NULL}, which picks white or near-black automatically for contrast
 #' with each cell's fill.
-#' @param columnFontSize Font size of the column (\code{x} category) labels
+#' @param column_font_size Font size of the column (\code{x} category) labels
 #' drawn above the chart. Labels that do not fit their column are shortened
 #' or hidden. Defaults to \code{12}.
 #' @param hover Whether to highlight the hovered cell and show a tooltip.
@@ -55,24 +55,24 @@
 #' animation on first render. Defaults to \code{TRUE}.
 #' @param legend Whether to display a legend of the \code{fill} categories.
 #' Defaults to \code{TRUE}.
-#' @param legendTitle Optional. Title of the legend. Defaults to \code{NULL},
+#' @param legend_title Optional. Title of the legend. Defaults to \code{NULL},
 #' which uses the name of the \code{fill} column. Use \code{""} to hide it.
-#' @param legendFontSize Font size of the legend text. Defaults to \code{11}.
+#' @param legend_font_size Font size of the legend text. Defaults to \code{11}.
 #' @param xtitle Optional. Title of the x-axis (bottom).
 #' @param ytitle Optional. Title of the y-axis (left).
-#' @param axisTitleFontSize Font size of the axis titles. Defaults to
+#' @param axis_title_font_size Font size of the axis titles. Defaults to
 #' \code{12}.
-#' @param xFontSize Font size of the x-axis tick labels. Defaults to
+#' @param x_font_size Font size of the x-axis tick labels. Defaults to
 #' \code{10}.
-#' @param yFontSize Font size of the y-axis tick labels. Defaults to
+#' @param y_font_size Font size of the y-axis tick labels. Defaults to
 #' \code{10}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. It is also the color of the gaps
 #' between cells. Defaults to \code{"white"}.
-#' @param axisCol Color of the axes, the axis labels, the column labels, the
+#' @param axis_col Color of the axes, the axis labels, the column labels, the
 #' legend text and the title. Defaults to \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -107,8 +107,8 @@
 #'   data        = cars,
 #'   x           = "cyl",
 #'   fill        = "gear",
-#'   labelType   = "both",
-#'   legendTitle = "Gears",
+#'   label_type   = "both",
+#'   legend_title = "Gears",
 #'   title       = "Motor Trend cars: gears by cylinders"
 #' )
 #'
@@ -134,26 +134,26 @@ mosaic_chart <- function(
     value             = NULL,
     colors            = NULL,
     gap               = 2,
-    labelType         = c("percent", "count", "both", "none"),
-    valueFormat       = ",.0f",
-    labelFontSize     = 11,
-    labelCol          = NULL,
-    columnFontSize    = 12,
+    label_type         = c("percent", "count", "both", "none"),
+    value_format       = ",.0f",
+    label_font_size     = 11,
+    label_col          = NULL,
+    column_font_size    = 12,
     hover             = TRUE,
     animate           = TRUE,
     legend            = TRUE,
-    legendTitle       = NULL,
-    legendFontSize    = 11,
+    legend_title       = NULL,
+    legend_font_size    = 11,
     xtitle            = NULL,
     ytitle            = NULL,
-    axisTitleFontSize = 12,
-    xFontSize         = 10,
-    yFontSize         = 10,
+    axis_title_font_size = 12,
+    x_font_size         = 10,
+    y_font_size         = 10,
     title             = NULL,
-    titleFontSize     = 16,
+    title_font_size     = 16,
     font              = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol             = "white",
-    axisCol           = "black",
+    axis_col           = "black",
     width             = NULL,
     height            = NULL
 ) {
@@ -182,14 +182,14 @@ mosaic_chart <- function(
     }
   }
 
-  labelType <- match.arg(labelType)
+  label_type <- match.arg(label_type)
 
   if (!is.numeric(gap) || length(gap) != 1 || is.na(gap) || gap < 0) {
     stop("'gap' must be a single non-negative number.")
   }
 
-  if (!is.character(valueFormat) || length(valueFormat) != 1) {
-    stop("'valueFormat' must be a single d3-format string, e.g. ',.0f'.")
+  if (!is.character(value_format) || length(value_format) != 1) {
+    stop("'value_format' must be a single d3-format string, e.g. ',.0f'.")
   }
 
   if (!is.null(colors) && !is.character(colors)) {
@@ -251,26 +251,26 @@ mosaic_chart <- function(
       valueName         = if (is.null(value)) "Count" else value,
       colors            = if (is.null(colors)) NULL else as.list(colors),
       gap               = gap,
-      labelType         = labelType,
-      valueFormat       = valueFormat,
-      labelFontSize     = labelFontSize,
-      labelCol          = labelCol,
-      columnFontSize    = columnFontSize,
+      labelType         = label_type,
+      valueFormat       = value_format,
+      labelFontSize     = label_font_size,
+      labelCol          = label_col,
+      columnFontSize    = column_font_size,
       hover             = hover,
       animate           = animate,
       legend            = legend,
-      legendTitle       = if (is.null(legendTitle)) fill else legendTitle,
-      legendFontSize    = legendFontSize,
+      legendTitle       = if (is.null(legend_title)) fill else legend_title,
+      legendFontSize    = legend_font_size,
       xtitle            = xtitle,
       ytitle            = ytitle,
-      axisTitleFontSize = axisTitleFontSize,
-      xFontSize         = xFontSize,
-      yFontSize         = yFontSize,
+      axisTitleFontSize = axis_title_font_size,
+      xFontSize         = x_font_size,
+      yFontSize         = y_font_size,
       title             = title,
-      titleFontSize     = titleFontSize,
+      titleFontSize     = title_font_size,
       font              = font,
       bgcol             = bgcol,
-      axisCol           = axisCol
+      axisCol           = axis_col
     ),
     width  = width,
     height = height

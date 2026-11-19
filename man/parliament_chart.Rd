@@ -8,33 +8,33 @@ parliament_chart(
   data,
   categorical_column,
   numerical_column,
-  seatSize = NULL,
+  seat_size = NULL,
   padding = NULL,
-  maxRows = NULL,
+  max_rows = NULL,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   width = NULL,
   height = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
+  subtitle_font_size = 13,
   fill = NULL,
-  colorCategory = NULL,
+  color_category = NULL,
   previous = NULL,
   majority = TRUE,
   coalition = NULL,
-  coalitionBuilder = TRUE,
+  coalition_builder = TRUE,
   regroup = TRUE,
   sort = c("none", "descending", "ascending"),
   arc = 180,
-  innerRadius = 0.4,
-  seatShape = c("circle", "square"),
-  centerLabel = "seats",
+  inner_radius = 0.4,
+  seat_shape = c("circle", "square"),
+  center_label = "seats",
   legend = TRUE,
   tooltip = TRUE,
   animate = TRUE,
-  axisCol = "#333333"
+  axis_col = "#333333"
 )
 }
 \arguments{
@@ -46,19 +46,19 @@ are added up).}
 \item{numerical_column}{The name of the column giving the number of seats
 (whole numbers; other numbers are rounded with a warning).}
 
-\item{seatSize}{Optional. The diameter of the seats in pixels. By default
+\item{seat_size}{Optional. The diameter of the seats in pixels. By default
 the seats are as large as the chart allows. When the seats do not fit,
 they are made smaller.}
 
 \item{padding}{Optional. The space between two seats, in pixels. By
 default a fifth of the space given to each seat.}
 
-\item{maxRows}{Optional. The number of rows of seats. By default the
+\item{max_rows}{Optional. The number of rows of seats. By default the
 number of rows that gives the largest seats.}
 
 \item{title}{Optional. The title of the chart.}
 
-\item{titleFontSize}{The font size of the title. Defaults to 20.}
+\item{title_font_size}{The font size of the title. Defaults to 20.}
 
 \item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
 sans-serif".}
@@ -71,14 +71,14 @@ sans-serif".}
 
 \item{subtitle}{Optional. A subtitle under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
 \item{fill}{Optional. The colours of the parties: one colour per party
 (recycled, in the order of the data), or a named vector mapping colours
 to parties (for instance \code{c(Greens = "#3ca951")}); the other
 parties get the ddplot palette.}
 
-\item{colorCategory}{Optional. The name of a D3 categorical colour scheme,
+\item{color_category}{Optional. The name of a D3 categorical colour scheme,
 such as "Tableau10" or "Set2", used when \code{fill} is not given.}
 
 \item{previous}{Optional. The name of a column giving the seats of each
@@ -93,7 +93,7 @@ draw no majority line.}
 \item{coalition}{Optional. A character vector of parties that form the
 coalition when the chart is first drawn.}
 
-\item{coalitionBuilder}{Logical. Let the viewer build a coalition by
+\item{coalition_builder}{Logical. Let the viewer build a coalition by
 clicking parties, with a gauge under the hemicycle. Defaults to
 \code{TRUE}.}
 
@@ -108,13 +108,13 @@ first) or \code{"ascending"}.}
 \item{arc}{The angle covered by the seats, in degrees, from 180 (default,
 a hemicycle) to 360 (a full ring).}
 
-\item{innerRadius}{The radius of the empty centre, as a fraction of the
+\item{inner_radius}{The radius of the empty centre, as a fraction of the
 outer radius. Defaults to 0.4.}
 
-\item{seatShape}{The shape of the seats: \code{"circle"} (default) or
+\item{seat_shape}{The shape of the seats: \code{"circle"} (default) or
 \code{"square"}.}
 
-\item{centerLabel}{The text under the number of seats in the centre.
+\item{center_label}{The text under the number of seats in the centre.
 Defaults to "seats"; \code{FALSE} leaves the centre empty.}
 
 \item{legend}{Logical. Show the legend, with the seats and shares (on the
@@ -126,7 +126,7 @@ to \code{TRUE}.}
 \item{animate}{Logical. Fill the seats from left to right when the chart
 comes into view. Defaults to \code{TRUE}.}
 
-\item{axisCol}{The colour of the texts. Defaults to "#333333".}
+\item{axis_col}{The colour of the texts. Defaults to "#333333".}
 }
 \value{
 An interactive parliament chart (an r2d3 htmlwidget).

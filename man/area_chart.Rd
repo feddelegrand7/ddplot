@@ -10,46 +10,46 @@ area_chart(
   y = NULL,
   fill = NULL,
   stroke = NULL,
-  strokeWidth = 2,
+  stroke_width = 2,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = NULL,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   group = NULL,
   baseline = NULL,
-  negativeFill = NULL,
+  negative_fill = NULL,
   curve = "curveLinear",
   points = FALSE,
-  yZero = NULL,
+  y_zero = NULL,
   events = NULL,
   bands = NULL,
   hlines = NULL,
   legend = NULL,
-  endLabels = NULL,
+  end_labels = NULL,
   tooltip = TRUE,
   navigator = TRUE,
-  rangeButtons = TRUE,
+  range_buttons = TRUE,
   zoom = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
-  dateFormat = NULL,
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
+  date_format = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
+  grid_col = "#e9e9e9"
 )
 }
 \arguments{
@@ -69,7 +69,7 @@ to a built-in palette.}
 \item{stroke}{Optional. The colour of the line on top of the area.
 Defaults to the colour of the area.}
 
-\item{strokeWidth}{The width of the line on top of the area. Defaults to
+\item{stroke_width}{The width of the line on top of the area. Defaults to
 2; use 0 to hide the line.}
 
 \item{xticks}{Optional. The approximate number of x-axis ticks.}
@@ -78,15 +78,15 @@ Defaults to the colour of the area.}
 
 \item{xtitle}{Optional. The title of the x-axis.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
 
 \item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -97,7 +97,7 @@ Defaults to the colour of the area.}
 \code{NULL} (default), the area is filled with a gradient that fades
 towards the axis.}
 
-\item{axisCol}{The color of the axis text, ticks and titles. Defaults to
+\item{axis_col}{The color of the axis text, ticks and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -110,7 +110,7 @@ series (one area per value).}
 \item{baseline}{Optional. A number: the area is drawn between the line and
 this value instead of zero.}
 
-\item{negativeFill}{Optional. With \code{baseline}, the colour of the area
+\item{negative_fill}{Optional. With \code{baseline}, the colour of the area
 (and line) below the baseline.}
 
 \item{curve}{The line's curve type. A complete list can be found here
@@ -120,7 +120,7 @@ this value instead of zero.}
 \item{points}{Logical. Draw a marker on every data point. Defaults to
 \code{FALSE}.}
 
-\item{yZero}{Logical. Force the y axis to include 0. When \code{NULL}
+\item{y_zero}{Logical. Force the y axis to include 0. When \code{NULL}
 (default), it does unless \code{baseline} is given.}
 
 \item{events}{Optional. Dates to mark with a vertical line: either a
@@ -139,7 +139,7 @@ dashed lines (names are used as labels). Only drawn when
 a series, double-click to isolate it). When \code{NULL} (default), the
 legend is shown when there are two series or more.}
 
-\item{endLabels}{Logical. Label each line at its last visible point. When
+\item{end_labels}{Logical. Label each line at its last visible point. When
 \code{NULL} (default), labels are shown when there are two series or
 more.}
 
@@ -151,7 +151,7 @@ series with a brush to select the visible range) under the chart.
 Defaults to \code{TRUE}; it is hidden automatically on very short
 charts.}
 
-\item{rangeButtons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
+\item{range_buttons}{Logical. Show range buttons (1M, 6M, YTD, 1Y, 5Y,
 All, ...), chosen from the length and frequency of the data. Only used
 with dates. Defaults to \code{TRUE}.}
 
@@ -161,26 +161,26 @@ double-click to reset. Defaults to \code{TRUE}.}
 \item{animate}{Logical. Draw the lines in with an animation on first
 render. Defaults to \code{TRUE}.}
 
-\item{valueFormat}{Optional. A d3-format string for values in the tooltip
+\item{value_format}{Optional. A d3-format string for values in the tooltip
 (see <https://github.com/d3/d3-format>). Defaults to ",.2~f", or "+.2~\%"
 with \code{transform = "percent"}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text placed before and after the
+\item{value_prefix, value_suffix}{Optional. Text placed before and after the
 values on the y axis and in the tooltip, for example "$" or " km".}
 
-\item{dateFormat}{Optional. A d3-time-format string for the date in the
+\item{date_format}{Optional. A d3-time-format string for the date in the
 tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
 (default), it is picked from the frequency of the data (yearly,
 quarterly, monthly, daily or intraday).}
 
 \item{subtitle}{Optional. A subtitle shown under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{xFontSize, yFontSize}{The font size of the axis tick labels. Defaults
+\item{x_font_size, y_font_size}{The font size of the axis tick labels. Defaults
 to 11.}
 
-\item{gridCol}{The color of the horizontal grid lines. Defaults to
+\item{grid_col}{The color of the horizontal grid lines. Defaults to
 "#e9e9e9".}
 }
 \value{
@@ -196,7 +196,7 @@ area.
 }
 \details{
 With \code{baseline}, the area is drawn between the line and that value
-instead of zero, and \code{negativeFill} colours the part below it, which
+instead of zero, and \code{negative_fill} colours the part below it, which
 suits anomalies, balances or profit and loss.
 
 The data can be one column (\code{y = "value"}), several columns
@@ -226,8 +226,8 @@ library(ggplot2) # for the economics data set
 area_chart(
   economics, x = "date", y = "psavert",
   baseline = mean(economics$psavert),
-  fill = "#3ca951", negativeFill = "#ff725c",
-  valueSuffix = "\%",
+  fill = "#3ca951", negative_fill = "#ff725c",
+  value_suffix = "\%",
   title = "US personal savings rate",
   subtitle = "Above and below its long-run average"
 )

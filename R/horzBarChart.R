@@ -15,19 +15,19 @@
 #'   colours to categories). With \code{group}, one colour per group (a named
 #'   vector maps colours to groups). Defaults to a built-in palette.
 #' @param stroke Optional. The stroke colour of the bars.
-#' @param strokeWidth Optional. The stroke width of the bars.
-#' @param paddingWidth The space between bars, from 0 to 0.99. Defaults to
+#' @param stroke_width Optional. The stroke width of the bars.
+#' @param padding_width The space between bars, from 0 to 0.99. Defaults to
 #'   0.2.
-#' @param valueTicks Optional. The approximate number of value axis ticks.
-#' @param valueFontSize The font size of the value axis labels. Defaults to 11.
-#' @param labelFontSize The font size of the category labels. Defaults to 12.
-#' @param valueTitle Optional. The title of the value axis. Defaults to the
+#' @param value_ticks Optional. The approximate number of value axis ticks.
+#' @param value_font_size The font size of the value axis labels. Defaults to 11.
+#' @param label_font_size The font size of the category labels. Defaults to 12.
+#' @param value_title Optional. The title of the value axis. Defaults to the
 #'   name of \code{value} (or "Count"); use \code{""} to hide it.
-#' @param valueTitleFontSize The font size of the value axis title. Defaults
+#' @param value_title_font_size The font size of the value axis title. Defaults
 #'   to 13.
-#' @param labelTitle Optional. The title of the category axis, drawn above the
+#' @param label_title Optional. The title of the category axis, drawn above the
 #'   labels.
-#' @param labelTitleFontSize The font size of the category axis title.
+#' @param label_title_font_size The font size of the category axis title.
 #'   Defaults to 13.
 #' @param sort The initial order of the bars: \code{"none"} (default, the
 #'   order of the data or of the factor levels), \code{"ascending"} or
@@ -67,8 +67,8 @@
 #' )
 #' horz_bar_chart(
 #'   change, label = "country", value = "growth",
-#'   sort = "descending", negativeFill = "#ff725c",
-#'   valueSuffix = "%", valueTitle = "GDP growth",
+#'   sort = "descending", negative_fill = "#ff725c",
+#'   value_suffix = "%", value_title = "GDP growth",
 #'   title = "Annual GDP growth"
 #' )
 #'
@@ -77,22 +77,22 @@ horz_bar_chart <- function(data,
                            value = NULL,
                            fill = NULL,
                            sort = "none",
-                           paddingWidth = 0.2,
+                           padding_width = 0.2,
                            stroke = NULL,
-                           strokeWidth = NULL,
+                           stroke_width = NULL,
                            bgcol = "white",
-                           valueTicks = NULL,
-                           valueFontSize = 11,
-                           labelFontSize = 12,
-                           valueTitle = NULL,
-                           valueTitleFontSize = 13,
-                           labelTitle = NULL,
-                           labelTitleFontSize = 13,
+                           value_ticks = NULL,
+                           value_font_size = 11,
+                           label_font_size = 12,
+                           value_title = NULL,
+                           value_title_font_size = 13,
+                           label_title = NULL,
+                           label_title_font_size = 13,
                            font = "Verdana, Geneva, Tahoma, sans-serif",
                            title = NULL,
-                           titleFontSize = 20,
+                           title_font_size = 20,
                            opacity = 1,
-                           axisCol = "#333333",
+                           axis_col = "#333333",
                            width = NULL,
                            height = NULL,
                            group = NULL,
@@ -100,19 +100,19 @@ horz_bar_chart <- function(data,
                            agg = c("sum", "mean", "median", "min", "max", "count"),
                            labels = TRUE,
                            highlight = NULL,
-                           refLines = NULL,
-                           negativeFill = NULL,
-                           cornerRadius = 3,
+                           ref_lines = NULL,
+                           negative_fill = NULL,
+                           corner_radius = 3,
                            legend = NULL,
                            controls = TRUE,
                            tooltip = TRUE,
                            animate = TRUE,
-                           valueFormat = NULL,
-                           valuePrefix = "",
-                           valueSuffix = "",
+                           value_format = NULL,
+                           value_prefix = "",
+                           value_suffix = "",
                            subtitle = NULL,
-                           subtitleFontSize = 13,
-                           gridCol = "#e9e9e9"
+                           subtitle_font_size = 13,
+                           grid_col = "#e9e9e9"
                            ) {
 
   if (!is.data.frame(data) || !is.character(label) || length(label) != 1 || is.null(data[[label]]) ||
@@ -122,19 +122,19 @@ horz_bar_chart <- function(data,
 
   bar_widget(
     data = data, cat = label, val = value, orientation = "horizontal",
-    fill = fill, sort = sort, paddingWidth = paddingWidth,
-    catFontSize = labelFontSize, valFontSize = valueFontSize, valTicks = valueTicks,
-    catTitle = labelTitle, catTitleFontSize = labelTitleFontSize,
-    valTitle = valueTitle, valTitleFontSize = valueTitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    stroke = stroke, strokeWidth = strokeWidth, font = font, bgcol = bgcol,
-    opacity = opacity, axisCol = axisCol, gridCol = gridCol,
+    fill = fill, sort = sort, padding_width = padding_width,
+    cat_font_size = label_font_size, val_font_size = value_font_size, val_ticks = value_ticks,
+    cat_title = label_title, cat_title_font_size = label_title_font_size,
+    val_title = value_title, val_title_font_size = value_title_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    stroke = stroke, stroke_width = stroke_width, font = font, bgcol = bgcol,
+    opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height,
     group = group, position = match.arg(position), agg = match.arg(agg),
-    labels = labels, highlight = highlight, refLines = refLines,
-    negativeFill = negativeFill, cornerRadius = cornerRadius, legend = legend,
+    labels = labels, highlight = highlight, ref_lines = ref_lines,
+    negative_fill = negative_fill, corner_radius = corner_radius, legend = legend,
     controls = controls, tooltip = tooltip, animate = animate,
-    valueFormat = valueFormat, valuePrefix = valuePrefix, valueSuffix = valueSuffix
+    value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix
   )
 }

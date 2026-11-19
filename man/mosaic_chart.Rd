@@ -11,26 +11,26 @@ mosaic_chart(
   value = NULL,
   colors = NULL,
   gap = 2,
-  labelType = c("percent", "count", "both", "none"),
-  valueFormat = ",.0f",
-  labelFontSize = 11,
-  labelCol = NULL,
-  columnFontSize = 12,
+  label_type = c("percent", "count", "both", "none"),
+  value_format = ",.0f",
+  label_font_size = 11,
+  label_col = NULL,
+  column_font_size = 12,
   hover = TRUE,
   animate = TRUE,
   legend = TRUE,
-  legendTitle = NULL,
-  legendFontSize = 11,
+  legend_title = NULL,
+  legend_font_size = 11,
   xtitle = NULL,
   ytitle = NULL,
-  axisTitleFontSize = 12,
-  xFontSize = 10,
-  yFontSize = 10,
+  axis_title_font_size = 12,
+  x_font_size = 10,
+  y_font_size = 10,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -55,23 +55,23 @@ palette.}
 \item{gap}{Width in pixels of the white gaps between columns and between
 segments. Defaults to \code{2}.}
 
-\item{labelType}{What to print inside each cell when there is room for it:
+\item{label_type}{What to print inside each cell when there is room for it:
 \code{"percent"} (the share within the column, the default),
 \code{"count"} (the count or summed value), \code{"both"}, or
 \code{"none"}.}
 
-\item{valueFormat}{A d3-format specifier used to display counts or values
+\item{value_format}{A d3-format specifier used to display counts or values
 in the labels and the tooltip (e.g. \code{",.0f"}, \code{".3~s"}).
 Defaults to \code{",.0f"}.}
 
-\item{labelFontSize}{Font size of the in-cell labels. Defaults to
+\item{label_font_size}{Font size of the in-cell labels. Defaults to
 \code{11}.}
 
-\item{labelCol}{Optional. Color of the in-cell labels. Defaults to
+\item{label_col}{Optional. Color of the in-cell labels. Defaults to
 \code{NULL}, which picks white or near-black automatically for contrast
 with each cell's fill.}
 
-\item{columnFontSize}{Font size of the column (\code{x} category) labels
+\item{column_font_size}{Font size of the column (\code{x} category) labels
 drawn above the chart. Labels that do not fit their column are shortened
 or hidden. Defaults to \code{12}.}
 
@@ -84,27 +84,27 @@ animation on first render. Defaults to \code{TRUE}.}
 \item{legend}{Whether to display a legend of the \code{fill} categories.
 Defaults to \code{TRUE}.}
 
-\item{legendTitle}{Optional. Title of the legend. Defaults to \code{NULL},
+\item{legend_title}{Optional. Title of the legend. Defaults to \code{NULL},
 which uses the name of the \code{fill} column. Use \code{""} to hide it.}
 
-\item{legendFontSize}{Font size of the legend text. Defaults to \code{11}.}
+\item{legend_font_size}{Font size of the legend text. Defaults to \code{11}.}
 
 \item{xtitle}{Optional. Title of the x-axis (bottom).}
 
 \item{ytitle}{Optional. Title of the y-axis (left).}
 
-\item{axisTitleFontSize}{Font size of the axis titles. Defaults to
+\item{axis_title_font_size}{Font size of the axis titles. Defaults to
 \code{12}.}
 
-\item{xFontSize}{Font size of the x-axis tick labels. Defaults to
+\item{x_font_size}{Font size of the x-axis tick labels. Defaults to
 \code{10}.}
 
-\item{yFontSize}{Font size of the y-axis tick labels. Defaults to
+\item{y_font_size}{Font size of the y-axis tick labels. Defaults to
 \code{10}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
@@ -112,7 +112,7 @@ which uses the name of the \code{fill} column. Use \code{""} to hide it.}
 \item{bgcol}{Background color of the SVG. It is also the color of the gaps
 between cells. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of the axes, the axis labels, the column labels, the
+\item{axis_col}{Color of the axes, the axis labels, the column labels, the
 legend text and the title. Defaults to \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -170,8 +170,8 @@ mosaic_chart(
   data        = cars,
   x           = "cyl",
   fill        = "gear",
-  labelType   = "both",
-  legendTitle = "Gears",
+  label_type   = "both",
+  legend_title = "Gears",
   title       = "Motor Trend cars: gears by cylinders"
 )
 

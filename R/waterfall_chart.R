@@ -19,33 +19,33 @@
 #' \code{"relative"} (default — a delta added to the running total) or
 #' \code{"total"} (a bar spanning from zero to the current running total,
 #' used for subtotals and the final total).
-#' @param positiveColor Fill color for bars representing an increase.
+#' @param positive_color Fill color for bars representing an increase.
 #' Defaults to \code{"#4CAF50"}.
-#' @param negativeColor Fill color for bars representing a decrease.
+#' @param negative_color Fill color for bars representing a decrease.
 #' Defaults to \code{"#F44336"}.
-#' @param totalColor Fill color for \code{"total"} measure bars.
+#' @param total_color Fill color for \code{"total"} measure bars.
 #' Defaults to \code{"#5C85D6"}.
 #' @param connector Logical. Whether to draw dashed connector lines between
 #' consecutive bars. Defaults to \code{TRUE}.
-#' @param connectorColor Color of the connector lines. Defaults to
+#' @param connector_color Color of the connector lines. Defaults to
 #' \code{"#aaaaaa"}.
-#' @param showLabels Logical. Whether to display the delta value above or
+#' @param show_labels Logical. Whether to display the delta value above or
 #' below each bar. Defaults to \code{TRUE}.
-#' @param labelFontSize Font size of the bar value labels. Defaults to
+#' @param label_font_size Font size of the bar value labels. Defaults to
 #' \code{10}.
 #' @param title Optional. Title of the chart.
-#' @param titleFontSize Font size of the chart title. Defaults to \code{16}.
+#' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param xtitle Optional. Title of the x-axis.
-#' @param xtitleFontSize Font size of the x-axis title. Defaults to \code{13}.
+#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param ytitle Optional. Title of the y-axis.
-#' @param ytitleFontSize Font size of the y-axis title. Defaults to \code{13}.
-#' @param xFontSize Font size of the x-axis tick labels. Defaults to \code{11}.
-#' @param yFontSize Font size of the y-axis tick labels. Defaults to \code{11}.
+#' @param ytitle_font_size Font size of the y-axis title. Defaults to \code{13}.
+#' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
+#' @param y_font_size Font size of the y-axis tick labels. Defaults to \code{11}.
 #' @param opacity Opacity of the bars (0 to 1). Defaults to \code{1}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
 #' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
-#' @param axisCol Color of axis lines, ticks, and labels. Defaults to
+#' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -84,33 +84,33 @@
 #'   y              = "delta",
 #'   title          = "Monthly cash flow",
 #'   ytitle         = "USD thousands",
-#'   positiveColor  = "steelblue",
-#'   negativeColor  = "tomato"
+#'   positive_color  = "steelblue",
+#'   negative_color  = "tomato"
 #' )
 waterfall_chart <- function(
     data,
     x,
     y,
     measure        = NULL,
-    positiveColor  = "#4CAF50",
-    negativeColor  = "#F44336",
-    totalColor     = "#5C85D6",
+    positive_color  = "#4CAF50",
+    negative_color  = "#F44336",
+    total_color     = "#5C85D6",
     connector      = TRUE,
-    connectorColor = "#aaaaaa",
-    showLabels     = TRUE,
-    labelFontSize  = 10,
+    connector_color = "#aaaaaa",
+    show_labels     = TRUE,
+    label_font_size  = 10,
     title          = NULL,
-    titleFontSize  = 16,
+    title_font_size  = 16,
     xtitle         = NULL,
-    xtitleFontSize = 13,
+    xtitle_font_size = 13,
     ytitle         = NULL,
-    ytitleFontSize = 13,
-    xFontSize      = 11,
-    yFontSize      = 11,
+    ytitle_font_size = 13,
+    x_font_size      = 11,
+    y_font_size      = 11,
     opacity        = 1,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
     bgcol          = "white",
-    axisCol        = "black",
+    axis_col        = "black",
     width          = NULL,
     height         = NULL
 ) {
@@ -143,25 +143,25 @@ waterfall_chart <- function(
       x              = x,
       y              = y,
       measure        = measure,
-      positiveColor  = positiveColor,
-      negativeColor  = negativeColor,
-      totalColor     = totalColor,
+      positiveColor  = positive_color,
+      negativeColor  = negative_color,
+      totalColor     = total_color,
       connector      = connector,
-      connectorColor = connectorColor,
-      showLabels     = showLabels,
-      labelFontSize  = labelFontSize,
+      connectorColor = connector_color,
+      showLabels     = show_labels,
+      labelFontSize  = label_font_size,
       title          = title,
-      titleFontSize  = titleFontSize,
+      titleFontSize  = title_font_size,
       xtitle         = xtitle,
-      xtitleFontSize = xtitleFontSize,
+      xtitleFontSize = xtitle_font_size,
       ytitle         = ytitle,
-      ytitleFontSize = ytitleFontSize,
-      xFontSize      = xFontSize,
-      yFontSize      = yFontSize,
+      ytitleFontSize = ytitle_font_size,
+      xFontSize      = x_font_size,
+      yFontSize      = y_font_size,
       opacity        = opacity,
       font           = font,
       bgcol          = bgcol,
-      axisCol        = axisCol
+      axisCol        = axis_col
     ),
     width  = width,
     height = height

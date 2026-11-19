@@ -12,22 +12,22 @@ ridgeline_plot(
   kernel = c("gaussian", "epanechnikov"),
   overlap = 1.5,
   fill = "steelblue",
-  fillOpacity = 0.8,
-  lineCol = "#333333",
-  lineWidth = 1,
+  fill_opacity = 0.8,
+  line_col = "#333333",
+  line_width = 1,
   sort = c("none", "mean", "median"),
   stat = c("none", "mean", "median"),
-  statColor = "#d62728",
+  stat_color = "#d62728",
   hover = TRUE,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   title = NULL,
-  titleFontSize = 16,
-  xFontSize = 11,
-  yFontSize = 11,
+  title_font_size = 16,
+  x_font_size = 11,
+  y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "black",
+  axis_col = "black",
   width = NULL,
   height = NULL
 )
@@ -61,12 +61,12 @@ a more dramatic, Joy Division-like look.}
 recycled over the groups (in their original order), or a named vector
 whose names match the group values.}
 
-\item{fillOpacity}{Fill opacity of the ridges (0 to 1). Defaults to
+\item{fill_opacity}{Fill opacity of the ridges (0 to 1). Defaults to
 \code{0.8}.}
 
-\item{lineCol}{Color of the density outline. Defaults to \code{"#333333"}.}
+\item{line_col}{Color of the density outline. Defaults to \code{"#333333"}.}
 
-\item{lineWidth}{Width of the density outline in pixels. Defaults to
+\item{line_width}{Width of the density outline in pixels. Defaults to
 \code{1}.}
 
 \item{sort}{How to order the ridges from top to bottom. One of
@@ -78,7 +78,7 @@ smallest mean/median is placed at the top.}
 \code{"mean"} or \code{"median"} of its values. Defaults to \code{"none"}
 (no line).}
 
-\item{statColor}{Color of the mean/median line. Defaults to
+\item{stat_color}{Color of the mean/median line. Defaults to
 \code{"#d62728"}.}
 
 \item{hover}{Logical. When \code{TRUE} (default), hovering a ridge or its
@@ -87,22 +87,22 @@ mean.}
 
 \item{xtitle}{Optional. Title of the x-axis.}
 
-\item{xtitleFontSize}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
-\item{xFontSize}{Font size of the x-axis tick labels. Defaults to \code{11}.}
+\item{x_font_size}{Font size of the x-axis tick labels. Defaults to \code{11}.}
 
-\item{yFontSize}{Font size of the group labels. Defaults to \code{11}.}
+\item{y_font_size}{Font size of the group labels. Defaults to \code{11}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{axisCol}{Color of axis lines, ticks, and labels. Defaults to
+\item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -162,8 +162,8 @@ ridgeline_plot(
   group       = "class",
   sort        = "median",
   fill        = "#2c7fb8",
-  lineCol     = "white",
-  fillOpacity = 0.9,
+  line_col     = "white",
+  fill_opacity = 0.9,
   overlap     = 2,
   title       = "Highway fuel economy by vehicle class",
   xtitle      = "Highway miles per gallon"

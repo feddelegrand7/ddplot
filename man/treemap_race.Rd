@@ -12,33 +12,33 @@ treemap_race(
   group = NULL,
   tile = c("resquarify", "squarify", "binary", "slice", "dice", "sliceDice"),
   fill = NULL,
-  colorCategory = NULL,
-  colorBy = c("group", "growth"),
+  color_category = NULL,
+  color_by = c("group", "growth"),
   highlight = NULL,
   labels = TRUE,
-  labelMode = c("value", "share", "growth"),
+  label_mode = c("value", "share", "growth"),
   padding = 2,
-  maxLabelSize = 26,
+  max_label_size = 26,
   legend = NULL,
   agg = c("sum", "mean", "max", "min", "last"),
-  fillGaps = TRUE,
-  frameDur = 900,
+  fill_gaps = TRUE,
+  frame_dur = 900,
   ease = "CubicInOut",
   autoplay = TRUE,
   loop = FALSE,
   controls = TRUE,
-  startFrame = "first",
-  timeFormat = NULL,
+  start_frame = "first",
+  time_format = NULL,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   subtitle = NULL,
-  subtitleFontSize = 13,
+  subtitle_font_size = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  axisCol = "#333333",
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
+  axis_col = "#333333",
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
   tooltip = TRUE,
   width = NULL,
   height = NULL
@@ -76,12 +76,12 @@ the items are drawn in shades of their group colour. Without
 colours to items). Defaults to the ddplot palette, the largest groups or
 items getting the first colours.}
 
-\item{colorCategory}{Optional. The name of a D3 categorical colour scheme
+\item{color_category}{Optional. The name of a D3 categorical colour scheme
 (e.g. \code{"Tableau10"}, \code{"Set2"}), see
 <https://github.com/d3/d3-scale-chromatic#categorical>, used when
 \code{fill} is not given.}
 
-\item{colorBy}{How the tiles are coloured at first: \code{"group"}
+\item{color_by}{How the tiles are coloured at first: \code{"group"}
 (default, the palette: by group, or by item without \code{group}) or
 \code{"growth"} (a heat map of the growth since the previous period, red
 for shrinking items, green for growing ones). It can be changed from the
@@ -94,14 +94,14 @@ start (outlined, the other tiles dimmed).}
 do not fit are hidden, their font size follows the tile size). Defaults
 to \code{TRUE}.}
 
-\item{labelMode}{What the labels show under the names at first:
+\item{label_mode}{What the labels show under the names at first:
 \code{"value"} (default), \code{"share"} (share of the total, or of the
 group when zoomed in) or \code{"growth"} (change since the previous
 period). It can be changed from the chart when \code{controls = TRUE}.}
 
 \item{padding}{The space between tiles, in pixels. Defaults to 2.}
 
-\item{maxLabelSize}{The largest font size of the tile labels, in pixels.
+\item{max_label_size}{The largest font size of the tile labels, in pixels.
 Defaults to 26.}
 
 \item{legend}{Logical. Show the legend of the groups. When \code{NULL}
@@ -111,11 +111,11 @@ Defaults to 26.}
 \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 \code{"last"}.}
 
-\item{fillGaps}{Logical. Interpolate the value of an item between the
+\item{fill_gaps}{Logical. Interpolate the value of an item between the
 periods where it is known. Defaults to \code{TRUE}; when \code{FALSE},
 the tile shrinks away during the missing periods.}
 
-\item{frameDur}{The duration of one period, in milliseconds, at 1x speed.
+\item{frame_dur}{The duration of one period, in milliseconds, at 1x speed.
 Defaults to 900.}
 
 \item{ease}{The easing used within each period, a d3-ease name such as
@@ -131,33 +131,33 @@ Defaults to \code{FALSE} (it can be changed from the player).}
 \item{controls}{Logical. Show the player at the bottom and the label and
 colour buttons at the top. Defaults to \code{TRUE}.}
 
-\item{startFrame}{The period shown first: \code{"first"} (default),
+\item{start_frame}{The period shown first: \code{"first"} (default),
 \code{"last"} or a period number (1 for the first one).}
 
-\item{timeFormat}{Optional. A d3-time-format string used for dates, e.g.
+\item{time_format}{Optional. A d3-time-format string used for dates, e.g.
 \code{"\%b \%Y"}. Chosen from the spacing of the periods when \code{NULL}.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
 \item{font}{The font family to consider for all the text. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
 \item{bgcol}{The background colour of the SVG. Defaults to "white".}
 
-\item{axisCol}{The colour of the titles, headers and controls. Defaults to
+\item{axis_col}{The colour of the titles, headers and controls. Defaults to
 "#333333".}
 
-\item{valueFormat}{Optional. A d3-format string for the values, e.g.
+\item{value_format}{Optional. A d3-format string for the values, e.g.
 \code{",.0f"}, \code{".1f"} or \code{".3~s"}. Compact values
 ("1.23M") are used when \code{NULL}.}
 
-\item{valuePrefix, valueSuffix}{Optional. Text added before or after every
+\item{value_prefix, value_suffix}{Optional. Text added before or after every
 value, e.g. \code{"$"} or \code{" t"}.}
 
 \item{tooltip}{Logical. Show a tooltip on hover. Defaults to \code{TRUE}.}
@@ -255,8 +255,8 @@ gapminder \%>\%
   mutate(gdp = gdpPercap * pop / 1e9) \%>\%
   treemap_race(
     label = "country", value = "gdp", time = "year",
-    colorBy = "growth", labelMode = "share",
-    valuePrefix = "$", valueSuffix = "B", valueFormat = ",.0f",
+    color_by = "growth", label_mode = "share",
+    value_prefix = "$", value_suffix = "B", value_format = ",.0f",
     title = "GDP of five European countries"
   )
 

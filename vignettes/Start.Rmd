@@ -98,10 +98,10 @@ The functions share a common vocabulary, so what you learn on one chart carries 
 | Argument | What it does |
 |---|---|
 | `data`, `x`, `y` | The data frame and the columns to plot, given as strings |
-| `title`, `titleFontSize` | Chart title and its size in pixels |
+| `title`, `title_font_size` | Chart title and its size in pixels |
 | `xtitle`, `ytitle` | Axis titles |
-| `fill`, `stroke`, `strokeWidth`, `col` | Colours and outlines of the marks |
-| `bgcol`, `axisCol` | Background and axis colours |
+| `fill`, `stroke`, `stroke_width`, `col` | Colours and outlines of the marks |
+| `bgcol`, `axis_col` | Background and axis colours |
 | `font` | Font family, for example `"Georgia, serif"` |
 | `xticks`, `yticks` | Approximate number of ticks on each axis |
 | `width`, `height` | Size of the widget, passed to `r2d3::r2d3()` |

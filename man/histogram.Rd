@@ -8,46 +8,46 @@ histogram(
   x,
   bins = 30,
   fill = NULL,
-  xFontSize = 11,
-  yFontSize = 11,
+  x_font_size = 11,
+  y_font_size = 11,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   stroke = NULL,
-  strokeWidth = NULL,
+  stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = NULL,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   data = NULL,
   group = NULL,
-  binWidth = NULL,
+  bin_width = NULL,
   breaks = NULL,
   position = c("stacked", "overlay"),
   stat = c("count", "percent", "density"),
   density = FALSE,
   stats = NULL,
-  refLines = NULL,
+  ref_lines = NULL,
   rug = FALSE,
   summary = TRUE,
-  cornerRadius = 2,
+  corner_radius = 2,
   legend = NULL,
   controls = TRUE,
   tooltip = TRUE,
   animate = TRUE,
-  xFormat = NULL,
-  xPrefix = "",
-  xSuffix = "",
+  x_format = NULL,
+  x_prefix = "",
+  x_suffix = "",
   subtitle = NULL,
-  subtitleFontSize = 13,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  grid_col = "#e9e9e9"
 )
 }
 \arguments{
@@ -56,16 +56,16 @@ numeric column of \code{data}.}
 
 \item{bins}{The approximate number of bins. The bins are given round
 widths (1, 2, 2.5 or 5 times a power of ten), so the actual number can
-differ slightly. Defaults to 30. Ignored when \code{binWidth} or
+differ slightly. Defaults to 30. Ignored when \code{bin_width} or
 \code{breaks} is given.}
 
 \item{fill}{The colour of the bars. A single colour, or, with \code{group},
 one colour per group (a named vector maps colours to groups). Defaults to
 a built-in palette.}
 
-\item{xFontSize}{The font size of the x-axis labels. Defaults to 11.}
+\item{x_font_size}{The font size of the x-axis labels. Defaults to 11.}
 
-\item{yFontSize}{The font size of the y-axis labels. Defaults to 11.}
+\item{y_font_size}{The font size of the y-axis labels. Defaults to 11.}
 
 \item{xticks}{Optional. The approximate number of x-axis ticks.}
 
@@ -74,20 +74,20 @@ a built-in palette.}
 \item{xtitle}{Optional. The title of the x-axis. Defaults to the name of
 the variable (when it can be found); use \code{""} to hide it.}
 
-\item{xtitleFontSize}{The font size of the x-axis title. Defaults to 13.}
+\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
 
 \item{ytitle}{Optional. The title of the y-axis, drawn above it. Defaults
 to "Count", "Percent" or "Density"; use \code{""} to hide it.}
 
-\item{ytitleFontSize}{The font size of the y-axis title. Defaults to 13.}
+\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
-\item{titleFontSize}{The font size of the plot title. Defaults to 20.}
+\item{title_font_size}{The font size of the plot title. Defaults to 20.}
 
 \item{stroke}{Optional. The stroke colour of the bars.}
 
-\item{strokeWidth}{Optional. The stroke width of the bars.}
+\item{stroke_width}{Optional. The stroke width of the bars.}
 
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
@@ -97,7 +97,7 @@ to "Count", "Percent" or "Density"; use \code{""} to hide it.}
 \item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1, or
 0.5 for overlaid groups.}
 
-\item{axisCol}{The colour of the axes, labels and titles. Defaults to
+\item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -111,7 +111,7 @@ column names.}
 \code{data}, the name of a column) splitting the observations into
 groups, with one colour per group and a clickable legend.}
 
-\item{binWidth}{Optional. The width of the bins, in the units of \code{x}.}
+\item{bin_width}{Optional. The width of the bins, in the units of \code{x}.}
 
 \item{breaks}{Optional. A numeric vector of bin edges, for bins of unequal
 width (the bars are then scaled by density so their areas stay
@@ -139,7 +139,7 @@ the bars. With overlaid groups, one curve is drawn per group. Defaults to
 \code{"mean"} and \code{"median"} (\code{TRUE} draws both). With overlaid
 groups, one line is drawn per group.}
 
-\item{refLines}{Optional. Numeric values drawn as dashed vertical lines
+\item{ref_lines}{Optional. Numeric values drawn as dashed vertical lines
 (e.g. a threshold or a target); names are used as labels.}
 
 \item{rug}{Logical. Draw a small tick under the bars for every observation
@@ -149,7 +149,7 @@ groups, one line is drawn per group.}
 median and the standard deviation above the bars (or those of the
 selected range). Defaults to \code{TRUE}.}
 
-\item{cornerRadius}{The radius of the rounded top corners of the bars, in
+\item{corner_radius}{The radius of the rounded top corners of the bars, in
 pixels. Defaults to 2; use 0 for square bars.}
 
 \item{legend}{Logical. Show the legend (with \code{group}). Defaults to
@@ -164,17 +164,17 @@ counts / percentages and the layout. Defaults to \code{TRUE}.}
 \item{animate}{Logical. Grow the bars when the chart is first drawn.
 Defaults to \code{TRUE}.}
 
-\item{xFormat}{Optional. A D3 format string for the values of \code{x}
+\item{x_format}{Optional. A D3 format string for the values of \code{x}
 (axis, tooltip and summary), such as \code{",.0f"} or \code{".1f"}.}
 
-\item{xPrefix, xSuffix}{Optional. Text added before and after the values of
+\item{x_prefix, x_suffix}{Optional. Text added before and after the values of
 \code{x}, such as \code{"$"} or \code{" km"}.}
 
 \item{subtitle}{Optional. A subtitle drawn under the title.}
 
-\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+\item{subtitle_font_size}{The font size of the subtitle. Defaults to 13.}
 
-\item{gridCol}{The colour of the horizontal grid lines. Defaults to
+\item{grid_col}{The colour of the horizontal grid lines. Defaults to
 "#e9e9e9"; use \code{NA} to hide them.}
 }
 \value{
@@ -234,8 +234,8 @@ histogram(
   bins = 50,
   density = TRUE,
   stats = c("mean", "median"),
-  xPrefix = "$",
-  xFormat = ",.0f",
+  x_prefix = "$",
+  x_format = ",.0f",
   title = "Diamond prices"
 )
 
@@ -246,7 +246,7 @@ histogram(
   group = "drv",
   position = "overlay",
   stat = "percent",
-  binWidth = 2,
+  bin_width = 2,
   density = TRUE,
   title = "Highway fuel economy by drive train"
 )

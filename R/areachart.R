@@ -8,7 +8,7 @@
 #' area.
 #'
 #' With \code{baseline}, the area is drawn between the line and that value
-#' instead of zero, and \code{negativeFill} colours the part below it, which
+#' instead of zero, and \code{negative_fill} colours the part below it, which
 #' suits anomalies, balances or profit and loss.
 #'
 #' The data can be one column (\code{y = "value"}), several columns
@@ -28,22 +28,22 @@
 #'   to a built-in palette.
 #' @param stroke Optional. The colour of the line on top of the area.
 #'   Defaults to the colour of the area.
-#' @param strokeWidth The width of the line on top of the area. Defaults to
+#' @param stroke_width The width of the line on top of the area. Defaults to
 #'   2; use 0 to hide the line.
 #' @param opacity Optional. The opacity of the area fill (from 0 to 1). When
 #'   \code{NULL} (default), the area is filled with a gradient that fades
 #'   towards the axis.
 #' @param ytitle Optional. The title of the y-axis, shown above the axis.
 #' @param bgcol The background color of the SVG. Defaults to "white".
-#' @param axisCol The color of the axis text, ticks and titles. Defaults to
+#' @param axis_col The color of the axis text, ticks and titles. Defaults to
 #'   "#333333".
 #' @param group Optional. For long data, the column whose values name the
 #'   series (one area per value).
 #' @param baseline Optional. A number: the area is drawn between the line and
 #'   this value instead of zero.
-#' @param negativeFill Optional. With \code{baseline}, the colour of the area
+#' @param negative_fill Optional. With \code{baseline}, the colour of the area
 #'   (and line) below the baseline.
-#' @param yZero Logical. Force the y axis to include 0. When \code{NULL}
+#' @param y_zero Logical. Force the y axis to include 0. When \code{NULL}
 #'   (default), it does unless \code{baseline} is given.
 #'
 #' @return An interactive SVG area chart.
@@ -70,8 +70,8 @@
 #' area_chart(
 #'   economics, x = "date", y = "psavert",
 #'   baseline = mean(economics$psavert),
-#'   fill = "#3ca951", negativeFill = "#ff725c",
-#'   valueSuffix = "%",
+#'   fill = "#3ca951", negative_fill = "#ff725c",
+#'   value_suffix = "%",
 #'   title = "US personal savings rate",
 #'   subtitle = "Above and below its long-run average"
 #' )
@@ -82,46 +82,46 @@ area_chart <- function(
   y = NULL,
   fill = NULL,
   stroke = NULL,
-  strokeWidth = 2,
+  stroke_width = 2,
   xticks = NULL,
   yticks = NULL,
   xtitle = NULL,
-  xtitleFontSize = 13,
+  xtitle_font_size = 13,
   ytitle = NULL,
-  ytitleFontSize = 13,
+  ytitle_font_size = 13,
   title = NULL,
-  titleFontSize = 20,
+  title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
   opacity = NULL,
-  axisCol = "#333333",
+  axis_col = "#333333",
   width = NULL,
   height = NULL,
   group = NULL,
   baseline = NULL,
-  negativeFill = NULL,
+  negative_fill = NULL,
   curve = "curveLinear",
   points = FALSE,
-  yZero = NULL,
+  y_zero = NULL,
   events = NULL,
   bands = NULL,
   hlines = NULL,
   legend = NULL,
-  endLabels = NULL,
+  end_labels = NULL,
   tooltip = TRUE,
   navigator = TRUE,
-  rangeButtons = TRUE,
+  range_buttons = TRUE,
   zoom = TRUE,
   animate = TRUE,
-  valueFormat = NULL,
-  valuePrefix = "",
-  valueSuffix = "",
-  dateFormat = NULL,
+  value_format = NULL,
+  value_prefix = "",
+  value_suffix = "",
+  date_format = NULL,
   subtitle = NULL,
-  subtitleFontSize = 13,
-  xFontSize = 11,
-  yFontSize = 11,
-  gridCol = "#e9e9e9"
+  subtitle_font_size = 13,
+  x_font_size = 11,
+  y_font_size = 11,
+  grid_col = "#e9e9e9"
 ) {
 
   if (!is.null(baseline) && (!is.numeric(baseline) || length(baseline) != 1 || !is.finite(baseline))) {
@@ -130,34 +130,34 @@ area_chart <- function(
   if (!is.null(opacity) && (!is.numeric(opacity) || length(opacity) != 1 || opacity < 0 || opacity > 1)) {
     stop("'opacity' must be a single number between 0 and 1")
   }
-  if (is.null(strokeWidth)) strokeWidth <- 2
-  if (!is.numeric(strokeWidth) || length(strokeWidth) != 1 || strokeWidth < 0) {
-    stop("'strokeWidth' must be a single number, 0 or more")
+  if (is.null(stroke_width)) stroke_width <- 2
+  if (!is.numeric(stroke_width) || length(stroke_width) != 1 || stroke_width < 0) {
+    stop("'stroke_width' must be a single number, 0 or more")
   }
-  if (is.null(yZero)) yZero <- is.null(baseline)
+  if (is.null(y_zero)) y_zero <- is.null(baseline)
 
   line_widget(
     data = data, x = x, y = y, group = group, colors = fill,
-    strokeWidth = if (strokeWidth == 0) 1 else strokeWidth, curve = curve,
-    area = TRUE, points = points, yZero = yZero,
+    stroke_width = if (stroke_width == 0) 1 else stroke_width, curve = curve,
+    area = TRUE, points = points, y_zero = y_zero,
     events = events, bands = bands, hlines = hlines, legend = legend,
-    endLabels = endLabels, tooltip = tooltip, navigator = navigator,
-    rangeButtons = rangeButtons, zoom = zoom, animate = animate,
-    valueFormat = valueFormat, valuePrefix = valuePrefix, valueSuffix = valueSuffix,
-    dateFormat = dateFormat, xticks = xticks, yticks = yticks,
-    xtitle = xtitle, xtitleFontSize = xtitleFontSize,
-    ytitle = ytitle, ytitleFontSize = ytitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    xFontSize = xFontSize, yFontSize = yFontSize, font = font,
-    bgcol = bgcol, gridCol = gridCol, axisCol = axisCol,
+    end_labels = end_labels, tooltip = tooltip, navigator = navigator,
+    range_buttons = range_buttons, zoom = zoom, animate = animate,
+    value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix,
+    date_format = date_format, xticks = xticks, yticks = yticks,
+    xtitle = xtitle, xtitle_font_size = xtitle_font_size,
+    ytitle = ytitle, ytitle_font_size = ytitle_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    x_font_size = x_font_size, y_font_size = y_font_size, font = font,
+    bgcol = bgcol, grid_col = grid_col, axis_col = axis_col,
     width = width, height = height,
     extra = list(
       kind = "area",
       areaOpacity = opacity,
-      lineColor = if (strokeWidth == 0) "none" else stroke,
+      lineColor = if (stroke_width == 0) "none" else stroke,
       baseline = baseline,
-      negativeFill = negativeFill
+      negativeFill = negative_fill
     )
   )
 }

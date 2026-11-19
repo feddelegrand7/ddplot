@@ -26,23 +26,23 @@
 #'
 #' @param fill_level A number between 0 and 1: how full the glass is (values
 #'   outside are clamped). Defaults to 0.65.
-#' @param glassWidth Optional. The width of the glass (at the rim) in pixels.
+#' @param glass_width Optional. The width of the glass (at the rim) in pixels.
 #'   By default it is 64 percent of the height of the glass.
-#' @param glassHeight Optional. The height of the glass in pixels. By default
+#' @param glass_height Optional. The height of the glass in pixels. By default
 #'   the glass fills the space available (up to 340 pixels).
-#' @param strokeColor The colour of the glass. Defaults to "#555".
-#' @param strokeWidth The width of the outline of the glass. Defaults to 2.5.
-#' @param fillColor The colour of the water. Defaults to "#5aa9e6".
-#' @param renderFillLabel Logical. Show the percentage above the glass.
+#' @param stroke_color The colour of the glass. Defaults to "#555".
+#' @param stroke_width The width of the outline of the glass. Defaults to 2.5.
+#' @param fill_color The colour of the water. Defaults to "#5aa9e6".
+#' @param render_fill_label Logical. Show the percentage above the glass.
 #'   Defaults to TRUE.
-#' @param labelFontSize Optional. The font size of the percentage, a number or
+#' @param label_font_size Optional. The font size of the percentage, a number or
 #'   a CSS size such as "16px". By default it grows with the glass.
-#' @param titleText Optional. A caption below the glass. Defaults to "Fill
+#' @param title_text Optional. A caption below the glass. Defaults to "Fill
 #'   level"; use \code{NULL} to hide it.
-#' @param labelColor The colour of the percentage, the scale and the target
+#' @param label_color The colour of the percentage, the scale and the target
 #'   label. Defaults to "#333".
-#' @param titleColor The colour of the caption. Defaults to "#333".
-#' @param titleFontSize The font size of the caption, a number or a CSS size
+#' @param title_color The colour of the caption. Defaults to "#333".
+#' @param title_font_size The font size of the caption, a number or a CSS size
 #'   such as "14px". Defaults to 14.
 #' @param font The font family. Defaults to "Verdana, Geneva, Tahoma,
 #'   sans-serif".
@@ -68,24 +68,24 @@
 #'   fill_level = 0.3,
 #'   target = 0.8,
 #'   ticks = TRUE,
-#'   titleText = "Water intake today"
+#'   title_text = "Water intake today"
 #' )
-#' glass_fill(0.5, fillColor = "#efb118", draggable = TRUE, titleText = "Drag me")
+#' glass_fill(0.5, fill_color = "#efb118", draggable = TRUE, title_text = "Drag me")
 #'
 #' @export
 glass_fill <- function(
     fill_level = 0.65,
-    glassWidth = NULL,
-    glassHeight = NULL,
-    strokeColor = "#555",
-    strokeWidth = 2.5,
-    fillColor = "#5aa9e6",
-    renderFillLabel = TRUE,
-    labelFontSize = NULL,
-    titleText = "Fill level",
-    labelColor = "#333",
-    titleColor = "#333",
-    titleFontSize = 14,
+    glass_width = NULL,
+    glass_height = NULL,
+    stroke_color = "#555",
+    stroke_width = 2.5,
+    fill_color = "#5aa9e6",
+    render_fill_label = TRUE,
+    label_font_size = NULL,
+    title_text = "Fill level",
+    label_color = "#333",
+    title_color = "#333",
+    title_font_size = 14,
     font = "Verdana, Geneva, Tahoma, sans-serif",
     target = NULL,
     ticks = FALSE,
@@ -108,17 +108,17 @@ glass_fill <- function(
     height = height,
     options = list(
       level = fill_level,
-      glassWidth = play_size(glassWidth, "glassWidth"),
-      glassHeight = play_size(glassHeight, "glassHeight"),
-      strokeColor = strokeColor,
-      strokeWidth = strokeWidth,
-      fillColor = fillColor,
-      renderFillLabel = play_flag(renderFillLabel, "renderFillLabel"),
-      labelColor = labelColor,
-      labelFontSize = play_size(labelFontSize, "labelFontSize"),
-      titleText = titleText,
-      titleColor = titleColor,
-      titleFontSize = play_size(titleFontSize, "titleFontSize"),
+      glassWidth = play_size(glass_width, "glass_width"),
+      glassHeight = play_size(glass_height, "glass_height"),
+      strokeColor = stroke_color,
+      strokeWidth = stroke_width,
+      fillColor = fill_color,
+      renderFillLabel = play_flag(render_fill_label, "render_fill_label"),
+      labelColor = label_color,
+      labelFontSize = play_size(label_font_size, "label_font_size"),
+      titleText = title_text,
+      titleColor = title_color,
+      titleFontSize = play_size(title_font_size, "title_font_size"),
       font = font,
       target = target,
       ticks = play_flag(ticks, "ticks"),

@@ -35,27 +35,27 @@
 #'   order of the data or of the factor levels), \code{"ascending"} or
 #'   \code{"descending"}. With \code{group}, categories are sorted by their
 #'   total.
-#' @param paddingWidth The space between bars, from 0 to 0.99. Defaults to
+#' @param padding_width The space between bars, from 0 to 0.99. Defaults to
 #'   0.2.
 #' @param xticks Not used; kept for compatibility.
-#' @param xFontSize The font size of the category labels. Defaults to 11.
-#' @param yFontSize The font size of the value axis labels. Defaults to 11.
+#' @param x_font_size The font size of the category labels. Defaults to 11.
+#' @param y_font_size The font size of the value axis labels. Defaults to 11.
 #' @param yticks Optional. The approximate number of value axis ticks.
 #' @param xtitle Optional. The title of the category axis.
-#' @param xtitleFontSize The font size of the category axis title. Defaults
+#' @param xtitle_font_size The font size of the category axis title. Defaults
 #'   to 13.
 #' @param ytitle Optional. The title of the value axis, drawn above it.
 #'   Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.
-#' @param ytitleFontSize The font size of the value axis title. Defaults to 13.
+#' @param ytitle_font_size The font size of the value axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
-#' @param titleFontSize The font size of the plot title. Defaults to 20.
+#' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param stroke Optional. The stroke colour of the bars.
-#' @param strokeWidth Optional. The stroke width of the bars.
+#' @param stroke_width Optional. The stroke width of the bars.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
 #' @param bgcol The background color of the SVG. Defaults to "white".
 #' @param opacity The opacity of the bars (from 0 to 1). Defaults to 1.
-#' @param axisCol The colour of the axes, labels and titles. Defaults to
+#' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
@@ -72,11 +72,11 @@
 #'   are skipped). Defaults to \code{TRUE}.
 #' @param highlight Optional. A character vector of categories to emphasise;
 #'   the other bars are drawn in grey (or faded, with \code{group}).
-#' @param refLines Optional. Numeric values drawn as dashed reference lines
+#' @param ref_lines Optional. Numeric values drawn as dashed reference lines
 #'   across the bars (e.g. a target or an average); names are used as labels.
-#' @param negativeFill Optional. The colour of negative bars (without
+#' @param negative_fill Optional. The colour of negative bars (without
 #'   \code{group}).
-#' @param cornerRadius The radius of the rounded bar ends, in pixels.
+#' @param corner_radius The radius of the rounded bar ends, in pixels.
 #'   Defaults to 3; use 0 for square bars.
 #' @param legend Logical. Show the legend. When \code{NULL} (default), it is
 #'   shown when \code{group} is used.
@@ -85,13 +85,13 @@
 #' @param tooltip Logical. Show a tooltip on hover. Defaults to \code{TRUE}.
 #' @param animate Logical. Animate the bars when the chart is first drawn.
 #'   Defaults to \code{TRUE}.
-#' @param valueFormat Optional. A d3-format string for the values, e.g.
+#' @param value_format Optional. A d3-format string for the values, e.g.
 #'   \code{",.0f"}, \code{".1f"} or \code{"~s"}.
-#' @param valuePrefix,valueSuffix Optional. Text added before or after every
+#' @param value_prefix,value_suffix Optional. Text added before or after every
 #'   value, e.g. \code{"$"} or \code{" km"}.
 #' @param subtitle Optional. A subtitle drawn under the title.
-#' @param subtitleFontSize The font size of the subtitle. Defaults to 13.
-#' @param gridCol The colour of the grid lines. Defaults to "#e9e9e9"; use
+#' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
+#' @param grid_col The colour of the grid lines. Defaults to "#e9e9e9"; use
 #'   \code{NA} to hide them.
 #'
 #' @return An interactive SVG bar chart (an r2d3 htmlwidget).
@@ -110,7 +110,7 @@
 #'     ytitle = "Average city miles per gallon",
 #'     title = "City fuel economy by manufacturer",
 #'     highlight = c("honda", "volkswagen"),
-#'     valueFormat = ".1f"
+#'     value_format = ".1f"
 #'   )
 #'
 #' # Count rows, without aggregating first
@@ -134,8 +134,8 @@
 #' )
 #' bar_chart(
 #'   sales, x = "quarter", y = "revenue", group = "region",
-#'   position = "stacked", refLines = c(Target = 300),
-#'   valuePrefix = "$", valueSuffix = "k",
+#'   position = "stacked", ref_lines = c(Target = 300),
+#'   value_prefix = "$", value_suffix = "k",
 #'   title = "Revenue by quarter"
 #' )
 #'
@@ -145,23 +145,23 @@ bar_chart <- function(
                      y = NULL,
                      fill = NULL,
                      sort = "none",
-                     paddingWidth = 0.2,
+                     padding_width = 0.2,
                      xticks = NULL,
-                     xFontSize = 11,
-                     yFontSize = 11,
+                     x_font_size = 11,
+                     y_font_size = 11,
                      yticks = NULL,
                      xtitle = NULL,
-                     xtitleFontSize = 13,
+                     xtitle_font_size = 13,
                      ytitle = NULL,
-                     ytitleFontSize = 13,
+                     ytitle_font_size = 13,
                      title = NULL,
-                     titleFontSize = 20,
+                     title_font_size = 20,
                      stroke = NULL,
-                     strokeWidth = NULL,
+                     stroke_width = NULL,
                      font = "Verdana, Geneva, Tahoma, sans-serif",
                      bgcol = "white",
                      opacity = 1,
-                     axisCol = "#333333",
+                     axis_col = "#333333",
                      width = NULL,
                      height = NULL,
                      group = NULL,
@@ -169,19 +169,19 @@ bar_chart <- function(
                      agg = c("sum", "mean", "median", "min", "max", "count"),
                      labels = TRUE,
                      highlight = NULL,
-                     refLines = NULL,
-                     negativeFill = NULL,
-                     cornerRadius = 3,
+                     ref_lines = NULL,
+                     negative_fill = NULL,
+                     corner_radius = 3,
                      legend = NULL,
                      controls = TRUE,
                      tooltip = TRUE,
                      animate = TRUE,
-                     valueFormat = NULL,
-                     valuePrefix = "",
-                     valueSuffix = "",
+                     value_format = NULL,
+                     value_prefix = "",
+                     value_suffix = "",
                      subtitle = NULL,
-                     subtitleFontSize = 13,
-                     gridCol = "#e9e9e9"
+                     subtitle_font_size = 13,
+                     grid_col = "#e9e9e9"
                      ) {
 
   if (!is.data.frame(data) || !is.character(x) || length(x) != 1 || is.null(data[[x]]) ||
@@ -191,20 +191,20 @@ bar_chart <- function(
 
   bar_widget(
     data = data, cat = x, val = y, orientation = "vertical",
-    fill = fill, sort = sort, paddingWidth = paddingWidth,
-    catFontSize = xFontSize, valFontSize = yFontSize, valTicks = yticks,
-    catTitle = xtitle, catTitleFontSize = xtitleFontSize,
-    valTitle = ytitle, valTitleFontSize = ytitleFontSize,
-    title = title, titleFontSize = titleFontSize,
-    subtitle = subtitle, subtitleFontSize = subtitleFontSize,
-    stroke = stroke, strokeWidth = strokeWidth, font = font, bgcol = bgcol,
-    opacity = opacity, axisCol = axisCol, gridCol = gridCol,
+    fill = fill, sort = sort, padding_width = padding_width,
+    cat_font_size = x_font_size, val_font_size = y_font_size, val_ticks = yticks,
+    cat_title = xtitle, cat_title_font_size = xtitle_font_size,
+    val_title = ytitle, val_title_font_size = ytitle_font_size,
+    title = title, title_font_size = title_font_size,
+    subtitle = subtitle, subtitle_font_size = subtitle_font_size,
+    stroke = stroke, stroke_width = stroke_width, font = font, bgcol = bgcol,
+    opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height,
     group = group, position = match.arg(position), agg = match.arg(agg),
-    labels = labels, highlight = highlight, refLines = refLines,
-    negativeFill = negativeFill, cornerRadius = cornerRadius, legend = legend,
+    labels = labels, highlight = highlight, ref_lines = ref_lines,
+    negative_fill = negative_fill, corner_radius = corner_radius, legend = legend,
     controls = controls, tooltip = tooltip, animate = animate,
-    valueFormat = valueFormat, valuePrefix = valuePrefix, valueSuffix = valueSuffix
+    value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix
   )
 }
 
@@ -214,16 +214,16 @@ bar_chart <- function(
 # per category (and group), and calls barchart.js. shape = "lollipop" draws
 # stems and dots instead of bars.
 # @noRd
-bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
-                       catFontSize, valFontSize, valTicks,
-                       catTitle, catTitleFontSize, valTitle, valTitleFontSize,
-                       title, titleFontSize, subtitle, subtitleFontSize,
-                       stroke, strokeWidth, font, bgcol, opacity, axisCol, gridCol,
+bar_widget <- function(data, cat, val, orientation, fill, sort, padding_width,
+                       cat_font_size, val_font_size, val_ticks,
+                       cat_title, cat_title_font_size, val_title, val_title_font_size,
+                       title, title_font_size, subtitle, subtitle_font_size,
+                       stroke, stroke_width, font, bgcol, opacity, axis_col, grid_col,
                        width, height, group, position, agg, labels, highlight,
-                       refLines, negativeFill, cornerRadius, legend, controls,
-                       tooltip, animate, valueFormat, valuePrefix, valueSuffix,
-                       shape = "bar", stemWidth = NULL, stemColor = NULL,
-                       dotRadius = NULL, dotStroke = NULL, dotStrokeWidth = NULL) {
+                       ref_lines, negative_fill, corner_radius, legend, controls,
+                       tooltip, animate, value_format, value_prefix, value_suffix,
+                       shape = "bar", stem_width = NULL, stem_color = NULL,
+                       dot_radius = NULL, dot_stroke = NULL, dot_stroke_width = NULL) {
 
   if (length(sort) != 1 || !sort %in% c("none", "ascending", "descending")) {
     stop("
@@ -234,9 +234,9 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
   if (grepl(";", font)) {
     stop("please remove the ';' character from your font argument")
   }
-  if (!is.numeric(paddingWidth) || length(paddingWidth) != 1 ||
-      paddingWidth < 0 || paddingWidth > 0.99) {
-    stop("'paddingWidth' must be a number between 0 and 0.99")
+  if (!is.numeric(padding_width) || length(padding_width) != 1 ||
+      padding_width < 0 || padding_width > 0.99) {
+    stop("'padding_width' must be a number between 0 and 0.99")
   }
   if (!is.numeric(opacity) || length(opacity) != 1 || opacity < 0 || opacity > 1) {
     stop("'opacity' must be a number between 0 and 1")
@@ -244,8 +244,8 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
   if (!is.null(group) && (!is.character(group) || length(group) != 1 || is.null(data[[group]]))) {
     stop("'group' must be the name of a column of 'data'")
   }
-  if (!is.null(refLines) && !is.numeric(refLines)) {
-    stop("'refLines' must be a numeric vector")
+  if (!is.null(ref_lines) && !is.numeric(ref_lines)) {
+    stop("'ref_lines' must be a numeric vector")
   }
 
   # ---- categories --------------------------------------------------------------
@@ -331,8 +331,8 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
   }
 
   # ---- titles --------------------------------------------------------------------
-  if (is.null(valTitle)) {
-    valTitle <- if (agg == "count") {
+  if (is.null(val_title)) {
+    val_title <- if (agg == "count") {
       "Count"
     } else if (agg %in% c("mean", "median", "min", "max") && any(pts$n > 1)) {
       paste0(c(mean = "Mean", median = "Median", min = "Minimum", max = "Maximum")[[agg]], " of ", val)
@@ -342,9 +342,9 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
   }
 
   ref_list <- NULL
-  if (!is.null(refLines)) {
-    lab <- if (is.null(names(refLines))) rep("", length(refLines)) else names(refLines)
-    ref_list <- lapply(seq_along(refLines), function(k) list(value = unname(refLines[k]), label = lab[k]))
+  if (!is.null(ref_lines)) {
+    lab <- if (is.null(names(ref_lines))) rep("", length(ref_lines)) else names(ref_lines)
+    ref_list <- lapply(seq_along(ref_lines), function(k) list(value = unname(ref_lines[k]), label = lab[k]))
   }
 
   if (is.null(legend)) legend <- !is.null(groups)
@@ -355,11 +355,11 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
     options = list(
       orientation = orientation,
       shape = shape,
-      stemWidth = stemWidth,
-      stemColor = stemColor,
-      dotRadius = dotRadius,
-      dotStroke = dotStroke,
-      dotStrokeWidth = dotStrokeWidth,
+      stemWidth = stem_width,
+      stemColor = stem_color,
+      dotRadius = dot_radius,
+      dotStroke = dot_stroke,
+      dotStrokeWidth = dot_stroke_width,
       stateKey = paste(shape, orientation, cat, val, group, agg, sep = "|"),
       categories = as.list(cats),
       groups = as.list(groups),
@@ -370,39 +370,39 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, paddingWidth,
       fill = bar_fill,
       colors = as.list(group_colors),
       catColors = as.list(cat_colors),
-      negativeFill = negativeFill,
+      negativeFill = negative_fill,
       sort = sort,
       position = position,
-      paddingWidth = paddingWidth,
+      paddingWidth = padding_width,
       labels = isTRUE(labels),
       highlight = as.list(as.character(highlight)),
       refLines = ref_list,
-      cornerRadius = cornerRadius,
+      cornerRadius = corner_radius,
       legend = isTRUE(legend),
       controls = isTRUE(controls),
       tooltip = isTRUE(tooltip),
       animate = isTRUE(animate),
-      valueFormat = valueFormat,
-      valuePrefix = valuePrefix,
-      valueSuffix = valueSuffix,
-      valTicks = valTicks,
-      catFontSize = catFontSize,
-      valFontSize = valFontSize,
-      catTitle = catTitle,
-      catTitleFontSize = catTitleFontSize,
-      valTitle = valTitle,
-      valTitleFontSize = valTitleFontSize,
+      valueFormat = value_format,
+      valuePrefix = value_prefix,
+      valueSuffix = value_suffix,
+      valTicks = val_ticks,
+      catFontSize = cat_font_size,
+      valFontSize = val_font_size,
+      catTitle = cat_title,
+      catTitleFontSize = cat_title_font_size,
+      valTitle = val_title,
+      valTitleFontSize = val_title_font_size,
       title = title,
-      titleFontSize = titleFontSize,
+      titleFontSize = title_font_size,
       subtitle = subtitle,
-      subtitleFontSize = subtitleFontSize,
+      subtitleFontSize = subtitle_font_size,
       stroke = stroke,
-      strokeWidth = strokeWidth,
+      strokeWidth = stroke_width,
       font = font,
       bgcol = bgcol,
       opacity = opacity,
-      axisCol = axisCol,
-      gridCol = if (is.null(gridCol) || is.na(gridCol)) NULL else gridCol,
+      axisCol = axis_col,
+      gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,
       width = width,
       height = height
     )

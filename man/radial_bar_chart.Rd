@@ -9,29 +9,29 @@ radial_bar_chart(
   label,
   value,
   max = 100,
-  startAngle = 0,
-  endAngle = 270,
+  start_angle = 0,
+  end_angle = 270,
   colors = NULL,
-  trackCol = "#ececec",
+  track_col = "#ececec",
   hollow = 0.35,
-  ringGap = 0.3,
-  roundedCaps = TRUE,
-  showLabels = TRUE,
-  showValues = TRUE,
-  labelFontSize = 12,
-  centerValue = c("average", "total", "none"),
-  centerLabel = NULL,
-  centerFontSize = NULL,
-  valueFormat = ",.0f",
+  ring_gap = 0.3,
+  rounded_caps = TRUE,
+  show_labels = TRUE,
+  show_values = TRUE,
+  label_font_size = 12,
+  center_value = c("average", "total", "none"),
+  center_label = NULL,
+  center_font_size = NULL,
+  value_format = ",.0f",
   suffix = NULL,
   hover = TRUE,
   animate = TRUE,
   duration = 1200,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  textCol = "#333333",
+  text_col = "#333333",
   width = NULL,
   height = NULL
 )
@@ -49,46 +49,46 @@ ring values.}
 Values above \code{max} are capped at a full sweep (with a warning).
 Defaults to \code{100}.}
 
-\item{startAngle}{Angle in degrees at which every track starts, measured
+\item{start_angle}{Angle in degrees at which every track starts, measured
 clockwise from 12 o'clock. Defaults to \code{0}.}
 
-\item{endAngle}{Angle in degrees at which every track ends. Must be greater
-than \code{startAngle} and at most \code{startAngle + 360}. Defaults to
+\item{end_angle}{Angle in degrees at which every track ends. Must be greater
+than \code{start_angle} and at most \code{start_angle + 360}. Defaults to
 \code{270}.}
 
 \item{colors}{Optional. A vector of colors, one per ring (recycled if
 shorter). Defaults to \code{NULL}, which uses a built-in palette.}
 
-\item{trackCol}{Color of the background tracks. Defaults to
+\item{track_col}{Color of the background tracks. Defaults to
 \code{"#ececec"}.}
 
 \item{hollow}{Size of the empty center as a fraction (0 to 0.9) of the
 outer radius. Defaults to \code{0.35}.}
 
-\item{ringGap}{Fraction (0 to 0.9) of each ring's band left empty between
+\item{ring_gap}{Fraction (0 to 0.9) of each ring's band left empty between
 neighbouring tracks. Defaults to \code{0.3}.}
 
-\item{roundedCaps}{Whether the arcs (and partial tracks) have rounded ends.
+\item{rounded_caps}{Whether the arcs (and partial tracks) have rounded ends.
 Defaults to \code{TRUE}.}
 
-\item{showLabels}{Whether to label each ring at the start of its track.
+\item{show_labels}{Whether to label each ring at the start of its track.
 Defaults to \code{TRUE}.}
 
-\item{showValues}{Whether to append the formatted value to each ring
+\item{show_values}{Whether to append the formatted value to each ring
 label (e.g. \code{"Vimeo: 76\%"}). Defaults to \code{TRUE}.}
 
-\item{labelFontSize}{Font size of the ring labels. Defaults to \code{12}.}
+\item{label_font_size}{Font size of the ring labels. Defaults to \code{12}.}
 
-\item{centerValue}{What to show in the center when nothing is hovered:
+\item{center_value}{What to show in the center when nothing is hovered:
 \code{"average"} (default), \code{"total"} or \code{"none"}.}
 
-\item{centerLabel}{Optional. Text shown above the center value. Defaults
-to \code{"Average"} or \code{"Total"} depending on \code{centerValue}.}
+\item{center_label}{Optional. Text shown above the center value. Defaults
+to \code{"Average"} or \code{"Total"} depending on \code{center_value}.}
 
-\item{centerFontSize}{Optional. Font size of the big center value.
+\item{center_font_size}{Optional. Font size of the big center value.
 Defaults to \code{NULL}, which sizes it to fit the hollow.}
 
-\item{valueFormat}{A d3-format specifier used to display values. Defaults
+\item{value_format}{A d3-format specifier used to display values. Defaults
 to \code{",.0f"}.}
 
 \item{suffix}{Optional. Text appended to every displayed value. Defaults to
@@ -106,14 +106,14 @@ to \code{1200}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{textCol}{Color of the title, labels and center text. Defaults to
+\item{text_col}{Color of the title, labels and center text. Defaults to
 \code{"#333333"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -138,11 +138,11 @@ the center shows the average (or total) of the values. Hovering a ring
 highlights it, replaces the center text with that ring's name and value,
 and shows a tooltip.
 
-By default the rings cover 270 degrees (\code{startAngle = 0},
-\code{endAngle = 270}), leaving the top-left quadrant free for the ring
+By default the rings cover 270 degrees (\code{start_angle = 0},
+\code{end_angle = 270}), leaving the top-left quadrant free for the ring
 labels. Angles are in degrees, measured clockwise from 12 o'clock. Use
-\code{endAngle = 360} for full circles (labels then follow the curve of
-each track), or for example \code{startAngle = -90, endAngle = 90} for a
+\code{end_angle = 360} for full circles (labels then follow the curve of
+each track), or for example \code{start_angle = -90, end_angle = 90} for a
 semicircle gauge.
 }
 \examples{
@@ -170,9 +170,9 @@ radial_bar_chart(
   label       = "region",
   value       = "units",
   max         = 500,
-  endAngle    = 360,
-  centerValue = "total",
-  centerLabel = "Units sold",
+  end_angle    = 360,
+  center_value = "total",
+  center_label = "Units sold",
   colors      = c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"),
   title       = "Units sold by region (target: 500)"
 )
@@ -182,10 +182,10 @@ radial_bar_chart(
   data       = platforms,
   label      = "platform",
   value      = "share",
-  startAngle = -135,
-  endAngle   = 135,
+  start_angle = -135,
+  end_angle   = 135,
   hollow     = 0.45,
-  showValues = FALSE,
-  trackCol   = "#f2f2f2"
+  show_values = FALSE,
+  track_col   = "#f2f2f2"
 )
 }

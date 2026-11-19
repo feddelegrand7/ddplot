@@ -26,34 +26,34 @@
 #'
 #' @param fill_level A number between 0 and 1: how grown the plant is (values
 #'   outside are clamped). Defaults to 0.5.
-#' @param potWidth Optional. The width of the pot in pixels. By default it
+#' @param pot_width Optional. The width of the pot in pixels. By default it
 #'   depends on the size of the chart.
-#' @param potHeight Optional. The height of the pot in pixels.
-#' @param plantMaxHeight Optional. The height of the fully grown plant (above
+#' @param pot_height Optional. The height of the pot in pixels.
+#' @param plant_max_height Optional. The height of the fully grown plant (above
 #'   the soil) in pixels. By default the plant uses the height available.
-#' @param stemColor The colour of the stem and the leaves. Defaults to
+#' @param stem_color The colour of the stem and the leaves. Defaults to
 #'   "#3ca951".
-#' @param potColor The colour of the pot. Defaults to "#c96f45".
-#' @param flowerColor The colour of the petals of the bud and the flower.
+#' @param pot_color The colour of the pot. Defaults to "#c96f45".
+#' @param flower_color The colour of the petals of the bud and the flower.
 #'   Defaults to "#ff8ab7".
-#' @param strokeColor Optional. The outline colour of the pot. Defaults to a
-#'   darker shade of \code{potColor}.
-#' @param strokeWidth The outline width of the pot. Defaults to 1.5.
-#' @param renderFillLabel Logical. Show the percentage and the stage above
+#' @param stroke_color Optional. The outline colour of the pot. Defaults to a
+#'   darker shade of \code{pot_color}.
+#' @param stroke_width The outline width of the pot. Defaults to 1.5.
+#' @param render_fill_label Logical. Show the percentage and the stage above
 #'   the plant. Defaults to TRUE.
-#' @param titleText Optional. A caption below the pot. Defaults to "Plant
+#' @param title_text Optional. A caption below the pot. Defaults to "Plant
 #'   growth"; use \code{NULL} to hide it.
-#' @param titleColor The colour of the caption. Defaults to "#333".
-#' @param titleFontSize The font size of the caption, a number or a CSS size
+#' @param title_color The colour of the caption. Defaults to "#333".
+#' @param title_font_size The font size of the caption, a number or a CSS size
 #'   such as "14px". Defaults to 14.
 #' @param font The font family. Defaults to "Verdana, Geneva, Tahoma,
 #'   sans-serif".
-#' @param labelColor The colour of the percentage and the target label.
+#' @param label_color The colour of the percentage and the target label.
 #'   Defaults to "#333".
-#' @param labelFontSize Optional. The font size of the percentage, a number
+#' @param label_font_size Optional. The font size of the percentage, a number
 #'   or a CSS size such as "16px". By default it depends on the size of the
 #'   chart.
-#' @param soilColor The colour of the soil. Defaults to "#5b3a29".
+#' @param soil_color The colour of the soil. Defaults to "#5b3a29".
 #' @param target Optional. A level between 0 and 1 marked with a dashed line
 #'   at the corresponding height.
 #' @param sway Logical. Let the plant sway in the breeze. Defaults to TRUE.
@@ -69,34 +69,34 @@
 #'
 #' @examples
 #' plant_growth(0.4)
-#' plant_growth(1, titleText = "Project completed")
+#' plant_growth(1, title_text = "Project completed")
 #' plant_growth(
 #'   0.7,
 #'   target = 0.9,
-#'   potColor = "#4269d0",
-#'   flowerColor = "#efb118",
+#'   pot_color = "#4269d0",
+#'   flower_color = "#efb118",
 #'   draggable = TRUE
 #' )
 #'
 #' @export
 plant_growth <- function(
     fill_level = 0.5,
-    potWidth = NULL,
-    potHeight = NULL,
-    plantMaxHeight = NULL,
-    stemColor = "#3ca951",
-    potColor = "#c96f45",
-    flowerColor = "#ff8ab7",
-    strokeColor = NULL,
-    strokeWidth = 1.5,
-    renderFillLabel = TRUE,
-    titleText = "Plant growth",
-    titleColor = "#333",
-    titleFontSize = 14,
+    pot_width = NULL,
+    pot_height = NULL,
+    plant_max_height = NULL,
+    stem_color = "#3ca951",
+    pot_color = "#c96f45",
+    flower_color = "#ff8ab7",
+    stroke_color = NULL,
+    stroke_width = 1.5,
+    render_fill_label = TRUE,
+    title_text = "Plant growth",
+    title_color = "#333",
+    title_font_size = 14,
     font = "Verdana, Geneva, Tahoma, sans-serif",
-    labelColor = "#333",
-    labelFontSize = NULL,
-    soilColor = "#5b3a29",
+    label_color = "#333",
+    label_font_size = NULL,
+    soil_color = "#5b3a29",
     target = NULL,
     sway = TRUE,
     draggable = FALSE,
@@ -116,22 +116,22 @@ plant_growth <- function(
     height = height,
     options = list(
       level = fill_level,
-      potWidth = play_size(potWidth, "potWidth"),
-      potHeight = play_size(potHeight, "potHeight"),
-      plantMaxHeight = play_size(plantMaxHeight, "plantMaxHeight"),
-      stemColor = stemColor,
-      potColor = potColor,
-      flowerColor = flowerColor,
-      strokeColor = strokeColor,
-      strokeWidth = strokeWidth,
-      renderFillLabel = play_flag(renderFillLabel, "renderFillLabel"),
-      titleText = titleText,
-      titleColor = titleColor,
-      titleFontSize = play_size(titleFontSize, "titleFontSize"),
+      potWidth = play_size(pot_width, "pot_width"),
+      potHeight = play_size(pot_height, "pot_height"),
+      plantMaxHeight = play_size(plant_max_height, "plant_max_height"),
+      stemColor = stem_color,
+      potColor = pot_color,
+      flowerColor = flower_color,
+      strokeColor = stroke_color,
+      strokeWidth = stroke_width,
+      renderFillLabel = play_flag(render_fill_label, "render_fill_label"),
+      titleText = title_text,
+      titleColor = title_color,
+      titleFontSize = play_size(title_font_size, "title_font_size"),
       font = font,
-      labelColor = labelColor,
-      labelFontSize = play_size(labelFontSize, "labelFontSize"),
-      soilColor = soilColor,
+      labelColor = label_color,
+      labelFontSize = play_size(label_font_size, "label_font_size"),
+      soilColor = soil_color,
       target = target,
       sway = play_flag(sway, "sway"),
       draggable = play_flag(draggable, "draggable"),

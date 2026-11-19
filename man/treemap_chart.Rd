@@ -12,21 +12,21 @@ treemap_chart(
   tile = "squarify",
   padding = 2,
   colors = NULL,
-  valueFormat = ",.0f",
-  showValues = TRUE,
-  labelFontSize = 11,
-  labelCol = NULL,
-  groupFontSize = 12,
-  strokeCol = "white",
-  strokeWidth = 1,
+  value_format = ",.0f",
+  show_values = TRUE,
+  label_font_size = 11,
+  label_col = NULL,
+  group_font_size = 12,
+  stroke_col = "white",
+  stroke_width = 1,
   hover = TRUE,
   legend = TRUE,
-  legendFontSize = 11,
+  legend_font_size = 11,
   title = NULL,
-  titleFontSize = 16,
+  title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
   bgcol = "white",
-  textCol = "black",
+  text_col = "black",
   width = NULL,
   height = NULL
 )
@@ -55,28 +55,28 @@ one color is used per group; otherwise one color per rectangle. Colors are
 recycled if there are fewer colors than groups/rectangles. Defaults to
 \code{NULL}, which uses D3's Tableau 10 palette.}
 
-\item{valueFormat}{A d3-format specifier used to display values in the
+\item{value_format}{A d3-format specifier used to display values in the
 labels and tooltip (e.g. \code{",.0f"}, \code{"$,.2s"}, \code{".3~s"}).
 Defaults to \code{",.0f"}.}
 
-\item{showValues}{Whether to display the formatted value under each label.
+\item{show_values}{Whether to display the formatted value under each label.
 Defaults to \code{TRUE}.}
 
-\item{labelFontSize}{Font size of the rectangle labels. Labels are
+\item{label_font_size}{Font size of the rectangle labels. Labels are
 automatically truncated or hidden when a rectangle is too small to fit
 them. Defaults to \code{11}.}
 
-\item{labelCol}{Optional. Color of the rectangle labels. Defaults to
+\item{label_col}{Optional. Color of the rectangle labels. Defaults to
 \code{NULL}, which picks white or near-black automatically for contrast
 with each rectangle's fill.}
 
-\item{groupFontSize}{Font size of the group headers (only used when
+\item{group_font_size}{Font size of the group headers (only used when
 \code{group} is supplied). Defaults to \code{12}.}
 
-\item{strokeCol}{Color of the rectangle borders. Defaults to
+\item{stroke_col}{Color of the rectangle borders. Defaults to
 \code{"white"}.}
 
-\item{strokeWidth}{Width of the rectangle borders in pixels. Defaults to
+\item{stroke_width}{Width of the rectangle borders in pixels. Defaults to
 \code{1}.}
 
 \item{hover}{Whether to highlight the hovered rectangle and show a tooltip.
@@ -85,18 +85,18 @@ Defaults to \code{TRUE}.}
 \item{legend}{Whether to display a legend of the groups (only used when
 \code{group} is supplied). Defaults to \code{TRUE}.}
 
-\item{legendFontSize}{Font size of the legend text. Defaults to \code{11}.}
+\item{legend_font_size}{Font size of the legend text. Defaults to \code{11}.}
 
 \item{title}{Optional. Title of the chart.}
 
-\item{titleFontSize}{Font size of the chart title. Defaults to \code{16}.}
+\item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
 \item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
 
-\item{textCol}{Color of the title and legend text. Defaults to
+\item{text_col}{Color of the title and legend text. Defaults to
 \code{"black"}.}
 
 \item{width}{Optional. The width of the SVG output.}
@@ -141,7 +141,7 @@ treemap_chart(
   value       = "spending",
   label       = "department",
   group       = "ministry",
-  valueFormat = "$,.0f",
+  value_format = "$,.0f",
   title       = "Where the money goes (millions)"
 )
 
@@ -155,7 +155,7 @@ treemap_chart(
   value       = "pop",
   label       = "country",
   group       = "continent",
-  valueFormat = ".3~s",
+  value_format = ".3~s",
   padding     = 1,
   title       = "World population in 2007"
 )
