@@ -22,7 +22,7 @@ Charts that split a whole into its parts, flat or nested.
 | [`sunburst_chart()`](#sunburst_chart) | You explore a hierarchy with several levels |
 | [`mosaic_chart()`](#mosaic_chart) | You show how two categorical variables combine |
 | [`rose_chart()`](#rose_chart) | You show a cyclical breakdown, such as months, Nightingale-style |
-| [`parliament_chart()`](#parliament_chart) | You show seats won by each party |
+| [`parliament_chart()`](#parliament_chart) | You show the seats of an assembly and build coalitions |
 
 :::
 
@@ -283,21 +283,53 @@ rose_chart(
 
 ## `parliament_chart()` {#parliament_chart}
 
-You can easily create a parliament chart using the `parliament_chart()` function, consider the following example: 
+`parliament_chart()` draws the seats of an assembly as a hemicycle, one dot per seat. The parties form wedges from left to right in the order of the data, which is usually their political orientation. A dashed line marks the majority, and the centre shows the total. Hover a seat or a legend entry to see the party's seats, share, rank and distance from a majority.
 
 ```{r}
 # The data is a toy example and does not reflect the reality
 vote_results_germany <- data.frame(
-    political_party = c("SDP", "CDU", "Linke", "Grüne"),
-    number_of_seats = c(200, 40, 30, 20)
+  political_party = c("SDP", "CDU", "Linke", "Grüne"),
+  number_of_seats = c(200, 40, 30, 20)
 )
 parliament_chart(
   data = vote_results_germany,
   categorical_column = "political_party",
   numerical_column = "number_of_seats",
   title = "German Bundestag",
-  seatSize = 10,
-  bgcol = "#fefefe"
+  subtitle = "Toy results"
+)
+```
+
+The chart is also a coalition builder: click the parties to put them together. Their seats glide to the left of the hemicycle, so the coalition has a majority when it crosses the dashed line, and the gauge underneath counts its seats. `coalition` sets the parties of the coalition when the chart is first drawn, `previous` shows the gains and losses since the previous election, and `fill` gives the parties their own colours. In Shiny, the coalition arrives in `input$<id>_coalition`.
+
+```{r}
+assembly <- data.frame(
+  party = c("Left", "Greens", "Social Democrats", "Liberals",
+            "Conservatives", "Nationalists"),
+  seats = c(28, 41, 152, 63, 187, 79),
+  seats_before = c(39, 30, 171, 48, 170, 92)
+)
+parliament_chart(
+  assembly, "party", "seats",
+  previous = "seats_before",
+  fill = c("#c0392b", "#3ca951", "#ff725c", "#efb118", "#4269d0", "#6b4e9c"),
+  coalition = c("Social Democrats", "Greens", "Liberals"),
+  title = "Who can govern?",
+  subtitle = "Click the parties to build a coalition"
+)
+```
+
+`arc` bends the seats into a horseshoe (or a full ring at 360 degrees), `seatShape = "square"` draws square seats and `majority` sets another threshold, such as a two-thirds majority.
+
+```{r}
+parliament_chart(
+  assembly, "party", "seats",
+  arc = 280,
+  innerRadius = 0.5,
+  seatShape = "square",
+  majority = 2 / 3,
+  sort = "descending",
+  title = "A two-thirds majority"
 )
 ```
 

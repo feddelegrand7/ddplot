@@ -2,65 +2,197 @@
 % Please edit documentation in R/parliamant_chart.R
 \name{parliament_chart}
 \alias{parliament_chart}
-\title{Display a Parliament  Chart}
+\title{Create an interactive parliament chart}
 \usage{
 parliament_chart(
   data,
   categorical_column,
   numerical_column,
-  seatSize = 6,
-  padding = 2,
+  seatSize = NULL,
+  padding = NULL,
   maxRows = NULL,
   title = NULL,
-  titleFontSize = 22,
+  titleFontSize = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
+  bgcol = "white",
   width = NULL,
-  height = NULL
+  height = NULL,
+  subtitle = NULL,
+  subtitleFontSize = 13,
+  fill = NULL,
+  colorCategory = NULL,
+  previous = NULL,
+  majority = TRUE,
+  coalition = NULL,
+  coalitionBuilder = TRUE,
+  regroup = TRUE,
+  sort = c("none", "descending", "ascending"),
+  arc = 180,
+  innerRadius = 0.4,
+  seatShape = c("circle", "square"),
+  centerLabel = "seats",
+  legend = TRUE,
+  tooltip = TRUE,
+  animate = TRUE,
+  axisCol = "#333333"
 )
 }
 \arguments{
-\item{data}{A data frame with a categorical column and a numerical column}
+\item{data}{A data frame with one row per party (rows with the same party
+are added up).}
 
-\item{categorical_column}{The categorical column to consider}
+\item{categorical_column}{The name of the column giving the parties.}
 
-\item{numerical_column}{The numerical column to consider}
+\item{numerical_column}{The name of the column giving the number of seats
+(whole numbers; other numbers are rounded with a warning).}
 
-\item{seatSize}{The size of each seat. Defaults to 6.}
+\item{seatSize}{Optional. The diameter of the seats in pixels. By default
+the seats are as large as the chart allows. When the seats do not fit,
+they are made smaller.}
 
-\item{padding}{The padding between seats. Defaults to 2.}
+\item{padding}{Optional. The space between two seats, in pixels. By
+default a fifth of the space given to each seat.}
 
-\item{maxRows}{The maximum number of rows. Optional.}
+\item{maxRows}{Optional. The number of rows of seats. By default the
+number of rows that gives the largest seats.}
 
-\item{title}{The title of the chart. Optional.}
+\item{title}{Optional. The title of the chart.}
 
-\item{titleFontSize}{Font size for the title. Defaults to 22.}
+\item{titleFontSize}{The font size of the title. Defaults to 20.}
 
-\item{font}{Font family for text. Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
+\item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
+sans-serif".}
 
-\item{bgcol}{Background color of the chart. Defaults to "#CAD0D3".}
+\item{bgcol}{The background colour. Defaults to "white".}
 
-\item{width}{Width of the SVG canvas. Optional.}
+\item{width}{Optional. The width of the chart.}
 
-\item{height}{Height of the SVG canvas. Optional.}
+\item{height}{Optional. The height of the chart.}
+
+\item{subtitle}{Optional. A subtitle under the title.}
+
+\item{subtitleFontSize}{The font size of the subtitle. Defaults to 13.}
+
+\item{fill}{Optional. The colours of the parties: one colour per party
+(recycled, in the order of the data), or a named vector mapping colours
+to parties (for instance \code{c(Greens = "#3ca951")}); the other
+parties get the ddplot palette.}
+
+\item{colorCategory}{Optional. The name of a D3 categorical colour scheme,
+such as "Tableau10" or "Set2", used when \code{fill} is not given.}
+
+\item{previous}{Optional. The name of a column giving the seats of each
+party at the previous election: the gains and losses are then shown in
+the legend and the tooltips.}
+
+\item{majority}{The seats needed for a majority: \code{TRUE} (default) for
+more than half of the seats, a number of seats, a share of the seats
+(a number below 1, such as \code{2/3}, rounded up), or \code{FALSE} to
+draw no majority line.}
+
+\item{coalition}{Optional. A character vector of parties that form the
+coalition when the chart is first drawn.}
+
+\item{coalitionBuilder}{Logical. Let the viewer build a coalition by
+clicking parties, with a gauge under the hemicycle. Defaults to
+\code{TRUE}.}
+
+\item{regroup}{Logical. Move the seats of the coalition to the left of the
+hemicycle. Defaults to \code{TRUE}.}
+
+\item{sort}{The order of the parties from left to right: \code{"none"}
+(default, the order of the data or of the factor levels, as parties are
+usually ordered by political orientation), \code{"descending"} (largest
+first) or \code{"ascending"}.}
+
+\item{arc}{The angle covered by the seats, in degrees, from 180 (default,
+a hemicycle) to 360 (a full ring).}
+
+\item{innerRadius}{The radius of the empty centre, as a fraction of the
+outer radius. Defaults to 0.4.}
+
+\item{seatShape}{The shape of the seats: \code{"circle"} (default) or
+\code{"square"}.}
+
+\item{centerLabel}{The text under the number of seats in the centre.
+Defaults to "seats"; \code{FALSE} leaves the centre empty.}
+
+\item{legend}{Logical. Show the legend, with the seats and shares (on the
+right when there is room, otherwise below). Defaults to \code{TRUE}.}
+
+\item{tooltip}{Logical. Show a tooltip when hovering the seats. Defaults
+to \code{TRUE}.}
+
+\item{animate}{Logical. Fill the seats from left to right when the chart
+comes into view. Defaults to \code{TRUE}.}
+
+\item{axisCol}{The colour of the texts. Defaults to "#333333".}
 }
 \value{
-A D3-rendered Parliament chart
+An interactive parliament chart (an r2d3 htmlwidget).
 }
 \description{
-Display a Parliament  Chart
+Draws the seats of an assembly as a hemicycle: one dot per seat, the
+parties forming wedges from left to right in the order of the data (or by
+size, see \code{sort}). A dashed line marks the majority, and the centre
+shows the total number of seats. Rows with the same party are added up.
 }
+\details{
+The chart is also a coalition builder: click parties to put them together.
+Their seats gather on the left of the hemicycle, so the coalition has a
+majority when its seats cross the majority line, and a gauge under the
+hemicycle counts its seats.
+}
+\section{Interactions}{
+
+\itemize{
+  \item Hover a seat or a legend entry to highlight the party and see its
+    seats, its share, its rank and how far it is from a majority (and its
+    gains or losses with \code{previous}).
+  \item Click a seat or a legend entry (or press Enter on a focused legend
+    entry) to add the party to the coalition, or to take it out. The
+    coalition seats move to the left (see \code{regroup}), the gauge shows
+    whether they reach the majority, and "Clear" empties the coalition.
+}
+}
+
+\section{Shiny}{
+
+Inside Shiny, with \code{r2d3::d3Output("id")} and \code{r2d3::renderD3()},
+clicking a party sets \code{input$id_clicked} to its name, and every change
+of the coalition sets \code{input$id_coalition} to a list with
+\code{parties} (a list of names: use \code{unlist()} to get a vector),
+\code{seats}, \code{majority} (the seats needed) and \code{hasMajority}.
+The coalition is kept when the chart is re-rendered (and
+\code{input$id_coalition} is updated if its seats changed), and the seats
+move smoothly to their new places when the results change.
+}
+
 \examples{
 political_results_example <- data.frame(
-    political_party = c("SDP", "CDU", "Linke"),
-    number_of_seats = c(200, 40, 30)
+  political_party = c("SDP", "CDU", "Linke"),
+  number_of_seats = c(200, 40, 30)
 )
 parliament_chart(
   data = political_results_example,
   categorical_column = "political_party",
   numerical_column = "number_of_seats",
-  title = "German Bundestag (results not real, just an example)",
-  seatSize = 10,
-  bgcol = "#fefefe"
+  title = "An assembly of 270 seats"
+)
+
+# A toy assembly with party colours, the previous results and a coalition
+assembly <- data.frame(
+  party = c("Left", "Greens", "Social Democrats", "Liberals",
+            "Conservatives", "Nationalists"),
+  seats = c(28, 41, 152, 63, 187, 79),
+  seats_before = c(39, 30, 171, 48, 170, 92)
+)
+parliament_chart(
+  assembly, "party", "seats",
+  previous = "seats_before",
+  fill = c("#c0392b", "#3ca951", "#ff725c", "#efb118", "#4269d0", "#6b4e9c"),
+  coalition = c("Social Democrats", "Greens", "Liberals"),
+  title = "Who can govern?",
+  subtitle = "Click the parties to build a coalition"
 )
 }

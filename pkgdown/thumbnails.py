@@ -45,11 +45,12 @@ GUIDES = {
 CLICK = {"anim_line_chart": 11000, "animated_histogram": 3500}
 # Charts whose thumbnail uses a later example (0-based index within the section).
 INDEX = {"flame": 1, "scatter_plot": 2, "bar_chart": 3, "horz_bar_chart": 1, "lollipop_chart": 1, "area_chart": 1, "area_band": 1,
-         "histogram": 1, "pie_chart": 1, "plant_growth": 1}
+         "histogram": 1, "pie_chart": 1, "plant_growth": 1, "parliament_chart": 1}
 # Charts that need longer to settle.
 WAIT = {"bar_chart_race": 6000, "line_race": 6000, "bubble_race": 6000,
         "radial_bar_race": 6000, "treemap_race": 6000, "donut_race": 6000, "liquid_chart": 3500, "beeswarm_plot": 3500,
-        "heart_fill": 2500, "glass_fill": 2500, "plant_growth": 3000, "flame": 2000, "flower": 2000}
+        "heart_fill": 2500, "glass_fill": 2500, "plant_growth": 3000, "flame": 2000, "flower": 2000,
+        "parliament_chart": 2500}
 
 
 def serve(directory):

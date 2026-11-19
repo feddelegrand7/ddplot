@@ -66,7 +66,7 @@ waffle_chart|composition|Waffle chart|You show shares as a grid of 100 squares|i
 sunburst_chart|composition|Sunburst chart|You explore a hierarchy with several levels|interactive
 mosaic_chart|composition|Mosaic chart|You show how two categorical variables combine|interactive
 rose_chart|composition|Rose chart|You show a cyclical breakdown, such as months, Nightingale-style|interactive
-parliament_chart|composition|Parliament chart|You show seats won by each party|
+parliament_chart|composition|Parliament chart|You show the seats of an assembly and build coalitions|animated,interactive,shiny
 bar_chart_race|races|Bar chart race|You animate a ranking through time, with the bars overtaking each other|animated,interactive,shiny
 line_race|races|Line race|You replay several series drawing themselves, by value or by rank|animated,interactive,shiny
 bubble_race|races|Bubble race|You replay a scatter plot through time, Gapminder style|animated,interactive,shiny
