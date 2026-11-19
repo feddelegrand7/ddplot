@@ -1,6 +1,6 @@
 ---
 title: "Playful indicators"
-description: "Hearts, glasses, plants, hair, noses, flames and flowers."
+description: "Hearts, glasses, plants, hair, noses, muscles, flames and flowers."
 ---
 
 ```{r setup, include = FALSE}
@@ -8,9 +8,9 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", message = FALSE, warning 
 library(ddplot)
 ```
 
-Illustrative, animated SVG indicators. Each one shows a single level and is meant for presentations, landing pages and dashboards that need a lighter touch. They come to life when they scroll into view: the heart and the glass fill up, the plant, the hair and the nose grow, the flame ignites and the flower blooms, while the value counts up. They only animate while they are on screen, and they stay still for visitors who have asked their system for reduced motion.
+Illustrative, animated SVG indicators. Each one shows a single level and is meant for presentations, landing pages and dashboards that need a lighter touch. They come to life when they scroll into view: the heart and the glass fill up, the plant, the hair, the nose and the biceps grow, the flame ignites and the flower blooms, while the value counts up. They only animate while they are on screen, and they stay still for visitors who have asked their system for reduced motion.
 
-Every indicator reacts to the mouse, and the heart, the glass, the plant, the hair, the nose and the flame can be made `draggable = TRUE`. Viewers can then set the level themselves by dragging, or with the arrow keys. In Shiny, the new level arrives in `input$<id>_value`, and clicks arrive in `input$<id>_clicked`.
+Every indicator reacts to the mouse, and the heart, the glass, the plant, the hair, the nose, the biceps and the flame can be made `draggable = TRUE`. Viewers can then set the level themselves by dragging, or with the arrow keys. In Shiny, the new level arrives in `input$<id>_value`, and clicks arrive in `input$<id>_clicked`.
 
 ::: {.dd-chooser}
 
@@ -21,6 +21,7 @@ Every indicator reacts to the mouse, and the heart, the glass, the plant, the ha
 | [`plant_growth()`](#plant_growth) | You show progress as a plant that grows and blooms |
 | [`hair_growth()`](#hair_growth) | You show progress as hair growing from bald to a big afro |
 | [`nose_growth()`](#nose_growth) | You show a growing number, such as unchecked claims, as a nose that keeps growing |
+| [`muscle_growth()`](#muscle_growth) | You show strength or progress as a sailor's biceps growing from flat to giant |
 | [`flame()`](#flame) | You show an intensity, such as an error count, as a flame |
 | [`flower()`](#flower) | You want a blooming flower, or a small flower chart of a few values |
 
@@ -143,6 +144,32 @@ nose_growth(
   panel_color = "#fdf1e3",
   draggable = TRUE,
   title_text = "Drag the nose"
+)
+```
+
+## `muscle_growth()` {#muscle_growth}
+
+`muscle_growth()` shows a level as a sailor flexing both arms. The biceps are flat at 0 and giant at 100 percent, and the stage goes from "Noodle arms" to "Mighty". A weak sailor strains (squeezed eyes, gritted teeth, a red face, sweat and trembling arms) while a strong one grins; the shoulders widen, the anchor and heart tattoos stretch with the biceps (`tattoos`), veins show and the biggest biceps sparkle (`sparkles`). The eyes follow the mouse, and clicking the portrait makes the sailor flex harder while a speech bubble pops up.
+
+```{r}
+muscle_growth(1, title_text = "Mighty")
+```
+
+```{r}
+muscle_growth(0.3, target = 0.75, title_text = "Training plan completed")
+```
+
+With `draggable = TRUE`, drag up to pump the biceps and down to shrink them. The colours of the skin, the hair, the stripes and the card can be changed:
+
+```{r}
+muscle_growth(
+  0.6,
+  skin_color = "#8d5a3b",
+  hair_color = "#1f1a17",
+  shirt_color = "#c0392b",
+  panel_color = "#fdf1e3",
+  draggable = TRUE,
+  title_text = "Drag up to pump the biceps"
 )
 ```
 

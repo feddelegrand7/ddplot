@@ -82,6 +82,7 @@ glass_fill|playful|Glass fill|You show a level from 0 to 1 as a glass of water|a
 plant_growth|playful|Plant growth|You show progress as a plant that grows and blooms|animated,interactive,shiny
 hair_growth|playful|Hair growth|You show progress as hair growing from bald to a big afro|animated,interactive,shiny
 nose_growth|playful|Nose growth|You show a growing number, such as unchecked claims, as a nose that keeps growing|animated,interactive,shiny
+muscle_growth|playful|Muscle growth|You show strength or progress, such as training done, as the biceps of a sailor growing from flat to giant|animated,interactive,shiny
 flame|playful|Flame|You show an intensity, such as an error count, as a flame|animated,interactive,shiny
 flower|playful|Flower|You want a blooming flower, or a small flower chart of a few values|animated,interactive,shiny
 ', sep = "|", stringsAsFactors = FALSE, na.strings = "")

@@ -22,9 +22,9 @@ const uid = pkUid("nose");
 const tw = pkMeasure(svg, font);
 const STAGES = [[0.05, "Honest"], [0.25, "Little fib"], [0.5, "White lie"], [0.75, "Tall tale"],
   [0.95, "Whopper"], [1.01, "Pants on fire"]];
-const stageOf = g => STAGES.find(s => g < s[0])[1];
+const stageOf = g => (STAGES.find(s => g < s[0]) || STAGES[STAGES.length - 1])[1];
 const QUOTES = [[0.05, "It's true!"], [0.3, "Honestly!"], [0.6, "I swear!"], [0.85, "Trust me!"], [1.01, "Would I lie?"]];
-const quoteOf = g => QUOTES.find(q => g < q[0])[1];
+const quoteOf = g => (QUOTES.find(q => g < q[0]) || QUOTES[QUOTES.length - 1])[1];
 const ariaOf = v => (o.titleText ? o.titleText + ": " : "") + pkPct(v) + " grown, " + stageOf(v);
 const ramp = (v, a, b) => pkClamp((v - a) / (b - a), 0, 1);
 const lerp = (a, b, k) => a + (b - a) * k;
@@ -246,10 +246,11 @@ const loop = pkLoop(svg, now => {
   look[0] += (lookTo[0] - look[0]) * Math.min(1, dt * 10);
   look[1] += (lookTo[1] - look[1]) * Math.min(1, dt * 10);
   if (!pkCalm && now > nextBlink) { blinkUntil = now + 130; nextBlink = now + 2200 + Math.random() * 3500; }
-  const g = lv.get(now);
+  // the springy ease overshoots a little: draw the overshoot, but not in the labels
+  const g = pkClamp(lv.get(now), 0, 1.08), gl = Math.min(1, g);
   draw(g, now);
-  if (pctText) pctText.text(pkPct(g));
-  if (stageText) stageText.text(stageOf(g));
+  if (pctText) pctText.text(pkPct(gl));
+  if (stageText) stageText.text(stageOf(gl));
 });
 loop.onVisible(() => {
   if (startFrom !== level) {
