@@ -38,7 +38,7 @@ GUIDES = {
     "races": ["bar_chart_race", "line_race", "bubble_race", "radial_bar_race",
               "treemap_race", "donut_race"],
     "kpis": ["gauge_chart", "bullet_chart", "liquid_chart", "pulse_grid"],
-    "playful": ["heart_fill", "glass_fill", "plant_growth", "hair_growth", "flame", "flower"],
+    "playful": ["heart_fill", "glass_fill", "plant_growth", "hair_growth", "nose_growth", "flame", "flower"],
 }
 
 # Charts that start empty and animate on click.
@@ -49,7 +49,7 @@ INDEX = {"flame": 1, "scatter_plot": 2, "bar_chart": 3, "horz_bar_chart": 1, "lo
 # Charts that need longer to settle.
 WAIT = {"bar_chart_race": 6000, "line_race": 6000, "bubble_race": 6000,
         "radial_bar_race": 6000, "treemap_race": 6000, "donut_race": 6000, "liquid_chart": 3500, "beeswarm_plot": 3500,
-        "heart_fill": 2500, "glass_fill": 2500, "plant_growth": 3000, "hair_growth": 3200, "flame": 2000, "flower": 2000,
+        "heart_fill": 2500, "glass_fill": 2500, "plant_growth": 3000, "hair_growth": 3200, "nose_growth": 3200, "flame": 2000, "flower": 2000,
         "parliament_chart": 2500}
 
 
