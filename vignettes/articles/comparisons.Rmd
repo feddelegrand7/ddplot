@@ -45,7 +45,7 @@ mpg %>%
     sort = "descending",
     highlight = c("honda", "volkswagen"),
     value_format = ".1f",
-    ytitle = "Average city miles per gallon",
+    y_title = "Average city miles per gallon",
     title = "City fuel economy by manufacturer",
     subtitle = "Honda and Volkswagen lead the field"
   )
@@ -176,7 +176,7 @@ mpg %>%
     x = "manufacturer",
     y = "mean_hwy",
     sort = "descending",
-    ytitle = "Average highway miles per gallon",
+    y_title = "Average highway miles per gallon",
     title = "Highway fuel economy by manufacturer",
     highlight = c("honda", "toyota"),
     value_format = ".1f"
@@ -212,7 +212,7 @@ lollipop_chart(
   y = "growth",
   negative_fill = "#ff725c",
   value_suffix = "%",
-  ytitle = "GDP growth",
+  y_title = "GDP growth",
   title = "Annual GDP growth",
   circle_radius = 8,
   line_stroke = "#c9ced6"
@@ -273,7 +273,7 @@ dumbbell_chart(
   x1_label  = "1952",
   x2_label  = "2007",
   title    = "Life expectancy: 1952 vs 2007",
-  xtitle   = "Life expectancy (years)",
+  x_title   = "Life expectancy (years)",
   sort     = "ascending"
 )
 ```
@@ -297,7 +297,7 @@ dumbbell_chart(
   col1    = "steelblue",
   col2    = "darkorange",
   title   = "City vs highway fuel economy by class",
-  xtitle  = "Miles per gallon",
+  x_title  = "Miles per gallon",
   sort    = "ascending"
 )
 ```
@@ -429,7 +429,7 @@ waterfall_chart(
   y      = "value",
   measure = "measure",
   title  = "P&L bridge",
-  ytitle = "USD thousands"
+  y_title = "USD thousands"
 )
 ```
 
@@ -446,7 +446,7 @@ waterfall_chart(
   x             = "month",
   y             = "delta",
   title         = "Monthly cash flow",
-  ytitle        = "USD thousands",
+  y_title        = "USD thousands",
   positive_color = "steelblue",
   negative_color = "tomato"
 )

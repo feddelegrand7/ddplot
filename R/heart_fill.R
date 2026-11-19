@@ -53,7 +53,7 @@
 #'   with the arrow keys. Defaults to FALSE.
 #' @param animate Logical. Fill the heart from empty when it first comes into
 #'   view. Defaults to TRUE.
-#' @param bgcol The background colour. Defaults to "white".
+#' @param bg_col The background colour. Defaults to "white".
 #' @param width Optional. The width of the chart.
 #' @param height Optional. The height of the chart.
 #'
@@ -90,7 +90,7 @@ heart_fill <- function(
     bpm = 60,
     draggable = FALSE,
     animate = TRUE,
-    bgcol = "white",
+    bg_col = "white",
     width = NULL,
     height = NULL
 ) {
@@ -125,7 +125,7 @@ heart_fill <- function(
       bpm = bpm,
       draggable = play_flag(draggable, "draggable"),
       animate = play_flag(animate, "animate"),
-      bgcol = bgcol
+      bgcol = bg_col
     )
   )
 }

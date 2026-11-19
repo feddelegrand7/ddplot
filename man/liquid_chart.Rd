@@ -19,7 +19,7 @@ liquid_chart(
   title = NULL,
   title_font_size = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   width = NULL,
   height = NULL
 )
@@ -63,7 +63,7 @@ faster. Defaults to \code{1}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{width}{Optional. The width of the SVG output.}
 

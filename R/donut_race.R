@@ -117,7 +117,7 @@
 #' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family of the chart. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background colour. Defaults to "white".
+#' @param bg_col The background colour. Defaults to "white".
 #' @param axis_col The colour of the texts. Defaults to "#333333".
 #' @param value_format Optional. A D3 format string for the values, such as
 #'   \code{",.0f"} or \code{".2s"}.
@@ -187,7 +187,7 @@ donut_race <- function(data,
                        subtitle = NULL,
                        subtitle_font_size = 13,
                        font = "Verdana, Geneva, Tahoma, sans-serif",
-                       bgcol = "white",
+                       bg_col = "white",
                        axis_col = "#333333",
                        value_format = NULL,
                        value_prefix = "",
@@ -301,7 +301,7 @@ donut_race <- function(data,
       subtitle = subtitle,
       subtitleFontSize = subtitle_font_size,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       axisCol = axis_col,
       valueFormat = value_format,
       valuePrefix = value_prefix,

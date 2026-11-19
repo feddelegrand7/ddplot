@@ -21,15 +21,15 @@ mosaic_chart(
   legend = TRUE,
   legend_title = NULL,
   legend_font_size = 11,
-  xtitle = NULL,
-  ytitle = NULL,
+  x_title = NULL,
+  y_title = NULL,
   axis_title_font_size = 12,
   x_font_size = 10,
   y_font_size = 10,
   title = NULL,
   title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -89,9 +89,9 @@ which uses the name of the \code{fill} column. Use \code{""} to hide it.}
 
 \item{legend_font_size}{Font size of the legend text. Defaults to \code{11}.}
 
-\item{xtitle}{Optional. Title of the x-axis (bottom).}
+\item{x_title}{Optional. Title of the x-axis (bottom).}
 
-\item{ytitle}{Optional. Title of the y-axis (left).}
+\item{y_title}{Optional. Title of the y-axis (left).}
 
 \item{axis_title_font_size}{Font size of the axis titles. Defaults to
 \code{12}.}
@@ -109,7 +109,7 @@ which uses the name of the \code{fill} column. Use \code{""} to hide it.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. It is also the color of the gaps
+\item{bg_col}{Background color of the SVG. It is also the color of the gaps
 between cells. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of the axes, the axis labels, the column labels, the
@@ -153,8 +153,8 @@ mosaic_chart(
   fill   = "Survived",
   value  = "Freq",
   colors = c("#e45756", "#4c78a8"),
-  xtitle = "Share of passengers and crew",
-  ytitle = "Share within class",
+  x_title = "Share of passengers and crew",
+  y_title = "Share within class",
   title  = "Who survived the Titanic?"
 )
 
@@ -187,7 +187,7 @@ mosaic_chart(
   value  = "Freq",
   colors = c("#8c564b", "#bcbd22", "#2ca02c", "#1f77b4"),
   gap    = 3,
-  xtitle = "Hair color",
+  x_title = "Hair color",
   title  = "Hair and eye color of 592 students"
 )
 }

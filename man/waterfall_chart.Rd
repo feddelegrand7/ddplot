@@ -18,15 +18,15 @@ waterfall_chart(
   label_font_size = 10,
   title = NULL,
   title_font_size = 16,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   x_font_size = 11,
   y_font_size = 11,
   opacity = 1,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -70,13 +70,13 @@ below each bar. Defaults to \code{TRUE}.}
 
 \item{title_font_size}{Font size of the chart title. Defaults to \code{16}.}
 
-\item{xtitle}{Optional. Title of the x-axis.}
+\item{x_title}{Optional. Title of the x-axis.}
 
-\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{x_title_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
-\item{ytitle}{Optional. Title of the y-axis.}
+\item{y_title}{Optional. Title of the y-axis.}
 
-\item{ytitle_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
+\item{y_title_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
 
 \item{x_font_size}{Font size of the x-axis tick labels. Defaults to \code{11}.}
 
@@ -87,7 +87,7 @@ below each bar. Defaults to \code{TRUE}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
@@ -126,7 +126,7 @@ waterfall_chart(
   y       = "value",
   measure = "measure",
   title   = "P&L bridge",
-  ytitle  = "USD thousands"
+  y_title  = "USD thousands"
 )
 
 # Monthly cash flow
@@ -140,7 +140,7 @@ waterfall_chart(
   x              = "month",
   y              = "delta",
   title          = "Monthly cash flow",
-  ytitle         = "USD thousands",
+  y_title         = "USD thousands",
   positive_color  = "steelblue",
   negative_color  = "tomato"
 )

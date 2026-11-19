@@ -14,7 +14,7 @@ parliament_chart(
   title = NULL,
   title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   width = NULL,
   height = NULL,
   subtitle = NULL,
@@ -63,7 +63,7 @@ number of rows that gives the largest seats.}
 \item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
 sans-serif".}
 
-\item{bgcol}{The background colour. Defaults to "white".}
+\item{bg_col}{The background colour. Defaults to "white".}
 
 \item{width}{Optional. The width of the chart.}
 

@@ -22,11 +22,11 @@ line_chart(
   y_zero = NULL,
   transform = c("none", "index", "percent"),
   index_base = 100,
-  rollmean = NULL,
+  roll_mean = NULL,
   show_raw = TRUE,
   events = NULL,
   bands = NULL,
-  hlines = NULL,
+  h_lines = NULL,
   legend = NULL,
   end_labels = NULL,
   tooltip = TRUE,
@@ -38,12 +38,12 @@ line_chart(
   value_prefix = "",
   value_suffix = "",
   date_format = NULL,
-  xticks = NULL,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_ticks = NULL,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   subtitle = NULL,
@@ -51,7 +51,7 @@ line_chart(
   x_font_size = 11,
   y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   grid_col = "#e9e9e9",
   axis_col = "#333333",
   width = NULL,
@@ -113,10 +113,10 @@ the first visible date). The base moves with the zoom.}
 \item{index_base}{The value series are rebased to when
 \code{transform = "index"}. Defaults to 100.}
 
-\item{rollmean}{Optional. A window size (number of observations). When
+\item{roll_mean}{Optional. A window size (number of observations). When
 given, a trailing moving average is drawn as the main line.}
 
-\item{show_raw}{Logical. When \code{rollmean} is used, also draw the raw
+\item{show_raw}{Logical. When \code{roll_mean} is used, also draw the raw
 series as a thin faded line. Defaults to \code{TRUE}.}
 
 \item{events}{Optional. Dates to mark with a vertical line: either a
@@ -127,7 +127,7 @@ column holds the dates and whose second column (optional) holds labels.}
 columns are the start and end dates. An optional third column holds the
 labels and an optional fourth column the fill colors.}
 
-\item{hlines}{Optional. Numeric reference values drawn as horizontal
+\item{h_lines}{Optional. Numeric reference values drawn as horizontal
 dashed lines (names are used as labels). Only drawn when
 \code{transform = "none"}.}
 
@@ -169,17 +169,17 @@ tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
 (default), it is picked from the frequency of the data (yearly,
 quarterly, monthly, daily or intraday).}
 
-\item{xticks}{Optional. The approximate number of x-axis ticks.}
+\item{x_ticks}{Optional. The approximate number of x-axis ticks.}
 
-\item{yticks}{Optional. The approximate number of y-axis ticks.}
+\item{y_ticks}{Optional. The approximate number of y-axis ticks.}
 
-\item{xtitle}{Optional. The title of the x-axis.}
+\item{x_title}{Optional. The title of the x-axis.}
 
-\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
+\item{x_title_font_size}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis, shown above the axis.}
+\item{y_title}{Optional. The title of the y-axis, shown above the axis.}
 
-\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
+\item{y_title_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
@@ -195,7 +195,7 @@ to 11.}
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{grid_col}{The color of the horizontal grid lines. Defaults to
 "#e9e9e9".}
@@ -236,10 +236,10 @@ date column when exact dates matter.
 
 Time-series extras: \code{transform = "index"} rebases every series to 100
 at the start of the visible range (or \code{"percent"} for the change since
-then), \code{rollmean} overlays a moving average, \code{lower} /
+then), \code{roll_mean} overlays a moving average, \code{lower} /
 \code{upper} draw a confidence or forecast ribbon, \code{bands} shade
 periods such as recessions, \code{events} mark dates with a vertical line
-and \code{hlines} draw reference values.
+and \code{h_lines} draw reference values.
 
 Missing values (\code{NA}) leave a gap in the line.
 }

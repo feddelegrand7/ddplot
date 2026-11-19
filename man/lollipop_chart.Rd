@@ -9,16 +9,16 @@ lollipop_chart(
   x,
   y = NULL,
   sort = "none",
-  bgcol = "white",
-  xticks = NULL,
-  yticks = NULL,
+  bg_col = "white",
+  x_ticks = NULL,
+  y_ticks = NULL,
   x_font_size = 11,
   y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   line_stroke = NULL,
@@ -63,11 +63,11 @@ order of the data or of the factor levels), \code{"ascending"} or
 \code{"descending"}. With \code{group}, categories are sorted by their
 total.}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
-\item{xticks}{Not used; kept for compatibility.}
+\item{x_ticks}{Not used; kept for compatibility.}
 
-\item{yticks}{Optional. The approximate number of y-axis ticks.}
+\item{y_ticks}{Optional. The approximate number of y-axis ticks.}
 
 \item{x_font_size}{The font size of the category labels. Defaults to 11.}
 
@@ -76,15 +76,15 @@ total.}
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{xtitle}{Optional. The title of the category axis.}
+\item{x_title}{Optional. The title of the category axis.}
 
-\item{xtitle_font_size}{The font size of the category axis title. Defaults
+\item{x_title_font_size}{The font size of the category axis title. Defaults
 to 13.}
 
-\item{ytitle}{Optional. The title of the value axis, drawn above it.
+\item{y_title}{Optional. The title of the value axis, drawn above it.
 Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 
-\item{ytitle_font_size}{The font size of the value axis title. Defaults to 13.}
+\item{y_title_font_size}{The font size of the value axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
@@ -204,8 +204,8 @@ mpg \%>\% group_by(drv) \%>\%
     x = "drv",
     y = "median_cty",
     sort = "ascending",
-    xtitle = "drv variable",
-    ytitle = "median cty",
+    x_title = "drv variable",
+    y_title = "median cty",
     title = "Median cty per drv"
   )
 

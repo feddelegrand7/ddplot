@@ -37,14 +37,14 @@
 #'   built-in palette (viridis for a numeric \code{group}).
 #' @param size The radius of the points in pixels when \code{size_by} is not
 #'   used. Defaults to 4.
-#' @param xticks Optional. The approximate number of x-axis ticks.
-#' @param yticks Optional. The approximate number of y-axis ticks.
-#' @param xtitle Optional. The title of the x-axis. Defaults to the name of
+#' @param x_ticks Optional. The approximate number of x-axis ticks.
+#' @param y_ticks Optional. The approximate number of y-axis ticks.
+#' @param x_title Optional. The title of the x-axis. Defaults to the name of
 #'   \code{x}; use \code{""} to hide it.
-#' @param xtitle_font_size The font size of the x-axis title. Defaults to 13.
-#' @param ytitle Optional. The title of the y-axis, drawn above the axis.
+#' @param x_title_font_size The font size of the x-axis title. Defaults to 13.
+#' @param y_title Optional. The title of the y-axis, drawn above the axis.
 #'   Defaults to the name of \code{y}; use \code{""} to hide it.
-#' @param ytitle_font_size The font size of the y-axis title. Defaults to 13.
+#' @param y_title_font_size The font size of the y-axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
 #' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param stroke Optional. The stroke colour of the points. Defaults to the
@@ -52,7 +52,7 @@
 #' @param stroke_width Optional. The stroke width of the points.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param opacity The opacity of the points (from 0 to 1). Defaults to 0.8.
 #' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
@@ -84,9 +84,9 @@
 #' @param x_scale The x-axis scale: \code{"linear"} (default) or \code{"log"}.
 #'   Rows with non-positive values are dropped with a log scale.
 #' @param y_scale The y-axis scale: \code{"linear"} (default) or \code{"log"}.
-#' @param hlines Optional. Numeric values drawn as horizontal dashed
+#' @param h_lines Optional. Numeric values drawn as horizontal dashed
 #'   reference lines; names are used as labels.
-#' @param vlines Optional. Numeric values drawn as vertical dashed reference
+#' @param v_lines Optional. Numeric values drawn as vertical dashed reference
 #'   lines; names are used as labels.
 #' @param legend Logical. Show the legend. When \code{NULL} (default), it is
 #'   shown when \code{group} or \code{size_by} is used.
@@ -149,7 +149,7 @@
 #'   label = "state",
 #'   x_scale = "log",
 #'   y_scale = "log",
-#'   hlines = c("Median" = 2838.5)
+#'   h_lines = c("Median" = 2838.5)
 #' )
 #'
 scatter_plot <- function(
@@ -158,18 +158,18 @@ scatter_plot <- function(
                         y,
                         col = NULL,
                         size = 4,
-                        xticks = NULL,
-                        yticks = NULL,
-                        xtitle = NULL,
-                        xtitle_font_size = 13,
-                        ytitle = NULL,
-                        ytitle_font_size = 13,
+                        x_ticks = NULL,
+                        y_ticks = NULL,
+                        x_title = NULL,
+                        x_title_font_size = 13,
+                        y_title = NULL,
+                        y_title_font_size = 13,
                         title = NULL,
                         title_font_size = 20,
                         stroke = NULL,
                         stroke_width = NULL,
                         font = "Verdana, Geneva, Tahoma, sans-serif",
-                        bgcol = "white",
+                        bg_col = "white",
                         opacity = 0.8,
                         axis_col = "#333333",
                         width = NULL,
@@ -185,8 +185,8 @@ scatter_plot <- function(
                         span = 0.75,
                         x_scale = c("linear", "log"),
                         y_scale = c("linear", "log"),
-                        hlines = NULL,
-                        vlines = NULL,
+                        h_lines = NULL,
+                        v_lines = NULL,
                         legend = NULL,
                         brush = TRUE,
                         animate = TRUE,
@@ -387,17 +387,17 @@ scatter_plot <- function(
       span = span,
       xScale = x_scale,
       yScale = y_scale,
-      hlines = ref_lines(hlines, "hlines"),
-      vlines = ref_lines(vlines, "vlines"),
+      hlines = ref_lines(h_lines, "h_lines"),
+      vlines = ref_lines(v_lines, "v_lines"),
       legend = isTRUE(legend),
       brush = isTRUE(brush),
       animate = isTRUE(animate),
       xFormat = x_format,
       yFormat = y_format,
-      xticks = xticks,
-      yticks = yticks,
-      xtitle = if (is.null(xtitle)) x else xtitle,
-      ytitle = if (is.null(ytitle)) y else ytitle,
+      xticks = x_ticks,
+      yticks = y_ticks,
+      xtitle = if (is.null(x_title)) x else x_title,
+      ytitle = if (is.null(y_title)) y else y_title,
       title = title,
       subtitle = subtitle,
       font = font,
@@ -405,11 +405,11 @@ scatter_plot <- function(
       strokeWidth = stroke_width,
       width = width,
       height = height,
-      xtitleFontSize = xtitle_font_size,
-      ytitleFontSize = ytitle_font_size,
+      xtitleFontSize = x_title_font_size,
+      ytitleFontSize = y_title_font_size,
       titleFontSize = title_font_size,
       subtitleFontSize = subtitle_font_size,
-      bgcol = bgcol,
+      bgcol = bg_col,
       gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,
       opacity = opacity,
       axisCol = axis_col
@@ -422,9 +422,9 @@ scatter_plot <- function(
 # Fits on log10 values when an axis uses a log scale, and returns the line
 # (and 95% confidence band) on an 80-point grid, back-transformed.
 # @noRd
-fit_scatter_trend <- function(xx, yy, method, ci, span, xlog, ylog, group) {
-  tx <- if (xlog) log10(xx) else xx
-  ty <- if (ylog) log10(yy) else yy
+fit_scatter_trend <- function(xx, yy, method, ci, span, x_log, y_log, group) {
+  tx <- if (x_log) log10(xx) else xx
+  ty <- if (y_log) log10(yy) else yy
   if (length(unique(tx)) < 3) return(NULL)
 
   grid <- seq(min(tx), max(tx), length.out = 80)
@@ -457,8 +457,8 @@ fit_scatter_trend <- function(xx, yy, method, ci, span, xlog, ylog, group) {
 
   ok <- is.finite(fit)
   if (sum(ok) < 2) return(NULL)
-  back_x <- function(v) if (xlog) 10^v else v
-  back_y <- function(v) if (ylog) 10^v else v
+  back_x <- function(v) if (x_log) 10^v else v
+  back_y <- function(v) if (y_log) 10^v else v
   band_ok <- ci && all(is.finite(lo[ok])) && all(is.finite(hi[ok]))
 
   list(

@@ -27,15 +27,15 @@ streamgraph(
   legend_font_size = 11,
   value_format = ",.2~f",
   x_format = NULL,
-  xticks = NULL,
+  x_ticks = NULL,
   x_font_size = 11,
   grid_col = "#e6e6e6",
-  xtitle = NULL,
-  xtitle_font_size = 13,
+  x_title = NULL,
+  x_title_font_size = 13,
   title = NULL,
   title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -126,7 +126,7 @@ tooltip header: a d3-format specifier for numeric \code{x} (e.g.
 \code{"\%b \%Y"}). Defaults to \code{NULL}, which picks a sensible format
 automatically.}
 
-\item{xticks}{Optional. Approximate number of x-axis ticks. Defaults to
+\item{x_ticks}{Optional. Approximate number of x-axis ticks. Defaults to
 \code{NULL} (chosen from the chart width).}
 
 \item{x_font_size}{Font size of the x-axis tick labels. Defaults to
@@ -136,9 +136,9 @@ automatically.}
 \code{NA} or \code{"transparent"} to hide them. Defaults to
 \code{"#e6e6e6"}.}
 
-\item{xtitle}{Optional. Title of the x-axis.}
+\item{x_title}{Optional. Title of the x-axis.}
 
-\item{xtitle_font_size}{Font size of the x-axis title. Defaults to
+\item{x_title_font_size}{Font size of the x-axis title. Defaults to
 \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
@@ -148,7 +148,7 @@ automatically.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of the x-axis, the titles, the crosshair and the
 legend text. Defaults to \code{"black"}.}
@@ -202,7 +202,7 @@ streamgraph(
   group  = "genre",
   value  = "listeners",
   value_format = ",.0f",
-  xtitle = "Year",
+  x_title = "Year",
   title  = "Music genres, 1980-2020 (millions of listeners)"
 )
 

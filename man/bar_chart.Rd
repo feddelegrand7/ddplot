@@ -11,20 +11,20 @@ bar_chart(
   fill = NULL,
   sort = "none",
   padding_width = 0.2,
-  xticks = NULL,
+  x_ticks = NULL,
   x_font_size = 11,
   y_font_size = 11,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   stroke = NULL,
   stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = 1,
   axis_col = "#333333",
   width = NULL,
@@ -70,23 +70,23 @@ total.}
 \item{padding_width}{The space between bars, from 0 to 0.99. Defaults to
 0.2.}
 
-\item{xticks}{Not used; kept for compatibility.}
+\item{x_ticks}{Not used; kept for compatibility.}
 
 \item{x_font_size}{The font size of the category labels. Defaults to 11.}
 
 \item{y_font_size}{The font size of the value axis labels. Defaults to 11.}
 
-\item{yticks}{Optional. The approximate number of value axis ticks.}
+\item{y_ticks}{Optional. The approximate number of value axis ticks.}
 
-\item{xtitle}{Optional. The title of the category axis.}
+\item{x_title}{Optional. The title of the category axis.}
 
-\item{xtitle_font_size}{The font size of the category axis title. Defaults
+\item{x_title_font_size}{The font size of the category axis title. Defaults
 to 13.}
 
-\item{ytitle}{Optional. The title of the value axis, drawn above it.
+\item{y_title}{Optional. The title of the value axis, drawn above it.
 Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 
-\item{ytitle_font_size}{The font size of the value axis title. Defaults to 13.}
+\item{y_title_font_size}{The font size of the value axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
@@ -99,7 +99,7 @@ Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.}
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1.}
 
@@ -202,7 +202,7 @@ mpg \%>\% group_by(manufacturer) \%>\%
     x = "manufacturer",
     y = "mean_cty",
     sort = "descending",
-    ytitle = "Average city miles per gallon",
+    y_title = "Average city miles per gallon",
     title = "City fuel economy by manufacturer",
     highlight = c("honda", "volkswagen"),
     value_format = ".1f"

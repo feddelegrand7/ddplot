@@ -34,7 +34,7 @@ donut_race(
   subtitle = NULL,
   subtitle_font_size = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "#333333",
   value_format = NULL,
   value_prefix = "",
@@ -138,7 +138,7 @@ periods.}
 \item{font}{The font family of the chart. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background colour. Defaults to "white".}
+\item{bg_col}{The background colour. Defaults to "white".}
 
 \item{axis_col}{The colour of the texts. Defaults to "#333333".}
 

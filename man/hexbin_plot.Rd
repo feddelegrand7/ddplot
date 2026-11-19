@@ -23,16 +23,16 @@ hexbin_plot(
   stroke_width = 0.5,
   grid = TRUE,
   grid_col = "#e5e5e5",
-  xtitle = NULL,
-  ytitle = NULL,
-  xtitle_font_size = 13,
-  ytitle_font_size = 13,
+  x_title = NULL,
+  y_title = NULL,
+  x_title_font_size = 13,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 16,
   x_font_size = 11,
   y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -91,15 +91,15 @@ Defaults to \code{TRUE}.}
 
 \item{grid_col}{Color of the gridlines. Defaults to \code{"#e5e5e5"}.}
 
-\item{xtitle}{Optional. Title of the x-axis. Defaults to the value of
+\item{x_title}{Optional. Title of the x-axis. Defaults to the value of
 \code{x}.}
 
-\item{ytitle}{Optional. Title of the y-axis. Defaults to the value of
+\item{y_title}{Optional. Title of the y-axis. Defaults to the value of
 \code{y}.}
 
-\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{x_title_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
-\item{ytitle_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
+\item{y_title_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
@@ -112,7 +112,7 @@ Defaults to \code{TRUE}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of axis lines, ticks, labels and titles. Defaults to
 \code{"black"}.}
@@ -150,8 +150,8 @@ hexbin_plot(
   x        = "waiting",
   y        = "eruptions",
   bin_width = 14,
-  xtitle   = "Waiting time to next eruption (min)",
-  ytitle   = "Eruption duration (min)",
+  x_title   = "Waiting time to next eruption (min)",
+  y_title   = "Eruption duration (min)",
   title    = "Old Faithful eruptions"
 )
 
@@ -167,8 +167,8 @@ hexbin_plot(
   bin_width     = 8,
   color_palette = "Viridis",
   color_scale   = "log",
-  xtitle       = "Carat",
-  ytitle       = "Price (USD)",
+  x_title       = "Carat",
+  y_title       = "Price (USD)",
   title        = "Diamond price by carat"
 )
 

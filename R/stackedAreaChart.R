@@ -32,8 +32,8 @@
 #' @param stroke_width The width of the line on top of every layer. Defaults
 #'   to 1.
 #' @param opacity The opacity of the layers (from 0 to 1). Defaults to 0.85.
-#' @param ytitle Optional. The title of the y-axis, shown above the axis.
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param y_title Optional. The title of the y-axis, shown above the axis.
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param axis_col The color of the axis text, ticks and titles. Defaults to
 #'   "#333333".
 #' @param legend_box_size,legend_text_size Not used; kept for compatibility.
@@ -95,16 +95,16 @@ stacked_area_chart <- function(
   curve = "curveLinear",
   stroke = NULL,
   stroke_width = 1,
-  xticks = NULL,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_ticks = NULL,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = 0.85,
   axis_col = "#333333",
   legend_box_size = NULL,
@@ -118,7 +118,7 @@ stacked_area_chart <- function(
   controls = TRUE,
   events = NULL,
   bands = NULL,
-  hlines = NULL,
+  h_lines = NULL,
   legend = NULL,
   end_labels = NULL,
   tooltip = TRUE,
@@ -165,18 +165,18 @@ stacked_area_chart <- function(
     data = data, x = x, y = y, group = group, colors = colors,
     stroke_width = if (stroke_width == 0) 1 else stroke_width, curve = curve,
     area = FALSE, y_zero = TRUE,
-    events = events, bands = bands, hlines = hlines,
+    events = events, bands = bands, h_lines = h_lines,
     legend = if (is.null(legend)) TRUE else legend,
     end_labels = end_labels, tooltip = tooltip, navigator = navigator,
     range_buttons = range_buttons, zoom = zoom, animate = animate,
     value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix,
-    date_format = date_format, xticks = xticks, yticks = yticks,
-    xtitle = xtitle, xtitle_font_size = xtitle_font_size,
-    ytitle = ytitle, ytitle_font_size = ytitle_font_size,
+    date_format = date_format, x_ticks = x_ticks, y_ticks = y_ticks,
+    x_title = x_title, x_title_font_size = x_title_font_size,
+    y_title = y_title, y_title_font_size = y_title_font_size,
     title = title, title_font_size = title_font_size,
     subtitle = subtitle, subtitle_font_size = subtitle_font_size,
     x_font_size = x_font_size, y_font_size = y_font_size, font = font,
-    bgcol = bgcol, grid_col = grid_col, axis_col = axis_col,
+    bg_col = bg_col, grid_col = grid_col, axis_col = axis_col,
     width = width, height = height,
     extra = list(
       kind = "stack",

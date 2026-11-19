@@ -25,7 +25,7 @@ pulse_grid(
   title = NULL,
   title_font_size = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#0F172A",
+  bg_col = "#0F172A",
   label_color = "#F8FAFC",
   title_color = "#F8FAFC",
   width = NULL,
@@ -76,7 +76,7 @@ Defaults to `TRUE`.}
 \item{font}{The font family used in labels and title. Defaults to
 'Verdana, Geneva, Tahoma, sans-serif'.}
 
-\item{bgcol}{Background color of the SVG. Defaults to '#0F172A'.}
+\item{bg_col}{Background color of the SVG. Defaults to '#0F172A'.}
 
 \item{label_color}{Color of the row and column labels. Defaults to '#F8FAFC'.}
 
@@ -110,6 +110,6 @@ pulse_grid(
   title = "Team Activity Pulse Grid",
   low = "#D9F0FF",
   high = "#EE6C4D",
-  bgcol = "#0B132B"
+  bg_col = "#0B132B"
 )
 }

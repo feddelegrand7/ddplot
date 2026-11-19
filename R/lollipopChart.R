@@ -33,8 +33,8 @@
 #'   order of the data or of the factor levels), \code{"ascending"} or
 #'   \code{"descending"}. With \code{group}, categories are sorted by their
 #'   total.
-#' @param xticks Not used; kept for compatibility.
-#' @param yticks Optional. The approximate number of y-axis ticks.
+#' @param x_ticks Not used; kept for compatibility.
+#' @param y_ticks Optional. The approximate number of y-axis ticks.
 #' @param x_font_size The font size of the category labels. Defaults to 11.
 #' @param y_font_size The font size of the value axis labels. Defaults to 11.
 #' @param line_stroke Optional. The colour of the stems. Defaults to the colour
@@ -77,8 +77,8 @@
 #'     x = "drv",
 #'     y = "median_cty",
 #'     sort = "ascending",
-#'     xtitle = "drv variable",
-#'     ytitle = "median cty",
+#'     x_title = "drv variable",
+#'     y_title = "median cty",
 #'     title = "Median cty per drv"
 #'   )
 #'
@@ -99,16 +99,16 @@ lollipop_chart <- function(data,
                            x,
                            y = NULL,
                            sort = "none",
-                           bgcol = "white",
-                           xticks = NULL,
-                           yticks = NULL,
+                           bg_col = "white",
+                           x_ticks = NULL,
+                           y_ticks = NULL,
                            x_font_size = 11,
                            y_font_size = 11,
                            font = "Verdana, Geneva, Tahoma, sans-serif",
-                           xtitle = NULL,
-                           xtitle_font_size = 13,
-                           ytitle = NULL,
-                           ytitle_font_size = 13,
+                           x_title = NULL,
+                           x_title_font_size = 13,
+                           y_title = NULL,
+                           y_title_font_size = 13,
                            title = NULL,
                            title_font_size = 20,
                            line_stroke = NULL,
@@ -146,15 +146,15 @@ lollipop_chart <- function(data,
 
   lollipop_widget(
     data = data, cat = x, val = y, orientation = "vertical", sort = sort,
-    cat_font_size = x_font_size, val_font_size = y_font_size, val_ticks = yticks,
-    cat_title = xtitle, cat_title_font_size = xtitle_font_size,
-    val_title = ytitle, val_title_font_size = ytitle_font_size,
+    cat_font_size = x_font_size, val_font_size = y_font_size, val_ticks = y_ticks,
+    cat_title = x_title, cat_title_font_size = x_title_font_size,
+    val_title = y_title, val_title_font_size = y_title_font_size,
     title = title, title_font_size = title_font_size,
     subtitle = subtitle, subtitle_font_size = subtitle_font_size,
     line_stroke = line_stroke, line_stroke_width = line_stroke_width,
     circle_fill = circle_fill, circle_stroke = circle_stroke,
     circle_stroke_width = circle_stroke_width, circle_radius = circle_radius,
-    font = font, bgcol = bgcol, opacity = opacity, axis_col = axis_col, grid_col = grid_col,
+    font = font, bg_col = bg_col, opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height, group = group, agg = match.arg(agg),
     labels = labels, highlight = highlight, ref_lines = ref_lines,
     negative_fill = negative_fill, legend = legend, controls = controls,
@@ -173,7 +173,7 @@ lollipop_widget <- function(data, cat, val, orientation, sort,
                             title, title_font_size, subtitle, subtitle_font_size,
                             line_stroke, line_stroke_width, circle_fill, circle_stroke,
                             circle_stroke_width, circle_radius,
-                            font, bgcol, opacity, axis_col, grid_col, width, height,
+                            font, bg_col, opacity, axis_col, grid_col, width, height,
                             group, agg, labels, highlight, ref_lines, negative_fill,
                             legend, controls, tooltip, animate,
                             value_format, value_prefix, value_suffix) {
@@ -199,7 +199,7 @@ lollipop_widget <- function(data, cat, val, orientation, sort,
     val_title = val_title, val_title_font_size = val_title_font_size,
     title = title, title_font_size = title_font_size,
     subtitle = subtitle, subtitle_font_size = subtitle_font_size,
-    stroke = NULL, stroke_width = NULL, font = font, bgcol = bgcol,
+    stroke = NULL, stroke_width = NULL, font = font, bg_col = bg_col,
     opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height,
     group = group, position = "grouped", agg = agg,

@@ -54,7 +54,7 @@
 #' @param center_text_color The colour of the centre text. Defaults to "#222".
 #' @param font The font family. Defaults to "Verdana, Geneva, Tahoma,
 #'   sans-serif".
-#' @param bgcol The background colour. Defaults to "white".
+#' @param bg_col The background colour. Defaults to "white".
 #' @param rotation_speed The speed of rotation, in degrees per 20
 #'   milliseconds (0 to stop it). Defaults to 0.5, or to 0 with
 #'   \code{petal_values}.
@@ -106,7 +106,7 @@ flower <- function(
     center_text_size = 16,
     center_text_color = "#222",
     font = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol = "white",
+    bg_col = "white",
     rotation_speed = 0.5,
     width = NULL,
     height = NULL,
@@ -156,7 +156,7 @@ flower <- function(
       centerTextSize = play_size(center_text_size, "center_text_size"),
       centerTextColor = center_text_color,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       rotationSpeed = rotation_speed,
       petalValues = if (is.null(petal_values)) NULL else I(as.numeric(petal_values)),
       petalLabels = if (is.null(petal_labels)) NULL else I(as.character(petal_labels)),

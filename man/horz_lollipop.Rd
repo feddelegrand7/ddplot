@@ -9,7 +9,7 @@ horz_lollipop(
   label,
   value = NULL,
   sort = "none",
-  bgcol = "white",
+  bg_col = "white",
   value_ticks = NULL,
   label_ticks = NULL,
   value_font_size = 11,
@@ -61,7 +61,7 @@ When \code{NULL}, the rows of each category are counted.}
 order of the data or of the factor levels), \code{"ascending"} or
 \code{"descending"}. Descending puts the largest value at the top.}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{value_ticks}{Optional. The approximate number of value axis ticks.}
 

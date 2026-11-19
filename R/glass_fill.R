@@ -56,7 +56,7 @@
 #'   with the arrow keys. Defaults to FALSE.
 #' @param animate Logical. Fill the glass from empty when it first comes into
 #'   view. Defaults to TRUE.
-#' @param bgcol The background colour. Defaults to "white".
+#' @param bg_col The background colour. Defaults to "white".
 #' @param width Optional. The width of the chart.
 #' @param height Optional. The height of the chart.
 #'
@@ -93,7 +93,7 @@ glass_fill <- function(
     bubbles = TRUE,
     draggable = FALSE,
     animate = TRUE,
-    bgcol = "white",
+    bg_col = "white",
     width = NULL,
     height = NULL
 ) {
@@ -126,7 +126,7 @@ glass_fill <- function(
       bubbles = play_flag(bubbles, "bubbles"),
       draggable = play_flag(draggable, "draggable"),
       animate = play_flag(animate, "animate"),
-      bgcol = bgcol
+      bgcol = bg_col
     )
   )
 }

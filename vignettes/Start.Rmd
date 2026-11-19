@@ -72,7 +72,7 @@ mpg %>%
     x = "manufacturer",
     y = "mean_cty",
     sort = "descending",
-    ytitle = "Average city miles per gallon",
+    y_title = "Average city miles per gallon",
     title = "City fuel economy by manufacturer"
   )
 ```
@@ -85,8 +85,8 @@ scatter_plot(
   x = "displ",
   y = "hwy",
   trend = "loess",
-  xtitle = "Engine displacement (litres)",
-  ytitle = "Highway miles per gallon",
+  x_title = "Engine displacement (litres)",
+  y_title = "Highway miles per gallon",
   title = "Bigger engines, fewer miles"
 )
 ```
@@ -99,11 +99,11 @@ The functions share a common vocabulary, so what you learn on one chart carries 
 |---|---|
 | `data`, `x`, `y` | The data frame and the columns to plot, given as strings |
 | `title`, `title_font_size` | Chart title and its size in pixels |
-| `xtitle`, `ytitle` | Axis titles |
+| `x_title`, `y_title` | Axis titles |
 | `fill`, `stroke`, `stroke_width`, `col` | Colours and outlines of the marks |
-| `bgcol`, `axis_col` | Background and axis colours |
+| `bg_col`, `axis_col` | Background and axis colours |
 | `font` | Font family, for example `"Georgia, serif"` |
-| `xticks`, `yticks` | Approximate number of ticks on each axis |
+| `x_ticks`, `y_ticks` | Approximate number of ticks on each axis |
 | `width`, `height` | Size of the widget, passed to `r2d3::r2d3()` |
 
 Each function's help page lists its full set of options, for example `?line_chart`.

@@ -22,8 +22,8 @@
 #'   1.
 #' @param opacity Optional. The opacity of the band (from 0 to 1). Defaults
 #'   to 0.3, or 0.22 with a central line.
-#' @param ytitle Optional. The title of the y-axis, shown above the axis.
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param y_title Optional. The title of the y-axis, shown above the axis.
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param axis_col The color of the axis text, ticks and titles. Defaults to
 #'   "#333333".
 #' @param y Optional. A column drawn as a line inside the band.
@@ -75,16 +75,16 @@ area_band <- function(
   fill = NULL,
   stroke = NULL,
   stroke_width = NULL,
-  xticks = NULL,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_ticks = NULL,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = NULL,
   axis_col = "#333333",
   width = NULL,
@@ -96,7 +96,7 @@ area_band <- function(
   y_zero = FALSE,
   events = NULL,
   bands = NULL,
-  hlines = NULL,
+  h_lines = NULL,
   legend = NULL,
   end_labels = NULL,
   tooltip = TRUE,
@@ -138,17 +138,17 @@ area_band <- function(
   line_widget(
     data = data, x = x, y = y, group = group, lower = y_lower, upper = y_upper,
     colors = fill, stroke_width = line_width, curve = curve, y_zero = y_zero,
-    events = events, bands = bands, hlines = hlines, legend = legend,
+    events = events, bands = bands, h_lines = h_lines, legend = legend,
     end_labels = end_labels, tooltip = tooltip, navigator = navigator,
     range_buttons = range_buttons, zoom = zoom, animate = animate,
     value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix,
-    date_format = date_format, xticks = xticks, yticks = yticks,
-    xtitle = xtitle, xtitle_font_size = xtitle_font_size,
-    ytitle = ytitle, ytitle_font_size = ytitle_font_size,
+    date_format = date_format, x_ticks = x_ticks, y_ticks = y_ticks,
+    x_title = x_title, x_title_font_size = x_title_font_size,
+    y_title = y_title, y_title_font_size = y_title_font_size,
     title = title, title_font_size = title_font_size,
     subtitle = subtitle, subtitle_font_size = subtitle_font_size,
     x_font_size = x_font_size, y_font_size = y_font_size, font = font,
-    bgcol = bgcol, grid_col = grid_col, axis_col = axis_col,
+    bg_col = bg_col, grid_col = grid_col, axis_col = axis_col,
     width = width, height = height,
     extra = list(
       kind = "band",

@@ -17,7 +17,7 @@ flower(
   center_text_size = 16,
   center_text_color = "#222",
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   rotation_speed = 0.5,
   width = NULL,
   height = NULL,
@@ -68,7 +68,7 @@ the stamens). Defaults to "#e09a1a".}
 \item{font}{The font family. Defaults to "Verdana, Geneva, Tahoma,
 sans-serif".}
 
-\item{bgcol}{The background colour. Defaults to "white".}
+\item{bg_col}{The background colour. Defaults to "white".}
 
 \item{rotation_speed}{The speed of rotation, in degrees per 20
 milliseconds (0 to stop it). Defaults to 0.5, or to 0 with

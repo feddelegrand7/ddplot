@@ -22,7 +22,7 @@ bump_chart(
   x_font_size = 11,
   label_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -84,7 +84,7 @@ each line. Defaults to \code{11}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of the period labels, grid lines and title. Defaults
 to \code{"black"}.}

@@ -58,8 +58,8 @@
 #' @param legend_title Optional. Title of the legend. Defaults to \code{NULL},
 #' which uses the name of the \code{fill} column. Use \code{""} to hide it.
 #' @param legend_font_size Font size of the legend text. Defaults to \code{11}.
-#' @param xtitle Optional. Title of the x-axis (bottom).
-#' @param ytitle Optional. Title of the y-axis (left).
+#' @param x_title Optional. Title of the x-axis (bottom).
+#' @param y_title Optional. Title of the y-axis (left).
 #' @param axis_title_font_size Font size of the axis titles. Defaults to
 #' \code{12}.
 #' @param x_font_size Font size of the x-axis tick labels. Defaults to
@@ -70,7 +70,7 @@
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. It is also the color of the gaps
+#' @param bg_col Background color of the SVG. It is also the color of the gaps
 #' between cells. Defaults to \code{"white"}.
 #' @param axis_col Color of the axes, the axis labels, the column labels, the
 #' legend text and the title. Defaults to \code{"black"}.
@@ -90,8 +90,8 @@
 #'   fill   = "Survived",
 #'   value  = "Freq",
 #'   colors = c("#e45756", "#4c78a8"),
-#'   xtitle = "Share of passengers and crew",
-#'   ytitle = "Share within class",
+#'   x_title = "Share of passengers and crew",
+#'   y_title = "Share within class",
 #'   title  = "Who survived the Titanic?"
 #' )
 #'
@@ -124,7 +124,7 @@
 #'   value  = "Freq",
 #'   colors = c("#8c564b", "#bcbd22", "#2ca02c", "#1f77b4"),
 #'   gap    = 3,
-#'   xtitle = "Hair color",
+#'   x_title = "Hair color",
 #'   title  = "Hair and eye color of 592 students"
 #' )
 mosaic_chart <- function(
@@ -144,15 +144,15 @@ mosaic_chart <- function(
     legend            = TRUE,
     legend_title       = NULL,
     legend_font_size    = 11,
-    xtitle            = NULL,
-    ytitle            = NULL,
+    x_title            = NULL,
+    y_title            = NULL,
     axis_title_font_size = 12,
     x_font_size         = 10,
     y_font_size         = 10,
     title             = NULL,
     title_font_size     = 16,
     font              = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol             = "white",
+    bg_col             = "white",
     axis_col           = "black",
     width             = NULL,
     height            = NULL
@@ -261,15 +261,15 @@ mosaic_chart <- function(
       legend            = legend,
       legendTitle       = if (is.null(legend_title)) fill else legend_title,
       legendFontSize    = legend_font_size,
-      xtitle            = xtitle,
-      ytitle            = ytitle,
+      xtitle            = x_title,
+      ytitle            = y_title,
       axisTitleFontSize = axis_title_font_size,
       xFontSize         = x_font_size,
       yFontSize         = y_font_size,
       title             = title,
       titleFontSize     = title_font_size,
       font              = font,
-      bgcol             = bgcol,
+      bgcol             = bg_col,
       axisCol           = axis_col
     ),
     width  = width,

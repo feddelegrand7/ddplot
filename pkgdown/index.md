@@ -72,7 +72,7 @@
 ```
 
 ```{=html}
-<p class="dd-more"><a href="articles/gallery.html">See all 42 charts in the gallery &rarr;</a></p>
+<p class="dd-more"><a href="articles/gallery.html">See all 48 charts in the gallery &rarr;</a></p>
 ```
 
 ## Browse by family {.dd-section-title}
@@ -90,7 +90,7 @@
 <a class="dd-family" href="articles/composition.html"><img src="gallery/treemap_chart.png" alt="" loading="lazy"><div><h3>Part-to-whole and hierarchies <span>7</span></h3><p>pie, treemap, waffle, sunburst, mosaic, rose, parliament</p></div></a>
 <a class="dd-family" href="articles/races.html"><img src="gallery/bubble_race.png" alt="" loading="lazy"><div><h3>Race charts <span>6</span></h3><p>bar, line, bubble, radial, treemap and donut races</p></div></a>
 <a class="dd-family" href="articles/kpis.html"><img src="gallery/gauge_chart.png" alt="" loading="lazy"><div><h3>KPIs and monitoring <span>4</span></h3><p>gauge, bullet, liquid fill, pulse grid</p></div></a>
-<a class="dd-family" href="articles/playful.html"><img src="gallery/flower.png" alt="" loading="lazy"><div><h3>Playful indicators <span>5</span></h3><p>heart, glass, plant, flame, flower</p></div></a>
+<a class="dd-family" href="articles/playful.html"><img src="gallery/flower.png" alt="" loading="lazy"><div><h3>Playful indicators <span>6</span></h3><p>heart, glass, plant, hair, flame, flower</p></div></a>
 </div>
 ```
 

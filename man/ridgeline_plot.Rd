@@ -19,14 +19,14 @@ ridgeline_plot(
   stat = c("none", "mean", "median"),
   stat_color = "#d62728",
   hover = TRUE,
-  xtitle = NULL,
-  xtitle_font_size = 13,
+  x_title = NULL,
+  x_title_font_size = 13,
   title = NULL,
   title_font_size = 16,
   x_font_size = 11,
   y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -85,9 +85,9 @@ smallest mean/median is placed at the top.}
 label raises and highlights it and shows its number of observations and
 mean.}
 
-\item{xtitle}{Optional. Title of the x-axis.}
+\item{x_title}{Optional. Title of the x-axis.}
 
-\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{x_title_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
@@ -100,7 +100,7 @@ mean.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
@@ -150,7 +150,7 @@ ridgeline_plot(
   sort   = "mean",
   stat   = "median",
   title  = "Reaction time by condition",
-  xtitle = "Reaction time (ms)"
+  x_title = "Reaction time (ms)"
 )
 
 # Highway fuel economy by vehicle class
@@ -166,7 +166,7 @@ ridgeline_plot(
   fill_opacity = 0.9,
   overlap     = 2,
   title       = "Highway fuel economy by vehicle class",
-  xtitle      = "Highway miles per gallon"
+  x_title      = "Highway miles per gallon"
 )
 
 # One color per group with a named vector, Epanechnikov kernel
@@ -179,6 +179,6 @@ ridgeline_plot(
               virginica = "#8da0cb"),
   overlap = 1,
   stat    = "mean",
-  xtitle  = "Petal length (cm)"
+  x_title  = "Petal length (cm)"
 )
 }

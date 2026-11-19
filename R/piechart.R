@@ -48,7 +48,7 @@
 #' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param font The font family to consider for the titles.
 #'   Defaults to "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param opacity The opacity of the slices (from 0 to 1). Defaults to 1.
 #' @param label_height Optional. The font size of the legend, in pixels.
 #'   Defaults to 12.
@@ -137,7 +137,7 @@ pie_chart <- function(
   title = NULL,
   title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = 1,
   label_height = NULL,
   width = NULL,
@@ -319,7 +319,7 @@ pie_chart <- function(
       font = font,
       labelFont = if (is.null(label_font)) font else label_font,
       labelHeight = if (is.null(label_height)) 12 else label_height,
-      bgcol = bgcol,
+      bgcol = bg_col,
       opacity = opacity,
       axisCol = axis_col,
       width = width,

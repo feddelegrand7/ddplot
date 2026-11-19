@@ -17,7 +17,7 @@ bullet_chart(
   tick_count = 5,
   font_size = 12,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   width = NULL,
   height = NULL
 )
@@ -57,7 +57,7 @@ Defaults to \code{""}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{The background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{The background color of the SVG. Defaults to \code{"white"}.}
 
 \item{width}{Optional. The width of the SVG output.}
 

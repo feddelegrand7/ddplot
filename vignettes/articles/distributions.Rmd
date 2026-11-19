@@ -32,7 +32,7 @@ Charts that show how a numeric variable is spread: where values concentrate, how
 histogram(
   x      = mpg$hwy,
   title  = "Highway fuel economy",
-  xtitle = "Miles per gallon"
+  x_title = "Miles per gallon"
 )
 ```
 
@@ -82,7 +82,7 @@ histogram(
   breaks  = c(1.5, 2, 2.5, 3.5, 4, 4.5, 5.5),
   rug     = TRUE,
   title   = "Old Faithful eruptions",
-  xtitle  = "Duration (minutes)",
+  x_title  = "Duration (minutes)",
   x_suffix = " min"
 )
 ```
@@ -99,11 +99,11 @@ violin_plot(
   y      = "Sepal.Length",
   group  = "Species",
   title  = "Sepal length by species",
-  ytitle = "Sepal length (cm)"
+  y_title = "Sepal length (cm)"
 )
 ```
 
-Use `points = "all"` to show every observation, `meanline` to mark the mean, `sort` to order the violins, and `scale = "count"` to make each violin's width proportional to its group size:
+Use `points = "all"` to show every observation, `mean_line` to mark the mean, `sort` to order the violins, and `scale = "count"` to make each violin's width proportional to its group size:
 
 ```{r}
 violin_plot(
@@ -111,11 +111,11 @@ violin_plot(
   y            = "hwy",
   group        = "class",
   points       = "all",
-  meanline     = TRUE,
+  mean_line     = TRUE,
   sort         = "median",
   color_palette = "Tableau10",
   title        = "Highway fuel economy by vehicle class",
-  ytitle       = "Highway miles per gallon"
+  y_title       = "Highway miles per gallon"
 )
 ```
 
@@ -133,7 +133,7 @@ beeswarm_plot(
   data   = mpg,
   x      = "hwy",
   col    = "steelblue",
-  xtitle = "Highway miles per gallon",
+  x_title = "Highway miles per gallon",
   title  = "Distribution of hwy"
 )
 ```
@@ -145,7 +145,7 @@ beeswarm_plot(
   data   = mpg,
   x      = "hwy",
   group  = "class",
-  xtitle = "Highway miles per gallon",
+  x_title = "Highway miles per gallon",
   title  = "Highway fuel economy by vehicle class", 
   tooltip = "manufacturer"
 )
@@ -161,7 +161,7 @@ beeswarm_plot(
   color_palette = "Set2",
   radius       = 5,
   opacity      = 0.8,
-  xtitle       = "Sepal length (cm)",
+  x_title       = "Sepal length (cm)",
   title        = "Sepal length by species"
 )
 ```
@@ -190,7 +190,7 @@ ridgeline_plot(
   sort   = "mean",
   stat   = "median",
   title  = "Reaction time by condition",
-  xtitle = "Reaction time (ms)"
+  x_title = "Reaction time (ms)"
 )
 ```
 
@@ -209,7 +209,7 @@ ridgeline_plot(
   fill_opacity = 0.9,
   overlap     = 2,
   title       = "Highway fuel economy by vehicle class",
-  xtitle      = "Highway miles per gallon"
+  x_title      = "Highway miles per gallon"
 )
 ```
 
@@ -224,7 +224,7 @@ animated_histogram(
   delay = 100,
   fill = "lime",
   stroke = "white",
-  bgcol = "white"
+  bg_col = "white"
   )
 ```
 

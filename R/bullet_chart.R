@@ -28,7 +28,7 @@
 #' @param font_size Base font size in pixels. Defaults to \code{12}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol The background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col The background color of the SVG. Defaults to \code{"white"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
@@ -79,7 +79,7 @@ bullet_chart <- function(
     tick_count   = 5,
     font_size    = 12,
     font        = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol       = "white",
+    bg_col       = "white",
     width       = NULL,
     height      = NULL
 ) {
@@ -128,7 +128,7 @@ bullet_chart <- function(
       tickCount   = tick_count,
       fontSize    = font_size,
       font        = font,
-      bgcol       = bgcol
+      bgcol       = bg_col
     ),
     width  = width,
     height = height

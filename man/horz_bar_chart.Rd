@@ -13,7 +13,7 @@ horz_bar_chart(
   padding_width = 0.2,
   stroke = NULL,
   stroke_width = NULL,
-  bgcol = "white",
+  bg_col = "white",
   value_ticks = NULL,
   value_font_size = 11,
   label_font_size = 12,
@@ -72,7 +72,7 @@ order of the data or of the factor levels), \code{"ascending"} or
 
 \item{stroke_width}{Optional. The stroke width of the bars.}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{value_ticks}{Optional. The approximate number of value axis ticks.}
 

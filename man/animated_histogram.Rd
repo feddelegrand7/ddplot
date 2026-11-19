@@ -12,18 +12,18 @@ animated_histogram(
   fill = "crimson",
   x_font_size = 10,
   y_font_size = 10,
-  xticks = NULL,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 16,
-  ytitle = NULL,
-  ytitle_font_size = 16,
+  x_ticks = NULL,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 16,
+  y_title = NULL,
+  y_title_font_size = 16,
   title = NULL,
   title_font_size = 22,
   stroke = "crimson",
   stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#CAD0D3",
+  bg_col = "#CAD0D3",
   opacity = 1,
   axis_col = "black",
   width = NULL,
@@ -46,17 +46,17 @@ precedes before triggering the appearance of each bar. Defaults to 100.}
 
 \item{y_font_size}{the font size of the y-axis labels. Defaults to 10.}
 
-\item{xticks}{Optional. the number of x-axis ticks to consider.}
+\item{x_ticks}{Optional. the number of x-axis ticks to consider.}
 
-\item{yticks}{Optional. The number of y-axis ticks to consider.}
+\item{y_ticks}{Optional. The number of y-axis ticks to consider.}
 
-\item{xtitle}{Optional. The title of the x-axis.}
+\item{x_title}{Optional. The title of the x-axis.}
 
-\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 16.}
+\item{x_title_font_size}{The font size of the x-axis title. Defaults to 16.}
 
-\item{ytitle}{Optional. The title of the y-axis.}
+\item{y_title}{Optional. The title of the y-axis.}
 
-\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 16.}
+\item{y_title_font_size}{The font size of the y-axis title. Defaults to 16.}
 
 \item{title}{Optional. The title of the plot.}
 
@@ -69,7 +69,7 @@ precedes before triggering the appearance of each bar. Defaults to 100.}
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
+\item{bg_col}{The background color of the SVG. Defaults to "#CAD0D3" HEX color.}
 
 \item{opacity}{The color opacity of the bars (from 0 to 1). Defaults to 1.}
 

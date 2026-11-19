@@ -84,13 +84,13 @@ line_chart(
   points = TRUE,
   curve = "curveMonotoneX",
   title = "Life expectancy at birth",
-  ytitle = "Years"
+  y_title = "Years"
 )
 ```
 
 ### Annotations: periods, events and reference lines
 
-`bands` shades periods (here the NBER recessions), `events` marks dates with a vertical line, and `hlines` draws reference values.
+`bands` shades periods (here the NBER recessions), `events` marks dates with a vertical line, and `h_lines` draws reference values.
 
 ```{r}
 recessions <- data.frame(
@@ -141,7 +141,7 @@ line_chart(
 )
 ```
 
-`rollmean` draws a trailing moving average over the raw series, which is kept as a faint line (`show_raw = FALSE` hides it). Missing values leave gaps in the lines:
+`roll_mean` draws a trailing moving average over the raw series, which is kept as a faint line (`show_raw = FALSE` hides it). Missing values leave gaps in the lines:
 
 ```{r}
 set.seed(3)
@@ -156,8 +156,8 @@ line_chart(
   samples,
   x = "time",
   y = c("cpu", "mem"),
-  rollmean = 12,
-  hlines = c(SLA = 70),
+  roll_mean = 12,
+  h_lines = c(SLA = 70),
   value_suffix = "%",
   title = "Server load",
   subtitle = "5-minute samples with a 1-hour moving average"
@@ -315,7 +315,7 @@ streamgraph(
   group       = "genre",
   value       = "listeners",
   value_format = ",.0f",
-  xtitle      = "Year",
+  x_title      = "Year",
   title       = "Music genres, 1980-2020 (simulated listeners)"
 )
 ```

@@ -58,15 +58,15 @@
 #' @param hover Logical. When \code{TRUE} (default), hovering a ridge or its
 #' label raises and highlights it and shows its number of observations and
 #' mean.
-#' @param xtitle Optional. Title of the x-axis.
-#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
+#' @param x_title Optional. Title of the x-axis.
+#' @param x_title_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
 #' @param y_font_size Font size of the group labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
@@ -93,7 +93,7 @@
 #'   sort   = "mean",
 #'   stat   = "median",
 #'   title  = "Reaction time by condition",
-#'   xtitle = "Reaction time (ms)"
+#'   x_title = "Reaction time (ms)"
 #' )
 #'
 #' # Highway fuel economy by vehicle class
@@ -109,7 +109,7 @@
 #'   fill_opacity = 0.9,
 #'   overlap     = 2,
 #'   title       = "Highway fuel economy by vehicle class",
-#'   xtitle      = "Highway miles per gallon"
+#'   x_title      = "Highway miles per gallon"
 #' )
 #'
 #' # One color per group with a named vector, Epanechnikov kernel
@@ -122,7 +122,7 @@
 #'               virginica = "#8da0cb"),
 #'   overlap = 1,
 #'   stat    = "mean",
-#'   xtitle  = "Petal length (cm)"
+#'   x_title  = "Petal length (cm)"
 #' )
 ridgeline_plot <- function(
     data,
@@ -139,14 +139,14 @@ ridgeline_plot <- function(
     stat         = c("none", "mean", "median"),
     stat_color    = "#d62728",
     hover        = TRUE,
-    xtitle       = NULL,
-    xtitle_font_size = 13,
+    x_title       = NULL,
+    x_title_font_size = 13,
     title        = NULL,
     title_font_size  = 16,
     x_font_size    = 11,
     y_font_size    = 11,
     font         = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol        = "white",
+    bg_col        = "white",
     axis_col      = "black",
     width        = NULL,
     height       = NULL
@@ -234,14 +234,14 @@ ridgeline_plot <- function(
       stat         = stat,
       statColor    = stat_color,
       hover        = hover,
-      xtitle       = xtitle,
-      xtitleFontSize = xtitle_font_size,
+      xtitle       = x_title,
+      xtitleFontSize = x_title_font_size,
       title        = title,
       titleFontSize  = title_font_size,
       xFontSize    = x_font_size,
       yFontSize    = y_font_size,
       font         = font,
-      bgcol        = bgcol,
+      bgcol        = bg_col,
       axisCol      = axis_col
     ),
     width  = width,

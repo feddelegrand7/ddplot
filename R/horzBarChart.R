@@ -32,7 +32,7 @@
 #' @param sort The initial order of the bars: \code{"none"} (default, the
 #'   order of the data or of the factor levels), \code{"ascending"} or
 #'   \code{"descending"}. Descending puts the largest bar at the top.
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #'
 #' @return An interactive SVG horizontal bar chart (an r2d3 htmlwidget).
 #' @export
@@ -80,7 +80,7 @@ horz_bar_chart <- function(data,
                            padding_width = 0.2,
                            stroke = NULL,
                            stroke_width = NULL,
-                           bgcol = "white",
+                           bg_col = "white",
                            value_ticks = NULL,
                            value_font_size = 11,
                            label_font_size = 12,
@@ -128,7 +128,7 @@ horz_bar_chart <- function(data,
     val_title = value_title, val_title_font_size = value_title_font_size,
     title = title, title_font_size = title_font_size,
     subtitle = subtitle, subtitle_font_size = subtitle_font_size,
-    stroke = stroke, stroke_width = stroke_width, font = font, bgcol = bgcol,
+    stroke = stroke, stroke_width = stroke_width, font = font, bg_col = bg_col,
     opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height,
     group = group, position = match.arg(position), agg = match.arg(agg),

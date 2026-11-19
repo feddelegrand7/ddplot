@@ -131,7 +131,7 @@
 #' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family to consider for all the text. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background colour of the SVG. Defaults to "white".
+#' @param bg_col The background colour of the SVG. Defaults to "white".
 #' @param axis_col The colour of the titles, headers and controls. Defaults to
 #'   "#333333".
 #' @param value_format Optional. A d3-format string for the values, e.g.
@@ -204,7 +204,7 @@ treemap_race <- function(
                          subtitle = NULL,
                          subtitle_font_size = 13,
                          font = "Verdana, Geneva, Tahoma, sans-serif",
-                         bgcol = "white",
+                         bg_col = "white",
                          axis_col = "#333333",
                          value_format = NULL,
                          value_prefix = "",
@@ -324,7 +324,7 @@ treemap_race <- function(
       subtitle = subtitle,
       subtitleFontSize = subtitle_font_size,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       axisCol = axis_col,
       valueFormat = value_format,
       valuePrefix = value_prefix,

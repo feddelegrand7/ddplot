@@ -25,8 +25,8 @@ line_race(
   dot_radius = 4.5,
   fill_gaps = TRUE,
   agg = c("sum", "mean", "max", "min", "last"),
-  xtitle = NULL,
-  ytitle = NULL,
+  x_title = NULL,
+  y_title = NULL,
   frame_dur = 700,
   ease = "Linear",
   autoplay = TRUE,
@@ -39,7 +39,7 @@ line_race(
   subtitle = NULL,
   subtitle_font_size = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "#333333",
   grid_col = "#ececec",
   value_format = NULL,
@@ -121,9 +121,9 @@ periods where it is known (otherwise the line is broken). Defaults to
 \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 \code{"last"}.}
 
-\item{xtitle}{Optional. The title of the time axis.}
+\item{x_title}{Optional. The title of the time axis.}
 
-\item{ytitle}{Optional. The title of the value axis, drawn above it.
+\item{y_title}{Optional. The title of the value axis, drawn above it.
 Defaults to the name of \code{y}; use \code{""} to hide it.}
 
 \item{frame_dur}{The duration of one period, in milliseconds. Defaults to
@@ -159,7 +159,7 @@ can be changed from the player.}
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
@@ -242,7 +242,7 @@ gapminder \%>\%
   line_race(
     x = "year", y = "gdpPercap", group = "country",
     y_scale = "log", value_prefix = "$", value_format = ",.0f",
-    ytitle = "GDP per capita (log scale)",
+    y_title = "GDP per capita (log scale)",
     title = "The Asian growth race",
     events = c("Reforms in China" = 1978, "Asian crisis" = 1997)
   )
@@ -251,7 +251,7 @@ gapminder \%>\%
 line_race(
   gapminder, x = "year", y = "lifeExp", group = "country",
   category = "continent", top_n = 10, y_zero = FALSE,
-  value_format = ".1f", ytitle = "Life expectancy (years)",
+  value_format = ".1f", y_title = "Life expectancy (years)",
   highlight = "Japan", title = "Life expectancy, 1952 to 2007"
 )
 

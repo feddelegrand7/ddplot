@@ -168,7 +168,7 @@ pulse_grid(
   title = "Support Team Load Through the Day",
   low = "#D9F0FF",
   high = "red",
-  bgcol = "#0B132B",
+  bg_col = "#0B132B",
   stroke = "#1C2541",
   stroke_width = 1.5,
   pulse_strength = 0.22
@@ -212,7 +212,7 @@ pulse_grid(
   title = "Service Reliability Pressure Map",
   low = "lightgreen",
   high = "#B00020",
-  bgcol = "#081C15",
+  bg_col = "#081C15",
   label_color = "#F1FAEE",
   title_color = "#F1FAEE",
   stroke = "#2D6A4F",

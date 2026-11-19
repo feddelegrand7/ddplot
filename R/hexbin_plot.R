@@ -53,19 +53,19 @@
 #' @param grid Logical. Whether to draw light gridlines behind the hexagons.
 #' Defaults to \code{TRUE}.
 #' @param grid_col Color of the gridlines. Defaults to \code{"#e5e5e5"}.
-#' @param xtitle Optional. Title of the x-axis. Defaults to the value of
+#' @param x_title Optional. Title of the x-axis. Defaults to the value of
 #' \code{x}.
-#' @param ytitle Optional. Title of the y-axis. Defaults to the value of
+#' @param y_title Optional. Title of the y-axis. Defaults to the value of
 #' \code{y}.
-#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
-#' @param ytitle_font_size Font size of the y-axis title. Defaults to \code{13}.
+#' @param x_title_font_size Font size of the x-axis title. Defaults to \code{13}.
+#' @param y_title_font_size Font size of the y-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
 #' @param y_font_size Font size of the y-axis tick labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param axis_col Color of axis lines, ticks, labels and titles. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
@@ -81,8 +81,8 @@
 #'   x        = "waiting",
 #'   y        = "eruptions",
 #'   bin_width = 14,
-#'   xtitle   = "Waiting time to next eruption (min)",
-#'   ytitle   = "Eruption duration (min)",
+#'   x_title   = "Waiting time to next eruption (min)",
+#'   y_title   = "Eruption duration (min)",
 #'   title    = "Old Faithful eruptions"
 #' )
 #'
@@ -98,8 +98,8 @@
 #'   bin_width     = 8,
 #'   color_palette = "Viridis",
 #'   color_scale   = "log",
-#'   xtitle       = "Carat",
-#'   ytitle       = "Price (USD)",
+#'   x_title       = "Carat",
+#'   y_title       = "Price (USD)",
 #'   title        = "Diamond price by carat"
 #' )
 #'
@@ -139,16 +139,16 @@ hexbin_plot <- function(
     stroke_width    = 0.5,
     grid           = TRUE,
     grid_col        = "#e5e5e5",
-    xtitle         = NULL,
-    ytitle         = NULL,
-    xtitle_font_size = 13,
-    ytitle_font_size = 13,
+    x_title         = NULL,
+    y_title         = NULL,
+    x_title_font_size = 13,
+    y_title_font_size = 13,
     title          = NULL,
     title_font_size  = 16,
     x_font_size      = 11,
     y_font_size      = 11,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol          = "white",
+    bg_col          = "white",
     axis_col        = "black",
     width          = NULL,
     height         = NULL
@@ -192,8 +192,8 @@ hexbin_plot <- function(
     stop("please remove the ';' character from your font argument")
   }
 
-  if (is.null(xtitle)) xtitle <- x
-  if (is.null(ytitle)) ytitle <- y
+  if (is.null(x_title)) x_title <- x
+  if (is.null(y_title)) y_title <- y
 
   # Only the two plotted columns are sent to the browser; hexbin plots are
   # meant for large data, so shipping every column would bloat the widget.
@@ -229,16 +229,16 @@ hexbin_plot <- function(
       strokeWidth    = stroke_width,
       grid           = grid,
       gridCol        = grid_col,
-      xtitle         = xtitle,
-      ytitle         = ytitle,
-      xtitleFontSize = xtitle_font_size,
-      ytitleFontSize = ytitle_font_size,
+      xtitle         = x_title,
+      ytitle         = y_title,
+      xtitleFontSize = x_title_font_size,
+      ytitleFontSize = y_title_font_size,
       title          = title,
       titleFontSize  = title_font_size,
       xFontSize      = x_font_size,
       yFontSize      = y_font_size,
       font           = font,
-      bgcol          = bgcol,
+      bgcol          = bg_col,
       axisCol        = axis_col
     ),
     width  = width,

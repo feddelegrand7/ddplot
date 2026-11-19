@@ -37,23 +37,23 @@
 #'   total.
 #' @param padding_width The space between bars, from 0 to 0.99. Defaults to
 #'   0.2.
-#' @param xticks Not used; kept for compatibility.
+#' @param x_ticks Not used; kept for compatibility.
 #' @param x_font_size The font size of the category labels. Defaults to 11.
 #' @param y_font_size The font size of the value axis labels. Defaults to 11.
-#' @param yticks Optional. The approximate number of value axis ticks.
-#' @param xtitle Optional. The title of the category axis.
-#' @param xtitle_font_size The font size of the category axis title. Defaults
+#' @param y_ticks Optional. The approximate number of value axis ticks.
+#' @param x_title Optional. The title of the category axis.
+#' @param x_title_font_size The font size of the category axis title. Defaults
 #'   to 13.
-#' @param ytitle Optional. The title of the value axis, drawn above it.
+#' @param y_title Optional. The title of the value axis, drawn above it.
 #'   Defaults to the name of \code{y} (or "Count"); use \code{""} to hide it.
-#' @param ytitle_font_size The font size of the value axis title. Defaults to 13.
+#' @param y_title_font_size The font size of the value axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
 #' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param stroke Optional. The stroke colour of the bars.
 #' @param stroke_width Optional. The stroke width of the bars.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param opacity The opacity of the bars (from 0 to 1). Defaults to 1.
 #' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
@@ -107,7 +107,7 @@
 #'     x = "manufacturer",
 #'     y = "mean_cty",
 #'     sort = "descending",
-#'     ytitle = "Average city miles per gallon",
+#'     y_title = "Average city miles per gallon",
 #'     title = "City fuel economy by manufacturer",
 #'     highlight = c("honda", "volkswagen"),
 #'     value_format = ".1f"
@@ -146,20 +146,20 @@ bar_chart <- function(
                      fill = NULL,
                      sort = "none",
                      padding_width = 0.2,
-                     xticks = NULL,
+                     x_ticks = NULL,
                      x_font_size = 11,
                      y_font_size = 11,
-                     yticks = NULL,
-                     xtitle = NULL,
-                     xtitle_font_size = 13,
-                     ytitle = NULL,
-                     ytitle_font_size = 13,
+                     y_ticks = NULL,
+                     x_title = NULL,
+                     x_title_font_size = 13,
+                     y_title = NULL,
+                     y_title_font_size = 13,
                      title = NULL,
                      title_font_size = 20,
                      stroke = NULL,
                      stroke_width = NULL,
                      font = "Verdana, Geneva, Tahoma, sans-serif",
-                     bgcol = "white",
+                     bg_col = "white",
                      opacity = 1,
                      axis_col = "#333333",
                      width = NULL,
@@ -192,12 +192,12 @@ bar_chart <- function(
   bar_widget(
     data = data, cat = x, val = y, orientation = "vertical",
     fill = fill, sort = sort, padding_width = padding_width,
-    cat_font_size = x_font_size, val_font_size = y_font_size, val_ticks = yticks,
-    cat_title = xtitle, cat_title_font_size = xtitle_font_size,
-    val_title = ytitle, val_title_font_size = ytitle_font_size,
+    cat_font_size = x_font_size, val_font_size = y_font_size, val_ticks = y_ticks,
+    cat_title = x_title, cat_title_font_size = x_title_font_size,
+    val_title = y_title, val_title_font_size = y_title_font_size,
     title = title, title_font_size = title_font_size,
     subtitle = subtitle, subtitle_font_size = subtitle_font_size,
-    stroke = stroke, stroke_width = stroke_width, font = font, bgcol = bgcol,
+    stroke = stroke, stroke_width = stroke_width, font = font, bg_col = bg_col,
     opacity = opacity, axis_col = axis_col, grid_col = grid_col,
     width = width, height = height,
     group = group, position = match.arg(position), agg = match.arg(agg),
@@ -218,7 +218,7 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, padding_width,
                        cat_font_size, val_font_size, val_ticks,
                        cat_title, cat_title_font_size, val_title, val_title_font_size,
                        title, title_font_size, subtitle, subtitle_font_size,
-                       stroke, stroke_width, font, bgcol, opacity, axis_col, grid_col,
+                       stroke, stroke_width, font, bg_col, opacity, axis_col, grid_col,
                        width, height, group, position, agg, labels, highlight,
                        ref_lines, negative_fill, corner_radius, legend, controls,
                        tooltip, animate, value_format, value_prefix, value_suffix,
@@ -399,7 +399,7 @@ bar_widget <- function(data, cat, val, orientation, fill, sort, padding_width,
       stroke = stroke,
       strokeWidth = stroke_width,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       opacity = opacity,
       axisCol = axis_col,
       gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,

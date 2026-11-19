@@ -23,7 +23,7 @@
 #' @param value_font_size The font size of the current value label. Defaults to 14.
 #' @param font The font family used for all text. Defaults to
 #' "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param animate Logical. When \code{TRUE} (default), the needle sweeps from
 #' the minimum up to the value on load and settles with a small wobble. Set to
 #' \code{FALSE} to draw the needle at the value immediately with no animation.
@@ -75,7 +75,7 @@ gauge_chart <- function(
     title_font_size = 16,
     value_font_size = 14,
     font = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol = "white",
+    bg_col = "white",
     animate = TRUE,
     animation_duration = 1500,
     width = NULL,
@@ -119,7 +119,7 @@ gauge_chart <- function(
       titleFontSize = title_font_size,
       valueFontSize = value_font_size,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       animate = animate,
       animationDuration = animation_duration
     ),

@@ -34,7 +34,7 @@ treemap_race(
   subtitle = NULL,
   subtitle_font_size = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "#333333",
   value_format = NULL,
   value_prefix = "",
@@ -148,7 +148,7 @@ colour buttons at the top. Defaults to \code{TRUE}.}
 \item{font}{The font family to consider for all the text. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background colour of the SVG. Defaults to "white".}
+\item{bg_col}{The background colour of the SVG. Defaults to "white".}
 
 \item{axis_col}{The colour of the titles, headers and controls. Defaults to
 "#333333".}

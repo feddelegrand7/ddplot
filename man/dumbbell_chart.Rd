@@ -17,8 +17,8 @@ dumbbell_chart(
   line_width = 2,
   circle_radius = 6,
   sort = "none",
-  xtitle = NULL,
-  xtitle_font_size = 13,
+  x_title = NULL,
+  x_title_font_size = 13,
   title = NULL,
   title_font_size = 16,
   x_font_size = 11,
@@ -26,7 +26,7 @@ dumbbell_chart(
   legend = TRUE,
   legend_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -63,9 +63,9 @@ dumbbell_chart(
 \code{"ascending"}, or \code{"descending"}, ordered by the \code{x1}
 value.}
 
-\item{xtitle}{Optional. Title of the x-axis.}
+\item{x_title}{Optional. Title of the x-axis.}
 
-\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{x_title_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
@@ -83,7 +83,7 @@ value.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
@@ -119,7 +119,7 @@ dumbbell_chart(
   x1_label  = "1952",
   x2_label  = "2007",
   title    = "Life expectancy: 1952 vs 2007",
-  xtitle   = "Life expectancy (years)",
+  x_title   = "Life expectancy (years)",
   sort     = "ascending"
 )
 
@@ -140,7 +140,7 @@ dumbbell_chart(
   col1    = "steelblue",
   col2    = "darkorange",
   title   = "City vs highway fuel economy by class",
-  xtitle  = "Miles per gallon",
+  x_title  = "Miles per gallon",
   sort    = "ascending"
 )
 }

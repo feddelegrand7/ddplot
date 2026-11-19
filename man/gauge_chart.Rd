@@ -19,7 +19,7 @@ gauge_chart(
   title_font_size = 16,
   value_font_size = 14,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   animate = TRUE,
   animation_duration = 1500,
   width = NULL,
@@ -58,7 +58,7 @@ Defaults to 90\% of max.}
 \item{font}{The font family used for all text. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{animate}{Logical. When \code{TRUE} (default), the needle sweeps from
 the minimum up to the value on load and settles with a small wobble. Set to

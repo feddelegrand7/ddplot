@@ -35,16 +35,16 @@
 #' \code{10}.
 #' @param title Optional. Title of the chart.
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
-#' @param xtitle Optional. Title of the x-axis.
-#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
-#' @param ytitle Optional. Title of the y-axis.
-#' @param ytitle_font_size Font size of the y-axis title. Defaults to \code{13}.
+#' @param x_title Optional. Title of the x-axis.
+#' @param x_title_font_size Font size of the x-axis title. Defaults to \code{13}.
+#' @param y_title Optional. Title of the y-axis.
+#' @param y_title_font_size Font size of the y-axis title. Defaults to \code{13}.
 #' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
 #' @param y_font_size Font size of the y-axis tick labels. Defaults to \code{11}.
 #' @param opacity Opacity of the bars (0 to 1). Defaults to \code{1}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
@@ -69,7 +69,7 @@
 #'   y       = "value",
 #'   measure = "measure",
 #'   title   = "P&L bridge",
-#'   ytitle  = "USD thousands"
+#'   y_title  = "USD thousands"
 #' )
 #'
 #' # Monthly cash flow
@@ -83,7 +83,7 @@
 #'   x              = "month",
 #'   y              = "delta",
 #'   title          = "Monthly cash flow",
-#'   ytitle         = "USD thousands",
+#'   y_title         = "USD thousands",
 #'   positive_color  = "steelblue",
 #'   negative_color  = "tomato"
 #' )
@@ -101,15 +101,15 @@ waterfall_chart <- function(
     label_font_size  = 10,
     title          = NULL,
     title_font_size  = 16,
-    xtitle         = NULL,
-    xtitle_font_size = 13,
-    ytitle         = NULL,
-    ytitle_font_size = 13,
+    x_title         = NULL,
+    x_title_font_size = 13,
+    y_title         = NULL,
+    y_title_font_size = 13,
     x_font_size      = 11,
     y_font_size      = 11,
     opacity        = 1,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol          = "white",
+    bg_col          = "white",
     axis_col        = "black",
     width          = NULL,
     height         = NULL
@@ -152,15 +152,15 @@ waterfall_chart <- function(
       labelFontSize  = label_font_size,
       title          = title,
       titleFontSize  = title_font_size,
-      xtitle         = xtitle,
-      xtitleFontSize = xtitle_font_size,
-      ytitle         = ytitle,
-      ytitleFontSize = ytitle_font_size,
+      xtitle         = x_title,
+      xtitleFontSize = x_title_font_size,
+      ytitle         = y_title,
+      ytitleFontSize = y_title_font_size,
       xFontSize      = x_font_size,
       yFontSize      = y_font_size,
       opacity        = opacity,
       font           = font,
-      bgcol          = bgcol,
+      bgcol          = bg_col,
       axisCol        = axis_col
     ),
     width  = width,

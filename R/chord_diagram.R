@@ -83,7 +83,7 @@
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param text_col Color of the title and the labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
@@ -152,7 +152,7 @@
 #'   sort_groups   = "descending",
 #'   color_palette = "Set2",
 #'   ribbon_opacity = 0.7,
-#'   bgcol        = "#1e1e2e",
+#'   bg_col        = "#1e1e2e",
 #'   text_col      = "#f0f0f0",
 #'   title        = "Joint publications between departments"
 #' )
@@ -182,7 +182,7 @@ chord_diagram <- function(
     title            = NULL,
     title_font_size    = 16,
     font             = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol            = "white",
+    bg_col            = "white",
     text_col          = "black",
     width            = NULL,
     height           = NULL
@@ -410,7 +410,7 @@ chord_diagram <- function(
       title            = title,
       titleFontSize    = title_font_size,
       font             = font,
-      bgcol            = bgcol,
+      bgcol            = bg_col,
       textCol          = text_col
     ),
     width  = width,

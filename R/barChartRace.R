@@ -74,12 +74,12 @@
 #' @param x_font_size The font size of the value axis labels. Defaults to 10.
 #' @param y_font_size The font size of the item names (shrunk when the bars are
 #'   thin). Defaults to 12.
-#' @param xticks Optional. The approximate number of value axis ticks.
-#' @param xtitle Optional. The title of the value axis, drawn above it. It is
+#' @param x_ticks Optional. The approximate number of value axis ticks.
+#' @param x_title Optional. The title of the value axis, drawn above it. It is
 #'   also used as the name of the value in the tooltip.
-#' @param xtitle_font_size The font size of the value axis title. Defaults to 12.
-#' @param ytitle Optional. The title of the item names, drawn above them.
-#' @param ytitle_font_size The font size of the item axis title. Defaults to 12.
+#' @param x_title_font_size The font size of the value axis title. Defaults to 12.
+#' @param y_title Optional. The title of the item names, drawn above them.
+#' @param y_title_font_size The font size of the item axis title. Defaults to 12.
 #' @param title Optional. The title of the plot.
 #' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param stroke Optional. The stroke colour of the bars.
@@ -87,11 +87,11 @@
 #'   \code{stroke} is given).
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background colour of the SVG. Defaults to "white".
-#' @param panelcol Optional. The background colour of the panel behind the
+#' @param bg_col The background colour of the SVG. Defaults to "white".
+#' @param panel_col Optional. The background colour of the panel behind the
 #'   bars (none by default).
-#' @param xgridlinecol The colour of the vertical grid lines. When \code{NULL}
-#'   (default), a light grey, or white when \code{panelcol} is given. Use
+#' @param x_grid_line_col The colour of the vertical grid lines. When \code{NULL}
+#'   (default), a light grey, or white when \code{panel_col} is given. Use
 #'   \code{NA} to hide them.
 #' @param opacity The opacity of the bars (from 0 to 1). Defaults to 1.
 #' @param time_label Logical. Show the big period label in the bottom right
@@ -166,8 +166,8 @@
 #' x = "lifeExp",
 #' y = "country",
 #' time = "year",
-#' ytitle = "Country",
-#' xtitle = "Life expectancy",
+#' y_title = "Country",
+#' x_title = "Life expectancy",
 #' title = "Bar chart race of countries life expectancy"
 #' )
 #'
@@ -211,19 +211,19 @@ bar_chart_race <- function(
   padding_width = 0.2,
   x_font_size = 10,
   y_font_size = 12,
-  xticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 12,
-  ytitle = NULL,
-  ytitle_font_size = 12,
+  x_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 12,
+  y_title = NULL,
+  y_title_font_size = 12,
   title = NULL,
   title_font_size = 20,
   stroke = NULL,
   stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
-  panelcol = NULL,
-  xgridlinecol = NULL,
+  bg_col = "white",
+  panel_col = NULL,
+  x_grid_line_col = NULL,
   opacity = 1,
   time_label = TRUE,
   time_label_opts = list(
@@ -299,11 +299,11 @@ bar_chart_race <- function(
     stop("'opacity' must be a number between 0 and 1")
   }
   num1(corner_radius, "corner_radius", 0)
-  for (nm in c("x_font_size", "y_font_size", "xtitle_font_size", "ytitle_font_size",
+  for (nm in c("x_font_size", "y_font_size", "x_title_font_size", "y_title_font_size",
                "title_font_size", "subtitle_font_size")) {
     num1(get(nm), nm, 1)
   }
-  if (!is.null(xticks)) num1(xticks, "xticks", 1)
+  if (!is.null(x_ticks)) num1(x_ticks, "x_ticks", 1)
   if (!is.null(stroke_width)) num1(stroke_width, "stroke_width", 0)
   if (!is.null(color_category) && (!is.character(color_category) || length(color_category) != 1)) {
     stop("'color_category' must be the name of a D3 colour scheme, e.g. \"Accent\"")
@@ -343,7 +343,7 @@ bar_chart_race <- function(
   )
   player$stateKey <- paste("barrace", y, time, x, if (is.null(group)) "" else group, sep = "|")
 
-  if (is.null(xgridlinecol)) xgridlinecol <- if (is.null(panelcol)) "#e9e9e9" else "white"
+  if (is.null(x_grid_line_col)) x_grid_line_col <- if (is.null(panel_col)) "#e9e9e9" else "white"
 
   r2d3::r2d3(
     data = NULL,
@@ -358,7 +358,7 @@ bar_chart_race <- function(
       colors = if (is.null(colors)) NULL else I(colors),
       colorCategory = color_category,
       groupName = group,
-      valName = if (is.null(xtitle)) x else xtitle,
+      valName = if (is.null(x_title)) x else x_title,
       intValues = all(abs(xv - round(xv)) < 1e-9),
       hold = frame_dur / (frame_dur + transition_dur),
       transitionDur = transition_dur,
@@ -368,11 +368,11 @@ bar_chart_race <- function(
       paddingWidth = padding_width,
       xFontSize = x_font_size,
       yFontSize = y_font_size,
-      xticks = xticks,
-      xtitle = xtitle,
-      xtitleFontSize = xtitle_font_size,
-      ytitle = ytitle,
-      ytitleFontSize = ytitle_font_size,
+      xticks = x_ticks,
+      xtitle = x_title,
+      xtitleFontSize = x_title_font_size,
+      ytitle = y_title,
+      ytitleFontSize = y_title_font_size,
       title = title,
       titleFontSize = title_font_size,
       subtitle = subtitle,
@@ -380,9 +380,9 @@ bar_chart_race <- function(
       stroke = stroke,
       strokeWidth = stroke_width,
       font = font,
-      bgcol = bgcol,
-      panelcol = panelcol,
-      gridCol = if (is.null(xgridlinecol) || is.na(xgridlinecol)) NULL else xgridlinecol,
+      bgcol = bg_col,
+      panelcol = panel_col,
+      gridCol = if (is.null(x_grid_line_col) || is.na(x_grid_line_col)) NULL else x_grid_line_col,
       opacity = opacity,
       timeLabel = isTRUE(time_label),
       timeLabelOpts = time_label_opts,

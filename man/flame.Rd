@@ -8,7 +8,7 @@ flame(
   intensity = 50,
   flame_gradient_colors = c("#fffbe6", "#ffc233", "#e8452c"),
   flame_outline = NULL,
-  bgcol = "white",
+  bg_col = "white",
   width = NULL,
   height = NULL,
   max_intensity = 100,
@@ -39,7 +39,7 @@ the core of the flame outwards. Defaults to
 \item{flame_outline}{Optional. The colour of an outline drawn around the
 flame. By default the flame has no outline.}
 
-\item{bgcol}{The background colour. Defaults to "white". The flame glows
+\item{bg_col}{The background colour. Defaults to "white". The flame glows
 more on dark backgrounds.}
 
 \item{width}{Optional. The width of the chart.}
@@ -123,7 +123,7 @@ flame(intensity = 20)
 flame(
   intensity = 80,
   flame_gradient_colors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
-  bgcol = "#111111",
+  bg_col = "#111111",
   base = "logs"
 )
 flame(

@@ -33,8 +33,8 @@
 #' @param opacity Optional. The opacity of the area fill (from 0 to 1). When
 #'   \code{NULL} (default), the area is filled with a gradient that fades
 #'   towards the axis.
-#' @param ytitle Optional. The title of the y-axis, shown above the axis.
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param y_title Optional. The title of the y-axis, shown above the axis.
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param axis_col The color of the axis text, ticks and titles. Defaults to
 #'   "#333333".
 #' @param group Optional. For long data, the column whose values name the
@@ -83,16 +83,16 @@ area_chart <- function(
   fill = NULL,
   stroke = NULL,
   stroke_width = 2,
-  xticks = NULL,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_ticks = NULL,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = NULL,
   axis_col = "#333333",
   width = NULL,
@@ -105,7 +105,7 @@ area_chart <- function(
   y_zero = NULL,
   events = NULL,
   bands = NULL,
-  hlines = NULL,
+  h_lines = NULL,
   legend = NULL,
   end_labels = NULL,
   tooltip = TRUE,
@@ -140,17 +140,17 @@ area_chart <- function(
     data = data, x = x, y = y, group = group, colors = fill,
     stroke_width = if (stroke_width == 0) 1 else stroke_width, curve = curve,
     area = TRUE, points = points, y_zero = y_zero,
-    events = events, bands = bands, hlines = hlines, legend = legend,
+    events = events, bands = bands, h_lines = h_lines, legend = legend,
     end_labels = end_labels, tooltip = tooltip, navigator = navigator,
     range_buttons = range_buttons, zoom = zoom, animate = animate,
     value_format = value_format, value_prefix = value_prefix, value_suffix = value_suffix,
-    date_format = date_format, xticks = xticks, yticks = yticks,
-    xtitle = xtitle, xtitle_font_size = xtitle_font_size,
-    ytitle = ytitle, ytitle_font_size = ytitle_font_size,
+    date_format = date_format, x_ticks = x_ticks, y_ticks = y_ticks,
+    x_title = x_title, x_title_font_size = x_title_font_size,
+    y_title = y_title, y_title_font_size = y_title_font_size,
     title = title, title_font_size = title_font_size,
     subtitle = subtitle, subtitle_font_size = subtitle_font_size,
     x_font_size = x_font_size, y_font_size = y_font_size, font = font,
-    bgcol = bgcol, grid_col = grid_col, axis_col = axis_col,
+    bg_col = bg_col, grid_col = grid_col, axis_col = axis_col,
     width = width, height = height,
     extra = list(
       kind = "area",

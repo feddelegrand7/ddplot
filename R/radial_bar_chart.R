@@ -71,7 +71,7 @@
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param text_col Color of the title, labels and center text. Defaults to
 #' \code{"#333333"}.
 #' @param width Optional. The width of the SVG output.
@@ -149,7 +149,7 @@ radial_bar_chart <- function(
     title          = NULL,
     title_font_size  = 16,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol          = "white",
+    bg_col          = "white",
     text_col        = "#333333",
     width          = NULL,
     height         = NULL
@@ -264,7 +264,7 @@ radial_bar_chart <- function(
       title          = title,
       titleFontSize  = title_font_size,
       font           = font,
-      bgcol          = bgcol,
+      bgcol          = bg_col,
       textCol        = text_col
     ),
     width  = width,

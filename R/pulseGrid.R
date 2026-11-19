@@ -26,7 +26,7 @@
 #' @param title_font_size Font size of the plot title. Defaults to 22.
 #' @param font The font family used in labels and title. Defaults to
 #' 'Verdana, Geneva, Tahoma, sans-serif'.
-#' @param bgcol Background color of the SVG. Defaults to '#0F172A'.
+#' @param bg_col Background color of the SVG. Defaults to '#0F172A'.
 #' @param label_color Color of the row and column labels. Defaults to '#F8FAFC'.
 #' @param title_color Color of the title. Defaults to '#F8FAFC'.
 #' @param width Optional. The width of the SVG output.
@@ -52,7 +52,7 @@
 #'   title = "Team Activity Pulse Grid",
 #'   low = "#D9F0FF",
 #'   high = "#EE6C4D",
-#'   bgcol = "#0B132B"
+#'   bg_col = "#0B132B"
 #' )
 
 pulse_grid <- function(
@@ -76,7 +76,7 @@ pulse_grid <- function(
   title = NULL,
   title_font_size = 22,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "#0F172A",
+  bg_col = "#0F172A",
   label_color = "#F8FAFC",
   title_color = "#F8FAFC",
   width = NULL,
@@ -126,7 +126,7 @@ pulse_grid <- function(
       title = title,
       titleFontSize = title_font_size,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       labelColor = label_color,
       titleColor = title_color,
       width = width,

@@ -38,7 +38,7 @@
 #' @param box Logical. When \code{TRUE} (default), an inner box plot is drawn
 #' inside each violin: a box from the first to the third quartile, a white
 #' median line, and whiskers reaching the most extreme values within 1.5 IQR.
-#' @param meanline Logical. When \code{TRUE}, a dashed line is drawn across
+#' @param mean_line Logical. When \code{TRUE}, a dashed line is drawn across
 #' each violin at the mean. Defaults to \code{FALSE}.
 #' @param points Which raw observations to draw on top of the violins:
 #' \code{"outliers"} (default, values beyond the whiskers), \code{"all"}, or
@@ -69,10 +69,10 @@
 #' highlights it and shows a tooltip with its summary statistics.
 #' @param animate Logical. When \code{TRUE} (default), the violins grow from
 #' their center line and the points fade in on first render.
-#' @param ytitle Optional. Title of the y-axis.
-#' @param ytitle_font_size Font size of the y-axis title. Defaults to \code{13}.
-#' @param xtitle Optional. Title of the x-axis.
-#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
+#' @param y_title Optional. Title of the y-axis.
+#' @param y_title_font_size Font size of the y-axis title. Defaults to \code{13}.
+#' @param x_title Optional. Title of the x-axis.
+#' @param x_title_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param x_font_size Font size of the group labels. Defaults to \code{11}.
@@ -80,7 +80,7 @@
 #' @param y_font_size Font size of the y-axis tick labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param grid_col Color of the horizontal grid lines. Defaults to
@@ -98,7 +98,7 @@
 #'   y      = "Sepal.Length",
 #'   group  = "Species",
 #'   title  = "Sepal length by species",
-#'   ytitle = "Sepal length (cm)"
+#'   y_title = "Sepal length (cm)"
 #' )
 #'
 #' # Every observation jittered inside its violin, plus a mean line
@@ -109,11 +109,11 @@
 #'   y            = "hwy",
 #'   group        = "class",
 #'   points       = "all",
-#'   meanline     = TRUE,
+#'   mean_line     = TRUE,
 #'   sort         = "median",
 #'   color_palette = "Tableau10",
 #'   title        = "Highway fuel economy by vehicle class",
-#'   ytitle       = "Highway miles per gallon"
+#'   y_title       = "Highway miles per gallon"
 #' )
 #'
 #' # A bimodal distribution, width proportional to group size, hard span
@@ -133,8 +133,8 @@
 #'   color_palette = c(North = "#636efa", Central = "#ef553b",
 #'                    South = "#00cc96"),
 #'   title        = "Waiting time by station",
-#'   ytitle       = "Minutes",
-#'   xtitle       = "Station"
+#'   y_title       = "Minutes",
+#'   x_title       = "Station"
 #' )
 #'
 #' # A single violin with a custom bandwidth
@@ -144,7 +144,7 @@
 #'   bandwidth    = 0.2,
 #'   color_palette = "#9467bd",
 #'   points       = "all",
-#'   ytitle       = "Eruption time (min)"
+#'   y_title       = "Eruption time (min)"
 #' )
 violin_plot <- function(
     data,
@@ -154,7 +154,7 @@ violin_plot <- function(
     span           = c("soft", "hard"),
     scale          = c("width", "count"),
     box            = TRUE,
-    meanline       = FALSE,
+    mean_line       = FALSE,
     points         = c("outliers", "all", "none"),
     jitter         = 0.6,
     point_radius    = 2.5,
@@ -166,16 +166,16 @@ violin_plot <- function(
     violin_width    = 0.8,
     hover          = TRUE,
     animate        = TRUE,
-    ytitle         = NULL,
-    ytitle_font_size = 13,
-    xtitle         = NULL,
-    xtitle_font_size = 13,
+    y_title         = NULL,
+    y_title_font_size = 13,
+    x_title         = NULL,
+    x_title_font_size = 13,
     title          = NULL,
     title_font_size  = 16,
     x_font_size      = 11,
     y_font_size      = 11,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol          = "white",
+    bg_col          = "white",
     axis_col        = "black",
     grid_col        = "#e6e6e6",
     width          = NULL,
@@ -223,7 +223,7 @@ violin_plot <- function(
     }
   }
   check_flag(box,      "box")
-  check_flag(meanline, "meanline")
+  check_flag(mean_line, "mean_line")
   check_flag(hover,    "hover")
   check_flag(animate,  "animate")
 
@@ -311,7 +311,7 @@ violin_plot <- function(
       span           = span,
       scale          = scale,
       box            = box,
-      meanline       = meanline,
+      meanline       = mean_line,
       points         = points,
       jitter         = jitter,
       pointRadius    = point_radius,
@@ -323,16 +323,16 @@ violin_plot <- function(
       violinWidth    = violin_width,
       hover          = hover,
       animate        = animate,
-      ytitle         = ytitle,
-      ytitleFontSize = ytitle_font_size,
-      xtitle         = xtitle,
-      xtitleFontSize = xtitle_font_size,
+      ytitle         = y_title,
+      ytitleFontSize = y_title_font_size,
+      xtitle         = x_title,
+      xtitleFontSize = x_title_font_size,
       title          = title,
       titleFontSize  = title_font_size,
       xFontSize      = x_font_size,
       yFontSize      = y_font_size,
       font           = font,
-      bgcol          = bgcol,
+      bgcol          = bg_col,
       axisCol        = axis_col,
       gridCol        = grid_col
     ),

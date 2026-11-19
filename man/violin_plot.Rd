@@ -12,7 +12,7 @@ violin_plot(
   span = c("soft", "hard"),
   scale = c("width", "count"),
   box = TRUE,
-  meanline = FALSE,
+  mean_line = FALSE,
   points = c("outliers", "all", "none"),
   jitter = 0.6,
   point_radius = 2.5,
@@ -24,16 +24,16 @@ violin_plot(
   violin_width = 0.8,
   hover = TRUE,
   animate = TRUE,
-  ytitle = NULL,
-  ytitle_font_size = 13,
-  xtitle = NULL,
-  xtitle_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
+  x_title = NULL,
+  x_title_font_size = 13,
   title = NULL,
   title_font_size = 16,
   x_font_size = 11,
   y_font_size = 11,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   grid_col = "#e6e6e6",
   width = NULL,
@@ -68,7 +68,7 @@ proportional to the number of observations, so larger groups look larger.}
 inside each violin: a box from the first to the third quartile, a white
 median line, and whiskers reaching the most extreme values within 1.5 IQR.}
 
-\item{meanline}{Logical. When \code{TRUE}, a dashed line is drawn across
+\item{mean_line}{Logical. When \code{TRUE}, a dashed line is drawn across
 each violin at the mean. Defaults to \code{FALSE}.}
 
 \item{points}{Which raw observations to draw on top of the violins:
@@ -111,13 +111,13 @@ highlights it and shows a tooltip with its summary statistics.}
 \item{animate}{Logical. When \code{TRUE} (default), the violins grow from
 their center line and the points fade in on first render.}
 
-\item{ytitle}{Optional. Title of the y-axis.}
+\item{y_title}{Optional. Title of the y-axis.}
 
-\item{ytitle_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
+\item{y_title_font_size}{Font size of the y-axis title. Defaults to \code{13}.}
 
-\item{xtitle}{Optional. Title of the x-axis.}
+\item{x_title}{Optional. Title of the x-axis.}
 
-\item{xtitle_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
+\item{x_title_font_size}{Font size of the x-axis title. Defaults to \code{13}.}
 
 \item{title}{Optional. Title of the chart.}
 
@@ -131,7 +131,7 @@ Labels are rotated automatically when they do not fit.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of axis lines, ticks, and labels. Defaults to
 \code{"black"}.}
@@ -171,7 +171,7 @@ violin_plot(
   y      = "Sepal.Length",
   group  = "Species",
   title  = "Sepal length by species",
-  ytitle = "Sepal length (cm)"
+  y_title = "Sepal length (cm)"
 )
 
 # Every observation jittered inside its violin, plus a mean line
@@ -182,11 +182,11 @@ violin_plot(
   y            = "hwy",
   group        = "class",
   points       = "all",
-  meanline     = TRUE,
+  mean_line     = TRUE,
   sort         = "median",
   color_palette = "Tableau10",
   title        = "Highway fuel economy by vehicle class",
-  ytitle       = "Highway miles per gallon"
+  y_title       = "Highway miles per gallon"
 )
 
 # A bimodal distribution, width proportional to group size, hard span
@@ -206,8 +206,8 @@ violin_plot(
   color_palette = c(North = "#636efa", Central = "#ef553b",
                    South = "#00cc96"),
   title        = "Waiting time by station",
-  ytitle       = "Minutes",
-  xtitle       = "Station"
+  y_title       = "Minutes",
+  x_title       = "Station"
 )
 
 # A single violin with a custom bandwidth
@@ -217,6 +217,6 @@ violin_plot(
   bandwidth    = 0.2,
   color_palette = "#9467bd",
   points       = "all",
-  ytitle       = "Eruption time (min)"
+  y_title       = "Eruption time (min)"
 )
 }

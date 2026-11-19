@@ -34,7 +34,7 @@
 #'   \code{c("#fffbe6", "#ffc233", "#e8452c")}.
 #' @param flame_outline Optional. The colour of an outline drawn around the
 #'   flame. By default the flame has no outline.
-#' @param bgcol The background colour. Defaults to "white". The flame glows
+#' @param bg_col The background colour. Defaults to "white". The flame glows
 #'   more on dark backgrounds.
 #' @param width Optional. The width of the chart.
 #' @param height Optional. The height of the chart.
@@ -71,7 +71,7 @@
 #' flame(
 #'   intensity = 80,
 #'   flame_gradient_colors = c("#e0f7ff", "#5ac8fa", "#1d4ed8"),
-#'   bgcol = "#111111",
+#'   bg_col = "#111111",
 #'   base = "logs"
 #' )
 #' flame(
@@ -85,7 +85,7 @@ flame <- function(
     intensity = 50,
     flame_gradient_colors = c("#fffbe6", "#ffc233", "#e8452c"),
     flame_outline = NULL,
-    bgcol = "white",
+    bg_col = "white",
     width = NULL,
     height = NULL,
     max_intensity = 100,
@@ -128,7 +128,7 @@ flame <- function(
       flameColor1 = flame_gradient_colors[[2]],
       flameColor2 = flame_gradient_colors[[3]],
       flameOutline = flame_outline,
-      bgcol = bgcol,
+      bgcol = bg_col,
       maxIntensity = max_intensity,
       base = base,
       showValue = play_flag(show_value, "show_value"),

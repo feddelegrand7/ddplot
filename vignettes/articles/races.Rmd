@@ -61,7 +61,7 @@ gapminder %>%
   bar_chart_race(
     x = "lifeExp", y = "country", time = "year",
     frame_dur = 300, transition_dur = 900, ease = "BackInOut",
-    xtitle = "Life expectancy", value_format = ".1f",
+    x_title = "Life expectancy", value_format = ".1f",
     time_label_opts = list(size = 40, prefix = "Year "),
     title = "Life expectancy in five countries"
   )
@@ -101,7 +101,7 @@ gapminder %>%
   line_race(
     x = "year", y = "gdpPercap", group = "country",
     y_scale = "log", value_prefix = "$", value_format = ",.0f",
-    ytitle = "GDP per capita (log scale)",
+    y_title = "GDP per capita (log scale)",
     title = "The Asian growth race",
     events = c("Reforms in China" = 1978, "Asian crisis" = 1997)
   )
@@ -111,7 +111,7 @@ gapminder %>%
 line_race(
   gapminder, x = "year", y = "lifeExp", group = "country",
   category = "continent", top_n = 10, y_zero = FALSE,
-  value_format = ".1f", ytitle = "Life expectancy (years)",
+  value_format = ".1f", y_title = "Life expectancy (years)",
   highlight = "Japan", title = "Life expectancy, 1952 to 2007"
 )
 ```
@@ -122,7 +122,7 @@ With dates, a sliding `window` keeps the last periods on screen:
 line_race(
   economics_long, x = "date", y = "value", group = "variable",
   y_scale = "log", window = 120, frame_dur = 60,
-  title = "US economic indicators", ytitle = "Value (log scale)"
+  title = "US economic indicators", y_title = "Value (log scale)"
 )
 ```
 
@@ -140,7 +140,7 @@ bubble_race(
   x = "gdpPercap", y = "lifeExp", id = "country", time = "year",
   size = "pop", group = "continent", x_scale = "log",
   highlight = c("China", "India"),
-  xtitle = "GDP per capita", ytitle = "Life expectancy", size_title = "Population",
+  x_title = "GDP per capita", y_title = "Life expectancy", size_title = "Population",
   value_prefix = c(x = "$"), value_suffix = c(y = " years"),
   value_format = c(x = ",.0f", y = ".1f"),
   title = "Health and wealth of nations"

@@ -17,19 +17,19 @@ bar_chart_race(
   padding_width = 0.2,
   x_font_size = 10,
   y_font_size = 12,
-  xticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 12,
-  ytitle = NULL,
-  ytitle_font_size = 12,
+  x_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 12,
+  y_title = NULL,
+  y_title_font_size = 12,
   title = NULL,
   title_font_size = 20,
   stroke = NULL,
   stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
-  panelcol = NULL,
-  xgridlinecol = NULL,
+  bg_col = "white",
+  panel_col = NULL,
+  x_grid_line_col = NULL,
   opacity = 1,
   time_label = TRUE,
   time_label_opts = list(size = NULL, prefix = "", suffix = "", xOffset = 0, yOffset = 0),
@@ -102,16 +102,16 @@ from 0 to 0.99. Defaults to 0.2.}
 \item{y_font_size}{The font size of the item names (shrunk when the bars are
 thin). Defaults to 12.}
 
-\item{xticks}{Optional. The approximate number of value axis ticks.}
+\item{x_ticks}{Optional. The approximate number of value axis ticks.}
 
-\item{xtitle}{Optional. The title of the value axis, drawn above it. It is
+\item{x_title}{Optional. The title of the value axis, drawn above it. It is
 also used as the name of the value in the tooltip.}
 
-\item{xtitle_font_size}{The font size of the value axis title. Defaults to 12.}
+\item{x_title_font_size}{The font size of the value axis title. Defaults to 12.}
 
-\item{ytitle}{Optional. The title of the item names, drawn above them.}
+\item{y_title}{Optional. The title of the item names, drawn above them.}
 
-\item{ytitle_font_size}{The font size of the item axis title. Defaults to 12.}
+\item{y_title_font_size}{The font size of the item axis title. Defaults to 12.}
 
 \item{title}{Optional. The title of the plot.}
 
@@ -125,13 +125,13 @@ also used as the name of the value in the tooltip.}
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background colour of the SVG. Defaults to "white".}
+\item{bg_col}{The background colour of the SVG. Defaults to "white".}
 
-\item{panelcol}{Optional. The background colour of the panel behind the
+\item{panel_col}{Optional. The background colour of the panel behind the
 bars (none by default).}
 
-\item{xgridlinecol}{The colour of the vertical grid lines. When \code{NULL}
-(default), a light grey, or white when \code{panelcol} is given. Use
+\item{x_grid_line_col}{The colour of the vertical grid lines. When \code{NULL}
+(default), a light grey, or white when \code{panel_col} is given. Use
 \code{NA} to hide them.}
 
 \item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1.}
@@ -283,8 +283,8 @@ data = gapminder,
 x = "lifeExp",
 y = "country",
 time = "year",
-ytitle = "Country",
-xtitle = "Life expectancy",
+y_title = "Country",
+x_title = "Life expectancy",
 title = "Bar chart race of countries life expectancy"
 )
 

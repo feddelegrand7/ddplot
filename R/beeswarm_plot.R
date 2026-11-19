@@ -45,15 +45,15 @@
 #' @param opacity Fill opacity of the points (0 to 1). Defaults to \code{0.75}.
 #' @param stroke Stroke color of the points. Defaults to \code{"white"}.
 #' @param stroke_width Stroke width in pixels. Defaults to \code{0.5}.
-#' @param xtitle Optional. Title of the x-axis.
-#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
+#' @param x_title Optional. Title of the x-axis.
+#' @param x_title_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
 #' @param y_font_size Font size of the y-axis group labels. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
@@ -70,7 +70,7 @@
 #'   data = mpg,
 #'   x    = "hwy",
 #'   col  = "steelblue",
-#'   xtitle = "Highway miles per gallon",
+#'   x_title = "Highway miles per gallon",
 #'   title  = "Distribution of hwy"
 #' )
 #'
@@ -79,7 +79,7 @@
 #'   data  = mpg,
 #'   x     = "hwy",
 #'   group = "class",
-#'   xtitle = "Highway miles per gallon",
+#'   x_title = "Highway miles per gallon",
 #'   title  = "Highway fuel economy by vehicle class"
 #' )
 #'
@@ -90,7 +90,7 @@
 #'   group        = "Species",
 #'   color_palette = "Set2",
 #'   radius       = 5,
-#'   xtitle       = "Sepal length (cm)",
+#'   x_title       = "Sepal length (cm)",
 #'   title        = "Sepal length by species"
 #' )
 #'
@@ -101,7 +101,7 @@
 #'   group   = "class",
 #'   tooltip = "model",
 #'   stat    = "median",
-#'   xtitle  = "Highway miles per gallon",
+#'   x_title  = "Highway miles per gallon",
 #'   title   = "Highway fuel economy by vehicle class"
 #' )
 beeswarm_plot <- function(
@@ -119,14 +119,14 @@ beeswarm_plot <- function(
     opacity      = 0.75,
     stroke       = "white",
     stroke_width  = 0.5,
-    xtitle       = NULL,
-    xtitle_font_size = 13,
+    x_title       = NULL,
+    x_title_font_size = 13,
     title        = NULL,
     title_font_size  = 16,
     x_font_size    = 11,
     y_font_size    = 11,
     font         = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol        = "white",
+    bg_col        = "white",
     axis_col      = "black",
     width        = NULL,
     height       = NULL
@@ -175,14 +175,14 @@ beeswarm_plot <- function(
       opacity      = opacity,
       stroke       = stroke,
       strokeWidth  = stroke_width,
-      xtitle       = xtitle,
-      xtitleFontSize = xtitle_font_size,
+      xtitle       = x_title,
+      xtitleFontSize = x_title_font_size,
       title        = title,
       titleFontSize  = title_font_size,
       xFontSize    = x_font_size,
       yFontSize    = y_font_size,
       font         = font,
-      bgcol        = bgcol,
+      bgcol        = bg_col,
       axisCol      = axis_col
     ),
     width  = width,

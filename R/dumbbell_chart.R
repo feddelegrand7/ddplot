@@ -25,8 +25,8 @@
 #' @param sort Whether to sort the rows. One of \code{"none"} (default),
 #' \code{"ascending"}, or \code{"descending"}, ordered by the \code{x1}
 #' value.
-#' @param xtitle Optional. Title of the x-axis.
-#' @param xtitle_font_size Font size of the x-axis title. Defaults to \code{13}.
+#' @param x_title Optional. Title of the x-axis.
+#' @param x_title_font_size Font size of the x-axis title. Defaults to \code{13}.
 #' @param title Optional. Title of the chart.
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param x_font_size Font size of the x-axis tick labels. Defaults to \code{11}.
@@ -36,7 +36,7 @@
 #' @param legend_font_size Font size of the legend text. Defaults to \code{11}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param axis_col Color of axis lines, ticks, and labels. Defaults to
 #' \code{"black"}.
 #' @param width Optional. The width of the SVG output.
@@ -62,7 +62,7 @@
 #'   x1_label  = "1952",
 #'   x2_label  = "2007",
 #'   title    = "Life expectancy: 1952 vs 2007",
-#'   xtitle   = "Life expectancy (years)",
+#'   x_title   = "Life expectancy (years)",
 #'   sort     = "ascending"
 #' )
 #'
@@ -83,7 +83,7 @@
 #'   col1    = "steelblue",
 #'   col2    = "darkorange",
 #'   title   = "City vs highway fuel economy by class",
-#'   xtitle  = "Miles per gallon",
+#'   x_title  = "Miles per gallon",
 #'   sort    = "ascending"
 #' )
 dumbbell_chart <- function(
@@ -99,8 +99,8 @@ dumbbell_chart <- function(
     line_width     = 2,
     circle_radius  = 6,
     sort          = "none",
-    xtitle        = NULL,
-    xtitle_font_size = 13,
+    x_title        = NULL,
+    x_title_font_size = 13,
     title         = NULL,
     title_font_size  = 16,
     x_font_size     = 11,
@@ -108,7 +108,7 @@ dumbbell_chart <- function(
     legend        = TRUE,
     legend_font_size = 11,
     font          = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol         = "white",
+    bg_col         = "white",
     axis_col       = "black",
     width         = NULL,
     height        = NULL
@@ -147,8 +147,8 @@ dumbbell_chart <- function(
       lineWidth     = line_width,
       circleRadius  = circle_radius,
       sort          = sort,
-      xtitle        = xtitle,
-      xtitleFontSize = xtitle_font_size,
+      xtitle        = x_title,
+      xtitleFontSize = x_title_font_size,
       title         = title,
       titleFontSize  = title_font_size,
       xFontSize     = x_font_size,
@@ -156,7 +156,7 @@ dumbbell_chart <- function(
       legend        = legend,
       legendFontSize = legend_font_size,
       font          = font,
-      bgcol         = bgcol,
+      bgcol         = bg_col,
       axisCol       = axis_col
     ),
     width  = width,

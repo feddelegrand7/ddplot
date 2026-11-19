@@ -47,7 +47,7 @@
 #' @param title_font_size The font size of the title. Defaults to 20.
 #' @param font The font family. Defaults to "Verdana, Geneva, Tahoma,
 #'   sans-serif".
-#' @param bgcol The background colour. Defaults to "white".
+#' @param bg_col The background colour. Defaults to "white".
 #' @param width Optional. The width of the chart.
 #' @param height Optional. The height of the chart.
 #' @param subtitle Optional. A subtitle under the title.
@@ -132,7 +132,7 @@ parliament_chart <- function(
     title = NULL,
     title_font_size = 20,
     font = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol = "white",
+    bg_col = "white",
     width = NULL,
     height = NULL,
     subtitle = NULL,
@@ -288,7 +288,7 @@ parliament_chart <- function(
       subtitle = subtitle,
       subtitleFontSize = play_size(subtitle_font_size, "subtitle_font_size"),
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       colorCategory = color_category,
       majority = majority_seats,
       coalition = if (is.null(coalition)) NULL else I(coalition),

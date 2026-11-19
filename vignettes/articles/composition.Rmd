@@ -223,8 +223,8 @@ mosaic_chart(
   fill   = "Survived",
   value  = "Freq",
   colors = c("#e45756", "#4c78a8"),
-  xtitle = "Share of passengers and crew",
-  ytitle = "Share within class",
+  x_title = "Share of passengers and crew",
+  y_title = "Share within class",
   title  = "Who survived the Titanic?"
 )
 ```

@@ -61,7 +61,7 @@
 #'   with the arrow keys. Defaults to FALSE.
 #' @param animate Logical. Grow the plant from the seed when it first comes
 #'   into view. Defaults to TRUE.
-#' @param bgcol The background colour. Defaults to "white".
+#' @param bg_col The background colour. Defaults to "white".
 #' @param width Optional. The width of the chart.
 #' @param height Optional. The height of the chart.
 #'
@@ -101,7 +101,7 @@ plant_growth <- function(
     sway = TRUE,
     draggable = FALSE,
     animate = TRUE,
-    bgcol = "white",
+    bg_col = "white",
     width = NULL,
     height = NULL
 ) {
@@ -136,7 +136,7 @@ plant_growth <- function(
       sway = play_flag(sway, "sway"),
       draggable = play_flag(draggable, "draggable"),
       animate = play_flag(animate, "animate"),
-      bgcol = bgcol
+      bgcol = bg_col
     )
   )
 }

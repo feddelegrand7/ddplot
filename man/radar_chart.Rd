@@ -29,7 +29,7 @@ radar_chart(
   title = NULL,
   title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "black",
   width = NULL,
   height = NULL
@@ -112,7 +112,7 @@ to \code{TRUE}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of the axis labels, tick labels, legend text and
 title. Defaults to \code{"black"}.}

@@ -18,7 +18,7 @@ pie_chart(
   title = NULL,
   title_font_size = 20,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = 1,
   label_height = NULL,
   width = NULL,
@@ -87,7 +87,7 @@ Defaults to 0.}
 \item{font}{The font family to consider for the titles.
 Defaults to "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{opacity}{The opacity of the slices (from 0 to 1). Defaults to 1.}
 

@@ -24,10 +24,10 @@
 #'
 #' Time-series extras: \code{transform = "index"} rebases every series to 100
 #' at the start of the visible range (or \code{"percent"} for the change since
-#' then), \code{rollmean} overlays a moving average, \code{lower} /
+#' then), \code{roll_mean} overlays a moving average, \code{lower} /
 #' \code{upper} draw a confidence or forecast ribbon, \code{bands} shade
 #' periods such as recessions, \code{events} mark dates with a vertical line
-#' and \code{hlines} draw reference values.
+#' and \code{h_lines} draw reference values.
 #'
 #' Missing values (\code{NA}) leave a gap in the line.
 #'
@@ -69,9 +69,9 @@
 #'   the first visible date). The base moves with the zoom.
 #' @param index_base The value series are rebased to when
 #'   \code{transform = "index"}. Defaults to 100.
-#' @param rollmean Optional. A window size (number of observations). When
+#' @param roll_mean Optional. A window size (number of observations). When
 #'   given, a trailing moving average is drawn as the main line.
-#' @param show_raw Logical. When \code{rollmean} is used, also draw the raw
+#' @param show_raw Logical. When \code{roll_mean} is used, also draw the raw
 #'   series as a thin faded line. Defaults to \code{TRUE}.
 #' @param events Optional. Dates to mark with a vertical line: either a
 #'   vector of dates (names are used as labels) or a data frame whose first
@@ -79,7 +79,7 @@
 #' @param bands Optional. Periods to shade, as a data frame whose first two
 #'   columns are the start and end dates. An optional third column holds the
 #'   labels and an optional fourth column the fill colors.
-#' @param hlines Optional. Numeric reference values drawn as horizontal
+#' @param h_lines Optional. Numeric reference values drawn as horizontal
 #'   dashed lines (names are used as labels). Only drawn when
 #'   \code{transform = "none"}.
 #' @param legend Logical. Show the interactive legend (click to hide or show
@@ -110,12 +110,12 @@
 #'   tooltip (see <https://github.com/d3/d3-time-format>). When \code{NULL}
 #'   (default), it is picked from the frequency of the data (yearly,
 #'   quarterly, monthly, daily or intraday).
-#' @param xticks Optional. The approximate number of x-axis ticks.
-#' @param yticks Optional. The approximate number of y-axis ticks.
-#' @param xtitle Optional. The title of the x-axis.
-#' @param xtitle_font_size The font size of the x-axis title. Defaults to 13.
-#' @param ytitle Optional. The title of the y-axis, shown above the axis.
-#' @param ytitle_font_size The font size of the y-axis title. Defaults to 13.
+#' @param x_ticks Optional. The approximate number of x-axis ticks.
+#' @param y_ticks Optional. The approximate number of y-axis ticks.
+#' @param x_title Optional. The title of the x-axis.
+#' @param x_title_font_size The font size of the x-axis title. Defaults to 13.
+#' @param y_title Optional. The title of the y-axis, shown above the axis.
+#' @param y_title_font_size The font size of the y-axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
 #' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param subtitle Optional. A subtitle shown under the title.
@@ -124,7 +124,7 @@
 #'   to 11.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param grid_col The color of the horizontal grid lines. Defaults to
 #'   "#e9e9e9".
 #' @param axis_col The color of the axis text, ticks and titles. Defaults to
@@ -219,11 +219,11 @@ line_chart <- function(
                       y_zero = NULL,
                       transform = c("none", "index", "percent"),
                       index_base = 100,
-                      rollmean = NULL,
+                      roll_mean = NULL,
                       show_raw = TRUE,
                       events = NULL,
                       bands = NULL,
-                      hlines = NULL,
+                      h_lines = NULL,
                       legend = NULL,
                       end_labels = NULL,
                       tooltip = TRUE,
@@ -235,12 +235,12 @@ line_chart <- function(
                       value_prefix = "",
                       value_suffix = "",
                       date_format = NULL,
-                      xticks = NULL,
-                      yticks = NULL,
-                      xtitle = NULL,
-                      xtitle_font_size = 13,
-                      ytitle = NULL,
-                      ytitle_font_size = 13,
+                      x_ticks = NULL,
+                      y_ticks = NULL,
+                      x_title = NULL,
+                      x_title_font_size = 13,
+                      y_title = NULL,
+                      y_title_font_size = 13,
                       title = NULL,
                       title_font_size = 20,
                       subtitle = NULL,
@@ -248,7 +248,7 @@ line_chart <- function(
                       x_font_size = 11,
                       y_font_size = 11,
                       font = "Verdana, Geneva, Tahoma, sans-serif",
-                      bgcol = "white",
+                      bg_col = "white",
                       grid_col = "#e9e9e9",
                       axis_col = "#333333",
                       width = NULL,
@@ -281,11 +281,11 @@ line_widget <- function(
                       y_zero = NULL,
                       transform = c("none", "index", "percent"),
                       index_base = 100,
-                      rollmean = NULL,
+                      roll_mean = NULL,
                       show_raw = TRUE,
                       events = NULL,
                       bands = NULL,
-                      hlines = NULL,
+                      h_lines = NULL,
                       legend = NULL,
                       end_labels = NULL,
                       tooltip = TRUE,
@@ -297,12 +297,12 @@ line_widget <- function(
                       value_prefix = "",
                       value_suffix = "",
                       date_format = NULL,
-                      xticks = NULL,
-                      yticks = NULL,
-                      xtitle = NULL,
-                      xtitle_font_size = 13,
-                      ytitle = NULL,
-                      ytitle_font_size = 13,
+                      x_ticks = NULL,
+                      y_ticks = NULL,
+                      x_title = NULL,
+                      x_title_font_size = 13,
+                      y_title = NULL,
+                      y_title_font_size = 13,
                       title = NULL,
                       title_font_size = 20,
                       subtitle = NULL,
@@ -310,7 +310,7 @@ line_widget <- function(
                       x_font_size = 11,
                       y_font_size = 11,
                       font = "Verdana, Geneva, Tahoma, sans-serif",
-                      bgcol = "white",
+                      bg_col = "white",
                       grid_col = "#e9e9e9",
                       axis_col = "#333333",
                       width = NULL,
@@ -394,11 +394,11 @@ line_widget <- function(
   if (!is.numeric(opacity) || length(opacity) != 1 || opacity < 0 || opacity > 1) {
     stop("'opacity' must be a single number between 0 and 1")
   }
-  if (!is.null(rollmean)) {
-    if (!is.numeric(rollmean) || length(rollmean) != 1 || rollmean < 2) {
-      stop("'rollmean' must be a single number of observations, 2 or more")
+  if (!is.null(roll_mean)) {
+    if (!is.numeric(roll_mean) || length(roll_mean) != 1 || roll_mean < 2) {
+      stop("'roll_mean' must be a single number of observations, 2 or more")
     }
-    rollmean <- as.integer(round(rollmean))
+    roll_mean <- as.integer(round(roll_mean))
   }
   if (!is.numeric(index_base) || length(index_base) != 1 || index_base <= 0) {
     stop("'index_base' must be a single positive number")
@@ -513,11 +513,11 @@ line_widget <- function(
   }
 
   hlines_list <- NULL
-  if (!is.null(hlines)) {
-    if (!is.numeric(hlines)) stop("'hlines' must be a numeric vector")
-    h_lab <- if (is.null(names(hlines))) rep("", length(hlines)) else names(hlines)
-    hlines_list <- lapply(seq_along(hlines), function(i) {
-      list(value = unname(hlines[i]), label = h_lab[i])
+  if (!is.null(h_lines)) {
+    if (!is.numeric(h_lines)) stop("'h_lines' must be a numeric vector")
+    h_lab <- if (is.null(names(h_lines))) rep("", length(h_lines)) else names(h_lines)
+    hlines_list <- lapply(seq_along(h_lines), function(i) {
+      list(value = unname(h_lines[i]), label = h_lab[i])
     })
   }
 
@@ -537,7 +537,7 @@ line_widget <- function(
       yZero = if (is.null(y_zero)) area else y_zero,
       transform = transform,
       indexBase = index_base,
-      rollmean = rollmean,
+      rollmean = roll_mean,
       showRaw = show_raw,
       events = events_list,
       bands = bands_list,
@@ -553,12 +553,12 @@ line_widget <- function(
       valuePrefix = value_prefix,
       valueSuffix = value_suffix,
       dateFormat = date_format,
-      xticks = xticks,
-      yticks = yticks,
-      xtitle = xtitle,
-      xtitleFontSize = xtitle_font_size,
-      ytitle = ytitle,
-      ytitleFontSize = ytitle_font_size,
+      xticks = x_ticks,
+      yticks = y_ticks,
+      xtitle = x_title,
+      xtitleFontSize = x_title_font_size,
+      ytitle = y_title,
+      ytitleFontSize = y_title_font_size,
       title = title,
       titleFontSize = title_font_size,
       subtitle = subtitle,
@@ -566,7 +566,7 @@ line_widget <- function(
       xFontSize = x_font_size,
       yFontSize = y_font_size,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       gridCol = grid_col,
       axisCol = axis_col
     ), extra),

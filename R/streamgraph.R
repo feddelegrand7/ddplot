@@ -84,21 +84,21 @@
 #' \code{"d"}) or a d3-time-format specifier for dates (e.g.
 #' \code{"\%b \%Y"}). Defaults to \code{NULL}, which picks a sensible format
 #' automatically.
-#' @param xticks Optional. Approximate number of x-axis ticks. Defaults to
+#' @param x_ticks Optional. Approximate number of x-axis ticks. Defaults to
 #' \code{NULL} (chosen from the chart width).
 #' @param x_font_size Font size of the x-axis tick labels. Defaults to
 #' \code{11}.
 #' @param grid_col Color of the vertical grid lines drawn at each x tick. Use
 #' \code{NA} or \code{"transparent"} to hide them. Defaults to
 #' \code{"#e6e6e6"}.
-#' @param xtitle Optional. Title of the x-axis.
-#' @param xtitle_font_size Font size of the x-axis title. Defaults to
+#' @param x_title Optional. Title of the x-axis.
+#' @param x_title_font_size Font size of the x-axis title. Defaults to
 #' \code{13}.
 #' @param title Optional. Title of the chart.
 #' @param title_font_size Font size of the chart title. Defaults to \code{16}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param axis_col Color of the x-axis, the titles, the crosshair and the
 #' legend text. Defaults to \code{"black"}.
 #' @param width Optional. The width of the SVG output.
@@ -127,7 +127,7 @@
 #'   group  = "genre",
 #'   value  = "listeners",
 #'   value_format = ",.0f",
-#'   xtitle = "Year",
+#'   x_title = "Year",
 #'   title  = "Music genres, 1980-2020 (millions of listeners)"
 #' )
 #'
@@ -197,15 +197,15 @@ streamgraph <- function(
     legend_font_size = 11,
     value_format    = ",.2~f",
     x_format        = NULL,
-    xticks         = NULL,
+    x_ticks         = NULL,
     x_font_size      = 11,
     grid_col        = "#e6e6e6",
-    xtitle         = NULL,
-    xtitle_font_size = 13,
+    x_title         = NULL,
+    x_title_font_size = 13,
     title          = NULL,
     title_font_size  = 16,
     font           = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol          = "white",
+    bg_col          = "white",
     axis_col        = "black",
     width          = NULL,
     height         = NULL
@@ -311,15 +311,15 @@ streamgraph <- function(
       legendFontSize = legend_font_size,
       valueFormat    = value_format,
       xFormat        = x_format,
-      xticks         = xticks,
+      xticks         = x_ticks,
       xFontSize      = x_font_size,
       gridCol        = if (is.null(grid_col) || is.na(grid_col)) "transparent" else grid_col,
-      xtitle         = xtitle,
-      xtitleFontSize = xtitle_font_size,
+      xtitle         = x_title,
+      xtitleFontSize = x_title_font_size,
       title          = title,
       titleFontSize  = title_font_size,
       font           = font,
-      bgcol          = bgcol,
+      bgcol          = bg_col,
       axisCol        = axis_col
     ),
     width  = width,

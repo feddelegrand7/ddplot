@@ -43,21 +43,21 @@
 #'   a built-in palette.
 #' @param x_font_size The font size of the x-axis labels. Defaults to 11.
 #' @param y_font_size The font size of the y-axis labels. Defaults to 11.
-#' @param xticks Optional. The approximate number of x-axis ticks.
-#' @param yticks Optional. The approximate number of y-axis ticks.
-#' @param xtitle Optional. The title of the x-axis. Defaults to the name of
+#' @param x_ticks Optional. The approximate number of x-axis ticks.
+#' @param y_ticks Optional. The approximate number of y-axis ticks.
+#' @param x_title Optional. The title of the x-axis. Defaults to the name of
 #'   the variable (when it can be found); use \code{""} to hide it.
-#' @param xtitle_font_size The font size of the x-axis title. Defaults to 13.
-#' @param ytitle Optional. The title of the y-axis, drawn above it. Defaults
+#' @param x_title_font_size The font size of the x-axis title. Defaults to 13.
+#' @param y_title Optional. The title of the y-axis, drawn above it. Defaults
 #'   to "Count", "Percent" or "Density"; use \code{""} to hide it.
-#' @param ytitle_font_size The font size of the y-axis title. Defaults to 13.
+#' @param y_title_font_size The font size of the y-axis title. Defaults to 13.
 #' @param title Optional. The title of the plot.
 #' @param title_font_size The font size of the plot title. Defaults to 20.
 #' @param stroke Optional. The stroke colour of the bars.
 #' @param stroke_width Optional. The stroke width of the bars.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param opacity The opacity of the bars (from 0 to 1). Defaults to 1, or
 #'   0.5 for overlaid groups.
 #' @param axis_col The colour of the axes, labels and titles. Defaults to
@@ -124,7 +124,7 @@
 #'   x = mtcars$mpg,
 #'   bins = 10,
 #'   title = "Fuel economy",
-#'   xtitle = "Miles per gallon"
+#'   x_title = "Miles per gallon"
 #' )
 #'
 #' library(ggplot2) # needed for the diamonds and mpg data frames
@@ -159,18 +159,18 @@ histogram <- function(
   fill = NULL,
   x_font_size = 11,
   y_font_size = 11,
-  xticks = NULL,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_ticks = NULL,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   stroke = NULL,
   stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = NULL,
   axis_col = "#333333",
   width = NULL,
@@ -324,7 +324,7 @@ histogram <- function(
     bar_fill <- as.character(fill)[1]
   }
 
-  if (is.null(xtitle)) xtitle <- x_name
+  if (is.null(x_title)) x_title <- x_name
   if (is.null(legend)) legend <- !is.null(groups)
 
   r2d3::r2d3(
@@ -355,10 +355,10 @@ histogram <- function(
       xFormat = x_format,
       xPrefix = x_prefix,
       xSuffix = x_suffix,
-      xticks = xticks,
-      yticks = yticks,
-      xtitle = xtitle,
-      ytitle = ytitle,
+      xticks = x_ticks,
+      yticks = y_ticks,
+      xtitle = x_title,
+      ytitle = y_title,
       title = title,
       subtitle = subtitle,
       font = font,
@@ -366,11 +366,11 @@ histogram <- function(
       strokeWidth = stroke_width,
       xFontSize = x_font_size,
       yFontSize = y_font_size,
-      xtitleFontSize = xtitle_font_size,
-      ytitleFontSize = ytitle_font_size,
+      xtitleFontSize = x_title_font_size,
+      ytitleFontSize = y_title_font_size,
       titleFontSize = title_font_size,
       subtitleFontSize = subtitle_font_size,
-      bgcol = bgcol,
+      bgcol = bg_col,
       opacity = opacity,
       axisCol = axis_col,
       gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,

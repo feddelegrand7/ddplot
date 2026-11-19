@@ -28,7 +28,7 @@ calendar_heatmap(
   title = NULL,
   title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "#555555",
   width = NULL,
   height = NULL
@@ -107,7 +107,7 @@ on first render. Defaults to \code{TRUE}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{axis_col}{Color of the title and of the month, weekday, year and
 legend labels. Defaults to \code{"#555555"}.}

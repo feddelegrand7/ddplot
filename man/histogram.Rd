@@ -10,18 +10,18 @@ histogram(
   fill = NULL,
   x_font_size = 11,
   y_font_size = 11,
-  xticks = NULL,
-  yticks = NULL,
-  xtitle = NULL,
-  xtitle_font_size = 13,
-  ytitle = NULL,
-  ytitle_font_size = 13,
+  x_ticks = NULL,
+  y_ticks = NULL,
+  x_title = NULL,
+  x_title_font_size = 13,
+  y_title = NULL,
+  y_title_font_size = 13,
   title = NULL,
   title_font_size = 20,
   stroke = NULL,
   stroke_width = NULL,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   opacity = NULL,
   axis_col = "#333333",
   width = NULL,
@@ -67,19 +67,19 @@ a built-in palette.}
 
 \item{y_font_size}{The font size of the y-axis labels. Defaults to 11.}
 
-\item{xticks}{Optional. The approximate number of x-axis ticks.}
+\item{x_ticks}{Optional. The approximate number of x-axis ticks.}
 
-\item{yticks}{Optional. The approximate number of y-axis ticks.}
+\item{y_ticks}{Optional. The approximate number of y-axis ticks.}
 
-\item{xtitle}{Optional. The title of the x-axis. Defaults to the name of
+\item{x_title}{Optional. The title of the x-axis. Defaults to the name of
 the variable (when it can be found); use \code{""} to hide it.}
 
-\item{xtitle_font_size}{The font size of the x-axis title. Defaults to 13.}
+\item{x_title_font_size}{The font size of the x-axis title. Defaults to 13.}
 
-\item{ytitle}{Optional. The title of the y-axis, drawn above it. Defaults
+\item{y_title}{Optional. The title of the y-axis, drawn above it. Defaults
 to "Count", "Percent" or "Density"; use \code{""} to hide it.}
 
-\item{ytitle_font_size}{The font size of the y-axis title. Defaults to 13.}
+\item{y_title_font_size}{The font size of the y-axis title. Defaults to 13.}
 
 \item{title}{Optional. The title of the plot.}
 
@@ -92,7 +92,7 @@ to "Count", "Percent" or "Density"; use \code{""} to hide it.}
 \item{font}{The font family to consider for the titles. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background color of the SVG. Defaults to "white".}
+\item{bg_col}{The background color of the SVG. Defaults to "white".}
 
 \item{opacity}{The opacity of the bars (from 0 to 1). Defaults to 1, or
 0.5 for overlaid groups.}
@@ -222,7 +222,7 @@ histogram(
   x = mtcars$mpg,
   bins = 10,
   title = "Fuel economy",
-  xtitle = "Miles per gallon"
+  x_title = "Miles per gallon"
 )
 
 library(ggplot2) # needed for the diamonds and mpg data frames

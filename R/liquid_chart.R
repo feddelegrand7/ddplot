@@ -31,7 +31,7 @@
 #' @param title_font_size Font size of the title in pixels. Defaults to \code{14}.
 #' @param font The font family used for all text. Defaults to
 #' \code{"Verdana, Geneva, Tahoma, sans-serif"}.
-#' @param bgcol Background color of the SVG. Defaults to \code{"white"}.
+#' @param bg_col Background color of the SVG. Defaults to \code{"white"}.
 #' @param width Optional. The width of the SVG output.
 #' @param height Optional. The height of the SVG output.
 #'
@@ -74,7 +74,7 @@ liquid_chart <- function(
     title         = NULL,
     title_font_size = 14,
     font          = "Verdana, Geneva, Tahoma, sans-serif",
-    bgcol         = "white",
+    bg_col         = "white",
     width         = NULL,
     height        = NULL
 ) {
@@ -113,7 +113,7 @@ liquid_chart <- function(
       title           = title,
       titleFontSize   = title_font_size,
       font            = font,
-      bgcol           = bgcol
+      bgcol           = bg_col
     ),
     width  = width,
     height = height

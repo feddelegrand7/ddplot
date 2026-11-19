@@ -24,8 +24,8 @@ bubble_race(
   legend = NULL,
   size_legend = TRUE,
   buttons = TRUE,
-  xtitle = NULL,
-  ytitle = NULL,
+  x_title = NULL,
+  y_title = NULL,
   size_title = NULL,
   agg = c("mean", "sum", "max", "min", "last"),
   fill_gaps = TRUE,
@@ -41,7 +41,7 @@ bubble_race(
   subtitle = NULL,
   subtitle_font_size = 13,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   axis_col = "#333333",
   grid_col = "#ebebeb",
   value_format = NULL,
@@ -116,7 +116,7 @@ it is shown when \code{group} is used.}
 \item{buttons}{Logical. Show the buttons at the top right (log scales,
 trails, clear). Defaults to \code{TRUE}.}
 
-\item{xtitle, ytitle}{Optional. The titles of the axes. They default to the
+\item{x_title, y_title}{Optional. The titles of the axes. They default to the
 names of \code{x} and \code{y}; use \code{""} to hide them.}
 
 \item{size_title}{Optional. The title of the size legend and the name of
@@ -165,7 +165,7 @@ periods by default.}
 \item{font}{The font family of the texts. Defaults to
 "Verdana, Geneva, Tahoma, sans-serif".}
 
-\item{bgcol}{The background colour of the SVG. Defaults to "white".}
+\item{bg_col}{The background colour of the SVG. Defaults to "white".}
 
 \item{axis_col}{The colour of the axes, labels and titles. Defaults to
 "#333333".}
@@ -248,7 +248,7 @@ bubble_race(
   size = "pop", group = "continent",
   x_scale = "log",
   highlight = c("China", "India"),
-  xtitle = "GDP per capita", ytitle = "Life expectancy",
+  x_title = "GDP per capita", y_title = "Life expectancy",
   size_title = "Population",
   value_prefix = c(x = "$"), value_suffix = c(y = " years"),
   value_format = c(x = ",.0f", y = ".1f"),

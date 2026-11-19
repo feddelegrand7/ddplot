@@ -24,7 +24,7 @@ waffle_chart(
   title = NULL,
   title_font_size = 16,
   font = "Verdana, Geneva, Tahoma, sans-serif",
-  bgcol = "white",
+  bg_col = "white",
   text_col = "black",
   width = NULL,
   height = NULL
@@ -84,7 +84,7 @@ milliseconds. Defaults to \code{1200}.}
 \item{font}{The font family used for all text. Defaults to
 \code{"Verdana, Geneva, Tahoma, sans-serif"}.}
 
-\item{bgcol}{Background color of the SVG. Defaults to \code{"white"}.}
+\item{bg_col}{Background color of the SVG. Defaults to \code{"white"}.}
 
 \item{text_col}{Color of the title and legend text. Defaults to
 \code{"black"}.}

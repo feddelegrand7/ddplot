@@ -23,7 +23,7 @@ heart_fill(
   bpm = 60,
   draggable = FALSE,
   animate = TRUE,
-  bgcol = "white",
+  bg_col = "white",
   width = NULL,
   height = NULL
 )
@@ -77,7 +77,7 @@ with the arrow keys. Defaults to FALSE.}
 \item{animate}{Logical. Fill the heart from empty when it first comes into
 view. Defaults to TRUE.}
 
-\item{bgcol}{The background colour. Defaults to "white".}
+\item{bg_col}{The background colour. Defaults to "white".}
 
 \item{width}{Optional. The width of the chart.}
 

@@ -94,8 +94,8 @@
 #' @param agg How rows with the same line and period are combined:
 #'   \code{"sum"} (default), \code{"mean"}, \code{"max"}, \code{"min"} or
 #'   \code{"last"}.
-#' @param xtitle Optional. The title of the time axis.
-#' @param ytitle Optional. The title of the value axis, drawn above it.
+#' @param x_title Optional. The title of the time axis.
+#' @param y_title Optional. The title of the value axis, drawn above it.
 #'   Defaults to the name of \code{y}; use \code{""} to hide it.
 #' @param frame_dur The duration of one period, in milliseconds. Defaults to
 #'   700.
@@ -118,7 +118,7 @@
 #' @param subtitle_font_size The font size of the subtitle. Defaults to 13.
 #' @param font The font family to consider for the titles. Defaults to
 #'   "Verdana, Geneva, Tahoma, sans-serif".
-#' @param bgcol The background color of the SVG. Defaults to "white".
+#' @param bg_col The background color of the SVG. Defaults to "white".
 #' @param axis_col The colour of the axes, labels and titles. Defaults to
 #'   "#333333".
 #' @param grid_col The colour of the grid lines. Defaults to "#ececec"; use
@@ -144,7 +144,7 @@
 #'   line_race(
 #'     x = "year", y = "gdpPercap", group = "country",
 #'     y_scale = "log", value_prefix = "$", value_format = ",.0f",
-#'     ytitle = "GDP per capita (log scale)",
+#'     y_title = "GDP per capita (log scale)",
 #'     title = "The Asian growth race",
 #'     events = c("Reforms in China" = 1978, "Asian crisis" = 1997)
 #'   )
@@ -153,7 +153,7 @@
 #' line_race(
 #'   gapminder, x = "year", y = "lifeExp", group = "country",
 #'   category = "continent", top_n = 10, y_zero = FALSE,
-#'   value_format = ".1f", ytitle = "Life expectancy (years)",
+#'   value_format = ".1f", y_title = "Life expectancy (years)",
 #'   highlight = "Japan", title = "Life expectancy, 1952 to 2007"
 #' )
 #'
@@ -189,8 +189,8 @@ line_race <- function(data,
                       dot_radius = 4.5,
                       fill_gaps = TRUE,
                       agg = c("sum", "mean", "max", "min", "last"),
-                      xtitle = NULL,
-                      ytitle = NULL,
+                      x_title = NULL,
+                      y_title = NULL,
                       frame_dur = 700,
                       ease = "Linear",
                       autoplay = TRUE,
@@ -203,7 +203,7 @@ line_race <- function(data,
                       subtitle = NULL,
                       subtitle_font_size = 13,
                       font = "Verdana, Geneva, Tahoma, sans-serif",
-                      bgcol = "white",
+                      bg_col = "white",
                       axis_col = "#333333",
                       grid_col = "#ececec",
                       value_format = NULL,
@@ -365,15 +365,15 @@ line_race <- function(data,
       labels = isTRUE(labels),
       strokeWidth = stroke_width,
       dotRadius = dot_radius,
-      xtitle = xtitle,
-      ytitle = if (is.null(ytitle)) y else ytitle,
+      xtitle = x_title,
+      ytitle = if (is.null(y_title)) y else y_title,
       controls = isTRUE(controls),
       title = title,
       titleFontSize = title_font_size,
       subtitle = subtitle,
       subtitleFontSize = subtitle_font_size,
       font = font,
-      bgcol = bgcol,
+      bgcol = bg_col,
       axisCol = axis_col,
       gridCol = if (is.null(grid_col) || is.na(grid_col)) NULL else grid_col,
       valueFormat = value_format,
