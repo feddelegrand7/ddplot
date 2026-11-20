@@ -3,7 +3,7 @@
 <div class="dd-hero-text">
 <p class="dd-eyebrow">R package &middot; D3.js &middot; SVG</p>
 <h1 class="dd-hero-title">Interactive D3 charts, one R function at a time</h1>
-<p class="dd-lead"><strong>ddplot</strong> turns a data frame into an interactive SVG chart. More than 40 chart types, from everyday line and bar charts to chord diagrams and sunbursts, that work in the RStudio viewer, R Markdown, Quarto and Shiny. No JavaScript required.</p>
+<p class="dd-lead"><strong>ddplot</strong> turns a data frame into an interactive SVG chart. Sixty chart types, from everyday line and bar charts to Sankey diagrams, networks and sunbursts, that work in the RStudio viewer, R Markdown, Quarto and Shiny. No JavaScript required.</p>
 <div class="dd-cta">
 <a class="btn btn-primary btn-lg" href="articles/Start.html">Get started</a>
 <a class="btn btn-outline-primary btn-lg" href="articles/gallery.html">Browse the gallery</a>
@@ -72,7 +72,7 @@
 ```
 
 ```{=html}
-<p class="dd-more"><a href="articles/gallery.html">See all 50 charts in the gallery &rarr;</a></p>
+<p class="dd-more"><a href="articles/gallery.html">See all 60 charts in the gallery &rarr;</a></p>
 ```
 
 ## Browse by family {.dd-section-title}
@@ -83,13 +83,13 @@
 
 ```{=html}
 <div class="dd-families">
-<a class="dd-family" href="articles/time-series.html"><img src="gallery/streamgraph.png" alt="" loading="lazy"><div><h3>Time series and trends <span>7</span></h3><p>line, area, stacked area, band, streamgraph, calendar</p></div></a>
-<a class="dd-family" href="articles/comparisons.html"><img src="gallery/dumbbell_chart.png" alt="" loading="lazy"><div><h3>Comparing categories <span>10</span></h3><p>bars, lollipops, dumbbell, slope, bump, waterfall, radar</p></div></a>
-<a class="dd-family" href="articles/distributions.html"><img src="gallery/violin_plot.png" alt="" loading="lazy"><div><h3>Distributions <span>5</span></h3><p>histogram, violin, beeswarm, ridgeline</p></div></a>
-<a class="dd-family" href="articles/relationships.html"><img src="gallery/hexbin_plot.png" alt="" loading="lazy"><div><h3>Relationships and flows <span>3</span></h3><p>scatter, hexbin, chord diagram</p></div></a>
-<a class="dd-family" href="articles/composition.html"><img src="gallery/treemap_chart.png" alt="" loading="lazy"><div><h3>Part-to-whole and hierarchies <span>7</span></h3><p>pie, treemap, waffle, sunburst, mosaic, rose, parliament</p></div></a>
+<a class="dd-family" href="articles/time-series.html"><img src="gallery/streamgraph.png" alt="" loading="lazy"><div><h3>Time series and trends <span>9</span></h3><p>line, area, stacked area, band, streamgraph, calendar, Gantt, candlestick</p></div></a>
+<a class="dd-family" href="articles/comparisons.html"><img src="gallery/dumbbell_chart.png" alt="" loading="lazy"><div><h3>Comparing categories <span>11</span></h3><p>bars, lollipops, dumbbell, slope, bump, waterfall, radar, Likert</p></div></a>
+<a class="dd-family" href="articles/distributions.html"><img src="gallery/violin_plot.png" alt="" loading="lazy"><div><h3>Distributions <span>7</span></h3><p>histogram, box plot, violin, density, beeswarm, ridgeline</p></div></a>
+<a class="dd-family" href="articles/relationships.html"><img src="gallery/hexbin_plot.png" alt="" loading="lazy"><div><h3>Relationships and flows <span>6</span></h3><p>scatter, hexbin, heatmap, chord, Sankey, network</p></div></a>
+<a class="dd-family" href="articles/composition.html"><img src="gallery/treemap_chart.png" alt="" loading="lazy"><div><h3>Part-to-whole and hierarchies <span>8</span></h3><p>pie, treemap, waffle, sunburst, mosaic, rose, parliament, circle packing</p></div></a>
 <a class="dd-family" href="articles/races.html"><img src="gallery/bubble_race.png" alt="" loading="lazy"><div><h3>Race charts <span>6</span></h3><p>bar, line, bubble, radial, treemap and donut races</p></div></a>
-<a class="dd-family" href="articles/kpis.html"><img src="gallery/gauge_chart.png" alt="" loading="lazy"><div><h3>KPIs and monitoring <span>4</span></h3><p>gauge, bullet, liquid fill, pulse grid</p></div></a>
+<a class="dd-family" href="articles/kpis.html"><img src="gallery/gauge_chart.png" alt="" loading="lazy"><div><h3>KPIs and monitoring <span>5</span></h3><p>gauge, bullet, liquid fill, pulse grid, funnel</p></div></a>
 <a class="dd-family" href="articles/playful.html"><img src="gallery/flower.png" alt="" loading="lazy"><div><h3>Playful indicators <span>8</span></h3><p>heart, glass, plant, hair, nose, muscle, flame, flower</p></div></a>
 </div>
 ```

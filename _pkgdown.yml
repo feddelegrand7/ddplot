@@ -89,6 +89,8 @@ reference:
   - streamgraph
   - calendar_heatmap
   - anim_line_chart
+  - gantt_chart
+  - candlestick_chart
 - title: Comparing categories
   desc: Values across categories, gaps, rankings and bridges.
   contents:
@@ -102,6 +104,7 @@ reference:
   - waterfall_chart
   - radar_chart
   - radial_bar_chart
+  - likert_chart
 - title: Distributions
   desc: How a numeric variable is spread, alone or across groups.
   contents:
@@ -110,12 +113,17 @@ reference:
   - beeswarm_plot
   - ridgeline_plot
   - animated_histogram
+  - box_plot
+  - density_plot
 - title: Relationships and flows
-  desc: Two numeric variables, or flows between categories.
+  desc: Two numeric variables, two-way tables, flows and networks.
   contents:
   - scatter_plot
   - hexbin_plot
+  - heatmap_chart
   - chord_diagram
+  - sankey_diagram
+  - network_graph
 - title: Part-to-whole and hierarchies
   desc: A whole split into its parts, flat or nested.
   contents:
@@ -126,6 +134,7 @@ reference:
   - mosaic_chart
   - rose_chart
   - parliament_chart
+  - circle_packing
 - title: Race charts
   desc: Animated charts that replay data through time, with a player to pause, scrub and step.
   contents:
@@ -142,6 +151,7 @@ reference:
   - bullet_chart
   - liquid_chart
   - pulse_grid
+  - funnel_chart
 - title: Playful indicators
   desc: Illustrative SVG indicators for a single level.
   contents:

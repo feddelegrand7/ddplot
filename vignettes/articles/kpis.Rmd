@@ -1,6 +1,6 @@
 ---
 title: "KPIs and monitoring"
-description: "Gauges, bullet charts, liquid fills and pulse grids."
+description: "Gauges, bullet charts, liquid fills, pulse grids and funnels."
 ---
 
 ```{r setup, include = FALSE}
@@ -18,6 +18,7 @@ Compact charts for dashboards: one value against its target or thresholds, or a 
 | [`bullet_chart()`](#bullet_chart) | You show one value against a target and qualitative ranges |
 | [`liquid_chart()`](#liquid_chart) | You show a single percentage in an eye-catching way |
 | [`pulse_grid()`](#pulse_grid) | You want the hottest cells of a matrix to stand out |
+| [`funnel_chart()`](#funnel_chart) | You follow how many make it through each stage of a process, and the conversion between stages |
 
 :::
 
@@ -223,3 +224,27 @@ pulse_grid(
 
 Why this is useful: repeated hot cells reveal where engineering effort should go first. In this example, a team can immediately see whether one service is consistently unstable or whether problems cluster around a particular day in the deployment cycle.
 
+## `funnel_chart()` {#funnel_chart}
+
+A funnel chart follows a process through its stages, from the first at the top to the last at the bottom, with bars proportional to the number at each stage. The conversion from one stage to the next is written between the bars, and the share of the first stage on the right. Hover a stage to see how many were lost on the way.
+
+```{r}
+shop <- data.frame(
+  step = c("Visited the site", "Viewed a product", "Added to cart",
+           "Started checkout", "Paid"),
+  users = c(12000, 7400, 2900, 1650, 1180)
+)
+funnel_chart(shop, stage = "step", value = "users",
+             title = "Online shop, last 30 days")
+```
+
+With `shape = "bars"`, the bars are drawn without the funnel between them; a single colour gives the stages lighter and lighter shades of it:
+
+```{r}
+hiring <- data.frame(
+  stage = c("Applications", "Screened", "Interviewed", "Offer", "Hired"),
+  people = c(420, 160, 48, 12, 9)
+)
+funnel_chart(hiring, stage = "stage", value = "people", shape = "bars",
+             colors = "#3ca951")
+```

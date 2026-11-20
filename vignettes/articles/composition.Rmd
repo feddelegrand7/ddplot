@@ -1,6 +1,6 @@
 ---
 title: "Part-to-whole and hierarchies"
-description: "Pies, treemaps, waffles, sunbursts, mosaics and more."
+description: "Pies, treemaps, waffles, sunbursts, mosaics, circle packing and more."
 ---
 
 ```{r setup, include = FALSE}
@@ -23,6 +23,7 @@ Charts that split a whole into its parts, flat or nested.
 | [`mosaic_chart()`](#mosaic_chart) | You show how two categorical variables combine |
 | [`rose_chart()`](#rose_chart) | You show a cyclical breakdown, such as months, Nightingale-style |
 | [`parliament_chart()`](#parliament_chart) | You show the seats of an assembly and build coalitions |
+| [`circle_packing()`](#circle_packing) | You show a hierarchy as nested circles and zoom into its groups |
 
 :::
 
@@ -333,3 +334,24 @@ parliament_chart(
 )
 ```
 
+## `circle_packing()` {#circle_packing}
+
+Circle packing draws a hierarchy as nested circles: each item is a circle whose area is proportional to its value, packed inside the circle of its group. `group` takes one or more columns, from the outermost level to the innermost. Hover a circle to see its share of its group, click a group to zoom into it, and click the background to zoom back out.
+
+```{r}
+pop <- subset(gapminder::gapminder, year == 2007)
+circle_packing(pop, label = "country", value = "pop", group = "continent",
+               title = "World population, 2007")
+```
+
+```{r}
+sales <- data.frame(
+  region = rep(c("North", "South"), each = 6),
+  category = rep(rep(c("Furniture", "Office", "Tech"), each = 2), 2),
+  product = c("Chairs", "Tables", "Paper", "Pens", "Phones", "Laptops",
+              "Chairs", "Tables", "Paper", "Pens", "Phones", "Laptops"),
+  revenue = c(120, 90, 40, 25, 210, 260, 80, 110, 55, 30, 160, 190)
+)
+circle_packing(sales, label = "product", value = "revenue",
+               group = c("region", "category"), value_format = "$,.0f")
+```

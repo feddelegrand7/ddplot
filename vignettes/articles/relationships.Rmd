@@ -1,6 +1,6 @@
 ---
 title: "Relationships and flows"
-description: "Scatter plots, hexbins and chord diagrams."
+description: "Scatter plots, hexbins, heatmaps, chords, Sankey diagrams and networks."
 ---
 
 ```{r setup, include = FALSE}
@@ -10,7 +10,7 @@ library(ggplot2) # mpg, diamonds
 library(dplyr)
 ```
 
-Charts for the relationship between two numeric variables, and for flows between categories.
+Charts for the relationship between two numeric variables, for two-way tables, and for flows and networks between categories.
 
 ::: {.dd-chooser}
 
@@ -19,6 +19,9 @@ Charts for the relationship between two numeric variables, and for flows between
 | [`scatter_plot()`](#scatter_plot) | You look at the relationship between two numeric variables, optionally by group, with bubbles or a trend line |
 | [`hexbin_plot()`](#hexbin_plot) | A scatter plot has too many points to read |
 | [`chord_diagram()`](#chord_diagram) | You show flows between categories, such as migration or trade |
+| [`heatmap_chart()`](#heatmap_chart) | You show a value for every pair of two categories, such as a correlation matrix |
+| [`sankey_diagram()`](#sankey_diagram) | You show how quantities flow and split through the stages of a process |
+| [`network_graph()`](#network_graph) | You show who is connected to whom, and the clusters that emerge |
 
 :::
 
@@ -196,3 +199,83 @@ chord_diagram(
 )
 ```
 
+## `heatmap_chart()` {#heatmap_chart}
+
+A heatmap colours a grid of cells, one per pair of two categorical columns. With a `value` column, the rows of each pair are aggregated (`aggregate`); without one, the cells count the rows. Hover a cell to read its value and see it on the colour legend.
+
+```{r}
+aq <- airquality
+aq$Month <- factor(month.abb[aq$Month], levels = month.abb[5:9])
+aq$Week <- paste("Week", (aq$Day - 1) %/% 7 + 1)
+heatmap_chart(aq, x = "Month", y = "Week", value = "Temp", aggregate = "mean",
+              colors = c("#fff3d6", "#ffb15c", "#d6402b"), value_format = ".0f",
+              title = "Temperature in New York (F)")
+```
+
+With a `midpoint`, the colours diverge around it, which suits correlations and changes. `cluster = TRUE` reorders the rows and the columns so that similar ones sit together:
+
+```{r}
+cors <- as.data.frame(as.table(cor(mtcars)))
+names(cors) <- c("var1", "var2", "correlation")
+heatmap_chart(cors, x = "var1", y = "var2", value = "correlation",
+              midpoint = 0, cluster = TRUE, title = "Correlations in mtcars")
+```
+
+## `sankey_diagram()` {#sankey_diagram}
+
+A Sankey diagram shows flows as bands whose width is proportional to their value. Each row of the data is a flow from a `source` to a `target`; the nodes are placed in columns from left to right. Hover a flow or a node to highlight it, and drag a node up or down to untangle the diagram.
+
+```{r}
+budget <- data.frame(
+  from = c("Salary", "Salary", "Freelance", "Freelance", "Savings",
+           "Savings", "Living", "Living", "Living"),
+  to = c("Living", "Savings", "Living", "Savings", "Stocks",
+         "Emergency fund", "Rent", "Food", "Transport"),
+  amount = c(2600, 900, 500, 300, 700, 500, 1700, 900, 500)
+)
+sankey_diagram(budget, source = "from", target = "to", value = "amount",
+               value_format = "$,.0f", title = "Where the money goes")
+```
+
+Several steps can be chained by stacking the flows of each step. Here, who survived the Titanic, by class and sex, with flows coloured from their source to their target:
+
+```{r}
+tt <- as.data.frame(Titanic)
+tt$Survived <- ifelse(tt$Survived == "Yes", "Survived", "Died")
+step1 <- aggregate(Freq ~ Class + Sex, data = tt, FUN = sum)
+step2 <- aggregate(Freq ~ Sex + Survived, data = tt, FUN = sum)
+names(step1) <- names(step2) <- c("from", "to", "people")
+sankey_diagram(rbind(step1, step2), source = "from", target = "to",
+               value = "people", link_color = "gradient",
+               colors = c(Died = "#9498a0", Survived = "#3ca951"))
+```
+
+## `network_graph()` {#network_graph}
+
+A network graph places connected nodes close to each other with a force simulation, so that clusters appear on their own. Give the links as a data frame (`from`, `to`, optionally a `weight`) and, optionally, the nodes as a second data frame to colour them by group, size them or label them. Hover a node to highlight its neighbours, drag it to move it, and scroll to zoom.
+
+```{r}
+team <- data.frame(
+  from = c("Ana", "Ana", "Ana", "Ben", "Ben", "Chloe", "Chloe", "Dev",
+           "Eve", "Eve", "Farid", "Gus", "Gus", "Hana", "Hana", "Ivo",
+           "Jo", "Jo", "Kim", "Ana", "Eve"),
+  to = c("Ben", "Chloe", "Dev", "Chloe", "Dev", "Dev", "Eve", "Eve",
+         "Farid", "Gus", "Gus", "Hana", "Ivo", "Ivo", "Jo", "Jo",
+         "Kim", "Lea", "Lea", "Hana", "Kim")
+)
+people <- data.frame(
+  name = c("Ana", "Ben", "Chloe", "Dev", "Eve", "Farid", "Gus", "Hana",
+           "Ivo", "Jo", "Kim", "Lea"),
+  team = rep(c("Product", "Engineering", "Sales"), each = 4)
+)
+network_graph(team, from = "from", to = "to", nodes = people,
+              node_group = "team", title = "Who works with whom")
+```
+
+By default the nodes are sized by their number of links. With `directed = TRUE`, the links become arrows:
+
+```{r}
+pairs <- as.data.frame(unique(mpg[, c("manufacturer", "class")]))
+network_graph(pairs, from = "manufacturer", to = "class", directed = TRUE,
+              charge = -220, title = "Which manufacturers make which classes")
+```

@@ -8,28 +8,28 @@ Every chart in `ddplot`, grouped by what it is for and ordered by how often you 
 ```{r catalogue, include = FALSE}
 categories <- list(
   list(id = "time-series", title = "Time series and trends",
-       desc = "Lines, areas, streams and calendars for data that moves over time.",
+       desc = "Lines, areas, streams, calendars, Gantt charts and candlesticks.",
        intro = "Charts for data indexed by time. `line_chart()` is the workhorse: it handles several series, `ts` objects, zooming, annotations and forecast ribbons. The others cover totals and their components, ranges, many categories at once, and daily patterns."),
   list(id = "comparisons", title = "Comparing categories",
-       desc = "Bars, lollipops, dumbbells, slopes, ranks and bridges.",
+       desc = "Bars, lollipops, dumbbells, slopes, ranks, bridges and Likert scales.",
        intro = "Charts for comparing values across categories, from the everyday bar chart to before/after comparisons, rankings over time and bridges that explain how a total was built. Most of them expect data that is already aggregated, one row per category; `dplyr::summarise()` is a convenient way to get there."),
   list(id = "distributions", title = "Distributions",
-       desc = "Histograms, violins, swarms and ridgelines.",
+       desc = "Histograms, box plots, violins, densities, swarms and ridgelines.",
        intro = "Charts that show how a numeric variable is spread: where values concentrate, how wide the spread is, and how several groups differ."),
   list(id = "relationships", title = "Relationships and flows",
-       desc = "Scatter plots, hexbins and chord diagrams.",
-       intro = "Charts for the relationship between two numeric variables, and for flows between categories."),
+       desc = "Scatter plots, hexbins, heatmaps, chords, Sankey diagrams and networks.",
+       intro = "Charts for the relationship between two numeric variables, for two-way tables, and for flows and networks between categories."),
   list(id = "composition", title = "Part-to-whole and hierarchies",
-       desc = "Pies, treemaps, waffles, sunbursts, mosaics and more.",
+       desc = "Pies, treemaps, waffles, sunbursts, mosaics, circle packing and more.",
        intro = "Charts that split a whole into its parts, flat or nested."),
   list(id = "races", title = "Race charts",
        desc = "Bar, line, bubble, radial, treemap and donut races.",
        intro = "Animated charts that replay data through time. Each one has a player: pause, drag the timeline, change the speed, step with the arrow keys, and hover or click the items while they move."),
   list(id = "kpis", title = "KPIs and monitoring",
-       desc = "Gauges, bullet charts, liquid fills and pulse grids.",
+       desc = "Gauges, bullet charts, liquid fills, pulse grids and funnels.",
        intro = "Compact charts for dashboards: one value against its target or thresholds, or a grid that makes hot spots stand out."),
   list(id = "playful", title = "Playful indicators",
-       desc = "Hearts, glasses, plants, flames and flowers.",
+       desc = "Hearts, glasses, plants, hair, noses, muscles, flames and flowers.",
        intro = "Illustrative SVG indicators. They show a single level and are meant for presentations, landing pages and dashboards that need a lighter touch.")
 )
 
@@ -42,6 +42,8 @@ area_band|time-series|Area band|You show a range over time, such as a min/max or
 streamgraph|time-series|Streamgraph|Many categories change over time and the overall shape matters more than exact values|interactive
 calendar_heatmap|time-series|Calendar heatmap|You look for daily, weekly or seasonal patterns in a daily series|interactive
 anim_line_chart|time-series|Animated line chart|You present a single series and want it to draw itself on click|animated
+gantt_chart|time-series|Gantt chart|You plan or report tasks over time, with groups, progress, dependencies and milestones|interactive,shiny
+candlestick_chart|time-series|Candlestick chart|You show the open, high, low and close prices of each period, with volumes and moving averages|interactive,shiny
 bar_chart|comparisons|Bar chart|You compare a value across categories, as single, grouped, stacked or 100% bars|interactive,shiny
 horz_bar_chart|comparisons|Horizontal bar chart|You have many categories or long labels, or show the composition of each category|interactive,shiny
 lollipop_chart|comparisons|Lollipop chart|You want a lighter alternative to a bar chart, for many similar values|interactive,shiny
@@ -52,14 +54,20 @@ bump_chart|comparisons|Bump chart|You follow how rankings change over several pe
 waterfall_chart|comparisons|Waterfall chart|You explain how a starting value becomes a final value|interactive
 radar_chart|comparisons|Radar chart|You compare a few items across several variables|interactive
 radial_bar_chart|comparisons|Radial bar chart|You show progress of a few items towards a goal|interactive
+likert_chart|comparisons|Likert chart|You show survey answers on an agree / disagree scale for several questions|interactive,shiny
 histogram|distributions|Histogram|You look at the distribution of a single numeric variable|interactive,shiny
 violin_plot|distributions|Violin plot|You compare distributions across groups, with quartiles|interactive
 beeswarm_plot|distributions|Beeswarm plot|You want to show every observation, not only a summary|interactive
 ridgeline_plot|distributions|Ridgeline plot|You compare the distributions of many groups|interactive
 animated_histogram|distributions|Animated histogram|You present a distribution and want the bars to grow on click|animated
+box_plot|distributions|Box plot|You compare the quartiles, spread and outliers of several groups|interactive,shiny
+density_plot|distributions|Density plot|You show the smooth shape of one or several distributions, overlapping or stacked|interactive,shiny
 scatter_plot|relationships|Scatter plot|You look at the relationship between two numeric variables, by group, as bubbles or with a trend line|interactive,shiny
 hexbin_plot|relationships|Hexbin plot|A scatter plot has too many points to read|interactive
+heatmap_chart|relationships|Heatmap|You show a value for every pair of two categories, such as a correlation matrix|interactive,shiny
 chord_diagram|relationships|Chord diagram|You show flows between categories, such as migration or trade|interactive
+sankey_diagram|relationships|Sankey diagram|You show how quantities flow and split through the stages of a process|interactive,shiny
+network_graph|relationships|Network graph|You show who is connected to whom, and the clusters that emerge|animated,interactive,shiny
 pie_chart|composition|Pie and donut chart|You split a whole into a few parts|interactive,shiny
 treemap_chart|composition|Treemap|You split a whole into many parts, optionally nested|interactive
 waffle_chart|composition|Waffle chart|You show shares as a grid of 100 squares|interactive
@@ -67,6 +75,7 @@ sunburst_chart|composition|Sunburst chart|You explore a hierarchy with several l
 mosaic_chart|composition|Mosaic chart|You show how two categorical variables combine|interactive
 rose_chart|composition|Rose chart|You show a cyclical breakdown, such as months, Nightingale-style|interactive
 parliament_chart|composition|Parliament chart|You show the seats of an assembly and build coalitions|animated,interactive,shiny
+circle_packing|composition|Circle packing|You show a hierarchy as nested circles and zoom into its groups|interactive,shiny
 bar_chart_race|races|Bar chart race|You animate a ranking through time, with the bars overtaking each other|animated,interactive,shiny
 line_race|races|Line race|You replay several series drawing themselves, by value or by rank|animated,interactive,shiny
 bubble_race|races|Bubble race|You replay a scatter plot through time, Gapminder style|animated,interactive,shiny
@@ -77,6 +86,7 @@ gauge_chart|kpis|Gauge|You show one value against warning and danger thresholds|
 bullet_chart|kpis|Bullet chart|You show one value against a target and qualitative ranges|
 liquid_chart|kpis|Liquid fill|You show a single percentage in an eye-catching way|animated
 pulse_grid|kpis|Pulse grid|You want the hottest cells of a matrix to stand out|animated
+funnel_chart|kpis|Funnel chart|You follow how many make it through each stage of a process, and the conversion between stages|interactive,shiny
 heart_fill|playful|Heart fill|You show a level from 0 to 1 as a beating heart filling with liquid|animated,interactive,shiny
 glass_fill|playful|Glass fill|You show a level from 0 to 1 as a glass of water|animated,interactive,shiny
 plant_growth|playful|Plant growth|You show progress as a plant that grows and blooms|animated,interactive,shiny

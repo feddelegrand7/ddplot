@@ -8,7 +8,7 @@ downloads](https://cranlogs.r-pkg.org/badges/ddplot)](https://cran.r-project.org
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/ddplot)](https://cran.r-project.org/package=ddplot)
 <!-- badges: end -->
 
-`ddplot` turns a data frame into an interactive D3 SVG chart with a single R function. It has more than 40 chart types, from line and bar charts to chord diagrams and sunbursts, and they work in the RStudio viewer, R Markdown, Quarto and Shiny.
+`ddplot` turns a data frame into an interactive D3 SVG chart with a single R function. It has 60 chart types, from line and bar charts to Sankey diagrams, networks and sunbursts, and they work in the RStudio viewer, R Markdown, Quarto and Shiny.
 
 ## Installation
 

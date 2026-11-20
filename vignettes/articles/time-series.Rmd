@@ -1,6 +1,6 @@
 ---
 title: "Time series and trends"
-description: "Lines, areas, streams and calendars for data that moves over time."
+description: "Lines, areas, streams, calendars, Gantt charts and candlesticks."
 ---
 
 ```{r setup, include = FALSE}
@@ -22,6 +22,8 @@ Charts for data indexed by time. `line_chart()` is the workhorse: it handles sev
 | [`streamgraph()`](#streamgraph) | Many categories change over time and the overall shape matters more than exact values |
 | [`calendar_heatmap()`](#calendar_heatmap) | You look for daily, weekly or seasonal patterns in a daily series |
 | [`anim_line_chart()`](#anim_line_chart) | You present a single series and want it to draw itself on click |
+| [`gantt_chart()`](#gantt_chart) | You plan or report tasks over time, with groups, progress, dependencies and milestones |
+| [`candlestick_chart()`](#candlestick_chart) | You show the open, high, low and close prices of each period, with volumes and moving averages |
 
 :::
 
@@ -386,3 +388,64 @@ anim_line_chart(
   )
 ```
 
+## `gantt_chart()` {#gantt_chart}
+
+A Gantt chart draws tasks as bars from their start to their end. Tasks can be coloured by `group`, show how far along they are (`progress`, between 0 and 1), depend on other tasks (`depends_on`, drawn as arrows), and be compared with `today`. A task that starts and ends on the same date is a milestone. Hover a task to highlight the tasks it depends on and the ones that depend on it; scroll to zoom in time and double-click to reset.
+
+```{r}
+plan <- data.frame(
+  task = c("Kick-off", "Research", "Design", "Prototype", "User tests",
+           "Build", "QA", "Launch"),
+  start = as.Date(c("2025-01-06", "2025-01-07", "2025-01-27", "2025-02-17",
+                    "2025-03-10", "2025-03-03", "2025-04-14", "2025-05-05")),
+  end = as.Date(c("2025-01-06", "2025-01-31", "2025-02-21", "2025-03-07",
+                  "2025-03-21", "2025-04-18", "2025-05-02", "2025-05-05")),
+  team = c("All", "Design", "Design", "Engineering", "Design",
+           "Engineering", "Engineering", "All"),
+  done = c(1, 1, 1, 0.8, 0.4, 0.3, 0, 0),
+  after = c(NA, "Kick-off", "Research", "Design", "Prototype", "Design",
+            "Build", "QA, User tests")
+)
+gantt_chart(plan, task = "task", start = "start", end = "end", group = "team",
+            progress = "done", depends_on = "after",
+            today = as.Date("2025-03-14"), title = "Product launch")
+```
+
+It also works as a simple timeline:
+
+```{r}
+reigns <- data.frame(
+  monarch = c("Victoria", "Edward VII", "George V", "Edward VIII",
+              "George VI", "Elizabeth II"),
+  from = as.Date(c("1837-06-20", "1901-01-22", "1910-05-06", "1936-01-20",
+                   "1936-12-11", "1952-02-06")),
+  to = as.Date(c("1901-01-22", "1910-05-06", "1936-01-20", "1936-12-11",
+                 "1952-02-06", "2022-09-08"))
+)
+gantt_chart(reigns, task = "monarch", start = "from", end = "to",
+            colors = "#a463f2", date_format = "%Y")
+```
+
+## `candlestick_chart()` {#candlestick_chart}
+
+A candlestick chart shows the open, high, low and close prices of each period: the body of a candle spans the open and the close (green when the price rose, red when it fell) and the wick spans the low and the high. Volumes are drawn below, and `moving_average` adds moving averages of the close. The periods are drawn side by side, so weekends leave no gaps. Move the mouse to read the prices of a period, scroll to zoom (the price axis fits the visible candles) and double-click to reset.
+
+```{r}
+set.seed(42)
+days <- seq(as.Date("2025-01-01"), by = "day", length.out = 170)
+days <- days[!format(days, "%u") %in% c("6", "7")][1:120]
+close <- 100 * cumprod(1 + rnorm(120, 0.001, 0.018))
+open <- c(100, head(close, -1)) * (1 + rnorm(120, 0, 0.004))
+stock <- data.frame(
+  day = days,
+  open = open,
+  high = pmax(open, close) * (1 + abs(rnorm(120, 0, 0.008))),
+  low = pmin(open, close) * (1 - abs(rnorm(120, 0, 0.008))),
+  close = close,
+  volume = round(rlnorm(120, 13, 0.4))
+)
+candlestick_chart(stock, date = "day", open = "open", high = "high",
+                  low = "low", close = "close", volume = "volume",
+                  moving_average = c(10, 30), value_format = "$,.2f",
+                  title = "A simulated stock")
+```

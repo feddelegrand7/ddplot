@@ -110,7 +110,7 @@ Each function's help page lists its full set of options, for example `?line_char
 
 ## Find the right chart
 
-`ddplot` has more than 40 chart types. The [gallery](https://feddelegrand7.github.io/ddplot/articles/gallery.html) shows all of them, and the guides below walk through each one with examples, starting with the charts you are most likely to need:
+`ddplot` has 60 chart types. The [gallery](https://feddelegrand7.github.io/ddplot/articles/gallery.html) shows all of them, and the guides below walk through each one with examples, starting with the charts you are most likely to need:
 
 | Guide | Charts |
 |---|---|

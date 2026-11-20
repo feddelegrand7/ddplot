@@ -1,5 +1,6 @@
 // playkit.js -- shared helpers for the playful charts (heart_fill(),
-// glass_fill(), plant_growth(), flame(), flower()).
+// glass_fill(), plant_growth(), flame(), flower(), ...), also used by the data
+// charts added in 1.0.0 through chart_script() (with chartkit.js).
 //
 // Prepended after ddplotreset.js by play_script() (R/playful_utils.R), so
 // everything here lives in the same r2d3 function scope as the chart script

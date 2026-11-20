@@ -26,18 +26,18 @@ OUT = os.path.join(ROOT, "pkgdown", "assets", "gallery")
 
 GUIDES = {
     "time-series": ["line_chart", "area_chart", "stacked_area_chart", "area_band",
-                    "streamgraph", "calendar_heatmap", "anim_line_chart"],
+                    "streamgraph", "calendar_heatmap", "anim_line_chart", "gantt_chart", "candlestick_chart"],
     "comparisons": ["bar_chart", "horz_bar_chart", "lollipop_chart", "horz_lollipop",
                     "dumbbell_chart", "slope_chart", "bump_chart", "waterfall_chart",
-                    "radar_chart", "radial_bar_chart"],
+                    "radar_chart", "radial_bar_chart", "likert_chart"],
     "distributions": ["histogram", "violin_plot", "beeswarm_plot", "ridgeline_plot",
-                      "animated_histogram"],
-    "relationships": ["scatter_plot", "hexbin_plot", "chord_diagram"],
+                      "animated_histogram", "box_plot", "density_plot"],
+    "relationships": ["scatter_plot", "hexbin_plot", "heatmap_chart", "chord_diagram", "sankey_diagram", "network_graph"],
     "composition": ["pie_chart", "treemap_chart", "waffle_chart", "sunburst_chart",
-                    "mosaic_chart", "rose_chart", "parliament_chart"],
+                    "mosaic_chart", "rose_chart", "parliament_chart", "circle_packing"],
     "races": ["bar_chart_race", "line_race", "bubble_race", "radial_bar_race",
               "treemap_race", "donut_race"],
-    "kpis": ["gauge_chart", "bullet_chart", "liquid_chart", "pulse_grid"],
+    "kpis": ["gauge_chart", "bullet_chart", "liquid_chart", "pulse_grid", "funnel_chart"],
     "playful": ["heart_fill", "glass_fill", "plant_growth", "hair_growth", "nose_growth", "muscle_growth", "flame", "flower"],
 }
 
@@ -50,7 +50,8 @@ INDEX = {"flame": 1, "scatter_plot": 2, "bar_chart": 3, "horz_bar_chart": 1, "lo
 WAIT = {"bar_chart_race": 6000, "line_race": 6000, "bubble_race": 6000,
         "radial_bar_race": 6000, "treemap_race": 6000, "donut_race": 6000, "liquid_chart": 3500, "beeswarm_plot": 3500,
         "heart_fill": 2500, "glass_fill": 2500, "plant_growth": 3000, "hair_growth": 3200, "nose_growth": 3200, "muscle_growth": 3200, "flame": 2000, "flower": 2000,
-        "parliament_chart": 2500}
+        "parliament_chart": 2500, "network_graph": 4000, "sankey_diagram": 2500, "circle_packing": 2000,
+        "gantt_chart": 2000, "funnel_chart": 2000, "likert_chart": 1500, "density_plot": 1500, "box_plot": 1500}
 
 
 def serve(directory):

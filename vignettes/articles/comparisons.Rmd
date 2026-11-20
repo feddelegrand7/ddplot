@@ -1,6 +1,6 @@
 ---
 title: "Comparing categories"
-description: "Bars, lollipops, dumbbells, slopes, ranks and bridges."
+description: "Bars, lollipops, dumbbells, slopes, ranks, bridges and Likert scales."
 ---
 
 ```{r setup, include = FALSE}
@@ -26,6 +26,7 @@ Charts for comparing values across categories, from the everyday bar chart to be
 | [`waterfall_chart()`](#waterfall_chart) | You explain how a starting value becomes a final value |
 | [`radar_chart()`](#radar_chart) | You compare a few items across several variables |
 | [`radial_bar_chart()`](#radial_bar_chart) | You show progress of a few items towards a goal |
+| [`likert_chart()`](#likert_chart) | You show survey answers on an agree / disagree scale for several questions |
 
 :::
 
@@ -531,4 +532,36 @@ radial_bar_chart(
   center_label = "Units sold",
   title       = "Units sold by region (target: 500)"
 )
+```
+
+## `likert_chart()` {#likert_chart}
+
+A Likert chart shows answers on an ordered scale as diverging bars: the negative answers go left of the centre line, the positive ones right, and a neutral answer (the middle of an odd scale) sits across the line. The totals of negative and positive answers are written at both ends. Give one row per answer, or counts in a `value` column; `levels` sets the order of the scale. Hover an answer to highlight it for every question.
+
+```{r}
+survey <- data.frame(
+  question = rep(c("The product is easy to use", "Support answers quickly",
+                   "The price is fair", "I would recommend it"), each = 5),
+  answer = rep(c("Strongly disagree", "Disagree", "Neutral", "Agree",
+                 "Strongly agree"), times = 4),
+  n = c(4, 10, 18, 45, 23,  12, 20, 25, 28, 15,  20, 30, 22, 20, 8,
+        5, 8, 15, 40, 32)
+)
+likert_chart(survey, question = "question", response = "answer", value = "n",
+             sort = "positive", title = "Customer survey")
+```
+
+A scale with an even number of levels has no neutral answer:
+
+```{r}
+set.seed(1)
+scale4 <- c("Never", "Rarely", "Often", "Always")
+habits <- data.frame(
+  habit = rep(c("Cook at home", "Walk to work", "Read before bed"), each = 60),
+  answer = c(sample(scale4, 60, TRUE, c(1, 2, 4, 3)),
+             sample(scale4, 60, TRUE, c(4, 3, 2, 1)),
+             sample(scale4, 60, TRUE, c(2, 3, 3, 2)))
+)
+likert_chart(habits, question = "habit", response = "answer", levels = scale4,
+             colors = c("#d6402b", "#ffb15c", "#6cc5b0", "#1f7a63"))
 ```

@@ -1,6 +1,6 @@
 ---
 title: "Distributions"
-description: "Histograms, violins, swarms and ridgelines."
+description: "Histograms, box plots, violins, densities, swarms and ridgelines."
 ---
 
 ```{r setup, include = FALSE}
@@ -21,6 +21,8 @@ Charts that show how a numeric variable is spread: where values concentrate, how
 | [`beeswarm_plot()`](#beeswarm_plot) | You want to show every observation, not only a summary |
 | [`ridgeline_plot()`](#ridgeline_plot) | You compare the distributions of many groups |
 | [`animated_histogram()`](#animated_histogram) | You present a distribution and want the bars to grow on click |
+| [`box_plot()`](#box_plot) | You compare the quartiles, spread and outliers of several groups |
+| [`density_plot()`](#density_plot) | You show the smooth shape of one or several distributions, overlapping or stacked |
 
 :::
 
@@ -230,3 +232,38 @@ animated_histogram(
 
 Note that you can customize the animation using the two parameters `duration` and `delay`.
 
+## `box_plot()` {#box_plot}
+
+A box plot summarises each group in five numbers: the box spans the first to the third quartile, the thick line is the median, the whiskers reach the most extreme values within 1.5 times the interquartile range, and the points beyond them are outliers. The diamond marks the mean (`mean = FALSE` to hide it). The statistics are computed in R, so they match `boxplot()` and `ggplot2::geom_boxplot()`. Hover a box to read its summary.
+
+```{r}
+box_plot(mpg, y = "hwy", group = "class", sort = "median",
+         y_title = "Highway miles per gallon", title = "Fuel economy by class")
+```
+
+With `points = "all"`, every observation is drawn over its box. `notch = TRUE` adds notches around the median (when the notches of two boxes do not overlap, their medians probably differ), and `horizontal = TRUE` turns the chart on its side:
+
+```{r}
+box_plot(ToothGrowth, y = "len", group = "dose", points = "all", notch = TRUE,
+         horizontal = TRUE, x_title = "Tooth length", y_title = "Dose (mg/day)")
+```
+
+## `density_plot()` {#density_plot}
+
+A density plot is a smoothed histogram: it shows where the values concentrate without depending on the choice of bins. The curves are computed in R with `stats::density()`; `bandwidth` and `adjust` control how smooth they are. Move the mouse over the chart to read the density of every group, and click a group in the legend to hide it.
+
+```{r}
+density_plot(faithful, x = "eruptions", title = "Old Faithful eruptions",
+             x_title = "Duration (minutes)")
+```
+
+```{r}
+density_plot(iris, x = "Petal.Length", group = "Species", stat = "median")
+```
+
+`position = "stack"` stacks the curves (each weighted by the size of its group, so the outline is the density of all the data), and `position = "fill"` shows the share of each group along the axis:
+
+```{r}
+density_plot(diamonds, x = "price", group = "cut", position = "fill",
+             title = "Share of each cut along the price range")
+```

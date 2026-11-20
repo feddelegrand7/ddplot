@@ -1,6 +1,7 @@
 # Shared helpers for the playful charts (heart_fill(), glass_fill(),
-# plant_growth(), flame(), flower()). Their scripts are prepended with
-# playkit.js through play_script("<chart>.js").
+# plant_growth(), flame(), flower(), ...). Their scripts are prepended with
+# playkit.js through play_script("<chart>.js"). playkit.js is also prepended to
+# the data charts by chart_script() (R/chart_utils.R).
 
 # @noRd
 play_script <- function(file) {
